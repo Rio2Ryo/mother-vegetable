@@ -1,0 +1,83 @@
+/* ============================================================================
+   HERO SECTION
+   ============================================================================ */
+   .hero-section { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+   .hero-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; background: radial-gradient(circle, rgba(37, 199, 96, 0.1) 0%, rgba(37, 199, 96, 0.05) 50%, transparent 70%); border-radius: 50%; z-index: 2; animation: pulse 4s ease-in-out infinite; }
+   .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+   .hero-bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+   .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.4) 100%); z-index: 2; }
+   .hero-content { position: relative; z-index: 3; text-align: center; max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+   .hero-content .title-underline { width: 80%; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--third-color), var(--primary-color)); margin: 20px auto 0 auto; border-radius: 2px; box-shadow: 0 0 20px rgba(37, 199, 96, 0.7), 0 0 40px rgba(37, 199, 96, 0.3); position: relative; }
+   .hero-content .title-underline::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: linear-gradient(90deg, var(--primary-color), var(--third-color)); border-radius: 4px; opacity: 0.3; z-index: -1; }
+   .hero-title { margin-bottom: 40px; animation: fadeInUp 1s ease-out 0.5s both; }
+   .hero-icon { display: block; width: 120px; height: 120px; margin: 0 auto 15px auto; filter: drop-shadow(0 0 20px rgba(37, 199, 96, 0.6)); animation: iconFloat 3s ease-in-out infinite; }
+   .title-main { display: block; font-family: Arial, sans-serif; font-weight: 700; font-size: 5rem; color: var(--primary-color); letter-spacing: 2px; margin-bottom: 10px; text-shadow: 0 0 20px rgba(37, 199, 96, 0.5); }
+   .title-product { display: block; font-family: Arial, sans-serif; font-weight: 600; font-size: 3rem; color: var(--primary-color); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; text-shadow: 0 0 20px rgba(37, 199, 96, 0.5); }
+   .hero-underline-img { display: block; width: 250px; max-width: 80%; height: auto; margin: 20px auto; filter: drop-shadow(0 0 15px rgba(37, 199, 96, 0.5)); }
+   .title-underline { width: 100%; height: 2px; background: linear-gradient(90deg, var(--primary-color), var(--third-color)); margin: 0 auto; border-radius: 1px; box-shadow: 0 0 10px rgba(37, 199, 96, 0.5); }
+   .hero-description { color: var(--secondary-color); font-family: Arial, sans-serif; animation: fadeInUp 1s ease-out 0.8s both; }
+   .description-text { font-size: 1.4rem; font-weight: 300; margin-bottom: 15px; opacity: 0.9; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); color: var(--primary-color); }
+   .description-quote { font-size: 1.6rem; font-weight: 300; color: var(--primary-color); margin-bottom: 15px; text-shadow: 0 0 15px rgba(37, 199, 96, 0.3); }
+   .description-message { font-size: 1.2rem; font-weight: 300; line-height: 1.6; opacity: 0.95; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); max-width: 600px; margin: 0 auto; color: var(--primary-color); }
+   
+   
+   /* ============================================================================
+      RESPONSIVE DESIGN - HERO SECTION
+      ============================================================================ */
+   /* Responsive - HERO SECTION - Removed duplicates and merged rulesets for clarity */
+   
+   /* Large tablets and small desktops */
+   @media (max-width: 1200px){
+       .title-product { font-size: 2.5rem; }
+   }
+   
+   /* Tablet Landscape (max-width: 1024px and min-width: 769px) */
+   @media (max-width: 1024px) and (min-width: 769px) {
+       .hero-section { height: 60vh; min-height: 450px; }
+       .hero-icon { width: 100px; height: 100px; margin-bottom: 20px; }
+       .title-main { font-size: 3rem; }
+       .title-product { font-size: 2.2rem; }
+       .hero-underline-img { width: 220px; margin: 15px auto; }
+       .description-text { font-size: 1rem; }
+       .description-quote { font-size: 1.2rem; }
+       .description-message { font-size: 1rem; }
+   }
+   
+   /* Tablet & Mobile (max-width: 768px) */
+   @media (max-width: 768px) {
+       .hero-section { height: 40vh; min-height: 350px; }
+       .hero-icon { width: 60px; height: 60px; margin-bottom: 15px; }
+       .title-main { font-size: 2rem; letter-spacing: 1px; }
+       .title-product { font-size: 1.6rem; letter-spacing: 1px; }
+       .hero-underline-img { width: 180px; margin: 10px auto; }
+       .title-underline { width: 55px; }
+       .description-text { font-size: 0.7rem; }
+       .description-quote { font-size: 0.7rem; }
+       .description-message { font-size: 0.7rem; }
+       .hero-content { padding: 0 15px; }
+   }
+   
+   /* Tablet Portrait (max-width: 768px) - middle ground for bigger mobiles and tablets */
+   @media (max-width: 768px) and (min-width: 481px) {
+       .hero-section { height: 80vh; min-height: 500px; }
+       .hero-icon { width: 80px; height: 80px; margin-bottom: 20px; }
+       .title-main { font-size: 2.5rem; }
+       .title-product { font-size: 2rem; }
+       .hero-underline-img { width: 250px; margin: 15px auto; }
+       .title-underline { width: 150px; }
+       .description-text { font-size: 1.2rem; }
+       .description-quote { font-size: 1.4rem; }
+       .description-message { font-size: 1.1rem; }
+   }
+   
+   /* Extra: If you want stricter mobile rules for very small screens */
+   @media (max-width: 480px) {
+       .hero-section { height: 35vh; min-height: 250px; }
+       .hero-icon { width: 48px; height: 48px; }
+       .title-main, .title-product { font-size: 1.2rem; }
+       .hero-underline-img { width: 120px; }
+       .title-underline { width: 35px; }
+       .description-text, .description-quote, .description-message { font-size: 0.6rem; }
+   }
+   
+   

@@ -1,0 +1,160 @@
+
+/* ============================================================================
+   SECTION 1: PRODUCT GALLERY & CART SECTION
+   ============================================================================ */
+
+/* --- Gallery Section Container --- */
+.product-gallery-section .container {max-width: 1500px !important;}
+.product-gallery-section .row {align-items: stretch;height: 750px;}
+.product-gallery-section {padding: 40px 0; background-color: var(--background-color); min-height: 60vh;}
+
+/* --- Thumbnail Gallery --- */
+.thumbnail-gallery {display: flex; flex-direction: column; gap: 15px; padding: 20px 0; height: unset; max-height: 600px; overflow-y: auto;}
+.thumbnail-gallery {scrollbar-width: none; -ms-overflow-style: none;}
+.thumbnail-gallery::-webkit-scrollbar {display: none;}
+.thumbnail-item {width: 100%; aspect-ratio: 1; border-radius: 10px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; position: relative; flex-shrink: 0;}
+.thumbnail-item:hover {border-color: var(--primary-color); transform: scale(1.05);}
+.thumbnail-item.active {border-color: var(--primary-color); box-shadow: 0 0 15px rgba(37, 199, 96, 0.5);}
+.thumbnail-video {width: 100%; height: 100%; object-fit: cover;}
+
+/* --- Main Product Display --- */
+.main-product-display {display: flex; justify-content: center; align-items: center; padding: 20px; height: 700px;}
+.product-media-container {position: relative; width: 100%; max-width: 500px; height: 100%; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); background-color: var(--background-color); display: flex; align-items: center; justify-content: center;}
+.main-product-video {width: 100%; max-height: 100%; height: auto; display: block; object-fit: contain;}
+.product-video {max-width: 240px; height: auto; transition: transform 0.3s ease; object-fit: cover; border-radius: 8px;}
+.video-overlay {position: absolute; top: 20px; left: 20px;}
+
+/* --- Product Info Cart Container --- */
+.product-info-cart {background: var(--background-color); padding: 40px; border-radius: 20px; color: var(--secondary-color); height: fit-content; margin-top: 20px;}
+
+/* --- Product Name & Category --- */
+.product-name {font-size: 2.5rem; font-weight: bold; color: var(--primary-color); margin-bottom: 10px; line-height: 1.2;}
+.product-category {font-size: 1.2rem; color: var(--secondary-color); margin-bottom: 30px;}
+
+/* --- Badges Container --- */
+.d-flex.gap-2.mb-3 { gap: 12px; }
+
+/* --- Pre-order Badge --- */
+.pre-order-badge {border: 1px solid var(--primary-color); border-radius: 5px; padding: 5px 10px; font-size: 12px; height: fit-content; flex-shrink: 0; align-self: center; margin-left: 0.5rem; margin-right: 0.5rem; display: flex; align-items: center;}
+.pre-order-badge p { color: var(--primary-color); font-size: 1rem; margin-bottom: 0; white-space: nowrap; }
+
+/* --- Pre-order Shipping Badge --- */
+.pre-order-shipping-badge { border: 1px solid var(--primary-color); border-radius: 5px; padding: 5px 10px; font-size: 12px; height: fit-content; width: fit-content; max-width: 100%; }
+.pre-order-shipping-badge p { color: var(--primary-color); display: flex; align-items: center; margin-bottom: 0; flex-wrap: wrap; gap: 4px; }
+.pre-order-shipping-badge .fa-calendar { color: var(--primary-color); font-size: 1em; margin-right: 7px; vertical-align: middle; flex-shrink: 0; }
+
+/* --- Free Shipping Badge --- */
+.free-shipping-badge { border: 1px solid var(--primary-color); border-radius: 5px; padding: 5px 10px; font-size: 12px; height: fit-content; width: fit-content; max-width: 100%; }
+.free-shipping-badge p { color: var(--primary-color); display: flex; align-items: center; margin-bottom: 0; white-space: nowrap; }
+.free-shipping-badge .fa-truck { color: var(--primary-color); font-size: 1em; margin-right: 7px; vertical-align: middle; flex-shrink: 0; }
+
+/* --- Quantity Selector --- */
+.quantity-selector { margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
+.quantity-selector label { font-size: 1.1rem; /* font-weight: bold; */ color: #000000; background-color: #ffffff; border-radius: 5px; padding: 8px 15px; margin: 0; }
+.quantity-controls { display: flex; align-items: center; background: var(--secondary-color); border: 2px solid var(--primary-color); border-radius: 5px; padding: 5px; width: 120px; }
+.quantity-btn { width: 30px; height: 30px; border: none; background: transparent; color: var(--background-color); border-radius: 50%; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; }
+.quantity-btn:hover { background: #f0f0f0; }
+.quantity-input { width: 40px; height: 30px; text-align: center; border: none; background: transparent; color: var(--background-color); font-size: 1.1rem; font-weight: bold; outline: none; }
+.quantity-input:focus { outline: none; }
+
+/* --- Action Buttons (Add to Cart, etc.) --- */
+.action-buttons { display: flex; flex-direction: column; gap: 15px; }
+.action-buttons .btn { padding: 15px 25px; font-size: 0.95rem; font-weight: bold; border-radius: 8px; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; border: 2px solid var(--primary-color); background: var(--secondary-color); color: var(--background-color); }
+.action-buttons .btn:hover { background: var(--primary-color); color: var(--secondary-color); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 199, 96, 0.3); }
+
+/* ============================================================================
+   RESPONSIVE DESIGN - PRODUCT GALLERY & CART SECTION
+   ============================================================================ */
+
+/* --- Tablet View (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+    /* Quantity Selector */
+    .quantity-selector label { font-size: 0.9rem; padding: 6px 12px; }
+    .quantity-controls { width: 100px; padding: 4px; }
+    .quantity-btn { width: 25px; height: 25px; font-size: 1rem; }
+    .quantity-input { width: 35px; height: 25px; font-size: 0.9rem; }
+}
+
+/* --- Mobile Large (max-width: 820px) --- */
+@media (max-width: 820px) {
+    /* Gallery Section Layout */
+    .product-gallery-section { padding: 30px 0; }
+    .product-gallery-section .row { display: flex; flex-direction: column; height: unset; }
+    .product-gallery-section .row .col-md-4 { order: 1; width: 100%; max-width: 100%; flex: 0 0 100%; height: 100%; }
+    .product-gallery-section .row .col-md-1 { order: 2; width: 100%; max-width: 100%; flex: 0 0 100%; }
+    .product-gallery-section .row .col-md-7 { order: 3; width: 100%; max-width: 100%; flex: 0 0 100%; }
+    
+    /* Main Product Display */
+    .main-product-display { height: auto; min-height: 400px; padding: 20px 0; display: flex; align-items: center; justify-content: center; }
+    .product-media-container { max-width: 100%; min-height: 350px; height: auto; background-color: var(--background-color); display: flex; align-items: center; justify-content: center; }
+    .main-product-video { max-height: none; width: 50%; height: auto; }
+    
+    /* Thumbnail Gallery */
+    .thumbnail-gallery { flex-direction: row; overflow-x: auto; padding: 10px 0; gap: 10px; height: auto; max-height: none; }
+    .thumbnail-item { min-width: 60px; max-width: 80px; height: auto; aspect-ratio: auto; flex-shrink: 0; }
+    .thumbnail-video { width: 100%; height: auto; object-fit: contain; }
+    
+    /* Product Name & Category */
+    .product-name { font-size: 1.2rem; line-height: 1.3; margin-bottom: 8px; }
+    .product-category { font-size: 0.8rem; }
+    
+    /* Product Info Cart */
+    .product-info-cart { padding: 30px 20px; margin-top: 30px; }
+    .product-info-cart .d-flex { flex-wrap: wrap; gap: 8px; align-items: center; }
+    
+    /* Badges */
+    .pre-order-badge { padding: 4px 8px; font-size: 10px; margin-left: 0; margin-right: 0; align-self: center; }
+    .pre-order-badge p { font-size: 0.7rem; }
+    .d-flex.gap-2.mb-3 { flex-direction: column; gap: 10px !important; }
+    .pre-order-shipping-badge { padding: 6px 10px; font-size: 11px; width: 100%; max-width: 100%; }
+    .pre-order-shipping-badge p { font-size: 0.8rem; flex-wrap: wrap; line-height: 1.4; }
+    .pre-order-shipping-badge .fa-calendar { font-size: 0.85em; margin-right: 6px; }
+    .free-shipping-badge { padding: 6px 10px; font-size: 11px; width: 100%; max-width: 100%; }
+    .free-shipping-badge p { font-size: 0.8rem; }
+    .free-shipping-badge .fa-truck { font-size: 0.85em; margin-right: 6px; }
+    
+    /* Quantity Selector */
+    .quantity-selector label { font-size: 0.8rem; padding: 6px 8px; white-space: nowrap; }
+    .quantity-controls { flex: 1; padding: 0; }
+    .quantity-btn { width: 30px; height: 30px; font-size: 0.9rem; }
+    .quantity-input { flex: 1; height: 30px; font-size: 0.9rem; }
+    
+    /* Action Buttons */
+    .action-buttons .btn { padding: 12px 20px; font-size: 0.5rem; }
+}
+
+/* --- Mobile Medium (max-width: 620px) --- */
+@media (max-width: 620px) {
+    /* Product Name & Pre-order Badge */
+    .product-name { font-size: 1.1rem; line-height: 1.2; }
+    .pre-order-badge { padding: 3px 7px; font-size: 9px; }
+    .pre-order-badge p { font-size: 0.68rem; }
+}
+
+/* --- Mobile Small (max-width: 530px) --- */
+@media (max-width: 530px) {
+    /* Product Name & Pre-order Badge */
+    .product-name { font-size: 1rem; line-height: 1.2; }
+    .pre-order-badge { padding: 3px 6px; font-size: 8px; }
+    .pre-order-badge p { font-size: 0.65rem; }
+}
+
+/* --- Mobile Extra Small (max-width: 480px) --- */
+@media (max-width: 480px) {
+    /* Product Info Cart */
+    .product-info-cart .d-flex { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px; }
+    
+    /* Product Name */
+    .product-name { font-size: 1rem; line-height: 1.2; margin-bottom: 6px; }
+    
+    /* Badges */
+    .pre-order-badge { padding: 3px 6px; font-size: 9px; margin-left: 0; margin-right: 0; align-self: center; }
+    .pre-order-badge p { font-size: 0.65rem; }
+    .d-flex.gap-2.mb-3 { gap: 8px !important; }
+    .pre-order-shipping-badge { padding: 5px 8px; font-size: 10px; width: 100%; max-width: 100%; }
+    .pre-order-shipping-badge p { font-size: 0.7rem; line-height: 1.3; }
+    .pre-order-shipping-badge .fa-calendar { font-size: 0.75em; margin-right: 5px; }
+    .free-shipping-badge { padding: 5px 8px; font-size: 10px; width: 100%; max-width: 100%; }
+    .free-shipping-badge p { font-size: 0.7rem; }
+    .free-shipping-badge .fa-truck { font-size: 0.75em; margin-right: 5px; }
+}

@@ -1,0 +1,243 @@
+
+/* ============================================================================
+   SECTION 2: BENEFIT SECTION & TRUST SECTION
+   ============================================================================ */
+
+/* --- Product Information Section Container --- */
+.product-info-section {padding: 40px 0; background-color: var(--background-color);}
+
+/* --- Product Information Card --- */
+.products-grid-details {display: grid; gap: 20px; max-width: 100%; margin: 0 auto;}
+.products-grid-details .product-card {background-color: var(--background-color); border: 1px solid var(--primary-color); border-radius: 12px; padding: 10px; position: relative; overflow: hidden; transition: all 0.3s ease; font-size: 1rem;}
+.products-grid-details .card-content {display: grid; grid-template-columns: auto 1fr 1fr; grid-template-rows: auto auto; gap: 10px; align-items: start; text-align: left; padding: 12px;}
+
+/* --- Product Image & Video --- */
+.products-grid-details .product-image {grid-column: 1; grid-row: 1 / 3; width: unset; height: auto; border-radius: 8px; overflow: hidden; position: relative; display: flex; align-items: flex-start; padding-top: 5px;}
+.products-grid-details .product-video {width: 100%; height: auto; object-fit: contain; display: block; padding-left:10%; padding-right:10%;}
+
+/* --- Product Title & Tagline --- */
+.products-grid-details .product-title {grid-column: 2; grid-row: 1; margin: 0; display: flex; flex-direction: column; gap: 5px; text-align: left; align-self: end; padding-left:5%;}
+.products-grid-details .title-main {font-size: 2rem; font-weight: bold; color: var(--primary-color); margin: 0; line-height: 1.2;}
+.products-grid-details .title-sub {font-size: 0.9rem; color: var(--primary-color); margin: 0;}
+.products-grid-details .product-tagline {grid-column: 2; grid-row: 2; font-size: 1rem; color: var(--secondary-color); margin: 2px 0 0 0; line-height: 1.5; text-align: left; padding-left:5%;}
+
+/* --- Product Benefits --- */
+.products-grid-details .product-benefits {grid-column: 3; grid-row: 1; margin: 0; align-self: end; display: flex; flex-direction: column; justify-content: flex-end;}
+.products-grid-details .benefit-item {display: flex; align-items: flex-start; margin-bottom: 10px; gap: 10px;}
+.products-grid-details .checkmark {color: var(--primary-color); font-weight: bold; font-size: 1.2rem; flex-shrink: 0;}
+.products-grid-details .benefit-item span:last-child {font-size: 1.2rem; color: var(--secondary-color); line-height: 1.4;}
+
+/* --- How to Use --- */
+.products-grid-details .how-to-use {grid-column: 3; grid-row: 2; margin: 0; margin-top: 10px;}
+.products-grid-details .how-to-use h4 {font-size: 1.5rem; color: var(--primary-color); margin: 0 0 10px 0;}
+.products-grid-details .usage-item {display: flex; align-items: flex-start; gap: 10px;}
+.products-grid-details .usage-item .checkmark {margin-top: -2px;}
+.products-grid-details .usage-item span:last-child {font-size: 0.95rem; color: var(--secondary-color); line-height: 1.4;}
+
+/* --- Hero Underline Images --- */
+.hero-underline-img {display: block; width: 250px; max-width: 80%; height: auto; margin: 20px auto; filter: drop-shadow(0 0 15px rgba(37, 199, 96, 0.5));}
+.red-hero-underline-img {display: block; width: 150px; max-width: 80%; height: auto; margin: 0px auto 20px auto; filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.5));}
+
+/* --- Trust Section --- */
+.section-title {text-align: center; font-family: Arial, sans-serif; font-weight: 700; font-size: 2.5rem; color: var(--primary-color); letter-spacing: 2px;}
+.trust-content {background-color: var(--background-color); border: 1px solid var(--primary-color); border-radius: 12px; padding: 40px; margin: 40px 0; transition: all 0.3s ease;}
+.trust-content:hover {transform: translateY(-5px); box-shadow: 0 15px 40px rgba(37, 199, 96, 0.2);}
+.trust-content p {font-family: Arial, sans-serif; font-size: 1rem; color: var(--secondary-color); line-height: 1.4; text-align: center; margin-bottom: 0;}
+
+/* --- Trust Logos --- */
+.trust-logos {display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 30px; max-width: 1400px; margin: 0 auto;}
+.trust-logo {display: flex; justify-content: center; align-items: center; padding: 10px;}
+.partner-logo {max-width: 120px; max-height: 120px; width: auto; height: auto; transition: all 0.3s ease;}
+.partner-logo:hover {transform: scale(1.1); filter: grayscale(0%) brightness(1);}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - BENEFIT SECTION & TRUST SECTION
+   ============================================================================ */
+
+/* --- Tablet View (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+    /* Trust Section */
+    .section-title { font-size: 2rem; }
+    .trust-content { margin: 30px 0px; padding: 30px; }
+    .trust-logos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 0 20px; }
+    .partner-logo { max-width: 120px; max-height: 120px; }
+}
+
+/* --- Mobile Large (max-width: 992px) --- */
+@media (max-width: 992px) {
+    /* Product Information Card */
+    .products-grid-details .product-card { padding: 0; }
+    .products-grid-details .card-content { display: grid; grid-template-columns: auto 1fr 1fr; grid-template-rows: auto auto; gap: 15px; align-items: start; text-align: left; }
+    .products-grid-details .product-image { width: unset; grid-column: 1; grid-row: 1 / 3; margin-bottom: 0; display: flex; align-items: flex-start; padding-top: 5px; }
+    .products-grid-details .product-video { max-width: 160px; height: auto; padding-left:0%; padding-right:0%; }
+    .products-grid-details .product-title { grid-column: 2; grid-row: 1; margin-bottom: 8px; text-align: left; align-self: start; }
+    .products-grid-details .product-title .text-center { text-align: left !important; }
+    .products-grid-details .title-main { font-size: 1.5rem; margin-bottom: 3px; }
+    .products-grid-details .title-sub { font-size: 1.3rem; }
+    .products-grid-details .product-tagline { grid-column: 2; grid-row: 2; font-size: 1rem; margin-bottom: 0; text-align: left; align-self: start; }
+    .products-grid-details .product-tagline.text-danger,
+    .products-grid-details .product-tagline.text-center { text-align: left !important; }
+    .products-grid-details .product-tagline strong::after { content: "\A"; white-space: pre; }
+    
+    /* Product Benefits */
+    .products-grid-details .product-benefits { grid-column: 3; grid-row: 1; margin-bottom: 0; align-self: start; width: 100%; }
+    .products-grid-details .benefit-item { margin-bottom: 6px; gap: 6px; }
+    .products-grid-details .benefit-item span:last-child { font-size: 1rem; line-height: 1.3; }
+    .products-grid-details .checkmark { font-size: 0.8rem; }
+    
+    /* How to Use */
+    .products-grid-details .how-to-use { grid-column: 3; grid-row: 2; align-self: start; width: 100%; }
+    .products-grid-details .how-to-use h4 { font-size:1rem; margin-bottom: 6px; }
+    .products-grid-details .usage-item { gap: 6px; }
+    .products-grid-details .usage-item span:last-child { font-size: 1rem; line-height: 1.3; }
+    
+    /* Hero Underline Images */
+    .hero-underline-img { width: 220px; margin: 15px auto; }
+    .red-hero-underline-img { width: 80px; /* margin: 0px auto 0px auto */ }
+}
+
+/* --- Mobile Medium (max-width: 820px) --- */
+@media (max-width: 820px) {
+    /* Product Information Card */
+    .products-grid-details .product-card { padding: 20px; }
+    .products-grid-details .title-main { font-size: 1.6rem; }
+    .products-grid-details .title-sub { font-size: 0.8rem; }
+    .products-grid-details .product-tagline { font-size: 0.9rem; }
+    .products-grid-details .product-video { max-width: 150px; }
+    
+    /* Hero Underline Images */
+    .hero-underline-img { width: 220px; margin: 15px auto; }
+    .red-hero-underline-img { width: 150px; margin: 5px auto; }
+    
+    /* Trust Section */
+    .section-title { font-size: 1rem; margin-bottom: 5px; }
+    .trust-content { margin: 20px 0px; padding: 10px; }
+    .trust-content p { font-size: 0.6rem; }
+    .trust-logos { display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 1px; padding: 0 2px; width: 100%; overflow: hidden; box-sizing: border-box; }
+    .trust-logo { padding: 1px; flex-shrink: 0; width: 16.66%; max-width: 16.66%; display: flex; justify-content: center; align-items: center; box-sizing: border-box; min-width: 0; }
+    .partner-logo { max-width: 100%; max-height: 35px; width: 100%; height: auto; object-fit: contain; display: block; }
+}
+
+/* --- Mobile Extra Small (max-width: 615px) --- */
+@media (max-width: 615px) {
+    /* Product Information Card */
+    .products-grid-details .product-card { padding: 0; }
+    .products-grid-details .card-content { display: grid; grid-template-columns: auto 1fr 1fr; grid-template-rows: auto auto; gap: 10px; align-items: start; text-align: left; }
+    .products-grid-details .product-image { grid-column: 1; grid-row: 1 / 3; margin-bottom: 0; display: flex; align-items: flex-start; padding-top: 5px; }
+    .products-grid-details .product-video { max-width: 50px; height: auto; }
+    .products-grid-details .product-title { grid-column: 2; grid-row: 1; margin-bottom: 5px; text-align: left; align-self: start; }
+    .products-grid-details .product-title .text-center { text-align: left !important; }
+    .products-grid-details .title-main { font-size: 0.85rem; margin-bottom: 3px; }
+    .products-grid-details .title-sub { font-size: 0.65rem; }
+    .products-grid-details .product-tagline { grid-column: 2; grid-row: 2; font-size: 0.6rem; margin-bottom: 0; text-align: left; align-self: start; }
+    .products-grid-details .product-tagline.text-danger,
+    .products-grid-details .product-tagline.text-center { text-align: left !important; }
+    .products-grid-details .product-tagline strong::after { content: "\A"; white-space: pre; }
+    
+    /* Product Benefits */
+    .products-grid-details .product-benefits { grid-column: 3; grid-row: 1; margin-bottom: 0; align-self: start; width: 100%; }
+    .products-grid-details .benefit-item { margin-bottom: 4px; gap: 4px; }
+    .products-grid-details .checkmark { font-size: 0.6rem; }
+    .products-grid-details .benefit-item span:last-child { font-size: 0.5rem; line-height: 1.2; }
+    
+    /* How to Use */
+    .products-grid-details .how-to-use { grid-column: 3; grid-row: 2; align-self: start; width: 100%; }
+    .products-grid-details .how-to-use h4 { font-size: 0.6rem; margin-bottom: 4px; }
+    .products-grid-details .usage-item { gap: 4px; }
+    .products-grid-details .usage-item span:last-child { font-size: 0.55rem; line-height: 1.2; }
+    
+    /* Hero Underline Images */
+    .hero-underline-img { width: 180px; margin: 10px auto; }
+    .red-hero-underline-img { width: 60px; margin: 0px auto 0px auto; }
+}
+
+
+/* --- Mobile Small (max-width: 530px) --- */
+@media (max-width: 530px) {
+    /* Product Information Card */
+    .products-grid-details .title-main { font-size: 1rem; margin-bottom: 3px; }
+    .products-grid-details .title-sub { font-size: 0.8rem; }
+    .products-grid-details .product-tagline { grid-column: 2; grid-row: 2; font-size: 0.8rem; margin-bottom: 0; text-align: left; align-self: start; }
+    .products-grid-details .product-video { max-width: 80px; }
+    
+    /* Product Benefits */
+    .products-grid-details .benefit-item span:last-child { font-size: 0.8rem; line-height: 1.3; }
+    
+    /* How to Use */
+    .products-grid-details .how-to-use h4 { font-size: 0.8rem; margin-bottom: 6px; }
+    .products-grid-details .usage-item span:last-child { font-size: 0.8rem; line-height: 1.3; }
+}
+
+/* --- Mobile Extra Small (max-width: 480px) --- */
+@media (max-width: 480px) {
+    /* Trust Section */
+    .trust-content p { font-size: 0.6rem; padding-top: 10px; }
+}
+
+/* --- Mobile (max-width: 767px) --- */
+@media (max-width: 480px) {
+    /* Product Information Card - 2 Column Grid Layout */
+    .products-grid-details .card-content {display: grid; grid-template-columns: 0.5fr 1.3fr; grid-template-rows: auto auto auto auto; gap: 10px 12px; align-items: start;}
+    .products-grid-details .product-image {height:100%;grid-column: 1; grid-row: 1 / 5; display: flex; align-items: center; justify-content: center; padding: 0;}
+    .products-grid-details .product-video {width: 100%; max-width: 100%; height: auto; object-fit: contain; padding: 0;}
+    .products-grid-details .product-title {line-height:0.5;grid-column: 2; grid-row: 1; margin: 0; padding: 0; align-self: start;}
+    .products-grid-details .product-title .title-main {margin-bottom: 0;}
+    .products-grid-details .product-tagline {font-size: 0.7rem; grid-column: 2; grid-row: 2; margin: 0; padding: 0; align-self: start;}
+    .products-grid-details .product-benefits {grid-column: 2; grid-row: 3; margin: 0; padding: 0; align-self: start;}
+    .products-grid-details .product-benefits .benefit-item span:last-child {font-size: 0.7rem; line-height: 1.3;}
+    .products-grid-details .how-to-use {grid-column: 2; grid-row: 4; margin: 0; padding: 0; align-self: start;}
+    .products-grid-details .how-to-use h4 {font-size: 0.7rem;}
+    .products-grid-details .usage-item span:last-child {font-size: 0.7rem; line-height: 1.3;}
+}
+
+/* --- Mobile Extra Small (max-width: 400px) --- */
+@media (max-width: 400px) {
+    /* Product Information Card - Override only unique styles */
+    .products-grid-details .product-card { padding: 0; }
+    .products-grid-details .card-content { gap: 8px 10px; }
+    .products-grid-details .product-title .title-main { font-size: 0.85rem; }
+    .products-grid-details .product-title .title-sub { font-size: 0.65rem; }
+    .products-grid-details .product-tagline { font-size: 0.5rem; }
+    .products-grid-details .product-benefits .benefit-item span:last-child { font-size: 0.45rem; line-height: 1.2; }
+    .products-grid-details .how-to-use h4 { font-size: 0.55rem; }
+    .products-grid-details .usage-item span:last-child { font-size: 0.45rem; line-height: 1.2; }
+    
+    /* Hero Underline Images */
+    .hero-underline-img { width: 100px; margin:5px auto 10px auto; }
+    .red-hero-underline-img { width: 60px; margin: 0px auto 0px auto; }
+}
+
+/* --- Mobile Extra Small (max-width: 370px) --- */
+@media (max-width: 370px) {
+    .trust-content p { font-size: 0.52rem; padding-top: 5px; }
+
+    /* Product Information Card - 2 Column Grid Layout */
+    .products-grid-details .card-content { gap: 6px 8px; }
+    .products-grid-details .product-title .title-main { font-size: 0.8rem; }
+    .products-grid-details .product-title .title-sub { font-size: 0.65rem; }
+    .products-grid-details .product-tagline { font-size: 0.45rem; }
+    .products-grid-details .product-benefits .benefit-item span:last-child { font-size: 0.45rem; line-height: 1.3; }
+    .products-grid-details .how-to-use h4 { font-size: 0.55rem; }
+    .products-grid-details .usage-item span:last-child { font-size: 0.45rem; line-height: 1.3; }
+
+}
+
+/* --- Fold Phone (max-width: 320px) --- */
+@media (max-width: 320px) {
+    /* Product Information Card - Override only unique styles */
+    .products-grid-details .product-card { padding: 0; }
+    .products-grid-details .card-content { gap: 5px 8px; }
+    .products-grid-details .product-title .title-main { font-size: 0.85rem; }
+    .products-grid-details .product-title .title-sub { font-size: 0.65rem; }
+    .products-grid-details .product-tagline { font-size: 0.5rem; }
+    .products-grid-details .product-benefits .benefit-item span:last-child { font-size: 0.45rem; line-height: 1.2; }
+    .products-grid-details .how-to-use h4 { font-size: 0.55rem; }
+    .products-grid-details .usage-item span:last-child { font-size: 0.45rem; line-height: 1.2; }
+    
+    /* Hero Underline Images */
+    .hero-underline-img { width: 180px; margin: 10px auto; }
+    .red-hero-underline-img { width: 60px; margin: 0px auto 0px auto; }
+}
+
+
+

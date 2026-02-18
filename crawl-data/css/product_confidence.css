@@ -1,0 +1,2615 @@
+/* ============================================================================
+   PRODUCT DETAILS PAGES - STYLESHEET
+   ============================================================================ */
+
+/* ============================================================================
+   SECTION 1: PRODUCT GALLERY & CART SECTION
+   ============================================================================ */
+
+/* Container Overrides */
+.product-gallery-section .container {
+    max-width: 1500px !important;
+}
+
+.product-gallery-section .row {
+    align-items: stretch;
+    height: 750px;
+}
+
+/* Product Gallery Section */
+.product-gallery-section {
+    padding: 40px 0;
+    background-color: var(--background-color);
+    min-height: 60vh;
+}
+
+/* Thumbnail Gallery (Left Side) */
+.thumbnail-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0;
+    height: unset;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+/* Hide scrollbar but keep scrolling */
+.thumbnail-gallery {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+.thumbnail-gallery::-webkit-scrollbar { /* Chrome/Safari/Edge */
+    display: none;
+}
+
+.thumbnail-item {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.thumbnail-item:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.thumbnail-item.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(37, 199, 96, 0.5);
+}
+
+.thumbnail-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Main Product Display (Center) */
+.main-product-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 700px;
+}
+
+.product-media-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-product-video {
+    width: 100%;
+    max-height: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.product-video {
+    max-width: 240px;
+    height: auto;
+    transition: transform 0.3s ease;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+/* Product Info & Cart (Right Side) */
+.product-info-cart {
+    background: var(--background-color);
+    padding: 40px;
+    border-radius: 20px;
+    color: var(--secondary-color);
+    height: fit-content;
+    margin-top: 20px;
+}
+
+.product-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.product-category {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 30px;
+}
+
+/* Pre-order Badge */
+.pre-order-badge {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    height: fit-content;
+    flex-shrink: 0;
+    align-self: center;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.pre-order-badge p {
+    color: var(--primary-color);
+    font-size: 1rem;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+/* Badge Container */
+.d-flex.gap-2.mb-3 {
+    gap: 12px;
+}
+
+/* Pre-order Shipping Info Badge */
+.pre-order-shipping-badge {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    height: fit-content;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.pre-order-shipping-badge p {
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.pre-order-shipping-badge .fa-calendar {
+    color: var(--primary-color);
+    font-size: 1em;
+    margin-right: 7px;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* Free Shipping Badge */
+.free-shipping-badge {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    height: fit-content;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.free-shipping-badge p {
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+.free-shipping-badge .fa-truck {
+    color: var(--primary-color);
+    font-size: 1em;
+    margin-right: 7px;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* Quantity Selector */
+.quantity-selector {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quantity-selector label {
+    font-size: 1.1rem;
+    /* font-weight: bold; */
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 8px 15px;
+    margin: 0;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    background: var(--secondary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 5px;
+    width: 120px;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    color: var(--background-color);
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-btn:hover {
+    background: #f0f0f0;
+}
+
+.quantity-input {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    color: var(--background-color);
+    font-size: 1.1rem;
+    font-weight: bold;
+    outline: none;
+}
+
+.quantity-input:focus {
+    outline: none;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.action-buttons .btn {
+    padding: 15px 25px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary-color);
+    background: var(--secondary-color);
+    color: var(--background-color);
+}
+
+.action-buttons .btn:hover {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 199, 96, 0.3);
+}
+
+/* ============================================================================
+   SECTION 2: PRODUCT INFORMATION CARD
+   ============================================================================ */
+
+.product-info-section {
+    padding: 40px 0;
+    background-color: var(--background-color);
+}
+
+.products-grid-details {
+    display: grid;
+    gap: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.products-grid-details .product-card {
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.products-grid-details .card-content {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    align-items: start;
+    text-align: left;
+    padding: 12px;
+}
+
+/* Product image (align like mobile on desktop too) */
+.products-grid-details .product-image {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    width: unset;
+    height: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 5px;
+}
+
+.products-grid-details .product-video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    padding-left:10%;
+    padding-right:10%;
+}
+
+/* Title and Tagline to the right of image */
+.products-grid-details .product-title {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left;
+    align-self: end;
+    padding-left:5%;
+}
+
+.products-grid-details .title-main {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.products-grid-details .title-sub {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.products-grid-details .product-tagline {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin: 2px 0 0 0;
+    line-height: 1.5;
+    text-align: left;
+    padding-left:5%;
+}
+
+/* Right Column: Benefits and Usage */
+.products-grid-details .product-benefits {
+    grid-column: 3;
+    grid-row: 1;
+    margin: 0;
+    align-self: end;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.products-grid-details .how-to-use {
+    grid-column: 3;
+    grid-row: 2;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.products-grid-details .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.products-grid-details .checkmark {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    /* margin-top: 2px; */
+    flex-shrink: 0;
+}
+
+.products-grid-details .usage-item .checkmark {
+    margin-top: -2px;
+}
+
+.products-grid-details .benefit-item span:last-child {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    line-height: 1.4;
+}
+
+.products-grid-details .how-to-use h4 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 0 0 10px 0;
+}
+
+.products-grid-details .usage-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.products-grid-details .usage-item span:last-child {
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    line-height: 1.4;
+}
+
+/* ============================================================================
+   SECTION 3: OUR TRUST SECTION
+   ============================================================================ */
+
+.hero-underline-img {
+    display: block;
+    width: 250px;
+    max-width: 80%;
+    height: auto;
+    margin: 20px auto;
+    filter: drop-shadow(0 0 15px rgba(37, 199, 96, 0.5));
+}
+
+.red-hero-underline-img {
+    display: block;
+    width: 150px;
+    max-width: 80%;
+    height: auto;
+    margin: 0px auto 20px auto;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.5));
+}
+
+.section-title {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    letter-spacing: 2px;
+}
+
+.trust-content {
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 40px;
+    margin: 40px 0;
+    transition: all 0.3s ease;
+}
+
+.trust-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(37, 199, 96, 0.2);
+}
+
+.trust-content p {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    color: var(--secondary-color);
+    line-height: 1.4;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.trust-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.trust-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.partner-logo {
+    max-width: 120px;
+    max-height: 120px;
+    width: auto;
+    height: auto;
+    transition: all 0.3s ease;
+}
+
+.partner-logo:hover {
+    transform: scale(1.1);
+    filter: grayscale(0%) brightness(1);
+}
+
+/* ============================================================================
+   MAZEKOMU LAYOUT SECTION
+   ============================================================================ */
+
+   .mazekomu-layout {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    background-color: #000000;
+    border: none;
+    border-radius: 0;
+    margin: 40px 0;
+    position: relative;
+    min-height: 500px;
+    gap: 0px;
+}
+
+/* Drink section border */
+.drink-section {
+    border: none;
+    border-radius: 20px 0 0 20px;
+    padding: 20px;
+    background-color: black;
+    position: relative;
+    /* Green borders for top, left, and bottom */
+    border-top: 1px solid #25c760;
+    border-left: 1px solid #25c760;
+    border-bottom: 1px solid #25c760;
+    border-right: none;
+    margin: 0;
+}
+
+/* Override the right border with custom gradient */
+.drink-section::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    width: 1px;
+    background: linear-gradient(
+        to bottom,
+        #25c760 0%,
+        #25c760 36%,
+        #000000 34%,
+        #000000 63.7%,
+        #25c760 52%,
+        #25c760 100%
+    );
+    border-radius: 0;
+    z-index: 1;
+}
+
+/* Food section border */
+.food-section {
+    border: none;
+    border-radius: 0 20px 20px 0;
+    padding: 20px;
+    background-color: black;
+    position: relative;
+    /* Green borders for top, right, and bottom */
+    border-top: 1px solid #25c760;
+    border-right: 1px solid #25c760;
+    border-bottom: 1px solid #25c760;
+    border-left: none;
+    margin: 0;
+}
+
+/* Custom left border for food section */
+.food-section::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    bottom: -1px;
+    width: 1px;
+    background: linear-gradient(
+        to bottom,
+        #25c760 0%,
+        #25c760 36%,
+        #000000 34%,
+        #000000 63.7%,
+        #25c760 52%,
+        #25c760 100%
+    );  
+    border-radius: 0;
+    z-index: 1;
+}
+
+
+.drink-section, .food-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3;
+    position: relative;
+    min-height: 100%;
+}
+
+.drink-section .section-title, .food-section .section-title {
+    color: #ff0000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* margin-bottom: 40px; */
+}
+
+.mazekomu-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 3;
+    grid-column: 2;
+    margin: 30px 0px;
+    
+}
+
+.mazekomu-center-content {
+    border-top: 1px solid #25c760;
+    border-bottom: 1px solid #25c760;
+}
+
+
+.mazekomu-title {
+    padding-top: 30px;
+    color: #ff0000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+.test-tube-container {
+    position: relative;
+}
+
+.test-tube-icon {
+    width: 120px;
+    height: auto;
+}
+
+.drink-items, .food-items {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    flex: 1;
+    justify-content: space-evenly;
+}
+
+.drink-row, .food-row {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.drink-item, .food-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+}
+
+.drink-image, .food-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.drink-label, .food-label {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+
+
+
+/* ============================================================================
+   SECTION 4: FOOD FUNCTION SECTION
+   ============================================================================ */
+
+.cosmetic-function-content {
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 40px;
+    margin: 40px 0;
+    transition: all 0.3s ease;
+}
+
+.cosmetic-function-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(37, 199, 96, 0.2);
+}
+
+.cosmetic-function-title {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.cosmetic-function-subtitle {
+    color: var(--secondary-color);
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.cosmetic-diagram {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.test-tube-icon {
+    margin-left: -10px;
+    margin-bottom: 0;
+    line-height: 0;
+}
+
+.test-tube-img {
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(0 5px 15px rgba(37, 199, 96, 0.3));
+    transition: transform 0.3s ease;
+}
+
+
+.test-tube-img:hover {
+    transform: scale(1.05);
+}
+
+.bracket-icon {
+    margin-bottom: 20px;
+    line-height: 0;
+}
+
+.bracket-img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.bracket-img:hover {
+    transform: scale(1.02);
+}
+
+.cosmetic-branches {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.cosmetic-circles {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    gap: 10px;
+}
+
+.cosmetic-circle {
+    background-color: var(--third-color);
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.cosmetic-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(37, 199, 96, 0.4);
+}
+
+.nutrient-category-black {
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    font-size: 0.9rem;
+    color: #000000;
+    line-height: 1.2;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.nutrient-category-white {
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    line-height: 1.2;
+    display: block;
+}
+
+.cosmetic-summary {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.cosmetic-total {
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.cosmetic-description {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    color: var(--secondary-color);
+    line-height: 1.6;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+/* Benefits Section */
+.benefits-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.benefit-category {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    border-radius: 12px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.benefit-image {
+    flex: 1;
+    max-width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    transition: all 0.3s ease;
+}
+
+.category-img:hover {
+    transform: scale(1.05);
+}
+
+.benefit-content {
+    flex: 2;
+}
+
+.benefit-title {
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.title-underline {
+    width: unset;
+    height: 2px;
+    background-color: var(--primary-color);
+    margin-bottom: 20px;
+    border-radius: 1px;
+}
+
+.benefit-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.benefit-list li {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.4;
+}
+
+.benefit-list li::before {
+    content: '•';
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+
+/* ============================================================================
+   MEDICAL GRADE CONTENT
+   ============================================================================ */
+
+   .medical-grade-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.medical-description {
+    text-align: center;
+}
+
+.medical-text {
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--secondary-color);
+    margin: 0 auto;
+    opacity: 0.95;
+    text-align: center;
+    max-width: 800px;
+}
+
+.medical-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.skin-healing-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    filter: drop-shadow(0 5px 15px rgba(37, 199, 96, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.skin-healing-img:hover {
+    transform: scale(1.02);
+}
+
+.skin-healing-video {
+    max-width: 60%;
+    height: auto;
+    border-radius: 8px;
+    filter: drop-shadow(0 5px 15px rgba(37, 199, 96, 0.3));
+    transition: transform 0.3s ease;
+    object-fit: cover;
+}
+
+.skin-healing-video:hover {
+    transform: scale(1.02);
+}
+
+/* Hide video controls for skin healing video */
+.skin-healing-video::-webkit-media-controls {
+    display: none !important;
+}
+
+.skin-healing-video::-webkit-media-controls-panel {
+    display: none !important;
+}
+
+.skin-healing-video::-webkit-media-controls-play-button {
+    display: none !important;
+}
+
+.skin-healing-video::-webkit-media-controls-volume-slider {
+    display: none !important;
+}
+
+.skin-healing-video::-webkit-media-controls-mute-button {
+    display: none !important;
+}
+
+.skin-healing-video::-webkit-media-controls-timeline {
+    display: none !important;
+}
+
+.skin-healing-video::-webkit-media-controls-current-time-display {
+    display: none !important;
+}
+
+.skin-healing-video::-webkit-media-controls-time-remaining-display {
+    display: none !important;
+}
+
+.skin-healing-video::-webkit-media-controls-fullscreen-button {
+    display: none !important;
+}
+
+
+.cosmetic-function-content .test-tube-icon {
+    width: unset;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - TABLET (max-width: 1024px)
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+    /* === Trust Section === */
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .trust-content {
+        margin: 30px 0px;
+        padding: 30px;
+    }
+
+    .trust-logos {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+        padding: 0 20px;
+    }
+
+    .partner-logo {
+        max-width: 120px;
+        max-height: 120px;
+    }
+
+    .cosmetic-function-content {
+        margin: 30px 0px;
+        padding: 30px;
+    }
+
+    .cosmetic-circles {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+        max-width: 900px;
+        justify-items: center;
+        margin: 0 auto;
+    }
+
+    .cosmetic-circle {
+        width: 120px;
+        height: 120px;
+        padding: 10px;
+    }
+
+    .nutrient-category-black {
+        font-size: 0.8rem;
+        font-weight: normal;
+    }
+
+    .nutrient-category-white {
+        font-size: 0.9rem;
+        font-weight: 700;
+    }
+
+    .cosmetic-total {
+        font-size: 1.6rem;
+    }
+
+    .cosmetic-description {
+        font-size: 0.9rem;
+    }
+
+    .benefits-section {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .benefit-category {
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .benefit-image {
+        max-width: 150px;
+    }
+
+    .category-img {
+        max-width: 130px;
+    }
+
+    .benefit-title {
+        font-size: 1.1rem;
+    }
+
+    /* === Quantity Selector === */
+    .quantity-selector label {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+
+    .quantity-controls {
+        width: 100px;
+        padding: 4px;
+    }
+
+    .quantity-btn {
+        width: 25px;
+        height: 25px;
+        font-size: 1rem;
+    }
+
+    .quantity-input {
+        width: 35px;
+        height: 25px;
+        font-size: 0.9rem;
+    }
+
+    /* Medical Grade */
+    .medical-grade-content {
+        margin: 0;
+        padding: 25px;
+        gap: 25px;
+    }
+
+    .medical-text {
+        font-size: 0.7rem;
+        line-height: 1.6;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 992px) {
+    .products-grid-details .product-video {
+        max-width: 160px;
+        height: auto;
+        padding-left:0%;
+        padding-right:0%;
+    }
+}
+
+
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE (max-width: 768px)
+   ============================================================================ */
+
+/* @media (max-width: 768px) { */
+@media (max-width: 820px) {
+    /* === Gallery Section === */
+    .product-gallery-section {padding: 30px 0;}
+    .product-gallery-section .row {display: flex;flex-direction: column;height: unset;}
+
+    /* Main product display at top */
+    .product-gallery-section .row .col-md-4 {order: 1;width: 100%;max-width: 100%;flex: 0 0 100%;height: 100%;}
+
+    /* Gallery below main product */
+    .product-gallery-section .row .col-md-1 {order: 2;width: 100%;max-width: 100%;flex: 0 0 100%;}
+
+    /* Product info cart at bottom */
+    .product-gallery-section .row .col-md-7 {order: 3;width: 100%;max-width: 100%;flex: 0 0 100%;}
+    .main-product-display {height: auto;min-height: 400px;padding: 20px 0;display: flex;align-items: center;justify-content: center;}
+    .product-media-container {max-width: 100%;min-height: 350px;height: auto;background-color: var(--background-color);display: flex;align-items: center;justify-content: center;}
+    .main-product-video {max-height: none;width: 50%;height: auto;}
+    .thumbnail-gallery {flex-direction: row;overflow-x: auto;padding: 10px 0;gap: 10px;height: auto;max-height: none;}
+    .thumbnail-item {min-width: 60px;max-width: 80px;height: auto;aspect-ratio: auto;flex-shrink: 0;}
+    .thumbnail-video {width: 100%;height: auto;object-fit: contain;}
+    
+    .product-name {
+        font-size: 1.2rem;
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+    .product-category {font-size: 0.8rem;}
+    .product-info-cart {padding: 30px 20px;margin-top: 30px;}
+    .action-buttons .btn {padding: 12px 20px;font-size: 0.5rem;}
+
+    /* Product Name + Badge Container - Mobile */
+    .product-info-cart .d-flex {
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+    }
+
+    /* Pre-order Badge - Mobile */
+    .pre-order-badge {
+        padding: 4px 8px;
+        font-size: 10px;
+        margin-left: 0;
+        margin-right: 0;
+        align-self: center;
+    }
+
+    .pre-order-badge p {
+        font-size: 0.7rem;
+    }
+
+    /* Badge Container - Mobile */
+    .d-flex.gap-2.mb-3 {
+        flex-direction: column;
+        gap: 10px !important;
+    }
+
+    /* Pre-order Shipping Info Badge - Mobile */
+    .pre-order-shipping-badge {
+        padding: 6px 10px;
+        font-size: 11px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .pre-order-shipping-badge p {
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+        line-height: 1.4;
+    }
+
+    .pre-order-shipping-badge .fa-calendar {
+        font-size: 0.85em;
+        margin-right: 6px;
+    }
+
+    /* Free Shipping Badge - Mobile */
+    .free-shipping-badge {
+        padding: 6px 10px;
+        font-size: 11px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .free-shipping-badge p {
+        font-size: 0.8rem;
+    }
+
+    .free-shipping-badge .fa-truck {
+        font-size: 0.85em;
+        margin-right: 6px;
+    }
+
+    /* === Quantity Selector === */
+    .quantity-selector label {font-size: 0.8rem; padding: 6px 8px; white-space: nowrap;}
+    .quantity-controls {flex: 1; padding: 0;}
+    .quantity-btn {width: 30px; height: 30px; font-size: 0.9rem;}
+    .quantity-input { flex: 1; height: 30px; font-size: 0.9rem; }
+
+    /* === Product Information Card === */
+    .products-grid-details .product-card {padding: 20px;}
+    .products-grid-details .title-main {font-size: 1.6rem;}
+    .products-grid-details .title-sub {font-size: 0.8rem;}
+    .products-grid-details .product-tagline {font-size: 0.9rem;}
+    .products-grid-details .product-video {max-width: 150px;}
+
+    .hero-underline-img {
+        width: 220px;
+        margin: 15px auto;
+    }
+
+    .red-hero-underline-img {
+        width: 150px;
+        margin: 5px auto;
+    }
+
+    /* === Trust Section - Mobile === */
+    .section-title {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .trust-content {
+        margin: 20px 0px;
+        padding: 10px;
+    }
+
+    .trust-content p {
+        font-size: 0.6rem;
+    }
+
+    .trust-logos {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1px;
+        padding: 0 2px;
+        width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .trust-logo {
+        padding: 1px;
+        flex-shrink: 0;
+        width: 16.66%;
+        max-width: 16.66%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        min-width: 0;
+    }
+
+    .partner-logo {
+        max-width: 100%;
+        max-height: 35px;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+    }
+
+    /* === Food Function Section - Mobile === */
+    .cosmetic-function-content {
+        margin: 20px 0px;
+        padding: 10px;
+    }
+
+    .cosmetic-function-subtitle {
+        font-size: 0.7rem;
+    }
+
+    .cosmetic-function-content h6 {
+        font-size: 0.5rem;
+    }
+
+    .cosmetic-function-content .product-video {
+        max-width: 90px;
+    }
+
+    .bracket-icon {
+        margin: 0;
+    }
+
+    .cosmetic-circles {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1%;
+        width: 100%;
+    }
+
+    .cosmetic-circle {
+        width: 19%;
+        height: auto;
+        aspect-ratio: 1;
+        padding: 6px;
+        flex-shrink: 0;
+    }
+
+    .nutrient-category-black {
+        font-size: 0.7rem;
+    }
+
+    .nutrient-category-white {
+        font-size: 0.4rem;
+        font-weight: normal;
+    }
+
+    .cosmetic-total {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .cosmetic-description {
+        font-size: 0.4rem;
+        text-align: center;
+    }
+
+    /* === Benefits Section - Mobile === */
+    .benefits-section {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 30px;
+        gap: 20px;
+        padding: 0 10px;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .benefit-category {
+        flex-direction: row;
+        gap: 6px;
+        padding: 8px 5px;
+        text-align: left;
+        align-items: flex-start;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .benefit-image {
+        flex: 0 0 45px;
+        max-width: 45px;
+        min-width: 45px;
+    }
+
+    .benefit-content {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .category-img {
+        max-width: 45px;
+        width: 100%;
+    }
+
+    .benefit-title {
+        font-size: 0.5rem;
+        text-align: left;
+        margin-bottom: 3px;
+        line-height: 1.2;
+    }
+
+    .title-underline {
+        width: 80px;
+        margin: 5px 0 8px 0;
+    }
+
+    .benefit-list {
+        padding-left: 0;
+    }
+
+    .benefit-list li {
+        font-size: 0.4rem;
+        margin-bottom: 2px;
+        padding-left: 8px;
+        line-height: 1.2;
+    }
+
+    /* === Quantity Selector === */
+    .quantity-selector label {
+        font-size: 0.8rem;
+        padding: 6px 8px;
+        white-space: nowrap;
+    }
+
+    .quantity-controls {
+        flex: 1;
+        padding: 0;
+    }
+
+    .quantity-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+
+    .quantity-input {
+        flex: 1;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+
+    /* === MAZEKOMU Layout Mobile === */
+    .mazekomu-layout {
+        flex-direction: column;
+        padding: 20px;
+        min-height: auto;
+    }
+
+    .mazekomu-center {
+        margin: 20px 0;
+        order: 1;
+    }
+
+    .drink-section, .food-section {
+        order: 2;
+        /* margin-bottom: 20px; */
+    }
+
+    .drink-row, .food-row {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .drink-image, .food-image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .drink-label, .food-label {
+        font-size: 0.7rem;
+    }
+
+    .mazekomu-title {
+        font-size: 0.9rem;
+    }
+
+    .test-tube-icon {
+        width: 60px;
+    }
+
+    .mazekomu-layout {
+        margin: 20px 0px;
+        padding: 10px;
+    }
+
+    /* Medical Grade */
+    .medical-grade-content {
+        margin: 0;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    /* .medical-text {
+        font-size: 0.4rem;
+        line-height: 1.6;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    } */
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - MOBILE (max-width: 480px)
+   ============================================================================ */
+
+@media (max-width: 992px) {
+    /* === Product Information Card === */
+    .products-grid-details .product-card {
+        padding: 0;
+    }
+
+    .products-grid-details .card-content {
+        display: grid;
+        grid-template-columns: auto 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 15px;
+        align-items: start;
+        text-align: left;
+    }
+
+    .products-grid-details .product-image {
+        width: unset;
+        grid-column: 1;
+        grid-row: 1 / 3;
+        margin-bottom: 0;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 5px;
+    }
+
+    .products-grid-details .product-video {
+        max-width: 80px;
+        height: auto;
+    }
+
+    .products-grid-details .product-title {
+        grid-column: 2;
+        grid-row: 1;
+        margin-bottom: 8px;
+        text-align: left;
+        align-self: start;
+    }
+
+    .products-grid-details .product-title .text-center {
+        text-align: left !important;
+    }
+
+    .products-grid-details .title-main {font-size: 1.5rem;margin-bottom: 3px;}
+    .products-grid-details .title-sub {font-size: 1.3rem;}
+    .products-grid-details .product-tagline {
+        grid-column: 2;
+        grid-row: 2;
+        font-size: 1rem;
+        margin-bottom: 0;
+        text-align: left;
+        align-self: start;
+    }
+    .products-grid-details .benefit-item span:last-child {font-size: 1rem;line-height: 1.3;}
+    .products-grid-details .how-to-use h4 {font-size:1rem;margin-bottom: 6px;}
+    .products-grid-details .usage-item span:last-child {font-size: 1rem;line-height: 1.3;}
+
+    .products-grid-details .product-tagline.text-danger,
+    .products-grid-details .product-tagline.text-center {
+        text-align: left !important;
+    }
+
+    .products-grid-details .product-tagline strong::after {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .products-grid-details .product-benefits {
+        grid-column: 3;
+        grid-row: 1;
+        margin-bottom: 0;
+        align-self: start;
+        width: 100%;
+    }
+
+    .products-grid-details .how-to-use {
+        grid-column: 3;
+        grid-row: 2;
+        align-self: start;
+        width: 100%;
+    }
+
+    .products-grid-details .benefit-item {
+        margin-bottom: 6px;
+        gap: 6px;
+    }
+
+    .products-grid-details .checkmark {
+        font-size: 0.8rem;
+    }
+
+   
+    .products-grid-details .usage-item {
+        gap: 6px;
+    }
+
+    
+
+    .hero-underline-img {
+        width: 220px;
+        margin: 15px auto;
+    }
+
+    .red-hero-underline-img {
+        width: 80px;
+        margin: 0px auto 0px auto
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - FOLD PHONE (max-width: 320px)
+   ============================================================================ */
+
+/* @media (max-width: 360px) {
+    .products-grid-details .product-video {
+        max-width: 50px;
+        height: auto;
+    }
+} */
+
+@media (max-width: 615px) {
+    /* === Product Information Card === */
+    .products-grid-details .product-card {
+        padding: 0;
+    }
+
+    .products-grid-details .card-content {
+        display: grid;
+        grid-template-columns: auto 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 10px;
+        align-items: start;
+        text-align: left;
+    }
+
+    .products-grid-details .product-image {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        margin-bottom: 0;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 5px;
+    }
+
+    .products-grid-details .product-video {
+        max-width: 50px;
+        height: auto;
+    }
+
+    .products-grid-details .product-title {
+        grid-column: 2;
+        grid-row: 1;
+        margin-bottom: 5px;
+        text-align: left;
+        align-self: start;
+    }
+
+    .products-grid-details .product-title .text-center {
+        text-align: left !important;
+    }
+
+    .products-grid-details .title-main {
+        font-size: 0.85rem;
+        margin-bottom: 3px;
+    }
+
+    .products-grid-details .title-sub {
+        font-size: 0.65rem;
+    }
+
+    .products-grid-details .product-tagline {
+        grid-column: 2;
+        grid-row: 2;
+        font-size: 0.6rem;
+        margin-bottom: 0;
+        text-align: left;
+        align-self: start;
+    }
+
+    .products-grid-details .product-tagline.text-danger,
+    .products-grid-details .product-tagline.text-center {
+        text-align: left !important;
+    }
+
+    .products-grid-details .product-tagline strong::after {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .products-grid-details .product-benefits {
+        grid-column: 3;
+        grid-row: 1;
+        margin-bottom: 0;
+        align-self: start;
+        width: 100%;
+    }
+
+    .products-grid-details .how-to-use {
+        grid-column: 3;
+        grid-row: 2;
+        align-self: start;
+        width: 100%;
+    }
+
+    .products-grid-details .benefit-item {
+        margin-bottom: 4px;
+        gap: 4px;
+    }
+
+    .products-grid-details .checkmark {
+        font-size: 0.6rem;
+    }
+
+    .products-grid-details .benefit-item span:last-child {
+        font-size: 0.5rem;
+        line-height: 1.2;
+    }
+
+    .products-grid-details .how-to-use h4 {
+        font-size: 0.6rem;
+        margin-bottom: 4px;
+    }
+
+    .products-grid-details .usage-item {
+        gap: 4px;
+    }
+
+    .products-grid-details .usage-item span:last-child {
+        font-size: 0.55rem;
+        line-height: 1.2;
+    }
+
+    .hero-underline-img {
+        width: 180px;
+        margin: 10px auto;
+    }
+
+    .red-hero-underline-img {
+        width: 60px;
+        margin: 0px auto 0px auto
+    }
+}
+
+
+@media (max-width: 400px) {
+    /* === Product Information Card === */
+    .products-grid-details .product-card {
+        padding: 0;
+    }
+
+    .products-grid-details .card-content {
+        display: grid;
+        grid-template-columns: auto 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 10px;
+        align-items: start;
+        text-align: left;
+    }
+
+    .products-grid-details .product-image {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        margin-bottom: 0;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 5px;
+    }
+
+    .products-grid-details .product-video {
+        max-width: 70px;
+        height: auto;
+    }
+
+    .products-grid-details .product-title {
+        grid-column: 2;
+        grid-row: 1;
+        margin-bottom: 5px;
+        text-align: left;
+        align-self: start;
+    }
+
+    .products-grid-details .product-title .text-center {
+        text-align: left !important;
+    }
+
+    .products-grid-details .title-main {
+        font-size: 0.85rem;
+        margin-bottom: 3px;
+    }
+
+    .products-grid-details .title-sub {
+        font-size: 0.65rem;
+    }
+
+    .products-grid-details .product-tagline {
+        grid-column: 2;
+        grid-row: 2;
+        font-size: 0.5rem;
+        margin-bottom: 0;
+        text-align: left;
+        align-self: start;
+    }
+
+    .products-grid-details .product-tagline.text-danger,
+    .products-grid-details .product-tagline.text-center {
+        text-align: left !important;
+    }
+
+    .products-grid-details .product-tagline strong::after {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .products-grid-details .product-benefits {
+        grid-column: 3;
+        grid-row: 1;
+        margin-bottom: 0;
+        align-self: start;
+        width: 100%;
+    }
+
+    .products-grid-details .how-to-use {
+        grid-column: 3;
+        grid-row: 2;
+        align-self: start;
+        width: 100%;
+    }
+
+    .products-grid-details .benefit-item {
+        margin-bottom: 4px;
+        gap: 4px;
+    }
+
+    .products-grid-details .checkmark {
+        font-size: 0.5rem;
+    }
+
+    .products-grid-details .benefit-item span:last-child {
+        font-size: 0.45rem;
+        line-height: 1.2;
+    }
+
+    .products-grid-details .how-to-use h4 {
+        font-size: 0.55rem;
+        margin-bottom: 4px;
+    }
+
+    .products-grid-details .usage-item {
+        gap: 4px;
+    }
+
+    .products-grid-details .usage-item span:last-child {
+        font-size: 0.45rem;
+        line-height: 1.2;
+    }
+
+    .hero-underline-img {
+        width: 180px;
+        margin: 10px auto;
+    }
+
+    .red-hero-underline-img {
+        width: 60px;
+        margin: 0px auto 0px auto
+    }
+}
+
+/* ============================================================================
+   CONSOLIDATED RESPONSIVE DESIGN
+   ============================================================================ */
+
+/* Tablet Large (max-width: 1200px) */
+@media (max-width: 1200px) {
+    /* MAZEKOMU Layout */
+    .mazekomu-layout {
+        gap: 0px;
+    }
+    
+    .drink-image, .food-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .drink-row, .food-row {
+        gap: 15px;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+    
+    .drink-item, .food-item {
+        flex: 0 0 auto;
+        min-width: 0;
+    }
+}
+
+/* Tablet (max-width: 992px) */
+@media (max-width: 992px) {
+    /* MAZEKOMU Layout */
+    .mazekomu-layout {
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-rows: auto;
+        align-items: stretch;
+        /* padding: 40px 20px; */
+        gap: 0px;
+    }
+    
+    .mazekomu-center {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    
+    .drink-section {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    
+    .food-section {
+        grid-column: 3;
+        grid-row: 1;
+    }
+}
+
+@media (max-width: 850px) {
+    .drink-image, .food-image {
+        width: 85px;
+        height: 85px;
+    }
+    
+    .mazekomu-title, .drink-section .section-title, .food-section .section-title{
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 820px) {
+    .nutrient-category-white {font-size: 0.6rem;font-weight: normal;}
+    .nutrition-total {font-size: 1rem;margin-bottom: 10px;}
+    .nutrition-description {font-size: 0.6rem;text-align: center;}
+
+    /* Custom gradient borders for mobile */
+    .drink-section::after {
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        width: 1px;
+        background: linear-gradient(
+            to bottom,
+            #25c760 0%,
+            #25c760 40%,
+            #000000 33%,
+            #000000 59.7%,
+            #25c760 52%,
+            #25c760 100%
+        );
+    }
+    
+    .food-section::after {
+        top: -1px;
+        left: -1px;
+        bottom: -1px;
+        width: 1px;
+        background: linear-gradient(
+            to bottom,
+            #25c760 0%,
+            #25c760 40%,
+            #000000 33%,
+            #000000 59.7%,
+            #25c760 52%,
+            #25c760 100%
+        );
+    }
+}
+
+/* Mobile Large (max-width: 768px) */
+@media (max-width: 768px) {
+    /* MAZEKOMU Layout */
+    .mazekomu-layout {
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-rows: auto;
+        align-items: stretch;
+        padding: 15px 5px;
+        gap: 0px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .mazekomu-center {
+        margin: 0;
+        grid-column: 2;
+        grid-row: 1;
+        padding: 0 ;
+    }
+    
+    .drink-section {
+        grid-column: 1;
+        grid-row: 1;
+        padding: 10px 5px;
+    }
+    
+    .food-section {
+        grid-column: 3;
+        grid-row: 1;
+        padding: 10px 5px;
+    }
+    
+    .drink-image, .food-image {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .drink-row, .food-row {
+        gap: 8px;
+        flex-wrap: nowrap;
+        justify-content: center;
+        display: flex;
+        width: 100%;
+    }
+    
+    .drink-item, .food-item {
+        flex: 0 0 calc(33.333% - 6px);
+        min-width: 0;
+        max-width: calc(33.333% - 6px);
+    }
+    
+    .drink-section .section-title, .food-section .section-title {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .mazekomu-title {
+        font-size: 0.8rem;
+        padding-top: 15px;
+    }
+    
+    .test-tube-icon {
+        width: 60px;
+    }
+    
+    /* Custom gradient borders for mobile */
+    .drink-section::after {
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        width: 1px;
+        background: linear-gradient(
+            to bottom,
+            #25c760 0%,
+            #25c760 37%,
+            #000000 36%,
+            #000000 63%,
+            #25c760 52%,
+            #25c760 100%
+        );
+    }
+    
+    .food-section::after {
+        top: -1px;
+        left: -1px;
+        bottom: -1px;
+        width: 1px;
+        background:linear-gradient(
+            to bottom,
+            #25c760 0%,
+            #25c760 37%,
+            #000000 36%,
+            #000000 63%,
+            #25c760 52%,
+            #25c760 100%
+        );
+    }
+}
+
+@media (max-width: 620px) {
+    .drink-label, .food-label {font-size: 0.6rem;}
+    .drink-section .section-title, .food-section .section-title {font-size: 0.8rem;margin-bottom: 0px;}
+    .red-hero-underline-img {width: 100px;margin: 5px auto;}
+    .drink-section .section-title, .food-section .section-title {font-size: 0.6rem;margin-bottom: 0px;}
+    .mazekomu-title {font-size: 0.7rem;padding-top: 15px;}
+
+    /* Product Name + Badge - Medium Mobile */
+    .product-name {
+        font-size: 1.1rem;
+        line-height: 1.2;
+    }
+
+    .pre-order-badge {
+        padding: 3px 7px;
+        font-size: 9px;
+    }
+
+    .pre-order-badge p {
+        font-size: 0.68rem;
+    }
+
+    .drink-section::after {
+        background: linear-gradient(to bottom, #25c760 0%, #25c760 37%, #000000 37%, #000000 63%, #25c760 49%, #25c760 100%);
+    }
+
+    .food-section::after {
+        background: linear-gradient(to bottom, #25c760 0%, #25c760 37%, #000000 37%, #000000 63%, #25c760 49%, #25c760 100%);
+    }
+}
+
+    .nutrition-total {font-size: 1rem;margin-bottom: 10px;}
+    .nutrition-description {font-size: 0.6rem;text-align: center;}
+
+
+@media (max-width: 506px) {
+    .drink-label, .food-label {
+        font-size: 0.5rem;
+    }
+
+    .drink-section .section-title, .food-section .section-title {
+        font-size: 0.8rem;
+        margin-bottom: 0px;
+    }
+
+    .red-hero-underline-img {
+        width: 100px;
+        margin: 5px auto;
+    }
+
+    .drink-section .section-title, .food-section .section-title {
+        font-size: 0.6rem;
+        margin-bottom: 0px;
+    }
+
+    .mazekomu-title {
+        font-size: 0.7rem;
+        padding-top: 15px;
+    }
+
+
+}
+
+/* Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    /* === Trust Section === */
+    .trust-content p {
+        font-size: 0.5rem;
+        padding-top: 10px;
+    }
+
+    /* Product Name + Badge Container - Small Mobile */
+    .product-info-cart .d-flex {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .product-name {
+        font-size: 1rem;
+        line-height: 1.2;
+        margin-bottom: 6px;
+    }
+
+    /* Pre-order Badge - Small Mobile */
+    .pre-order-badge {
+        padding: 3px 6px;
+        font-size: 9px;
+        margin-left: 0;
+        margin-right: 0;
+        align-self: center;
+    }
+
+    .pre-order-badge p {
+        font-size: 0.65rem;
+    }
+
+    /* Badge Container - Small Mobile */
+    .d-flex.gap-2.mb-3 {
+        gap: 8px !important;
+    }
+
+    /* Pre-order Shipping Info Badge - Small Mobile */
+    .pre-order-shipping-badge {
+        padding: 5px 8px;
+        font-size: 10px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .pre-order-shipping-badge p {
+        font-size: 0.7rem;
+        line-height: 1.3;
+    }
+
+    .pre-order-shipping-badge .fa-calendar {
+        font-size: 0.75em;
+        margin-right: 5px;
+    }
+
+    /* Free Shipping Badge - Small Mobile */
+    .free-shipping-badge {
+        padding: 5px 8px;
+        font-size: 10px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .free-shipping-badge p {
+        font-size: 0.7rem;
+    }
+
+    .free-shipping-badge .fa-truck {
+        font-size: 0.75em;
+        margin-right: 5px;
+    }
+
+    /* MAZEKOMU Layout */
+    .mazekomu-layout {
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-rows: auto;
+        align-items: stretch;
+        padding: 10px 2px;
+        gap: 0px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .mazekomu-center {
+        margin: 0;
+        grid-column: 2;
+        grid-row: 1;
+        padding: 0 ;
+    }
+    
+    .drink-section {
+        grid-column: 1;
+        grid-row: 1;
+        padding: 8px 2px;
+    }
+    
+    .food-section {
+        grid-column: 3;
+        grid-row: 1;
+        padding: 8px 2px;
+    }
+    
+    .drink-image, .food-image {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .drink-row, .food-row {
+        gap: 5px;
+        flex-wrap: nowrap;
+        justify-content: center;
+        display: flex;
+        width: 100%;
+    }
+    
+    .drink-item, .food-item {
+        flex: 0 0 calc(33.333% - 4px);
+        min-width: 0;
+        max-width: calc(33.333% - 4px);
+    }
+    
+    .drink-label, .food-label {
+        font-size: 0.5rem;
+    }
+    
+    .drink-section .section-title, .food-section .section-title {
+        font-size: 0.7rem;
+        margin-bottom: 0px;
+    }
+    
+    .mazekomu-title {
+        font-size: 0.5rem;
+        padding-top: 15px;
+    }
+    
+    .test-tube-icon {
+        width: 40px;
+    }
+    
+    /* Custom gradient borders for mobile */
+    .drink-section::after {
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        width: 1px;
+        background: linear-gradient(to bottom, #25c760 0%, #25c760 41%, #000000 21%, #000000 59.5%, #25c760 43%, #25c760 100%);
+    }
+    
+    .food-section::after {
+        top: -1px;
+        left: -1px;
+        bottom: -1px;
+        width: 1px;
+        background:linear-gradient(to bottom, #25c760 0%, #25c760 41%, #000000 21%, #000000 59.5%, #25c760 43%, #25c760 100%);
+    }
+
+    .nutrient-category-white {font-size: 0.5rem;font-weight: normal;}
+    .nutrition-description {font-size: 0.4rem;text-align: center;}
+}
+
+/* Mobile (max-width: 420px) */
+@media (max-width: 420px) {
+    /* MAZEKOMU Layout */
+    .mazekomu-layout {
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-rows: auto;
+        align-items: stretch;
+        padding: 8px 3px;
+        gap: 0px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .mazekomu-center {
+        margin: 0;
+        grid-column: 2;
+        grid-row: 1;
+        padding: 0 ;
+    }
+    
+    .drink-section {
+        grid-column: 1;
+        grid-row: 1;
+        padding: 8px 3px;
+    }
+    
+    .food-section {
+        grid-column: 3;
+        grid-row: 1;
+        padding: 8px 3px;
+    }
+    
+    .drink-image, .food-image {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .drink-row, .food-row {
+        gap: 5px;
+        flex-wrap: nowrap;
+        justify-content: center;
+        display: flex;
+        width: 100%;
+    }
+    
+    .drink-item, .food-item {
+        flex: 0 0 calc(33.333% - 4px);
+        min-width: 0;
+        max-width: calc(33.333% - 4px);
+    }
+    
+    .drink-label, .food-label {
+        font-size: 0.45rem;
+    }
+    
+    .drink-section .section-title, .food-section .section-title {
+        font-size: 0.5rem;
+        margin-bottom: 5px;
+    }
+    
+    .mazekomu-title {
+        font-size: 0.5rem;
+        padding-top: 15px;
+    }
+    
+    .test-tube-icon {
+        width: 35px;
+    }
+    
+    .red-hero-underline-img {
+        width: 55px;
+        margin: 0px auto 0px auto;
+    }
+    
+    /* Custom gradient borders for mobile */
+    .drink-section::after {
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        width: 1px;
+        background: linear-gradient(to bottom, #25c760 0%, #25c760 40%, #000000 21%, #000000 60%, #25c760 41%, #25c760 100%);
+    }
+    
+    .food-section::after {
+        top: -1px;
+        left: -1px;
+        bottom: -1px;
+        width: 1px;
+        background: linear-gradient(to bottom, #25c760 0%, #25c760 40%, #000000 21%, #000000 60%, #25c760 41%, #25c760 100%);
+    }
+}
+
+@media (max-width: 380px) {
+    .nutrient-category-white {font-size: 0.4rem;font-weight: normal;}
+    .nutrition-description {font-size: 0.4rem;text-align: center;}
+}
+
+/* Mobile Small (max-width: 320px) */
+@media (max-width: 345px) {
+    /* MAZEKOMU Layout */
+    .mazekomu-title {
+        font-size: 0.4rem;
+    }
+    
+    .drink-section .section-title, .food-section .section-title {
+        font-size: 0.6rem;
+    }
+    
+    .drink-image, .food-image {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .drink-label, .food-label {
+        font-size: 0.4rem;
+    }
+    
+    /* Custom gradient borders for mobile small */
+    .drink-section::after {
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        width: 1px;
+        background:linear-gradient(to bottom, #25c760 0%, #25c760 40%, #000000 21%, #000000 61%, #25c760 41%, #25c760 100%);
+    }
+    
+    .food-section::after {
+        top: -1px;
+        left: -1px;
+        bottom: -1px;
+        width: 1px;
+        background: linear-gradient(to bottom, #25c760 0%, #25c760 40%, #000000 21%, #000000 61%, #25c760 41%, #25c760 100%);
+    }
+}
+
+/* Fold Phone (max-width: 280px) */
+@media (max-width: 280px) {
+    /* MAZEKOMU Layout for fold phones */
+    .mazekomu-layout {
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-rows: auto;
+        align-items: stretch;
+        padding: 5px 1px;
+        gap: 0px;
+        max-width: 100%;
+        overflow-x: hidden;
+        margin: 10px 0px;
+    }
+    
+    .mazekomu-center {
+        margin: 0;
+        grid-column: 2;
+        grid-row: 1;
+        padding: 0;
+    }
+    
+    .drink-section {
+        grid-column: 1;
+        grid-row: 1;
+        padding: 5px 1px;
+    }
+    
+    .food-section {
+        grid-column: 3;
+        grid-row: 1;
+        padding: 5px 1px;
+    }
+    
+    .drink-image, .food-image {
+        width: 15px;
+        height: 15px;
+    }
+    
+    .drink-row, .food-row {
+        gap: 3px;
+        flex-wrap: nowrap;
+        justify-content: center;
+        display: flex;
+        width: 100%;
+    }
+    
+    .drink-item, .food-item {
+        flex: 0 0 calc(33.333% - 2px);
+        min-width: 0;
+        max-width: calc(33.333% - 2px);
+    }
+    
+    .drink-label, .food-label {
+        font-size: 0.3rem;
+        line-height: 1;
+    }
+    
+    .drink-section .section-title, .food-section .section-title {
+        font-size: 0.5rem;
+        margin-bottom: 5px;
+    }
+    
+    .mazekomu-title {
+        font-size: 0.3rem;
+        padding-top: 5px;
+        letter-spacing: 1px;
+    }
+    
+    .test-tube-icon {
+        width: 25px;
+    }
+    
+    .red-hero-underline-img {
+        width: 40px;
+        margin: 2px auto;
+    }
+    
+    /* Custom gradient borders for fold phones */
+    .drink-section::after {
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        width: 1px;
+        background: linear-gradient(to bottom, #25c760 0%, #25c760 41%, #000000 21%, #000000 59%, #25c760 41%, #25c760 100%);
+    }
+    
+    .food-section::after {
+        top: -1px;
+        left: -1px;
+        bottom: -1px;
+        width: 1px;
+        background: linear-gradient(to bottom, #25c760 0%, #25c760 41%, #000000 21%, #000000 59%, #25c760 41%, #25c760 100%);
+    }
+}
+
+

@@ -1,0 +1,100 @@
+/* ============================================================================
+   ROOT VARIABLES & GLOBAL SETTINGS
+   ============================================================================ */
+
+   :root{
+    --primary-color: #25C760;
+    --secondary-color: #FFFFFF;
+    --third-color: #3C8063;
+    --background-color: black;
+}
+
+/* Override Bootstrap container max-width */
+.container {
+    max-width: 1500px !important;
+}
+
+/* ============================================================================
+   CUSTOM SCROLLBAR - ALL BROWSERS
+   ============================================================================ */
+
+/* Webkit Browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {width: 12px;}
+::-webkit-scrollbar-track { background: var(--background-color); border-radius: 6px; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary-color), var(--third-color)); border-radius: 6px; border: 2px solid var(--background-color); transition: all 0.3s ease; }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--third-color), var(--primary-color)); box-shadow: 0 0 10px rgba(37, 199, 96, 0.5); }
+::-webkit-scrollbar-thumb:active { background: var(--third-color); }
+::-webkit-scrollbar-corner { background: var(--background-color); }
+
+/* Firefox Scrollbar */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--background-color);
+}
+
+
+/* ============================================================================
+   RESPONSIVE DESIGN - GENERAL SECTION
+   ============================================================================ */
+
+/* General - Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+
+    .products-trust-section {
+        padding: 60px 0;
+    }
+}
+
+/* General - Tablet/iPad (max-width: 1024px and min-width: 769px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .products-trust-section {
+        padding: 0;
+    }
+
+    .checkmark {
+        font-size: 0.8rem;
+    }
+}
+
+/* General - Tablets (max-width: 768px) */
+@media (max-width: 768px) {
+    .checkmark {
+        font-size: 0.8rem;
+    }
+}
+
+/* General - Mobile Phones (max-width: 768px) */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .products-trust-section {
+        padding: 0;
+    }
+
+    .checkmark {
+        font-size: 0.5rem;
+    }
+}
+
+sub {
+    bottom: -.25em;
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}

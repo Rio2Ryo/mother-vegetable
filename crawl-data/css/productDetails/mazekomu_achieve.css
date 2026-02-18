@@ -1,0 +1,156 @@
+
+.grid {  height: 500px; display: grid; grid-template-columns: 3fr 1fr 3fr; grid-template-rows: repeat(5, 1fr); width: 100%;gap: 0; background: var(--background-color); }
+.cell { background: var(--background-color); border: none; display: flex; align-items: center; justify-content: center; color: var(--secondary-color); font-size: 18px; }
+.left-box { grid-column: 1; grid-row: 1 / 6; border-top: 1px solid var(--primary-color); border-left: 1px solid var(--primary-color); border-bottom: 1px solid var(--primary-color); border-top-left-radius: 20px; border-bottom-left-radius: 20px; }
+.right-box { grid-column: 3; grid-row: 1 / 6; border-top: 1px solid var(--primary-color); border-right: 1px solid var(--primary-color); border-bottom: 1px solid var(--primary-color); border-top-right-radius: 20px; border-bottom-right-radius: 20px; }
+.box-1-2 { grid-column: 2; grid-row: 1; border-left: 1px solid var(--primary-color); border-right: 1px solid var(--primary-color); }
+.box-2-2 { grid-column: 2; grid-row: 2; border-left: 1px solid var(--primary-color); border-right: 1px solid var(--primary-color); border-bottom: 1px solid var(--primary-color); }
+.box-3-2 { grid-column: 2; grid-row: 3; }
+.box-4-2 { grid-column: 2; grid-row: 4; border-left: 1px solid var(--primary-color); border-right: 1px solid var(--primary-color); border-top: 1px solid var(--primary-color); }
+.box-5-2 { grid-column: 2; grid-row: 5; border-left: 1px solid var(--primary-color); border-right: 1px solid var(--primary-color); }
+
+.grid-content{
+    /* padding: 40px; */
+    margin: 40px 0;
+}
+
+
+/* Content Section Styles */
+.content-section {
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.content-section .section-title {
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ff0000;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.content-section .red-hero-underline-img {
+  width: 100px;
+  margin: 0 auto 20px;
+  display: block;
+  height: auto;
+}
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .grid-image {
+    width: 50%;
+    /* max-width: 80px; */
+    height: auto;
+    margin-bottom: 8px;
+    object-fit: contain;
+  }
+  
+  .text-label {
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+  }
+  
+  .grid .test-tube-icon {
+    width: 70%;
+    object-fit: contain;
+  }
+
+/* Tablet: 2 items per row */
+@media (max-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-content {
+    margin: 20px 0px;
+    padding: 10px;
+  }
+  .content-section .red-hero-underline-img {
+    width: 80px;
+    margin: 0 auto 15px;
+  }
+}
+
+@media (max-width: 820px) {
+    .grid-content {
+        margin: 20px 0px;
+        padding: 0;
+    }
+}
+
+/* Mobile: 2 items per row */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 20px;
+  }
+  
+  .content-section .section-title {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+
+  .content-section .red-hero-underline-img {
+    width: 70px;
+    margin: 0 auto 10px;
+  }
+
+  .grid{height: 450px;}
+
+
+}
+
+@media (max-width: 620px) {
+    .grid{height: 420px;}
+    .content-section{padding: 0;}
+    .content-section .section-title {font-size: 0.8rem;}
+    .grid .text-label{font-size: 0.5rem;}
+
+    .grid-container{gap: 5px;padding-top: 10px;}
+    .mazekomu-content-section{padding: 10px 0; }
+    
+    .content-section .red-hero-underline-img {
+        width: 50px;
+        margin: 0 auto 8px;
+    }
+}
+
+@media (max-width: 580px) {
+    .content-section .section-title {font-size: 0.6rem;}
+    .grid{height: 400px;}
+}
+
+@media (max-width: 540px) {
+    .grid{height: 350px;}
+}
+
+@media (max-width: 420px) {
+    .grid{height: 250px;}
+    .content-section .red-hero-underline-img {
+        width: 40px;
+        margin: 0 auto 5px;
+    }
+}
+

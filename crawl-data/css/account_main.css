@@ -1,0 +1,113 @@
+:root {
+    --primary-color: #25C760;
+    --secondary-color: #FFFFFF;
+    --third-color: #3C8063;
+    --background-color: #000000;
+    --danger-color: #FF4444;
+}
+
+/* Input styling */
+input {
+    background-color: var(--secondary-color) ;
+    color: var(--background-color) ;
+    border: 2px solid var(--primary-color) ;
+    border-radius: 8px;
+    padding: 15px 20px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: var(--third-color) ;
+    box-shadow: 0 0 0 0.2rem rgba(37, 199, 96, 0.25);
+    outline: none;
+}
+
+input::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* Disabled and read-only input styling */
+.form-control:disabled, .form-control[readonly]  {
+    background-color: var(--background-color) !important;
+    color: #CCCCCC ;
+    border: 2px solid var(--primary-color) ;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* Label styling */
+label {
+    color: var(--secondary-color) ;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Title primary */
+.title-primary {
+    color: var(--primary-color) ;
+    font-weight: bold;
+}
+
+.title-secondary {
+    color: var(--secondary-color) ;
+}
+
+/* Title danger */
+.title-danger {
+    color: var(--danger-color) ;
+    font-weight: bold;
+}
+
+/* Input group prepend styling */
+.input-group-prepend {
+    background-color: var(--background-color) ;
+    border: 2px solid var(--secondary-color) ;
+    border-radius: 8px 0 0 8px;
+    padding: 0 15px;
+}
+
+.input-group-prepend .input-group-text {
+    background-color: var(--background-color) ;
+    border: none ;
+    color: var(--primary-color) ;
+    font-weight: bold;
+    padding: 12px 8px;
+}
+
+.input-group-prepend span {
+    color: var(--primary-color) ;
+    font-weight: bold;
+    padding: 8px;
+}
+
+/* Save button styling */
+.save-button, .btn-save,.btn_container .btn-primary {
+    background-color: var(--secondary-color) ;
+    color: var(--background-color) ;
+    border: 2px solid var(--secondary-color) ;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.save-button:hover, .btn-save:hover, .btn_container .btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-color) ;
+    color: var(--secondary-color) ;
+    border-color: var(--primary-color) ;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 199, 96, 0.3);
+}
+
+/* Radio group styling */
+.radio-group {
+    padding-left: 20px;
+}
+
+.container-content{
+    max-width: 1400px;
+}
+
+

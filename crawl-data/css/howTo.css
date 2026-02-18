@@ -1,0 +1,61 @@
+    .how-to-use-card{
+        border: 1px solid var(--primary-color);
+        border-radius: 10px;
+        padding:5%;
+        margin: 20px 0;
+    }
+
+    .how-to-use-card h4{text-align: left !important;}
+
+    .how-to-use-card .section-title{color:var(--secondary-color);font-size:1.7rem; padding-bottom: 2rem;}
+    .how-to-use-card .how-to-use-card-content{display:flex;flex-direction:row;gap:2rem;}
+    .how-to-use-card .how-to-use-card-content p{font-weight: 600;}
+    .how-to-use-card .class-content{padding: 0 10px;}
+    .how-to-use-card .class-img{width:45%;display:flex;align-items:center;justify-content:start;}
+    .how-to-use-card .recommended-content-title{color:var(--primary-color);text-align:center;font-weight: 700;}
+    .how-to-use-card .recommended-content-container{display:flex;color: var(--secondary-color);gap:1.5rem;flex-direction: row;}
+    .how-to-use-card .desp-content-container{color: var(--secondary-color);padding-top: 1rem;}
+    .mazavege-family{padding-top:6rem;padding-bottom:6rem;}
+    .mazavege-family-img{width:4rem;height:4rem;object-fit:contain;}
+    
+    /* Match To Buy button font size with desp-content-container p */
+    .buy-now-text p {
+        font-size: 1rem;
+    }
+
+    /* Tablet and Mobile Responsive Styles */
+    @media (max-width: 768px) {
+        .how-to-use-card .how-to-use-card-content {
+            flex-direction: column;
+        }
+        .how-to-use-card .class-img {
+            width: 100%;
+        }
+        .how-to-use-card .recommended-content-container {
+            flex-direction: column;
+        }
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 576px) {
+        .how-to-use-card .section-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+           
+        }
+        .how-to-use-card .recommended-content-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .how-to-use-card .how-to-use-card-content p {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .how-to-use-card .desp-content-container p {
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+        .buy-now-text p {
+            font-size: 0.85rem;
+        }
+    }

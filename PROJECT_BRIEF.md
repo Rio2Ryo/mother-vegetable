@@ -54,10 +54,48 @@ Recreate https://www.mothervegetable.com/ as a pixel-perfect clone using Next.js
 - `vercel` command available
 - Deploy with `vercel --prod` when ready
 
+## E-Commerce Requirements
+The site is a full EC (e-commerce) site. Must implement:
+
+### Products
+- **Achieve** (Food supplement) — capsule/stick format, multiple SKUs
+- **Confidence** (Cosmetic/Skincare) — quasi-drug certified
+- **Forever** (Pet supplement) — pet food grade certified
+
+### EC Features Required
+1. **Product Listings** — Product pages with image galleries, descriptions, pricing
+2. **Shopping Cart** — Slide-in cart panel, add/remove items, quantity adjustment
+3. **User Auth** — Login/Signup (Google, Facebook OAuth + email/password)
+4. **Checkout Flow** — Shipping info, payment, order confirmation
+5. **User Account** — Order history, profile management
+6. **Inventory/SKU Management** — Multiple product variants (sizes, quantities)
+
+### EC Backend Options (choose one)
+- **Shopify Storefront API (Headless)** — Most mature, easy setup
+- **Medusa.js** — Open source, self-hosted, Next.js friendly
+- **Saleor** — GraphQL-based, modern
+
+For MVP: Use Shopify Storefront API or mock the backend with local JSON data + Zustand state management. Real payment integration can come later.
+
+### Cart State
+- Use Zustand for client-side cart state
+- Persist cart in localStorage
+- Cart panel slides in from right (matches original site behavior)
+
+## Crawl Data Available
+All HTML, CSS, and assets have been crawled and saved:
+- `crawl-data/*.html` — All page HTML source
+- `crawl-data/css/` — All CSS files
+- `public/Images/` — Local image assets
+- `public/cdn/` — CDN product images downloaded locally
+- Videos: Reference CDN URLs directly (https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/...)
+
 ## Important Notes
 - Crawl ALL pages thoroughly before building
 - Download/reference all images, videos, assets
 - Match fonts, colors, spacing exactly
-- EC functionality should be functional (cart, checkout)
-- Multi-language support required
+- EC functionality should be fully functional (cart, checkout, auth)
+- Multi-language support required (EN, JA, ZH)
 - The site uses EJS templating currently — we're converting to Next.js/React
+- Deploy to Vercel with `vercel --prod --yes`
+- Git: `gh auth setup-git` before pushing
