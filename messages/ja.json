@@ -1,0 +1,159 @@
+{
+  "nav": {
+    "food": "フード",
+    "cosmetic": "コスメ",
+    "products": "製品",
+    "howToUse": "使い方",
+    "certifiedInstructor": "認定インストラクター",
+    "healthcare": "ヘルスケア",
+    "forHospital": "病院向け",
+    "login": "ログイン",
+    "signup": "新規登録",
+    "achieve": "Achieve",
+    "confidence": "Confidence",
+    "forever": "Forever"
+  },
+  "hero": {
+    "title": "MOTHER VEGETABLE PRODUCTS",
+    "subtitle": "35億年前、地球の始まりの野菜",
+    "quote": "「マザーベジタブル」",
+    "message": "地球の生命力を、あなたに。"
+  },
+  "products": {
+    "title": "製品",
+    "toBuy": "購入する",
+    "achieve": {
+      "name": "Achieve",
+      "subtitle": "身体のために",
+      "taglineJp": "「取り込む」",
+      "tagline": "48種の栄養素を一度に。",
+      "benefits": [
+        "健康な腸をサポートし、全身の細胞再生を促進。",
+        "便秘改善、睡眠向上、体重管理をサポート。"
+      ],
+      "howToUse": "カプセルをお飲み物やお食事に「取り込む」だけ。"
+    },
+    "confidence": {
+      "name": "Confidence",
+      "subtitle": "すべての肌に",
+      "taglineJp": "「擦り込む」「混ぜ込む」",
+      "tagline": "肌のヒーリング効果",
+      "benefits": [
+        "強力なアンチエイジング効果。",
+        "シミ、ニキビ、臭い、肌ダメージの改善をサポート。"
+      ],
+      "howToUse": "直接「擦り込む」か、お使いの化粧品に「混ぜ込む」。"
+    },
+    "forever": {
+      "name": "Forever",
+      "subtitle": "ペットのために",
+      "taglineJp": "「混ぜ込む」",
+      "tagline": "ペットの健康寿命を延ばす。",
+      "benefits": [
+        "涙やけの軽減と腸の健康をサポート。",
+        "体臭・排泄臭の軽減、食欲増進。"
+      ],
+      "howToUse": "ペットのフードにカプセルを「混ぜ込む」だけ。"
+    },
+    "terms": {
+      "torikomu": "「TORIKOMU」は日本語で「取り込む」という意味です",
+      "mazekomu": "「MAZEKOMU」は日本語で「混ぜ込む」という意味です",
+      "surikomu": "「SURIKOMU」は日本語で「擦り込む」という意味です"
+    }
+  },
+  "trust": {
+    "title": "信頼の証",
+    "achieveDesc": "",
+    "confidenceDesc": "厚生労働省により「日本薬局方医薬部外品原料規格（JSQI）」認定コスメ",
+    "foreverDesc": "農林水産省によりペットフードグレード認定"
+  },
+  "foodFunction": {
+    "title": "フード機能",
+    "subtitle": "Achieve / Forever",
+    "method": "取り込む / 混ぜ込む",
+    "nutritionTitle": "48種の栄養素",
+    "nutritionDesc": "48種以上の必須栄養素を含むマザーベジタブルは、カリウム、マグネシウム、カルシウム、鉄、亜鉛、銅などのミネラル、ビタミンA、B群、C、E、Kのフルスペクトラム、そして必須アミノ酸と条件付き必須アミノ酸を提供します。",
+    "children": "子ども",
+    "adults": "成人",
+    "seniors": "高齢者",
+    "athletes": "アスリート",
+    "dog": "犬",
+    "cat": "猫"
+  },
+  "cosmeticFunction": {
+    "title": "コスメ機能",
+    "subtitle": "Confidence",
+    "method": "擦り込む / 混ぜ込む",
+    "description": "医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。",
+    "beforeAfter": "ビフォー＆アフター"
+  },
+  "twoOnlyOnes": {
+    "title": "二つの唯一",
+    "description": "マザーベジタブルプロジェクトは、\n二つのユニークなビジネスを中心に、\n地球とすべての生命の回復を目指す世界唯一のプロジェクトです。\n\n各施設は24時間365日、CO₂を吸収し酸素を生成することで大気を浄化し、\n同時にマザーベジタブル製品と魚介類の養殖を通じて\n人間と生物の健康向上に貢献します。\n\nさらに、これらの施設を世界中に展開することで、\n8つの追加産業セクターへと発展します。",
+    "mvTitle": "マザーベジタブル",
+    "sefTitle": "スモールアースファクトリー（SEF）"
+  },
+  "footer": {
+    "description": "マザーベジタブル - 35億年前の地球の生命力から生まれた自然治癒製品。",
+    "productsTitle": "製品",
+    "howToUseTitle": "使い方",
+    "companyTitle": "会社情報",
+    "accountTitle": "アカウント",
+    "groupTitle": "マザーベジタブルグループ",
+    "copyright": "© {year} Mother Vegetable. All rights reserved."
+  },
+  "cart": {
+    "title": "マイカート",
+    "empty": "カートは空です",
+    "continueShopping": "買い物を続ける",
+    "qty": "数量:",
+    "subtotal": "小計:",
+    "checkout": "レジに進む",
+    "addToCart": "カートに追加",
+    "buyNow": "今すぐ購入 / レジへ進む",
+    "freeShipping": "全世界送料無料",
+    "quantity": "数量"
+  },
+  "checkout": {
+    "title": "お会計",
+    "shippingInfo": "配送先情報",
+    "firstName": "名",
+    "lastName": "姓",
+    "email": "メールアドレス",
+    "phone": "電話番号",
+    "address": "住所",
+    "city": "市区町村",
+    "state": "都道府県",
+    "zip": "郵便番号",
+    "country": "国",
+    "orderSummary": "注文内容",
+    "placeOrder": "注文する",
+    "total": "合計",
+    "thankYou": "ご注文ありがとうございます！",
+    "orderConfirmed": "ご注文が確認されました。",
+    "backToHome": "ホームに戻る"
+  },
+  "auth": {
+    "loginTitle": "ログイン",
+    "signupTitle": "新規登録",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワード確認",
+    "orContinueWith": "または以下で続行",
+    "google": "Googleで続行",
+    "noAccount": "アカウントをお持ちでない方",
+    "haveAccount": "すでにアカウントをお持ちの方",
+    "signUpLink": "新規登録",
+    "loginLink": "ログイン"
+  },
+  "healthcare": {
+    "title": "ヘルスケア",
+    "subtitle": "病院向け"
+  },
+  "privacy": {
+    "title": "プライバシーポリシー"
+  },
+  "terms": {
+    "title": "利用規約"
+  }
+}

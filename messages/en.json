@@ -1,0 +1,159 @@
+{
+  "nav": {
+    "food": "Food",
+    "cosmetic": "Cosmetic",
+    "products": "Products",
+    "howToUse": "How To Use",
+    "certifiedInstructor": "Certified Instructor",
+    "healthcare": "Healthcare",
+    "forHospital": "For Hospital",
+    "login": "Login",
+    "signup": "Sign Up",
+    "achieve": "Achieve",
+    "confidence": "Confidence",
+    "forever": "Forever"
+  },
+  "hero": {
+    "title": "MOTHER VEGETABLE PRODUCTS",
+    "subtitle": "Vegetable at the beginning of Earth, 3.5 billion years ago",
+    "quote": "'Mother Vegetable'",
+    "message": "Earth's life force, for you."
+  },
+  "products": {
+    "title": "Products",
+    "toBuy": "To Buy",
+    "achieve": {
+      "name": "Achieve",
+      "subtitle": "for Body",
+      "taglineJp": "'TORIKOMU'",
+      "tagline": "48 different nutrients at once.",
+      "benefits": [
+        "Supports a healthy gut, Regeneration of cells throughout the body.",
+        "Helps relieve constipation, improve sleep, and aid weight management."
+      ],
+      "howToUse": "Simply 'TORIKOMU' one capsule into your drink or meal."
+    },
+    "confidence": {
+      "name": "Confidence",
+      "subtitle": "For All Skin",
+      "taglineJp": "'SURIKOMU' , 'MAZEKOMU'",
+      "tagline": "Skin Healing Effect",
+      "benefits": [
+        "Powerful anti-aging benefits.",
+        "Helps improve dark spots, acne, odor, and skin damage."
+      ],
+      "howToUse": "'SURIKOMU' directly or 'MAZEKOMU' into your current cosmetics."
+    },
+    "forever": {
+      "name": "Forever",
+      "subtitle": "for Pet",
+      "taglineJp": "'MAZEKOMU'",
+      "tagline": "to extend your pet's healthy life.",
+      "benefits": [
+        "Supports tear stain reduction and gut health.",
+        "Helps reduce body and waste odors, boosts appetite."
+      ],
+      "howToUse": "Simply 'MAZEKOMU' one capsule into your pet's food."
+    },
+    "terms": {
+      "torikomu": "'TORIKOMU' means of having in Japanese as 「取り込む」",
+      "mazekomu": "'MAZEKOMU' means of mixing in Japanese as 「混ぜ込む」",
+      "surikomu": "'SURIKOMU' means of rubbing in Japanese as 「擦り込む」"
+    }
+  },
+  "trust": {
+    "title": "Our Trust",
+    "achieveDesc": "",
+    "confidenceDesc": "certified cosmetic \"The Japanese Standards of Quasi-Drug Ingredients (JSQI)\" by MHLW, Japan",
+    "foreverDesc": "certified by pet grade food by Ministry of Agriculture, Forestry and Fisheries (MAFF), Japan"
+  },
+  "foodFunction": {
+    "title": "Food Function",
+    "subtitle": "Achieve / Forever",
+    "method": "TORIKOMU / MAZEKOMU",
+    "nutritionTitle": "48 Nutrition",
+    "nutritionDesc": "Packed with over 48 essential nutrients, Mother Vegetable delivers everything your body needs in one serving. It contains vital minerals like potassium, magnesium, calcium, iron, zinc, and copper; a full spectrum of vitamins, including A, B-complex, C, E, and K; and all the essential amino acids along with conditionally essential ones to support overall health.",
+    "children": "Children",
+    "adults": "Adults",
+    "seniors": "Seniors",
+    "athletes": "Athletes",
+    "dog": "Dog",
+    "cat": "Cat"
+  },
+  "cosmeticFunction": {
+    "title": "Cosmetic Function",
+    "subtitle": "Confidence",
+    "method": "SURIKOMU / MAZEKOMU",
+    "description": "Mother Vegetable, certified as a medical-grade quasi-drug, is trusted by medical institutions worldwide for its healing properties — used in post-surgery recovery, burn scar improvement, cancer care, and even to help control skin shine. It supports the skin's natural ability to heal and restore balance.",
+    "beforeAfter": "Before & After"
+  },
+  "twoOnlyOnes": {
+    "title": "Two Only Ones",
+    "description": "The MOTHER VEGETABLE PROJECT is\nthe world's only project that aims to restore the Earth and all life,\ncentered around two one-of-a-kind businesses.\n\nIn this process, each facility purifies the atmosphere by absorbing CO₂\nand generating oxygen 24 hours a day, 365 days a year,\nwhile simultaneously contributing to improving the health of humans\nand living organisms through Mother Vegetable products and the aquaculture of fish and shellfish.\n\nFurthermore, by expanding these facilities around the world,\nit will develop into eight additional industrial sectors.",
+    "mvTitle": "Mother Vegetable",
+    "sefTitle": "Small Earth Factory (SEF)"
+  },
+  "footer": {
+    "description": "Mother Vegetable - Natural healing products born from Earth's life force 3.5 billion years ago.",
+    "productsTitle": "Products",
+    "howToUseTitle": "How To Use",
+    "companyTitle": "Company",
+    "accountTitle": "Account",
+    "groupTitle": "Mother Vegetable Group",
+    "copyright": "© {year} Mother Vegetable. All rights reserved."
+  },
+  "cart": {
+    "title": "My Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "CONTINUE SHOPPING",
+    "qty": "Qty:",
+    "subtotal": "Subtotal:",
+    "checkout": "CHECKOUT",
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now / Proceed to Checkout",
+    "freeShipping": "Free Shipping Worldwide",
+    "quantity": "Quantity"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "shippingInfo": "Shipping Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "city": "City",
+    "state": "State / Province",
+    "zip": "Postal Code",
+    "country": "Country",
+    "orderSummary": "Order Summary",
+    "placeOrder": "Place Order",
+    "total": "Total",
+    "thankYou": "Thank you for your order!",
+    "orderConfirmed": "Your order has been confirmed.",
+    "backToHome": "Back to Home"
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "signupTitle": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "orContinueWith": "Or continue with",
+    "google": "Continue with Google",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "signUpLink": "Sign up",
+    "loginLink": "Log in"
+  },
+  "healthcare": {
+    "title": "Healthcare",
+    "subtitle": "For Hospital"
+  },
+  "privacy": {
+    "title": "Privacy Policy"
+  },
+  "terms": {
+    "title": "Terms & Conditions"
+  }
+}

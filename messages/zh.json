@@ -1,0 +1,159 @@
+{
+  "nav": {
+    "food": "食品",
+    "cosmetic": "化妆品",
+    "products": "产品",
+    "howToUse": "使用方法",
+    "certifiedInstructor": "认证讲师",
+    "healthcare": "医疗保健",
+    "forHospital": "医院专用",
+    "login": "登录",
+    "signup": "注册",
+    "achieve": "Achieve",
+    "confidence": "Confidence",
+    "forever": "Forever"
+  },
+  "hero": {
+    "title": "MOTHER VEGETABLE PRODUCTS",
+    "subtitle": "35亿年前，地球起源的植物",
+    "quote": "「Mother Vegetable」",
+    "message": "地球的生命力，为您而来。"
+  },
+  "products": {
+    "title": "产品",
+    "toBuy": "立即购买",
+    "achieve": {
+      "name": "Achieve",
+      "subtitle": "身体健康",
+      "taglineJp": "「TORIKOMU」",
+      "tagline": "一次摄取48种营养素。",
+      "benefits": [
+        "支持健康的肠道，促进全身细胞再生。",
+        "帮助缓解便秘、改善睡眠、辅助体重管理。"
+      ],
+      "howToUse": "只需将一颗胶囊「TORIKOMU」放入饮品或餐食中。"
+    },
+    "confidence": {
+      "name": "Confidence",
+      "subtitle": "全效护肤",
+      "taglineJp": "「SURIKOMU」「MAZEKOMU」",
+      "tagline": "皮肤修复效果",
+      "benefits": [
+        "强大的抗衰老功效。",
+        "帮助改善色斑、痘痘、体味和皮肤损伤。"
+      ],
+      "howToUse": "直接「SURIKOMU」涂抹或「MAZEKOMU」混入您的化妆品中。"
+    },
+    "forever": {
+      "name": "Forever",
+      "subtitle": "宠物专用",
+      "taglineJp": "「MAZEKOMU」",
+      "tagline": "延长宠物的健康寿命。",
+      "benefits": [
+        "支持减少泪痕和肠道健康。",
+        "帮助减少体臭和排泄物异味，增进食欲。"
+      ],
+      "howToUse": "只需将一颗胶囊「MAZEKOMU」混入宠物食物中。"
+    },
+    "terms": {
+      "torikomu": "「TORIKOMU」在日语中意为「取り込む」（摄入）",
+      "mazekomu": "「MAZEKOMU」在日语中意为「混ぜ込む」（混合）",
+      "surikomu": "「SURIKOMU」在日语中意为「擦り込む」（涂抹）"
+    }
+  },
+  "trust": {
+    "title": "我们的信誉",
+    "achieveDesc": "",
+    "confidenceDesc": "获日本厚生劳动省「日本医药部外品原料规格（JSQI）」认证化妆品",
+    "foreverDesc": "获日本农林水产省宠物食品等级认证"
+  },
+  "foodFunction": {
+    "title": "食品功能",
+    "subtitle": "Achieve / Forever",
+    "method": "TORIKOMU / MAZEKOMU",
+    "nutritionTitle": "48种营养素",
+    "nutritionDesc": "Mother Vegetable 含有48种以上必需营养素，包括钾、镁、钙、铁、锌、铜等矿物质，维生素A、B族、C、E、K的全谱系，以及所有必需氨基酸和条件必需氨基酸。",
+    "children": "儿童",
+    "adults": "成人",
+    "seniors": "老年人",
+    "athletes": "运动员",
+    "dog": "犬",
+    "cat": "猫"
+  },
+  "cosmeticFunction": {
+    "title": "化妆品功能",
+    "subtitle": "Confidence",
+    "method": "SURIKOMU / MAZEKOMU",
+    "description": "作为医药部外品认证产品，Mother Vegetable 被全球医疗机构信赖，用于术后恢复、烧伤疤痕改善、癌症护理和控油。",
+    "beforeAfter": "使用前后对比"
+  },
+  "twoOnlyOnes": {
+    "title": "两个唯一",
+    "description": "MOTHER VEGETABLE 项目是\n全球唯一旨在恢复地球和所有生命的项目，\n以两项独一无二的业务为核心。\n\n每个设施全年无休地吸收CO₂并产生氧气，净化大气，\n同时通过Mother Vegetable产品和水产养殖\n为人类和生物的健康做出贡献。\n\n此外，通过在全球扩展这些设施，\n将发展出八个额外的产业领域。",
+    "mvTitle": "Mother Vegetable",
+    "sefTitle": "小型地球工厂（SEF）"
+  },
+  "footer": {
+    "description": "Mother Vegetable - 源自35亿年前地球生命力的天然修复产品。",
+    "productsTitle": "产品",
+    "howToUseTitle": "使用方法",
+    "companyTitle": "公司",
+    "accountTitle": "账户",
+    "groupTitle": "Mother Vegetable 集团",
+    "copyright": "© {year} Mother Vegetable. 保留所有权利。"
+  },
+  "cart": {
+    "title": "我的购物车",
+    "empty": "购物车为空",
+    "continueShopping": "继续购物",
+    "qty": "数量:",
+    "subtotal": "小计:",
+    "checkout": "结算",
+    "addToCart": "加入购物车",
+    "buyNow": "立即购买 / 前往结算",
+    "freeShipping": "全球免费配送",
+    "quantity": "数量"
+  },
+  "checkout": {
+    "title": "结算",
+    "shippingInfo": "配送信息",
+    "firstName": "名",
+    "lastName": "姓",
+    "email": "电子邮件",
+    "phone": "电话",
+    "address": "地址",
+    "city": "城市",
+    "state": "省份",
+    "zip": "邮编",
+    "country": "国家",
+    "orderSummary": "订单摘要",
+    "placeOrder": "提交订单",
+    "total": "总计",
+    "thankYou": "感谢您的订单！",
+    "orderConfirmed": "您的订单已确认。",
+    "backToHome": "返回首页"
+  },
+  "auth": {
+    "loginTitle": "登录",
+    "signupTitle": "注册",
+    "email": "电子邮件",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "orContinueWith": "或通过以下方式继续",
+    "google": "使用Google继续",
+    "noAccount": "还没有账户？",
+    "haveAccount": "已有账户？",
+    "signUpLink": "注册",
+    "loginLink": "登录"
+  },
+  "healthcare": {
+    "title": "医疗保健",
+    "subtitle": "医院专用"
+  },
+  "privacy": {
+    "title": "隐私政策"
+  },
+  "terms": {
+    "title": "服务条款"
+  }
+}
