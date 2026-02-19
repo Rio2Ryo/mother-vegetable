@@ -44,7 +44,8 @@ test.describe('Full Purchase Flow', () => {
 
     // Step 5: Verify order summary shows product
     await expect(page.getByText('Order Summary')).toBeVisible();
-    await expect(page.getByText('Achieve').first()).toBeVisible();
+    const orderSummary = page.locator('.bg-gray-900');
+    await expect(orderSummary.getByText('Achieve')).toBeVisible();
 
     // Step 6: Place order
     await page.getByRole('button', { name: 'Place Order' }).click();
@@ -94,8 +95,9 @@ test.describe('Full Purchase Flow', () => {
     await waitForPageReady(page);
 
     // Both products should be in order summary
-    await expect(page.getByText('Achieve').first()).toBeVisible();
-    await expect(page.getByText('Confidence').first()).toBeVisible();
+    const orderSummary = page.locator('.bg-gray-900');
+    await expect(orderSummary.getByText('Achieve')).toBeVisible();
+    await expect(orderSummary.getByText('Confidence')).toBeVisible();
 
     // Fill form and submit
     await page.getByPlaceholder('First Name').fill('Multi');
@@ -120,8 +122,8 @@ test.describe('Full Purchase Flow', () => {
     await page.waitForURL('**/checkout', { timeout: 10000 });
     await waitForPageReady(page);
 
-    // Should be on checkout with the product in order summary
-    await expect(page.getByText('Checkout')).toBeVisible();
+    // Should be on checkout with the heading visible
+    await expect(page.getByRole('heading', { name: 'Checkout' })).toBeVisible();
   });
 
   test('checkout form validation prevents empty submission', async ({ page }) => {

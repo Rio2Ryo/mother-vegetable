@@ -308,6 +308,7 @@ export default function CheckoutPage() {
 
         <form
           onSubmit={handleSubmit}
+          noValidate
           className="grid grid-cols-1 lg:grid-cols-5 gap-10"
         >
           {/* ---- Shipping Form ---- */}

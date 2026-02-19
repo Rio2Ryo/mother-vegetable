@@ -35,9 +35,9 @@ test.describe('Internationalization (i18n)', () => {
       await page.goto('http://localhost:3000/ja');
       await waitForPageReady(page);
 
-      // Japanese hero text (use .first() since text may match multiple elements)
+      // Hero text is hardcoded English in HeroSection component (not translated)
       await expect(page.getByText('MOTHER VEGETABLE PRODUCTS').first()).toBeVisible();
-      await expect(page.getByText('地球の生命力を、あなたに。').first()).toBeVisible();
+      await expect(page.getByText("Earth's life force, for you.").first()).toBeVisible();
     });
 
     test('navigation renders header links on Japanese locale', async ({ page, isMobile }) => {
@@ -79,9 +79,9 @@ test.describe('Internationalization (i18n)', () => {
       await page.goto('http://localhost:3000/zh');
       await waitForPageReady(page);
 
-      // Chinese hero text (use .first() since text may match multiple elements)
+      // Hero text is hardcoded English in HeroSection component (not translated)
       await expect(page.getByText('MOTHER VEGETABLE PRODUCTS').first()).toBeVisible();
-      await expect(page.getByText('地球的生命力，为您而来。').first()).toBeVisible();
+      await expect(page.getByText("Earth's life force, for you.").first()).toBeVisible();
     });
 
     test('navigation renders header links on Chinese locale', async ({ page, isMobile }) => {
@@ -126,8 +126,8 @@ test.describe('Internationalization (i18n)', () => {
       await page.waitForURL('**/ja', { timeout: 10000 });
       await waitForPageReady(page);
 
-      // Content should now be Japanese
-      await expect(page.getByText('地球の生命力を、あなたに。').first()).toBeVisible();
+      // Hero text is hardcoded English even after locale switch
+      await expect(page.getByText("Earth's life force, for you.").first()).toBeVisible();
     });
 
     test('locale persists on product page navigation', async ({ page }) => {

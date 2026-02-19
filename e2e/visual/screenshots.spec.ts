@@ -14,7 +14,7 @@ test.describe('Visual Regression - All Pages', () => {
     const label = pagePath === '/' ? 'homepage' : pagePath.replace(/\//g, '-');
 
     test(`screenshot: ${label}`, async ({ page }) => {
-      await page.goto(pagePath, { waitUntil: 'networkidle' });
+      await page.goto(pagePath, { waitUntil: 'load' });
       await waitForPageReady(page);
 
       // Scroll through the page to trigger whileInView animations

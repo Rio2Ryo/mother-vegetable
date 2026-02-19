@@ -110,7 +110,7 @@ export default function InstructorRegisterPage() {
                   <p className="text-white/60 text-sm mt-1">{t('registerSubtitle')}</p>
                 </div>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} noValidate>
                   {/* Full Name */}
                   <div className="py-1.5">
                     <label className="block text-[#25C760] font-semibold text-sm mb-1">

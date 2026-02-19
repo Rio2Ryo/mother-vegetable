@@ -137,8 +137,8 @@ test.describe('Instructor Authentication', () => {
     await page.getByRole('button', { name: /register now/i }).click();
     await page.waitForURL('**/instructor/dashboard', { timeout: 10000 });
 
-    // Should show referral code (INS-XXXXXXXX format)
-    await expect(page.getByText(/INS-[A-Z0-9]{8}/)).toBeVisible();
+    // Should show referral code (INS-XXXXXXXX format) — use .first() as it may match both code and URL
+    await expect(page.getByText(/INS-[A-Z0-9]{8}/).first()).toBeVisible();
     // Should show copy button
     await expect(page.getByText(/copy/i)).toBeVisible();
   });
