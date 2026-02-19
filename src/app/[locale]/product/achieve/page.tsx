@@ -1,7 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
-import ProductPage from '@/components/ProductPage';
+import ProductPage, { type ProductPageData } from '@/components/ProductPage';
 
-const achieveProduct = {
+const achieveProduct: ProductPageData = {
   id: 'achieve',
   name: 'Achieve',
   fullName: 'Mother Vegetable Achieve - 30 sticks',
@@ -26,22 +26,109 @@ const achieveProduct = {
   ],
   howToUse: "Simply 'TORIKOMU' one capsule into your drink or meal.",
   howToLink: '/achieve-howto',
-  drinkItems: [
-    { name: 'Water', image: '/Images/Assets/achieve/mazekomu/water_green.png' },
-    { name: 'Juice', image: '/Images/Assets/achieve/mazekomu/juice.png' },
-    { name: 'Cola', image: '/Images/Assets/achieve/mazekomu/cola.png' },
-    { name: 'Beer', image: '/Images/Assets/achieve/mazekomu/beer.png' },
-    { name: 'Highball', image: '/Images/Assets/achieve/mazekomu/highball.png' },
-    { name: 'White Wine', image: '/Images/Assets/achieve/mazekomu/whiteWine.png' },
-  ],
-  foodItems: [
-    { name: 'Yogurt', image: '/Images/Assets/achieve/mazekomu/yogurt.png' },
-    { name: 'Salad', image: '/Images/Assets/achieve/mazekomu/salad.png' },
-    { name: 'Pasta', image: '/Images/Assets/achieve/mazekomu/pasta.png' },
-    { name: 'Ramen', image: '/Images/Assets/achieve/mazekomu/ramen.png' },
-    { name: 'Fried Rice', image: '/Images/Assets/achieve/mazekomu/friedRice.png' },
-    { name: 'Tempura', image: '/Images/Assets/achieve/mazekomu/tempura.png' },
-  ],
+
+  leftSection: {
+    title: 'Drink',
+    items: [
+      { name: 'Water', image: '/Images/Assets/achieve/mazekomu/water_green.png' },
+      { name: 'Juice', image: '/Images/Assets/achieve/mazekomu/juice.png' },
+      { name: 'Cola', image: '/Images/Assets/achieve/mazekomu/cola.png' },
+      { name: 'Beer', image: '/Images/Assets/achieve/mazekomu/beer.png' },
+      { name: 'White wine', image: '/Images/Assets/achieve/mazekomu/whiteWine.png' },
+      { name: 'Highball', image: '/Images/Assets/achieve/mazekomu/highball.png' },
+    ],
+  },
+  rightSection: {
+    title: 'Food',
+    items: [
+      { name: 'Fried Rice', image: '/Images/Assets/achieve/mazekomu/friedRice.png' },
+      { name: 'Ramen', image: '/Images/Assets/achieve/mazekomu/ramen.png' },
+      { name: 'Salad', image: '/Images/Assets/achieve/mazekomu/salad.png' },
+      { name: 'Yogurt', image: '/Images/Assets/achieve/mazekomu/yogurt.png' },
+      { name: 'Pasta', image: '/Images/Assets/achieve/mazekomu/pasta.png' },
+      { name: 'Tempura', image: '/Images/Assets/achieve/mazekomu/tempura.png' },
+    ],
+  },
+  centerTitle: 'MAZEKOMU',
+  centerImage: '/Images/Assets/achieve/mazekomu/mazekomu.png',
+
+  trust: {
+    productName: 'Achieve',
+    certification: '',
+    partners: [
+      '/Images/Assets/homepage/company/partner_1.png',
+      '/Images/Assets/homepage/company/partner_2.png',
+      '/Images/Assets/homepage/company/partner_3.png',
+      '/Images/Assets/homepage/company/partner_4.png',
+      '/Images/Assets/homepage/company/partner_5.png',
+      '/Images/Assets/homepage/company/partner_6.png',
+    ],
+  },
+
+  functionSection: {
+    type: 'food',
+    title: 'Food Function',
+    subtitle: 'Achieve',
+    method: 'TORIKOMU / MAZEKOMU',
+    videoUrl: '/Images/Assets/homepage/product/food_video.mov',
+    circles: [
+      { name: 'Essential Fatty Acids', detail: '9 types' },
+      { name: 'Amino Acids', detail: '10 types' },
+      { name: 'Vital Vitamins', detail: '18 types' },
+      { name: 'Key Minerals For Balance', detail: '2 types' },
+      { name: 'Other Functional Ingredients', detail: '9 types' },
+    ],
+    summary: {
+      total: '48 Nutrition',
+      description:
+        'Packed with over 48 essential nutrients, Mother Vegetable delivers everything your body needs in one serving. It contains vital minerals like potassium, magnesium, calcium, iron, zinc, and copper; a full spectrum of vitamins, including A, B-complex, C, E, and K; and all the essential amino acids along with conditionally essential ones to support overall health. It also provides beneficial healthy fats such as y-linolenic acid, powerful antioxidants like phycocyanin, chlorophyll, and carotenoids, and natural polysaccharides including spirulan, ẞ-glucan-like compounds, and cellulose for gut health and digestive support.',
+    },
+    benefits: [
+      {
+        title: 'Children',
+        image: '/Images/Assets/homepage/foodFunction/children.png',
+        items: [
+          'Improves concentration',
+          'Enhances learning ability',
+          'Supports bone growth',
+          'Boosts immunity',
+          'Increases appetite',
+        ],
+      },
+      {
+        title: 'Adults',
+        image: '/Images/Assets/homepage/foodFunction/alduts.png',
+        items: [
+          'Improves constipation and digestion',
+          'Enhances sleep quality',
+          'Reduces fatigue',
+          'Suppresses cellular aging and inflammation',
+          'Supports dieting*',
+        ],
+      },
+      {
+        title: 'Seniors',
+        image: '/Images/Assets/homepage/foodFunction/seniors.png',
+        items: [
+          'Improves sleep quality and blood circulation',
+          'Boosts appetite and nutrient intake',
+          'Supports internal organ function',
+          'Promotes bone density',
+        ],
+      },
+      {
+        title: 'Athletes',
+        image: '/Images/Assets/homepage/foodFunction/athletes.png',
+        items: [
+          'Detoxifies additives',
+          'Aids muscle recovery and improves endurance',
+          'Provides efficient nutrient absorption',
+          'Reduces inflammation and supports recovery',
+          'Enhances training effectiveness',
+        ],
+      },
+    ],
+  },
 };
 
 export default async function AchievePage({ params }: { params: Promise<{ locale: string }> }) {

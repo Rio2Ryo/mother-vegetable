@@ -1,7 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
-import ProductPage from '@/components/ProductPage';
+import ProductPage, { type ProductPageData } from '@/components/ProductPage';
 
-const foreverProduct = {
+const foreverProduct: ProductPageData = {
   id: 'forever',
   name: 'Forever',
   fullName: 'Mother Vegetable Forever - 30 sticks',
@@ -26,14 +26,86 @@ const foreverProduct = {
   ],
   howToUse: "Simply 'MAZEKOMU' one capsule into your pet's food.",
   howToLink: '/forever-howto',
-  foodItems: [
-    { name: 'Dry Food', image: '/Images/Assets/forever/mazekomu/dryFood.png' },
-    { name: 'Wet Food', image: '/Images/Assets/forever/mazekomu/wetFood.png' },
-    { name: 'Dog Water', image: '/Images/Assets/forever/mazekomu/dogWater.png' },
-    { name: 'Cat Water', image: '/Images/Assets/forever/mazekomu/catWater.png' },
-    { name: 'Dog Treats', image: '/Images/Assets/forever/mazekomu/dogTreats.png' },
-    { name: 'Cat Treats', image: '/Images/Assets/forever/mazekomu/catTreats.png' },
-  ],
+
+  leftSection: {
+    title: 'Dog',
+    items: [
+      { name: 'Dry Food', image: '/Images/Assets/forever/mazekomu/dryFood.png' },
+      { name: 'Wet Food', image: '/Images/Assets/forever/mazekomu/wetFood.png' },
+      { name: 'Water', image: '/Images/Assets/forever/mazekomu/dogWater.png' },
+      { name: 'Treats', image: '/Images/Assets/forever/mazekomu/dogTreats.png' },
+    ],
+  },
+  rightSection: {
+    title: 'Cat',
+    items: [
+      { name: 'Dry Food', image: '/Images/Assets/forever/mazekomu/dryFood.png' },
+      { name: 'Wet Food', image: '/Images/Assets/forever/mazekomu/wetFood.png' },
+      { name: 'Water', image: '/Images/Assets/forever/mazekomu/catWater.png' },
+      { name: 'Treats', image: '/Images/Assets/forever/mazekomu/catTreats.png' },
+    ],
+  },
+  centerTitle: 'MAZEKOMU',
+  centerImage: '/Images/Assets/forever/mazekomu/mazekomu.png',
+
+  trust: {
+    productName: 'Forever',
+    certification: 'certified by pet grade food by Ministry of Agriculture, Forestry and Fisheries (MAFF), Japan',
+    partners: [
+      '/Images/Assets/homepage/company/partner_1.png',
+      '/Images/Assets/homepage/company/partner_2.png',
+      '/Images/Assets/homepage/company/partner_3.png',
+      '/Images/Assets/homepage/company/partner_4.png',
+      '/Images/Assets/homepage/company/partner_5.png',
+      '/Images/Assets/homepage/company/partner_6.png',
+    ],
+  },
+
+  functionSection: {
+    type: 'food',
+    title: 'Food Function',
+    subtitle: 'Forever',
+    method: 'TORIKOMU / MAZEKOMU',
+    videoUrl: '/Images/Assets/homepage/product/food_video.mov',
+    circles: [
+      { name: 'Essential Fatty Acids', detail: '9 types' },
+      { name: 'Amino Acids', detail: '10 types' },
+      { name: 'Vital Vitamins', detail: '18 types' },
+      { name: 'Key Minerals For Balance', detail: '2 types' },
+      { name: 'Other Functional Ingredients', detail: '9 types' },
+    ],
+    summary: {
+      total: '48 Nutrition',
+      description:
+        'Packed with over 48 essential nutrients, Mother Vegetable delivers everything your body needs in one serving. It contains vital minerals like potassium, magnesium, calcium, iron, zinc, and copper; a full spectrum of vitamins, including A, B-complex, C, E, and K; and all the essential amino acids along with conditionally essential ones to support overall health. It also provides beneficial healthy fats such as y-linolenic acid, powerful antioxidants like phycocyanin, chlorophyll, and carotenoids, and natural polysaccharides including spirulan, ẞ-glucan-like compounds, and cellulose for gut health and digestive support.',
+    },
+    benefits: [
+      {
+        title: 'Dog',
+        image: '/Images/Assets/homepage/foodFunction/dog.png',
+        items: [
+          'Reduces tear stains',
+          'Improves waste odor',
+          'Increases appetite',
+          'Supports digestive health',
+          'Promotes deep sleep',
+          'Reduces body odor',
+        ],
+      },
+      {
+        title: 'Cat',
+        image: '/Images/Assets/homepage/foodFunction/cat.png',
+        items: [
+          'Reduces tear stains',
+          'Improves waste odor',
+          'Increases appetite',
+          'Supports digestive health',
+          'Promotes deep sleep',
+          'Reduces body odor',
+        ],
+      },
+    ],
+  },
 };
 
 export default async function ForeverPage({ params }: { params: Promise<{ locale: string }> }) {

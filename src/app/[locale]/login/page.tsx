@@ -1,67 +1,125 @@
-import { setRequestLocale } from 'next-intl/server';
-import Image from 'next/image';
+'use client';
 
-export default async function LoginPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+import { useState } from 'react';
+import { useLocale } from 'next-intl';
+import Image from 'next/image';
+import Link from 'next/link';
+
+export default function LoginPage() {
+  const locale = useLocale();
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="bg-black min-h-screen flex items-center justify-center py-8 px-5">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <Image src="/Images/Assets/General/logo.png" alt="Mother Vegetable" width={150} height={75} className="mx-auto mb-4" />
-          <h1 className="text-[#25C760] font-bold text-2xl">Login</h1>
-        </div>
-
-        <div className="bg-black border-2 border-[#25C760] rounded-xl p-6 md:p-8">
-          <form className="space-y-4">
-            <div>
-              <label className="block text-[#25C760] font-semibold text-sm mb-2">Email</label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full px-4 py-3 bg-black border-2 border-[#25C760] rounded-md text-white text-sm outline-none focus:border-[#3C8063] focus:shadow-[0_0_0_0.2rem_rgba(37,199,96,0.25)] transition-all placeholder-white/60"
+    <div className="bg-black min-h-[calc(100vh-80px)] flex items-center justify-center py-4 px-4">
+      <div className="w-full max-w-[900px]">
+        <div className="border-2 border-[#25C760] rounded-[10px] bg-black/95 shadow-lg overflow-hidden">
+          <div className="flex flex-col md:flex-row">
+            {/* Left Column: Background Image with Text Overlay (hidden on mobile) */}
+            <div className="hidden md:flex md:w-1/2 relative flex-col items-center justify-center p-4 min-h-[400px]">
+              <div
+                className="absolute inset-0 bg-cover bg-center rounded-[10px] opacity-50"
+                style={{ backgroundImage: "url('/Images/Assets/homepage/bannerImg.png')" }}
               />
+              <div className="relative z-10 text-center flex flex-col items-center justify-center">
+                <h1 className="font-['Ubuntu'] font-bold text-[#25C760] text-[2.7rem] leading-tight p-3">
+                  WELCOME TO MOTHER VEGETABLE!
+                </h1>
+                <div className="p-2 text-white text-base font-bold">
+                  New User?
+                </div>
+                <div className="flex items-center justify-center">
+                  <Link
+                    href={`/${locale}/signup`}
+                    className="inline-block bg-white text-black font-bold text-base px-6 py-2 rounded-[5px] border-2 border-[#25C760] shadow-lg no-underline hover:bg-[#25C760] hover:text-white hover:-translate-y-0.5 transition-all"
+                  >
+                    SIGN UP HERE
+                  </Link>
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="block text-[#25C760] font-semibold text-sm mb-2">Password</label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                className="w-full px-4 py-3 bg-black border-2 border-[#25C760] rounded-md text-white text-sm outline-none focus:border-[#3C8063] focus:shadow-[0_0_0_0.2rem_rgba(37,199,96,0.25)] transition-all placeholder-white/60"
-              />
+
+            {/* Right Column: Login Form */}
+            <div className="w-full md:w-1/2 p-4">
+              <div className="px-2.5 py-2.5 md:px-6 md:py-2.5">
+                <div className="pb-0">
+                  <h1 className="font-['Ubuntu'] font-bold text-[#25C760] text-2xl md:text-3xl">LOGIN</h1>
+                </div>
+                <form action="/login" method="POST">
+                  <div className="py-2">
+                    <label className="block text-[#25C760] font-semibold text-sm mb-1">
+                      Email Address:
+                    </label>
+                    <input
+                      type="text"
+                      name="email"
+                      placeholder="sample@email.com"
+                      className="w-full px-3 py-2 bg-black border-2 border-[#25C760] rounded-[5px] text-white text-sm outline-none focus:border-[#3C8063] focus:shadow-[0_0_0_0.2rem_rgba(37,199,96,0.25)] transition-all placeholder-white/60"
+                    />
+                  </div>
+                  <div className="py-2">
+                    <label className="block text-[#25C760] font-semibold text-sm mb-1">
+                      Password:
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        name="password"
+                        placeholder="Password"
+                        className="w-full px-3 py-2 bg-black border-2 border-[#25C760] rounded-[5px] text-white text-sm outline-none focus:border-[#3C8063] focus:shadow-[0_0_0_0.2rem_rgba(37,199,96,0.25)] transition-all placeholder-white/60"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-xs bg-transparent border-none cursor-pointer"
+                      >
+                        {showPassword ? 'HIDE' : 'SHOW'}
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex justify-end text-sm">
+                    <a
+                      href="/forgetPassword"
+                      className="text-[#25C760] underline hover:text-[#3C8063] transition-colors"
+                    >
+                      Forgot Password?
+                    </a>
+                  </div>
+                  <div className="py-4">
+                    <button
+                      type="submit"
+                      name="login"
+                      className="w-full bg-white text-black font-bold py-2 rounded-[5px] border-2 border-[#25C760] cursor-pointer shadow-[0_4px_12px_rgba(37,199,96,0.3)] hover:bg-[#25C760] hover:text-white hover:border-[#25C760] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(37,199,96,0.4)] transition-all"
+                    >
+                      Login Now
+                    </button>
+                  </div>
+                  <div className="text-center py-2 text-white text-sm">
+                    or Login with
+                  </div>
+                  <div className="flex justify-center py-1">
+                    <a href="#" className="hover:scale-105 transition-transform cursor-pointer">
+                      <Image
+                        src="/Images/Authenticate/google_logo.png"
+                        alt="Google"
+                        width={40}
+                        height={40}
+                        className="px-1"
+                      />
+                    </a>
+                  </div>
+                </form>
+                {/* Sign up link (visible on mobile, also shown at bottom) */}
+                <div className="md:hidden">
+                  <div className="flex items-center justify-center text-white text-xs pt-2">
+                    Don&apos;t have an account?&nbsp;
+                    <Link href={`/${locale}/signup`} className="text-[#25C760] underline font-bold">
+                      SIGN UP HERE
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-[#25C760] to-[#3C8063] text-white font-semibold py-3 rounded-md border-none cursor-pointer hover:opacity-90 transition-all text-base"
-            >
-              LOGIN
-            </button>
-          </form>
-
-          <div className="my-6 flex items-center gap-4">
-            <div className="flex-1 h-px bg-[rgba(37,199,96,0.3)]" />
-            <span className="text-white/50 text-sm">OR</span>
-            <div className="flex-1 h-px bg-[rgba(37,199,96,0.3)]" />
           </div>
-
-          <div className="space-y-3">
-            <button className="w-full flex items-center justify-center gap-3 bg-white text-black font-semibold py-3 rounded-md border-none cursor-pointer hover:opacity-90 transition-all text-sm">
-              <Image src="/Images/Authenticate/google_logo.png" alt="Google" width={20} height={20} />
-              Continue with Google
-            </button>
-            <button className="w-full flex items-center justify-center gap-3 bg-[#1877F2] text-white font-semibold py-3 rounded-md border-none cursor-pointer hover:opacity-90 transition-all text-sm">
-              <Image src="/Images/Authenticate/fb_logo.png" alt="Facebook" width={20} height={20} />
-              Continue with Facebook
-            </button>
-          </div>
-
-          <p className="text-center text-white/70 text-sm mt-6">
-            Don&apos;t have an account?{' '}
-            <a href="/signup" className="text-[#25C760] font-semibold hover:underline no-underline">
-              Sign Up
-            </a>
-          </p>
         </div>
       </div>
     </div>

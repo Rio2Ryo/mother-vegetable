@@ -9,8 +9,7 @@ import CartPanel from './CartPanel';
 
 const langOptions = [
   { code: 'en' as const, label: 'Eng' },
-  { code: 'ja' as const, label: '日本語' },
-  { code: 'zh' as const, label: '中文' },
+  { code: 'ja' as const, label: '日' },
 ];
 
 export default function Header() {
@@ -18,6 +17,7 @@ export default function Header() {
   const [productsOpen, setProductsOpen] = useState(false);
   const [howToOpen, setHowToOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const { toggleCart, totalItems } = useCartStore();
 
   const locale = useLocale();
@@ -26,7 +26,7 @@ export default function Header() {
 
   const currentLangLabel = langOptions.find((l) => l.code === locale)?.label ?? 'Eng';
 
-  function switchLocale(newLocale: 'en' | 'ja' | 'zh') {
+  function switchLocale(newLocale: 'en' | 'ja') {
     router.replace(pathname, { locale: newLocale });
     setLangOpen(false);
   }
@@ -34,56 +34,84 @@ export default function Header() {
   return (
     <>
       <header className="bg-black sticky top-0 z-[1000] shadow-[0_2px_20px_rgba(0,0,0,0.3)]">
-        <div className="max-w-[1400px] mx-auto px-5 flex items-center justify-between h-20">
+        <div className="max-w-[1400px] mx-auto px-5 flex items-center justify-between h-20 max-md:px-[15px] max-md:h-[70px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-4">
+          <Link href="/" className="flex items-center gap-[15px]">
             <Image
               src="/Images/Assets/General/logo.png"
               alt="Mother Vegetable Logo"
               width={150}
               height={75}
-              className="h-[75px] w-auto hover:scale-105 transition-transform duration-300"
+              className="h-[75px] w-auto hover:scale-105 transition-all duration-300 max-md:h-[50px]"
               priority
             />
           </Link>
 
           {/* Nav */}
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5 max-md:gap-[10px]">
             <nav
               className={`${
                 mobileMenuOpen ? 'right-0' : 'right-[-100%]'
-              } fixed top-0 w-4/5 max-w-[300px] h-screen bg-black border-l-2 border-[#25C760] transition-all duration-300 z-[1000] pt-20 px-5 md:static md:w-auto md:max-w-none md:h-auto md:border-0 md:pt-0 md:px-0 md:flex md:items-center`}
+              } fixed top-0 w-4/5 max-w-[300px] h-screen bg-black border-l-2 border-[#25C760] transition-all duration-300 z-[1000] pt-20 px-5 shadow-[-5px_0_15px_rgba(0,0,0,0.3)] md:shadow-none md:static md:w-auto md:max-w-none md:h-auto md:border-0 md:pt-0 md:px-0 md:flex md:items-center max-[600px]:w-[90%] max-[600px]:max-w-[280px] max-[600px]:pt-[70px] max-[600px]:px-[15px]`}
             >
-              <ul className="flex flex-col md:flex-row gap-[30px] md:gap-[35px] list-none m-0 p-0">
-                <li>
+              {/* Mobile profile buttons */}
+              <div className="md:hidden flex flex-col gap-[10px] mb-4">
+                <Link
+                  href="/login"
+                  className="flex items-center w-full py-3 px-4 bg-black border-2 border-[#25C760] rounded-lg text-white text-base font-medium cursor-pointer transition-all duration-300 no-underline hover:bg-[rgba(37,199,96,0.1)] hover:border-[#3C8063]"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 448 512">
+                    <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                  </svg>
+                  LOGIN
+                </Link>
+                <Link
+                  href="/signup"
+                  className="flex items-center w-full py-3 px-4 bg-black border-2 border-[#25C760] rounded-lg text-white text-base font-medium cursor-pointer transition-all duration-300 no-underline hover:bg-[rgba(37,199,96,0.1)] hover:border-[#3C8063]"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 640 512">
+                    <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
+                  </svg>
+                  Sign Up
+                </Link>
+              </div>
+
+              <ul className="flex flex-col md:flex-row gap-[5px] md:gap-[35px] list-none m-0 p-0 max-[600px]:pt-[25px] max-[600px]:relative max-[600px]:z-[-1] max-[600px]:w-full">
+                <li className="max-md:w-full">
                   <Link
                     href="/#food-function"
-                    className="text-[#25C760] text-base hover:text-white transition-all duration-300 no-underline"
-                    style={{ fontWeight: 500 }}
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:block max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Food
                   </Link>
                 </li>
-                <li>
+                <li className="max-md:w-full">
                   <Link
                     href="/#cosmetic-function"
-                    className="text-[#25C760] text-base hover:text-white transition-all duration-300 no-underline"
-                    style={{ fontWeight: 500 }}
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:block max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Cosmetic
                   </Link>
                 </li>
                 <li
-                  className="relative group"
+                  className="relative group max-md:w-full"
                   onMouseEnter={() => setProductsOpen(true)}
                   onMouseLeave={() => setProductsOpen(false)}
                 >
-                  <button className="text-[#25C760] text-base hover:text-white transition-all duration-300 flex items-center gap-1 bg-transparent border-none cursor-pointer" style={{ fontWeight: 500 }}>
+                  <button
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-[5px] bg-transparent border-none cursor-pointer py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                    onClick={() => setProductsOpen(!productsOpen)}
+                  >
                     Products
                     <svg
-                      className={`w-3 h-3 transition-transform duration-300 ${productsOpen ? 'rotate-180' : ''}`}
+                      className={`w-3 h-3 transition-transform duration-300 ml-[5px] ${productsOpen ? 'rotate-180' : ''}`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -98,14 +126,14 @@ export default function Header() {
                     className={`md:absolute md:top-full md:left-0 md:bg-black md:shadow-[0_8px_20px_rgba(0,0,0,0.3)] md:rounded-lg md:border md:border-[#25C760] md:min-w-[180px] md:mt-2 md:z-[1000] list-none p-0 ml-0 transition-all duration-300 ${
                       productsOpen
                         ? 'opacity-100 visible translate-y-0 pointer-events-auto'
-                        : 'md:opacity-0 md:invisible md:-translate-y-2 md:pointer-events-none'
+                        : 'md:opacity-0 md:invisible md:-translate-y-[10px] md:pointer-events-none'
                     } static mt-2 ml-4`}
                   >
                     {['achieve', 'confidence', 'forever'].map((p) => (
                       <li key={p}>
                         <Link
                           href={`/product/${p}`}
-                          className="block px-4 py-3 text-white font-medium text-sm hover:bg-[#25C760] hover:text-black transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
+                          className="block px-2 py-2 text-white font-medium text-sm hover:bg-[#25C760] hover:text-white transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {p.charAt(0).toUpperCase() + p.slice(1)}
@@ -115,14 +143,18 @@ export default function Header() {
                   </ul>
                 </li>
                 <li
-                  className="relative group"
+                  className="relative group max-md:w-full"
                   onMouseEnter={() => setHowToOpen(true)}
                   onMouseLeave={() => setHowToOpen(false)}
                 >
-                  <button className="text-[#25C760] text-base hover:text-white transition-all duration-300 flex items-center gap-1 bg-transparent border-none cursor-pointer" style={{ fontWeight: 500 }}>
+                  <button
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-[5px] bg-transparent border-none cursor-pointer py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                    onClick={() => setHowToOpen(!howToOpen)}
+                  >
                     How To Use
                     <svg
-                      className={`w-3 h-3 transition-transform duration-300 ${howToOpen ? 'rotate-180' : ''}`}
+                      className={`w-3 h-3 transition-transform duration-300 ml-[5px] ${howToOpen ? 'rotate-180' : ''}`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -137,14 +169,14 @@ export default function Header() {
                     className={`md:absolute md:top-full md:left-0 md:bg-black md:shadow-[0_8px_20px_rgba(0,0,0,0.3)] md:rounded-lg md:border md:border-[#25C760] md:min-w-[180px] md:mt-2 md:z-[1000] list-none p-0 ml-0 transition-all duration-300 ${
                       howToOpen
                         ? 'opacity-100 visible translate-y-0 pointer-events-auto'
-                        : 'md:opacity-0 md:invisible md:-translate-y-2 md:pointer-events-none'
+                        : 'md:opacity-0 md:invisible md:-translate-y-[10px] md:pointer-events-none'
                     } static mt-2 ml-4`}
                   >
                     {['achieve', 'confidence', 'forever'].map((p) => (
                       <li key={p}>
                         <Link
                           href={`/${p}-howto`}
-                          className="block px-4 py-3 text-white font-medium text-sm hover:bg-[#25C760] hover:text-black transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
+                          className="block px-2 py-2 text-white font-medium text-sm hover:bg-[#25C760] hover:text-white transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {p.charAt(0).toUpperCase() + p.slice(1)}
@@ -153,25 +185,24 @@ export default function Header() {
                     ))}
                   </ul>
                 </li>
-                <li>
+                <li className="max-md:w-full">
                   <Link
                     href="/mv/certifiedInstructor"
-                    className="text-[#25C760] text-base hover:text-white transition-all duration-300 no-underline"
-                    style={{ fontWeight: 500 }}
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:block max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Certified Instructor
                   </Link>
                 </li>
-                <li className="md:hidden">
+                <li className="md:hidden list-none mt-3 w-full">
                   <Link
                     href="/healthcare"
-                    className="text-[#25C760] text-base hover:text-white transition-all duration-300 no-underline"
-                    style={{ fontWeight: 500 }}
+                    className="inline-flex flex-col items-center justify-center w-fit py-[5px] px-5 border border-white rounded-md text-white text-sm font-semibold no-underline bg-black transition-all duration-300 hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:translate-x-0"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Healthcare
-                    <span className="block text-sm font-normal opacity-90">For Hospital</span>
+                    <span className="block text-[13px] font-medium opacity-95">For Hospital</span>
                   </Link>
                 </li>
               </ul>
@@ -180,25 +211,27 @@ export default function Header() {
             {/* Healthcare Button (Desktop) */}
             <Link
               href="/healthcare"
-              className="hidden md:inline-flex flex-col items-center justify-center h-10 bg-black text-white border border-white px-3 rounded-md text-[11px] font-semibold leading-tight no-underline hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-0.5 transition-all duration-300 text-center"
+              className="hidden md:inline-flex flex-col items-center justify-center h-10 bg-black text-white border border-white px-3 rounded-md text-[11px] font-semibold leading-[1.2] no-underline hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-0.5 transition-all duration-300 text-center"
+              style={{ fontFamily: 'Arial, sans-serif' }}
             >
               Healthcare
-              <span className="text-[10px] font-medium">For Hospital</span>
+              <span className="text-[10px] font-medium whitespace-nowrap">For Hospital</span>
             </Link>
 
             {/* Language Selector */}
             <div
-              className="relative border border-white rounded-md bg-transparent text-white px-4 py-2 font-medium text-sm cursor-pointer min-w-[60px] text-center h-10 flex items-center justify-center hover:bg-[#25C760] hover:border-[#25C760] hover:text-black hover:-translate-y-0.5 transition-all duration-300"
+              className="relative border border-white rounded-md bg-transparent text-white px-4 py-2 font-medium text-sm cursor-pointer min-w-[60px] text-center h-10 flex items-center justify-center hover:bg-[#25C760] hover:border-[#25C760] hover:-translate-y-[3px] transition-all duration-300"
+              style={{ fontFamily: 'Arial, sans-serif' }}
               onClick={() => setLangOpen(!langOpen)}
               onMouseLeave={() => setLangOpen(false)}
             >
-              <span>{currentLangLabel}</span>
+              <span className="block">{currentLangLabel}</span>
               {langOpen && (
-                <div className="absolute top-full left-0 right-0 bg-black border border-[#25C760] rounded-lg shadow-[0_8px_20px_rgba(0,0,0,0.3)] z-[1000] mt-1 overflow-hidden">
+                <div className="absolute top-full left-0 right-0 bg-black border border-[#25C760] rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[1000] mt-1 overflow-hidden">
                   {langOptions.map((lang) => (
                     <div
                       key={lang.code}
-                      className="px-4 py-2.5 text-white hover:bg-[#25C760] hover:text-black transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] last:border-b-0 cursor-pointer text-center"
+                      className="px-4 py-[10px] text-white hover:bg-[#25C760] transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] last:border-b-0 cursor-pointer text-center font-medium"
                       onClick={(e) => {
                         e.stopPropagation();
                         switchLocale(lang.code);
@@ -214,7 +247,8 @@ export default function Header() {
             {/* Cart Button */}
             <button
               onClick={toggleCart}
-              className="bg-black text-white border border-white px-6 py-3 rounded-[5px] font-semibold text-sm cursor-pointer relative flex items-center gap-2 h-10 hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-0.5 hover:bg-[#25C760] hover:text-black hover:border-[#25C760] transition-all duration-300"
+              className="bg-black text-white border border-white px-6 py-3 rounded-[5px] font-semibold text-sm cursor-pointer relative overflow-hidden flex items-center gap-2 h-10 hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300 max-md:px-4 max-md:text-xs max-[600px]:px-3 max-[600px]:text-[11px]"
+              style={{ fontFamily: 'Arial, sans-serif' }}
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 576 512">
                 <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
@@ -226,15 +260,43 @@ export default function Header() {
               )}
             </button>
 
-            {/* Profile Button */}
-            <Link
-              href="/login"
-              className="hidden md:flex text-white bg-black border border-white cursor-pointer h-10 w-10 rounded-[5px] items-center justify-center hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-0.5 hover:bg-[#25C760] hover:text-black hover:border-[#25C760] transition-all duration-300 no-underline"
+            {/* Profile Button (Desktop) */}
+            <div
+              className="hidden md:flex relative text-white bg-black border border-white cursor-pointer h-10 w-10 rounded-[5px] items-center justify-center hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300"
+              onMouseEnter={() => setProfileOpen(true)}
+              onMouseLeave={() => setProfileOpen(false)}
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 448 512">
                 <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
               </svg>
-            </Link>
+              {/* Profile Dropdown */}
+              <div
+                className={`absolute top-full right-0 bg-black shadow-[0_8px_20px_rgba(0,0,0,0.3)] rounded-lg border border-[#25C760] z-[1000] min-w-[200px] w-max mt-2 transition-all duration-300 ${
+                  profileOpen
+                    ? 'opacity-100 visible translate-y-0 pointer-events-auto'
+                    : 'opacity-0 invisible -translate-y-[10px] pointer-events-none'
+                }`}
+              >
+                <Link
+                  href="/login"
+                  className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] hover:bg-[#25C760] hover:text-white"
+                >
+                  <svg className="w-[14px] h-[14px] mr-[10px]" fill="currentColor" viewBox="0 0 512 512">
+                    <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
+                  </svg>
+                  LOGIN
+                </Link>
+                <Link
+                  href="/signup"
+                  className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 hover:bg-[#25C760] hover:text-white"
+                >
+                  <svg className="w-[14px] h-[14px] mr-[10px]" fill="currentColor" viewBox="0 0 640 512">
+                    <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
+                  </svg>
+                  Sign Up
+                </Link>
+              </div>
+            </div>
 
             {/* Hamburger */}
             <button
@@ -242,17 +304,17 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <span
-                className={`w-full h-[3px] bg-[#25C760] rounded transition-all duration-300 ${
+                className={`w-full h-[3px] bg-[#25C760] rounded-sm transition-all duration-300 origin-center ${
                   mobileMenuOpen ? 'rotate-45 translate-x-[8px] translate-y-[7px]' : ''
                 }`}
               />
               <span
-                className={`w-full h-[3px] bg-[#25C760] rounded transition-all duration-300 ${
+                className={`w-full h-[3px] bg-[#25C760] rounded-sm transition-all duration-300 ${
                   mobileMenuOpen ? 'opacity-0' : ''
                 }`}
               />
               <span
-                className={`w-full h-[3px] bg-[#25C760] rounded transition-all duration-300 ${
+                className={`w-full h-[3px] bg-[#25C760] rounded-sm transition-all duration-300 origin-center ${
                   mobileMenuOpen ? '-rotate-45 translate-x-[6px] -translate-y-[6px]' : ''
                 }`}
               />

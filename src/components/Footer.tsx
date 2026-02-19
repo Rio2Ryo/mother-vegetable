@@ -3,98 +3,87 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#e9e9e9] py-12 pb-[30px]">
-      <div className="max-w-[1400px] mx-auto px-5">
-        {/* Country badges */}
-        <div className="mb-8">
-          <div className="flex flex-wrap justify-center gap-2">
+    <footer className="bg-black border-t-2 border-[#25C760] py-10 mt-20 max-md:py-[30px] max-md:mt-[60px] max-[480px]:py-[25px] max-[480px]:mt-10">
+      <div className="max-w-[1400px] mx-auto px-5 text-center max-md:px-[15px]">
+        <div className="flex flex-col gap-2 text-center">
+          {/* Logo */}
+          <div>
+            <Image
+              src="/Images/favicon.png"
+              alt="Mother Vegetable Logo"
+              width={40}
+              height={40}
+              className="max-w-[40px] h-auto mb-2 inline-block max-md:max-w-[35px]"
+            />
+          </div>
+
+          {/* Company name */}
+          <p
+            className="text-[#25C760] text-[clamp(10px,1.2vw,14px)] font-medium tracking-[-0.025em] m-0 max-md:text-[clamp(9px,2vw,12px)]"
+            style={{ fontFamily: 'Arial, sans-serif' }}
+          >
+            Mother Vegetable Group
+          </p>
+
+          {/* Official Page link */}
+          <p
+            className="text-[#25C760] text-[clamp(10px,1.2vw,14px)] font-medium tracking-[-0.025em] m-0 my-2 max-md:text-[clamp(9px,2vw,12px)]"
+            style={{ fontFamily: 'Arial, sans-serif' }}
+          >
+            <a
+              href="https://www.mothervegetable.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-inherit no-underline"
+            >
+              Official Page
+            </a>
+          </p>
+
+          {/* Country grid - 9 columns on desktop, 6 on mobile */}
+          <div className="grid grid-cols-9 gap-0.5 mx-auto mt-[15px] max-w-[800px] justify-center pb-1 max-[1024px]:max-w-[600px] max-md:grid-cols-6 max-md:gap-1.5">
             {[
               'Japan', 'South Korea', 'Hong Kong', 'Malaysia', 'Singapore',
               'Indonesia', 'Thailand', 'Mongolia', 'Australia', 'Germany',
               'Italy', 'France', 'Switzerland', 'United Kingdom', 'Canada',
               'USA', 'Brazil', 'Peru'
             ].map((country) => (
-              <span
+              <div
                 key={country}
-                className="inline-block bg-[#e9e9e9] text-black px-3 py-2 rounded-sm text-[14px] leading-normal border border-[#ccc]"
-                style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 700 }}
+                className="text-[#25C760] text-[clamp(10px,1.2vw,14px)] font-medium whitespace-nowrap tracking-[-0.025em] text-center max-md:text-[clamp(9px,2vw,12px)]"
+                style={{ fontFamily: 'Arial, sans-serif' }}
               >
                 {country}
-              </span>
+              </div>
             ))}
           </div>
-        </div>
 
-        {/* Company name */}
-        <div className="mt-[30px] mb-5">
-          <h3 className="text-[#1a2323] text-xl" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 700 }}>
-            Mother Vegetable Group
-          </h3>
-        </div>
-
-        {/* Main footer grid */}
-        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-8 md:gap-12 mt-5">
-          {/* Company info & address */}
-          <div>
-            <Link href="/">
-              <Image
-                src="/Images/Assets/General/logo.png"
-                alt="Mother Vegetable"
-                width={120}
-                height={60}
-                className="h-[60px] w-auto mb-4"
-              />
+          {/* Privacy and Terms links */}
+          <span
+            className="text-[#25C760] text-[clamp(10px,1.2vw,14px)] font-medium tracking-[-0.025em] max-md:text-[clamp(9px,2vw,12px)]"
+            style={{ fontFamily: 'Arial, sans-serif' }}
+          >
+            <Link href="/privacy" className="text-[#25C760] no-underline hover:underline">
+              Privacy Policy
             </Link>
-            <p className="text-[#1a2323] text-[14px] leading-relaxed max-w-sm" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>
-              Mother Vegetable - Natural healing products born from Earth&apos;s life force 3.5 billion years ago.
-            </p>
-          </div>
+            {' | '}
+            <Link href="/terms" className="text-[#25C760] no-underline hover:underline">
+              Terms and Conditions
+            </Link>
+          </span>
 
-          {/* Products */}
-          <div>
-            <h4 className="text-[#1a2323] font-bold text-base mb-4" style={{ fontFamily: "'Open Sans', Arial, sans-serif" }}>Products</h4>
-            <ul className="list-none p-0 m-0 space-y-2">
-              <li><Link href="/product/achieve" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Achieve</Link></li>
-              <li><Link href="/product/confidence" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Confidence</Link></li>
-              <li><Link href="/product/forever" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Forever</Link></li>
-            </ul>
-          </div>
-
-          {/* How To Use */}
-          <div>
-            <h4 className="text-[#1a2323] font-bold text-base mb-4" style={{ fontFamily: "'Open Sans', Arial, sans-serif" }}>How To Use</h4>
-            <ul className="list-none p-0 m-0 space-y-2">
-              <li><Link href="/achieve-howto" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Achieve</Link></li>
-              <li><Link href="/confidence-howto" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Confidence</Link></li>
-              <li><Link href="/forever-howto" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Forever</Link></li>
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="text-[#1a2323] font-bold text-base mb-4" style={{ fontFamily: "'Open Sans', Arial, sans-serif" }}>Company</h4>
-            <ul className="list-none p-0 m-0 space-y-2">
-              <li><Link href="/healthcare" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Healthcare</Link></li>
-              <li><Link href="/mv/certifiedInstructor" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Certified Instructor</Link></li>
-              <li><Link href="/privacy" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Privacy Policy</Link></li>
-              <li><Link href="/terms" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Terms &amp; Conditions</Link></li>
-            </ul>
-          </div>
-
-          {/* Account */}
-          <div>
-            <h4 className="text-[#1a2323] font-bold text-base mb-4" style={{ fontFamily: "'Open Sans', Arial, sans-serif" }}>Account</h4>
-            <ul className="list-none p-0 m-0 space-y-2">
-              <li><Link href="/login" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Login</Link></li>
-              <li><Link href="/signup" className="text-[#1a2323] text-[14px] hover:text-[#25C760] transition-colors no-underline" style={{ fontFamily: "'Open Sans', Arial, sans-serif", fontWeight: 600 }}>Sign Up</Link></li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="mt-8 pt-6 border-t border-[#ccc] text-center">
-          <p className="text-[#1a2323]/50 text-sm" style={{ fontFamily: "'Open Sans', Arial, sans-serif" }}>
-            &copy; {new Date().getFullYear()} Mother Vegetable. All rights reserved.
+          {/* Copyright */}
+          <p
+            className="text-white text-[clamp(10px,1.2vw,14px)] font-medium tracking-[-0.025em] m-0 leading-[1.4] max-md:text-[clamp(9px,2vw,12px)] max-[480px]:text-xs"
+            style={{ fontFamily: 'Arial, sans-serif', color: '#25C760' }}
+          >
+            &copy; {new Date().getFullYear()} MOTHER VEGETABLE PROJECT.
+          </p>
+          <p
+            className="text-white text-[clamp(10px,1.2vw,14px)] font-normal tracking-[-0.025em] m-0 leading-[1.4] opacity-80 -mt-2 max-md:text-[clamp(9px,2vw,12px)] max-[480px]:text-xs"
+            style={{ fontFamily: 'Arial, sans-serif', color: '#25C760' }}
+          >
+            All rights reserved.
           </p>
         </div>
       </div>
