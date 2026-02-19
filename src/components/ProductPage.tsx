@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useCartStore } from '@/store/cart';
+import { useRouter } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 
 /* ------------------------------------------------------------------ */
@@ -85,6 +86,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
   const [selectedVideo, setSelectedVideo] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const { addItem } = useCartStore();
+  const router = useRouter();
 
   const handleAddToCart = () => {
     addItem({
@@ -108,6 +110,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       currency: product.currency,
       quantity,
     });
+    router.push('/checkout');
   };
 
   return (

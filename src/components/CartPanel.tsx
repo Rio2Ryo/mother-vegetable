@@ -1,11 +1,13 @@
 'use client';
 
 import { useCartStore } from '@/store/cart';
+import { useRouter } from '@/i18n/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CartPanel() {
   const { items, isOpen, closeCart, updateQuantity, removeItem, totalPrice } =
     useCartStore();
+  const router = useRouter();
 
   return (
     <AnimatePresence>
@@ -110,7 +112,13 @@ export default function CartPanel() {
                     USD {totalPrice().toFixed(2)}
                   </span>
                 </div>
-                <button className="w-full bg-gradient-to-r from-[#25C760] to-[#3C8063] text-white font-semibold border-none rounded-[5px] py-3 cursor-pointer hover:shadow-[0_4px_20px_rgba(37,199,96,0.5)] hover:opacity-95 transition-all duration-300 active:scale-[0.98]">
+                <button
+                  onClick={() => {
+                    closeCart();
+                    router.push('/checkout');
+                  }}
+                  className="w-full bg-gradient-to-r from-[#25C760] to-[#3C8063] text-white font-semibold border-none rounded-[5px] py-3 cursor-pointer hover:shadow-[0_4px_20px_rgba(37,199,96,0.5)] hover:opacity-95 transition-all duration-300 active:scale-[0.98]"
+                >
                   CHECKOUT
                 </button>
               </div>

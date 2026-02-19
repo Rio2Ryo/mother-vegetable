@@ -2,7 +2,7 @@
 
 import { Link, useRouter, usePathname } from '@/i18n/navigation';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { useLocale } from 'next-intl';
 import { useCartStore } from '@/store/cart';
 import CartPanel from './CartPanel';
@@ -19,6 +19,35 @@ export default function Header() {
   const [langOpen, setLangOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const { toggleCart, totalItems } = useCartStore();
+
+  // Timeout refs for delayed dropdown close
+  const productsTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const howToTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const profileTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openProducts = useCallback(() => {
+    if (productsTimeout.current) { clearTimeout(productsTimeout.current); productsTimeout.current = null; }
+    setProductsOpen(true);
+  }, []);
+  const closeProducts = useCallback(() => {
+    productsTimeout.current = setTimeout(() => setProductsOpen(false), 150);
+  }, []);
+
+  const openHowTo = useCallback(() => {
+    if (howToTimeout.current) { clearTimeout(howToTimeout.current); howToTimeout.current = null; }
+    setHowToOpen(true);
+  }, []);
+  const closeHowTo = useCallback(() => {
+    howToTimeout.current = setTimeout(() => setHowToOpen(false), 150);
+  }, []);
+
+  const openProfile = useCallback(() => {
+    if (profileTimeout.current) { clearTimeout(profileTimeout.current); profileTimeout.current = null; }
+    setProfileOpen(true);
+  }, []);
+  const closeProfile = useCallback(() => {
+    profileTimeout.current = setTimeout(() => setProfileOpen(false), 150);
+  }, []);
 
   const locale = useLocale();
   const router = useRouter();
@@ -101,8 +130,8 @@ export default function Header() {
                 </li>
                 <li
                   className="relative group max-md:w-full"
-                  onMouseEnter={() => setProductsOpen(true)}
-                  onMouseLeave={() => setProductsOpen(false)}
+                  onMouseEnter={openProducts}
+                  onMouseLeave={closeProducts}
                 >
                   <button
                     className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-[5px] bg-transparent border-none cursor-pointer py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
@@ -124,30 +153,32 @@ export default function Header() {
                       />
                     </svg>
                   </button>
-                  <ul
-                    className={`md:absolute md:top-full md:left-0 md:bg-black md:shadow-[0_8px_20px_rgba(0,0,0,0.3)] md:rounded-lg md:border md:border-[#25C760] md:min-w-[180px] md:mt-2 md:z-[1000] list-none p-0 ml-0 transition-all duration-300 ${
+                  <div
+                    className={`md:absolute md:top-full md:left-0 md:z-[1000] md:pt-2 transition-all duration-300 ${
                       productsOpen
                         ? 'opacity-100 visible translate-y-0 pointer-events-auto'
                         : 'md:opacity-0 md:invisible md:-translate-y-[10px] md:pointer-events-none'
-                    } static mt-2 ml-4`}
+                    } static mt-2 ml-4 md:mt-0 md:ml-0`}
                   >
-                    {['achieve', 'confidence', 'forever'].map((p) => (
-                      <li key={p}>
-                        <Link
-                          href={`/product/${p}`}
-                          className="block px-2 py-2 text-white font-medium text-sm hover:bg-[#25C760] hover:text-white transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {p.charAt(0).toUpperCase() + p.slice(1)}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                    <ul className="md:bg-black md:shadow-[0_8px_20px_rgba(0,0,0,0.3)] md:rounded-lg md:border md:border-[#25C760] md:min-w-[180px] list-none p-0 m-0">
+                      {['achieve', 'confidence', 'forever'].map((p) => (
+                        <li key={p}>
+                          <Link
+                            href={`/product/${p}`}
+                            className="block px-2 py-2 text-white font-medium text-sm hover:bg-[#25C760] hover:text-white transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {p.charAt(0).toUpperCase() + p.slice(1)}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </li>
                 <li
                   className="relative group max-md:w-full"
-                  onMouseEnter={() => setHowToOpen(true)}
-                  onMouseLeave={() => setHowToOpen(false)}
+                  onMouseEnter={openHowTo}
+                  onMouseLeave={closeHowTo}
                 >
                   <button
                     className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-[5px] bg-transparent border-none cursor-pointer py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
@@ -169,25 +200,27 @@ export default function Header() {
                       />
                     </svg>
                   </button>
-                  <ul
-                    className={`md:absolute md:top-full md:left-0 md:bg-black md:shadow-[0_8px_20px_rgba(0,0,0,0.3)] md:rounded-lg md:border md:border-[#25C760] md:min-w-[180px] md:mt-2 md:z-[1000] list-none p-0 ml-0 transition-all duration-300 ${
+                  <div
+                    className={`md:absolute md:top-full md:left-0 md:z-[1000] md:pt-2 transition-all duration-300 ${
                       howToOpen
                         ? 'opacity-100 visible translate-y-0 pointer-events-auto'
                         : 'md:opacity-0 md:invisible md:-translate-y-[10px] md:pointer-events-none'
-                    } static mt-2 ml-4`}
+                    } static mt-2 ml-4 md:mt-0 md:ml-0`}
                   >
-                    {['achieve', 'confidence', 'forever'].map((p) => (
-                      <li key={p}>
-                        <Link
-                          href={`/${p}-howto`}
-                          className="block px-2 py-2 text-white font-medium text-sm hover:bg-[#25C760] hover:text-white transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {p.charAt(0).toUpperCase() + p.slice(1)}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                    <ul className="md:bg-black md:shadow-[0_8px_20px_rgba(0,0,0,0.3)] md:rounded-lg md:border md:border-[#25C760] md:min-w-[180px] list-none p-0 m-0">
+                      {['achieve', 'confidence', 'forever'].map((p) => (
+                        <li key={p}>
+                          <Link
+                            href={`/${p}-howto`}
+                            className="block px-2 py-2 text-white font-medium text-sm hover:bg-[#25C760] hover:text-white transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {p.charAt(0).toUpperCase() + p.slice(1)}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </li>
                 <li className="max-md:w-full">
                   <Link
@@ -267,38 +300,40 @@ export default function Header() {
             {/* Profile Button (Desktop) */}
             <div
               className="hidden md:flex relative text-white bg-black border border-white cursor-pointer h-10 w-10 rounded-[5px] items-center justify-center hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300"
-              onMouseEnter={() => setProfileOpen(true)}
-              onMouseLeave={() => setProfileOpen(false)}
+              onMouseEnter={openProfile}
+              onMouseLeave={closeProfile}
             >
               <svg className="w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 448 512">
                 <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
               </svg>
               {/* Profile Dropdown */}
               <div
-                className={`absolute top-full right-0 bg-black shadow-[0_8px_20px_rgba(0,0,0,0.3)] rounded-lg border border-[#25C760] z-[1000] min-w-[200px] w-max mt-2 transition-all duration-300 ${
+                className={`absolute top-full right-0 z-[1000] pt-2 transition-all duration-300 ${
                   profileOpen
                     ? 'opacity-100 visible translate-y-0 pointer-events-auto'
                     : 'opacity-0 invisible -translate-y-[10px] pointer-events-none'
                 }`}
               >
-                <Link
-                  href="/login"
-                  className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] hover:bg-[#25C760] hover:text-white"
-                >
-                  <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 512 512">
-                    <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
-                  </svg>
-                  LOGIN
-                </Link>
-                <Link
-                  href="/signup"
-                  className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 hover:bg-[#25C760] hover:text-white"
-                >
-                  <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 640 512">
-                    <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
-                  </svg>
-                  Sign Up
-                </Link>
+                <div className="bg-black shadow-[0_8px_20px_rgba(0,0,0,0.3)] rounded-lg border border-[#25C760] min-w-[200px] w-max">
+                  <Link
+                    href="/login"
+                    className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] hover:bg-[#25C760] hover:text-white"
+                  >
+                    <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 512 512">
+                      <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
+                    </svg>
+                    LOGIN
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 hover:bg-[#25C760] hover:text-white"
+                  >
+                    <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 640 512">
+                      <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
+                    </svg>
+                    Sign Up
+                  </Link>
+                </div>
               </div>
             </div>
 

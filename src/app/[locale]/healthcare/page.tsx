@@ -1,5 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
+import ResearchSlider from '@/components/healthcare/ResearchSlider';
 
 /* ------------------------------------------------------------------ */
 /*  Healthcare / ALL 45E  –  Complete clinical product page            */
@@ -85,20 +86,10 @@ const benefitCards = [
   { tag: 'Immune Stability', desc: 'Vitamin A, D, E, zinc, and selenium strengthen immune response pathways.', image: '/images/medical/benefit_5.png' },
 ];
 
-const researchPapers = [
-  { title: 'ESPEN Micronutrient Guideline (2022)', year: '2022', source: 'ESPEN Practical Short Micronutrient' },
-  { title: 'ASPEN Critical Care Guidelines (ICU, 2020)', year: '2020', source: 'ASPEN Consensus Recommendations for Refeeding Syndrome' },
-  { title: 'High-Leucine Essential Amino Acid Supplementation Study', year: '2019', source: "Leucine's Role in Muscle Protein Synthesis in Young and Elderly" },
-  { title: 'Micronutrients in Surgical Recovery (ERAS)', year: '2021', source: 'ESPEN Practical Guideline Clinical Nutrition in Surgery' },
-  { title: 'Critical Care Patient Guidelines', year: '2023', source: 'Adult Crit 3 Patient Guidelines' },
-  { title: 'Malnutrition in Adult Patients', year: '2022', source: 'Malnutrition in Adult Patients Africa Studies' },
-  { title: 'All 45E Essentials Hospital Therapeutic Use', year: '2024', source: 'All 45 Essentials Hospital Therapeutic Use' },
-  { title: 'All 45E Essentials \u2013 Your Daily Safety Net', year: '2024', source: 'All 45 Essentials \u2013 Your Daily Safety Net2' },
-];
 
 const certDocuments = [
-  { label: 'JFRL Food Test Report', preview: 'JFRL Food Test Preview.jpg', pdf: 'JFRL Food Test Report.pdf' },
-  { label: 'Japan Import Permit', preview: 'Japan Import Permit Preview.jpg', pdf: 'Japan Import Permit.pdf' },
+  { label: 'JFRL Food Test Report', preview: '/Images/medical/pdf/cert/JFRL Food Test Preview.jpg', pdf: '/Images/medical/pdf/cert/JFRL Food Test Report.pdf' },
+  { label: 'Japan Import Permit', preview: '/Images/medical/pdf/cert/Japan Import Permit Preview.jpg', pdf: '/Images/medical/pdf/cert/Japan Import Permit.pdf' },
 ];
 
 /* ---------- SVG icon helper (inline so no external dep) ----------- */
@@ -541,54 +532,17 @@ export default async function HealthcarePage({
       {/*  SECTION 10 — International Guidelines & Research            */}
       {/* ============================================================ */}
       <section className="py-16 md:py-24 bg-[#f8faf8]">
-        <div className="max-w-[1400px] mx-auto px-5">
+        <div className="max-w-[1400px] mx-auto px-5 md:px-16 lg:px-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
-              International Guidelines &amp; Published Clinical Research
+              International Guidelines &amp;<br />Published Clinical Research
             </h2>
             <p className="text-base md:text-lg text-[#555] max-w-3xl mx-auto">
               ALL 45E aligns with ESPEN, ASPEN, and ERAS guidelines supporting micronutrient adequacy for recovery.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {researchPapers.map((paper) => (
-              <div key={paper.title} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                {/* Preview placeholder */}
-                <div className="h-40 bg-gray-100 flex items-center justify-center">
-                  <Image
-                    src="/images/medical/research_placeholder.png"
-                    alt={paper.title}
-                    width={200}
-                    height={140}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">PDF</span>
-                    <span className="text-xs text-gray-400">{paper.year}</span>
-                  </div>
-                  <h3 className="text-sm font-bold leading-snug mb-2 line-clamp-2">{paper.title}</h3>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <span className="text-[#036A31] text-xs font-semibold cursor-pointer hover:underline">
-                        Read More &rarr;
-                      </span>
-                      <p className="text-[10px] text-gray-400 mt-0.5 line-clamp-1">
-                        Source: &ldquo;{paper.source}&rdquo;
-                      </p>
-                    </div>
-                    <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-[#036A31] hover:text-white hover:border-[#036A31] transition-colors">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 5v14" /><path d="M19 12l-7 7-7-7" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ResearchSlider />
         </div>
       </section>
 
@@ -679,10 +633,16 @@ export default async function HealthcarePage({
           {/* Certification document cards */}
           <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-12">
             {certDocuments.map((doc) => (
-              <div key={doc.label} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+              <a
+                key={doc.label}
+                href={doc.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer group block"
+              >
                 <div className="h-48 bg-gray-100 flex items-center justify-center relative">
                   <Image
-                    src="/images/medical/research_placeholder.png"
+                    src={doc.preview}
                     alt={doc.label}
                     width={300}
                     height={200}
@@ -698,7 +658,7 @@ export default async function HealthcarePage({
                 <div className="p-4 bg-[#036A31] text-white text-center">
                   <span className="text-sm font-semibold">{doc.label}</span>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
 
