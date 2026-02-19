@@ -105,6 +105,16 @@ export default function Header() {
                   </svg>
                   Sign Up
                 </Link>
+                <Link
+                  href="/instructor/login"
+                  className="flex items-center w-full py-3 px-4 bg-black border-2 border-[#25C760] rounded-lg text-white text-base font-medium cursor-pointer transition-all duration-300 no-underline hover:bg-[rgba(37,199,96,0.1)] hover:border-[#3C8063]"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
+                    <path d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H576V64H224v49.9C205.2 102.2 183.3 96 160 96V64zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM0 482.3C0 383.8 79.8 304 178.3 304h-36.6C240.2 304 320 383.8 320 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
+                  </svg>
+                  Instructor Portal
+                </Link>
               </div>
 
               <ul className="flex flex-col md:flex-row gap-[5px] md:gap-[35px] list-none m-0 p-0 max-[600px]:pt-[25px] max-[600px]:relative max-[600px]:z-[-1] max-[600px]:w-full">
@@ -326,12 +336,21 @@ export default function Header() {
                   </Link>
                   <Link
                     href="/signup"
-                    className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 hover:bg-[#25C760] hover:text-white"
+                    className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] hover:bg-[#25C760] hover:text-white"
                   >
                     <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 640 512">
                       <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                     </svg>
                     Sign Up
+                  </Link>
+                  <Link
+                    href="/instructor/login"
+                    className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 hover:bg-[#25C760] hover:text-white"
+                  >
+                    <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 640 512">
+                      <path d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H576V64H224v49.9C205.2 102.2 183.3 96 160 96V64zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM0 482.3C0 383.8 79.8 304 178.3 304h-36.6C240.2 304 320 383.8 320 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
+                    </svg>
+                    Instructor Portal
                   </Link>
                 </div>
               </div>

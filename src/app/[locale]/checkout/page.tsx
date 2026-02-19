@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, useCallback, memo, type FormEvent, type ChangeEvent } from "react";
 import { useCartStore } from "@/store/cart";
+import { useAffiliateStore } from "@/store/affiliateStore";
 import { Link } from "@/i18n/navigation";
+import { getStoredReferralCode, clearStoredReferralCode } from "@/lib/affiliate";
 
 interface ShippingForm {
   firstName: string;
@@ -28,18 +30,77 @@ const emptyForm: ShippingForm = {
   country: "",
 };
 
+const inputClass =
+  "w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#25C760] focus:ring-1 focus:ring-[#25C760] transition-colors";
+
+/* -----------------------------------------------------------------------
+   Field component — declared outside the page component so it is not
+   re-created on every render.  This prevents inputs from losing focus.
+   ----------------------------------------------------------------------- */
+const Field = memo(function Field({
+  label,
+  field,
+  type = "text",
+  required = true,
+  colSpan,
+  value,
+  onChange,
+}: {
+  label: string;
+  field: keyof ShippingForm;
+  type?: string;
+  required?: boolean;
+  colSpan?: string;
+  value: string;
+  onChange: (field: keyof ShippingForm, value: string) => void;
+}) {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(field, e.target.value);
+  };
+
+  return (
+    <div className={colSpan}>
+      <label className="block text-sm text-gray-400 mb-1.5">{label}</label>
+      <input
+        type={type}
+        required={required}
+        value={value}
+        onChange={handleChange}
+        placeholder={label}
+        className={inputClass}
+      />
+    </div>
+  );
+});
+
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCartStore();
+  const processOrder = useAffiliateStore((s) => s.processOrder);
+  const getInstructorByReferralCode = useAffiliateStore((s) => s.getInstructorByReferralCode);
   const [form, setForm] = useState<ShippingForm>(emptyForm);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [referralCode, setReferralCode] = useState<string | null>(null);
+  const [referrerName, setReferrerName] = useState<string | null>(null);
 
   const total = totalPrice();
 
-  function update(field: keyof ShippingForm, value: string) {
+  // Retrieve referral code from storage on mount
+  useEffect(() => {
+    const code = getStoredReferralCode();
+    if (code) {
+      setReferralCode(code);
+      const instructor = getInstructorByReferralCode(code);
+      if (instructor) {
+        setReferrerName(instructor.fullName);
+      }
+    }
+  }, [getInstructorByReferralCode]);
+
+  const update = useCallback((field: keyof ShippingForm, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
-  }
+  }, []);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -87,6 +148,11 @@ export default function CheckoutPage() {
 
       if (res.ok) {
         const data = await res.json();
+        // Process affiliate commission
+        if (referralCode) {
+          processOrder(data.id, total, referralCode, `${form.firstName} ${form.lastName}`);
+          clearStoredReferralCode();
+        }
         setOrderId(data.id);
         clearCart();
         return;
@@ -109,6 +175,7 @@ export default function CheckoutPage() {
         total: total,
         currency: items[0]?.currency ?? "USD",
         status: "confirmed",
+        referralCode: referralCode || undefined,
         createdAt: new Date().toISOString(),
       };
 
@@ -117,6 +184,12 @@ export default function CheckoutPage() {
       );
       existingOrders.push(orderRecord);
       localStorage.setItem("mv-orders", JSON.stringify(existingOrders));
+
+      // Process affiliate commission
+      if (referralCode) {
+        processOrder(clientOrderId, total, referralCode, `${form.firstName} ${form.lastName}`);
+        clearStoredReferralCode();
+      }
 
       setOrderId(clientOrderId);
       clearCart();
@@ -137,6 +210,7 @@ export default function CheckoutPage() {
           total: total,
           currency: items[0]?.currency ?? "USD",
           status: "confirmed",
+          referralCode: referralCode || undefined,
           createdAt: new Date().toISOString(),
         };
         const existingOrders = JSON.parse(
@@ -144,6 +218,12 @@ export default function CheckoutPage() {
         );
         existingOrders.push(orderRecord);
         localStorage.setItem("mv-orders", JSON.stringify(existingOrders));
+
+        // Process affiliate commission
+        if (referralCode) {
+          processOrder(clientOrderId, total, referralCode, `${form.firstName} ${form.lastName}`);
+          clearStoredReferralCode();
+        }
 
         setOrderId(clientOrderId);
         clearCart();
@@ -219,40 +299,6 @@ export default function CheckoutPage() {
   }
 
   // -----------------------------------------------------------------------
-  // Input helper
-  // -----------------------------------------------------------------------
-  const inputClass =
-    "w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#25C760] focus:ring-1 focus:ring-[#25C760] transition-colors";
-
-  function Field({
-    label,
-    field,
-    type = "text",
-    required = true,
-    colSpan,
-  }: {
-    label: string;
-    field: keyof ShippingForm;
-    type?: string;
-    required?: boolean;
-    colSpan?: string;
-  }) {
-    return (
-      <div className={colSpan}>
-        <label className="block text-sm text-gray-400 mb-1.5">{label}</label>
-        <input
-          type={type}
-          required={required}
-          value={form[field]}
-          onChange={(e) => update(field, e.target.value)}
-          placeholder={label}
-          className={inputClass}
-        />
-      </div>
-    );
-  }
-
-  // -----------------------------------------------------------------------
   // Checkout form
   // -----------------------------------------------------------------------
   return (
@@ -271,24 +317,24 @@ export default function CheckoutPage() {
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label="First Name" field="firstName" />
-              <Field label="Last Name" field="lastName" />
+              <Field label="First Name" field="firstName" value={form.firstName} onChange={update} />
+              <Field label="Last Name" field="lastName" value={form.lastName} onChange={update} />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label="Email" field="email" type="email" />
-              <Field label="Phone" field="phone" type="tel" />
+              <Field label="Email" field="email" type="email" value={form.email} onChange={update} />
+              <Field label="Phone" field="phone" type="tel" value={form.phone} onChange={update} />
             </div>
 
-            <Field label="Street Address" field="address" />
+            <Field label="Street Address" field="address" value={form.address} onChange={update} />
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <Field label="City" field="city" />
-              <Field label="State / Province" field="state" />
-              <Field label="ZIP / Postal Code" field="zip" />
+              <Field label="City" field="city" value={form.city} onChange={update} />
+              <Field label="State / Province" field="state" value={form.state} onChange={update} />
+              <Field label="ZIP / Postal Code" field="zip" value={form.zip} onChange={update} />
             </div>
 
-            <Field label="Country" field="country" />
+            <Field label="Country" field="country" value={form.country} onChange={update} />
           </div>
 
           {/* ---- Order Summary ---- */}
@@ -297,6 +343,15 @@ export default function CheckoutPage() {
               <h2 className="text-xl font-semibold text-[#25C760]">
                 Order Summary
               </h2>
+
+              {referrerName && (
+                <div className="flex items-center gap-2 px-3 py-2 bg-[#25C760]/10 border border-[#25C760]/30 rounded-lg text-sm">
+                  <svg className="w-4 h-4 text-[#25C760] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span className="text-gray-300">Referred by <span className="text-[#25C760] font-medium">{referrerName}</span></span>
+                </div>
+              )}
 
               <div className="space-y-4 max-h-80 overflow-y-auto pr-1">
                 {items.map((item) => (

@@ -95,43 +95,45 @@ const certDocuments = [
 /* ---------- SVG icon helper (inline so no external dep) ----------- */
 
 function HeroIcon({ name }: { name: string }) {
+  const svgStyle = { width: '32px', height: '32px', maxWidth: '32px', maxHeight: '32px' } as const;
   const map: Record<string, React.ReactNode> = {
     users: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+      <svg width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
     ),
     check: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+      <svg width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
     ),
     heart: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
+      <svg width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
     ),
     clipboard: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><rect x="8" y="2" width="8" height="4" rx="1" ry="1" /></svg>
+      <svg width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><rect x="8" y="2" width="8" height="4" rx="1" ry="1" /></svg>
     ),
   };
-  return <span className="text-[#BDF626]">{map[name] ?? null}</span>;
+  return <span className="hero-icon-wrap text-[#BDF626]">{map[name] ?? null}</span>;
 }
 
 function PatientIcon({ name }: { name: string }) {
   const common = 'w-8 h-8';
+  const svgStyle = { width: '32px', height: '32px', maxWidth: '32px', maxHeight: '32px' } as const;
   const map: Record<string, React.ReactNode> = {
     clock: (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+      <svg className={common} width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
     ),
     bed: (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 4v16" /><path d="M2 8h18a2 2 0 0 1 2 2v10" /><path d="M2 17h20" /><path d="M6 8v9" /></svg>
+      <svg className={common} width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 4v16" /><path d="M2 8h18a2 2 0 0 1 2 2v10" /><path d="M2 17h20" /><path d="M6 8v9" /></svg>
     ),
     elderly: (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="2" /><path d="M10 22V16l-2-4 4-2 4 2-2 4v6" /><path d="M20 17l-2 5" /></svg>
+      <svg className={common} width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="2" /><path d="M10 22V16l-2-4 4-2 4 2-2 4v6" /><path d="M20 17l-2 5" /></svg>
     ),
     doctor: (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><line x1="19" y1="8" x2="19" y2="14" /><line x1="22" y1="11" x2="16" y2="11" /></svg>
+      <svg className={common} width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><line x1="19" y1="8" x2="19" y2="14" /><line x1="22" y1="11" x2="16" y2="11" /></svg>
     ),
     heartPulse: (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19.5 12.572l-7.5 7.428-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572" /><path d="M12 6v4l2 2" /></svg>
+      <svg className={common} width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19.5 12.572l-7.5 7.428-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572" /><path d="M12 6v4l2 2" /></svg>
     ),
     vial: (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 2v2" /><path d="M17 2v2" /><path d="M7 4h10l1 16H6L7 4z" /><path d="M6 12h12" /></svg>
+      <svg className={common} width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 2v2" /><path d="M17 2v2" /><path d="M7 4h10l1 16H6L7 4z" /><path d="M6 12h12" /></svg>
     ),
   };
   return <>{map[name] ?? null}</>;
@@ -139,15 +141,16 @@ function PatientIcon({ name }: { name: string }) {
 
 function PurposeIcon({ name }: { name: string }) {
   const common = 'w-8 h-8';
+  const svgStyle = { width: '32px', height: '32px', maxWidth: '32px', maxHeight: '32px' } as const;
   const map: Record<string, React.ReactNode> = {
     hospital: (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21h18" /><path d="M5 21V7l8-4v18" /><path d="M19 21V11l-6-4" /><path d="M9 9h1" /><path d="M9 13h1" /><path d="M9 17h1" /></svg>
+      <svg className={common} width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21h18" /><path d="M5 21V7l8-4v18" /><path d="M19 21V11l-6-4" /><path d="M9 9h1" /><path d="M9 13h1" /><path d="M9 17h1" /></svg>
     ),
     chart: (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
+      <svg className={common} width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
     ),
     shield: (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M12 8v4" /><path d="M12 16h.01" /></svg>
+      <svg className={common} width="32" height="32" style={svgStyle} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M12 8v4" /><path d="M12 16h.01" /></svg>
     ),
   };
   return <>{map[name] ?? null}</>;
@@ -167,6 +170,14 @@ export default async function HealthcarePage({
 
   return (
     <div className="bg-white text-[#333] font-[Inter,sans-serif]">
+      {/* SVG sizing fallback styles - must be at top */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        .icon-container { width: 48px !important; height: 48px !important; min-width: 48px !important; max-width: 48px !important; overflow: hidden; }
+        .icon-container svg { width: 32px !important; height: 32px !important; max-width: 32px !important; max-height: 32px !important; }
+        .hero-icon-wrap { display: inline-flex; width: 32px; height: 32px; }
+        .hero-icon-wrap svg { width: 32px !important; height: 32px !important; }
+        .ticker-star { width: 16px !important; height: 16px !important; max-width: 16px !important; max-height: 16px !important; flex-shrink: 0; }
+      `}} />
       {/* ============================================================ */}
       {/*  SECTION 1 — Hero Banner                                     */}
       {/* ============================================================ */}
@@ -238,7 +249,7 @@ export default async function HealthcarePage({
         <div className="flex animate-[ticker_20s_linear_infinite] whitespace-nowrap">
           {[1, 2, 3, 4].map((i) => (
             <span key={i} className="inline-flex items-center gap-2 text-[#BDF626] text-sm font-medium mx-8">
-              <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <svg className="ticker-star w-4 h-4 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
               Clinical Nutrition &nbsp;|&nbsp; Perioperative Recovery &nbsp;|&nbsp; Critical Care &nbsp;|&nbsp; Geriatric Support &nbsp;|&nbsp; Wound Healing
@@ -284,7 +295,7 @@ export default async function HealthcarePage({
                   key={card.text}
                   className="flex items-center gap-4 bg-[#f8faf8] border border-gray-100 rounded-2xl p-5 hover:shadow-md transition-shadow"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#036A31]/10 text-[#036A31] flex items-center justify-center shrink-0">
+                  <div className="icon-container w-12 h-12 rounded-xl bg-[#036A31]/10 text-[#036A31] flex items-center justify-center shrink-0">
                     <PurposeIcon name={card.icon} />
                   </div>
                   <span className="text-sm md:text-base font-medium">{card.text}</span>
@@ -443,7 +454,7 @@ export default async function HealthcarePage({
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {patientProfiles.map((p) => (
               <div key={p.title} className="flex items-start gap-4 bg-[#f8faf8] border border-gray-100 rounded-2xl p-6 hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 rounded-xl bg-[#036A31]/10 text-[#036A31] flex items-center justify-center shrink-0">
+                <div className="icon-container w-12 h-12 rounded-xl bg-[#036A31]/10 text-[#036A31] flex items-center justify-center shrink-0">
                   <PatientIcon name={p.icon} />
                 </div>
                 <div>
@@ -726,13 +737,6 @@ export default async function HealthcarePage({
         </div>
       </section>
 
-      {/* Ticker animation keyframe (injected via style tag for SSR) */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes ticker {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}} />
     </div>
   );
 }

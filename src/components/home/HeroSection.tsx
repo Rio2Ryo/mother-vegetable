@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 export default function HeroSection() {
   return (
     <motion.section
-      className="relative h-[35vh] min-h-[250px] sm:h-[80vh] sm:min-h-[500px] md:h-[60vh] md:min-h-[450px] lg:h-screen lg:min-h-[600px] flex items-center justify-center overflow-hidden"
+      className="relative h-[35vh] min-h-[250px] sm:h-[60vh] sm:min-h-[400px] md:h-[50vh] md:min-h-[400px] lg:h-[70vh] lg:min-h-[500px] flex items-center justify-center overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
@@ -51,7 +51,7 @@ export default function HeroSection() {
           transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
         >
           <span
-            className="block font-bold text-[1.2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[5rem] text-[#25C760] tracking-[2px] sm:tracking-wider mb-2.5 [text-shadow:0_0_20px_rgba(37,199,96,0.5)]"
+            className="block font-bold text-[1.2rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3.5rem] text-[#25C760] tracking-[2px] sm:tracking-wider mb-2.5 [text-shadow:0_0_20px_rgba(37,199,96,0.5)]"
             style={{ fontFamily: 'Arial, sans-serif' }}
           >
             MOTHER VEGETABLE PRODUCTS

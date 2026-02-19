@@ -1,13 +1,27 @@
 'use client';
 
-import { useState } from 'react';
-import { useLocale } from 'next-intl';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { Link } from '@/i18n/navigation';
+import { useAffiliateStore } from '@/store/affiliateStore';
+import { getStoredReferralCode } from '@/lib/affiliate';
+import { useTranslations } from 'next-intl';
 
 export default function SignupPage() {
-  const locale = useLocale();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [referrerName, setReferrerName] = useState<string | null>(null);
+  const getInstructorByReferralCode = useAffiliateStore((s) => s.getInstructorByReferralCode);
+  const t = useTranslations('instructor');
+
+  useEffect(() => {
+    const code = getStoredReferralCode();
+    if (code) {
+      const instructor = getInstructorByReferralCode(code);
+      if (instructor) {
+        setReferrerName(instructor.fullName);
+      }
+    }
+  }, [getInstructorByReferralCode]);
 
   return (
     <div className="bg-black min-h-[calc(100vh-80px)] flex items-center justify-center py-4 px-4">
@@ -20,6 +34,19 @@ export default function SignupPage() {
                 <div className="pb-0">
                   <h1 className="font-['Ubuntu'] font-bold text-[#25C760] text-2xl md:text-3xl">SIGN UP</h1>
                 </div>
+
+                {/* Referral Banner */}
+                {referrerName && (
+                  <div className="mt-3 flex items-center gap-2 px-3 py-2 bg-[#25C760]/10 border border-[#25C760]/30 rounded-[5px] text-sm">
+                    <svg className="w-4 h-4 text-[#25C760] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span className="text-gray-300 text-xs">
+                      {t('referredBy')} <span className="text-[#25C760] font-medium">{referrerName}</span>
+                    </span>
+                  </div>
+                )}
+
                 <form id="signup" action="/signup" method="POST">
                   {/* Google Sign Up Button */}
                   <div className="flex justify-center py-2 w-full mt-4">
@@ -44,8 +71,10 @@ export default function SignupPage() {
                     </button>
                   </div>
 
-                  <div className="text-center py-3 text-white text-sm">
-                    or
+                  <div className="flex items-center gap-3 py-3">
+                    <div className="flex-1 h-px bg-white/30" />
+                    <span className="text-white text-sm">or</span>
+                    <div className="flex-1 h-px bg-white/30" />
                   </div>
 
                   {/* Username */}
@@ -141,7 +170,7 @@ export default function SignupPage() {
                 <div className="md:hidden">
                   <div className="flex justify-center text-xs pt-2">
                     Already have an account?&nbsp;
-                    <Link href={`/${locale}/login`} className="text-[#25C760] underline font-bold">
+                    <Link href="/login" className="text-[#25C760] underline font-bold">
                       SIGN IN HERE
                     </Link>
                   </div>
@@ -164,7 +193,7 @@ export default function SignupPage() {
                 </div>
                 <div className="flex items-center justify-center">
                   <Link
-                    href={`/${locale}/login`}
+                    href="/login"
                     className="inline-block bg-[#25C760] text-white font-bold text-base px-6 py-2 rounded-[5px] border-2 border-[#25C760] shadow-lg no-underline hover:bg-[#3C8063] hover:border-[#3C8063] hover:-translate-y-0.5 transition-all"
                   >
                     SIGN IN HERE

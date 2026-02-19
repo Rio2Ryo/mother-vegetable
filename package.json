@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:e2e": "playwright test --ignore-snapshots",
+    "test:e2e:ui": "playwright test --ui --ignore-snapshots",
+    "test:visual": "playwright test e2e/visual/",
+    "test:visual:update": "playwright test e2e/visual/ --update-snapshots"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",

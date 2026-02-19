@@ -127,6 +127,11 @@ body {
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* Hide video controls */
 video::-webkit-media-controls { display: none !important; }
 video::-webkit-media-controls-panel { display: none !important; }
@@ -158,4 +163,35 @@ video::-webkit-media-controls-fullscreen-button { display: none !important; }
   color: var(--color-primary);
   font-weight: bold;
   margin-right: 8px;
+}
+
+/* Healthcare page SVG icon sizing */
+.icon-container {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+  overflow: hidden;
+}
+.icon-container svg {
+  width: 32px !important;
+  height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+}
+.hero-icon-wrap {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+}
+.hero-icon-wrap svg {
+  width: 32px !important;
+  height: 32px !important;
+}
+.ticker-star {
+  width: 16px !important;
+  height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+  flex-shrink: 0;
 }

@@ -1,8 +1,10 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
+import { Suspense } from 'react';
 import { routing } from '@/i18n/routing';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ReferralTracker from '@/components/ReferralTracker';
 import '../globals.css';
 
 export function generateStaticParams() {
@@ -28,6 +30,9 @@ export default async function LocaleLayout({
       </head>
       <body className="bg-black text-white">
         <NextIntlClientProvider messages={messages}>
+          <Suspense fallback={null}>
+            <ReferralTracker />
+          </Suspense>
           <Header />
           <main>{children}</main>
           <Footer />

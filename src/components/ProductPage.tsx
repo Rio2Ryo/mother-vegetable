@@ -201,6 +201,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         .content-section .section-title-center { text-align: center; }
         .red-hero-underline-img { display: block; width: 100px; max-width: 80%; height: auto; margin: 0 auto 20px auto; filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.5)); }
         .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px; }
+        .grid-container.cols-3 { grid-template-columns: repeat(3, 1fr); }
         .grid-item { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         .grid-image { width: 50%; height: auto; margin-bottom: 8px; object-fit: contain; }
         .text-label { font-family: Arial, sans-serif; font-size: 0.9rem; color: #FFFFFF; }
@@ -274,6 +275,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
            ============================================================================ */
         @media (max-width: 1024px) {
           .grid-container { grid-template-columns: repeat(2, 1fr); }
+          .grid-container.cols-3 { grid-template-columns: repeat(3, 1fr); }
           .mazekomu-grid { margin: 20px 0; }
           .content-section .red-hero-underline-img { width: 80px; margin: 0 auto 15px; }
           .function-content { margin: 30px 0; padding: 30px; }
@@ -339,6 +341,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
           .skin-healing-video { max-width: 80%; }
           .mazekomu-grid { height: 450px; }
           .grid-container { grid-template-columns: repeat(2, 1fr); padding-top: 20px; }
+          .grid-container.cols-3 { grid-template-columns: repeat(3, 1fr); }
           .content-section .red-hero-underline-img { width: 70px; margin: 0 auto 10px; }
         }
 
@@ -375,6 +378,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         }
 
         @media (max-width: 480px) {
+          .grid-container, .grid-container.cols-3 { grid-template-columns: repeat(2, 1fr); }
           .card-content { display: grid; grid-template-columns: 0.5fr 1.3fr; grid-template-rows: auto auto auto auto; gap: 10px 12px; }
           .card-product-image { height: 100%; grid-column: 1; grid-row: 1 / 5; display: flex; align-items: center; justify-content: center; padding: 0; }
           .card-product-video { width: 100%; max-width: 100%; height: auto; padding: 0; }
@@ -558,7 +562,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                   height={10}
                   className="red-hero-underline-img"
                 />
-                <div className="grid-container">
+                <div className={`grid-container${product.leftSection.items.length > 4 ? ' cols-3' : ''}`}>
                   {product.leftSection.items.map((item, i) => (
                     <div key={i} className="grid-item">
                       <Image src={item.image} alt={item.name} width={80} height={80} className="grid-image" />
@@ -608,7 +612,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                   height={10}
                   className="red-hero-underline-img"
                 />
-                <div className="grid-container">
+                <div className={`grid-container${product.rightSection.items.length > 4 ? ' cols-3' : ''}`}>
                   {product.rightSection.items.map((item, i) => (
                     <div key={i} className="grid-item">
                       <Image src={item.image} alt={item.name} width={80} height={80} className="grid-image" />

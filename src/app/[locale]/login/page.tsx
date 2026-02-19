@@ -1,12 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { useLocale } from 'next-intl';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 export default function LoginPage() {
-  const locale = useLocale();
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -29,7 +27,7 @@ export default function LoginPage() {
                 </div>
                 <div className="flex items-center justify-center">
                   <Link
-                    href={`/${locale}/signup`}
+                    href="/signup"
                     className="inline-block bg-white text-black font-bold text-base px-6 py-2 rounded-[5px] border-2 border-[#25C760] shadow-lg no-underline hover:bg-[#25C760] hover:text-white hover:-translate-y-0.5 transition-all"
                   >
                     SIGN UP HERE
@@ -77,12 +75,12 @@ export default function LoginPage() {
                     </div>
                   </div>
                   <div className="flex justify-end text-sm">
-                    <a
+                    <Link
                       href="/forgetPassword"
                       className="text-[#25C760] underline hover:text-[#3C8063] transition-colors"
                     >
                       Forgot Password?
-                    </a>
+                    </Link>
                   </div>
                   <div className="py-4">
                     <button
@@ -93,16 +91,18 @@ export default function LoginPage() {
                       LOGIN NOW
                     </button>
                   </div>
-                  <div className="text-center py-2 text-white text-sm">
-                    or Login with
+                  <div className="flex items-center gap-3 py-2">
+                    <div className="flex-1 h-px bg-white/30" />
+                    <span className="text-white text-sm whitespace-nowrap">or Login with</span>
+                    <div className="flex-1 h-px bg-white/30" />
                   </div>
                   <div className="flex justify-center py-1">
                     <a href="#" className="hover:scale-105 transition-transform cursor-pointer">
                       <Image
                         src="/Images/Authenticate/google_logo.png"
                         alt="Google"
-                        width={40}
-                        height={40}
+                        width={48}
+                        height={48}
                         className="px-1"
                       />
                     </a>
@@ -112,7 +112,7 @@ export default function LoginPage() {
                 <div className="md:hidden">
                   <div className="flex items-center justify-center text-white text-xs pt-2">
                     Don&apos;t have an account?&nbsp;
-                    <Link href={`/${locale}/signup`} className="text-[#25C760] underline font-bold">
+                    <Link href="/signup" className="text-[#25C760] underline font-bold">
                       SIGN UP HERE
                     </Link>
                   </div>
