@@ -30,7 +30,7 @@ const confidenceProduct: ProductPageData = {
   leftSection: {
     title: 'SURIKOMU',
     items: [
-      { name: 'Dark spot', image: '/Images/Assets/confidence/mazekomu/darkSpot.png' },
+      { name: 'Dark Spot', image: '/Images/Assets/confidence/mazekomu/darkSpot.png' },
       { name: 'Acne', image: '/Images/Assets/confidence/mazekomu/acne.png' },
       { name: 'Wound Burn', image: '/Images/Assets/confidence/mazekomu/woundBurn.png' },
       { name: 'Smell', image: '/Images/Assets/confidence/mazekomu/smell.png' },
@@ -72,7 +72,7 @@ const confidenceProduct: ProductPageData = {
     title: 'Cosmetic Function',
     subtitle: 'Confidence',
     method: 'SURIKOMU / MAZEKOMU',
-    videoUrl: '/Images/Assets/homepage/product/cosmetic_video.mov',
+    videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
     circles: [
       { name: 'Dark Spots', detail: 'Freckles' },
       { name: 'Acne', detail: 'Acne scars' },

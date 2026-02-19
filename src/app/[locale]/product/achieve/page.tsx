@@ -54,7 +54,7 @@ const achieveProduct: ProductPageData = {
 
   trust: {
     productName: 'Achieve',
-    certification: '',
+    certification: 'certified human grade food by Ministry of Health, Labour and Welfare (MHLW), Japan',
     partners: [
       '/Images/Assets/homepage/company/partner_1.png',
       '/Images/Assets/homepage/company/partner_2.png',
@@ -70,18 +70,18 @@ const achieveProduct: ProductPageData = {
     title: 'Food Function',
     subtitle: 'Achieve',
     method: 'TORIKOMU / MAZEKOMU',
-    videoUrl: '/Images/Assets/homepage/product/food_video.mov',
+    videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
     circles: [
       { name: 'Essential Fatty Acids', detail: '9 types' },
       { name: 'Amino Acids', detail: '10 types' },
       { name: 'Vital Vitamins', detail: '18 types' },
-      { name: 'Key Minerals For Balance', detail: '2 types' },
+      { name: 'Key Minerals For Balance', detail: '3 types' },
       { name: 'Other Functional Ingredients', detail: '9 types' },
     ],
     summary: {
-      total: '48 Nutrition',
+      total: '48 Nutrients',
       description:
-        'Packed with over 48 essential nutrients, Mother Vegetable delivers everything your body needs in one serving. It contains vital minerals like potassium, magnesium, calcium, iron, zinc, and copper; a full spectrum of vitamins, including A, B-complex, C, E, and K; and all the essential amino acids along with conditionally essential ones to support overall health. It also provides beneficial healthy fats such as y-linolenic acid, powerful antioxidants like phycocyanin, chlorophyll, and carotenoids, and natural polysaccharides including spirulan, ẞ-glucan-like compounds, and cellulose for gut health and digestive support.',
+        'Potassium, sodium, magnesium, calcium, phosphorus, iron, manganese, zinc, copper, Vitamin A, B1, B2, B3, B5, B6, B9, C, E, K, tryptophan, threonine, leucine, isoleucine, lysine, methionine, phenylalanine, valine, histidine, arginine, cystine, tyrosine, alanine, aspartic acid, glutamic acid, serine, glycine, proline, saturated fatty acids, omega-3 fatty acids, omega-6 fatty acids, C-phycocyanin, chlorophyll a, total carotenoids, nucleic acids, spirulan, glycogen-like polysaccharides, β-glucan-like polysaccharides, cellulose.',
     },
     benefits: [
       {

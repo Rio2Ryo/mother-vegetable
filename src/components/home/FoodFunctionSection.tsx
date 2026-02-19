@@ -16,7 +16,7 @@ const nutrients = [
   { name: 'Essential Fatty Acids', count: '9 types' },
   { name: 'Amino Acids', count: '10 types' },
   { name: 'Vital Vitamins', count: '18 types' },
-  { name: 'Key Minerals For Balance', count: '2 types' },
+  { name: 'Key Minerals For Balance', count: '3 types' },
   { name: 'Other Functional Ingredients', count: '9 types' },
 ];
 
@@ -53,7 +53,7 @@ export default function FoodFunctionSection() {
       id="food-function"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.6 }}
     >
       <h2 className="section-title mb-2.5">Food Function</h2>
@@ -74,7 +74,7 @@ export default function FoodFunctionSection() {
           transition={{ duration: 0.5 }}
         >
           <video className="max-w-[150px] max-[767px]:max-w-[90px] h-auto rounded-lg" autoPlay muted loop playsInline>
-            <source src="/Images/Assets/homepage/product/food_video.mov" type="video/mp4" />
+            <source src="https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4" type="video/mp4" />
           </video>
         </motion.div>
 
@@ -118,9 +118,9 @@ export default function FoodFunctionSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h4 className="text-[#25C760] font-bold text-[2rem] max-[1024px]:text-[1.6rem] max-[767px]:text-[1.2rem] max-[620px]:text-[1rem] mb-5" style={{ fontFamily: 'Arial, sans-serif' }}>48 Nutrition</h4>
+        <h4 className="text-[#25C760] font-bold text-[2rem] max-[1024px]:text-[1.6rem] max-[767px]:text-[1.2rem] max-[620px]:text-[1rem] mb-5" style={{ fontFamily: 'Arial, sans-serif' }}>48 Nutrients</h4>
         <p className="text-white text-[1rem] max-[1024px]:text-[0.9rem] max-[767px]:text-[0.9rem] max-[620px]:text-[0.8rem] max-[530px]:text-[0.75rem] max-[490px]:text-[0.7rem] max-[405px]:text-[0.6rem] leading-[1.6] text-center max-w-[800px] mx-auto opacity-90" style={{ fontFamily: 'Arial, sans-serif' }}>
-          Packed with over 48 essential nutrients, Mother Vegetable delivers everything your body needs in one serving. It contains vital minerals like potassium, magnesium, calcium, iron, zinc, and copper; a full spectrum of vitamins, including A, B-complex, C, E, and K; and all the essential amino acids along with conditionally essential ones to support overall health. It also provides beneficial healthy fats such as y-linolenic acid, powerful antioxidants like phycocyanin, chlorophyll, and carotenoids, and natural polysaccharides including spirulan, &#x3B2;-glucan-like compounds, and cellulose for gut health and digestive support.
+          Potassium, sodium, magnesium, calcium, phosphorus, iron, manganese, zinc, copper, Vitamin A, B1, B2, B3, B5, B6, B9, C, E, K, tryptophan, threonine, leucine, isoleucine, lysine, methionine, phenylalanine, valine, histidine, arginine, cystine, tyrosine, alanine, aspartic acid, glutamic acid, serine, glycine, proline, saturated fatty acids, omega-3 fatty acids, omega-6 fatty acids, C-phycocyanin, chlorophyll a, total carotenoids, nucleic acids, spirulan, glycogen-like polysaccharides, &beta;-glucan-like polysaccharides, cellulose.
         </p>
       </motion.div>
 

@@ -90,7 +90,7 @@ export default function LoginPage() {
                       name="login"
                       className="w-full bg-white text-black font-bold py-2 rounded-[5px] border-2 border-[#25C760] cursor-pointer shadow-[0_4px_12px_rgba(37,199,96,0.3)] hover:bg-[#25C760] hover:text-white hover:border-[#25C760] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(37,199,96,0.4)] transition-all"
                     >
-                      Login Now
+                      LOGIN NOW
                     </button>
                   </div>
                   <div className="text-center py-2 text-white text-sm">

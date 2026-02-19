@@ -58,7 +58,7 @@ export default function ProductsSection() {
       id="product-listing"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.6 }}
     >
       <h2 className="section-title mb-2">Products</h2>

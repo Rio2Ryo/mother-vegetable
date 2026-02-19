@@ -35,7 +35,7 @@ export default function CosmeticFunctionSection() {
       id="cosmetic-function"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.6 }}
     >
       <h2 className="section-title mb-1">Cosmetic Function</h2>
@@ -53,7 +53,7 @@ export default function CosmeticFunctionSection() {
           transition={{ duration: 0.5 }}
         >
           <video className="max-w-[100px] h-auto rounded-lg" autoPlay muted loop playsInline>
-            <source src="/Images/Assets/homepage/product/cosmetic_video.mov" type="video/mp4" />
+            <source src="https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4" type="video/mp4" />
           </video>
         </motion.div>
         <div className="flex justify-center">

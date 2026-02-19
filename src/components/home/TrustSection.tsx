@@ -26,7 +26,7 @@ export default function TrustSection() {
       className="bg-black border border-[#25C760] rounded-xl p-[10px] md:p-[25px] lg:p-10 my-5 md:my-10 transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_40px_rgba(37,199,96,0.2)]"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.6 }}
     >
       <h2 className="section-title mb-2">Our Trust</h2>
@@ -66,7 +66,7 @@ export default function TrustSection() {
         viewport={{ once: true }}
       >
         {[
-          { label: 'Achieve', desc: '' },
+          { label: 'Achieve', desc: 'certified human grade food by Ministry of Health, Labour and Welfare (MHLW), Japan' },
           { label: 'Confidence', desc: 'certified cosmetic \u201CThe Japanese Standards of Quasi-Drug Ingredients (JSQI)\u201D by MHLW, Japan' },
           { label: 'Forever', desc: 'certified by pet grade food by Ministry of Agriculture, Forestry and Fisheries (MAFF), Japan' },
         ].map((item) => (

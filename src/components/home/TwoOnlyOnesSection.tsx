@@ -26,7 +26,7 @@ export default function TwoOnlyOnesSection() {
       className="py-[60px] px-5 bg-black"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.6 }}
     >
       <h2 className="section-title mb-4">Two Only Ones</h2>

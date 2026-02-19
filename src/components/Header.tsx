@@ -55,13 +55,13 @@ export default function Header() {
               } fixed top-0 w-4/5 max-w-[300px] h-screen bg-black border-l-2 border-[#25C760] transition-all duration-300 z-[1000] pt-20 px-5 shadow-[-5px_0_15px_rgba(0,0,0,0.3)] md:shadow-none md:static md:w-auto md:max-w-none md:h-auto md:border-0 md:pt-0 md:px-0 md:flex md:items-center max-[600px]:w-[90%] max-[600px]:max-w-[280px] max-[600px]:pt-[70px] max-[600px]:px-[15px]`}
             >
               {/* Mobile profile buttons */}
-              <div className="md:hidden flex flex-col gap-[10px] mb-4">
+              <div className="hidden max-md:flex max-md:flex-col gap-[10px] mb-4">
                 <Link
                   href="/login"
                   className="flex items-center w-full py-3 px-4 bg-black border-2 border-[#25C760] rounded-lg text-white text-base font-medium cursor-pointer transition-all duration-300 no-underline hover:bg-[rgba(37,199,96,0.1)] hover:border-[#3C8063]"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 448 512">
+                  <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 448 512">
                     <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
                   </svg>
                   LOGIN
@@ -71,7 +71,7 @@ export default function Header() {
                   className="flex items-center w-full py-3 px-4 bg-black border-2 border-[#25C760] rounded-lg text-white text-base font-medium cursor-pointer transition-all duration-300 no-underline hover:bg-[rgba(37,199,96,0.1)] hover:border-[#3C8063]"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 640 512">
+                  <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
                     <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                   </svg>
                   Sign Up
@@ -112,6 +112,8 @@ export default function Header() {
                     Products
                     <svg
                       className={`w-3 h-3 transition-transform duration-300 ml-[5px] ${productsOpen ? 'rotate-180' : ''}`}
+                      width="12"
+                      height="12"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -155,6 +157,8 @@ export default function Header() {
                     How To Use
                     <svg
                       className={`w-3 h-3 transition-transform duration-300 ml-[5px] ${howToOpen ? 'rotate-180' : ''}`}
+                      width="12"
+                      height="12"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -195,7 +199,7 @@ export default function Header() {
                     Certified Instructor
                   </Link>
                 </li>
-                <li className="md:hidden list-none mt-3 w-full">
+                <li className="hidden max-md:block list-none mt-3 w-full">
                   <Link
                     href="/healthcare"
                     className="inline-flex flex-col items-center justify-center w-fit py-[5px] px-5 border border-white rounded-md text-white text-sm font-semibold no-underline bg-black transition-all duration-300 hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:translate-x-0"
@@ -250,7 +254,7 @@ export default function Header() {
               className="bg-black text-white border border-white px-6 py-3 rounded-[5px] font-semibold text-sm cursor-pointer relative overflow-hidden flex items-center gap-2 h-10 hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300 max-md:px-4 max-md:text-xs max-[600px]:px-3 max-[600px]:text-[11px]"
               style={{ fontFamily: 'Arial, sans-serif' }}
             >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 576 512">
+              <svg className="w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 576 512">
                 <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
               </svg>
               {totalItems() > 0 && (
@@ -266,7 +270,7 @@ export default function Header() {
               onMouseEnter={() => setProfileOpen(true)}
               onMouseLeave={() => setProfileOpen(false)}
             >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 448 512">
+              <svg className="w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 448 512">
                 <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
               </svg>
               {/* Profile Dropdown */}
@@ -281,7 +285,7 @@ export default function Header() {
                   href="/login"
                   className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] hover:bg-[#25C760] hover:text-white"
                 >
-                  <svg className="w-[14px] h-[14px] mr-[10px]" fill="currentColor" viewBox="0 0 512 512">
+                  <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 512 512">
                     <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
                   </svg>
                   LOGIN
@@ -290,7 +294,7 @@ export default function Header() {
                   href="/signup"
                   className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 hover:bg-[#25C760] hover:text-white"
                 >
-                  <svg className="w-[14px] h-[14px] mr-[10px]" fill="currentColor" viewBox="0 0 640 512">
+                  <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 640 512">
                     <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                   </svg>
                   Sign Up
@@ -300,7 +304,7 @@ export default function Header() {
 
             {/* Hamburger */}
             <button
-              className="flex md:hidden flex-col justify-around w-[30px] h-[30px] bg-transparent border-none cursor-pointer p-0 z-[1001]"
+              className="hidden max-md:flex flex-col justify-around w-[30px] h-[30px] bg-transparent border-none cursor-pointer p-0 z-[1001]"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <span
@@ -326,7 +330,7 @@ export default function Header() {
       {/* Mobile menu overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-[999] md:hidden"
+          className="fixed inset-0 bg-black/50 z-[999] hidden max-md:block"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}

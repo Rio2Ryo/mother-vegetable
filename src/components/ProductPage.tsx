@@ -197,7 +197,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         .content-section .section-title { font-family: Arial, sans-serif; font-size: 1.5rem; font-weight: 700; color: #ff0000; margin-bottom: 10px; text-align: center; }
         .content-section .section-title-center { text-align: center; }
         .red-hero-underline-img { display: block; width: 100px; max-width: 80%; height: auto; margin: 0 auto 20px auto; filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.5)); }
-        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 15px; }
+        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px; }
         .grid-item { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         .grid-image { width: 50%; height: auto; margin-bottom: 8px; object-fit: contain; }
         .text-label { font-family: Arial, sans-serif; font-size: 0.9rem; color: #FFFFFF; }
@@ -457,7 +457,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '12px' }}>
                   <div className="free-shipping-badge">
                     <p>
-                      <i className="fa fa-truck" style={{ marginRight: '7px' }} />
+                      <svg className="inline-block w-4 h-4" style={{ marginRight: '7px' }} fill="currentColor" viewBox="0 0 640 512"><path d="M48 0C21.5 0 0 21.5 0 48V368c0 26.5 21.5 48 48 48H64c0 53 43 96 96 96s96-43 96-96H384c0 53 43 96 96 96s96-43 96-96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V288 256 237.3c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7H416V48c0-26.5-21.5-48-48-48H48zM416 160h50.7L544 237.3V256H416V160zM112 416a48 48 0 1 1 96 0 48 48 0 1 1-96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
                       Free Shipping Worldwide
                     </p>
                   </div>
