@@ -12,7 +12,7 @@ export default function HeroSection() {
       transition={{ duration: 0.6 }}
     >
       {/* Background image */}
-      <div className="absolute inset-0 z-[1]">
+      <div className="absolute inset-0 z-[1] pointer-events-none">
         <Image
           src="/Images/Assets/homepage/bannerImg.png"
           alt="Cosmic Earth Background"

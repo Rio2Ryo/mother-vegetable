@@ -10,7 +10,7 @@ test.describe('Product Pages', () => {
         // Clean cart state
         await page.goto('/');
         await page.evaluate(() => localStorage.removeItem('mv-cart'));
-        await page.goto(`/product/${product}`);
+        await page.goto(`product/${product}`);
         await waitForPageReady(page);
       });
 

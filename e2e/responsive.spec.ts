@@ -9,9 +9,9 @@ const viewports = {
 
 const keyPages = [
   { path: '/', name: 'homepage' },
-  { path: '/product/achieve', name: 'product-achieve' },
-  { path: '/checkout', name: 'checkout' },
-  { path: '/login', name: 'login' },
+  { path: 'product/achieve', name: 'product-achieve' },
+  { path: 'checkout', name: 'checkout' },
+  { path: 'login', name: 'login' },
 ] as const;
 
 for (const [vpName, viewport] of Object.entries(viewports)) {
@@ -94,7 +94,7 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
 
     if (vpName === 'tablet') {
       test('product page gallery adapts to tablet width', async ({ page }) => {
-        await page.goto('/product/achieve');
+        await page.goto('product/achieve');
         await waitForPageReady(page);
 
         // On tablet (768px), the gallery-row switches to column layout at 820px
@@ -105,7 +105,7 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
     }
 
     test(`login page form fits within ${vpName} viewport`, async ({ page }) => {
-      await page.goto('/login');
+      await page.goto('login');
       await waitForPageReady(page);
 
       // Login form container

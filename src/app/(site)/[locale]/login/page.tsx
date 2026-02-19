@@ -2,10 +2,35 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Link } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
+import { useUserStore } from '@/store/userStore';
+import { useTranslations } from 'next-intl';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  const login = useUserStore((s) => s.login);
+  const t = useTranslations('auth');
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setSubmitting(true);
+
+    const success = login(email, password);
+
+    if (success) {
+      router.push('/');
+    } else {
+      setError('errorInvalidCredentials');
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="bg-black min-h-[calc(100vh-80px)] flex items-center justify-center py-4 px-4">
@@ -20,17 +45,17 @@ export default function LoginPage() {
               />
               <div className="relative z-10 text-center flex flex-col items-center justify-center">
                 <h1 className="font-['Ubuntu'] font-bold text-[#25C760] text-[2.7rem] leading-tight p-3">
-                  WELCOME TO MOTHER VEGETABLE!
+                  {t('welcomeMessage')}
                 </h1>
                 <div className="p-2 text-white text-base font-bold">
-                  New User?
+                  {t('newUser')}
                 </div>
                 <div className="flex items-center justify-center">
                   <Link
                     href="/signup"
                     className="inline-block bg-white text-black font-bold text-base px-6 py-2 rounded-[5px] border-2 border-[#25C760] shadow-lg no-underline hover:bg-[#25C760] hover:text-white hover:-translate-y-0.5 transition-all"
                   >
-                    SIGN UP HERE
+                    {t('signUpHere')}
                   </Link>
                 </div>
               </div>
@@ -40,29 +65,41 @@ export default function LoginPage() {
             <div className="w-full md:w-1/2 p-4">
               <div className="px-2.5 py-2.5 md:px-6 md:py-2.5">
                 <div className="pb-0">
-                  <h1 className="font-['Ubuntu'] font-bold text-[#25C760] text-2xl md:text-3xl">LOGIN</h1>
+                  <h1 className="font-['Ubuntu'] font-bold text-[#25C760] text-2xl md:text-3xl">{t('loginTitle').toUpperCase()}</h1>
                 </div>
-                <form action="/login" method="POST">
+
+                {/* Error Message */}
+                {error && (
+                  <div className="mt-3 text-red-500 text-sm font-semibold">
+                    {t(error)}
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit}>
                   <div className="py-2">
                     <label className="block text-[#25C760] font-semibold text-sm mb-1">
-                      Email Address:
+                      {t('emailAddress')}:
                     </label>
                     <input
                       type="text"
                       name="email"
                       placeholder="sample@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="w-full px-3 py-2 bg-black border-2 border-[#25C760] rounded-[5px] text-white text-sm outline-none focus:border-[#3C8063] focus:shadow-[0_0_0_0.2rem_rgba(37,199,96,0.25)] transition-all placeholder-white/60"
                     />
                   </div>
                   <div className="py-2">
                     <label className="block text-[#25C760] font-semibold text-sm mb-1">
-                      Password:
+                      {t('password')}:
                     </label>
                     <div className="relative">
                       <input
                         type={showPassword ? 'text' : 'password'}
                         name="password"
-                        placeholder="Password"
+                        placeholder={t('password')}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         className="w-full px-3 py-2 bg-black border-2 border-[#25C760] rounded-[5px] text-white text-sm outline-none focus:border-[#3C8063] focus:shadow-[0_0_0_0.2rem_rgba(37,199,96,0.25)] transition-all placeholder-white/60"
                       />
                       <button
@@ -79,21 +116,21 @@ export default function LoginPage() {
                       href="/forgetPassword"
                       className="text-[#25C760] underline hover:text-[#3C8063] transition-colors"
                     >
-                      Forgot Password?
+                      {t('forgotPassword')}
                     </Link>
                   </div>
                   <div className="py-4">
                     <button
                       type="submit"
-                      name="login"
-                      className="w-full bg-white text-black font-bold py-2 rounded-[5px] border-2 border-[#25C760] cursor-pointer shadow-[0_4px_12px_rgba(37,199,96,0.3)] hover:bg-[#25C760] hover:text-white hover:border-[#25C760] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(37,199,96,0.4)] transition-all"
+                      disabled={submitting}
+                      className="w-full bg-white text-black font-bold py-2 rounded-[5px] border-2 border-[#25C760] cursor-pointer shadow-[0_4px_12px_rgba(37,199,96,0.3)] hover:bg-[#25C760] hover:text-white hover:border-[#25C760] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(37,199,96,0.4)] transition-all disabled:opacity-50"
                     >
-                      LOGIN NOW
+                      {submitting ? '...' : t('loginNow')}
                     </button>
                   </div>
                   <div className="flex items-center gap-3 py-2">
                     <div className="flex-1 h-px bg-white/30" />
-                    <span className="text-white text-sm whitespace-nowrap">or Login with</span>
+                    <span className="text-white text-sm whitespace-nowrap">{t('orLoginWith')}</span>
                     <div className="flex-1 h-px bg-white/30" />
                   </div>
                   <div className="flex justify-center py-1">
@@ -111,9 +148,9 @@ export default function LoginPage() {
                 {/* Sign up link (visible on mobile, also shown at bottom) */}
                 <div className="md:hidden">
                   <div className="flex items-center justify-center text-white text-xs pt-2">
-                    Don&apos;t have an account?&nbsp;
+                    {t('dontHaveAccount')}&nbsp;
                     <Link href="/signup" className="text-[#25C760] underline font-bold">
-                      SIGN UP HERE
+                      {t('signUpHere')}
                     </Link>
                   </div>
                 </div>

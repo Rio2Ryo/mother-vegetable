@@ -17,7 +17,7 @@ export default defineConfig({
 
   /* Shared settings for all projects */
   use: {
-    baseURL: 'http://localhost:3000/en',
+    baseURL: 'http://localhost:3000/en/',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

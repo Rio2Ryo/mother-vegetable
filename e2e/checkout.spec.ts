@@ -11,7 +11,7 @@ test.describe('Checkout', () => {
   });
 
   test('checkout page shows empty cart message when no items', async ({ page }) => {
-    await page.goto('/checkout');
+    await page.goto('checkout');
     await waitForPageReady(page);
 
     await expect(page.getByText('Your cart is empty')).toBeVisible();
@@ -22,7 +22,7 @@ test.describe('Checkout', () => {
     await addProductToCart(page, 'achieve');
 
     // Close cart and navigate to checkout
-    await page.goto('/checkout');
+    await page.goto('checkout');
     await waitForPageReady(page);
 
     // The shipping form should be visible
@@ -41,7 +41,7 @@ test.describe('Checkout', () => {
 
   test('form inputs allow continuous typing without losing focus', async ({ page }) => {
     await addProductToCart(page, 'achieve');
-    await page.goto('/checkout');
+    await page.goto('checkout');
     await waitForPageReady(page);
 
     // Type a full name -- this tests that React controlled inputs
@@ -64,7 +64,7 @@ test.describe('Checkout', () => {
 
   test('form validation rejects empty required fields', async ({ page }) => {
     await addProductToCart(page, 'achieve');
-    await page.goto('/checkout');
+    await page.goto('checkout');
     await waitForPageReady(page);
 
     // Submit without filling anything
@@ -81,7 +81,7 @@ test.describe('Checkout', () => {
 
   test('form validation rejects invalid email', async ({ page }) => {
     await addProductToCart(page, 'achieve');
-    await page.goto('/checkout');
+    await page.goto('checkout');
     await waitForPageReady(page);
 
     // Fill required fields with valid data except email
@@ -104,7 +104,7 @@ test.describe('Checkout', () => {
 
   test('order summary shows cart items and total', async ({ page }) => {
     await addProductToCart(page, 'achieve');
-    await page.goto('/checkout');
+    await page.goto('checkout');
     await waitForPageReady(page);
 
     // Order summary section should contain the product
@@ -122,7 +122,7 @@ test.describe('Checkout', () => {
 
   test('successful order submission shows confirmation', async ({ page }) => {
     await addProductToCart(page, 'achieve');
-    await page.goto('/checkout');
+    await page.goto('checkout');
     await waitForPageReady(page);
 
     // Fill all required fields
@@ -151,7 +151,7 @@ test.describe('Checkout', () => {
 
   test('confirmation page links back to homepage', async ({ page }) => {
     await addProductToCart(page, 'achieve');
-    await page.goto('/checkout');
+    await page.goto('checkout');
     await waitForPageReady(page);
 
     // Fill and submit

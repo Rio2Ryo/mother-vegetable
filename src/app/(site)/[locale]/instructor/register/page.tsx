@@ -1,14 +1,12 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { Link, useRouter } from '@/i18n/navigation';
 import { useAffiliateStore } from '@/store/affiliateStore';
 import { getStoredReferralCode } from '@/lib/affiliate';
 
 export default function InstructorRegisterPage() {
-  const locale = useLocale();
   const router = useRouter();
   const t = useTranslations('instructor');
   const register = useAffiliateStore((s) => s.register);
@@ -60,7 +58,7 @@ export default function InstructorRegisterPage() {
     });
 
     if (result.success) {
-      router.push(`/${locale}/instructor/dashboard`);
+      router.push('/instructor/dashboard');
     } else {
       setError(result.error || t('errorGeneric'));
       setSubmitting(false);
@@ -93,7 +91,7 @@ export default function InstructorRegisterPage() {
                 </div>
                 <div className="flex items-center justify-center">
                   <Link
-                    href={`/${locale}/instructor/login`}
+                    href="/instructor/login"
                     className="inline-block bg-white text-black font-bold text-base px-6 py-2 rounded-[5px] border-2 border-[#25C760] shadow-lg no-underline hover:bg-[#25C760] hover:text-white hover:-translate-y-0.5 transition-all"
                   >
                     {t('loginHere')}
@@ -244,7 +242,7 @@ export default function InstructorRegisterPage() {
                 <div className="md:hidden">
                   <div className="flex justify-center text-xs pt-2">
                     {t('alreadyRegistered')}&nbsp;
-                    <Link href={`/${locale}/instructor/login`} className="text-[#25C760] underline font-bold">
+                    <Link href="/instructor/login" className="text-[#25C760] underline font-bold">
                       {t('loginHere')}
                     </Link>
                   </div>

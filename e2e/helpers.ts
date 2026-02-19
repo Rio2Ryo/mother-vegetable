@@ -18,13 +18,15 @@ export async function scrollFullPage(page: Page, stepPx = 400, delayMs = 200) {
 }
 
 /**
- * Wait for the page to be fully loaded: network idle + no pending animations.
+ * Wait for the page to be fully loaded and interactive.
+ * Uses 'load' state (not 'networkidle') for reliability in production builds
+ * where background resources may keep the network active.
  */
 export async function waitForPageReady(page: Page) {
   await page.waitForLoadState('domcontentloaded');
-  await page.waitForLoadState('networkidle');
-  // Give framer-motion animations a moment to settle
-  await page.waitForTimeout(500);
+  await page.waitForLoadState('load');
+  // Give framer-motion animations and hydration a moment to settle
+  await page.waitForTimeout(1000);
 }
 
 /**
@@ -36,7 +38,7 @@ export async function addProductToCart(
   productSlug: 'achieve' | 'confidence' | 'forever' = 'achieve',
   quantity = 1,
 ) {
-  await page.goto(`/product/${productSlug}`);
+  await page.goto(`product/${productSlug}`);
   await waitForPageReady(page);
 
   // Set quantity if more than 1
@@ -52,19 +54,19 @@ export async function addProductToCart(
   await page.waitForTimeout(500);
 }
 
-/** All pages to test, relative to the locale prefix */
+/** All pages to test, relative to the locale prefix (no leading slash) */
 export const ALL_PAGES = [
   '/',
-  '/product/achieve',
-  '/product/confidence',
-  '/product/forever',
-  '/achieve-howto',
-  '/confidence-howto',
-  '/forever-howto',
-  '/healthcare',
-  '/mv/certifiedInstructor',
-  '/login',
-  '/signup',
-  '/privacy',
-  '/terms',
+  'product/achieve',
+  'product/confidence',
+  'product/forever',
+  'achieve-howto',
+  'confidence-howto',
+  'forever-howto',
+  'healthcare',
+  'mv/certifiedInstructor',
+  'login',
+  'signup',
+  'privacy',
+  'terms',
 ] as const;

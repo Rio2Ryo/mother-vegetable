@@ -11,7 +11,7 @@ import { scrollFullPage, waitForPageReady, ALL_PAGES } from '../helpers';
 
 test.describe('Visual Regression - All Pages', () => {
   for (const pagePath of ALL_PAGES) {
-    const label = pagePath === '/' ? 'homepage' : pagePath.replace(/\//g, '-').slice(1);
+    const label = pagePath === '/' ? 'homepage' : pagePath.replace(/\//g, '-');
 
     test(`screenshot: ${label}`, async ({ page }) => {
       await page.goto(pagePath, { waitUntil: 'networkidle' });

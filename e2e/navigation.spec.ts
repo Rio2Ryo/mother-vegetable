@@ -1,6 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { waitForPageReady } from './helpers';
 
+/** Helper: returns true when the viewport is narrower than Tailwind's md breakpoint (768px) */
+async function isMobileViewport(page: import('@playwright/test').Page) {
+  const vp = page.viewportSize();
+  return vp ? vp.width < 768 : false;
+}
+
 test.describe('Navigation', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
@@ -21,15 +27,15 @@ test.describe('Navigation', () => {
   });
 
   test('logo navigates to homepage', async ({ page }) => {
-    await page.goto('/product/achieve');
+    await page.goto('product/achieve');
     await waitForPageReady(page);
 
     await page.locator('header a img[alt="Mother Vegetable Logo"]').click();
     await page.waitForURL('**/en');
   });
 
-  test('Products dropdown shows product links', async ({ page, isMobile }) => {
-    if (isMobile) {
+  test('Products dropdown shows product links', async ({ page }) => {
+    if (await isMobileViewport(page)) {
       // Open mobile menu first
       await page.locator('header button').last().click();
       await page.waitForTimeout(400);
@@ -51,8 +57,8 @@ test.describe('Navigation', () => {
     await expect(foreverLink).toBeVisible();
   });
 
-  test('Products dropdown navigates to product page', async ({ page, isMobile }) => {
-    if (isMobile) {
+  test('Products dropdown navigates to product page', async ({ page }) => {
+    if (await isMobileViewport(page)) {
       await page.locator('header button').last().click();
       await page.waitForTimeout(400);
     }
@@ -66,8 +72,8 @@ test.describe('Navigation', () => {
     await expect(page.locator('.product-name')).toBeVisible();
   });
 
-  test('How To Use dropdown shows links', async ({ page, isMobile }) => {
-    if (isMobile) {
+  test('How To Use dropdown shows links', async ({ page }) => {
+    if (await isMobileViewport(page)) {
       await page.locator('header button').last().click();
       await page.waitForTimeout(400);
     }
@@ -81,19 +87,22 @@ test.describe('Navigation', () => {
     await expect(page.locator('header a[href*="/forever-howto"]')).toBeVisible();
   });
 
-  test('Healthcare link navigates correctly', async ({ page, isMobile }) => {
-    if (isMobile) {
+  test('Healthcare link navigates correctly', async ({ page }) => {
+    if (await isMobileViewport(page)) {
       // On mobile, Healthcare is inside the mobile menu
       await page.locator('header button').last().click();
       await page.waitForTimeout(400);
+      await page.locator('header nav a', { hasText: 'Healthcare' }).click();
+    } else {
+      // On desktop, the Healthcare link is outside the nav, use the desktop-only one
+      await page.locator('header a.hidden.md\\:inline-flex', { hasText: 'Healthcare' }).click();
     }
 
-    await page.locator('header a', { hasText: 'Healthcare' }).first().click();
     await page.waitForURL('**/healthcare');
   });
 
-  test('Certified Instructor link navigates correctly', async ({ page, isMobile }) => {
-    if (isMobile) {
+  test('Certified Instructor link navigates correctly', async ({ page }) => {
+    if (await isMobileViewport(page)) {
       await page.locator('header button').last().click();
       await page.waitForTimeout(400);
     }
@@ -139,12 +148,9 @@ test.describe('Navigation - Mobile Menu', () => {
     const mobileNav = page.locator('header nav');
     await expect(mobileNav).toBeVisible();
 
-    // Close by clicking overlay
-    const overlay = page.locator('div.fixed.inset-0.bg-black\\/50');
-    if (await overlay.isVisible()) {
-      await overlay.click();
-      await page.waitForTimeout(400);
-    }
+    // Close by clicking hamburger again (overlay is behind the header z-index)
+    await hamburger.click();
+    await page.waitForTimeout(400);
   });
 
   test('mobile menu shows login and signup links', async ({ page }) => {

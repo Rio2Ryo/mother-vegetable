@@ -1,13 +1,11 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { Link, useRouter } from '@/i18n/navigation';
 import { useAffiliateStore } from '@/store/affiliateStore';
 
 export default function InstructorLoginPage() {
-  const locale = useLocale();
   const router = useRouter();
   const t = useTranslations('instructor');
   const login = useAffiliateStore((s) => s.login);
@@ -31,7 +29,7 @@ export default function InstructorLoginPage() {
 
     const success = login(email.trim(), password);
     if (success) {
-      router.push(`/${locale}/instructor/dashboard`);
+      router.push('/instructor/dashboard');
     } else {
       setError(t('errorInvalidCredentials'));
       setSubmitting(false);
@@ -64,7 +62,7 @@ export default function InstructorLoginPage() {
                 </div>
                 <div className="flex items-center justify-center">
                   <Link
-                    href={`/${locale}/instructor/register`}
+                    href="/instructor/register"
                     className="inline-block bg-white text-black font-bold text-base px-6 py-2 rounded-[5px] border-2 border-[#25C760] shadow-lg no-underline hover:bg-[#25C760] hover:text-white hover:-translate-y-0.5 transition-all"
                   >
                     {t('registerHere')}
@@ -146,7 +144,7 @@ export default function InstructorLoginPage() {
                 <div className="md:hidden">
                   <div className="flex items-center justify-center text-white text-xs pt-2">
                     {t('noAccount')}&nbsp;
-                    <Link href={`/${locale}/instructor/register`} className="text-[#25C760] underline font-bold">
+                    <Link href="/instructor/register" className="text-[#25C760] underline font-bold">
                       {t('registerHere')}
                     </Link>
                   </div>

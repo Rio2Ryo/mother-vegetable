@@ -1,14 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { useRouter } from '@/i18n/navigation';
 import { useAffiliateStore } from '@/store/affiliateStore';
 import { buildReferralUrl } from '@/lib/affiliate';
 
 export default function InstructorDashboardPage() {
-  const locale = useLocale();
   const router = useRouter();
   const t = useTranslations('instructor');
   const [copied, setCopied] = useState(false);
@@ -34,9 +32,9 @@ export default function InstructorDashboardPage() {
 
   useEffect(() => {
     if (mounted && !currentInstructor) {
-      router.push(`/${locale}/instructor/login`);
+      router.push('/instructor/login');
     }
-  }, [mounted, currentInstructor, router, locale]);
+  }, [mounted, currentInstructor, router]);
 
   if (!mounted || !currentInstructor) {
     return (
@@ -70,7 +68,7 @@ export default function InstructorDashboardPage() {
 
   function handleLogout() {
     logout();
-    router.push(`/${locale}/instructor/login`);
+    router.push('/instructor/login');
   }
 
   return (

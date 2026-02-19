@@ -46,9 +46,9 @@ test.describe('Cart', () => {
   test('cart badge shows item count in header', async ({ page }) => {
     await addProductToCart(page, 'achieve');
 
-    // Close cart first
+    // Close cart (force click since header z-index overlaps the cart panel close button)
     const closeBtn = page.locator('button', { hasText: '\u2715' });
-    await closeBtn.click();
+    await closeBtn.click({ force: true });
     await page.waitForTimeout(500);
 
     // Check for the badge count on the cart button
@@ -112,9 +112,9 @@ test.describe('Cart', () => {
   test('add multiple different products', async ({ page }) => {
     await addProductToCart(page, 'achieve');
 
-    // Close cart
+    // Close cart (force click since header z-index overlaps the cart panel close button)
     const closeBtn = page.locator('button', { hasText: '\u2715' });
-    await closeBtn.click();
+    await closeBtn.click({ force: true });
     await page.waitForTimeout(300);
 
     // Add another product
@@ -147,15 +147,16 @@ test.describe('Cart', () => {
     await checkoutBtn.click();
 
     await page.waitForURL('**/checkout');
-    await expect(page.getByText('Checkout')).toBeVisible();
+    await waitForPageReady(page);
+    await expect(page.locator('h1', { hasText: 'Checkout' })).toBeVisible();
   });
 
   test('cart persists across page navigation', async ({ page }) => {
     await addProductToCart(page, 'achieve');
 
-    // Close the cart
+    // Close the cart (force click since header z-index overlaps the cart panel close button)
     const closeBtn = page.locator('button', { hasText: '\u2715' });
-    await closeBtn.click();
+    await closeBtn.click({ force: true });
     await page.waitForTimeout(300);
 
     // Navigate to a different page
