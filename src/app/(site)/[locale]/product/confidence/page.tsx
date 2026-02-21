@@ -72,7 +72,7 @@ const confidenceProduct: ProductPageData = {
     title: 'Cosmetic Function',
     subtitle: 'Confidence',
     method: 'SURIKOMU / MAZEKOMU',
-    videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
+    videoUrl: '/Images/Assets/homepage/product/cosmetic_video.mov',
     circles: [
       { name: 'Dark Spots', detail: 'Freckles' },
       { name: 'Acne', detail: 'Acne scars' },

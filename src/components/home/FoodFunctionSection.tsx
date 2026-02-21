@@ -74,7 +74,7 @@ export default function FoodFunctionSection() {
           transition={{ duration: 0.5 }}
         >
           <video className="max-w-[150px] max-[767px]:max-w-[90px] h-auto rounded-lg" autoPlay muted loop playsInline>
-            <source src="https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4" type="video/mp4" />
+            <source src="/Images/Assets/homepage/product/food_video.mov" type="video/mp4" />
           </video>
         </motion.div>
 

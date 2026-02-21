@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git config --global --add safe.directory /home/azureuser/Projects/mother-vegetable)",
+      "Bash(npm run build)",
+      "Bash(gh auth setup-git)",
+      "Bash(git add -A)",
+      "Bash(git commit:*)",
+      "Bash(git -c:*)",
+      "Bash(git push)",
+      "Bash(vercel --prod --yes)",
+      "Bash(vercel whoami)",
+      "Bash(vercel login --help)",
+      "Bash(vercel login --no-color)",
+      "Bash(vercel login)",
+      "Bash(npx playwright --version)",
+      "Bash(node take-screenshots.mjs)"
+    ]
+  }
+}

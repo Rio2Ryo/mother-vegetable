@@ -70,7 +70,7 @@ const achieveProduct: ProductPageData = {
     title: 'Food Function',
     subtitle: 'Achieve',
     method: 'TORIKOMU / MAZEKOMU',
-    videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
+    videoUrl: '/Images/Assets/homepage/product/food_video.mov',
     circles: [
       { name: 'Essential Fatty Acids', detail: '9 types' },
       { name: 'Amino Acids', detail: '10 types' },
