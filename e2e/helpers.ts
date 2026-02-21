@@ -35,7 +35,7 @@ export async function waitForPageReady(page: Page) {
  */
 export async function addProductToCart(
   page: Page,
-  productSlug: 'achieve' | 'confidence' | 'forever' = 'achieve',
+  productSlug: 'achieve' | 'confidence' = 'achieve',
   quantity = 1,
 ) {
   await page.goto(`product/${productSlug}`);
@@ -59,10 +59,8 @@ export const ALL_PAGES = [
   '/',
   'product/achieve',
   'product/confidence',
-  'product/forever',
   'achieve-howto',
   'confidence-howto',
-  'forever-howto',
   'healthcare',
   'mv/certifiedInstructor',
   'login',

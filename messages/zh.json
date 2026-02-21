@@ -10,8 +10,7 @@
     "login": "登录",
     "signup": "注册",
     "achieve": "Achieve",
-    "confidence": "Confidence",
-    "forever": "Forever"
+    "confidence": "Confidence"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -69,7 +68,7 @@
   },
   "foodFunction": {
     "title": "食品功能",
-    "subtitle": "Achieve / Forever",
+    "subtitle": "Achieve",
     "method": "TORIKOMU / MAZEKOMU",
     "nutritionTitle": "48种营养素",
     "nutritionDesc": "Mother Vegetable 含有48种以上必需营养素，包括钾、镁、钙、铁、锌、铜等矿物质，维生素A、B族、C、E、K的全谱系，以及所有必需氨基酸和条件必需氨基酸。",

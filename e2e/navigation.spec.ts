@@ -48,7 +48,7 @@ test.describe('Navigation', () => {
     await page.waitForURL('**/en');
   });
 
-  test('Products dropdown shows product links', async ({ page }) => {
+  test('Products dropdown shows product links (achieve, confidence only)', async ({ page }) => {
     if (await isMobileViewport(page)) {
       // Open mobile menu first
       await page.locator('header button').last().click();
@@ -67,8 +67,9 @@ test.describe('Navigation', () => {
     const confidenceLink = page.locator('header a[href*="/product/confidence"]');
     await expect(confidenceLink).toBeVisible();
 
+    // Forever should NOT be in dropdown
     const foreverLink = page.locator('header a[href*="/product/forever"]');
-    await expect(foreverLink).toBeVisible();
+    await expect(foreverLink).toHaveCount(0);
   });
 
   test('Products dropdown navigates to product page', async ({ page }) => {
@@ -86,7 +87,7 @@ test.describe('Navigation', () => {
     await expect(page.locator('.product-name')).toBeVisible();
   });
 
-  test('How To Use dropdown shows links', async ({ page }) => {
+  test('How To Use dropdown shows links (achieve, confidence only)', async ({ page }) => {
     if (await isMobileViewport(page)) {
       await page.locator('header button').last().click();
       await page.waitForTimeout(400);
@@ -98,7 +99,10 @@ test.describe('Navigation', () => {
 
     await expect(page.locator('header a[href*="/achieve-howto"]')).toBeVisible();
     await expect(page.locator('header a[href*="/confidence-howto"]')).toBeVisible();
-    await expect(page.locator('header a[href*="/forever-howto"]')).toBeVisible();
+
+    // Forever howto should NOT be in dropdown
+    const foreverHowto = page.locator('header a[href*="/forever-howto"]');
+    await expect(foreverHowto).toHaveCount(0);
   });
 
   test('Healthcare link navigates correctly', async ({ page }) => {

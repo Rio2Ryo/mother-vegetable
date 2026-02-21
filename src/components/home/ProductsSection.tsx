@@ -28,7 +28,7 @@ function getProducts(isJa: boolean) {
       name: 'Achieve',
       subtitle: isJa ? '身体のために（人・動物）' : 'for Body (Human & Animal)',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
-      videoUrl: '/Images/Assets/homepage/product/achieve_video.mp4',
+      videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
       features: isJa
         ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と', '動物にも使用可能']
         : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones', 'Also suitable for animals'],
@@ -41,7 +41,7 @@ function getProducts(isJa: boolean) {
       name: 'Confidence',
       subtitle: isJa ? 'すべての肌に（人・動物）' : 'for All Skin (Human & Animal)',
       tagline: isJa ? '肌の気になるところに直接塗布' : 'Skin Healing Effect',
-      videoUrl: '/Images/Assets/homepage/product/confidence_v2.mp4',
+      videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
       features: isJa
         ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用', '動物の肌にも使用可能']
         : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics', 'Also suitable for animal skin'],

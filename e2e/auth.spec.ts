@@ -113,7 +113,21 @@ test.describe('User Authentication', () => {
     await page.getByPlaceholder('Password', { exact: true }).fill('password123');
     await page.getByPlaceholder('Confirm Password').fill('password123');
     await page.getByRole('button', { name: /sign up now/i }).click();
-    await page.waitForURL('**/en', { timeout: 10000 });
+
+    // Wait for success message and redirect (1.5s delay + navigation)
+    await page.waitForURL('**/en', { timeout: 15000 });
+
+    // Clear user session so we can access signup again
+    await page.evaluate(() => {
+      const stored = localStorage.getItem('mv-users');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.state) {
+          parsed.state.currentUser = null;
+          localStorage.setItem('mv-users', JSON.stringify(parsed));
+        }
+      }
+    });
 
     // Second registration with same email
     await page.goto('signup');
@@ -201,9 +215,21 @@ test.describe('User Authentication', () => {
     await page.getByPlaceholder('Password', { exact: true }).fill('flowpass123');
     await page.getByPlaceholder('Confirm Password').fill('flowpass123');
     await page.getByRole('button', { name: /sign up now/i }).click();
-    await page.waitForURL('**/en', { timeout: 10000 });
+    await page.waitForURL('**/en', { timeout: 15000 });
 
-    // Step 2: Navigate to login
+    // Step 2: Logout by clearing current user (keep users list for login)
+    await page.evaluate(() => {
+      const stored = localStorage.getItem('mv-users');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.state) {
+          parsed.state.currentUser = null;
+          localStorage.setItem('mv-users', JSON.stringify(parsed));
+        }
+      }
+    });
+
+    // Step 3: Navigate to login
     await page.goto('login');
     await waitForPageReady(page);
     await page.getByPlaceholder('sample@email.com').fill('flow@example.com');
@@ -211,7 +237,7 @@ test.describe('User Authentication', () => {
     await page.getByRole('button', { name: /login now/i }).click();
 
     // Should redirect to homepage
-    await page.waitForURL('**/en', { timeout: 10000 });
+    await page.waitForURL('**/en', { timeout: 15000 });
   });
 
   test('password show/hide toggle works on login', async ({ page }) => {

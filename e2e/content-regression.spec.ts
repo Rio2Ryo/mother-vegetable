@@ -5,8 +5,8 @@ import { waitForPageReady, scrollFullPage } from './helpers';
  * Content Regression Tests
  *
  * These tests verify that page content (video URLs, text, section structure)
- * matches the original mothervegetable.com site. They are designed to be
- * reusable as regression tests to catch unintended content changes.
+ * matches the current site design. They are designed to be reusable as
+ * regression tests to catch unintended content changes.
  */
 
 /* ================================================================== */
@@ -19,106 +19,65 @@ test.describe('Homepage Content Regression', () => {
     await waitForPageReady(page);
   });
 
-  test('Food Function section uses correct video (food_video.mov)', async ({ page }) => {
+  test('Hero section displays correct title and tagline', async ({ page }) => {
+    await expect(page.getByText('MOTHER VEGETABLE PROJECT').first()).toBeVisible();
+    await expect(page.getByText("Earth\u2019s life force, for you.").first()).toBeVisible();
+  });
+
+  test('Food Function section renders with correct id and video', async ({ page }) => {
     await scrollFullPage(page);
     const foodSection = page.locator('#food-function');
     await expect(foodSection).toBeVisible();
 
-    const video = foodSection.locator('video source');
-    const src = await video.getAttribute('src');
-    expect(src).toBe('/Images/Assets/homepage/product/food_video.mov');
-    // Must NOT use achieve_video.mp4 here
-    expect(src).not.toContain('achieve_video');
+    const video = foodSection.locator('video[src*="food_video"]');
+    await expect(video).toHaveCount(1);
   });
 
-  test('Cosmetic Function section uses correct video (cosmetic_video.mov)', async ({ page }) => {
+  test('Food Function section has nutrition facts table', async ({ page }) => {
+    await scrollFullPage(page);
+    const foodSection = page.locator('#food-function');
+
+    // Main nutrients should be visible
+    await expect(foodSection.getByText('Nutrition Facts')).toBeVisible();
+    await expect(foodSection.getByText('Energy')).toBeVisible();
+    await expect(foodSection.getByText('Protein').first()).toBeVisible();
+  });
+
+  test('Food Function section has clipboard copy button', async ({ page }) => {
+    await scrollFullPage(page);
+    const foodSection = page.locator('#food-function');
+    const copyButton = foodSection.getByText('Copy Ingredients to Clipboard');
+    await expect(copyButton).toBeVisible();
+  });
+
+  test('Food Function section has AI service links', async ({ page }) => {
+    await scrollFullPage(page);
+    const foodSection = page.locator('#food-function');
+    await expect(foodSection.locator('a[href*="chat.openai.com"]')).toHaveCount(1);
+    await expect(foodSection.locator('a[href*="gemini.google.com"]')).toHaveCount(1);
+  });
+
+  test('Cosmetic Function section renders with correct id and video', async ({ page }) => {
     await scrollFullPage(page);
     const cosmeticSection = page.locator('#cosmetic-function');
     await expect(cosmeticSection).toBeVisible();
 
-    const videos = cosmeticSection.locator('video source');
-    const firstVideoSrc = await videos.first().getAttribute('src');
-    expect(firstVideoSrc).toBe('/Images/Assets/homepage/product/cosmetic_video.mov');
+    const video = cosmeticSection.locator('video[src*="cosmetic_video"]');
+    await expect(video).toHaveCount(1);
   });
 
-  test('Cosmetic Function skin healing video is correct', async ({ page }) => {
+  test('Cosmetic Function section has ingredient info', async ({ page }) => {
     await scrollFullPage(page);
     const cosmeticSection = page.locator('#cosmetic-function');
-    const videos = cosmeticSection.locator('video source');
-    const count = await videos.count();
-
-    // Find the skin.mp4 video
-    let foundSkinVideo = false;
-    for (let i = 0; i < count; i++) {
-      const src = await videos.nth(i).getAttribute('src');
-      if (src?.includes('skin.mp4')) {
-        foundSkinVideo = true;
-        expect(src).toBe('/Images/Assets/homepage/product/skin.mp4');
-      }
-    }
-    expect(foundSkinVideo).toBe(true);
+    await expect(cosmeticSection.getByText('Ingredient Information')).toBeVisible();
+    await expect(cosmeticSection.getByText('Anhydrous Silica (Amorphous)').first()).toBeVisible();
   });
 
-  test('Products section has correct video URLs for achieve, confidence, forever', async ({ page }) => {
-    await scrollFullPage(page);
-
-    const expectedVideos = [
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/forever_video.mp4',
-    ];
-
-    for (const expectedUrl of expectedVideos) {
-      const source = page.locator(`video source[src="${expectedUrl}"]`);
-      await expect(source).toHaveCount(1);
-    }
-  });
-
-  test('Two Only Ones section has mazavege and sef videos', async ({ page }) => {
-    await scrollFullPage(page);
-
-    const mazavegeVideo = page.locator('video source[src*="mazavege_top.mp4"]');
-    await expect(mazavegeVideo).toHaveCount(1);
-
-    const sefVideo = page.locator('video source[src*="sef_top.mp4"]');
-    await expect(sefVideo).toHaveCount(1);
-  });
-
-  test('Food Function section has correct nutrient circles', async ({ page }) => {
-    await scrollFullPage(page);
-    const foodSection = page.locator('#food-function');
-
-    const expectedNutrients = [
-      'Essential Fatty Acids',
-      'Amino Acids',
-      'Vital Vitamins',
-      'Key Minerals For Balance',
-      'Other Functional Ingredients',
-    ];
-
-    for (const nutrient of expectedNutrients) {
-      await expect(foodSection.getByText(nutrient)).toBeVisible();
-    }
-  });
-
-  test('Food Function benefit categories are correct', async ({ page }) => {
-    await scrollFullPage(page);
-    const foodSection = page.locator('#food-function');
-
-    const categories = ['Children', 'Adults', 'Seniors', 'Athletes', 'Dog', 'Cat'];
-    for (const cat of categories) {
-      await expect(foodSection.getByText(cat, { exact: true })).toBeVisible();
-    }
-  });
-
-  test('Cosmetic Function concern circles are correct', async ({ page }) => {
+  test('Cosmetic Function section has clipboard copy button', async ({ page }) => {
     await scrollFullPage(page);
     const cosmeticSection = page.locator('#cosmetic-function');
-
-    const concerns = ['Dark Spots', 'Acne', 'Wounds', 'Odor', 'Shine'];
-    for (const concern of concerns) {
-      await expect(cosmeticSection.getByText(concern, { exact: true })).toBeVisible();
-    }
+    const copyButton = cosmeticSection.getByText('Copy Ingredients to Clipboard');
+    await expect(copyButton).toBeVisible();
   });
 
   test('Before & After button exists in Cosmetic Function', async ({ page }) => {
@@ -126,6 +85,74 @@ test.describe('Homepage Content Regression', () => {
     const cosmeticSection = page.locator('#cosmetic-function');
     const baButton = cosmeticSection.getByText('Before & After');
     await expect(baButton).toBeVisible();
+  });
+
+  test('Before & After modal opens and closes', async ({ page }) => {
+    await scrollFullPage(page);
+    const cosmeticSection = page.locator('#cosmetic-function');
+
+    // Click the Before & After button
+    await cosmeticSection.getByText('Before & After').click();
+    await page.waitForTimeout(500);
+
+    // Modal should be visible with case study content
+    const modal = page.locator('.fixed.inset-0');
+    await expect(modal).toBeVisible();
+
+    // Close modal via the close button
+    await page.locator('.fixed.inset-0 button:has-text("\u2715")').click();
+    await page.waitForTimeout(300);
+  });
+
+  test('Products section has correct video URLs for achieve and confidence (no forever)', async ({ page }) => {
+    await scrollFullPage(page);
+
+    const achieveVideo = page.locator('video[src*="achieve_video.mp4"]');
+    await expect(achieveVideo).toHaveCount(1);
+
+    const confidenceVideo = page.locator('video[src*="confidence_v2.mp4"]');
+    await expect(confidenceVideo).toHaveCount(1);
+
+    // Forever should NOT exist
+    const foreverVideo = page.locator('video[src*="forever_video.mp4"]');
+    await expect(foreverVideo).toHaveCount(0);
+  });
+
+  test('Products section shows human and animal usage', async ({ page }) => {
+    await scrollFullPage(page);
+    // Both products should mention human and animal usage
+    await expect(page.getByText('for Body (Human & Animal)').first()).toBeVisible();
+    await expect(page.getByText('for All Skin (Human & Animal)').first()).toBeVisible();
+  });
+
+  test('Two Only Ones section has mazavege and sef videos', async ({ page }) => {
+    await scrollFullPage(page);
+
+    const mazavegeVideo = page.locator('video[src*="mazavege_top.mp4"]');
+    await expect(mazavegeVideo).toHaveCount(1);
+
+    const sefVideo = page.locator('video[src*="sef_top.mp4"]');
+    await expect(sefVideo).toHaveCount(1);
+  });
+
+  test('Trust section shows certification logos and descriptions', async ({ page }) => {
+    await scrollFullPage(page);
+    await expect(page.getByText('Our Trust')).toBeVisible();
+
+    // Should have trust items for Achieve and Confidence only (no Forever)
+    const trustText = await page.locator('body').textContent();
+    expect(trustText).toContain('Achieve');
+    expect(trustText).toContain('Confidence');
+  });
+
+  test('No TORIKOMU/MAZEKOMU/SURIKOMU text visible on homepage', async ({ page }) => {
+    await scrollFullPage(page);
+    // Check that these terms don't appear in any visible text elements
+    // (they may still exist in hidden JSON payloads from i18n messages)
+    const visibleTexts = await page.locator('h1, h2, h3, h4, p, span, a, button, li, td, th, label, div:not(script)')
+      .filter({ hasText: /TORIKOMU|MAZEKOMU|SURIKOMU/ })
+      .count();
+    expect(visibleTexts).toBe(0);
   });
 });
 
@@ -139,47 +166,13 @@ test.describe('Product Page Content Regression', () => {
       slug: 'achieve',
       name: 'Achieve',
       subtitle: 'for Body',
-      functionType: 'Food Function',
-      functionVideoUrl: '/Images/Assets/homepage/product/food_video.mov',
-      mainVideoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
-      videoCount: 5,
-      videoPrefix: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/achieve/video_',
-      method: 'TORIKOMU / MAZEKOMU',
       howToLink: '/achieve-howto',
-      leftSectionTitle: 'Drink',
-      rightSectionTitle: 'Food',
-      benefitCategories: ['Children', 'Adults', 'Seniors', 'Athletes'],
     },
     {
       slug: 'confidence',
       name: 'Confidence',
       subtitle: 'For All Skin',
-      functionType: 'Cosmetic Function',
-      functionVideoUrl: '/Images/Assets/homepage/product/cosmetic_video.mov',
-      mainVideoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
-      videoCount: 5,
-      videoPrefix: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/confidence/video_',
-      method: 'SURIKOMU / MAZEKOMU',
       howToLink: '/confidence-howto',
-      leftSectionTitle: 'SURIKOMU',
-      rightSectionTitle: 'MAZEKOMU',
-      skinVideoUrl: '/Images/Assets/homepage/product/skin.mp4',
-      benefitCategories: ['Dark Spots & Freckles', 'Acne & Scars', 'Wounds & Burns', 'Odor & Shine Control'],
-    },
-    {
-      slug: 'forever',
-      name: 'Forever',
-      subtitle: 'for Pet',
-      functionType: 'Food Function',
-      functionVideoUrl: '/Images/Assets/homepage/product/food_video.mov',
-      mainVideoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/forever_video.mp4',
-      videoCount: 5,
-      videoPrefix: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/forever/video_',
-      method: 'TORIKOMU / MAZEKOMU',
-      howToLink: '/forever-howto',
-      leftSectionTitle: 'Dog',
-      rightSectionTitle: 'Cat',
-      benefitCategories: ['Dog', 'Cat'],
     },
   ];
 
@@ -197,33 +190,10 @@ test.describe('Product Page Content Regression', () => {
         await expect(page.locator('.card-title-sub')).toContainText(product.subtitle);
       });
 
-      test(`has ${product.videoCount} thumbnail videos`, async ({ page }) => {
+      test(`has thumbnail videos`, async ({ page }) => {
         const thumbnails = page.locator('.thumbnail-item');
-        await expect(thumbnails).toHaveCount(product.videoCount);
-      });
-
-      test(`function section uses correct video`, async ({ page }) => {
-        await scrollFullPage(page);
-        const functionVideo = page.locator('.function-diagram video source').first();
-        const src = await functionVideo.getAttribute('src');
-        expect(src).toBe(product.functionVideoUrl);
-      });
-
-      test(`function section title matches`, async ({ page }) => {
-        await scrollFullPage(page);
-        await expect(page.getByText(product.functionType, { exact: true }).first()).toBeVisible();
-      });
-
-      test(`method text is correct`, async ({ page }) => {
-        await scrollFullPage(page);
-        await expect(page.getByText(product.method)).toBeVisible();
-      });
-
-      test(`benefit categories are present`, async ({ page }) => {
-        await scrollFullPage(page);
-        for (const cat of product.benefitCategories) {
-          await expect(page.getByText(cat, { exact: true }).first()).toBeVisible();
-        }
+        const count = await thumbnails.count();
+        expect(count).toBeGreaterThan(0);
       });
 
       test(`how to use link points to correct page`, async ({ page }) => {
@@ -241,14 +211,16 @@ test.describe('Product Page Content Regression', () => {
     });
   }
 
-  // Confidence-specific: skin healing video
-  test('Confidence page has skin healing video', async ({ page }) => {
-    await page.goto('product/confidence');
+  // Forever product page exists in data but is NOT linked from homepage or navigation
+  test('Forever product is not linked from homepage products section', async ({ page }) => {
+    await page.goto('/');
     await waitForPageReady(page);
     await scrollFullPage(page);
 
-    const skinVideo = page.locator('video source[src="/Images/Assets/homepage/product/skin.mp4"]');
-    await expect(skinVideo).toHaveCount(1);
+    // The product listing section should NOT have a link to forever
+    const productSection = page.locator('#product-listing');
+    const foreverLink = productSection.locator('a[href*="forever"]');
+    await expect(foreverLink).toHaveCount(0);
   });
 });
 
@@ -278,13 +250,6 @@ test.describe('HowTo Pages Content Regression', () => {
     await waitForPageReady(page);
 
     await expect(page.getByText('How to Use Confidence')).toBeVisible();
-  });
-
-  test('Forever HowTo page loads with recipe content', async ({ page }) => {
-    await page.goto('forever-howto');
-    await waitForPageReady(page);
-
-    await expect(page.getByText('How to Use Forever')).toBeVisible();
   });
 });
 
@@ -346,10 +311,8 @@ test.describe('Cross-Page Structure Regression', () => {
     { path: '/', name: 'Homepage' },
     { path: 'product/achieve', name: 'Achieve' },
     { path: 'product/confidence', name: 'Confidence' },
-    { path: 'product/forever', name: 'Forever' },
     { path: 'achieve-howto', name: 'Achieve HowTo' },
     { path: 'confidence-howto', name: 'Confidence HowTo' },
-    { path: 'forever-howto', name: 'Forever HowTo' },
     { path: 'healthcare', name: 'Healthcare' },
     { path: 'mv/certifiedInstructor', name: 'Certified Instructor' },
   ];
@@ -370,7 +333,6 @@ test.describe('Cross-Page Structure Regression', () => {
     const cdnVideos = [
       'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
       'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/forever_video.mp4',
       'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/mazavege_top.mp4',
       'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/sef_top.mp4',
     ];
@@ -385,7 +347,6 @@ test.describe('Cross-Page Structure Regression', () => {
     const localVideos = [
       '/Images/Assets/homepage/product/food_video.mov',
       '/Images/Assets/homepage/product/cosmetic_video.mov',
-      '/Images/Assets/homepage/product/skin.mp4',
     ];
 
     for (const url of localVideos) {

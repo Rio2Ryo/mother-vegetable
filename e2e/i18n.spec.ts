@@ -7,9 +7,9 @@ test.describe('Internationalization (i18n)', () => {
       await page.goto('/');
       await waitForPageReady(page);
 
-      // English hero text (use .first() since text may match multiple elements)
-      await expect(page.getByText('MOTHER VEGETABLE PRODUCTS').first()).toBeVisible();
-      await expect(page.getByText("Earth's life force, for you.").first()).toBeVisible();
+      // English hero text
+      await expect(page.getByText('MOTHER VEGETABLE PROJECT').first()).toBeVisible();
+      await expect(page.getByText("Earth\u2019s life force, for you.").first()).toBeVisible();
     });
 
     test('navigation uses English labels', async ({ page }) => {
@@ -35,9 +35,10 @@ test.describe('Internationalization (i18n)', () => {
       await page.goto('http://localhost:3000/ja');
       await waitForPageReady(page);
 
-      // Hero text is hardcoded English in HeroSection component (not translated)
-      await expect(page.getByText('MOTHER VEGETABLE PRODUCTS').first()).toBeVisible();
-      await expect(page.getByText("Earth's life force, for you.").first()).toBeVisible();
+      // Hero title is English; tagline switches to Japanese
+      await expect(page.getByText('MOTHER VEGETABLE PROJECT').first()).toBeVisible();
+      // Japanese tagline
+      await expect(page.getByText('\u300C\u30DE\u30B6\u30FC\u30D9\u30B8\u30BF\u30D6\u30EB\u300D').first()).toBeVisible();
     });
 
     test('navigation renders header links on Japanese locale', async ({ page, isMobile }) => {
@@ -72,6 +73,16 @@ test.describe('Internationalization (i18n)', () => {
       await waitForPageReady(page);
       expect(page.url()).toContain('/ja');
     });
+
+    test('homepage sections show Japanese text', async ({ page }) => {
+      await page.goto('http://localhost:3000/ja');
+      await waitForPageReady(page);
+
+      // Products section should show Japanese subtitles
+      const bodyText = await page.locator('body').textContent();
+      // Japanese tagline for achieve: 身体のために（人・動物）
+      expect(bodyText).toContain('\u8EAB\u4F53\u306E\u305F\u3081\u306B');
+    });
   });
 
   test.describe('Chinese locale (/zh)', () => {
@@ -79,9 +90,8 @@ test.describe('Internationalization (i18n)', () => {
       await page.goto('http://localhost:3000/zh');
       await waitForPageReady(page);
 
-      // Hero text is hardcoded English in HeroSection component (not translated)
-      await expect(page.getByText('MOTHER VEGETABLE PRODUCTS').first()).toBeVisible();
-      await expect(page.getByText("Earth's life force, for you.").first()).toBeVisible();
+      // Hero text - title is always English
+      await expect(page.getByText('MOTHER VEGETABLE PROJECT').first()).toBeVisible();
     });
 
     test('navigation renders header links on Chinese locale', async ({ page, isMobile }) => {
@@ -111,7 +121,7 @@ test.describe('Internationalization (i18n)', () => {
       await waitForPageReady(page);
 
       // Verify we are on English first
-      await expect(page.getByText("Earth's life force, for you.").first()).toBeVisible();
+      await expect(page.getByText("Earth\u2019s life force, for you.").first()).toBeVisible();
 
       // Click the language selector
       const langSelector = page.locator('header .relative', { hasText: 'Eng' }).first();
@@ -119,15 +129,15 @@ test.describe('Internationalization (i18n)', () => {
       await page.waitForTimeout(300);
 
       // Click Japanese option
-      const jaOption = page.locator('header .relative').getByText('日');
+      const jaOption = page.locator('header .relative').getByText('\u65E5');
       await jaOption.click();
 
       // Wait for navigation to complete
       await page.waitForURL('**/ja', { timeout: 10000 });
       await waitForPageReady(page);
 
-      // Hero text is hardcoded English even after locale switch
-      await expect(page.getByText("Earth's life force, for you.").first()).toBeVisible();
+      // Japanese tagline should now be visible
+      await expect(page.getByText('\u300C\u30DE\u30B6\u30FC\u30D9\u30B8\u30BF\u30D6\u30EB\u300D').first()).toBeVisible();
     });
 
     test('locale persists on product page navigation', async ({ page }) => {

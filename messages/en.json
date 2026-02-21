@@ -10,8 +10,7 @@
     "login": "Login",
     "signup": "Sign Up",
     "achieve": "Achieve",
-    "confidence": "Confidence",
-    "forever": "Forever"
+    "confidence": "Confidence"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -65,11 +64,11 @@
     "title": "Our Trust",
     "achieveDesc": "certified human grade food by Ministry of Health, Labour and Welfare (MHLW), Japan",
     "confidenceDesc": "certified cosmetic \"The Japanese Standards of Quasi-Drug Ingredients (JSQI)\" by MHLW, Japan",
-    "foreverDesc": "certified by pet grade food by Ministry of Agriculture, Forestry and Fisheries (MAFF), Japan"
+    "foreverDesc": "certified pet grade food by Ministry of Agriculture, Forestry and Fisheries (MAFF), Japan"
   },
   "foodFunction": {
     "title": "Food Function",
-    "subtitle": "Achieve / Forever",
+    "subtitle": "Achieve",
     "method": "TORIKOMU / MAZEKOMU",
     "nutritionTitle": "48 Nutrients",
     "nutritionDesc": "Potassium, sodium, magnesium, calcium, phosphorus, iron, manganese, zinc, copper, Vitamin A, B1, B2, B3, B5, B6, B9, C, E, K, tryptophan, threonine, leucine, isoleucine, lysine, methionine, phenylalanine, valine, histidine, arginine, cystine, tyrosine, alanine, aspartic acid, glutamic acid, serine, glycine, proline, saturated fatty acids, omega-3 fatty acids, omega-6 fatty acids, C-phycocyanin, chlorophyll a, total carotenoids, nucleic acids, spirulan, glycogen-like polysaccharides, β-glucan-like polysaccharides, cellulose.",

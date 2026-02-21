@@ -209,9 +209,9 @@ Explain the expected effects from this ingredient group in the following areas:
       ? '私たちMother Vegetableグループは、世界各地で活動を行っているため、効果効能に関する表現についても各国の法律・ガイドラインを遵守します。'
       : 'The Mother Vegetable Group operates worldwide, and we comply with the laws and guidelines of each country regarding the expression of effects and benefits.',
     effectsDescription3: isJa
-      ? 'そこで、Mother Vegetable Achieve/Foreverについて成分を全てオープンにします。以下の「クリップボードにコピー」のボタンを押すと全成分がコピーされますので、ChatGPTやGeminiなどのAIに入力し、これらの成分の特性については一般公開情報をご確認ください。'
-      : 'Therefore, we are fully disclosing all ingredients of Mother Vegetable Achieve/Forever. Clicking the "Copy to Clipboard" button below will copy all ingredients. Please paste them into an AI service such as ChatGPT or Gemini, and refer to publicly available information regarding the characteristics of these ingredients.',
-    featuresTitle: isJa ? 'Achieve / Foreverの特性について' : 'About Achieve / Forever Characteristics',
+      ? 'そこで、Mother Vegetable Achieveについて成分を全てオープンにします。以下の「クリップボードにコピー」のボタンを押すと全成分がコピーされますので、ChatGPTやGeminiなどのAIに入力し、これらの成分の特性については一般公開情報をご確認ください。'
+      : 'Therefore, we are fully disclosing all ingredients of Mother Vegetable Achieve. Clicking the "Copy to Clipboard" button below will copy all ingredients. Please paste them into an AI service such as ChatGPT or Gemini, and refer to publicly available information regarding the characteristics of these ingredients.',
+    featuresTitle: isJa ? 'Achieveの特性について' : 'About Achieve Characteristics',
     featuresNote: isJa
       ? '（多くお問い合わせいただく、腸内機能/睡眠/便/運動機能/二日酔い/疲労等については各国で表現規制が異なりますので、各自AIにてお調べください。）'
       : '(Regarding frequently asked topics such as gut health, sleep, bowel movements, exercise performance, hangovers, fatigue, etc., expression regulations vary by country, so please research using AI.)',
@@ -237,7 +237,7 @@ Explain the expected effects from this ingredient group in the following areas:
       <p className="text-sm md:text-2xl text-center mb-2 md:mb-4" style={{ color: '#25c760' }}>
         {isJa ? '飲むタイプのMother Vegetable' : 'Drinkable Mother Vegetable'}
       </p>
-      <p className="text-center text-white text-base md:text-xl mb-4">Achieve / Forever</p>
+      <p className="text-center text-white text-base md:text-xl mb-4">Achieve</p>
 
       <div className="w-32 md:w-48 h-1 md:h-1.5 bg-gradient-to-r from-transparent via-green-400 to-transparent mx-auto rounded-full mt-4 md:mt-6 mb-6 md:mb-8 opacity-80" />
 
@@ -310,7 +310,7 @@ Explain the expected effects from this ingredient group in the following areas:
       {/* Features Section */}
       <div className="max-w-4xl mx-auto px-4 md:px-4 mt-12 md:mt-16">
         <h3 className="text-lg md:text-3xl font-bold text-center mb-6 md:mb-8" style={{ color: '#25c760' }}>
-          {isJa ? (<>Achieve / Foreverの<br className="md:hidden" />特性について</>) : texts.featuresTitle}
+          {isJa ? (<>Achieveの<br className="md:hidden" />特性について</>) : texts.featuresTitle}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5 md:gap-y-6">
           {featuresTable.flat().map((item, index) => (

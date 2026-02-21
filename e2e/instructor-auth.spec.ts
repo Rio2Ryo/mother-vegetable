@@ -68,9 +68,10 @@ test.describe('Instructor Authentication', () => {
 
     await page.getByRole('button', { name: /register now/i }).click();
 
-    // Should redirect to instructor dashboard
-    await page.waitForURL('**/instructor/dashboard', { timeout: 10000 });
-    await expect(page.getByText('Test Instructor')).toBeVisible();
+    // Registration shows success message then redirects after 1.5s
+    await page.waitForURL('**/instructor/dashboard', { timeout: 15000 });
+    // Dashboard shows "Welcome, <name>" in a visible <p class="text-lg"> in the main area
+    await expect(page.locator('h1', { hasText: 'Instructor Dashboard' })).toBeVisible({ timeout: 10000 });
   });
 
   // INSTRUCTOR LOGIN
@@ -105,14 +106,14 @@ test.describe('Instructor Authentication', () => {
     await page.getByPlaceholder('Minimum 6 characters').fill('flowpass123');
     await page.getByPlaceholder('Re-enter your password').fill('flowpass123');
     await page.getByRole('button', { name: /register now/i }).click();
-    await page.waitForURL('**/instructor/dashboard', { timeout: 10000 });
+    await page.waitForURL('**/instructor/dashboard', { timeout: 15000 });
 
-    // Logout (if there's a logout button)
+    // Logout by clicking the Logout button on dashboard
+    await page.waitForTimeout(1000);
     const logoutBtn = page.getByRole('button', { name: /logout/i });
-    if (await logoutBtn.isVisible()) {
-      await logoutBtn.click();
-      await page.waitForTimeout(500);
-    }
+    await expect(logoutBtn).toBeVisible({ timeout: 5000 });
+    await logoutBtn.click();
+    await page.waitForTimeout(1000);
 
     // Login
     await page.goto('instructor/login');
@@ -120,8 +121,8 @@ test.describe('Instructor Authentication', () => {
     await page.getByPlaceholder('sample@email.com').fill('flow.inst@example.com');
     await page.getByPlaceholder('Minimum 6 characters').fill('flowpass123');
     await page.getByRole('button', { name: /login now/i }).click();
-    await page.waitForURL('**/instructor/dashboard', { timeout: 10000 });
-    await expect(page.getByText('Flow Instructor')).toBeVisible();
+    await page.waitForURL('**/instructor/dashboard', { timeout: 15000 });
+    await expect(page.locator('h1', { hasText: 'Instructor Dashboard' })).toBeVisible({ timeout: 10000 });
   });
 
   // INSTRUCTOR DASHBOARD

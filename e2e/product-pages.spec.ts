@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { waitForPageReady, scrollFullPage } from './helpers';
 
-const products = ['achieve', 'confidence', 'forever'] as const;
+const products = ['achieve', 'confidence'] as const;
 
 test.describe('Product Pages', () => {
   for (const product of products) {

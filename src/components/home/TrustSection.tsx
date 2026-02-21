@@ -47,12 +47,6 @@ export default function TrustSection() {
         ? '厚生労働省が定める医薬部外品原料規格を満たした原料を使用しています。'
         : 'Materials compliant with Japanese quasi-drug ingredient standards.',
     },
-    {
-      label: 'Forever',
-      text: isJa
-        ? '農林水産省のペットフード基準に準拠し、ヒューマングレード品質で管理された製品です。'
-        : "Compliant with Japan\u2019s pet food standards. Managed at human-grade quality.",
-    },
   ];
 
   return (

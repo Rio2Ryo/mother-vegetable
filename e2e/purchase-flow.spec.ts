@@ -114,7 +114,7 @@ test.describe('Full Purchase Flow', () => {
   });
 
   test('buy now button goes directly to checkout', async ({ page }) => {
-    await page.goto('product/forever');
+    await page.goto('product/achieve');
     await waitForPageReady(page);
 
     // Click "Buy Now / Proceed to Checkout" button
