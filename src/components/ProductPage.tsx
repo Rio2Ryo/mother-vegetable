@@ -1,10 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
+import { getStoredReferralCode } from '@/lib/affiliate';
+
+const REFERRAL_DISCOUNT_PRICE = 33.00;
 
 /* ------------------------------------------------------------------ */
 /* Types                                                               */
@@ -85,8 +88,16 @@ export interface ProductPageData {
 export default function ProductPage({ product }: { product: ProductPageData }) {
   const [selectedVideo, setSelectedVideo] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [hasReferral, setHasReferral] = useState(false);
   const { addItem } = useCartStore();
   const router = useRouter();
+
+  useEffect(() => {
+    const code = getStoredReferralCode();
+    if (code) setHasReferral(true);
+  }, []);
+
+  const effectivePrice = hasReferral ? REFERRAL_DISCOUNT_PRICE : product.price;
 
   const handleAddToCart = () => {
     addItem({
@@ -94,6 +105,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       productId: product.id,
       name: product.fullName,
       price: product.price,
+      discountedPrice: hasReferral ? REFERRAL_DISCOUNT_PRICE : undefined,
       image: product.productImage,
       currency: product.currency,
       quantity,
@@ -106,6 +118,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       productId: product.id,
       name: product.fullName,
       price: product.price,
+      discountedPrice: hasReferral ? REFERRAL_DISCOUNT_PRICE : undefined,
       image: product.productImage,
       currency: product.currency,
       quantity,
@@ -458,8 +471,24 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                 </div>
 
                 <h2 className="product-price" style={{ fontFamily: 'Arial, sans-serif' }}>
-                  {product.priceDisplay}
+                  {hasReferral ? (
+                    <>
+                      <span style={{ textDecoration: 'line-through', opacity: 0.5, fontSize: '0.7em', marginRight: '8px' }}>
+                        {product.priceDisplay}
+                      </span>
+                      <span style={{ color: '#25C760' }}>
+                        USD {REFERRAL_DISCOUNT_PRICE.toFixed(2)}
+                      </span>
+                    </>
+                  ) : (
+                    product.priceDisplay
+                  )}
                 </h2>
+                {hasReferral && (
+                  <div style={{ display: 'inline-block', padding: '4px 12px', background: 'rgba(37,199,96,0.15)', border: '1px solid #25C760', borderRadius: '6px', marginBottom: '8px' }}>
+                    <span style={{ color: '#25C760', fontSize: '13px', fontWeight: 600 }}>Referral Discount Applied</span>
+                  </div>
+                )}
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '12px' }}>
                   <div className="free-shipping-badge">

@@ -535,7 +535,47 @@ export function updateOrderStatus(id: string, status: OrderStatus): void {
 export function getInstructors(): Instructor[] {
   if (typeof window === "undefined") return [];
   const raw = localStorage.getItem(INSTRUCTORS_KEY);
-  return raw ? JSON.parse(raw) : [];
+  if (!raw) return [];
+
+  // Also load commissions and orders for computing sales data
+  const commissions: { instructorId: string; type: string; orderTotal: number; commissionAmount: number }[] =
+    JSON.parse(localStorage.getItem("mv-commissions") || "[]");
+  const orders: Order[] = getOrders();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const parsed: any[] = JSON.parse(raw);
+  return parsed.map((i) => {
+    // Normalise: affiliate store uses `fullName`, admin seed uses `name`
+    const name = i.name || i.fullName || "Unknown";
+    const id = i.id || "";
+    const referralCode = i.referralCode || "";
+
+    // Compute sales from commissions if fields are missing/zero
+    const directComm = commissions.filter((c) => c.instructorId === id && c.type === "direct");
+    const referralComm = commissions.filter((c) => c.instructorId === id && c.type === "referral");
+    const ordersWithCode = orders.filter((o) => o.referralCode === referralCode);
+
+    const directSales = i.directSales ?? directComm.length ?? 0;
+    const referralSales = i.referralSales ?? referralComm.length ?? 0;
+    const commissionEarned = i.commissionEarned ??
+      (directComm.reduce((s, c) => s + (c.commissionAmount || 0), 0) +
+       referralComm.reduce((s, c) => s + (c.commissionAmount || 0), 0));
+
+    return {
+      id,
+      name,
+      email: i.email || "",
+      phone: i.phone || "",
+      referralCode,
+      referralUrl: i.referralUrl || `${typeof window !== "undefined" ? window.location.origin : ""}/?ref=${referralCode}`,
+      referredBy: i.referredBy || i.parentInstructorId || undefined,
+      status: i.status || "active",
+      directSales: typeof directSales === "number" ? directSales : ordersWithCode.length,
+      referralSales,
+      commissionEarned,
+      createdAt: i.createdAt || new Date().toISOString(),
+    } satisfies Instructor;
+  });
 }
 
 export function getInstructorById(id: string): Instructor | undefined {

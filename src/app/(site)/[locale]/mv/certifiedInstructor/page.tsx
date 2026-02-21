@@ -48,9 +48,8 @@ const planDetails = [
 ];
 
 const heroProducts = [
-  { name: 'Achieve', subtitle: 'for Body', price: '$33.00', instructionReward: '$8.25', growthReward: '$3.30' },
-  { name: 'Confidence', subtitle: 'for All Skin', price: '$33.00', instructionReward: '$8.25', growthReward: '$3.30' },
-  { name: 'Forever', subtitle: 'for Pet', price: '$33.00', instructionReward: '$8.25', growthReward: '$3.30' },
+  { name: 'Achieve', subtitle: 'for Body (Human & Animal)', price: '$33.00', instructionReward: '$8.25', growthReward: '$3.30' },
+  { name: 'Confidence', subtitle: 'for All Skin (Human & Animal)', price: '$33.00', instructionReward: '$8.25', growthReward: '$3.30' },
 ];
 
 /* ================================================================== */
@@ -108,7 +107,7 @@ export default async function CertifiedInstructorPage({
         {/* ============================================================ */}
         <div className="flex justify-center mb-10">
           <video
-            className="w-full max-w-[65%] h-auto rounded-lg max-md:max-w-[80%] max-sm:max-w-full"
+            className="w-full max-w-[35%] h-auto rounded-lg max-md:max-w-[50%] max-sm:max-w-[75%]"
             autoPlay
             muted
             loop
@@ -222,7 +221,7 @@ export default async function CertifiedInstructorPage({
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 max-w-3xl mx-auto">
           {heroProducts.map((product) => (
             <div
               key={product.name}

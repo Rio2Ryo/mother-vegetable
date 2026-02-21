@@ -223,7 +223,7 @@ export default function Header() {
                     } static mt-2 ml-4 md:mt-0 md:ml-0`}
                   >
                     <ul className="md:bg-black md:shadow-[0_8px_20px_rgba(0,0,0,0.3)] md:rounded-lg md:border md:border-[#25C760] md:min-w-[180px] list-none p-0 m-0">
-                      {['achieve', 'confidence', 'forever'].map((p) => (
+                      {['achieve', 'confidence'].map((p) => (
                         <li key={p}>
                           <Link
                             href={`/product/${p}`}
@@ -270,7 +270,7 @@ export default function Header() {
                     } static mt-2 ml-4 md:mt-0 md:ml-0`}
                   >
                     <ul className="md:bg-black md:shadow-[0_8px_20px_rgba(0,0,0,0.3)] md:rounded-lg md:border md:border-[#25C760] md:min-w-[180px] list-none p-0 m-0">
-                      {['achieve', 'confidence', 'forever'].map((p) => (
+                      {['achieve', 'confidence'].map((p) => (
                         <li key={p}>
                           <Link
                             href={`/${p}-howto`}
@@ -322,24 +322,26 @@ export default function Header() {
               className="relative border border-white rounded-md bg-transparent text-white px-4 py-2 font-medium text-sm cursor-pointer min-w-[60px] text-center h-10 flex items-center justify-center hover:bg-[#25C760] hover:border-[#25C760] hover:-translate-y-[3px] transition-all duration-300"
               style={{ fontFamily: 'Arial, sans-serif' }}
               onClick={() => setLangOpen(!langOpen)}
-              onMouseLeave={() => setLangOpen(false)}
             >
               <span className="block">{currentLangLabel}</span>
               {langOpen && (
-                <div className="absolute top-full left-0 right-0 bg-black border border-[#25C760] rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[1000] mt-1 overflow-hidden">
-                  {langOptions.map((lang) => (
-                    <div
-                      key={lang.code}
-                      className="px-4 py-[10px] text-white hover:bg-[#25C760] transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] last:border-b-0 cursor-pointer text-center font-medium"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        switchLocale(lang.code);
-                      }}
-                    >
-                      {lang.label}
-                    </div>
-                  ))}
-                </div>
+                <>
+                  <div className="fixed inset-0 z-[999]" onClick={(e) => { e.stopPropagation(); setLangOpen(false); }} />
+                  <div className="absolute top-full left-0 right-0 bg-black border border-[#25C760] rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[1000] mt-1 overflow-hidden">
+                    {langOptions.map((lang) => (
+                      <div
+                        key={lang.code}
+                        className="px-4 py-[10px] text-white hover:bg-[#25C760] transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] last:border-b-0 cursor-pointer text-center font-medium"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          switchLocale(lang.code);
+                        }}
+                      >
+                        {lang.label}
+                      </div>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
 

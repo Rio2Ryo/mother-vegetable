@@ -26,16 +26,12 @@ function getProducts(isJa: boolean) {
     {
       id: 'achieve',
       name: 'Achieve',
-      subtitle: isJa ? '身体のために' : 'for Body',
-      taglineJp: "'TORIKOMU'",
+      subtitle: isJa ? '身体のために（人・動物）' : 'for Body (Human & Animal)',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
       videoUrl: '/Images/Assets/homepage/product/achieve_video.mp4',
       features: isJa
-        ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と']
-        : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones'],
-      howToUse: isJa
-        ? "1スティックを飲み物や食事に'TORIKOMU'"
-        : "Simply 'TORIKOMU' one capsule into your drink or meal.",
+        ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と', '動物にも使用可能']
+        : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones', 'Also suitable for animals'],
       howToUseLabel: isJa ? 'Achieveの料理/ドリンク一覧' : 'Achieve Recipes & Drinks',
       howToLink: '/achieve-howto',
       productLink: '/product/achieve',
@@ -43,36 +39,15 @@ function getProducts(isJa: boolean) {
     {
       id: 'confidence',
       name: 'Confidence',
-      subtitle: isJa ? 'すべての肌に' : 'for All Skin',
-      taglineJp: "'SURIKOMU' , 'MAZEKOMU'",
+      subtitle: isJa ? 'すべての肌に（人・動物）' : 'for All Skin (Human & Animal)',
       tagline: isJa ? '肌の気になるところに直接塗布' : 'Skin Healing Effect',
       videoUrl: '/Images/Assets/homepage/product/confidence_v2.mp4',
       features: isJa
-        ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用']
-        : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics'],
-      howToUse: isJa
-        ? "直接 'SURIKOMU' または コスメに 'MAZEKOMU'"
-        : "'SURIKOMU' directly or 'MAZEKOMU' into your current cosmetics.",
+        ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用', '動物の肌にも使用可能']
+        : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics', 'Also suitable for animal skin'],
       howToUseLabel: isJa ? 'Confidenceの混ぜ方/使い方一覧' : 'Confidence Mixing & Usage Guide',
       howToLink: '/confidence-howto',
       productLink: '/product/confidence',
-    },
-    {
-      id: 'forever',
-      name: 'Forever',
-      subtitle: isJa ? 'ペットのために' : 'for Pet',
-      taglineJp: "'MAZEKOMU'",
-      tagline: isJa ? 'フードに混ぜて栄養48種を摂取' : "to extend your pet's healthy life.",
-      videoUrl: '/Images/Assets/homepage/product/forever_video.mp4',
-      features: isJa
-        ? ['フードに混ぜて栄養48種を摂取', '大切なペットと永く健康に']
-        : ['Mix into food for 48 essential nutrients', 'Live a long, healthy life with your beloved pet'],
-      howToUse: isJa
-        ? "ペットフードに1スティックを'MAZEKOMU'"
-        : "Simply 'MAZEKOMU' one capsule into your pet's food.",
-      howToUseLabel: isJa ? 'Foreverのペット種類別与え方一覧' : 'Forever Feeding Guide by Pet Type',
-      howToLink: '/forever-howto',
-      productLink: '/product/forever',
     },
   ];
 }
@@ -100,7 +75,7 @@ export default function ProductsSection() {
 
       {/* Product Cards */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -137,11 +112,6 @@ export default function ProductsSection() {
                   <p className="text-green-400 text-xs md:text-sm">{product.subtitle}</p>
                 </div>
 
-                {/* Label */}
-                <p className="text-red-600 font-semibold text-xs md:text-sm md:text-center">
-                  {product.taglineJp}
-                </p>
-
                 {/* Features */}
                 <div className="space-y-1 mb-2 mt-5">
                   {product.features.map((feature, idx) => (
@@ -177,19 +147,6 @@ export default function ProductsSection() {
         ))}
       </motion.div>
 
-      {/* Trust Text */}
-      <div className="space-y-0 md:space-y-1 text-center mt-8 md:mt-12">
-        {[
-          { label: "'TORIKOMU'", text: 'means of having in Japanese as \u300C\u53D6\u308A\u8FBC\u3080\u300D' },
-          { label: "'MAZEKOMU'", text: 'means of mixing in Japanese as \u300C\u6DF7\u305C\u8FBC\u3080\u300D' },
-          { label: "'SURIKOMU'", text: 'means of rubbing in Japanese as \u300C\u64E6\u308A\u8FBC\u3080\u300D' },
-        ].map((item, index) => (
-          <div key={index} className="text-[10px] md:text-base">
-            <span className="text-red-600 font-semibold mr-4">{item.label}</span>
-            <span className="text-gray-300">{item.text}</span>
-          </div>
-        ))}
-      </div>
     </motion.div>
   );
 }

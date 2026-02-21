@@ -347,9 +347,6 @@ Characteristics of the raw materials:
 
         <div className="w-32 md:w-48 h-1 md:h-1.5 bg-gradient-to-r from-transparent via-green-400 to-transparent mx-auto rounded-full mt-4 md:mt-6 mb-6 md:mb-8 opacity-80" />
 
-        {/* SURIKOMU / MAZEKOMU */}
-        <p className="text-center text-red-600 text-xs md:text-sm mb-2 font-semibold">SURIKOMU / MAZEKOMU</p>
-
         {/* Cosmetic Video */}
         <div className="flex justify-center">
           <video
