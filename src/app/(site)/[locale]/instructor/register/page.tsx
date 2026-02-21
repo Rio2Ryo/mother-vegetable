@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useAffiliateStore } from '@/store/affiliateStore';
@@ -10,17 +10,33 @@ export default function InstructorRegisterPage() {
   const router = useRouter();
   const t = useTranslations('instructor');
   const register = useAffiliateStore((s) => s.register);
+  const currentInstructor = useAffiliateStore((s) => s.currentInstructor);
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [referralCode, setReferralCode] = useState(() => getStoredReferralCode() || '');
+  const [referralCode, setReferralCode] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const code = getStoredReferralCode();
+    if (code) setReferralCode(code);
+  }, []);
+
+  // If already logged in as instructor, redirect to dashboard
+  useEffect(() => {
+    if (mounted && currentInstructor && !success) {
+      router.push('/instructor/dashboard');
+    }
+  }, [mounted, currentInstructor, success, router]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -49,18 +65,24 @@ export default function InstructorRegisterPage() {
 
     setSubmitting(true);
 
-    const result = register({
-      fullName: fullName.trim(),
-      email: email.trim(),
-      phone: phone.trim(),
-      password,
-      referralCode: referralCode.trim() || undefined,
-    });
+    try {
+      const result = register({
+        fullName: fullName.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        password,
+        referralCode: referralCode.trim() || undefined,
+      });
 
-    if (result.success) {
-      router.push('/instructor/dashboard');
-    } else {
-      setError(result.error || t('errorGeneric'));
+      if (result.success) {
+        setSuccess(true);
+        setTimeout(() => router.push('/instructor/dashboard'), 1500);
+      } else {
+        setError(result.error || t('errorGeneric'));
+        setSubmitting(false);
+      }
+    } catch {
+      setError(t('errorGeneric'));
       setSubmitting(false);
     }
   }
@@ -109,6 +131,15 @@ export default function InstructorRegisterPage() {
                   </h1>
                   <p className="text-white/60 text-sm mt-1">{t('registerSubtitle')}</p>
                 </div>
+
+                {/* Success Message */}
+                {success && (
+                  <div className="py-2">
+                    <div className="p-3 bg-[#25C760]/10 border border-[#25C760]/30 rounded-[5px] text-[#25C760] text-sm font-semibold text-center">
+                      {t('registerSuccess')}
+                    </div>
+                  </div>
+                )}
 
                 <form onSubmit={handleSubmit} noValidate>
                   {/* Full Name */}

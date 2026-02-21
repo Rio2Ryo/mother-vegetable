@@ -165,6 +165,8 @@
     "errorPasswordMatch": "パスワードが一致しません。",
     "errorEmailExists": "このメールアドレスは既に登録されています。",
     "errorInvalidCredentials": "メールアドレスまたはパスワードが正しくありません。",
+    "errorGeneric": "エラーが発生しました。もう一度お試しください。",
+    "signupSuccess": "アカウントが作成されました！リダイレクト中...",
     "registerSuccess": "アカウントが作成されました！"
   },
   "healthcare": {
@@ -199,6 +201,7 @@
     "referralCodeHint": "紹介してくれたインストラクターの紹介コードを入力してください",
     "registerButton": "登録する",
     "registering": "登録中...",
+    "registerSuccess": "登録が完了しました！ダッシュボードに移動します...",
     "errorFullName": "氏名を入力してください。",
     "errorEmail": "有効なメールアドレスを入力してください。",
     "errorPhone": "電話番号を入力してください。",

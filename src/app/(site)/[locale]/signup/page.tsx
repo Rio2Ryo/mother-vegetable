@@ -16,15 +16,21 @@ export default function SignupPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const getInstructorByReferralCode = useAffiliateStore((s) => s.getInstructorByReferralCode);
   const register = useUserStore((s) => s.register);
+  const currentUser = useUserStore((s) => s.currentUser);
   const t = useTranslations('auth');
   const tInstructor = useTranslations('instructor');
   const router = useRouter();
 
+  useEffect(() => { setMounted(true); }, []);
+
   useEffect(() => {
+    if (!mounted) return;
     const code = getStoredReferralCode();
     if (code) {
       const instructor = getInstructorByReferralCode(code);
@@ -32,19 +38,32 @@ export default function SignupPage() {
         setReferrerName(instructor.fullName);
       }
     }
-  }, [getInstructorByReferralCode]);
+  }, [mounted, getInstructorByReferralCode]);
+
+  // If already logged in, redirect to home
+  useEffect(() => {
+    if (mounted && currentUser) {
+      router.push('/');
+    }
+  }, [mounted, currentUser, router]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setSubmitting(true);
 
-    const result = register({ username, email, password, confirmPassword });
+    try {
+      const result = register({ username, email, password, confirmPassword });
 
-    if (result.success) {
-      router.push('/');
-    } else {
-      setError(result.error || '');
+      if (result.success) {
+        setSuccess(true);
+        setTimeout(() => router.push('/'), 1500);
+      } else {
+        setError(result.error || '');
+        setSubmitting(false);
+      }
+    } catch {
+      setError('errorGeneric');
       setSubmitting(false);
     }
   };
@@ -70,6 +89,13 @@ export default function SignupPage() {
                     <span className="text-gray-300 text-xs">
                       {tInstructor('referredBy')} <span className="text-[#25C760] font-medium">{referrerName}</span>
                     </span>
+                  </div>
+                )}
+
+                {/* Success Message */}
+                {success && (
+                  <div className="mt-3 p-3 bg-[#25C760]/10 border border-[#25C760]/30 rounded-[5px] text-[#25C760] text-sm font-semibold text-center">
+                    {t('signupSuccess')}
                   </div>
                 )}
 

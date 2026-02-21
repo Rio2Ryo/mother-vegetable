@@ -165,6 +165,8 @@
     "errorPasswordMatch": "Passwords do not match.",
     "errorEmailExists": "This email is already registered.",
     "errorInvalidCredentials": "Invalid email or password.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "signupSuccess": "Account created successfully! Redirecting...",
     "registerSuccess": "Account created successfully!"
   },
   "healthcare": {
@@ -199,6 +201,7 @@
     "referralCodeHint": "Enter the referral code of the instructor who referred you",
     "registerButton": "REGISTER NOW",
     "registering": "Registering...",
+    "registerSuccess": "Registration successful! Redirecting to dashboard...",
     "errorFullName": "Please enter your full name.",
     "errorEmail": "Please enter a valid email address.",
     "errorPhone": "Please enter your phone number.",

@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useUserStore } from '@/store/userStore';
+import { useAffiliateStore } from '@/store/affiliateStore';
 import { useTranslations } from 'next-intl';
 
 export default function LoginPage() {
@@ -12,24 +13,44 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  const login = useUserStore((s) => s.login);
+  const userLogin = useUserStore((s) => s.login);
+  const instructorLogin = useAffiliateStore((s) => s.login);
+  const currentUser = useUserStore((s) => s.currentUser);
+  const currentInstructor = useAffiliateStore((s) => s.currentInstructor);
   const t = useTranslations('auth');
   const router = useRouter();
+
+  useEffect(() => { setMounted(true); }, []);
+
+  // If already logged in, redirect
+  useEffect(() => {
+    if (mounted && (currentUser || currentInstructor)) {
+      router.push('/');
+    }
+  }, [mounted, currentUser, currentInstructor, router]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setSubmitting(true);
 
-    const success = login(email, password);
-
-    if (success) {
+    // Try user login first, then instructor login
+    const userSuccess = userLogin(email, password);
+    if (userSuccess) {
       router.push('/');
-    } else {
-      setError('errorInvalidCredentials');
-      setSubmitting(false);
+      return;
     }
+
+    const instructorSuccess = instructorLogin(email, password);
+    if (instructorSuccess) {
+      router.push('/instructor/dashboard');
+      return;
+    }
+
+    setError('errorInvalidCredentials');
+    setSubmitting(false);
   };
 
   return (
