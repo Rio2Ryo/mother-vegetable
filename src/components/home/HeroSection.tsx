@@ -2,86 +2,90 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useLocale } from 'next-intl';
 
 export default function HeroSection() {
+  const locale = useLocale();
+  const isJa = locale === 'ja';
+
   return (
     <motion.section
-      className="relative h-[35vh] min-h-[250px] sm:h-[60vh] sm:min-h-[400px] md:h-[50vh] md:min-h-[400px] lg:h-[70vh] lg:min-h-[500px] flex items-center justify-center overflow-hidden"
+      className="relative md:min-h-screen flex items-center justify-center overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
       {/* Background image */}
-      <div className="absolute inset-0 z-[1] pointer-events-none">
+      <div className="absolute inset-0">
         <Image
           src="/Images/Assets/homepage/bannerImg.png"
-          alt="Cosmic Earth Background"
+          alt="Earth Regeneration"
           fill
-          className="object-cover object-center"
+          className="object-cover"
           priority
         />
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.3)_0%,rgba(0,0,0,0.1)_50%,rgba(0,0,0,0.4)_100%)] z-[2]" />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
-      {/* Animated green pulse circle behind icon */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-[radial-gradient(circle,rgba(37,199,96,0.1)_0%,rgba(37,199,96,0.05)_50%,transparent_70%)] z-[2] animate-[pulse_4s_ease-in-out_infinite]" />
-
-      {/* Hero content */}
-      <div className="relative z-[3] text-center max-w-[1400px] mx-auto px-4 sm:px-5">
-        {/* Floating icon */}
-        <motion.div
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 3, ease: 'easeInOut', repeat: Infinity }}
-        >
-          <Image
-            src="/Images/favicon.png"
-            alt="Mother Vegetable Icon"
-            width={120}
-            height={120}
-            className="mx-auto mb-4 drop-shadow-[0_0_20px_rgba(37,199,96,0.6)] w-12 h-12 max-[480px]:w-12 max-[480px]:h-12 sm:w-20 sm:h-20 md:w-[100px] md:h-[100px] lg:w-[120px] lg:h-[120px]"
-          />
-        </motion.div>
-
-        {/* Title with fadeInUp */}
-        <motion.h1
-          className="mb-10"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
-        >
-          <span
-            className="block font-bold text-[1.2rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3.5rem] text-[#25C760] tracking-[2px] sm:tracking-wider mb-2.5 [text-shadow:0_0_20px_rgba(37,199,96,0.5)]"
-            style={{ fontFamily: 'Arial, sans-serif' }}
+      {/* Content */}
+      <div className="relative z-10 text-center max-w-7xl mx-auto px-4 transition-all duration-1500 pt-40 md:pt-48 lg:pt-56">
+        {/* Title Section */}
+        <div className="mb-12">
+          {/* Logo */}
+          <motion.div
+            className="mb-6"
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 3, ease: 'easeInOut', repeat: Infinity }}
           >
-            MOTHER VEGETABLE PRODUCTS
-          </span>
-          <Image
-            src="/Images/Assets/homepage/underline.png"
-            alt="Underline"
-            width={250}
-            height={10}
-            className="mx-auto max-w-[80%] h-auto drop-shadow-[0_0_15px_rgba(37,199,96,0.5)] w-[120px] sm:w-[250px] md:w-[220px] lg:w-[250px] my-2 sm:my-4 lg:my-5"
-          />
-        </motion.h1>
+            <Image
+              src="/Images/favicon.png"
+              alt="Mother Vegetable Logo"
+              width={140}
+              height={140}
+              className="mx-auto w-12 h-12 sm:w-32 sm:h-32 md:w-32 md:h-32 drop-shadow-[0_0_20px_rgba(37,199,96,0.6)]"
+              priority
+            />
+          </motion.div>
 
-        {/* Description with fadeInUp */}
+          <motion.div
+            className="inline-block"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
+            style={{
+              background: 'linear-gradient(135deg, #4ade80 0%, #22c55e 50%, #16a34a 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) drop-shadow(0 2px 4px rgba(34, 197, 94, 0.2))',
+            }}
+          >
+            <h1 className="text-sm sm:text-2xl md:text-3xl lg:text-3xl font-semibold leading-tight">
+              <div>MOTHER VEGETABLE PROJECT</div>
+            </h1>
+          </motion.div>
+
+          <div className="w-40 md:w-48 h-1.5 bg-gradient-to-r from-transparent via-green-400 to-transparent mx-auto rounded-full mt-6 opacity-80" />
+        </div>
+
+        {/* Description */}
         <motion.div
+          className="max-w-4xl mx-auto mb-2 mt-8 md:mt-16 px-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.8 }}
-          className="text-white"
-          style={{ fontFamily: 'Arial, sans-serif' }}
         >
-          <p className="text-[0.6rem] sm:text-[1.2rem] md:text-[1rem] lg:text-[1.4rem] font-light mb-4 opacity-90 [text-shadow:0_2px_4px_rgba(0,0,0,0.5)] text-[#25C760]">
-            Vegetable at the beginning of Earth, 3.5 billion years ago
-          </p>
-          <p className="text-[0.6rem] sm:text-[1.4rem] md:text-[1.2rem] lg:text-[1.6rem] font-light text-[#25C760] mb-4 [text-shadow:0_0_15px_rgba(37,199,96,0.3)]">
-            &apos;Mother Vegetable&apos;
-          </p>
-          <p className="text-[0.6rem] sm:text-[1.1rem] md:text-[1rem] lg:text-[1.2rem] font-light leading-relaxed opacity-95 [text-shadow:0_2px_4px_rgba(0,0,0,0.5)] max-w-[600px] mx-auto text-[#25C760]">
-            Earth&apos;s life force, for you.
-          </p>
+          <div className="space-y-3">
+            <p className="text-xs md:text-xl text-[#4ade80] leading-relaxed">
+              {isJa ? '35億年前の地球のはじまりの植物' : 'The vegetable from 3.5 billion years ago'}
+            </p>
+            <p className="text-xs md:text-xl text-[#4ade80] leading-relaxed">
+              {isJa ? '「マザーベジタブル」' : '"Mother Vegetable"'}
+            </p>
+            <p className="text-xs md:text-xl text-[#4ade80] leading-relaxed">
+              {isJa ? '地球が生み出した生命力を、あなたに。' : "Earth\u2019s life force, for you."}
+            </p>
+          </div>
         </motion.div>
       </div>
     </motion.section>

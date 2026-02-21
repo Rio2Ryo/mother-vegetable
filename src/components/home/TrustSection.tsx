@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useLocale } from 'next-intl';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -21,66 +22,89 @@ const itemVariants = {
 };
 
 export default function TrustSection() {
+  const locale = useLocale();
+  const isJa = locale === 'ja';
+
+  const certifications = [
+    { id: 1, src: '/Images/Assets/homepage/company/partner_1.png', alt: '100% Organic' },
+    { id: 2, src: '/Images/Assets/homepage/company/partner_2.png', alt: 'Certified Vegan' },
+    { id: 3, src: '/Images/Assets/homepage/company/partner_3.png', alt: 'GMP Quality' },
+    { id: 4, src: '/Images/Assets/homepage/company/partner_4.png', alt: 'Halal' },
+    { id: 5, src: '/Images/Assets/homepage/company/partner_5.png', alt: 'HACCP' },
+    { id: 6, src: '/Images/Assets/homepage/company/partner_6.png', alt: 'JFRL' },
+  ];
+
+  const trustItems = [
+    {
+      label: 'Achieve',
+      text: isJa
+        ? 'GMP認証取得工場にて製造され、ハラル・ヴィーガン・オーガニック認証原料を使用した製品です。'
+        : 'GMP-certified manufacturing. Halal, Vegan, and Organic certified.',
+    },
+    {
+      label: 'Confidence',
+      text: isJa
+        ? '厚生労働省が定める医薬部外品原料規格を満たした原料を使用しています。'
+        : 'Materials compliant with Japanese quasi-drug ingredient standards.',
+    },
+    {
+      label: 'Forever',
+      text: isJa
+        ? '農林水産省のペットフード基準に準拠し、ヒューマングレード品質で管理された製品です。'
+        : "Compliant with Japan\u2019s pet food standards. Managed at human-grade quality.",
+    },
+  ];
+
   return (
     <motion.div
-      className="bg-black border border-[#25C760] rounded-xl p-[10px] md:p-[25px] lg:p-10 my-5 md:my-10 transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_40px_rgba(37,199,96,0.2)]"
+      className="bg-black border-2 border-[#25C760] rounded-lg p-4 md:p-8 my-5 md:my-5"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <h2 className="section-title mb-2">Our Trust</h2>
-      <Image src="/Images/Assets/homepage/underline.png" alt="Underline" width={250} height={10} className="mx-auto mb-8 max-w-[80%] h-auto drop-shadow-[0_0_15px_rgba(37,199,96,0.5)]" />
+      <h2 className="text-xl md:text-5xl font-bold text-center mb-2 md:mb-4" style={{ color: '#25c760' }}>
+        Our Trust
+      </h2>
 
-      {/* Partner logos - flex row on all sizes, matching original exactly */}
+      <div className="w-32 md:w-48 h-1 md:h-1.5 bg-gradient-to-r from-transparent via-green-400 to-transparent mx-auto rounded-full mt-4 md:mt-6 mb-6 md:mb-12 opacity-80" />
+
+      {/* Certification Logos */}
       <motion.div
-        className="flex flex-row flex-nowrap justify-center items-center gap-[1px] md:gap-[1%] lg:gap-[30px] max-w-[1400px] mx-auto mb-8 overflow-hidden px-0 sm:px-0 md:px-0"
+        className="flex justify-center items-center gap-1 md:gap-10 mb-6 md:mb-12"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <motion.div
-            key={i}
-            variants={itemVariants}
-            className="flex justify-center items-center p-[1px] md:p-2 lg:p-2.5 flex-shrink-0 w-[16.66%] max-w-[16.66%] md:w-auto md:max-w-none"
-          >
+        {certifications.map((cert) => (
+          <motion.div key={cert.id} variants={itemVariants}>
             <Image
-              src={`/Images/Assets/homepage/company/partner_${i}.png`}
-              alt={`Partner ${i}`}
+              src={cert.src}
+              alt={cert.alt}
               width={120}
               height={120}
-              className="w-full max-h-[35px] md:max-w-[70px] md:max-h-[70px] lg:max-w-[120px] lg:max-h-[120px] h-auto object-contain transition-all duration-300 hover:scale-110"
+              className="w-[15vw] max-w-[96px] md:w-auto md:h-24 object-contain transition-all duration-300 hover:scale-110"
             />
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Trust descriptions */}
-      <motion.div
-        className="flex flex-col gap-[5px] max-w-[820px] mx-auto w-fit py-4 max-[480px]:gap-[10px]"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        {[
-          { label: 'Achieve', desc: 'certified human grade food by Ministry of Health, Labour and Welfare (MHLW), Japan' },
-          { label: 'Confidence', desc: 'certified cosmetic \u201CThe Japanese Standards of Quasi-Drug Ingredients (JSQI)\u201D by MHLW, Japan' },
-          { label: 'Forever', desc: 'certified by pet grade food by Ministry of Agriculture, Forestry and Fisheries (MAFF), Japan' },
-        ].map((item) => (
-          <motion.div
-            key={item.label}
-            variants={itemVariants}
-            className="flex flex-col max-[768px]:flex-col max-[768px]:items-center max-[768px]:gap-[6px] max-[768px]:text-center sm:flex-row justify-center items-center gap-4 text-white text-[1rem] max-[1024px]:text-[0.95rem] max-[768px]:text-[0.7rem] max-[480px]:text-[0.55rem]"
-            style={{ fontFamily: 'Arial, sans-serif' }}
-          >
-            <span className="min-w-[110px] text-right font-bold text-[#25C760] max-[768px]:text-center">{item.label}</span>
-            <span className="flex-1 text-left max-[768px]:text-center">{item.desc}</span>
-          </motion.div>
-        ))}
-      </motion.div>
+      {/* Trust Text */}
+      <div className="flex justify-center">
+        <div className="space-y-3 md:space-y-1 text-left inline-block">
+          {trustItems.map((item, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="text-[10px] md:text-base"
+            >
+              <p className="text-green-400 font-semibold md:inline md:mr-4">{item.label}</p>
+              <p className="text-gray-300 md:inline">{item.text}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </motion.div>
   );
 }

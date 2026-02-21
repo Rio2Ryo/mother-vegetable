@@ -1,38 +1,8 @@
 'use client';
 
 import { Link } from '@/i18n/navigation';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
-
-const products = [
-  {
-    id: 'achieve', name: 'Achieve', subtitle: 'for Body',
-    taglineJp: "'TORIKOMU'", tagline: '48 different nutrients at once.',
-    videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
-    benefits: ['Supports a healthy gut, Regeneration of cells throughout the body.', 'Helps relieve constipation, improve sleep, and aid weight management.'],
-    howToUse: "Simply 'TORIKOMU' one capsule into your drink or meal.",
-    howToLink: '/achieve-howto', productLink: '/product/achieve',
-    cardClass: 'achieve-card',
-  },
-  {
-    id: 'confidence', name: 'Confidence', subtitle: 'For All Skin',
-    taglineJp: "'SURIKOMU' , 'MAZEKOMU'", tagline: 'Skin Healing Effect',
-    videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
-    benefits: ['Powerful anti-aging benefits.', 'Helps improve dark spots, acne, odor, and skin damage.'],
-    howToUse: " 'SURIKOMU' directly or 'MAZEKOMU' into your current cosmetics.",
-    howToLink: '/confidence-howto', productLink: '/product/confidence',
-    cardClass: 'heal-card',
-  },
-  {
-    id: 'forever', name: 'Forever', subtitle: 'for Pet',
-    taglineJp: "'MAZEKOMU'", tagline: "to extend your pet's healthy life.",
-    videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/forever_video.mp4',
-    benefits: ['Supports tear stain reduction and gut health.', 'Helps reduce body and waste odors, boosts appetite.'],
-    howToUse: "Simply 'MAZEKOMU' one capsule into your pet's food.\"",
-    howToLink: '/forever-howto', productLink: '/product/forever',
-    cardClass: 'forever-card',
-  },
-];
+import { useLocale } from 'next-intl';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -51,22 +21,86 @@ const cardVariants = {
   },
 };
 
+function getProducts(isJa: boolean) {
+  return [
+    {
+      id: 'achieve',
+      name: 'Achieve',
+      subtitle: isJa ? '身体のために' : 'for Body',
+      taglineJp: "'TORIKOMU'",
+      tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
+      videoUrl: '/Images/Assets/homepage/product/achieve_video.mp4',
+      features: isJa
+        ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と']
+        : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones'],
+      howToUse: isJa
+        ? "1スティックを飲み物や食事に'TORIKOMU'"
+        : "Simply 'TORIKOMU' one capsule into your drink or meal.",
+      howToUseLabel: isJa ? 'Achieveの料理/ドリンク一覧' : 'Achieve Recipes & Drinks',
+      howToLink: '/achieve-howto',
+      productLink: '/product/achieve',
+    },
+    {
+      id: 'confidence',
+      name: 'Confidence',
+      subtitle: isJa ? 'すべての肌に' : 'for All Skin',
+      taglineJp: "'SURIKOMU' , 'MAZEKOMU'",
+      tagline: isJa ? '肌の気になるところに直接塗布' : 'Skin Healing Effect',
+      videoUrl: '/Images/Assets/homepage/product/confidence_v2.mp4',
+      features: isJa
+        ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用']
+        : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics'],
+      howToUse: isJa
+        ? "直接 'SURIKOMU' または コスメに 'MAZEKOMU'"
+        : "'SURIKOMU' directly or 'MAZEKOMU' into your current cosmetics.",
+      howToUseLabel: isJa ? 'Confidenceの混ぜ方/使い方一覧' : 'Confidence Mixing & Usage Guide',
+      howToLink: '/confidence-howto',
+      productLink: '/product/confidence',
+    },
+    {
+      id: 'forever',
+      name: 'Forever',
+      subtitle: isJa ? 'ペットのために' : 'for Pet',
+      taglineJp: "'MAZEKOMU'",
+      tagline: isJa ? 'フードに混ぜて栄養48種を摂取' : "to extend your pet's healthy life.",
+      videoUrl: '/Images/Assets/homepage/product/forever_video.mp4',
+      features: isJa
+        ? ['フードに混ぜて栄養48種を摂取', '大切なペットと永く健康に']
+        : ['Mix into food for 48 essential nutrients', 'Live a long, healthy life with your beloved pet'],
+      howToUse: isJa
+        ? "ペットフードに1スティックを'MAZEKOMU'"
+        : "Simply 'MAZEKOMU' one capsule into your pet's food.",
+      howToUseLabel: isJa ? 'Foreverのペット種類別与え方一覧' : 'Forever Feeding Guide by Pet Type',
+      howToLink: '/forever-howto',
+      productLink: '/product/forever',
+    },
+  ];
+}
+
 export default function ProductsSection() {
+  const locale = useLocale();
+  const isJa = locale === 'ja';
+  const products = getProducts(isJa);
+
   return (
     <motion.div
-      className="bg-black border border-[#25C760] rounded-xl p-5 sm:p-[30px] md:p-10 my-5 md:my-10 transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_40px_rgba(37,199,96,0.2)]"
+      className="bg-black border-2 border-[#25C760] rounded-lg p-4 md:p-8 my-5 md:my-5"
       id="product-listing"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <h2 className="section-title mb-2">Products</h2>
-      <Image src="/Images/Assets/homepage/underline.png" alt="Underline" width={250} height={10} className="mx-auto mb-8 max-w-[80%] h-auto drop-shadow-[0_0_15px_rgba(37,199,96,0.5)]" />
+      {/* Title */}
+      <h2 className="text-xl md:text-5xl font-bold text-center mb-2 md:mb-4" style={{ color: '#25c760' }}>
+        Products
+      </h2>
 
-      {/* Bento grid: 3 equal columns on desktop, single col on tablet/mobile with horizontal card layout */}
+      <div className="w-32 md:w-48 h-1 md:h-1.5 bg-gradient-to-r from-transparent via-green-400 to-transparent mx-auto rounded-full mt-4 md:mt-6 mb-6 md:mb-12 opacity-80" />
+
+      {/* Product Cards */}
       <motion.div
-        className="grid grid-cols-1 lg:grid-cols-3 gap-5"
+        className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -76,88 +110,83 @@ export default function ProductsSection() {
           <motion.div
             key={product.id}
             variants={cardVariants}
-            className="bg-black border border-[#25C760] rounded-xl p-[30px] flex flex-col transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_15px_40px_rgba(37,199,96,0.2)] cursor-pointer max-[480px]:p-0 max-[768px]:p-[10px] max-[1024px]:p-[15px]"
+            className="rounded-lg p-3 md:p-6"
+            style={{ border: '1px solid #25c760' }}
           >
-            {/* Card content: column on desktop, grid on tablet/mobile */}
-            <div className="flex flex-col lg:flex-col max-[1024px]:grid max-[1024px]:grid-cols-[auto_1fr_1fr] max-[1024px]:grid-rows-[auto_auto] max-[1024px]:gap-[15px] max-[1024px]:items-start max-[1024px]:text-left max-[768px]:gap-[10px] max-[480px]:grid-cols-[0.5fr_1.3fr] max-[480px]:grid-rows-[auto_auto_auto_auto] max-[480px]:gap-[10px_12px] max-[480px]:p-3">
+            {/* Mobile: Horizontal Layout / Desktop: Vertical Layout */}
+            <div className="flex flex-row md:flex-col gap-3 md:gap-0">
               {/* Video */}
-              <div className="text-center mb-6 lg:mb-6 max-[1024px]:mb-0 max-[1024px]:col-[1] max-[1024px]:row-[1/3] max-[1024px]:flex max-[1024px]:items-start max-[1024px]:pt-[5px] max-[480px]:col-[1] max-[480px]:row-[1/5] max-[480px]:flex max-[480px]:items-center max-[480px]:justify-center max-[480px]:h-full">
+              <div className="flex-shrink-0 self-stretch md:self-auto md:mb-4 md:flex md:justify-center">
                 <video
-                  className="max-w-[120px] h-auto rounded-lg mx-auto object-cover max-[1024px]:max-w-[100px] max-[768px]:max-w-[80px] max-[480px]:w-full max-[480px]:max-w-full"
+                  src={product.videoUrl}
                   autoPlay
-                  muted
                   loop
+                  muted
                   playsInline
-                >
-                  <source src={product.videoUrl} type="video/mp4" />
-                </video>
+                  className="w-24 h-full md:w-28 md:h-52 object-cover rounded-lg"
+                />
               </div>
 
-              {/* Product title */}
-              <h3 className="text-center mb-4 max-[1024px]:text-left max-[1024px]:col-[2] max-[1024px]:row-[1] max-[1024px]:mb-2 max-[1024px]:self-start max-[480px]:col-[2] max-[480px]:row-[1] max-[480px]:mb-0 max-[480px]:leading-tight" style={{ fontFamily: 'Arial, sans-serif' }}>
-                <span className="block font-bold text-[2rem] text-[#25C760] mb-1 max-[1024px]:text-[1.2rem] max-[767px]:text-[1rem] max-[530px]:text-[1rem] max-[480px]:text-[1rem] max-[400px]:text-[0.85rem] max-[370px]:text-[0.8rem]">{product.name}</span>
-                <span className="block text-[0.9rem] text-[#25C760] max-[1024px]:text-[0.9rem] max-[768px]:text-[0.65rem] max-[530px]:text-[0.8rem]">{product.subtitle}</span>
-              </h3>
+              {/* Text Content */}
+              <div className="flex-1 flex flex-col">
+                {/* Title & Subtitle */}
+                <div className="mb-1 md:text-center">
+                  <h3 className="text-lg md:text-3xl font-bold" style={{ color: '#25c760' }}>
+                    {product.name}
+                  </h3>
+                  <p className="text-green-400 text-xs md:text-sm">{product.subtitle}</p>
+                </div>
 
-              {/* Tagline */}
-              <p className="text-center mb-6 text-base text-white leading-relaxed opacity-90 min-h-[3rem] max-[1024px]:text-left max-[1024px]:col-[2] max-[1024px]:row-[2] max-[1024px]:text-[0.8rem] max-[1024px]:mb-0 max-[1024px]:self-start max-[768px]:text-[0.5rem] max-[767px]:text-[0.7rem] max-[530px]:text-[0.8rem] max-[480px]:text-[0.7rem] max-[480px]:col-[2] max-[480px]:row-[2] max-[480px]:min-h-0 max-[480px]:mb-0 max-[400px]:text-[0.5rem] max-[370px]:text-[0.45rem]" style={{ fontFamily: 'Arial, sans-serif' }}>
-                <strong className="text-[#dc3545] block">{product.taglineJp}</strong>
-                <span className="block">{product.tagline}</span>
-              </p>
+                {/* Label */}
+                <p className="text-red-600 font-semibold text-xs md:text-sm md:text-center">
+                  {product.taglineJp}
+                </p>
 
-              {/* Benefits */}
-              <div className="mb-6 flex-1 max-[1024px]:col-[3] max-[1024px]:row-[1] max-[1024px]:mb-0 max-[1024px]:self-start max-[1024px]:w-full max-[480px]:col-[2] max-[480px]:row-[3] max-[480px]:mb-0 max-[480px]:self-start">
-                {product.benefits.map((benefit, i) => (
-                  <div key={i} className="flex items-start gap-2.5 mb-2.5 max-[1024px]:gap-[6px] max-[1024px]:mb-[6px] max-[768px]:gap-1 max-[768px]:mb-1">
-                    <span className="text-[#25C760] font-bold text-[1.2rem] shrink-0 -mt-0.5 max-[1024px]:text-[0.8rem] max-[768px]:text-[0.8rem] max-[480px]:text-[0.8rem]">&#10003;</span>
-                    <span className="text-white text-[1.2rem] leading-relaxed max-[1024px]:text-[0.8rem] max-[1024px]:leading-[1.3] max-[767px]:text-[0.7rem] max-[530px]:text-[0.8rem] max-[480px]:text-[0.7rem] max-[480px]:leading-[1.3] max-[400px]:text-[0.45rem] max-[400px]:leading-[1.2]" style={{ fontFamily: 'Arial, sans-serif' }}>{benefit}</span>
-                  </div>
-                ))}
-              </div>
+                {/* Features */}
+                <div className="space-y-1 mb-2 mt-5">
+                  {product.features.map((feature, idx) => (
+                    <p key={idx} className="text-white text-[10px] md:text-lg flex items-start">
+                      <span className="text-green-400 mr-1 md:mr-2">{'\u2713'}</span>
+                      {feature}
+                    </p>
+                  ))}
+                </div>
 
-              {/* How to use */}
-              <div className="flex-1 flex flex-col justify-between max-[1024px]:col-[3] max-[1024px]:row-[2] max-[1024px]:self-start max-[1024px]:w-full max-[480px]:col-[2] max-[480px]:row-[4] max-[480px]:self-start">
-                <Link href={product.howToLink} className="no-underline">
-                  <h4 className="flex items-center justify-start gap-2 text-[#25C760] font-semibold text-[1.5rem] mb-2.5 max-[1024px]:text-[1rem] max-[1024px]:mb-[6px] max-[1024px]:justify-start max-[767px]:text-[0.7rem] max-[530px]:text-[0.8rem] max-[480px]:text-[0.7rem] max-[400px]:text-[0.55rem]" style={{ fontFamily: 'Arial, sans-serif' }}>
-                    <span>How to use</span>
-                    <svg className="w-4 h-4 text-[#25C760] max-[480px]:w-3 max-[480px]:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </h4>
-                </Link>
-                <div className="flex items-start gap-2.5 max-[1024px]:gap-[6px] max-[768px]:gap-1">
-                  <span className="text-[#25C760] font-bold text-lg shrink-0 -mt-0.5 max-[1024px]:text-[0.8rem] max-[768px]:text-[0.8rem]">&#10003;</span>
-                  <span className="text-white text-[0.95rem] leading-relaxed max-[1024px]:text-[0.8rem] max-[1024px]:leading-[1.3] max-[767px]:text-[0.7rem] max-[530px]:text-[0.8rem] max-[480px]:text-[0.7rem] max-[480px]:leading-[1.3] max-[400px]:text-[0.45rem] max-[400px]:leading-[1.2]" style={{ fontFamily: 'Arial, sans-serif' }}>{product.howToUse}</span>
+                {/* How to use */}
+                <div className="mb-2 md:mt-6 md:mb-2">
+                  <Link
+                    href={product.howToLink}
+                    className="text-green-400 font-semibold text-xs md:text-xl mb-1 hover:underline block text-center"
+                  >
+                    {product.howToUseLabel}
+                  </Link>
                 </div>
               </div>
             </div>
 
-            {/* Buy button */}
-            <div className="mt-auto pt-5 w-full max-[480px]:mt-[10px] max-[480px]:ml-[10px] max-[480px]:p-0 max-[480px]:w-auto max-[480px]:z-10 max-[400px]:mt-[8px] max-[400px]:ml-[8px]">
+            {/* Purchase Button */}
+            <div className="mt-4 md:mt-6 px-2 md:px-4 pb-1 md:pb-2">
               <Link
                 href={product.productLink}
-                className="block w-full bg-white text-black border-none rounded-lg py-[5px] px-5 text-center font-semibold no-underline transition-all duration-300 hover:bg-[#25C760] hover:text-white hover:-translate-y-0.5 max-[480px]:rounded max-[530px]:py-[10px] max-[530px]:rounded"
-                style={{ fontFamily: 'Arial, sans-serif' }}
+                className="block w-full text-center py-2.5 md:py-3 bg-white text-black font-semibold text-sm md:text-base rounded-full hover:bg-gray-200 transition-colors no-underline"
               >
-                <span className="flex items-center justify-center gap-2">
-                  <span className="text-[1.1rem] max-[1024px]:text-[1rem] max-[768px]:text-[0.65rem] max-[530px]:text-[0.9rem] max-[480px]:text-[0.65rem] max-[400px]:text-[0.6rem] max-[375px]:text-[0.55rem]" style={{ color: 'inherit' }}>To Buy</span>
-                </span>
+                {isJa ? '購入ページ' : 'Purchase'}
               </Link>
             </div>
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Japanese terms */}
-      <div className="pt-4 flex flex-col gap-[5px] max-w-[820px] mx-auto w-fit max-[480px]:gap-0">
+      {/* Trust Text */}
+      <div className="space-y-0 md:space-y-1 text-center mt-8 md:mt-12">
         {[
-          { label: "'TORIKOMU'", desc: 'means of having in Japanese as \u300C\u53D6\u308A\u8FBC\u3080\u300D' },
-          { label: "'MAZEKOMU'", desc: 'means of mixing in Japanese as \u300C\u6DF7\u305C\u8FBC\u3080\u300D' },
-          { label: "'SURIKOMU'", desc: 'means of rubbing in Japanese as \u300C\u64E6\u308A\u8FBC\u3080\u300D' },
-        ].map((term) => (
-          <div key={term.label} className="flex justify-center items-center gap-4 text-white text-[1rem] max-[1024px]:text-[0.9rem] max-[768px]:text-[0.7rem] max-[480px]:text-[0.65rem] max-[480px]:gap-[5px]" style={{ fontFamily: 'Arial, sans-serif' }}>
-            <span className="min-w-[110px] text-right font-bold text-[#dc3545] max-[480px]:min-w-[70px]">{term.label}</span>
-            <span className="flex-1 text-left">{term.desc}</span>
+          { label: "'TORIKOMU'", text: 'means of having in Japanese as \u300C\u53D6\u308A\u8FBC\u3080\u300D' },
+          { label: "'MAZEKOMU'", text: 'means of mixing in Japanese as \u300C\u6DF7\u305C\u8FBC\u3080\u300D' },
+          { label: "'SURIKOMU'", text: 'means of rubbing in Japanese as \u300C\u64E6\u308A\u8FBC\u3080\u300D' },
+        ].map((item, index) => (
+          <div key={index} className="text-[10px] md:text-base">
+            <span className="text-red-600 font-semibold mr-4">{item.label}</span>
+            <span className="text-gray-300">{item.text}</span>
           </div>
         ))}
       </div>
