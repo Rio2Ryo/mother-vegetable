@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import { DIRECT_COMMISSION_RATE, REFERRAL_COMMISSION_RATE } from "@/lib/affiliate";
 import prisma from "@/lib/prisma";
 import {
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
   try {
     // If webhook secret is set, verify signature; otherwise parse directly (dev mode)
     if (process.env.STRIPE_WEBHOOK_SECRET) {
-      event = stripe.webhooks.constructEvent(
+      event = getStripe().webhooks.constructEvent(
         body,
         signature,
         process.env.STRIPE_WEBHOOK_SECRET

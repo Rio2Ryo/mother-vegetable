@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     // Create Connect account if not exists
     if (!connectAccountId) {
-      const account = await stripe.accounts.create({
+      const account = await getStripe().accounts.create({
         type: "express",
         email: instructor.email,
         metadata: {
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create account link for onboarding
-    const accountLink = await stripe.accountLinks.create({
+    const accountLink = await getStripe().accountLinks.create({
       account: connectAccountId,
       refresh_url: `${appUrl}/instructor/dashboard?connect=refresh`,
       return_url: `${appUrl}/instructor/dashboard?connect=success`,
@@ -88,7 +88,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ connected: false, onboarded: false });
     }
 
-    const account = await stripe.accounts.retrieve(instructor.stripeConnectId);
+    const account = await getStripe().accounts.retrieve(instructor.stripeConnectId);
     const onboarded = account.details_submitted ?? false;
 
     if (onboarded !== instructor.connectOnboarded) {

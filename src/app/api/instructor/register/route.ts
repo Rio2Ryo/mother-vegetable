@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe, INSTRUCTOR_SUBSCRIPTION_PRICE_AMOUNT } from "@/lib/stripe";
+import { getStripe, INSTRUCTOR_SUBSCRIPTION_PRICE_AMOUNT } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Create Stripe Customer
-    const customer = await stripe.customers.create({
+    const customer = await getStripe().customers.create({
       email: body.email.trim(),
       name: body.fullName.trim(),
       phone: body.phone.trim(),
@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Create Stripe Price for the subscription
-    const price = await stripe.prices.create({
+    const price = await getStripe().prices.create({
       unit_amount: INSTRUCTOR_SUBSCRIPTION_PRICE_AMOUNT,
       currency: "usd",
       recurring: { interval: "year" },
@@ -118,7 +118,7 @@ export async function POST(request: NextRequest) {
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
     // Create Stripe Checkout Session for subscription
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       mode: "subscription",
       payment_method_types: ["card"],
       customer: customer.id,

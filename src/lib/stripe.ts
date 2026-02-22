@@ -1,10 +1,18 @@
 import Stripe from "stripe";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error("STRIPE_SECRET_KEY is not set");
-}
+// Lazy singleton – avoids throwing at module-evaluation time so Next.js
+// can collect page data during build without STRIPE_SECRET_KEY being set.
+let _stripe: Stripe | null = null;
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+export function getStripe(): Stripe {
+  if (!_stripe) {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      throw new Error("STRIPE_SECRET_KEY is not set");
+    }
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  }
+  return _stripe;
+}
 
 // Instructor annual subscription price ($250/year)
 export const INSTRUCTOR_SUBSCRIPTION_PRICE_AMOUNT = 25000; // cents

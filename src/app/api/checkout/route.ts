@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe, PRODUCT_PRICES, REFERRAL_DISCOUNT_PRICE } from "@/lib/stripe";
+import { getStripe, PRODUCT_PRICES, REFERRAL_DISCOUNT_PRICE } from "@/lib/stripe";
 
 interface CheckoutItem {
   productId: string;
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Create Stripe Checkout Session
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
       line_items: lineItems,
