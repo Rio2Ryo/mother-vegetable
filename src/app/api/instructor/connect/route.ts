@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { instructorId } = body;
+    const { instructorId, locale: reqLocale } = body;
 
     if (!instructorId) {
       return NextResponse.json(
@@ -26,6 +26,7 @@ export async function POST(request: NextRequest) {
     }
 
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const locale = reqLocale || instructor.locale || "en";
     let connectAccountId = instructor.stripeConnectId;
 
     // Create Connect account if not exists
@@ -52,8 +53,8 @@ export async function POST(request: NextRequest) {
     // Create account link for onboarding
     const accountLink = await getStripe().accountLinks.create({
       account: connectAccountId,
-      refresh_url: `${appUrl}/instructor/dashboard?connect=refresh`,
-      return_url: `${appUrl}/instructor/dashboard?connect=success`,
+      refresh_url: `${appUrl}/${locale}/instructor/dashboard?connect=refresh`,
+      return_url: `${appUrl}/${locale}/instructor/dashboard?connect=success`,
       type: "account_onboarding",
     });
 

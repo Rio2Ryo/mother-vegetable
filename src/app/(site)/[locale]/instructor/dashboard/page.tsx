@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense, useEffect, useState, useCallback } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useAffiliateStore } from '@/store/affiliateStore';
 import { buildReferralUrl } from '@/lib/affiliate';
@@ -18,6 +18,7 @@ export default function InstructorDashboardPage() {
 function DashboardContent() {
   const router = useRouter();
   const t = useTranslations('instructor');
+  const locale = useLocale();
   const searchParams = useSearchParams();
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -182,7 +183,7 @@ function DashboardContent() {
       const res = await fetch('/api/instructor/connect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ instructorId: currentInstructor.id }),
+        body: JSON.stringify({ instructorId: currentInstructor.id, locale }),
       });
       const data = await res.json();
       if (data.url) {
