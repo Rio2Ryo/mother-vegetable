@@ -1,15 +1,25 @@
 'use client';
 
-import { useState, useEffect, type FormEvent } from 'react';
-import { useTranslations } from 'next-intl';
+import { Suspense, useState, useEffect, type FormEvent } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useAffiliateStore } from '@/store/affiliateStore';
 import { getStoredReferralCode } from '@/lib/affiliate';
+import { useSearchParams } from 'next/navigation';
 
 export default function InstructorRegisterPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <RegisterContent />
+    </Suspense>
+  );
+}
+
+function RegisterContent() {
   const router = useRouter();
   const t = useTranslations('instructor');
-  const register = useAffiliateStore((s) => s.register);
+  const locale = useLocale();
+  const searchParams = useSearchParams();
   const currentInstructor = useAffiliateStore((s) => s.currentInstructor);
 
   const [fullName, setFullName] = useState('');
@@ -17,26 +27,31 @@ export default function InstructorRegisterPage() {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [referralCode, setReferralCode] = useState('');
+  const [parentReferralCode, setParentReferralCode] = useState('');
+  const [desiredReferralCode, setDesiredReferralCode] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const code = getStoredReferralCode();
-    if (code) setReferralCode(code);
-  }, []);
+    if (code) setParentReferralCode(code);
+
+    // Show canceled message
+    if (searchParams.get('canceled') === 'true') {
+      setError(t('paymentCanceled'));
+    }
+  }, [searchParams, t]);
 
   // If already logged in as instructor, redirect to dashboard
   useEffect(() => {
-    if (mounted && currentInstructor && !success) {
+    if (mounted && currentInstructor) {
       router.push('/instructor/dashboard');
     }
-  }, [mounted, currentInstructor, success, router]);
+  }, [mounted, currentInstructor, router]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -62,23 +77,45 @@ export default function InstructorRegisterPage() {
       setError(t('errorPasswordMatch'));
       return;
     }
+    if (!desiredReferralCode.trim()) {
+      setError(t('errorDesiredReferralCode'));
+      return;
+    }
+    if (!/^[A-Za-z0-9_-]{3,20}$/.test(desiredReferralCode.trim())) {
+      setError(t('errorReferralCodeFormat'));
+      return;
+    }
 
     setSubmitting(true);
 
     try {
-      const result = register({
-        fullName: fullName.trim(),
-        email: email.trim(),
-        phone: phone.trim(),
-        password,
-        referralCode: referralCode.trim() || undefined,
+      const res = await fetch('/api/instructor/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: fullName.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          password,
+          referralCode: parentReferralCode.trim() || undefined,
+          desiredReferralCode: desiredReferralCode.trim(),
+          locale,
+        }),
       });
 
-      if (result.success) {
-        setSuccess(true);
-        setTimeout(() => router.push('/instructor/dashboard'), 1500);
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || t('errorGeneric'));
+        setSubmitting(false);
+        return;
+      }
+
+      if (data.url) {
+        // Redirect to Stripe Checkout for $250/year subscription
+        window.location.href = data.url;
       } else {
-        setError(result.error || t('errorGeneric'));
+        setError(t('errorGeneric'));
         setSubmitting(false);
       }
     } catch {
@@ -108,6 +145,10 @@ export default function InstructorRegisterPage() {
                 <p className="text-white text-sm px-4 mb-4 leading-relaxed">
                   {t('registerBenefits')}
                 </p>
+                <div className="bg-[#25C760]/10 border border-[#25C760]/30 rounded-lg p-3 mx-4 mb-4">
+                  <p className="text-[#25C760] font-bold text-lg">{t('subscriptionPrice')}</p>
+                  <p className="text-white/60 text-xs">{t('subscriptionDesc')}</p>
+                </div>
                 <div className="p-2 text-white text-base font-bold">
                   {t('alreadyRegistered')}
                 </div>
@@ -131,15 +172,6 @@ export default function InstructorRegisterPage() {
                   </h1>
                   <p className="text-white/60 text-sm mt-1">{t('registerSubtitle')}</p>
                 </div>
-
-                {/* Success Message */}
-                {success && (
-                  <div className="py-2">
-                    <div className="p-3 bg-[#25C760]/10 border border-[#25C760]/30 rounded-[5px] text-[#25C760] text-sm font-semibold text-center">
-                      {t('registerSuccess')}
-                    </div>
-                  </div>
-                )}
 
                 <form onSubmit={handleSubmit} noValidate>
                   {/* Full Name */}
@@ -185,6 +217,22 @@ export default function InstructorRegisterPage() {
                       required
                       className={inputClass}
                     />
+                  </div>
+
+                  {/* Desired Referral Code */}
+                  <div className="py-1.5">
+                    <label className="block text-[#25C760] font-semibold text-sm mb-1">
+                      {t('desiredReferralCode')}:
+                    </label>
+                    <input
+                      type="text"
+                      value={desiredReferralCode}
+                      onChange={(e) => setDesiredReferralCode(e.target.value.toUpperCase())}
+                      placeholder={t('desiredReferralCodePlaceholder')}
+                      required
+                      className={inputClass}
+                    />
+                    <p className="text-white/40 text-xs mt-1">{t('desiredReferralCodeHint')}</p>
                   </div>
 
                   {/* Password */}
@@ -235,15 +283,15 @@ export default function InstructorRegisterPage() {
                     </div>
                   </div>
 
-                  {/* Referral Code (optional) */}
+                  {/* Parent Referral Code (optional) */}
                   <div className="py-1.5">
                     <label className="block text-[#25C760] font-semibold text-sm mb-1">
                       {t('referralCodeOptional')}:
                     </label>
                     <input
                       type="text"
-                      value={referralCode}
-                      onChange={(e) => setReferralCode(e.target.value)}
+                      value={parentReferralCode}
+                      onChange={(e) => setParentReferralCode(e.target.value)}
                       placeholder={t('referralCodePlaceholder')}
                       className={inputClass}
                     />
@@ -257,6 +305,14 @@ export default function InstructorRegisterPage() {
                     </div>
                   )}
 
+                  {/* Subscription Price Notice */}
+                  <div className="py-2">
+                    <div className="p-3 bg-gray-900 border border-gray-700 rounded-[5px] text-center">
+                      <p className="text-white text-sm font-semibold">{t('subscriptionPrice')}</p>
+                      <p className="text-white/40 text-xs mt-1">{t('subscriptionNotice')}</p>
+                    </div>
+                  </div>
+
                   {/* Submit Button */}
                   <div className="py-3">
                     <button
@@ -264,7 +320,7 @@ export default function InstructorRegisterPage() {
                       disabled={submitting}
                       className="w-full bg-[#25C760] text-white font-bold py-2.5 rounded-[5px] border-2 border-[#25C760] cursor-pointer shadow-[0_4px_12px_rgba(37,199,96,0.3)] hover:bg-[#3C8063] hover:border-[#3C8063] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(37,199,96,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {submitting ? t('registering') : t('registerButton')}
+                      {submitting ? t('registering') : t('registerAndPay')}
                     </button>
                   </div>
                 </form>

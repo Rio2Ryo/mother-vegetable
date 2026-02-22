@@ -1,16 +1,31 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useAffiliateStore } from '@/store/affiliateStore';
 import { buildReferralUrl } from '@/lib/affiliate';
+import { useSearchParams } from 'next/navigation';
 
 export default function InstructorDashboardPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black text-white flex items-center justify-center"><div className="text-[#25C760] text-lg">Loading...</div></div>}>
+      <DashboardContent />
+    </Suspense>
+  );
+}
+
+function DashboardContent() {
   const router = useRouter();
   const t = useTranslations('instructor');
+  const searchParams = useSearchParams();
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [connectLoading, setConnectLoading] = useState(false);
+  const [payoutLoading, setPayoutLoading] = useState(false);
+  const [payoutMessage, setPayoutMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [connectStatus, setConnectStatus] = useState<{ connected: boolean; onboarded: boolean } | null>(null);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
   const currentInstructor = useAffiliateStore((s) => s.currentInstructor);
   const logout = useAffiliateStore((s) => s.logout);
@@ -18,17 +33,42 @@ export default function InstructorDashboardPage() {
   const getReferralSalesTotal = useAffiliateStore((s) => s.getReferralSalesTotal);
   const getDirectCommissionTotal = useAffiliateStore((s) => s.getDirectCommissionTotal);
   const getReferralCommissionTotal = useAffiliateStore((s) => s.getReferralCommissionTotal);
+  const getInstructorReferralTotal = useAffiliateStore((s) => s.getInstructorReferralTotal);
   const getTotalEarnings = useAffiliateStore((s) => s.getTotalEarnings);
+  const getAvailableBalance = useAffiliateStore((s) => s.getAvailableBalance);
   const getReferredInstructors = useAffiliateStore((s) => s.getReferredInstructors);
   const getDirectSalesCount = useAffiliateStore((s) => s.getDirectSalesCount);
   const getReferralSalesCount = useAffiliateStore((s) => s.getReferralSalesCount);
   const getDirectCommissions = useAffiliateStore((s) => s.getDirectCommissions);
   const getReferralCommissions = useAffiliateStore((s) => s.getReferralCommissions);
-  const instructors = useAffiliateStore((s) => s.instructors);
+  const getInstructorReferralCommissions = useAffiliateStore((s) => s.getInstructorReferralCommissions);
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    if (searchParams.get('registration') === 'success') {
+      setRegistrationSuccess(true);
+    }
+  }, [searchParams]);
+
+  // Fetch Connect status
+  const fetchConnectStatus = useCallback(async () => {
+    if (!currentInstructor) return;
+    try {
+      const res = await fetch(`/api/instructor/connect?instructorId=${currentInstructor.id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setConnectStatus(data);
+      }
+    } catch {
+      // silently fail
+    }
+  }, [currentInstructor]);
+
+  useEffect(() => {
+    if (mounted && currentInstructor) {
+      fetchConnectStatus();
+    }
+  }, [mounted, currentInstructor, fetchConnectStatus]);
 
   useEffect(() => {
     if (mounted && !currentInstructor) {
@@ -49,15 +89,20 @@ export default function InstructorDashboardPage() {
   const referralSalesTotal = getReferralSalesTotal(currentInstructor.id);
   const directCommissionTotal = getDirectCommissionTotal(currentInstructor.id);
   const referralCommissionTotal = getReferralCommissionTotal(currentInstructor.id);
+  const instructorReferralTotal = getInstructorReferralTotal(currentInstructor.id);
   const totalEarnings = getTotalEarnings(currentInstructor.id);
+  const availableBalance = getAvailableBalance(currentInstructor.id);
   const referredInstructors = getReferredInstructors(currentInstructor.id);
   const directSalesCount = getDirectSalesCount(currentInstructor.id);
   const referralSalesCount = getReferralSalesCount(currentInstructor.id);
   const directCommissions = getDirectCommissions(currentInstructor.id);
   const referralCommissions = getReferralCommissions(currentInstructor.id);
-  const allCommissions = [...directCommissions, ...referralCommissions].sort(
+  const instructorReferralCommissions = getInstructorReferralCommissions(currentInstructor.id);
+  const allCommissions = [...directCommissions, ...referralCommissions, ...instructorReferralCommissions].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
+
+  const subscriptionStatus = currentInstructor.subscriptionStatus || 'inactive';
 
   function handleCopy() {
     navigator.clipboard.writeText(referralUrl).then(() => {
@@ -71,9 +116,59 @@ export default function InstructorDashboardPage() {
     router.push('/instructor/login');
   }
 
+  async function handleConnectStripe() {
+    if (!currentInstructor) return;
+    setConnectLoading(true);
+    try {
+      const res = await fetch('/api/instructor/connect', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ instructorId: currentInstructor.id }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch {
+      // silently fail
+    } finally {
+      setConnectLoading(false);
+    }
+  }
+
+  async function handlePayout() {
+    if (!currentInstructor) return;
+    setPayoutLoading(true);
+    setPayoutMessage(null);
+    try {
+      const res = await fetch('/api/instructor/payout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ instructorId: currentInstructor.id }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setPayoutMessage({ type: 'success', text: `$${data.amount.toFixed(2)} ${t('payoutSuccess')}` });
+      } else {
+        setPayoutMessage({ type: 'error', text: data.error || t('payoutFailed') });
+      }
+    } catch {
+      setPayoutMessage({ type: 'error', text: t('payoutFailed') });
+    } finally {
+      setPayoutLoading(false);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12">
+        {/* Registration Success Banner */}
+        {registrationSuccess && (
+          <div className="mb-6 p-4 bg-[#25C760]/10 border border-[#25C760]/30 rounded-xl text-center">
+            <p className="text-[#25C760] font-semibold">{t('registrationComplete')}</p>
+          </div>
+        )}
+
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <div>
@@ -84,12 +179,24 @@ export default function InstructorDashboardPage() {
               {t('welcome')}, {currentInstructor.fullName}
             </p>
           </div>
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 border border-gray-600 text-gray-400 rounded-lg hover:border-red-500 hover:text-red-400 transition-colors text-sm"
-          >
-            {t('logout')}
-          </button>
+          <div className="flex items-center gap-3">
+            {/* Subscription Status Badge */}
+            <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+              subscriptionStatus === 'active'
+                ? 'bg-[#25C760]/20 text-[#25C760]'
+                : subscriptionStatus === 'past_due'
+                ? 'bg-yellow-500/20 text-yellow-400'
+                : 'bg-red-500/20 text-red-400'
+            }`}>
+              {t(`subscription_${subscriptionStatus}`)}
+            </span>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 border border-gray-600 text-gray-400 rounded-lg hover:border-red-500 hover:text-red-400 transition-colors text-sm"
+            >
+              {t('logout')}
+            </button>
+          </div>
         </div>
 
         {/* Referral URL Section */}
@@ -111,8 +218,45 @@ export default function InstructorDashboardPage() {
           </p>
         </div>
 
+        {/* Balance & Payout Section */}
+        <div className="bg-gray-900 border border-[#25C760]/30 rounded-2xl p-6 mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h2 className="text-lg font-semibold text-[#25C760] mb-1">{t('availableBalance')}</h2>
+              <p className="text-3xl font-bold text-[#25C760]">${availableBalance.toFixed(2)}</p>
+              <p className="text-gray-400 text-xs mt-1">
+                {t('totalEarned')}: ${totalEarnings.toFixed(2)}
+              </p>
+            </div>
+            <div className="flex flex-col gap-2">
+              {connectStatus?.onboarded ? (
+                <button
+                  onClick={handlePayout}
+                  disabled={payoutLoading || availableBalance < 1}
+                  className="px-6 py-3 bg-[#25C760] text-black font-semibold rounded-lg hover:bg-[#1ea84e] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {payoutLoading ? t('processing') : t('requestPayout')}
+                </button>
+              ) : (
+                <button
+                  onClick={handleConnectStripe}
+                  disabled={connectLoading}
+                  className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500 transition-colors disabled:opacity-50"
+                >
+                  {connectLoading ? t('processing') : t('connectStripe')}
+                </button>
+              )}
+            </div>
+          </div>
+          {payoutMessage && (
+            <p className={`mt-3 text-sm ${payoutMessage.type === 'success' ? 'text-[#25C760]' : 'text-red-400'}`}>
+              {payoutMessage.text}
+            </p>
+          )}
+        </div>
+
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {/* Direct Sales */}
           <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
             <div className="flex items-center gap-3 mb-3">
@@ -124,7 +268,7 @@ export default function InstructorDashboardPage() {
               <h3 className="text-sm text-gray-400">{t('directSales')}</h3>
             </div>
             <p className="text-2xl font-bold">{directSalesCount} {t('orders')}</p>
-            <p className="text-[#25C760] text-sm mt-1">${directSalesTotal.toFixed(2)} {t('revenue')}</p>
+            <p className="text-[#25C760] text-sm mt-1">${directCommissionTotal.toFixed(2)}</p>
           </div>
 
           {/* Referral Sales */}
@@ -138,7 +282,21 @@ export default function InstructorDashboardPage() {
               <h3 className="text-sm text-gray-400">{t('referralSales')}</h3>
             </div>
             <p className="text-2xl font-bold">{referralSalesCount} {t('orders')}</p>
-            <p className="text-blue-400 text-sm mt-1">${referralSalesTotal.toFixed(2)} {t('revenue')}</p>
+            <p className="text-blue-400 text-sm mt-1">${referralCommissionTotal.toFixed(2)}</p>
+          </div>
+
+          {/* Instructor Referrals */}
+          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+                <svg className="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+              </div>
+              <h3 className="text-sm text-gray-400">{t('instructorReferrals')}</h3>
+            </div>
+            <p className="text-2xl font-bold">{referredInstructors.length}</p>
+            <p className="text-purple-400 text-sm mt-1">${instructorReferralTotal.toFixed(2)}</p>
           </div>
 
           {/* Total Earnings */}
@@ -152,21 +310,13 @@ export default function InstructorDashboardPage() {
               <h3 className="text-sm text-gray-400">{t('totalEarnings')}</h3>
             </div>
             <p className="text-3xl font-bold text-[#25C760]">${totalEarnings.toFixed(2)}</p>
-            <div className="flex gap-4 mt-2 text-xs">
-              <span className="text-gray-400">
-                {t('directCommission')}: <span className="text-white">${directCommissionTotal.toFixed(2)}</span>
-              </span>
-              <span className="text-gray-400">
-                {t('referralCommission')}: <span className="text-white">${referralCommissionTotal.toFixed(2)}</span>
-              </span>
-            </div>
           </div>
         </div>
 
         {/* Commission Rates Info */}
         <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 mb-8">
           <h2 className="text-lg font-semibold text-[#25C760] mb-3">{t('commissionRates')}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-lg bg-[#25C760]/10 flex items-center justify-center text-[#25C760] font-bold text-lg">
                 25%
@@ -183,6 +333,15 @@ export default function InstructorDashboardPage() {
               <div>
                 <p className="text-white font-medium">{t('referralCommission')}</p>
                 <p className="text-gray-400 text-xs">{t('referralCommissionDesc')}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 font-bold text-lg">
+                $50
+              </div>
+              <div>
+                <p className="text-white font-medium">{t('instructorReferralReward')}</p>
+                <p className="text-gray-400 text-xs">{t('instructorReferralRewardDesc')}</p>
               </div>
             </div>
           </div>
@@ -202,7 +361,6 @@ export default function InstructorDashboardPage() {
                     <tr className="border-b border-gray-800">
                       <th className="text-left text-gray-400 pb-3 font-medium">{t('date')}</th>
                       <th className="text-left text-gray-400 pb-3 font-medium">{t('type')}</th>
-                      <th className="text-right text-gray-400 pb-3 font-medium">{t('orderTotal')}</th>
                       <th className="text-right text-gray-400 pb-3 font-medium">{t('commission')}</th>
                     </tr>
                   </thead>
@@ -217,13 +375,14 @@ export default function InstructorDashboardPage() {
                             className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${
                               c.type === 'direct'
                                 ? 'bg-[#25C760]/20 text-[#25C760]'
-                                : 'bg-blue-500/20 text-blue-400'
+                                : c.type === 'referral'
+                                ? 'bg-blue-500/20 text-blue-400'
+                                : 'bg-purple-500/20 text-purple-400'
                             }`}
                           >
-                            {c.type === 'direct' ? t('direct') : t('referral')}
+                            {c.type === 'direct' ? t('direct') : c.type === 'referral' ? t('referral') : t('instructorRef')}
                           </span>
                         </td>
-                        <td className="py-3 text-right text-gray-300">${c.orderTotal.toFixed(2)}</td>
                         <td className="py-3 text-right font-medium text-[#25C760]">
                           +${c.commissionAmount.toFixed(2)}
                         </td>
@@ -247,7 +406,6 @@ export default function InstructorDashboardPage() {
               <div className="space-y-3">
                 {referredInstructors.map((ri) => {
                   const riDirectSales = getDirectSalesCount(ri.id);
-                  const riTotalEarnings = getTotalEarnings(ri.id);
                   const riDirectSalesTotal = getDirectSalesTotal(ri.id);
                   return (
                     <div
@@ -275,24 +433,21 @@ export default function InstructorDashboardPage() {
         {/* Commission Breakdown */}
         <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
           <h2 className="text-lg font-semibold text-[#25C760] mb-4">{t('commissionBreakdown')}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-black/50 rounded-lg">
-              <p className="text-gray-400 text-xs mb-1">{t('directSales')}</p>
-              <p className="text-xl font-bold">${directSalesTotal.toFixed(2)}</p>
-              <p className="text-[#25C760] text-xs mt-1">x 25%</p>
-            </div>
-            <div className="text-center p-4 bg-black/50 rounded-lg">
-              <p className="text-gray-400 text-xs mb-1">{t('directCommission')}</p>
+              <p className="text-gray-400 text-xs mb-1">{t('directCommission')} (25%)</p>
               <p className="text-xl font-bold text-[#25C760]">${directCommissionTotal.toFixed(2)}</p>
+              <p className="text-gray-500 text-xs mt-1">{t('from')} ${directSalesTotal.toFixed(2)} {t('inSales')}</p>
             </div>
             <div className="text-center p-4 bg-black/50 rounded-lg">
-              <p className="text-gray-400 text-xs mb-1">{t('referralSales')}</p>
-              <p className="text-xl font-bold">${referralSalesTotal.toFixed(2)}</p>
-              <p className="text-blue-400 text-xs mt-1">x 10%</p>
-            </div>
-            <div className="text-center p-4 bg-black/50 rounded-lg">
-              <p className="text-gray-400 text-xs mb-1">{t('referralCommission')}</p>
+              <p className="text-gray-400 text-xs mb-1">{t('referralCommission')} (10%)</p>
               <p className="text-xl font-bold text-blue-400">${referralCommissionTotal.toFixed(2)}</p>
+              <p className="text-gray-500 text-xs mt-1">{t('from')} ${referralSalesTotal.toFixed(2)} {t('inSales')}</p>
+            </div>
+            <div className="text-center p-4 bg-black/50 rounded-lg">
+              <p className="text-gray-400 text-xs mb-1">{t('instructorReferralReward')}</p>
+              <p className="text-xl font-bold text-purple-400">${instructorReferralTotal.toFixed(2)}</p>
+              <p className="text-gray-500 text-xs mt-1">${referredInstructors.length} {t('referrals')}</p>
             </div>
           </div>
           <div className="mt-4 pt-4 border-t border-gray-800 flex justify-between items-center">

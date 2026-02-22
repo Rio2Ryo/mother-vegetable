@@ -10,17 +10,23 @@ export interface Instructor {
   passwordHash: string;
   referralCode: string;
   parentInstructorId: string | null;
+  stripeCustomerId?: string | null;
+  stripeConnectId?: string | null;
+  stripeSubscriptionId?: string | null;
+  subscriptionStatus?: string; // active, inactive, past_due, canceled
+  connectOnboarded?: boolean;
   createdAt: string;
 }
 
 export interface Commission {
   id: string;
-  orderId: string;
+  orderId?: string | null;
   instructorId: string;
-  type: 'direct' | 'referral';
+  type: 'direct' | 'referral' | 'instructor_referral';
   orderTotal: number;
   commissionRate: number;
   commissionAmount: number;
+  paidOut?: boolean;
   createdAt: string;
 }
 

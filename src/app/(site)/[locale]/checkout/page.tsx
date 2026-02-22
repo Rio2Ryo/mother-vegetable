@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, memo, type FormEvent, type ChangeEven
 import { useCartStore } from "@/store/cart";
 import { useAffiliateStore } from "@/store/affiliateStore";
 import { Link } from "@/i18n/navigation";
+import { useLocale } from "next-intl";
 import { getStoredReferralCode, clearStoredReferralCode } from "@/lib/affiliate";
 
 interface ShippingForm {
@@ -77,6 +78,7 @@ export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCartStore();
   const processOrder = useAffiliateStore((s) => s.processOrder);
   const getInstructorByReferralCode = useAffiliateStore((s) => s.getInstructorByReferralCode);
+  const locale = useLocale();
   const [form, setForm] = useState<ShippingForm>(emptyForm);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -129,108 +131,42 @@ export default function CheckoutPage() {
     setSubmitting(true);
 
     try {
-      // Try the server API first (works when auth + database are available)
-      const res = await fetch("/api/orders", {
+      // Create Stripe Checkout Session
+      const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          shipping: form,
           items: items.map((item) => ({
             productId: item.productId,
             name: item.name,
-            price: item.discountedPrice ?? item.price,
+            price: item.price,
+            discountedPrice: item.discountedPrice,
             quantity: item.quantity,
             image: item.image,
           })),
-          currency: items[0]?.currency ?? "USD",
+          shipping: form,
+          referralCode: referralCode || undefined,
+          locale,
         }),
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        // Process affiliate commission
-        if (referralCode) {
-          processOrder(data.id, total, referralCode, `${form.firstName} ${form.lastName}`);
-          clearStoredReferralCode();
-        }
-        setOrderId(data.id);
-        clearCart();
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Failed to create checkout session.");
+        setSubmitting(false);
         return;
       }
 
-      // API not available (no auth, no database, etc.) — fall back to client-side order
-      const clientOrderId = `MV-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
-
-      // Persist the order to localStorage for reference
-      const orderRecord = {
-        id: clientOrderId,
-        shipping: form,
-        items: items.map((item) => ({
-          productId: item.productId,
-          name: item.name,
-          price: item.discountedPrice ?? item.price,
-          quantity: item.quantity,
-          image: item.image,
-        })),
-        total: total,
-        currency: items[0]?.currency ?? "USD",
-        status: "confirmed",
-        referralCode: referralCode || undefined,
-        createdAt: new Date().toISOString(),
-      };
-
-      const existingOrders = JSON.parse(
-        localStorage.getItem("mv-orders") || "[]"
-      );
-      existingOrders.push(orderRecord);
-      localStorage.setItem("mv-orders", JSON.stringify(existingOrders));
-
-      // Process affiliate commission
-      if (referralCode) {
-        processOrder(clientOrderId, total, referralCode, `${form.firstName} ${form.lastName}`);
-        clearStoredReferralCode();
+      if (data.url) {
+        // Redirect to Stripe Checkout
+        window.location.href = data.url;
+      } else {
+        setError("Failed to get checkout URL.");
+        setSubmitting(false);
       }
-
-      setOrderId(clientOrderId);
-      clearCart();
     } catch {
-      // Network error or other failure — also fall back to client-side
-      try {
-        const clientOrderId = `MV-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
-        const orderRecord = {
-          id: clientOrderId,
-          shipping: form,
-          items: items.map((item) => ({
-            productId: item.productId,
-            name: item.name,
-            price: item.discountedPrice ?? item.price,
-            quantity: item.quantity,
-            image: item.image,
-          })),
-          total: total,
-          currency: items[0]?.currency ?? "USD",
-          status: "confirmed",
-          referralCode: referralCode || undefined,
-          createdAt: new Date().toISOString(),
-        };
-        const existingOrders = JSON.parse(
-          localStorage.getItem("mv-orders") || "[]"
-        );
-        existingOrders.push(orderRecord);
-        localStorage.setItem("mv-orders", JSON.stringify(existingOrders));
-
-        // Process affiliate commission
-        if (referralCode) {
-          processOrder(clientOrderId, total, referralCode, `${form.firstName} ${form.lastName}`);
-          clearStoredReferralCode();
-        }
-
-        setOrderId(clientOrderId);
-        clearCart();
-      } catch (innerErr) {
-        setError("Something went wrong. Please try again.");
-      }
-    } finally {
+      setError("Something went wrong. Please try again.");
       setSubmitting(false);
     }
   }

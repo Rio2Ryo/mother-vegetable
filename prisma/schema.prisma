@@ -74,8 +74,11 @@ model Order {
   currency        String   @default("USD")
   shippingAddress String // JSON stored as text for SQLite
   items           String // JSON stored as text for SQLite
+  referralCode    String?
+  stripeSessionId String?  @unique
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  commissions Commission[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -92,6 +95,59 @@ model Product {
   category    String
   sku         String  @unique
   inStock     Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Instructor {
+  id                  String   @id @default(cuid())
+  fullName            String
+  email               String   @unique
+  phone               String
+  passwordHash        String
+  referralCode        String   @unique
+  parentInstructorId  String?
+  stripeCustomerId    String?  @unique
+  stripeConnectId     String?  @unique
+  stripeSubscriptionId String?
+  subscriptionStatus  String   @default("inactive") // active, inactive, past_due, canceled
+  connectOnboarded    Boolean  @default(false)
+
+  parentInstructor    Instructor?  @relation("InstructorReferral", fields: [parentInstructorId], references: [id])
+  referredInstructors Instructor[] @relation("InstructorReferral")
+  commissions         Commission[]
+  payoutRequests      PayoutRequest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Commission {
+  id              String  @id @default(cuid())
+  orderId         String?
+  instructorId    String
+  type            String  // direct, referral, instructor_referral
+  orderTotal      Float
+  commissionRate  Float
+  commissionAmount Float
+  paidOut         Boolean @default(false)
+
+  order      Order?     @relation(fields: [orderId], references: [id])
+  instructor Instructor @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PayoutRequest {
+  id            String  @id @default(cuid())
+  instructorId  String
+  amount        Float
+  status        String  @default("pending") // pending, processing, completed, failed
+  stripeTransferId String?
+
+  instructor Instructor @relation(fields: [instructorId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

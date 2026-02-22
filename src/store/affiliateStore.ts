@@ -28,16 +28,24 @@ interface AffiliateState {
 
   // Data access
   getInstructorByReferralCode: (code: string) => Instructor | null;
+  getInstructorByEmail: (email: string) => Instructor | null;
   getDirectCommissions: (instructorId: string) => Commission[];
   getReferralCommissions: (instructorId: string) => Commission[];
+  getInstructorReferralCommissions: (instructorId: string) => Commission[];
   getDirectSalesTotal: (instructorId: string) => number;
   getReferralSalesTotal: (instructorId: string) => number;
   getDirectCommissionTotal: (instructorId: string) => number;
   getReferralCommissionTotal: (instructorId: string) => number;
+  getInstructorReferralTotal: (instructorId: string) => number;
   getTotalEarnings: (instructorId: string) => number;
+  getAvailableBalance: (instructorId: string) => number;
   getReferredInstructors: (instructorId: string) => Instructor[];
   getDirectSalesCount: (instructorId: string) => number;
   getReferralSalesCount: (instructorId: string) => number;
+
+  // Instructor data sync from server
+  setCurrentInstructor: (instructor: Instructor) => void;
+  updateInstructor: (id: string, data: Partial<Instructor>) => void;
 
   // Commission processing
   addCommission: (commission: Commission) => void;
@@ -144,6 +152,12 @@ export const useAffiliateStore = create<AffiliateState>()(
         );
       },
 
+      getInstructorReferralCommissions: (instructorId: string) => {
+        return get().commissions.filter(
+          (c) => c.instructorId === instructorId && c.type === "instructor_referral"
+        );
+      },
+
       getDirectSalesTotal: (instructorId: string) => {
         return get()
           .commissions.filter(
@@ -176,6 +190,14 @@ export const useAffiliateStore = create<AffiliateState>()(
           .reduce((sum, c) => sum + c.commissionAmount, 0);
       },
 
+      getInstructorReferralTotal: (instructorId: string) => {
+        return get()
+          .commissions.filter(
+            (c) => c.instructorId === instructorId && c.type === "instructor_referral"
+          )
+          .reduce((sum, c) => sum + c.commissionAmount, 0);
+      },
+
       getTotalEarnings: (instructorId: string) => {
         return get()
           .commissions.filter((c) => c.instructorId === instructorId)
@@ -198,6 +220,40 @@ export const useAffiliateStore = create<AffiliateState>()(
         return get().commissions.filter(
           (c) => c.instructorId === instructorId && c.type === "referral"
         ).length;
+      },
+
+      getInstructorByEmail: (email: string) => {
+        return get().instructors.find((i) => i.email === email) || null;
+      },
+
+      getAvailableBalance: (instructorId: string) => {
+        return get()
+          .commissions.filter(
+            (c) => c.instructorId === instructorId && !c.paidOut
+          )
+          .reduce((sum, c) => sum + c.commissionAmount, 0);
+      },
+
+      setCurrentInstructor: (instructor: Instructor) => {
+        set({ currentInstructor: instructor });
+        // Also update in the instructors list
+        const state = get();
+        const exists = state.instructors.some((i) => i.id === instructor.id);
+        if (!exists) {
+          set({ instructors: [...state.instructors, instructor] });
+        }
+      },
+
+      updateInstructor: (id: string, data: Partial<Instructor>) => {
+        set((state) => ({
+          instructors: state.instructors.map((i) =>
+            i.id === id ? { ...i, ...data } : i
+          ),
+          currentInstructor:
+            state.currentInstructor?.id === id
+              ? { ...state.currentInstructor, ...data }
+              : state.currentInstructor,
+        }));
       },
 
       addCommission: (commission: Commission) => {
