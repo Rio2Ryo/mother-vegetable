@@ -1,10 +1,16 @@
 import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import ProductPage, { type ProductPageData } from '@/components/ProductPage';
+import ProductJsonLd from '@/components/ProductJsonLd';
 
 export const metadata: Metadata = {
   title: 'Forever — Pet Health Supplement',
   description: 'Mother Vegetable Forever supports your pet\'s gut health, reduces tear stains and body odor. Natural supplement for a longer, healthier life.',
+  openGraph: {
+    title: 'Mother Vegetable Forever — Pet Health Supplement',
+    description: 'Natural supplement for your pet\'s gut health and longer, healthier life.',
+    images: [{ url: '/cdn/products_forever_10001.png', width: 800, height: 800, alt: 'Mother Vegetable Forever' }],
+  },
 };
 
 const foreverProduct: ProductPageData = {
@@ -117,5 +123,16 @@ const foreverProduct: ProductPageData = {
 export default async function ForeverPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <ProductPage product={foreverProduct} />;
+  return (
+    <>
+      <ProductJsonLd
+        name="Mother Vegetable Forever"
+        description="Natural pet health supplement. Supports gut health, reduces tear stains and body odor."
+        image="/cdn/products_forever_10001.png"
+        price={36.70}
+        slug="forever"
+      />
+      <ProductPage product={foreverProduct} />
+    </>
+  );
 }

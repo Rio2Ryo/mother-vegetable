@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t-2 border-[#25C760] py-10 mt-20 max-md:py-[30px] max-md:mt-[60px] max-[480px]:py-[25px] max-[480px]:mt-10">
+    <footer role="contentinfo" aria-label="Site footer" className="bg-black border-t-2 border-[#25C760] py-10 mt-20 max-md:py-[30px] max-md:mt-[60px] max-[480px]:py-[25px] max-[480px]:mt-10">
       <div className="max-w-[1400px] mx-auto px-5 text-center max-md:px-[15px]">
         <div className="flex flex-col gap-2 text-center">
           {/* Logo */}

@@ -83,7 +83,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-black sticky top-0 z-[1000] shadow-[0_2px_20px_rgba(0,0,0,0.3)]">
+      <header role="banner" className="bg-black sticky top-0 z-[1000] shadow-[0_2px_20px_rgba(0,0,0,0.3)]">
         <div className="max-w-[1400px] mx-auto px-5 flex items-center justify-between h-20 max-md:px-[15px] max-md:h-[70px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-[15px]">
@@ -100,6 +100,7 @@ export default function Header() {
           {/* Nav */}
           <div className="flex items-center gap-5 max-md:gap-[10px]">
             <nav
+              aria-label="Main navigation"
               className={`${
                 mobileMenuOpen ? 'right-0' : 'right-[-100%]'
               } fixed top-0 w-4/5 max-w-[300px] h-screen bg-black border-l-2 border-[#25C760] transition-all duration-300 z-[1000] pt-20 px-5 shadow-[-5px_0_15px_rgba(0,0,0,0.3)] md:shadow-none md:static md:w-auto md:max-w-none md:h-auto md:border-0 md:pt-0 md:px-0 md:flex md:items-center max-[600px]:w-[90%] max-[600px]:max-w-[280px] max-[600px]:pt-[70px] max-[600px]:px-[15px]`}

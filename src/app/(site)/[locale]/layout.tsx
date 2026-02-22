@@ -2,11 +2,25 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Suspense } from 'react';
 import type { Metadata } from 'next';
+import { Inter, Noto_Sans_JP } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ReferralTracker from '@/components/ReferralTracker';
 import '../../globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const notoSansJp = Noto_Sans_JP({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-noto-sans-jp',
+  weight: ['400', '500', '700'],
+});
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://mother-vegetable.vercel.app';
 
@@ -19,6 +33,14 @@ export const metadata: Metadata = {
     'Mother Vegetable offers premium health supplements derived from nature. Achieve capsules for daily wellness, Confidence cream for skin vitality. Free worldwide shipping.',
   metadataBase: new URL(APP_URL),
   icons: { icon: '/Images/favicon.png' },
+  alternates: {
+    canonical: APP_URL,
+    languages: {
+      en: `${APP_URL}/en`,
+      ja: `${APP_URL}/ja`,
+      zh: `${APP_URL}/zh`,
+    },
+  },
   openGraph: {
     type: 'website',
     siteName: 'Mother Vegetable',
@@ -64,14 +86,35 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body className="bg-black text-white">
+    <html lang={locale} className={`${inter.variable} ${notoSansJp.variable}`}>
+      <body className="bg-black text-white font-sans">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Mother Vegetable',
+              url: APP_URL,
+              logo: `${APP_URL}/Images/favicon.png`,
+              description:
+                'Premium health supplements derived from nature, born from Earth\'s life force 3.5 billion years ago.',
+              sameAs: [],
+            }),
+          }}
+        />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-lg focus:bg-emerald-600 focus:px-4 focus:py-2 focus:text-white focus:outline-none"
+        >
+          Skip to main content
+        </a>
         <NextIntlClientProvider messages={messages}>
           <Suspense fallback={null}>
             <ReferralTracker />
           </Suspense>
           <Header />
-          <main>{children}</main>
+          <main id="main-content" role="main">{children}</main>
           <Footer />
         </NextIntlClientProvider>
       </body>

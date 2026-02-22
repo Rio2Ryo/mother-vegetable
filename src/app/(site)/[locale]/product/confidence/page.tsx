@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import ProductPage, { type ProductPageData } from '@/components/ProductPage';
+import ProductJsonLd from '@/components/ProductJsonLd';
 
 export const metadata: Metadata = {
   title: 'Confidence — Skin Healing Effect',
@@ -138,5 +139,16 @@ const confidenceProduct: ProductPageData = {
 export default async function ConfidencePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <ProductPage product={confidenceProduct} />;
+  return (
+    <>
+      <ProductJsonLd
+        name="Mother Vegetable Confidence"
+        description="Natural skin healing cream for all skin types. Powerful anti-aging benefits."
+        image="/cdn/products_confidence_10001.png"
+        price={36.70}
+        slug="confidence"
+      />
+      <ProductPage product={confidenceProduct} />
+    </>
+  );
 }

@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import ProductPage, { type ProductPageData } from '@/components/ProductPage';
+import ProductJsonLd from '@/components/ProductJsonLd';
 
 export const metadata: Metadata = {
   title: 'Achieve — 48 Nutrients in One Stick',
@@ -146,5 +147,16 @@ const achieveProduct: ProductPageData = {
 export default async function AchievePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <ProductPage product={achieveProduct} />;
+  return (
+    <>
+      <ProductJsonLd
+        name="Mother Vegetable Achieve"
+        description="48 different nutrients in one stick. Premium health supplement for daily wellness."
+        image="/cdn/products_achieve_10001.png"
+        price={36.70}
+        slug="achieve"
+      />
+      <ProductPage product={achieveProduct} />
+    </>
+  );
 }

@@ -305,7 +305,7 @@ function RegisterContent() {
                   {/* Error */}
                   {error && (
                     <div className="py-2">
-                      <p className="text-red-400 text-sm text-center">{error}</p>
+                      <p role="alert" className="text-red-400 text-sm text-center">{error}</p>
                     </div>
                   )}
 

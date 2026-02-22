@@ -91,7 +91,7 @@ export default function LoginPage() {
 
                 {/* Error Message */}
                 {error && (
-                  <div className="mt-3 text-red-500 text-sm font-semibold">
+                  <div role="alert" className="mt-3 text-red-500 text-sm font-semibold">
                     {t(error)}
                   </div>
                 )}
