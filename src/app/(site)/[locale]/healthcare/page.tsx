@@ -1,6 +1,13 @@
 import { setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import ResearchSlider from '@/components/healthcare/ResearchSlider';
+
+export const metadata: Metadata = {
+  title: 'Healthcare — Clinical Research & Certifications',
+  description:
+    'Explore the science behind Mother Vegetable. GMP, HACCP, and JFRL certified. Clinical research on 45+ vegetable extract benefits.',
+};
 
 /* ------------------------------------------------------------------ */
 /*  Healthcare / ALL 45E  –  Complete clinical product page            */

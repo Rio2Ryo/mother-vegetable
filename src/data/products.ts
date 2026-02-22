@@ -272,8 +272,12 @@ const forever: ProductData = {
 // Exports
 // ---------------------------------------------------------------------------
 
-export const products: ProductData[] = [achieve, confidence, forever];
+/** Active products shown on the site (Forever removed from catalog). */
+export const products: ProductData[] = [achieve, confidence];
+
+/** All products including discontinued, for admin/order lookup. */
+export const allProducts: ProductData[] = [achieve, confidence, forever];
 
 export function getProductBySlug(slug: string): ProductData | undefined {
-  return products.find((p) => p.slug === slug);
+  return allProducts.find((p) => p.slug === slug);
 }

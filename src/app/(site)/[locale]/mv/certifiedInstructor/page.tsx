@@ -1,6 +1,13 @@
 import { setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
+
+export const metadata: Metadata = {
+  title: 'Become a Certified Instructor',
+  description:
+    'Join the Mother Vegetable instructor affiliate program. Earn 25% commission on direct sales and 10% on referral sales. $250/year subscription.',
+};
 
 /* ------------------------------------------------------------------ */
 /*  Certified Instructor Page – Mother Vegetable Partners              */

@@ -1,5 +1,17 @@
 import { setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
 import ProductPage, { type ProductPageData } from '@/components/ProductPage';
+
+export const metadata: Metadata = {
+  title: 'Confidence — Skin Healing Effect',
+  description:
+    'Mother Vegetable Confidence cream for all skin types. Natural skin healing and vitality. USD 36.70 with free worldwide shipping.',
+  openGraph: {
+    title: 'Mother Vegetable Confidence — Skin Healing Effect',
+    description: 'Natural skin healing cream for all skin types.',
+    images: [{ url: '/cdn/products_confidence_10001.png', width: 800, height: 800, alt: 'Mother Vegetable Confidence' }],
+  },
+};
 
 const confidenceProduct: ProductPageData = {
   id: 'confidence',

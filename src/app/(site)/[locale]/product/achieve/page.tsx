@@ -1,5 +1,17 @@
 import { setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
 import ProductPage, { type ProductPageData } from '@/components/ProductPage';
+
+export const metadata: Metadata = {
+  title: 'Achieve — 48 Nutrients in One Stick',
+  description:
+    'Mother Vegetable Achieve delivers 48 different nutrients in a single stick. Premium health supplement for daily wellness. USD 36.70 with free worldwide shipping.',
+  openGraph: {
+    title: 'Mother Vegetable Achieve — 48 Nutrients in One Stick',
+    description: 'Premium health supplement delivering 48 nutrients in one stick.',
+    images: [{ url: '/cdn/products_achieve_10001.png', width: 800, height: 800, alt: 'Mother Vegetable Achieve' }],
+  },
+};
 
 const achieveProduct: ProductPageData = {
   id: 'achieve',
