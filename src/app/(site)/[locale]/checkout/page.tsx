@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback, memo, type FormEvent, type ChangeEven
 import { useCartStore } from "@/store/cart";
 import { useAffiliateStore } from "@/store/affiliateStore";
 import { Link } from "@/i18n/navigation";
-import { useLocale } from "next-intl";
-import { getStoredReferralCode, clearStoredReferralCode } from "@/lib/affiliate";
+import { useLocale, useTranslations } from "next-intl";
+import { getStoredReferralCode } from "@/lib/affiliate";
 
 interface ShippingForm {
   firstName: string;
@@ -75,14 +75,13 @@ const Field = memo(function Field({
 });
 
 export default function CheckoutPage() {
-  const { items, totalPrice, clearCart } = useCartStore();
-  const processOrder = useAffiliateStore((s) => s.processOrder);
+  const { items, totalPrice } = useCartStore();
   const getInstructorByReferralCode = useAffiliateStore((s) => s.getInstructorByReferralCode);
   const locale = useLocale();
+  const t = useTranslations('checkout');
   const [form, setForm] = useState<ShippingForm>(emptyForm);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [orderId, setOrderId] = useState<string | null>(null);
   const [referralCode, setReferralCode] = useState<string | null>(null);
   const [referrerName, setReferrerName] = useState<string | null>(null);
 
@@ -104,6 +103,19 @@ export default function CheckoutPage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   }, []);
 
+  // Map field keys to translation keys
+  const fieldLabels: Record<keyof ShippingForm, string> = {
+    firstName: t('firstName'),
+    lastName: t('lastName'),
+    email: t('email'),
+    phone: t('phone'),
+    address: t('street'),
+    city: t('city'),
+    state: t('state'),
+    zip: t('zip'),
+    country: t('country'),
+  };
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
@@ -119,12 +131,12 @@ export default function CheckoutPage() {
     ];
     for (const field of requiredFields) {
       if (!form[field].trim()) {
-        setError(`Please fill in the ${field.replace(/([A-Z])/g, " $1").toLowerCase()} field.`);
+        setError(t('errorRequired', { field: fieldLabels[field] }));
         return;
       }
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      setError("Please enter a valid email address.");
+      setError(t('errorEmail'));
       return;
     }
 
@@ -153,7 +165,7 @@ export default function CheckoutPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Failed to create checkout session.");
+        setError(data.error || t('errorCheckout'));
         setSubmitting(false);
         return;
       }
@@ -162,54 +174,13 @@ export default function CheckoutPage() {
         // Redirect to Stripe Checkout
         window.location.href = data.url;
       } else {
-        setError("Failed to get checkout URL.");
+        setError(t('errorCheckout'));
         setSubmitting(false);
       }
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError(t('errorGeneric'));
       setSubmitting(false);
     }
-  }
-
-  // -----------------------------------------------------------------------
-  // Success state
-  // -----------------------------------------------------------------------
-  if (orderId) {
-    return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
-        <div className="max-w-md w-full text-center space-y-6">
-          <div className="w-16 h-16 rounded-full bg-[#25C760] mx-auto flex items-center justify-center">
-            <svg
-              className="w-8 h-8 text-black"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={3}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </div>
-          <h1 className="text-3xl font-bold">Thank you!</h1>
-          <p className="text-gray-400">
-            Your order has been placed successfully.
-          </p>
-          <p className="text-sm text-gray-500">
-            Order ID:{" "}
-            <span className="text-[#25C760] font-mono">{orderId}</span>
-          </p>
-          <Link
-            href="/"
-            className="inline-block mt-4 px-6 py-3 bg-[#25C760] text-black font-semibold rounded-lg hover:bg-[#1ea84e] transition-colors"
-          >
-            Continue Shopping
-          </Link>
-        </div>
-      </div>
-    );
   }
 
   // -----------------------------------------------------------------------
@@ -219,15 +190,15 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
         <div className="max-w-md w-full text-center space-y-6">
-          <h1 className="text-3xl font-bold">Your cart is empty</h1>
+          <h1 className="text-3xl font-bold">{t('emptyCart')}</h1>
           <p className="text-gray-400">
-            Add some products before checking out.
+            {t('emptyCartDesc')}
           </p>
           <Link
             href="/"
             className="inline-block mt-4 px-6 py-3 bg-[#25C760] text-black font-semibold rounded-lg hover:bg-[#1ea84e] transition-colors"
           >
-            Browse Products
+            {t('browseProducts')}
           </Link>
         </div>
       </div>
@@ -240,7 +211,7 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-10">Checkout</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-10">{t('title')}</h1>
 
         <form
           onSubmit={handleSubmit}
@@ -250,35 +221,35 @@ export default function CheckoutPage() {
           {/* ---- Shipping Form ---- */}
           <div className="lg:col-span-3 space-y-6">
             <h2 className="text-xl font-semibold text-[#25C760]">
-              Shipping Information
+              {t('shippingInfo')}
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label="First Name" field="firstName" value={form.firstName} onChange={update} />
-              <Field label="Last Name" field="lastName" value={form.lastName} onChange={update} />
+              <Field label={t('firstName')} field="firstName" value={form.firstName} onChange={update} />
+              <Field label={t('lastName')} field="lastName" value={form.lastName} onChange={update} />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Field label="Email" field="email" type="email" value={form.email} onChange={update} />
-              <Field label="Phone" field="phone" type="tel" value={form.phone} onChange={update} />
+              <Field label={t('email')} field="email" type="email" value={form.email} onChange={update} />
+              <Field label={t('phone')} field="phone" type="tel" value={form.phone} onChange={update} />
             </div>
 
-            <Field label="Street Address" field="address" value={form.address} onChange={update} />
+            <Field label={t('street')} field="address" value={form.address} onChange={update} />
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <Field label="City" field="city" value={form.city} onChange={update} />
-              <Field label="State / Province" field="state" value={form.state} onChange={update} />
-              <Field label="ZIP / Postal Code" field="zip" value={form.zip} onChange={update} />
+              <Field label={t('city')} field="city" value={form.city} onChange={update} />
+              <Field label={t('state')} field="state" value={form.state} onChange={update} />
+              <Field label={t('zip')} field="zip" value={form.zip} onChange={update} />
             </div>
 
-            <Field label="Country" field="country" value={form.country} onChange={update} />
+            <Field label={t('country')} field="country" value={form.country} onChange={update} />
           </div>
 
           {/* ---- Order Summary ---- */}
           <div className="lg:col-span-2">
             <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 space-y-6 sticky top-8">
               <h2 className="text-xl font-semibold text-[#25C760]">
-                Order Summary
+                {t('orderSummary')}
               </h2>
 
               {referrerName && (
@@ -286,7 +257,7 @@ export default function CheckoutPage() {
                   <svg className="w-4 h-4 text-[#25C760] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                  <span className="text-gray-300">Referred by <span className="text-[#25C760] font-medium">{referrerName}</span></span>
+                  <span className="text-gray-300">{t('referredBy')} <span className="text-[#25C760] font-medium">{referrerName}</span></span>
                 </div>
               )}
 
@@ -304,7 +275,7 @@ export default function CheckoutPage() {
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate">{item.name}</p>
                       <p className="text-sm text-gray-400">
-                        Qty: {item.quantity}
+                        {t('qty')}: {item.quantity}
                       </p>
                     </div>
                     <p className="font-semibold whitespace-nowrap">
@@ -318,7 +289,7 @@ export default function CheckoutPage() {
               </div>
 
               <div className="border-t border-gray-700 pt-4 flex justify-between text-lg font-bold">
-                <span>Total</span>
+                <span>{t('total')}</span>
                 <span className="text-[#25C760]">${total.toFixed(2)}</span>
               </div>
 
@@ -331,7 +302,7 @@ export default function CheckoutPage() {
                 disabled={submitting}
                 className="w-full py-4 bg-[#25C760] text-black font-bold text-lg rounded-xl hover:bg-[#1ea84e] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {submitting ? "Placing Order..." : "Place Order"}
+                {submitting ? t('placingOrder') : t('placeOrder')}
               </button>
             </div>
           </div>

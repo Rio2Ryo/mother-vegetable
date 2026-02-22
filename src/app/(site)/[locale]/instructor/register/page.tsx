@@ -112,6 +112,10 @@ function RegisterContent() {
       }
 
       if (data.url) {
+        // Store instructor ID for post-payment dashboard sync
+        if (data.instructorId) {
+          localStorage.setItem('mv-pending-instructor', data.instructorId);
+        }
         // Redirect to Stripe Checkout for $250/year subscription
         window.location.href = data.url;
       } else {

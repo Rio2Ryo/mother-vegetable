@@ -43,12 +43,67 @@ function DashboardContent() {
   const getReferralCommissions = useAffiliateStore((s) => s.getReferralCommissions);
   const getInstructorReferralCommissions = useAffiliateStore((s) => s.getInstructorReferralCommissions);
 
+  // Sync instructor data from server after Stripe registration redirect
+  const syncFromServer = useCallback(async (instructorId: string) => {
+    try {
+      const res = await fetch(`/api/instructor/me?id=${instructorId}`);
+      if (!res.ok) return false;
+      const data = await res.json();
+
+      const { setCurrentInstructor, addCommission } = useAffiliateStore.getState();
+      setCurrentInstructor({
+        id: data.id,
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        passwordHash: '',
+        referralCode: data.referralCode,
+        parentInstructorId: data.parentInstructorId,
+        stripeCustomerId: data.stripeCustomerId,
+        stripeConnectId: data.stripeConnectId,
+        stripeSubscriptionId: data.stripeSubscriptionId,
+        subscriptionStatus: data.subscriptionStatus,
+        connectOnboarded: data.connectOnboarded,
+        createdAt: data.createdAt,
+      });
+
+      // Sync commissions from server
+      if (data.commissions?.length) {
+        for (const c of data.commissions) {
+          addCommission({
+            id: c.id,
+            orderId: c.orderId,
+            instructorId: c.instructorId ?? data.id,
+            type: c.type,
+            orderTotal: c.orderTotal,
+            commissionRate: c.commissionRate,
+            commissionAmount: c.commissionAmount,
+            paidOut: c.paidOut,
+            createdAt: c.createdAt,
+          });
+        }
+      }
+
+      return true;
+    } catch {
+      return false;
+    }
+  }, []);
+
   useEffect(() => {
     setMounted(true);
     if (searchParams.get('registration') === 'success') {
       setRegistrationSuccess(true);
+
+      // If we have a pending instructor ID from registration, sync from server
+      const pendingId = localStorage.getItem('mv-pending-instructor');
+      if (pendingId && !currentInstructor) {
+        syncFromServer(pendingId).then(() => {
+          localStorage.removeItem('mv-pending-instructor');
+        });
+      }
     }
-  }, [searchParams]);
+  }, [searchParams, currentInstructor, syncFromServer]);
 
   // Fetch Connect status
   const fetchConnectStatus = useCallback(async () => {
@@ -72,7 +127,11 @@ function DashboardContent() {
 
   useEffect(() => {
     if (mounted && !currentInstructor) {
-      router.push('/instructor/login');
+      // Don't redirect if we're still loading from server after registration
+      const pendingId = localStorage.getItem('mv-pending-instructor');
+      if (!pendingId) {
+        router.push('/instructor/login');
+      }
     }
   }, [mounted, currentInstructor, router]);
 

@@ -5,11 +5,13 @@ import { Link } from "@/i18n/navigation";
 import { useCartStore } from "@/store/cart";
 import { clearStoredReferralCode } from "@/lib/affiliate";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const clearCart = useCartStore((s) => s.clearCart);
+  const t = useTranslations('checkout');
   const [orderId, setOrderId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -49,24 +51,24 @@ function SuccessContent() {
             />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold">Thank you!</h1>
+        <h1 className="text-3xl font-bold">{t('thankYou')}</h1>
         <p className="text-gray-400">
-          Your payment was successful and your order has been placed.
+          {t('orderPlaced')}
         </p>
         {orderId && (
           <p className="text-sm text-gray-500">
-            Session:{" "}
+            {t('sessionLabel')}:{" "}
             <span className="text-[#25C760] font-mono">{orderId}</span>
           </p>
         )}
         <p className="text-sm text-gray-500">
-          You will receive an order confirmation email shortly.
+          {t('confirmationEmail')}
         </p>
         <Link
           href="/"
           className="inline-block mt-4 px-6 py-3 bg-[#25C760] text-black font-semibold rounded-lg hover:bg-[#1ea84e] transition-colors"
         >
-          Continue Shopping
+          {t('continueShopping')}
         </Link>
       </div>
     </div>

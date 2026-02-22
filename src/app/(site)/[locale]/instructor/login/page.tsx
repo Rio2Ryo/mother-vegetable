@@ -8,7 +8,6 @@ import { useAffiliateStore } from '@/store/affiliateStore';
 export default function InstructorLoginPage() {
   const router = useRouter();
   const t = useTranslations('instructor');
-  const login = useAffiliateStore((s) => s.login);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,10 +26,41 @@ export default function InstructorLoginPage() {
 
     setSubmitting(true);
 
-    const success = login(email.trim(), password);
-    if (success) {
+    try {
+      const res = await fetch('/api/instructor/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || t('errorInvalidCredentials'));
+        setSubmitting(false);
+        return;
+      }
+
+      // Sync instructor data to local store for dashboard
+      const { setCurrentInstructor } = useAffiliateStore.getState();
+      setCurrentInstructor({
+        id: data.id,
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        passwordHash: '',
+        referralCode: data.referralCode,
+        parentInstructorId: data.parentInstructorId,
+        stripeCustomerId: data.stripeCustomerId,
+        stripeConnectId: data.stripeConnectId,
+        stripeSubscriptionId: data.stripeSubscriptionId,
+        subscriptionStatus: data.subscriptionStatus,
+        connectOnboarded: data.connectOnboarded,
+        createdAt: data.createdAt,
+      });
+
       router.push('/instructor/dashboard');
-    } else {
+    } catch {
       setError(t('errorInvalidCredentials'));
       setSubmitting(false);
     }
