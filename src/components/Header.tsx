@@ -84,7 +84,7 @@ export default function Header() {
   return (
     <>
       <header role="banner" className="bg-black sticky top-0 z-[1000] shadow-[0_2px_20px_rgba(0,0,0,0.3)]">
-        <div className="max-w-[1400px] mx-auto px-5 flex items-center justify-between h-20 max-md:px-[15px] max-md:h-[70px]">
+        <div className="max-w-[1400px] mx-auto px-5 flex items-center justify-between h-20 max-lg:px-[15px] max-lg:h-[70px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-[15px]">
             <Image
@@ -92,21 +92,21 @@ export default function Header() {
               alt="Mother Vegetable Logo"
               width={150}
               height={75}
-              className="h-[75px] w-auto hover:scale-105 transition-all duration-300 max-md:h-[50px]"
+              className="h-[75px] w-auto hover:scale-105 transition-all duration-300 max-lg:h-[50px]"
               priority
             />
           </Link>
 
           {/* Nav */}
-          <div className="flex items-center gap-5 max-md:gap-[10px]">
+          <div className="flex items-center gap-5 max-lg:gap-[10px]">
             <nav
               aria-label="Main navigation"
               className={`${
                 mobileMenuOpen ? 'right-0' : 'right-[-100%]'
-              } fixed top-0 w-4/5 max-w-[300px] h-screen bg-black border-l-2 border-[#25C760] transition-all duration-300 z-[1000] pt-20 px-5 shadow-[-5px_0_15px_rgba(0,0,0,0.3)] md:shadow-none md:static md:w-auto md:max-w-none md:h-auto md:border-0 md:pt-0 md:px-0 md:flex md:items-center max-[600px]:w-[90%] max-[600px]:max-w-[280px] max-[600px]:pt-[70px] max-[600px]:px-[15px]`}
+              } fixed top-0 w-4/5 max-w-[300px] h-screen bg-black border-l-2 border-[#25C760] transition-all duration-300 z-[1000] pt-20 px-5 shadow-[-5px_0_15px_rgba(0,0,0,0.3)] lg:shadow-none lg:static lg:w-auto lg:max-w-none lg:h-auto lg:border-0 lg:pt-0 lg:px-0 lg:flex lg:items-center max-[600px]:w-[90%] max-[600px]:max-w-[280px] max-[600px]:pt-[70px] max-[600px]:px-[15px]`}
             >
               {/* Mobile profile buttons */}
-              <div className="hidden max-md:flex max-md:flex-col gap-[10px] mb-4">
+              <div className="hidden max-lg:flex max-lg:flex-col gap-[10px] mb-4">
                 {isLoggedIn ? (
                   <>
                     <div className="py-3 px-4 border-2 border-[#25C760] rounded-lg">
@@ -171,21 +171,21 @@ export default function Header() {
                 )}
               </div>
 
-              <ul className="flex flex-col md:flex-row gap-[5px] md:gap-[35px] list-none m-0 p-0 max-[600px]:pt-[25px] max-[600px]:relative max-[600px]:z-[-1] max-[600px]:w-full">
-                <li className="max-md:w-full">
+              <ul className="flex flex-col lg:flex-row gap-[5px] lg:gap-[35px] list-none m-0 p-0 max-[600px]:pt-[25px] max-[600px]:relative max-[600px]:z-[-1] max-[600px]:w-full">
+                <li className="max-lg:w-full">
                   <Link
                     href="/#food-function"
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:block max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t('food')}
                   </Link>
                 </li>
-                <li className="max-md:w-full">
+                <li className="max-lg:w-full">
                   <Link
                     href="/#cosmetic-function"
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:block max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -193,12 +193,12 @@ export default function Header() {
                   </Link>
                 </li>
                 <li
-                  className="relative group max-md:w-full"
+                  className="relative group max-lg:w-full"
                   onMouseEnter={openProducts}
                   onMouseLeave={closeProducts}
                 >
                   <button
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-[5px] bg-transparent border-none cursor-pointer py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-[5px] bg-transparent border-none cursor-pointer py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setProductsOpen(!productsOpen)}
                   >
@@ -218,13 +218,13 @@ export default function Header() {
                     </svg>
                   </button>
                   <div
-                    className={`md:absolute md:top-full md:left-0 md:z-[1000] md:pt-2 transition-all duration-300 ${
+                    className={`lg:absolute lg:top-full lg:left-0 lg:z-[1000] lg:pt-2 transition-all duration-300 ${
                       productsOpen
                         ? 'opacity-100 visible translate-y-0 pointer-events-auto'
-                        : 'md:opacity-0 md:invisible md:-translate-y-[10px] md:pointer-events-none'
-                    } static mt-2 ml-4 md:mt-0 md:ml-0`}
+                        : 'lg:opacity-0 lg:invisible lg:-translate-y-[10px] lg:pointer-events-none'
+                    } static mt-2 ml-4 lg:mt-0 lg:ml-0`}
                   >
-                    <ul className="md:bg-black md:shadow-[0_8px_20px_rgba(0,0,0,0.3)] md:rounded-lg md:border md:border-[#25C760] md:min-w-[180px] list-none p-0 m-0">
+                    <ul className="lg:bg-black lg:shadow-[0_8px_20px_rgba(0,0,0,0.3)] lg:rounded-lg lg:border lg:border-[#25C760] lg:min-w-[180px] list-none p-0 m-0">
                       {['achieve', 'confidence'].map((p) => (
                         <li key={p}>
                           <Link
@@ -240,12 +240,12 @@ export default function Header() {
                   </div>
                 </li>
                 <li
-                  className="relative group max-md:w-full"
+                  className="relative group max-lg:w-full"
                   onMouseEnter={openHowTo}
                   onMouseLeave={closeHowTo}
                 >
                   <button
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-[5px] bg-transparent border-none cursor-pointer py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-[5px] bg-transparent border-none cursor-pointer py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setHowToOpen(!howToOpen)}
                   >
@@ -265,13 +265,13 @@ export default function Header() {
                     </svg>
                   </button>
                   <div
-                    className={`md:absolute md:top-full md:left-0 md:z-[1000] md:pt-2 transition-all duration-300 ${
+                    className={`lg:absolute lg:top-full lg:left-0 lg:z-[1000] lg:pt-2 transition-all duration-300 ${
                       howToOpen
                         ? 'opacity-100 visible translate-y-0 pointer-events-auto'
-                        : 'md:opacity-0 md:invisible md:-translate-y-[10px] md:pointer-events-none'
-                    } static mt-2 ml-4 md:mt-0 md:ml-0`}
+                        : 'lg:opacity-0 lg:invisible lg:-translate-y-[10px] lg:pointer-events-none'
+                    } static mt-2 ml-4 lg:mt-0 lg:ml-0`}
                   >
-                    <ul className="md:bg-black md:shadow-[0_8px_20px_rgba(0,0,0,0.3)] md:rounded-lg md:border md:border-[#25C760] md:min-w-[180px] list-none p-0 m-0">
+                    <ul className="lg:bg-black lg:shadow-[0_8px_20px_rgba(0,0,0,0.3)] lg:rounded-lg lg:border lg:border-[#25C760] lg:min-w-[180px] list-none p-0 m-0">
                       {['achieve', 'confidence'].map((p) => (
                         <li key={p}>
                           <Link
@@ -286,17 +286,17 @@ export default function Header() {
                     </ul>
                   </div>
                 </li>
-                <li className="max-md:w-full">
+                <li className="max-lg:w-full">
                   <Link
                     href="/mv/certifiedInstructor"
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 md:py-0 max-md:text-lg max-md:text-white max-md:py-[10px] max-md:border-b max-md:border-[rgba(37,199,96,0.2)] max-md:w-full max-md:block max-md:hover:text-[#25C760] max-md:hover:translate-x-[10px] max-md:hover:translate-y-0 max-[600px]:text-base"
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t('certifiedInstructor')}
                   </Link>
                 </li>
-                <li className="hidden max-md:block list-none mt-3 w-full">
+                <li className="hidden max-lg:block list-none mt-3 w-full">
                   <Link
                     href="/healthcare"
                     className="inline-flex flex-col items-center justify-center w-fit py-[5px] px-5 border border-white rounded-md text-white text-sm font-semibold no-underline bg-black transition-all duration-300 hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:translate-x-0"
@@ -312,7 +312,7 @@ export default function Header() {
             {/* Healthcare Button (Desktop) */}
             <Link
               href="/healthcare"
-              className="hidden md:inline-flex flex-col items-center justify-center h-10 bg-black text-white border border-white px-3 rounded-md text-[11px] font-semibold leading-[1.2] no-underline hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-0.5 transition-all duration-300 text-center"
+              className="hidden lg:inline-flex flex-col items-center justify-center h-10 bg-black text-white border border-white px-3 rounded-md text-[11px] font-semibold leading-[1.2] no-underline hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-0.5 transition-all duration-300 text-center"
               style={{ fontFamily: 'Arial, sans-serif' }}
             >
               {t('healthcare')}
@@ -350,7 +350,7 @@ export default function Header() {
             {/* Cart Button */}
             <button
               onClick={toggleCart}
-              className="bg-black text-white border border-white px-6 py-3 rounded-[5px] font-semibold text-sm cursor-pointer relative overflow-hidden flex items-center gap-2 h-10 hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300 max-md:px-4 max-md:text-xs max-[600px]:px-3 max-[600px]:text-[11px]"
+              className="bg-black text-white border border-white px-6 py-3 rounded-[5px] font-semibold text-sm cursor-pointer relative overflow-hidden flex items-center gap-2 h-10 hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300 max-lg:px-4 max-lg:text-xs max-[600px]:px-3 max-[600px]:text-[11px]"
               style={{ fontFamily: 'Arial, sans-serif' }}
             >
               <svg className="w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 576 512">
@@ -365,7 +365,7 @@ export default function Header() {
 
             {/* Profile Button (Desktop) */}
             <div
-              className="hidden md:flex relative text-white bg-black border border-white cursor-pointer h-10 rounded-[5px] items-center justify-center hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300"
+              className="hidden lg:flex relative text-white bg-black border border-white cursor-pointer h-10 rounded-[5px] items-center justify-center hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300"
               style={{ minWidth: isLoggedIn ? 'auto' : '40px', paddingInline: isLoggedIn ? '12px' : '0' }}
               onMouseEnter={openProfile}
               onMouseLeave={closeProfile}
@@ -449,7 +449,7 @@ export default function Header() {
 
             {/* Hamburger */}
             <button
-              className="hidden max-md:flex flex-col justify-around w-[30px] h-[30px] bg-transparent border-none cursor-pointer p-0 z-[1001]"
+              className="hidden max-lg:flex flex-col justify-around w-[30px] h-[30px] bg-transparent border-none cursor-pointer p-0 z-[1001]"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <span
@@ -475,7 +475,7 @@ export default function Header() {
       {/* Mobile menu overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-[999] hidden max-md:block"
+          className="fixed inset-0 bg-black/50 z-[999] hidden max-lg:block"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
