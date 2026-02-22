@@ -9,6 +9,7 @@ import {
   sendReferralSuccessEmail,
   sendSubscriptionRenewalEmail,
 } from "@/lib/email";
+import { countryToLocale } from "@/lib/email-i18n";
 import type Stripe from "stripe";
 
 export async function POST(request: NextRequest) {
@@ -84,6 +85,7 @@ async function handlePaymentCompleted(session: Stripe.Checkout.Session) {
   const shipping = metadata.shipping ? JSON.parse(metadata.shipping) : {};
   const items = metadata.items ? JSON.parse(metadata.items) : [];
   const referralCode = metadata.referralCode || null;
+  const locale = metadata.locale || countryToLocale(shipping.country) || "en";
   const amountTotal = (session.amount_total || 0) / 100; // convert cents to dollars
 
   // Create order in DB
@@ -155,7 +157,7 @@ async function handlePaymentCompleted(session: Stripe.Checkout.Session) {
           orderTotal: amountTotal,
           commissionAmount: directAmount,
           commissionType: "direct",
-        });
+        }, locale);
 
         // Parent instructor referral commission (10%)
         if (instructor.parentInstructorId) {
@@ -182,7 +184,7 @@ async function handlePaymentCompleted(session: Stripe.Checkout.Session) {
               orderTotal: amountTotal,
               commissionAmount: referralAmount,
               commissionType: "referral",
-            });
+            }, locale);
           }
         }
       }
@@ -205,7 +207,7 @@ async function handlePaymentCompleted(session: Stripe.Checkout.Session) {
         quantity: i.quantity,
         price: i.price,
       })),
-    });
+    }, locale);
   }
 }
 
@@ -215,6 +217,7 @@ async function handlePaymentCompleted(session: Stripe.Checkout.Session) {
 async function handleSubscriptionCreated(session: Stripe.Checkout.Session) {
   const metadata = session.metadata || {};
   const instructorId = metadata.instructorId;
+  const locale = metadata.locale || "en";
 
   if (!instructorId) return;
 
@@ -249,7 +252,7 @@ async function handleSubscriptionCreated(session: Stripe.Checkout.Session) {
           fullName: parent.fullName,
           referredName: instructor.fullName,
           reward: 50,
-        });
+        }, parent.locale);
       }
     }
 
@@ -258,7 +261,7 @@ async function handleSubscriptionCreated(session: Stripe.Checkout.Session) {
       email: instructor.email,
       fullName: instructor.fullName,
       referralCode: instructor.referralCode,
-    });
+    }, locale);
   } catch (err) {
     console.error("Failed to process instructor subscription:", err);
   }
@@ -315,7 +318,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
           fullName: parent.fullName,
           referredName: instructor.fullName,
           reward: 50,
-        });
+        }, parent.locale);
       }
     }
 
@@ -330,7 +333,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
       email: instructor.email,
       fullName: instructor.fullName,
       nextBillingDate,
-    });
+    }, instructor.locale);
   } catch (err) {
     console.error("Failed to process invoice.paid:", err);
   }

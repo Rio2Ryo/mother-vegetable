@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test:e2e": "playwright test --ignore-snapshots",
     "test:e2e:ui": "playwright test --ui --ignore-snapshots",
+    "test": "vitest run",
     "test:visual": "playwright test e2e/visual/",
     "test:visual:update": "playwright test e2e/visual/ --update-snapshots"
   },
@@ -47,6 +48,7 @@
     "eslint-config-next": "16.1.6",
     "playwright": "^1.58.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.0.18"
   }
 }

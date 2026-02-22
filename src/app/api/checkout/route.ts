@@ -78,6 +78,7 @@ export async function POST(request: NextRequest) {
       metadata: {
         shipping: JSON.stringify(body.shipping),
         referralCode: body.referralCode || "",
+        locale: locale,
         items: JSON.stringify(
           body.items.map((i) => ({
             productId: i.productId,

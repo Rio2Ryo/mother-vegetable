@@ -113,6 +113,7 @@ model Instructor {
   stripeSubscriptionId String?
   subscriptionStatus  String   @default("inactive") // active, inactive, past_due, canceled
   connectOnboarded    Boolean  @default(false)
+  locale              String   @default("en")
 
   parentInstructor    Instructor?  @relation("InstructorReferral", fields: [parentInstructorId], references: [id])
   referredInstructors Instructor[] @relation("InstructorReferral")

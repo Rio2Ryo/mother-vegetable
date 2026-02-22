@@ -84,6 +84,7 @@ export async function POST(request: NextRequest) {
         referralCode: code,
         parentInstructorId,
         subscriptionStatus: "inactive",
+        locale: body.locale || "en",
       },
     });
 
@@ -124,6 +125,7 @@ export async function POST(request: NextRequest) {
       line_items: [{ price: price.id, quantity: 1 }],
       metadata: {
         instructorId: instructor.id,
+        locale: locale,
       },
       success_url: `${appUrl}/${locale}/instructor/dashboard?registration=success`,
       cancel_url: `${appUrl}/${locale}/instructor/register?canceled=true`,
