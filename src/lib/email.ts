@@ -1,4 +1,4 @@
-import { resend, FROM_EMAIL } from "./resend";
+import { transporter, FROM_EMAIL } from "./resend";
 
 const APP_NAME = "Mother Vegetable";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
@@ -10,13 +10,13 @@ interface SendEmailOptions {
 }
 
 async function sendEmail({ to, subject, html }: SendEmailOptions) {
-  if (!resend) {
-    console.log(`[Email Skipped] No RESEND_API_KEY. To: ${to}, Subject: ${subject}`);
+  if (!transporter) {
+    console.log(`[Email Skipped] SMTP not configured. To: ${to}, Subject: ${subject}`);
     return;
   }
 
   try {
-    await resend.emails.send({
+    await transporter.sendMail({
       from: FROM_EMAIL,
       to,
       subject,
