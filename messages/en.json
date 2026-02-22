@@ -124,7 +124,7 @@
     "street": "Street Address",
     "city": "City",
     "state": "State / Province",
-    "zip": "Postal Code",
+    "zip": "ZIP / Postal Code",
     "country": "Country",
     "orderSummary": "Order Summary",
     "placeOrder": "Place Order",
