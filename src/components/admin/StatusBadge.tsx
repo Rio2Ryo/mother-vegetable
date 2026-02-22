@@ -13,13 +13,13 @@ const COLORS: Record<Status, string> = {
 };
 
 interface Props {
-  status: Status;
+  status: string;
 }
 
 export default function StatusBadge({ status }: Props) {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize ring-1 ring-inset ${COLORS[status] ?? "bg-gray-50 text-gray-600 ring-gray-500/20"}`}
+      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize ring-1 ring-inset ${COLORS[status as Status] ?? "bg-gray-50 text-gray-600 ring-gray-500/20"}`}
     >
       {status}
     </span>

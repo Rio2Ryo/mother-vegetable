@@ -4,12 +4,49 @@ import { useEffect, useState, use } from "react";
 import Link from "next/link";
 import { ArrowLeft, Copy, Check, ExternalLink } from "lucide-react";
 import type { Instructor, Order } from "@/types/admin";
-import {
-  getInstructorById,
-  getInstructors,
-  getOrders,
-} from "@/lib/admin-data";
+import { getInstructorById } from "@/lib/admin-data";
 import StatusBadge from "@/components/admin/StatusBadge";
+
+// Extended instructor detail from the API
+interface InstructorDetail extends Omit<Instructor, "referredBy"> {
+  subscriptionStatus?: string;
+  connectOnboarded?: boolean;
+  availableBalance?: number;
+  commissions?: {
+    id: string;
+    orderId: string | null;
+    type: string;
+    orderTotal: number;
+    commissionRate: number;
+    commissionAmount: number;
+    paidOut: boolean;
+    createdAt: string;
+  }[];
+  referredInstructors?: {
+    id: string;
+    name: string;
+    email: string;
+    referralCode: string;
+    status: string;
+    createdAt: string;
+  }[];
+  payoutHistory?: {
+    id: string;
+    amount: number;
+    status: string;
+    createdAt: string;
+  }[];
+  relatedOrders?: {
+    id: string;
+    customerName: string;
+    total: number;
+    status: string;
+    createdAt: string;
+  }[];
+  referredBy?:
+    | string
+    | { id: string; name: string; referralCode: string };
+}
 
 export default function InstructorDetailPage({
   params,
@@ -17,32 +54,24 @@ export default function InstructorDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-  const [instructor, setInstructor] = useState<Instructor | null | undefined>(
+  const [instructor, setInstructor] = useState<InstructorDetail | null | undefined>(
     undefined
   );
-  const [referredInstructors, setReferredInstructors] = useState<Instructor[]>(
-    []
-  );
-  const [relatedOrders, setRelatedOrders] = useState<Order[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const inst = getInstructorById(id);
-    setInstructor(inst ?? null);
-
-    if (inst) {
-      // Instructors referred by this instructor
-      const allInstructors = getInstructors();
-      setReferredInstructors(
-        allInstructors.filter((i) => i.referredBy === inst.id)
-      );
-
-      // Orders with this instructor's referral code
-      const allOrders = getOrders();
-      setRelatedOrders(
-        allOrders.filter((o) => o.referralCode === inst.referralCode)
-      );
+    async function load() {
+      try {
+        const data = await getInstructorById(id);
+        setInstructor((data as InstructorDetail) ?? null);
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : "Failed to load instructor"
+        );
+      }
     }
+    load();
   }, [id]);
 
   async function copyUrl() {
@@ -50,6 +79,21 @@ export default function InstructorDetailPage({
     await navigator.clipboard.writeText(instructor.referralUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-64 flex-col items-center justify-center gap-2 text-red-500">
+        <p className="text-lg font-medium">Error</p>
+        <p className="text-sm">{error}</p>
+        <Link
+          href="/admin/instructors"
+          className="mt-2 text-sm text-emerald-600 hover:underline"
+        >
+          Back to instructors
+        </Link>
+      </div>
+    );
   }
 
   if (instructor === undefined) {
@@ -74,9 +118,20 @@ export default function InstructorDetailPage({
     );
   }
 
-  // Commission breakdown
-  const directCommission = instructor.directSales * 150 * 0.25; // 25% direct
-  const referralCommission = instructor.referralSales * 150 * 0.1; // 10% referral
+  // Referral info
+  const referredByInfo =
+    typeof instructor.referredBy === "object" && instructor.referredBy
+      ? instructor.referredBy
+      : null;
+
+  const commissions = instructor.commissions || [];
+  const directComm = commissions.filter((c) => c.type === "direct");
+  const referralComm = commissions.filter((c) => c.type === "referral");
+  const directEarned = directComm.reduce((s, c) => s + c.commissionAmount, 0);
+  const referralEarned = referralComm.reduce(
+    (s, c) => s + c.commissionAmount,
+    0
+  );
 
   return (
     <div className="space-y-6">
@@ -150,15 +205,23 @@ export default function InstructorDetailPage({
                 </div>
               </dd>
             </div>
-            {instructor.referredBy && (
+            {instructor.subscriptionStatus && (
+              <div>
+                <dt className="font-medium text-gray-500">Subscription</dt>
+                <dd className="mt-0.5 capitalize text-gray-900">
+                  {instructor.subscriptionStatus}
+                </dd>
+              </div>
+            )}
+            {referredByInfo && (
               <div>
                 <dt className="font-medium text-gray-500">Referred By</dt>
                 <dd className="mt-0.5">
                   <Link
-                    href={`/admin/instructors/${instructor.referredBy}`}
+                    href={`/admin/instructors/${referredByInfo.id}`}
                     className="text-emerald-600 hover:underline inline-flex items-center gap-1"
                   >
-                    {instructor.referredBy}
+                    {referredByInfo.name}
                     <ExternalLink className="h-3 w-3" />
                   </Link>
                 </dd>
@@ -182,7 +245,7 @@ export default function InstructorDetailPage({
                 {instructor.directSales}
               </p>
               <p className="mt-0.5 text-sm text-emerald-600">
-                ${directCommission.toFixed(2)}
+                ${directEarned.toFixed(2)}
               </p>
             </div>
             <div className="rounded-lg bg-blue-50 p-4">
@@ -193,7 +256,7 @@ export default function InstructorDetailPage({
                 {instructor.referralSales}
               </p>
               <p className="mt-0.5 text-sm text-blue-600">
-                ${referralCommission.toFixed(2)}
+                ${referralEarned.toFixed(2)}
               </p>
             </div>
             <div className="rounded-lg bg-gray-50 p-4">
@@ -203,11 +266,15 @@ export default function InstructorDetailPage({
               <p className="mt-1 text-2xl font-bold text-gray-900">
                 ${instructor.commissionEarned.toFixed(2)}
               </p>
-              <p className="mt-0.5 text-sm text-gray-500">Lifetime</p>
+              {instructor.availableBalance !== undefined && (
+                <p className="mt-0.5 text-sm text-gray-500">
+                  Available: ${instructor.availableBalance.toFixed(2)}
+                </p>
+              )}
             </div>
           </div>
 
-          {/* Payout history placeholder */}
+          {/* Payout history */}
           <div className="mt-6">
             <h3 className="mb-3 text-sm font-semibold text-gray-700">
               Payout History
@@ -228,26 +295,24 @@ export default function InstructorDetailPage({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {instructor.commissionEarned > 0 ? (
-                    <tr>
-                      <td className="px-4 py-2 text-gray-700">
-                        {new Date(
-                          Date.now() - 30 * 24 * 60 * 60 * 1000
-                        ).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </td>
-                      <td className="px-4 py-2 font-medium text-gray-900">
-                        ${instructor.commissionEarned.toFixed(2)}
-                      </td>
-                      <td className="px-4 py-2">
-                        <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
-                          Paid
-                        </span>
-                      </td>
-                    </tr>
+                  {(instructor.payoutHistory || []).length > 0 ? (
+                    (instructor.payoutHistory || []).map((p) => (
+                      <tr key={p.id}>
+                        <td className="px-4 py-2 text-gray-700">
+                          {new Date(p.createdAt).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
+                        </td>
+                        <td className="px-4 py-2 font-medium text-gray-900">
+                          ${p.amount.toFixed(2)}
+                        </td>
+                        <td className="px-4 py-2">
+                          <StatusBadge status={p.status} />
+                        </td>
+                      </tr>
+                    ))
                   ) : (
                     <tr>
                       <td
@@ -268,9 +333,9 @@ export default function InstructorDetailPage({
       {/* Referred instructors */}
       <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
         <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-500">
-          Referred Instructors ({referredInstructors.length})
+          Referred Instructors ({(instructor.referredInstructors || []).length})
         </h2>
-        {referredInstructors.length === 0 ? (
+        {(instructor.referredInstructors || []).length === 0 ? (
           <p className="text-sm text-gray-400">
             This instructor has not referred anyone yet.
           </p>
@@ -294,7 +359,7 @@ export default function InstructorDetailPage({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {referredInstructors.map((ri) => (
+                {(instructor.referredInstructors || []).map((ri) => (
                   <tr
                     key={ri.id}
                     className="cursor-pointer hover:bg-gray-50"
@@ -326,12 +391,12 @@ export default function InstructorDetailPage({
         )}
       </div>
 
-      {/* Sales history (orders with this referral code) */}
+      {/* Sales history */}
       <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
         <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-500">
-          Sales History ({relatedOrders.length} orders)
+          Sales History ({(instructor.relatedOrders || []).length} orders)
         </h2>
-        {relatedOrders.length === 0 ? (
+        {(instructor.relatedOrders || []).length === 0 ? (
           <p className="text-sm text-gray-400">No orders with this referral code yet.</p>
         ) : (
           <div className="overflow-x-auto rounded-lg border border-gray-200">
@@ -356,7 +421,7 @@ export default function InstructorDetailPage({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {relatedOrders.map((o) => (
+                {(instructor.relatedOrders || []).map((o) => (
                   <tr
                     key={o.id}
                     className="cursor-pointer hover:bg-gray-50"

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, use } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import type { Order, OrderStatus } from "@/types/admin";
 import { getOrderById, updateOrderStatus } from "@/lib/admin-data";
@@ -23,15 +24,47 @@ export default function OrderDetailPage({
 }) {
   const { id } = use(params);
   const [order, setOrder] = useState<Order | null | undefined>(undefined);
+  const [updating, setUpdating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setOrder(getOrderById(id) ?? null);
+    async function load() {
+      try {
+        const data = await getOrderById(id);
+        setOrder(data ?? null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load order");
+      }
+    }
+    load();
   }, [id]);
 
-  function handleStatusChange(newStatus: OrderStatus) {
-    if (!order) return;
-    updateOrderStatus(order.id, newStatus);
-    setOrder({ ...order, status: newStatus });
+  async function handleStatusChange(newStatus: OrderStatus) {
+    if (!order || updating) return;
+    setUpdating(true);
+    try {
+      await updateOrderStatus(order.id, newStatus);
+      setOrder({ ...order, status: newStatus });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to update status");
+    } finally {
+      setUpdating(false);
+    }
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-64 flex-col items-center justify-center gap-2 text-red-500">
+        <p className="text-lg font-medium">Error</p>
+        <p className="text-sm">{error}</p>
+        <Link
+          href="/admin/orders"
+          className="mt-2 text-sm text-emerald-600 hover:underline"
+        >
+          Back to orders
+        </Link>
+      </div>
+    );
   }
 
   if (order === undefined) {
@@ -145,9 +178,11 @@ export default function OrderDetailPage({
               <div key={idx} className="flex items-center gap-4 py-4 first:pt-0 last:pb-0">
                 <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
                   {item.image ? (
-                    <img
+                    <Image
                       src={item.image}
                       alt={item.name}
+                      width={64}
+                      height={64}
                       className="h-full w-full object-cover"
                     />
                   ) : (
@@ -191,7 +226,7 @@ export default function OrderDetailPage({
           {ALL_STATUSES.map((s) => (
             <button
               key={s}
-              disabled={s === order.status}
+              disabled={s === order.status || updating}
               onClick={() => handleStatusChange(s)}
               className={`rounded-lg px-4 py-2 text-sm font-medium capitalize transition-colors ${
                 s === order.status
@@ -199,7 +234,7 @@ export default function OrderDetailPage({
                   : s === "cancelled"
                     ? "bg-red-50 text-red-700 hover:bg-red-100"
                     : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
-              }`}
+              } ${updating ? "opacity-50" : ""}`}
             >
               {s === order.status ? `${s} (current)` : `Mark as ${s}`}
             </button>

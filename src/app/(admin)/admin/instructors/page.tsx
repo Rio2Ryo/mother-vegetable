@@ -17,18 +17,44 @@ const STATUS_OPTIONS: (InstructorStatus | "all")[] = [
 export default function InstructorsPage() {
   const router = useRouter();
   const [instructors, setInstructors] = useState<Instructor[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<
     InstructorStatus | "all"
   >("all");
 
   useEffect(() => {
-    const all = getInstructors();
-    all.sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
-    setInstructors(all);
+    async function load() {
+      try {
+        const all = await getInstructors();
+        setInstructors(all);
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : "Failed to load instructors"
+        );
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
   }, []);
+
+  if (error) {
+    return (
+      <div className="flex h-64 flex-col items-center justify-center gap-2 text-red-500">
+        <p className="text-lg font-medium">Error</p>
+        <p className="text-sm">{error}</p>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="flex h-64 items-center justify-center text-gray-400">
+        Loading...
+      </div>
+    );
+  }
 
   const filtered =
     statusFilter === "all"

@@ -19,17 +19,40 @@ const STATUS_OPTIONS: (OrderStatus | "all")[] = [
 export default function OrdersPage() {
   const router = useRouter();
   const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<OrderStatus | "all">("all");
 
   useEffect(() => {
-    const all = getOrders();
-    // Sort newest first
-    all.sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
-    setOrders(all);
+    async function load() {
+      try {
+        const all = await getOrders();
+        setOrders(all);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load orders");
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
   }, []);
+
+  if (error) {
+    return (
+      <div className="flex h-64 flex-col items-center justify-center gap-2 text-red-500">
+        <p className="text-lg font-medium">Error</p>
+        <p className="text-sm">{error}</p>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="flex h-64 items-center justify-center text-gray-400">
+        Loading...
+      </div>
+    );
+  }
 
   const filtered =
     statusFilter === "all"
