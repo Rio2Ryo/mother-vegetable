@@ -181,7 +181,9 @@
     "errorInvalidCredentials": "メールアドレスまたはパスワードが正しくありません。",
     "errorGeneric": "エラーが発生しました。もう一度お試しください。",
     "signupSuccess": "アカウントが作成されました！リダイレクト中...",
-    "registerSuccess": "アカウントが作成されました！"
+    "registerSuccess": "アカウントが作成されました！",
+    "showPassword": "表示",
+    "hidePassword": "非表示"
   },
   "healthcare": {
     "title": "ヘルスケア",
@@ -295,6 +297,8 @@
     "subscription_inactive": "無効",
     "subscription_past_due": "支払い遅延",
     "subscription_canceled": "解約済み",
-    "registrationComplete": "登録が完了しました！インストラクタープログラムへようこそ。"
+    "registrationComplete": "登録が完了しました！インストラクタープログラムへようこそ。",
+    "showPassword": "表示",
+    "hidePassword": "非表示"
   }
 }

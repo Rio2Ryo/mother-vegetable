@@ -181,7 +181,9 @@
     "errorInvalidCredentials": "邮箱或密码无效。",
     "errorGeneric": "出现错误，请重试。",
     "signupSuccess": "账户创建成功！正在跳转...",
-    "registerSuccess": "账户创建成功！"
+    "registerSuccess": "账户创建成功！",
+    "showPassword": "显示",
+    "hidePassword": "隐藏"
   },
   "healthcare": {
     "title": "医疗保健",
@@ -295,6 +297,8 @@
     "subscription_inactive": "未激活",
     "subscription_past_due": "逾期",
     "subscription_canceled": "已取消",
-    "registrationComplete": "注册完成！欢迎加入讲师计划。"
+    "registrationComplete": "注册完成！欢迎加入讲师计划。",
+    "showPassword": "显示",
+    "hidePassword": "隐藏"
   }
 }

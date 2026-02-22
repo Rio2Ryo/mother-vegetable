@@ -1,5 +1,11 @@
 import { setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+  title: 'How to Use Confidence Cream',
+  description: 'Step-by-step guide for applying Mother Vegetable Confidence cream for optimal skin vitality and radiance.',
+};
 
 const CDN_BASE = 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/confidence';
 

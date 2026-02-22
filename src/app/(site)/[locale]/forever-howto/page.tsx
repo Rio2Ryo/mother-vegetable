@@ -1,5 +1,11 @@
 import { setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+  title: 'How to Use Forever for Pets',
+  description: 'Learn how to use Mother Vegetable Forever supplement to support your pet\'s health and longevity.',
+};
 
 const CDN_BASE = 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/forever';
 

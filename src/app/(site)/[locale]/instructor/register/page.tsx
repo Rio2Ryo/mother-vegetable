@@ -258,7 +258,7 @@ function RegisterContent() {
                         onClick={() => setShowPassword(!showPassword)}
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-xs bg-transparent border-none cursor-pointer"
                       >
-                        {showPassword ? 'HIDE' : 'SHOW'}
+                        {showPassword ? t('hidePassword') : t('showPassword')}
                       </button>
                     </div>
                   </div>
@@ -282,7 +282,7 @@ function RegisterContent() {
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-xs bg-transparent border-none cursor-pointer"
                       >
-                        {showConfirmPassword ? 'HIDE' : 'SHOW'}
+                        {showConfirmPassword ? t('hidePassword') : t('showPassword')}
                       </button>
                     </div>
                   </div>

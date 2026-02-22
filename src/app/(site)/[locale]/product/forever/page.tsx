@@ -1,5 +1,11 @@
 import { setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
 import ProductPage, { type ProductPageData } from '@/components/ProductPage';
+
+export const metadata: Metadata = {
+  title: 'Forever — Pet Health Supplement',
+  description: 'Mother Vegetable Forever supports your pet\'s gut health, reduces tear stains and body odor. Natural supplement for a longer, healthier life.',
+};
 
 const foreverProduct: ProductPageData = {
   id: 'forever',

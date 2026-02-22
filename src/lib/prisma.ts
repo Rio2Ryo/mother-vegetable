@@ -8,7 +8,13 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function makePrisma() {
-  const client = createClient({ url: "file:dev.db" });
+  const url = process.env.DATABASE_URL || "file:dev.db";
+  const client = createClient({
+    url,
+    ...(url.startsWith("libsql://") || url.startsWith("https://")
+      ? { authToken: process.env.DATABASE_AUTH_TOKEN }
+      : {}),
+  });
   const adapter = new PrismaLibSql(client as any);
   return new PrismaClient({ adapter } as any);
 }

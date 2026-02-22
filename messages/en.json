@@ -181,7 +181,9 @@
     "errorInvalidCredentials": "Invalid email or password.",
     "errorGeneric": "Something went wrong. Please try again.",
     "signupSuccess": "Account created successfully! Redirecting...",
-    "registerSuccess": "Account created successfully!"
+    "registerSuccess": "Account created successfully!",
+    "showPassword": "SHOW",
+    "hidePassword": "HIDE"
   },
   "healthcare": {
     "title": "Healthcare",
@@ -295,6 +297,8 @@
     "subscription_inactive": "Inactive",
     "subscription_past_due": "Past Due",
     "subscription_canceled": "Canceled",
-    "registrationComplete": "Registration complete! Welcome to the instructor program."
+    "registrationComplete": "Registration complete! Welcome to the instructor program.",
+    "showPassword": "SHOW",
+    "hidePassword": "HIDE"
   }
 }
