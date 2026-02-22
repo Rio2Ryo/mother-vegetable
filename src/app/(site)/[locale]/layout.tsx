@@ -8,9 +8,7 @@ import Footer from '@/components/Footer';
 import ReferralTracker from '@/components/ReferralTracker';
 import '../../globals.css';
 
-const APP_URL =
-  process.env.NEXT_PUBLIC_APP_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://mother-vegetable.vercel.app');
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://mother-vegetable.vercel.app';
 
 export const metadata: Metadata = {
   title: {
