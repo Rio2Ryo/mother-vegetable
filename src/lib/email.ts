@@ -1,38 +1,14 @@
-import { transporter, FROM_EMAIL } from "./resend";
+import { sendMail } from "./resend";
 
 const APP_NAME = "Mother Vegetable";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-
-interface SendEmailOptions {
-  to: string;
-  subject: string;
-  html: string;
-}
-
-async function sendEmail({ to, subject, html }: SendEmailOptions) {
-  if (!transporter) {
-    console.log(`[Email Skipped] SMTP not configured. To: ${to}, Subject: ${subject}`);
-    return;
-  }
-
-  try {
-    await transporter.sendMail({
-      from: FROM_EMAIL,
-      to,
-      subject,
-      html,
-    });
-  } catch (error) {
-    console.error(`[Email Error] To: ${to}, Subject: ${subject}`, error);
-  }
-}
 
 // ---------------------------------------------------------------------------
 // General User Emails
 // ---------------------------------------------------------------------------
 
 export async function sendWelcomeEmail(user: { name: string; email: string }) {
-  await sendEmail({
+  await sendMail({
     to: user.email,
     subject: `Welcome to ${APP_NAME}!`,
     html: `
@@ -62,7 +38,7 @@ export async function sendOrderConfirmationEmail(order: {
     )
     .join("");
 
-  await sendEmail({
+  await sendMail({
     to: order.customerEmail,
     subject: `Order Confirmation - ${order.orderId}`,
     html: `
@@ -92,7 +68,7 @@ export async function sendInstructorWelcomeEmail(instructor: {
 }) {
   const referralUrl = `${APP_URL}/?ref=${instructor.referralCode}`;
 
-  await sendEmail({
+  await sendMail({
     to: instructor.email,
     subject: `Welcome to ${APP_NAME} Instructor Program!`,
     html: `
@@ -124,7 +100,7 @@ export async function sendSaleNotificationEmail(instructor: {
   commissionAmount: number;
   commissionType: string;
 }) {
-  await sendEmail({
+  await sendMail({
     to: instructor.email,
     subject: `New Sale! You earned $${instructor.commissionAmount.toFixed(2)}`,
     html: `
@@ -149,7 +125,7 @@ export async function sendReferralSuccessEmail(instructor: {
   referredName: string;
   reward: number;
 }) {
-  await sendEmail({
+  await sendMail({
     to: instructor.email,
     subject: `New Instructor Referral! +$${instructor.reward.toFixed(2)} bonus`,
     html: `
@@ -172,7 +148,7 @@ export async function sendSubscriptionRenewalEmail(instructor: {
   fullName: string;
   nextBillingDate: string;
 }) {
-  await sendEmail({
+  await sendMail({
     to: instructor.email,
     subject: `Subscription Renewed - ${APP_NAME} Instructor`,
     html: `

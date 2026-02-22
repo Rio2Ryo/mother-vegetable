@@ -1,0 +1,7 @@
+name = "mv-email-worker"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+# wrangler secret put API_KEY で設定
+# [vars]
+# API_KEY = "" # ← wrangler secret で設定すること（平文で書かない）
