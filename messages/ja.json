@@ -10,7 +10,10 @@
     "login": "ログイン",
     "signup": "新規登録",
     "achieve": "Achieve",
-    "confidence": "Confidence"
+    "confidence": "Confidence",
+    "logout": "ログアウト",
+    "dashboard": "ダッシュボード",
+    "instructorPortal": "インストラクターポータル"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -111,7 +114,12 @@
     "addToCart": "カートに追加",
     "buyNow": "今すぐ購入 / レジへ進む",
     "freeShipping": "全世界送料無料",
-    "quantity": "数量"
+    "quantity": "数量",
+    "referralDiscount": "紹介割引が適用されました",
+    "ourTrust": "信頼の証",
+    "howToUseTitle": "使い方",
+    "addedToCart": "カートに追加しました！",
+    "itemCount": "({count}) 点"
   },
   "checkout": {
     "title": "お会計",

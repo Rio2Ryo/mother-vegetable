@@ -3,7 +3,7 @@
 import { Link, useRouter, usePathname } from '@/i18n/navigation';
 import Image from 'next/image';
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useCartStore } from '@/store/cart';
 import { useUserStore } from '@/store/userStore';
 import { useAffiliateStore } from '@/store/affiliateStore';
@@ -22,6 +22,7 @@ export default function Header() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { toggleCart, totalItems } = useCartStore();
+  const t = useTranslations('nav');
 
   const currentUser = useUserStore((s) => s.currentUser);
   const userLogout = useUserStore((s) => s.logout);
@@ -120,7 +121,7 @@ export default function Header() {
                         <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 512 512">
                           <path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm320 96c0-26.9-16.5-49.9-40-59.3V88c0-13.3-10.7-24-24-24s-24 10.7-24 24V292.7c-23.5 9.5-40 32.5-40 59.3c0 35.3 28.7 64 64 64s64-28.7 64-64z" />
                         </svg>
-                        Dashboard
+                        {t('dashboard')}
                       </Link>
                     )}
                     <button
@@ -130,7 +131,7 @@ export default function Header() {
                       <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 512 512">
                         <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
                       </svg>
-                      Logout
+                      {t('logout')}
                     </button>
                   </>
                 ) : (
@@ -143,7 +144,7 @@ export default function Header() {
                       <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 448 512">
                         <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
                       </svg>
-                      LOGIN
+                      {t('login').toUpperCase()}
                     </Link>
                     <Link
                       href="/signup"
@@ -153,7 +154,7 @@ export default function Header() {
                       <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
                         <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                       </svg>
-                      Sign Up
+                      {t('signup')}
                     </Link>
                     <Link
                       href="/instructor/login"
@@ -163,7 +164,7 @@ export default function Header() {
                       <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
                         <path d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H576V64H224v49.9C205.2 102.2 183.3 96 160 96V64zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM0 482.3C0 383.8 79.8 304 178.3 304h-36.6C240.2 304 320 383.8 320 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
                       </svg>
-                      Instructor Portal
+                      {t('instructorPortal')}
                     </Link>
                   </>
                 )}
@@ -177,7 +178,7 @@ export default function Header() {
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Food
+                    {t('food')}
                   </Link>
                 </li>
                 <li className="max-md:w-full">
@@ -187,7 +188,7 @@ export default function Header() {
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Cosmetic
+                    {t('cosmetic')}
                   </Link>
                 </li>
                 <li
@@ -200,7 +201,7 @@ export default function Header() {
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setProductsOpen(!productsOpen)}
                   >
-                    Products
+                    {t('products')}
                     <svg
                       className={`w-3 h-3 transition-transform duration-300 ml-[5px] ${productsOpen ? 'rotate-180' : ''}`}
                       width="12"
@@ -247,7 +248,7 @@ export default function Header() {
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setHowToOpen(!howToOpen)}
                   >
-                    How To Use
+                    {t('howToUse')}
                     <svg
                       className={`w-3 h-3 transition-transform duration-300 ml-[5px] ${howToOpen ? 'rotate-180' : ''}`}
                       width="12"
@@ -291,7 +292,7 @@ export default function Header() {
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Certified Instructor
+                    {t('certifiedInstructor')}
                   </Link>
                 </li>
                 <li className="hidden max-md:block list-none mt-3 w-full">
@@ -300,8 +301,8 @@ export default function Header() {
                     className="inline-flex flex-col items-center justify-center w-fit py-[5px] px-5 border border-white rounded-md text-white text-sm font-semibold no-underline bg-black transition-all duration-300 hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:translate-x-0"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Healthcare
-                    <span className="block text-[13px] font-medium opacity-95">For Hospital</span>
+                    {t('healthcare')}
+                    <span className="block text-[13px] font-medium opacity-95">{t('forHospital')}</span>
                   </Link>
                 </li>
               </ul>
@@ -313,8 +314,8 @@ export default function Header() {
               className="hidden md:inline-flex flex-col items-center justify-center h-10 bg-black text-white border border-white px-3 rounded-md text-[11px] font-semibold leading-[1.2] no-underline hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-0.5 transition-all duration-300 text-center"
               style={{ fontFamily: 'Arial, sans-serif' }}
             >
-              Healthcare
-              <span className="text-[10px] font-medium whitespace-nowrap">For Hospital</span>
+              {t('healthcare')}
+              <span className="text-[10px] font-medium whitespace-nowrap">{t('forHospital')}</span>
             </Link>
 
             {/* Language Selector */}
@@ -397,7 +398,7 @@ export default function Header() {
                           <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 512 512">
                             <path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm320 96c0-26.9-16.5-49.9-40-59.3V88c0-13.3-10.7-24-24-24s-24 10.7-24 24V292.7c-23.5 9.5-40 32.5-40 59.3c0 35.3 28.7 64 64 64s64-28.7 64-64z" />
                           </svg>
-                          Dashboard
+                          {t('dashboard')}
                         </Link>
                       )}
                       <button
@@ -407,7 +408,7 @@ export default function Header() {
                         <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 512 512">
                           <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
                         </svg>
-                        Logout
+                        {t('logout')}
                       </button>
                     </>
                   ) : (
@@ -419,7 +420,7 @@ export default function Header() {
                         <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 512 512">
                           <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
                         </svg>
-                        LOGIN
+                        {t('login').toUpperCase()}
                       </Link>
                       <Link
                         href="/signup"
@@ -428,7 +429,7 @@ export default function Header() {
                         <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 640 512">
                           <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                         </svg>
-                        Sign Up
+                        {t('signup')}
                       </Link>
                       <Link
                         href="/instructor/login"
@@ -437,7 +438,7 @@ export default function Header() {
                         <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 640 512">
                           <path d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H576V64H224v49.9C205.2 102.2 183.3 96 160 96V64zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM0 482.3C0 383.8 79.8 304 178.3 304h-36.6C240.2 304 320 383.8 320 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
                         </svg>
-                        Instructor Portal
+                        {t('instructorPortal')}
                       </Link>
                     </>
                   )}

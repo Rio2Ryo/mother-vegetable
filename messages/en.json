@@ -10,7 +10,10 @@
     "login": "Login",
     "signup": "Sign Up",
     "achieve": "Achieve",
-    "confidence": "Confidence"
+    "confidence": "Confidence",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "instructorPortal": "Instructor Portal"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -111,7 +114,12 @@
     "addToCart": "Add to Cart",
     "buyNow": "Buy Now / Proceed to Checkout",
     "freeShipping": "Free Shipping Worldwide",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "referralDiscount": "Referral Discount Applied",
+    "ourTrust": "Our Trust",
+    "howToUseTitle": "How to use",
+    "addedToCart": "Added to cart!",
+    "itemCount": "({count}) items"
   },
   "checkout": {
     "title": "Checkout",

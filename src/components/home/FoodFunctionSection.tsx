@@ -361,7 +361,7 @@ Explain the expected effects from this ingredient group in the following areas:
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-3 md:px-6 md:py-3 rounded-xl font-semibold text-sm md:text-base transition-all duration-300 hover:scale-105 bg-gray-800 hover:bg-gray-700 border border-gray-600"
             >
-              <img src={service.logo} alt={service.name} className="w-5 h-5 md:w-6 md:h-6" />
+              <Image src={service.logo} alt={service.name} width={24} height={24} className="w-5 h-5 md:w-6 md:h-6" />
               <span className="text-white">{service.name}</span>
             </a>
           ))}

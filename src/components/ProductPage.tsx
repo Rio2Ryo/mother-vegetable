@@ -1,9 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { getStoredReferralCode } from '@/lib/affiliate';
 
@@ -89,8 +90,10 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
   const [selectedVideo, setSelectedVideo] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [hasReferral, setHasReferral] = useState(false);
+  const [addedFeedback, setAddedFeedback] = useState(false);
   const { addItem } = useCartStore();
   const router = useRouter();
+  const t = useTranslations('cart');
 
   useEffect(() => {
     const code = getStoredReferralCode();
@@ -99,7 +102,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
 
   const effectivePrice = hasReferral ? REFERRAL_DISCOUNT_PRICE : product.price;
 
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
     addItem({
       id: product.id,
       productId: product.id,
@@ -110,9 +113,11 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       currency: product.currency,
       quantity,
     });
-  };
+    setAddedFeedback(true);
+    setTimeout(() => setAddedFeedback(false), 2000);
+  }, [addItem, product, hasReferral, quantity]);
 
-  const handleBuyNow = () => {
+  const handleBuyNow = useCallback(() => {
     addItem({
       id: product.id,
       productId: product.id,
@@ -124,7 +129,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       quantity,
     });
     router.push('/checkout');
-  };
+  }, [addItem, product, hasReferral, quantity, router]);
 
   return (
     <div className="bg-black min-h-screen">
@@ -486,7 +491,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                 </h2>
                 {hasReferral && (
                   <div style={{ display: 'inline-block', padding: '4px 12px', background: 'rgba(37,199,96,0.15)', border: '1px solid #25C760', borderRadius: '6px', marginBottom: '8px' }}>
-                    <span style={{ color: '#25C760', fontSize: '13px', fontWeight: 600 }}>Referral Discount Applied</span>
+                    <span style={{ color: '#25C760', fontSize: '13px', fontWeight: 600 }}>{t('referralDiscount')}</span>
                   </div>
                 )}
 
@@ -494,13 +499,13 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                   <div className="free-shipping-badge">
                     <p>
                       <svg className="inline-block w-4 h-4" style={{ marginRight: '7px' }} fill="currentColor" viewBox="0 0 640 512"><path d="M48 0C21.5 0 0 21.5 0 48V368c0 26.5 21.5 48 48 48H64c0 53 43 96 96 96s96-43 96-96H384c0 53 43 96 96 96s96-43 96-96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V288 256 237.3c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7H416V48c0-26.5-21.5-48-48-48H48zM416 160h50.7L544 237.3V256H416V160zM112 416a48 48 0 1 1 96 0 48 48 0 1 1-96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
-                      Free Shipping Worldwide
+                      {t('freeShipping')}
                     </p>
                   </div>
                 </div>
 
                 <div className="quantity-selector">
-                  <label style={{ fontFamily: 'Arial, sans-serif' }}>Quantity</label>
+                  <label style={{ fontFamily: 'Arial, sans-serif' }}>{t('quantity')}</label>
                   <div className="quantity-controls">
                     <button
                       className="quantity-btn"
@@ -528,10 +533,15 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
 
                 <div className="action-buttons">
                   <button className="action-btn" onClick={handleAddToCart}>
-                    Add to Cart
+                    {addedFeedback ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="w-5 h-5 text-[#25C760]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        {t('addedToCart')}
+                      </span>
+                    ) : t('addToCart')}
                   </button>
                   <button className="action-btn" onClick={handleBuyNow}>
-                    Buy Now / Proceed to Checkout
+                    {t('buyNow')}
                   </button>
                 </div>
               </div>
@@ -566,7 +576,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                   ))}
                 </div>
                 <div className="card-how-to-use">
-                  <h4>How to use</h4>
+                  <h4>{t('howToUseTitle')}</h4>
                   <div className="usage-item">
                     <span className="checkmark">&#10003;</span>
                     <span>{product.howToUse}</span>
@@ -657,7 +667,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         {/* Trust Section */}
         <div className="gallery-container">
           <div className="trust-content">
-            <h2 className="trust-title">Our Trust</h2>
+            <h2 className="trust-title">{t('ourTrust')}</h2>
             <Image
               src="/Images/Assets/homepage/underline.png"
               alt="Underline"

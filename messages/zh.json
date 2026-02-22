@@ -10,7 +10,10 @@
     "login": "登录",
     "signup": "注册",
     "achieve": "Achieve",
-    "confidence": "Confidence"
+    "confidence": "Confidence",
+    "logout": "退出登录",
+    "dashboard": "仪表盘",
+    "instructorPortal": "讲师门户"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -111,7 +114,12 @@
     "addToCart": "加入购物车",
     "buyNow": "立即购买 / 前往结算",
     "freeShipping": "全球免费配送",
-    "quantity": "数量"
+    "quantity": "数量",
+    "referralDiscount": "已应用推荐折扣",
+    "ourTrust": "值得信赖",
+    "howToUseTitle": "使用方法",
+    "addedToCart": "已添加到购物车！",
+    "itemCount": "({count}) 件"
   },
   "checkout": {
     "title": "结算",

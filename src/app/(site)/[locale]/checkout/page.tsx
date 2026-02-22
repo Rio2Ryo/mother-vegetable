@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, memo, type FormEvent, type ChangeEvent } from "react";
+import Image from "next/image";
 import { useCartStore } from "@/store/cart";
 import { useAffiliateStore } from "@/store/affiliateStore";
 import { Link } from "@/i18n/navigation";
@@ -267,9 +268,11 @@ export default function CheckoutPage() {
                     key={item.id}
                     className="flex items-center gap-4 border-b border-gray-800 pb-4"
                   >
-                    <img
+                    <Image
                       src={item.image}
                       alt={item.name}
+                      width={56}
+                      height={56}
                       className="w-14 h-14 rounded-lg object-cover bg-gray-800"
                     />
                     <div className="flex-1 min-w-0">
@@ -300,9 +303,17 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-4 bg-[#25C760] text-black font-bold text-lg rounded-xl hover:bg-[#1ea84e] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full py-4 bg-[#25C760] text-black font-bold text-lg rounded-xl hover:bg-[#1ea84e] disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 min-h-[56px]"
               >
-                {submitting ? t('placingOrder') : t('placeOrder')}
+                {submitting ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    </svg>
+                    {t('placingOrder')}
+                  </>
+                ) : t('placeOrder')}
               </button>
             </div>
           </div>
