@@ -92,27 +92,19 @@ function getAchieveProduct(locale: string): ProductPageData {
 
     functionSection: {
       type: 'food',
-      title: isJa ? 'フード機能' : 'Food Function',
+      title: 'Food Function',
       subtitle: 'Achieve',
       method: isJa ? '加える / 混ぜる' : 'Add / Mix In',
       videoUrl: '/Images/Assets/homepage/product/food_video.mov',
-      circles: isJa
-        ? [
-            { name: '必須脂肪酸', detail: '9種' },
-            { name: 'アミノ酸', detail: '10種' },
-            { name: 'ビタミン', detail: '18種' },
-            { name: 'ミネラル', detail: '3種' },
-            { name: 'その他機能性成分', detail: '9種' },
-          ]
-        : [
-            { name: 'Essential Fatty Acids', detail: '9 types' },
-            { name: 'Amino Acids', detail: '10 types' },
-            { name: 'Vital Vitamins', detail: '18 types' },
-            { name: 'Key Minerals For Balance', detail: '3 types' },
-            { name: 'Other Functional Ingredients', detail: '9 types' },
-          ],
+      circles: [
+        { name: 'Essential Fatty Acids', detail: '9 types' },
+        { name: 'Amino Acids', detail: '10 types' },
+        { name: 'Vital Vitamins', detail: '18 types' },
+        { name: 'Key Minerals For Balance', detail: '3 types' },
+        { name: 'Other Functional Ingredients', detail: '9 types' },
+      ],
       summary: {
-        total: isJa ? '48種の栄養素' : '48 Nutrients',
+        total: '48 Nutrients',
         description:
           'Potassium, sodium, magnesium, calcium, phosphorus, iron, manganese, zinc, copper, Vitamin A, B1, B2, B3, B5, B6, B9, C, E, K, tryptophan, threonine, leucine, isoleucine, lysine, methionine, phenylalanine, valine, histidine, arginine, cystine, tyrosine, alanine, aspartic acid, glutamic acid, serine, glycine, proline, saturated fatty acids, omega-3 fatty acids, omega-6 fatty acids, C-phycocyanin, chlorophyll a, total carotenoids, nucleic acids, spirulan, glycogen-like polysaccharides, β-glucan-like polysaccharides, cellulose.',
       },

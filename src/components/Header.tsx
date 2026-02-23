@@ -1,22 +1,36 @@
 'use client';
 
-import { Link, useRouter } from '@/i18n/navigation';
+import { Link, useRouter, usePathname } from '@/i18n/navigation';
 import Image from 'next/image';
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { useCartStore } from '@/store/cart';
 import { useUserStore } from '@/store/userStore';
 import { useAffiliateStore } from '@/store/affiliateStore';
 import CartPanel from './CartPanel';
 
+const langOptions = [
+  { code: 'en' as const, label: 'Eng' },
+  { code: 'ja' as const, label: '日本語' },
+];
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [howToOpen, setHowToOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { toggleCart, totalItems } = useCartStore();
-  const t = useTranslations('nav');
+  const locale = useLocale();
+  const pathname = usePathname();
+
+  const currentLangLabel = langOptions.find((l) => l.code === locale)?.label ?? 'Eng';
+
+  function switchLocale(newLocale: 'en' | 'ja') {
+    router.replace(pathname, { locale: newLocale });
+    setLangOpen(false);
+  }
 
   const currentUser = useUserStore((s) => s.currentUser);
   const userLogout = useUserStore((s) => s.logout);
@@ -107,7 +121,7 @@ export default function Header() {
                         <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 512 512">
                           <path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm320 96c0-26.9-16.5-49.9-40-59.3V88c0-13.3-10.7-24-24-24s-24 10.7-24 24V292.7c-23.5 9.5-40 32.5-40 59.3c0 35.3 28.7 64 64 64s64-28.7 64-64z" />
                         </svg>
-                        {t('dashboard')}
+                        Dashboard
                       </Link>
                     )}
                     <button
@@ -117,7 +131,7 @@ export default function Header() {
                       <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 512 512">
                         <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
                       </svg>
-                      {t('logout')}
+                      Logout
                     </button>
                   </>
                 ) : (
@@ -130,7 +144,7 @@ export default function Header() {
                       <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 448 512">
                         <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
                       </svg>
-                      {t('login').toUpperCase()}
+                      LOGIN
                     </Link>
                     <Link
                       href="/signup"
@@ -140,7 +154,7 @@ export default function Header() {
                       <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
                         <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                       </svg>
-                      {t('signup')}
+                      Sign Up
                     </Link>
                     <Link
                       href="/instructor/login"
@@ -150,7 +164,7 @@ export default function Header() {
                       <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
                         <path d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H576V64H224v49.9C205.2 102.2 183.3 96 160 96V64zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM0 482.3C0 383.8 79.8 304 178.3 304h-36.6C240.2 304 320 383.8 320 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
                       </svg>
-                      {t('instructorPortal')}
+                      Instructor Portal
                     </Link>
                   </>
                 )}
@@ -164,7 +178,7 @@ export default function Header() {
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {t('food')}
+                    Food
                   </Link>
                 </li>
                 <li className="max-lg:w-full">
@@ -174,7 +188,7 @@ export default function Header() {
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {t('cosmetic')}
+                    Cosmetic
                   </Link>
                 </li>
                 <li
@@ -187,7 +201,7 @@ export default function Header() {
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setProductsOpen(!productsOpen)}
                   >
-                    {t('products')}
+                    Products
                     <svg
                       className={`w-3 h-3 transition-transform duration-300 ml-[5px] ${productsOpen ? 'rotate-180' : ''}`}
                       width="12"
@@ -234,7 +248,7 @@ export default function Header() {
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setHowToOpen(!howToOpen)}
                   >
-                    {t('howToUse')}
+                    How To Use
                     <svg
                       className={`w-3 h-3 transition-transform duration-300 ml-[5px] ${howToOpen ? 'rotate-180' : ''}`}
                       width="12"
@@ -278,7 +292,7 @@ export default function Header() {
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {t('certifiedInstructor')}
+                    Certified Instructor
                   </Link>
                 </li>
                 <li className="hidden max-lg:block list-none mt-3 w-full">
@@ -287,8 +301,8 @@ export default function Header() {
                     className="inline-flex flex-col items-center justify-center w-fit py-[5px] px-5 border border-white rounded-md text-white text-sm font-semibold no-underline bg-black transition-all duration-300 hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:translate-x-0"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {t('healthcare')}
-                    <span className="block text-[13px] font-medium opacity-95">{t('forHospital')}</span>
+                    Healthcare
+                    <span className="block text-[13px] font-medium opacity-95">For Hospital</span>
                   </Link>
                 </li>
               </ul>
@@ -300,9 +314,37 @@ export default function Header() {
               className="hidden lg:inline-flex flex-col items-center justify-center h-10 bg-black text-white border border-white px-3 rounded-md text-[11px] font-semibold leading-[1.2] no-underline hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-0.5 transition-all duration-300 text-center"
               style={{ fontFamily: 'Arial, sans-serif' }}
             >
-              {t('healthcare')}
-              <span className="text-[10px] font-medium whitespace-nowrap">{t('forHospital')}</span>
+              Healthcare
+              <span className="text-[10px] font-medium whitespace-nowrap">For Hospital</span>
             </Link>
+
+            {/* Language Selector */}
+            <div
+              className="relative border border-white rounded-md bg-transparent text-white px-4 py-2 font-medium text-sm cursor-pointer min-w-[60px] text-center h-10 flex items-center justify-center hover:bg-[#25C760] hover:border-[#25C760] hover:-translate-y-[3px] transition-all duration-300"
+              style={{ fontFamily: 'Arial, sans-serif' }}
+              onClick={() => setLangOpen(!langOpen)}
+            >
+              <span className="block">{currentLangLabel}</span>
+              {langOpen && (
+                <>
+                  <div className="fixed inset-0 z-[999]" onClick={(e) => { e.stopPropagation(); setLangOpen(false); }} />
+                  <div className="absolute top-full left-0 right-0 bg-black border border-[#25C760] rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[1000] mt-1 overflow-hidden">
+                    {langOptions.map((lang) => (
+                      <div
+                        key={lang.code}
+                        className="px-4 py-[10px] text-white hover:bg-[#25C760] transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] last:border-b-0 cursor-pointer text-center font-medium"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          switchLocale(lang.code);
+                        }}
+                      >
+                        {lang.label}
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
 
             {/* Cart Button */}
             <button
@@ -356,7 +398,7 @@ export default function Header() {
                           <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 512 512">
                             <path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm320 96c0-26.9-16.5-49.9-40-59.3V88c0-13.3-10.7-24-24-24s-24 10.7-24 24V292.7c-23.5 9.5-40 32.5-40 59.3c0 35.3 28.7 64 64 64s64-28.7 64-64z" />
                           </svg>
-                          {t('dashboard')}
+                          Dashboard
                         </Link>
                       )}
                       <button
@@ -366,7 +408,7 @@ export default function Header() {
                         <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 512 512">
                           <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
                         </svg>
-                        {t('logout')}
+                        Logout
                       </button>
                     </>
                   ) : (
@@ -378,7 +420,7 @@ export default function Header() {
                         <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 512 512">
                           <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
                         </svg>
-                        {t('login').toUpperCase()}
+                        LOGIN
                       </Link>
                       <Link
                         href="/signup"
@@ -387,7 +429,7 @@ export default function Header() {
                         <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 640 512">
                           <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                         </svg>
-                        {t('signup')}
+                        Sign Up
                       </Link>
                       <Link
                         href="/instructor/login"
@@ -396,7 +438,7 @@ export default function Header() {
                         <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 640 512">
                           <path d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H576V64H224v49.9C205.2 102.2 183.3 96 160 96V64zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM0 482.3C0 383.8 79.8 304 178.3 304h-36.6C240.2 304 320 383.8 320 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
                         </svg>
-                        {t('instructorPortal')}
+                        Instructor Portal
                       </Link>
                     </>
                   )}

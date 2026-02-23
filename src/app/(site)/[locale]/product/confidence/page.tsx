@@ -94,25 +94,17 @@ function getConfidenceProduct(locale: string): ProductPageData {
 
     functionSection: {
       type: 'cosmetic',
-      title: isJa ? 'コスメ機能' : 'Cosmetic Function',
+      title: 'Cosmetic Function',
       subtitle: 'Confidence',
       method: isJa ? '塗る / 混ぜる' : 'Apply / Mix In',
       videoUrl: '/Images/Assets/homepage/product/cosmetic_video.mov',
-      circles: isJa
-        ? [
-            { name: 'シミ', detail: 'そばかす' },
-            { name: 'ニキビ', detail: 'ニキビ跡' },
-            { name: '傷', detail: '火傷跡' },
-            { name: '臭い', detail: '顔、首、脇、Vゾーン、足' },
-            { name: 'テカリ', detail: 'クリーンな肌を維持' },
-          ]
-        : [
-            { name: 'Dark Spots', detail: 'Freckles' },
-            { name: 'Acne', detail: 'Acne scars' },
-            { name: 'Wounds', detail: 'Scars, Burn Marks' },
-            { name: 'Odor', detail: 'Face, Neck, Underarms, V-Zone, Feet' },
-            { name: 'Shine', detail: 'Maintains A Clean Look, Natural/ Earth Tones' },
-          ],
+      circles: [
+        { name: 'Dark Spots', detail: 'Freckles' },
+        { name: 'Acne', detail: 'Acne scars' },
+        { name: 'Wounds', detail: 'Scars, Burn Marks' },
+        { name: 'Odor', detail: 'Face, Neck, Underarms, V-Zone, Feet' },
+        { name: 'Shine', detail: 'Maintains A Clean Look, Natural/ Earth Tones' },
+      ],
       medicalText: isJa
         ? '医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。肌の自然な治癒力とバランス回復をサポートします。'
         : 'Mother Vegetable, certified as a medical-grade quasi-drug, is trusted by medical institutions worldwide for its healing properties \u2014 used in post-surgery recovery, burn scar improvement, cancer care, and even to help control skin shine. It supports the skin\u2019s natural ability to heal and restore balance.',

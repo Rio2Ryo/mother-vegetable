@@ -59,13 +59,13 @@
     }
   },
   "trust": {
-    "title": "信頼の証",
+    "title": "Our Trust",
     "achieveDesc": "厚生労働省によりヒューマングレード食品認定",
     "confidenceDesc": "厚生労働省により「日本薬局方医薬部外品原料規格（JSQI）」認定コスメ",
     "foreverDesc": "農林水産省によりペットフードグレード認定"
   },
   "foodFunction": {
-    "title": "フード機能",
+    "title": "Food Function",
     "subtitle": "Achieve",
     "method": "加える / 混ぜる",
     "nutritionTitle": "48種の栄養素",
@@ -78,7 +78,7 @@
     "cat": "猫"
   },
   "cosmeticFunction": {
-    "title": "コスメ機能",
+    "title": "Cosmetic Function",
     "subtitle": "Confidence",
     "method": "塗る / 混ぜる",
     "description": "医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。",
@@ -111,7 +111,7 @@
     "freeShipping": "全世界送料無料",
     "quantity": "数量",
     "referralDiscount": "紹介割引が適用されました",
-    "ourTrust": "信頼の証",
+    "ourTrust": "Our Trust",
     "howToUseTitle": "使い方",
     "addedToCart": "カートに追加しました！",
     "itemCount": "({count}) 点"
