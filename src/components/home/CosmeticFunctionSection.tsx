@@ -415,7 +415,7 @@ Characteristics of the raw materials:
           <div className="flex flex-col items-center gap-4 mb-8">
             <button
               onClick={handleCopy}
-              className="group flex flex-col items-center gap-2 md:gap-3 px-6 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-xs md:text-lg transition-all duration-300 hover:scale-105 border-2 border-[#25c760] bg-transparent hover:bg-[#25c760]/10"
+              className="group flex flex-col items-center gap-2 md:gap-3 px-6 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-[2.6vw] md:text-lg transition-all duration-300 hover:scale-105 border-2 border-[#25c760] bg-transparent hover:bg-[#25c760]/10"
               style={{ color: '#25c760' }}
             >
               <svg className="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
