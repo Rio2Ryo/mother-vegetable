@@ -3,10 +3,8 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Link, useRouter } from '@/i18n/navigation';
-import { useUserStore } from '@/store/userStore';
-import { useAffiliateStore } from '@/store/affiliateStore';
 import { useTranslations } from 'next-intl';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,42 +14,41 @@ export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  const userLogin = useUserStore((s) => s.login);
-  const instructorLogin = useAffiliateStore((s) => s.login);
-  const currentUser = useUserStore((s) => s.currentUser);
-  const currentInstructor = useAffiliateStore((s) => s.currentInstructor);
   const t = useTranslations('auth');
   const router = useRouter();
+  const { data: session, status } = useSession();
 
   useEffect(() => { setMounted(true); }, []);
 
   // If already logged in, redirect
   useEffect(() => {
-    if (mounted && (currentUser || currentInstructor)) {
+    if (mounted && status === 'authenticated' && session) {
       router.push('/');
     }
-  }, [mounted, currentUser, currentInstructor, router]);
+  }, [mounted, status, session, router]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setSubmitting(true);
 
-    // Try user login first, then instructor login
-    const userSuccess = userLogin(email, password);
-    if (userSuccess) {
-      router.push('/');
-      return;
-    }
+    try {
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
 
-    const instructorSuccess = instructorLogin(email, password);
-    if (instructorSuccess) {
-      router.push('/instructor/dashboard');
-      return;
+      if (result?.error) {
+        setError('errorInvalidCredentials');
+        setSubmitting(false);
+      } else {
+        router.push('/');
+      }
+    } catch {
+      setError('errorGeneric');
+      setSubmitting(false);
     }
-
-    setError('errorInvalidCredentials');
-    setSubmitting(false);
   };
 
   return (

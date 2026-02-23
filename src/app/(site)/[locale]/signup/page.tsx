@@ -3,10 +3,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useAffiliateStore } from '@/store/affiliateStore';
-import { useUserStore } from '@/store/userStore';
 import { getStoredReferralCode } from '@/lib/affiliate';
 import { useTranslations } from 'next-intl';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,11 +21,10 @@ export default function SignupPage() {
   const [mounted, setMounted] = useState(false);
 
   const getInstructorByReferralCode = useAffiliateStore((s) => s.getInstructorByReferralCode);
-  const register = useUserStore((s) => s.register);
-  const currentUser = useUserStore((s) => s.currentUser);
   const t = useTranslations('auth');
   const tInstructor = useTranslations('instructor');
   const router = useRouter();
+  const { data: session, status } = useSession();
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -43,25 +41,68 @@ export default function SignupPage() {
 
   // If already logged in, redirect to home
   useEffect(() => {
-    if (mounted && currentUser) {
+    if (mounted && status === 'authenticated' && session) {
       router.push('/');
     }
-  }, [mounted, currentUser, router]);
+  }, [mounted, status, session, router]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setSubmitting(true);
 
-    try {
-      const result = register({ username, email, password, confirmPassword });
+    // Client-side validation
+    if (!username.trim()) {
+      setError('errorUsernameRequired');
+      setSubmitting(false);
+      return;
+    }
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('errorEmailRequired');
+      setSubmitting(false);
+      return;
+    }
+    if (password.length < 6) {
+      setError('errorPasswordLength');
+      setSubmitting(false);
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError('errorPasswordMatch');
+      setSubmitting(false);
+      return;
+    }
 
-      if (result.success) {
+    try {
+      // Create account via server API
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username.trim(), email: email.trim(), password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || 'errorGeneric');
+        setSubmitting(false);
+        return;
+      }
+
+      // Auto-login with NextAuth after successful registration
+      const result = await signIn('credentials', {
+        email: email.trim(),
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        // Account created but auto-login failed - redirect to login
+        setSuccess(true);
+        setTimeout(() => router.push('/login'), 1500);
+      } else {
         setSuccess(true);
         setTimeout(() => router.push('/'), 1500);
-      } else {
-        setError(result.error || '');
-        setSubmitting(false);
       }
     } catch {
       setError('errorGeneric');

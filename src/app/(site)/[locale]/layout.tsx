@@ -7,6 +7,7 @@ import { routing } from '@/i18n/routing';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ReferralTracker from '@/components/ReferralTracker';
+import AuthProvider from '@/components/AuthProvider';
 import '../../globals.css';
 
 const inter = Inter({
@@ -109,14 +110,16 @@ export default async function LocaleLayout({
         >
           Skip to main content
         </a>
-        <NextIntlClientProvider messages={messages}>
-          <Suspense fallback={null}>
-            <ReferralTracker />
-          </Suspense>
-          <Header />
-          <main id="main-content" role="main">{children}</main>
-          <Footer />
-        </NextIntlClientProvider>
+        <AuthProvider>
+          <NextIntlClientProvider messages={messages}>
+            <Suspense fallback={null}>
+              <ReferralTracker />
+            </Suspense>
+            <Header />
+            <main id="main-content" role="main">{children}</main>
+            <Footer />
+          </NextIntlClientProvider>
+        </AuthProvider>
       </body>
     </html>
   );

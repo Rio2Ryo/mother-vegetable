@@ -1,21 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaLibSql } from "@prisma/adapter-libsql";
-import { createClient } from "@libsql/client";
+import path from "path";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
+function resolveDbUrl(): string {
+  const raw = process.env.DATABASE_URL;
+  if (!raw) {
+    return `file:${path.resolve(process.cwd(), "dev.db")}`;
+  }
+  if (raw.startsWith("libsql://") || raw.startsWith("https://")) {
+    return raw;
+  }
+  if (raw.startsWith("file:")) {
+    const filePart = raw.slice(5);
+    if (path.isAbsolute(filePart)) return raw;
+    return `file:${path.resolve(process.cwd(), filePart)}`;
+  }
+  return raw;
+}
+
 function makePrisma() {
-  const url = process.env.DATABASE_URL || "file:dev.db";
-  const client = createClient({
+  const url = resolveDbUrl();
+  const isRemote = url.startsWith("libsql://") || url.startsWith("https://");
+
+  // In Prisma 7, PrismaLibSql is a factory that takes a config object
+  const adapter = new PrismaLibSql({
     url,
-    ...(url.startsWith("libsql://") || url.startsWith("https://")
-      ? { authToken: process.env.DATABASE_AUTH_TOKEN }
-      : {}),
+    ...(isRemote ? { authToken: process.env.DATABASE_AUTH_TOKEN } : {}),
   });
-  const adapter = new PrismaLibSql(client as any);
+
   return new PrismaClient({ adapter } as any);
 }
 
