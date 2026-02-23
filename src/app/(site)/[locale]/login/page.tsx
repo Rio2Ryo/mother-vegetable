@@ -6,6 +6,7 @@ import { Link, useRouter } from '@/i18n/navigation';
 import { useUserStore } from '@/store/userStore';
 import { useAffiliateStore } from '@/store/affiliateStore';
 import { useTranslations } from 'next-intl';
+import { signIn } from 'next-auth/react';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -155,7 +156,11 @@ export default function LoginPage() {
                     <div className="flex-1 h-px bg-white/30" />
                   </div>
                   <div className="flex justify-center py-1">
-                    <a href="#" className="hover:scale-105 transition-transform cursor-pointer">
+                    <button
+                      type="button"
+                      onClick={() => signIn('google', { callbackUrl: '/' })}
+                      className="hover:scale-105 transition-transform cursor-pointer bg-transparent border-none p-0"
+                    >
                       <Image
                         src="/Images/Authenticate/google_logo.png"
                         alt="Google"
@@ -163,7 +168,7 @@ export default function LoginPage() {
                         height={48}
                         className="px-1"
                       />
-                    </a>
+                    </button>
                   </div>
                 </form>
                 {/* Sign up link (visible on mobile, also shown at bottom) */}

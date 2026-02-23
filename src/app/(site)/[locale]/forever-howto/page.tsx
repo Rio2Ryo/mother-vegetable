@@ -26,7 +26,7 @@ const dogCatItems: HowToItem[] = [
     id: 1,
     header: 'Dry Food',
     image: `${CDN_BASE}/10002.png`,
-    title: 'MAZEKOMU Forever over dry food',
+    title: 'Mix Forever over dry food',
     recommendations: [
       {
         label: 'Recommended amount for pets 10kg and over',
@@ -46,7 +46,7 @@ const dogCatItems: HowToItem[] = [
     id: 2,
     header: 'Wet Food',
     image: `${CDN_BASE}/10003.png`,
-    title: 'MAZEKOMU Forever over wet food',
+    title: 'Mix Forever over wet food',
     recommendations: [
       {
         label: 'Recommended amount for pets 10kg and over',
@@ -66,7 +66,7 @@ const dogCatItems: HowToItem[] = [
     id: 3,
     header: 'Drinking Water',
     image: `${CDN_BASE}/10004.jpg`,
-    title: 'MAZEKOMU Forever over drinking water',
+    title: 'Mix Forever over drinking water',
     recommendations: [
       {
         label: 'Recommended amount',
@@ -81,7 +81,7 @@ const dogCatItems: HowToItem[] = [
     id: 4,
     header: 'Treats',
     image: `${CDN_BASE}/10005.jpg`,
-    title: 'MAZEKOMU Forever over treats',
+    title: 'Mix Forever over treats',
     recommendations: [
       {
         label: 'Recommended amount',
@@ -99,7 +99,7 @@ const otherPetItems: HowToItem[] = [
     id: 5,
     header: 'Fish Food',
     image: `${CDN_BASE}/10006.png`,
-    title: 'MAZEKOMU Forever into fish food',
+    title: 'Mix Forever into fish food',
     recommendations: [
       {
         label: 'Recommended amount if adding directly to the tank',
@@ -126,7 +126,7 @@ const otherPetItems: HowToItem[] = [
     id: 6,
     header: 'Bird Food',
     image: `${CDN_BASE}/10007.png`,
-    title: 'MAZEKOMU Forever into bird food',
+    title: 'Mix Forever into bird food',
     recommendations: [
       {
         label: 'Recommended amount if adding directly',
@@ -150,7 +150,7 @@ const otherPetItems: HowToItem[] = [
     id: 7,
     header: 'Rabbit Food',
     image: `${CDN_BASE}/10008.png`,
-    title: 'MAZEKOMU Forever into rabbit food',
+    title: 'Mix Forever into rabbit food',
     recommendations: [
       {
         label: 'Recommended amount for pets 5kg and over',
@@ -167,7 +167,7 @@ const otherPetItems: HowToItem[] = [
     id: 8,
     header: 'Hamster Food',
     image: `${CDN_BASE}/10009.png`,
-    title: 'MAZEKOMU Forever into hamster food',
+    title: 'Mix Forever into hamster food',
     recommendations: [
       {
         label: 'Recommended amount if adding directly',
@@ -191,7 +191,7 @@ const otherPetItems: HowToItem[] = [
     id: 9,
     header: 'Small Pet Food',
     image: `${CDN_BASE}/10010.png`,
-    title: 'MAZEKOMU Forever into small pet food',
+    title: 'Mix Forever into small pet food',
     recommendations: [
       {
         label: 'Recommended amount for pets 5kg and over',
@@ -208,7 +208,7 @@ const otherPetItems: HowToItem[] = [
     id: 10,
     header: 'Insect Food',
     image: `${CDN_BASE}/10011.jpg`,
-    title: 'MAZEKOMU Forever into insect food',
+    title: 'Mix Forever into insect food',
     recommendations: [
       {
         label: 'Recommended amount',
@@ -223,7 +223,7 @@ const otherUseItems: HowToItem[] = [
     id: 11,
     header: 'Drinking Water for Reptiles',
     image: `${CDN_BASE}/10012.png`,
-    title: 'MAZEKOMU Forever into drinking water for reptiles',
+    title: 'Mix Forever into drinking water for reptiles',
     recommendations: [
       {
         label: 'Recommended amount',
@@ -235,7 +235,7 @@ const otherUseItems: HowToItem[] = [
     id: 12,
     header: 'Houseplants',
     image: `${CDN_BASE}/10013.jpg`,
-    title: 'MAZEKOMU Forever with water and apply to houseplants',
+    title: 'Mix Forever with water and apply to houseplants',
     recommendations: [
       {
         label: 'Recommended amount',

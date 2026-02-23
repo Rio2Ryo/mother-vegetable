@@ -571,9 +571,9 @@ export default async function AchieveHowToPage({ params }: { params: Promise<{ l
         <div className="bg-black border border-[#25C760] rounded-xl p-6 md:p-8 mb-8">
           <div className="flex flex-col md:flex-row gap-6">
             <div className="flex-1">
-              <h2 className="text-white font-bold text-xl mb-4">TORIKOMU - Take In</h2>
+              <h2 className="text-white font-bold text-xl mb-4">How to Take In</h2>
               <p className="text-white text-sm leading-relaxed opacity-90 mb-4">
-                Simply open one capsule of Achieve and mix it into your favorite drink or meal. The powder dissolves easily and blends naturally, allowing you to take in all 48 essential nutrients without changing the taste of your food or drink.
+                Simply open one stick of Achieve and mix it into your favorite drink or meal. The powder dissolves easily and blends naturally, allowing you to take in all 48 essential nutrients without changing the taste of your food or drink.
               </p>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 mt-6">
                 {[

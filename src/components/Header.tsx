@@ -1,24 +1,18 @@
 'use client';
 
-import { Link, useRouter, usePathname } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import Image from 'next/image';
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useCartStore } from '@/store/cart';
 import { useUserStore } from '@/store/userStore';
 import { useAffiliateStore } from '@/store/affiliateStore';
 import CartPanel from './CartPanel';
 
-const langOptions = [
-  { code: 'en' as const, label: 'Eng' },
-  { code: 'ja' as const, label: '日' },
-];
-
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [howToOpen, setHowToOpen] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { toggleCart, totalItems } = useCartStore();
@@ -70,16 +64,7 @@ export default function Header() {
     profileTimeout.current = setTimeout(() => setProfileOpen(false), 150);
   }, []);
 
-  const locale = useLocale();
   const router = useRouter();
-  const pathname = usePathname();
-
-  const currentLangLabel = langOptions.find((l) => l.code === locale)?.label ?? 'Eng';
-
-  function switchLocale(newLocale: 'en' | 'ja') {
-    router.replace(pathname, { locale: newLocale });
-    setLangOpen(false);
-  }
 
   return (
     <>
@@ -318,34 +303,6 @@ export default function Header() {
               {t('healthcare')}
               <span className="text-[10px] font-medium whitespace-nowrap">{t('forHospital')}</span>
             </Link>
-
-            {/* Language Selector */}
-            <div
-              className="relative border border-white rounded-md bg-transparent text-white px-4 py-2 font-medium text-sm cursor-pointer min-w-[60px] text-center h-10 flex items-center justify-center hover:bg-[#25C760] hover:border-[#25C760] hover:-translate-y-[3px] transition-all duration-300"
-              style={{ fontFamily: 'Arial, sans-serif' }}
-              onClick={() => setLangOpen(!langOpen)}
-            >
-              <span className="block">{currentLangLabel}</span>
-              {langOpen && (
-                <>
-                  <div className="fixed inset-0 z-[999]" onClick={(e) => { e.stopPropagation(); setLangOpen(false); }} />
-                  <div className="absolute top-full left-0 right-0 bg-black border border-[#25C760] rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[1000] mt-1 overflow-hidden">
-                    {langOptions.map((lang) => (
-                      <div
-                        key={lang.code}
-                        className="px-4 py-[10px] text-white hover:bg-[#25C760] transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] last:border-b-0 cursor-pointer text-center font-medium"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          switchLocale(lang.code);
-                        }}
-                      >
-                        {lang.label}
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
 
             {/* Cart Button */}
             <button

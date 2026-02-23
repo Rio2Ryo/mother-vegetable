@@ -6,6 +6,7 @@ import { useAffiliateStore } from '@/store/affiliateStore';
 import { useUserStore } from '@/store/userStore';
 import { getStoredReferralCode } from '@/lib/affiliate';
 import { useTranslations } from 'next-intl';
+import { signIn } from 'next-auth/react';
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -111,6 +112,7 @@ export default function SignupPage() {
                   <div className="flex justify-center py-2 w-full mt-4">
                     <button
                       type="button"
+                      onClick={() => signIn('google', { callbackUrl: '/' })}
                       className="w-full bg-black border-2 border-[#25C760] text-white font-semibold py-2.5 rounded-[5px] cursor-pointer hover:bg-[#25C760] hover:text-white transition-all flex items-center justify-center"
                     >
                       <svg

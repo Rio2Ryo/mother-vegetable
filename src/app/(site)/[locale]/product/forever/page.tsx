@@ -18,7 +18,7 @@ const foreverProduct: ProductPageData = {
   name: 'Forever',
   fullName: 'Mother Vegetable Forever - 30 sticks',
   subtitle: 'for Pet',
-  taglineJp: "'MAZEKOMU'",
+  taglineJp: '',
   tagline: "to extend your pet's healthy life.",
   price: 36.70,
   currency: 'USD',
@@ -36,7 +36,7 @@ const foreverProduct: ProductPageData = {
     'Supports tear stain reduction and gut health.',
     'Helps reduce body and waste odors, boosts appetite.',
   ],
-  howToUse: "Simply 'MAZEKOMU' one capsule into your pet's food.",
+  howToUse: "Simply mix one stick into your pet's food.",
   howToLink: '/forever-howto',
 
   leftSection: {
@@ -57,7 +57,7 @@ const foreverProduct: ProductPageData = {
       { name: 'Treats', image: '/Images/Assets/forever/mazekomu/catTreats.png' },
     ],
   },
-  centerTitle: 'MAZEKOMU',
+  centerTitle: 'Mix In',
   centerImage: '/Images/Assets/forever/mazekomu/mazekomu.png',
 
   trust: {
@@ -77,7 +77,7 @@ const foreverProduct: ProductPageData = {
     type: 'food',
     title: 'Food Function',
     subtitle: 'Forever',
-    method: 'TORIKOMU / MAZEKOMU',
+    method: 'Add / Mix In',
     videoUrl: '/Images/Assets/homepage/product/food_video.mov',
     circles: [
       { name: 'Essential Fatty Acids', detail: '9 types' },

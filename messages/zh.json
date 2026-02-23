@@ -27,40 +27,35 @@
     "achieve": {
       "name": "Achieve",
       "subtitle": "身体健康",
-      "taglineJp": "「TORIKOMU」",
+      "taglineJp": "",
       "tagline": "一次摄取48种营养素。",
       "benefits": [
         "支持健康的肠道，促进全身细胞再生。",
         "帮助缓解便秘、改善睡眠、辅助体重管理。"
       ],
-      "howToUse": "只需将一颗胶囊「TORIKOMU」放入饮品或餐食中。"
+      "howToUse": "只需将一条加入饮品或餐食中。"
     },
     "confidence": {
       "name": "Confidence",
       "subtitle": "全效护肤",
-      "taglineJp": "「SURIKOMU」「MAZEKOMU」",
+      "taglineJp": "",
       "tagline": "皮肤修复效果",
       "benefits": [
         "强大的抗衰老功效。",
         "帮助改善色斑、痘痘、体味和皮肤损伤。"
       ],
-      "howToUse": "直接「SURIKOMU」涂抹或「MAZEKOMU」混入您的化妆品中。"
+      "howToUse": "直接涂抹或混入您的化妆品中。"
     },
     "forever": {
       "name": "Forever",
       "subtitle": "宠物专用",
-      "taglineJp": "「MAZEKOMU」",
+      "taglineJp": "",
       "tagline": "延长宠物的健康寿命。",
       "benefits": [
         "支持减少泪痕和肠道健康。",
         "帮助减少体臭和排泄物异味，增进食欲。"
       ],
-      "howToUse": "只需将一颗胶囊「MAZEKOMU」混入宠物食物中。"
-    },
-    "terms": {
-      "torikomu": "「TORIKOMU」在日语中意为「取り込む」（摄入）",
-      "mazekomu": "「MAZEKOMU」在日语中意为「混ぜ込む」（混合）",
-      "surikomu": "「SURIKOMU」在日语中意为「擦り込む」（涂抹）"
+      "howToUse": "只需将一条混入宠物食物中。"
     }
   },
   "trust": {
@@ -72,7 +67,7 @@
   "foodFunction": {
     "title": "食品功能",
     "subtitle": "Achieve",
-    "method": "TORIKOMU / MAZEKOMU",
+    "method": "添加 / 混合",
     "nutritionTitle": "48种营养素",
     "nutritionDesc": "Mother Vegetable 含有48种以上必需营养素，包括钾、镁、钙、铁、锌、铜等矿物质，维生素A、B族、C、E、K的全谱系，以及所有必需氨基酸和条件必需氨基酸。",
     "children": "儿童",
@@ -85,7 +80,7 @@
   "cosmeticFunction": {
     "title": "化妆品功能",
     "subtitle": "Confidence",
-    "method": "SURIKOMU / MAZEKOMU",
+    "method": "涂抹 / 混合",
     "description": "作为医药部外品认证产品，Mother Vegetable 被全球医疗机构信赖，用于术后恢复、烧伤疤痕改善、癌症护理和控油。",
     "beforeAfter": "使用前后对比"
   },

@@ -86,11 +86,11 @@ const achieve: ProductData = {
     "Supports a healthy gut, Regeneration of cells throughout the body.",
     "Helps relieve constipation, improve sleep, and aid weight management.",
   ],
-  taglineJp: "'TORIKOMU'",
+  taglineJp: "",
   tagline: "48 different nutrients at once.",
   subtitle: "for Body",
   howToUse:
-    "Simply 'TORIKOMU' one capsule into your drink or meal.",
+    "Simply add one stick into your drink or meal.",
   howToLink: "/achieve-howto",
   inStock: true,
   drinkItems: [
@@ -152,11 +152,11 @@ const confidence: ProductData = {
     "Skin Healing Effect. Powerful anti-aging benefits.",
     "Helps improve skin texture, reduce wrinkles, and restore radiance.",
   ],
-  taglineJp: "'SURIKOMU' , 'MAZEKOMU'",
+  taglineJp: "",
   tagline: "Skin Healing Effect",
   subtitle: "For All Skin",
   howToUse:
-    "'SURIKOMU' directly or 'MAZEKOMU' into your current cosmetics.",
+    "Apply directly or mix into your current cosmetics.",
   howToLink: "/confidence-howto",
   inStock: true,
   cosmeticItems: [
@@ -233,11 +233,11 @@ const forever: ProductData = {
     "Extend your pet's healthy life with 48 different nutrients.",
     "Supports digestion, coat health, and overall vitality for your pet.",
   ],
-  taglineJp: "'MAZEKOMU'",
+  taglineJp: "",
   tagline: "to extend your pet's healthy life.",
   subtitle: "for Pet",
   howToUse:
-    "Simply 'MAZEKOMU' one capsule into your pet's food.",
+    "Simply mix one stick into your pet's food.",
   howToLink: "/forever-howto",
   inStock: true,
   petItems: [

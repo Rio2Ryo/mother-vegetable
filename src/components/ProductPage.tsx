@@ -39,7 +39,7 @@ interface FunctionSection {
   type: 'food' | 'cosmetic';
   title: string;
   subtitle: string;
-  method: string; // e.g. "TORIKOMU / MAZEKOMU"
+  method: string;
   videoUrl: string;
   circles: FunctionCircle[];
   summary?: { total: string; description: string };
@@ -332,9 +332,9 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
           .trust-title { font-size: 1rem; margin-bottom: 5px; }
           .trust-content { margin: 20px 0; padding: 10px; }
           .trust-content p { font-size: 0.6rem; }
-          .trust-logos { display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 1px; padding: 0 2px; width: 100%; overflow: hidden; }
-          .trust-logo { padding: 1px; flex-shrink: 0; width: 16.66%; max-width: 16.66%; display: flex; justify-content: center; align-items: center; min-width: 0; }
-          .partner-logo { max-width: 100%; max-height: 35px; width: 100%; height: auto; object-fit: contain; display: block; }
+          .trust-logos { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px; padding: 0 4px; width: 100%; overflow: hidden; }
+          .trust-logo { padding: 2px; flex-shrink: 1; width: 15%; max-width: 15%; display: flex; justify-content: center; align-items: center; min-width: 0; }
+          .partner-logo { max-width: 100%; max-height: 40px; width: 100%; height: auto; object-fit: contain; display: block; }
           .card-content { padding: 20px; }
           .card-title-main { font-size: 1.6rem; }
           .card-title-sub { font-size: 0.8rem; }
@@ -419,10 +419,10 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
           .card-content { gap: 8px 10px; }
           .card-title-main { font-size: 0.85rem; }
           .card-title-sub { font-size: 0.65rem; }
-          .card-product-tagline { font-size: 0.5rem; }
-          .benefit-item span:last-child { font-size: 0.45rem; }
-          .card-how-to-use h4 { font-size: 0.55rem; }
-          .usage-item span:last-child { font-size: 0.45rem; }
+          .card-product-tagline { font-size: 0.6rem; }
+          .benefit-item span:last-child { font-size: 0.6rem; }
+          .card-how-to-use h4 { font-size: 0.65rem; }
+          .usage-item span:last-child { font-size: 0.6rem; }
           .hero-underline-img { width: 100px; margin: 5px auto 10px auto; }
         }
       `}</style>
@@ -564,7 +564,9 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                   <span className="card-title-sub">{product.subtitle}</span>
                 </h3>
                 <p className="card-product-tagline">
-                  <strong style={{ color: '#dc3545' }}>{product.taglineJp}</strong>{' '}
+                  {product.taglineJp && (
+                    <><strong style={{ color: '#dc3545' }}>{product.taglineJp}</strong>{' '}</>
+                  )}
                   <span style={{ color: '#FFFFFF' }}>{product.tagline}</span>
                 </p>
                 <div className="card-product-benefits">
@@ -711,8 +713,6 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
               height={20}
               className="hero-underline-img"
             />
-            <h6 style={{ textAlign: 'center', color: '#dc3545' }}>{product.functionSection.method}</h6>
-
             <div className="function-diagram">
               <div className="test-tube-icon">
                 <video className="product-video" autoPlay muted loop playsInline>

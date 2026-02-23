@@ -27,40 +27,35 @@
     "achieve": {
       "name": "Achieve",
       "subtitle": "身体のために",
-      "taglineJp": "「取り込む」",
+      "taglineJp": "",
       "tagline": "48種の栄養素を一度に。",
       "benefits": [
         "健康な腸をサポートし、全身の細胞再生を促進。",
         "便秘改善、睡眠向上、体重管理をサポート。"
       ],
-      "howToUse": "カプセルをお飲み物やお食事に「取り込む」だけ。"
+      "howToUse": "スティック1本をお飲み物やお食事に加えるだけ。"
     },
     "confidence": {
       "name": "Confidence",
       "subtitle": "すべての肌に",
-      "taglineJp": "「擦り込む」「混ぜ込む」",
+      "taglineJp": "",
       "tagline": "肌のヒーリング効果",
       "benefits": [
         "強力なアンチエイジング効果。",
         "シミ、ニキビ、臭い、肌ダメージの改善をサポート。"
       ],
-      "howToUse": "直接「擦り込む」か、お使いの化粧品に「混ぜ込む」。"
+      "howToUse": "直接塗るか、お使いの化粧品に混ぜてご使用ください。"
     },
     "forever": {
       "name": "Forever",
       "subtitle": "ペットのために",
-      "taglineJp": "「混ぜ込む」",
+      "taglineJp": "",
       "tagline": "ペットの健康寿命を延ばす。",
       "benefits": [
         "涙やけの軽減と腸の健康をサポート。",
         "体臭・排泄臭の軽減、食欲増進。"
       ],
-      "howToUse": "ペットのフードにカプセルを「混ぜ込む」だけ。"
-    },
-    "terms": {
-      "torikomu": "「TORIKOMU」は日本語で「取り込む」という意味です",
-      "mazekomu": "「MAZEKOMU」は日本語で「混ぜ込む」という意味です",
-      "surikomu": "「SURIKOMU」は日本語で「擦り込む」という意味です"
+      "howToUse": "スティック1本をペットのフードに混ぜるだけ。"
     }
   },
   "trust": {
@@ -72,7 +67,7 @@
   "foodFunction": {
     "title": "フード機能",
     "subtitle": "Achieve",
-    "method": "取り込む / 混ぜ込む",
+    "method": "加える / 混ぜる",
     "nutritionTitle": "48種の栄養素",
     "nutritionDesc": "48種以上の必須栄養素を含むマザーベジタブルは、カリウム、マグネシウム、カルシウム、鉄、亜鉛、銅などのミネラル、ビタミンA、B群、C、E、Kのフルスペクトラム、そして必須アミノ酸と条件付き必須アミノ酸を提供します。",
     "children": "子ども",
@@ -85,7 +80,7 @@
   "cosmeticFunction": {
     "title": "コスメ機能",
     "subtitle": "Confidence",
-    "method": "擦り込む / 混ぜ込む",
+    "method": "塗る / 混ぜる",
     "description": "医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。",
     "beforeAfter": "ビフォー＆アフター"
   },

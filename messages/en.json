@@ -27,40 +27,35 @@
     "achieve": {
       "name": "Achieve",
       "subtitle": "for Body",
-      "taglineJp": "'TORIKOMU'",
+      "taglineJp": "",
       "tagline": "48 different nutrients at once.",
       "benefits": [
         "Supports a healthy gut, Regeneration of cells throughout the body.",
         "Helps relieve constipation, improve sleep, and aid weight management."
       ],
-      "howToUse": "Simply 'TORIKOMU' one capsule into your drink or meal."
+      "howToUse": "Simply add one stick into your drink or meal."
     },
     "confidence": {
       "name": "Confidence",
       "subtitle": "For All Skin",
-      "taglineJp": "'SURIKOMU' , 'MAZEKOMU'",
+      "taglineJp": "",
       "tagline": "Skin Healing Effect",
       "benefits": [
         "Powerful anti-aging benefits.",
         "Helps improve dark spots, acne, odor, and skin damage."
       ],
-      "howToUse": "'SURIKOMU' directly or 'MAZEKOMU' into your current cosmetics."
+      "howToUse": "Apply directly or mix into your current cosmetics."
     },
     "forever": {
       "name": "Forever",
       "subtitle": "for Pet",
-      "taglineJp": "'MAZEKOMU'",
+      "taglineJp": "",
       "tagline": "to extend your pet's healthy life.",
       "benefits": [
         "Supports tear stain reduction and gut health.",
         "Helps reduce body and waste odors, boosts appetite."
       ],
-      "howToUse": "Simply 'MAZEKOMU' one capsule into your pet's food."
-    },
-    "terms": {
-      "torikomu": "'TORIKOMU' means of having in Japanese as 「取り込む」",
-      "mazekomu": "'MAZEKOMU' means of mixing in Japanese as 「混ぜ込む」",
-      "surikomu": "'SURIKOMU' means of rubbing in Japanese as 「擦り込む」"
+      "howToUse": "Simply mix one stick into your pet's food."
     }
   },
   "trust": {
@@ -72,7 +67,7 @@
   "foodFunction": {
     "title": "Food Function",
     "subtitle": "Achieve",
-    "method": "TORIKOMU / MAZEKOMU",
+    "method": "Add / Mix In",
     "nutritionTitle": "48 Nutrients",
     "nutritionDesc": "Potassium, sodium, magnesium, calcium, phosphorus, iron, manganese, zinc, copper, Vitamin A, B1, B2, B3, B5, B6, B9, C, E, K, tryptophan, threonine, leucine, isoleucine, lysine, methionine, phenylalanine, valine, histidine, arginine, cystine, tyrosine, alanine, aspartic acid, glutamic acid, serine, glycine, proline, saturated fatty acids, omega-3 fatty acids, omega-6 fatty acids, C-phycocyanin, chlorophyll a, total carotenoids, nucleic acids, spirulan, glycogen-like polysaccharides, β-glucan-like polysaccharides, cellulose.",
     "children": "Children",
@@ -85,7 +80,7 @@
   "cosmeticFunction": {
     "title": "Cosmetic Function",
     "subtitle": "Confidence",
-    "method": "SURIKOMU / MAZEKOMU",
+    "method": "Apply / Mix In",
     "description": "Mother Vegetable, certified as a medical-grade quasi-drug, is trusted by medical institutions worldwide for its healing properties — used in post-surgery recovery, burn scar improvement, cancer care, and even to help control skin shine. It supports the skin's natural ability to heal and restore balance.",
     "beforeAfter": "Before & After"
   },

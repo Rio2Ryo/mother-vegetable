@@ -275,11 +275,11 @@ Explain the expected effects from this ingredient group in the following areas:
           </h4>
           <div className="grid grid-cols-5 gap-2 md:gap-3 max-w-3xl mx-auto">
             {mainNutrients.map((nutrient, index) => (
-              <div key={index} className="border-2 border-green-400 rounded-lg px-2 py-3 md:px-4 md:py-4 bg-green-900/40 text-center">
-                <div className="text-gray-100 text-[8px] md:text-sm font-semibold mb-1">
+              <div key={index} className="border-2 border-green-400 rounded-lg px-1 py-2 md:px-4 md:py-4 bg-green-900/40 text-center">
+                <div className="text-gray-100 text-[10px] md:text-sm font-semibold mb-1 leading-tight">
                   {isJa ? nutrient.name : nutrient.nameEN}
                 </div>
-                <div className="text-green-300 text-[10px] md:text-lg font-bold">
+                <div className="text-green-300 text-[11px] md:text-lg font-bold">
                   {isJa ? nutrient.amount : nutrient.amount.replace(/約/g, 'approx. ')}
                 </div>
               </div>
@@ -295,10 +295,10 @@ Explain the expected effects from this ingredient group in the following areas:
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-flow-col md:grid-rows-8 md:auto-cols-fr gap-2 md:gap-3">
             {nutrientsWithAmount.map((nutrient, index) => (
               <div key={index} className="border border-green-500/40 rounded-lg px-2 py-2 md:px-3 md:py-3 bg-green-900/20 hover:bg-green-900/40 transition-colors">
-                <div className="text-gray-200 text-[9px] md:text-xs font-medium">
+                <div className="text-gray-200 text-[10px] md:text-xs font-medium leading-tight">
                   {isJa ? nutrient.name : nutrient.nameEN}
                 </div>
-                <div className="text-green-400 text-[10px] md:text-sm font-bold">
+                <div className="text-green-400 text-[11px] md:text-sm font-bold">
                   {isJa ? nutrient.amount : nutrient.amount.replace(/約/g, 'approx. ')}
                 </div>
               </div>
