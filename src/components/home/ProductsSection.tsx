@@ -27,11 +27,12 @@ function getProducts(isJa: boolean) {
       id: 'achieve',
       name: 'Achieve',
       subtitle: isJa ? '身体のために（飲むタイプ）' : 'for Body (Drinkable Type)',
+      subName: 'Flesh Dry Protein',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
       videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
       features: isJa
         ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と', 'Flesh Dry Protein']
-        : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones', 'Flesh Dry Protein'],
+        : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones'],
       howToUseLabel: isJa ? 'Achieveの料理/ドリンク一覧' : 'Achieve Recipes & Drinks',
       howToLink: '/achieve-howto',
       productLink: '/product/achieve',
@@ -40,11 +41,12 @@ function getProducts(isJa: boolean) {
       id: 'confidence',
       name: 'Confidence',
       subtitle: isJa ? 'すべての肌に（肌に塗るタイプ）' : 'for All Skin (Topical Type)',
+      subName: 'Flesh Bridge Collagen',
       tagline: isJa ? '肌の気になるところに直接塗布' : 'Skin Healing Effect',
       videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
       features: isJa
         ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用', 'Flesh Bridge Collagen']
-        : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics', 'Flesh Bridge Collagen'],
+        : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics'],
       howToUseLabel: isJa ? 'Confidenceの混ぜ方/使い方一覧' : 'Confidence Mixing & Usage Guide',
       howToLink: '/confidence-howto',
       productLink: '/product/confidence',
