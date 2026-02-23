@@ -450,23 +450,7 @@ Characteristics of the raw materials:
           <p className="text-gray-400 text-xs md:text-sm text-center italic">{cosmeticTexts.featuresNote}</p>
         </div>
 
-        {/* Before & After Button */}
-        <motion.div
-          className="flex items-center justify-center my-[30px] max-[490px]:my-[15px]"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <button
-            onClick={() => setIsPopupOpen(true)}
-            className="group inline-flex items-center justify-center gap-2.5 py-3 px-[30px] border-2 border-[#25C760] rounded-[30px] bg-transparent text-[#25C760] font-semibold text-[1.1rem] max-[767px]:text-[0.95rem] max-[530px]:text-[0.85rem] transition-all duration-300 relative overflow-hidden shadow-[0_0_15px_rgba(37,199,96,0.2)] hover:bg-[#25C760] hover:text-black hover:-translate-y-[3px] hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] cursor-pointer outline-none"
-            type="button"
-          >
-            <span className="relative z-[1] text-[1.2rem] font-bold text-[#25C760] group-hover:text-white transition-colors duration-300">{'\u2713'}</span>
-            <span className="relative z-[1] group-hover:tracking-[1px] group-hover:text-white transition-all duration-300">Before & After</span>
-          </button>
-        </motion.div>
+        {/* Before & After Button (hidden) */}
       </motion.div>
 
       {/* Before & After Modal */}
