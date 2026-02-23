@@ -12,7 +12,7 @@ function resolveDbUrl(): string {
   if (!raw) {
     return `file:${path.resolve(process.cwd(), "dev.db")}`;
   }
-  if (raw.startsWith("libsql://") || raw.startsWith("https://")) {
+  if (raw.startsWith("libsql://") || raw.startsWith("https://") || raw.startsWith("http://")) {
     return raw;
   }
   if (raw.startsWith("file:")) {
@@ -25,7 +25,7 @@ function resolveDbUrl(): string {
 
 function makePrisma() {
   const url = resolveDbUrl();
-  const isRemote = url.startsWith("libsql://") || url.startsWith("https://");
+  const isRemote = url.startsWith("libsql://") || url.startsWith("https://") || url.startsWith("http://");
 
   // In Prisma 7, PrismaLibSql is a factory that takes a config object
   const adapter = new PrismaLibSql({
