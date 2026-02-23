@@ -14,7 +14,8 @@
       "Bash(vercel login --no-color)",
       "Bash(vercel login)",
       "Bash(npx playwright --version)",
-      "Bash(node take-screenshots.mjs)"
+      "Bash(node take-screenshots.mjs)",
+      "Bash(cd C:\\\\Users\\\\山﨑宗洋\\\\Desktop\\\\０２２３\\\\mother-vegetable:*)"
     ]
   }
 }

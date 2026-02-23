@@ -217,7 +217,7 @@ export default function CosmeticFunctionSection() {
 
   // Cosmetic ingredients
   const cosmeticNutrients = [
-    { name: '無水ケイ酸', amount: '97.1g', nameEN: 'Anhydrous Silica' },
+    { name: '無水ケイ酸', amount: '97.1g', nameEN: 'Silicic Anhydride' },
     { name: 'たんぱく質', amount: '2.4~2.6g', nameEN: 'Protein' },
     { name: '炭水化物（食物繊維）', amount: '0.3~0.5g', nameEN: 'Carbohydrates (Dietary Fiber)' },
     { name: '脂質', amount: '0.1g未満', nameEN: 'Fat' },
@@ -233,9 +233,9 @@ export default function CosmeticFunctionSection() {
         ['動物や植物への使用が可能', '長期保存が可能'],
       ]
     : [
-        ['Made entirely from natural materials/nutrients derived solely from Mother Vegetable, the ancestor of plants and algae', 'The main component of topical Mother Vegetable is amorphous anhydrous silica'],
+        ['Made entirely from natural materials/nutrients derived solely from Mother Vegetable, the ancestor of plants and algae', 'The main component of topical Mother Vegetable is amorphous Silicic Anhydride'],
         ['Complete indoor cultivation free from PM2.5, insects, birds, and other contaminants', 'Minimizes heavy metal and microplastic contamination risks'],
-        ['No preservatives, artificial colors, or fragrances', 'No extraction process for anhydrous silica \u2014 simply dried Mother Vegetable in its natural form'],
+        ['No preservatives, artificial colors, or fragrances', 'No extraction process for Silicic Anhydride \u2014 simply dried Mother Vegetable in its natural form'],
         ['No pesticides or chemical fertilizers', 'Meets quasi-drug raw material standards'],
         ['Can be used on animals and plants', 'Suitable for long-term storage'],
       ];
@@ -276,8 +276,8 @@ export default function CosmeticFunctionSection() {
 
 Characteristics of the raw materials:
 - Uses only natural ingredients derived from the ancestor of plants
-- Amorphous anhydrous silica at 97.1% in powder form
-- Despite being 97.1% high-purity anhydrous silica, lipids and dietary fiber remain in the powder
+- Amorphous Silicic Anhydride at 97.1% in powder form
+- Despite being 97.1% high-purity Silicic Anhydride, lipids and dietary fiber remain in the powder
 - Complete indoor cultivation (Closed Bioreactor System)
 - Minimized risk of heavy metal and microplastic contamination
 - No pesticides or chemical fertilizers

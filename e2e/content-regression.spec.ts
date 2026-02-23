@@ -70,7 +70,7 @@ test.describe('Homepage Content Regression', () => {
     await scrollFullPage(page);
     const cosmeticSection = page.locator('#cosmetic-function');
     await expect(cosmeticSection.getByText('Ingredient Information')).toBeVisible();
-    await expect(cosmeticSection.getByText('Anhydrous Silica (Amorphous)').first()).toBeVisible();
+    await expect(cosmeticSection.getByText('Silicic Anhydride (Amorphous)').first()).toBeVisible();
   });
 
   test('Cosmetic Function section has clipboard copy button', async ({ page }) => {
