@@ -372,13 +372,13 @@ Characteristics of the raw materials:
           <p className="text-gray-400 text-xs md:text-sm text-center mb-4 md:mb-6">
             {isJa ? '（100g当たり）' : '(per 100g)'}
           </p>
-          <div className="grid grid-cols-5 gap-2 md:gap-3 mb-8">
+          <div className="flex flex-wrap justify-center gap-2 md:grid md:grid-cols-5 md:gap-3 mb-8">
             {cosmeticNutrients.map((nutrient, index) => (
-              <div key={index} className="border-2 border-green-300 rounded-lg px-1 py-2 md:px-3 md:py-3 bg-green-800/50 hover:bg-green-700/50 transition-colors text-center">
-                <div className="text-white text-[10px] md:text-xs font-semibold leading-tight">
+              <div key={index} className="border-2 border-green-300 rounded-lg px-2 py-2 md:px-3 md:py-3 bg-green-800/50 hover:bg-green-700/50 transition-colors text-center flex flex-col items-center justify-center w-[28%] md:w-auto">
+                <div className="text-white text-[9px] md:text-xs font-semibold leading-tight">
                   {isJa ? nutrient.name : nutrient.nameEN}
                 </div>
-                <div className="text-green-200 text-[10px] md:text-sm font-bold">
+                <div className="text-green-200 text-[9px] md:text-sm font-bold">
                   {isJa ? nutrient.amount : nutrient.amount.replace(/未満/g, 'or less')}
                 </div>
               </div>
