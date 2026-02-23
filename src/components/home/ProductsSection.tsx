@@ -26,12 +26,11 @@ function getProducts(isJa: boolean) {
     {
       id: 'achieve',
       name: 'Achieve',
-      type: isJa ? '飲むタイプ' : 'Flesh Dry Protein',
-      subtitle: isJa ? '身体のために' : 'for Body (Human & Animal)',
+      subtitle: isJa ? '身体のために（飲むタイプ）' : 'for Body (Human & Animal)',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
       videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
       features: isJa
-        ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と']
+        ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と', 'Flesh Dry Protein']
         : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones', 'Also suitable for animals'],
       howToUseLabel: isJa ? 'Achieveの料理/ドリンク一覧' : 'Achieve Recipes & Drinks',
       howToLink: '/achieve-howto',
@@ -40,12 +39,11 @@ function getProducts(isJa: boolean) {
     {
       id: 'confidence',
       name: 'Confidence',
-      type: isJa ? '肌に塗るタイプ' : 'Flesh Bridge Collagen',
-      subtitle: isJa ? 'すべての肌に' : 'for All Skin (Human & Animal)',
+      subtitle: isJa ? 'すべての肌に（肌に塗るタイプ）' : 'for All Skin (Human & Animal)',
       tagline: isJa ? '肌の気になるところに直接塗布' : 'Skin Healing Effect',
       videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
       features: isJa
-        ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用']
+        ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用', 'Flesh Bridge Collagen']
         : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics', 'Also suitable for animal skin'],
       howToUseLabel: isJa ? 'Confidenceの混ぜ方/使い方一覧' : 'Confidence Mixing & Usage Guide',
       howToLink: '/confidence-howto',
@@ -111,7 +109,6 @@ export default function ProductsSection() {
                   <h3 className="text-lg md:text-3xl font-bold" style={{ color: '#25c760' }}>
                     {product.name}
                   </h3>
-                  {product.type && <p className="text-xs md:text-sm" style={{ color: '#05df72' }}>{product.type}</p>}
                   <p className="text-green-400 text-xs md:text-sm">{product.subtitle}</p>
                 </div>
 
