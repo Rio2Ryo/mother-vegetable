@@ -337,7 +337,7 @@ Characteristics of the raw materials:
         transition={{ duration: 0.6 }}
       >
         {/* Title */}
-        <h2 className="text-xl md:text-5xl font-bold text-center mb-1 md:mb-2 text-white">
+        <h2 className="text-xl md:text-5xl font-bold text-center mb-1 md:mb-2" style={{ color: '#25c760' }}>
           Cosmetic Function
         </h2>
         <p className="text-sm md:text-2xl text-center mb-2 md:mb-4 text-white">
