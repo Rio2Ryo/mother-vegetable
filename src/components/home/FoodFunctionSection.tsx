@@ -273,13 +273,13 @@ Explain the expected effects from this ingredient group in the following areas:
           <h4 className="text-sm md:text-lg font-bold text-center mb-3 md:mb-4 text-green-300">
             {isJa ? '主要項目' : 'Main Nutrients'}
           </h4>
-          <div className="grid grid-cols-5 gap-2 md:gap-3 max-w-3xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-2 md:grid md:grid-cols-5 md:gap-3 max-w-3xl mx-auto">
             {mainNutrients.map((nutrient, index) => (
-              <div key={index} className="border-2 border-green-400 rounded-lg px-1 py-2 md:px-4 md:py-4 bg-green-900/40 text-center">
-                <div className="text-gray-100 text-[10px] md:text-sm font-semibold mb-1 leading-tight">
+              <div key={index} className="border-2 border-green-400 rounded-lg px-2 py-2 md:px-4 md:py-4 bg-green-900/40 text-center flex flex-col items-center justify-center w-[28%] md:w-auto">
+                <div className="text-gray-100 text-[9px] md:text-sm font-semibold mb-1 leading-tight">
                   {isJa ? nutrient.name : nutrient.nameEN}
                 </div>
-                <div className="text-green-300 text-[11px] md:text-lg font-bold">
+                <div className="text-green-300 text-[9px] md:text-lg font-bold">
                   {isJa ? nutrient.amount : nutrient.amount.replace(/約/g, 'approx. ')}
                 </div>
               </div>
