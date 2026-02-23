@@ -303,5 +303,14 @@
     "registrationComplete": "登録が完了しました！インストラクタープログラムへようこそ。",
     "showPassword": "表示",
     "hidePassword": "非表示"
+  },
+  "chatbot": {
+    "title": "チャットで質問",
+    "greeting": "こんにちは！マザーベジタブルのAIアシスタントです。何かお手伝いできることはありますか？",
+    "placeholder": "メッセージを入力...",
+    "send": "送信",
+    "supportLink": "サポートへ連絡: support@mothervegetable.com",
+    "error": "申し訳ありません、エラーが発生しました。support@mothervegetable.comにお問い合わせください。",
+    "close": "閉じる"
   }
 }

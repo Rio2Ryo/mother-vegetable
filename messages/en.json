@@ -303,5 +303,14 @@
     "registrationComplete": "Registration complete! Welcome to the instructor program.",
     "showPassword": "SHOW",
     "hidePassword": "HIDE"
+  },
+  "chatbot": {
+    "title": "Chat with us",
+    "greeting": "Hi! I'm Mother Vegetable's AI assistant. How can I help you today?",
+    "placeholder": "Type your message...",
+    "send": "Send",
+    "supportLink": "Contact support: support@mothervegetable.com",
+    "error": "Sorry, something went wrong. Please contact support@mothervegetable.com",
+    "close": "Close"
   }
 }
