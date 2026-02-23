@@ -26,7 +26,7 @@ function getProducts(isJa: boolean) {
     {
       id: 'achieve',
       name: 'Achieve',
-      subtitle: isJa ? '身体のために（飲むタイプ）' : 'for Body (Human & Animal)',
+      subtitle: isJa ? '身体のために（飲むタイプ）' : 'for Body (Flesh Dry Protein)',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
       videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
       features: isJa
@@ -39,7 +39,7 @@ function getProducts(isJa: boolean) {
     {
       id: 'confidence',
       name: 'Confidence',
-      subtitle: isJa ? 'すべての肌に（肌に塗るタイプ）' : 'for All Skin (Human & Animal)',
+      subtitle: isJa ? 'すべての肌に（肌に塗るタイプ）' : 'for All Skin (Flesh Bridge Collagen)',
       tagline: isJa ? '肌の気になるところに直接塗布' : 'Skin Healing Effect',
       videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
       features: isJa
