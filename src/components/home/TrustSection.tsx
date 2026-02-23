@@ -78,7 +78,7 @@ export default function TrustSection() {
               alt={cert.alt}
               width={120}
               height={120}
-              className="w-[15vw] max-w-[96px] md:w-auto md:h-24 object-contain transition-all duration-300 hover:scale-110"
+              className="w-[13vw] max-w-[96px] md:w-auto md:h-24 object-contain transition-all duration-300 hover:scale-110"
             />
           </motion.div>
         ))}
