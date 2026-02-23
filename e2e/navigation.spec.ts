@@ -113,7 +113,7 @@ test.describe('Navigation', () => {
       await page.locator('header nav a', { hasText: 'Healthcare' }).click();
     } else {
       // On desktop, the Healthcare link is outside the nav, use the desktop-only one
-      await page.locator('header a.hidden.md\\:inline-flex', { hasText: 'Healthcare' }).click();
+      await page.locator('header a.hidden.lg\\:inline-flex', { hasText: 'Healthcare' }).click();
     }
 
     await page.waitForURL('**/healthcare');

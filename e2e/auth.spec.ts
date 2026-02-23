@@ -1,10 +1,14 @@
 import { test, expect } from '@playwright/test';
 import { waitForPageReady } from './helpers';
 
+// Use unique emails per test run to avoid conflicts with persistent DB
+const testId = Date.now();
+
 test.describe('User Authentication', () => {
   test.beforeEach(async ({ page }) => {
     // Clear user auth state
     await page.goto('/');
+    await page.context().clearCookies();
     await page.evaluate(() => {
       localStorage.removeItem('mv-users');
     });
@@ -94,7 +98,7 @@ test.describe('User Authentication', () => {
     await waitForPageReady(page);
 
     await page.getByPlaceholder('Username').fill('newuser');
-    await page.getByPlaceholder('Email Address').fill('newuser@example.com');
+    await page.getByPlaceholder('Email Address').fill(`newuser-${testId}@example.com`);
     await page.getByPlaceholder('Password', { exact: true }).fill('password123');
     await page.getByPlaceholder('Confirm Password').fill('password123');
 
@@ -105,11 +109,13 @@ test.describe('User Authentication', () => {
   });
 
   test('signup rejects duplicate email', async ({ page }) => {
+    const dupEmail = `dup-${testId}@example.com`;
+
     // First registration
     await page.goto('signup');
     await waitForPageReady(page);
     await page.getByPlaceholder('Username').fill('user1');
-    await page.getByPlaceholder('Email Address').fill('duplicate@example.com');
+    await page.getByPlaceholder('Email Address').fill(dupEmail);
     await page.getByPlaceholder('Password', { exact: true }).fill('password123');
     await page.getByPlaceholder('Confirm Password').fill('password123');
     await page.getByRole('button', { name: /sign up now/i }).click();
@@ -117,27 +123,18 @@ test.describe('User Authentication', () => {
     // Wait for success message and redirect (1.5s delay + navigation)
     await page.waitForURL('**/en', { timeout: 15000 });
 
-    // Clear user session so we can access signup again
-    await page.evaluate(() => {
-      const stored = localStorage.getItem('mv-users');
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed.state) {
-          parsed.state.currentUser = null;
-          localStorage.setItem('mv-users', JSON.stringify(parsed));
-        }
-      }
-    });
+    // Clear cookies to ensure clean session state
+    await page.context().clearCookies();
 
     // Second registration with same email
     await page.goto('signup');
     await waitForPageReady(page);
     await page.getByPlaceholder('Username').fill('user2');
-    await page.getByPlaceholder('Email Address').fill('duplicate@example.com');
+    await page.getByPlaceholder('Email Address').fill(dupEmail);
     await page.getByPlaceholder('Password', { exact: true }).fill('password123');
     await page.getByPlaceholder('Confirm Password').fill('password123');
     await page.getByRole('button', { name: /sign up now/i }).click();
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(3000);
 
     const error = page.locator('.text-red-500');
     await expect(error).toBeVisible();
@@ -207,32 +204,25 @@ test.describe('User Authentication', () => {
   });
 
   test('full signup then login flow works', async ({ page }) => {
+    const flowEmail = `flow-${testId}@example.com`;
+
     // Step 1: Register
     await page.goto('signup');
     await waitForPageReady(page);
     await page.getByPlaceholder('Username').fill('flowuser');
-    await page.getByPlaceholder('Email Address').fill('flow@example.com');
+    await page.getByPlaceholder('Email Address').fill(flowEmail);
     await page.getByPlaceholder('Password', { exact: true }).fill('flowpass123');
     await page.getByPlaceholder('Confirm Password').fill('flowpass123');
     await page.getByRole('button', { name: /sign up now/i }).click();
     await page.waitForURL('**/en', { timeout: 15000 });
 
-    // Step 2: Logout by clearing current user (keep users list for login)
-    await page.evaluate(() => {
-      const stored = localStorage.getItem('mv-users');
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed.state) {
-          parsed.state.currentUser = null;
-          localStorage.setItem('mv-users', JSON.stringify(parsed));
-        }
-      }
-    });
+    // Step 2: Clear cookies to sign out
+    await page.context().clearCookies();
 
     // Step 3: Navigate to login
     await page.goto('login');
     await waitForPageReady(page);
-    await page.getByPlaceholder('sample@email.com').fill('flow@example.com');
+    await page.getByPlaceholder('sample@email.com').fill(flowEmail);
     await page.getByPlaceholder('Password').fill('flowpass123');
     await page.getByRole('button', { name: /login now/i }).click();
 

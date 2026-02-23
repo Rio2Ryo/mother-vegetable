@@ -82,7 +82,7 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
         await waitForPageReady(page);
 
         // Profile icon button (desktop only)
-        const profileBtn = page.locator('header .hidden.md\\:flex.relative');
+        const profileBtn = page.locator('header .hidden.lg\\:flex.relative');
         await expect(profileBtn).toBeVisible();
       });
     }

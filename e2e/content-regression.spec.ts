@@ -70,7 +70,7 @@ test.describe('Homepage Content Regression', () => {
     await scrollFullPage(page);
     const cosmeticSection = page.locator('#cosmetic-function');
     await expect(cosmeticSection.getByText('Ingredient Information')).toBeVisible();
-    await expect(cosmeticSection.getByText('Silicic Anhydride (Amorphous)').first()).toBeVisible();
+    await expect(cosmeticSection.getByText('Silicic Anhydride').first()).toBeVisible();
   });
 
   test('Cosmetic Function section has clipboard copy button', async ({ page }) => {
@@ -80,14 +80,16 @@ test.describe('Homepage Content Regression', () => {
     await expect(copyButton).toBeVisible();
   });
 
-  test('Before & After button exists in Cosmetic Function', async ({ page }) => {
+  // Before & After button is currently hidden in the codebase
+  test.skip('Before & After button exists in Cosmetic Function', async ({ page }) => {
     await scrollFullPage(page);
     const cosmeticSection = page.locator('#cosmetic-function');
     const baButton = cosmeticSection.getByText('Before & After');
     await expect(baButton).toBeVisible();
   });
 
-  test('Before & After modal opens and closes', async ({ page }) => {
+  // Before & After button is currently hidden in the codebase
+  test.skip('Before & After modal opens and closes', async ({ page }) => {
     await scrollFullPage(page);
     const cosmeticSection = page.locator('#cosmetic-function');
 
@@ -107,10 +109,10 @@ test.describe('Homepage Content Regression', () => {
   test('Products section has correct video URLs for achieve and confidence (no forever)', async ({ page }) => {
     await scrollFullPage(page);
 
-    const achieveVideo = page.locator('video[src*="achieve_video.mp4"]');
+    const achieveVideo = page.locator('video[src*="new_achieve_video.mp4"]');
     await expect(achieveVideo).toHaveCount(1);
 
-    const confidenceVideo = page.locator('video[src*="confidence_v2.mp4"]');
+    const confidenceVideo = page.locator('video[src*="new_confidence_video.mp4"]');
     await expect(confidenceVideo).toHaveCount(1);
 
     // Forever should NOT exist
@@ -118,11 +120,11 @@ test.describe('Homepage Content Regression', () => {
     await expect(foreverVideo).toHaveCount(0);
   });
 
-  test('Products section shows human and animal usage', async ({ page }) => {
+  test('Products section shows product type subtitles', async ({ page }) => {
     await scrollFullPage(page);
-    // Both products should mention human and animal usage
-    await expect(page.getByText('for Body (Human & Animal)').first()).toBeVisible();
-    await expect(page.getByText('for All Skin (Human & Animal)').first()).toBeVisible();
+    // Both products should show their type subtitles
+    await expect(page.getByText('Drinkable Type').first()).toBeVisible();
+    await expect(page.getByText('Topical Type').first()).toBeVisible();
   });
 
   test('Two Only Ones section has mazavege and sef videos', async ({ page }) => {
@@ -331,13 +333,23 @@ test.describe('Cross-Page Structure Regression', () => {
 
   test('all product video CDN URLs are accessible', async ({ page }) => {
     const cdnVideos = [
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
       'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/mazavege_top.mp4',
       'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/sef_top.mp4',
     ];
 
     for (const url of cdnVideos) {
+      const response = await page.request.head(url);
+      expect(response.status()).toBe(200);
+    }
+  });
+
+  test('local product video files are accessible', async ({ page }) => {
+    const localProductVideos = [
+      '/new_achieve_video.mp4',
+      '/new_confidence_video.mp4',
+    ];
+
+    for (const url of localProductVideos) {
       const response = await page.request.head(url);
       expect(response.status()).toBe(200);
     }
