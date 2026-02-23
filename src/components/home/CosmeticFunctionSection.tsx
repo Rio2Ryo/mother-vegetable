@@ -217,7 +217,7 @@ export default function CosmeticFunctionSection() {
 
   // Cosmetic ingredients
   const cosmeticNutrients = [
-    { name: '無水ケイ酸', amount: '97.1g', nameEN: 'Anhydrous Silica (Amorphous)' },
+    { name: '無水ケイ酸', amount: '97.1g', nameEN: 'Anhydrous Silica' },
     { name: 'たんぱく質', amount: '2.4~2.6g', nameEN: 'Protein' },
     { name: '炭水化物（食物繊維）', amount: '0.3~0.5g', nameEN: 'Carbohydrates (Dietary Fiber)' },
     { name: '脂質', amount: '0.1g未満', nameEN: 'Fat' },
