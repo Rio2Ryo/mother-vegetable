@@ -329,7 +329,7 @@ Characteristics of the raw materials:
   return (
     <>
       <motion.div
-        className="bg-black border-2 border-white rounded-lg p-4 md:p-8 my-5 md:my-5"
+        className="bg-black border-2 border-[#25c760] rounded-lg p-4 md:p-8 my-5 md:my-5"
         id="cosmetic-function"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

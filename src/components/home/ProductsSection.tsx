@@ -26,6 +26,7 @@ function getProducts(isJa: boolean) {
     {
       id: 'achieve',
       name: 'Achieve',
+      type: isJa ? '飲むタイプ' : 'Flesh Dry Protein',
       subtitle: isJa ? '身体のために' : 'for Body (Human & Animal)',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
       videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
@@ -39,6 +40,7 @@ function getProducts(isJa: boolean) {
     {
       id: 'confidence',
       name: 'Confidence',
+      type: isJa ? '肌に塗るタイプ' : 'Flesh Bridge Collagen',
       subtitle: isJa ? 'すべての肌に' : 'for All Skin (Human & Animal)',
       tagline: isJa ? '肌の気になるところに直接塗布' : 'Skin Healing Effect',
       videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
@@ -109,6 +111,7 @@ export default function ProductsSection() {
                   <h3 className="text-lg md:text-3xl font-bold" style={{ color: '#25c760' }}>
                     {product.name}
                   </h3>
+                  {product.type && <p className="text-white text-xs md:text-sm">{product.type}</p>}
                   <p className="text-green-400 text-xs md:text-sm">{product.subtitle}</p>
                 </div>
 
