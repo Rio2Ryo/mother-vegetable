@@ -29,7 +29,7 @@ function getProducts(isJa: boolean) {
       subtitle: isJa ? '飲むタイプ' : 'Drinkable Type',
       subName: 'Flesh Dry Protein',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
-      videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
+      videoUrl: '/new_achieve_video.mp4',
       features: isJa
         ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と']
         : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones'],
@@ -43,7 +43,7 @@ function getProducts(isJa: boolean) {
       subtitle: isJa ? '肌に塗るタイプ' : 'Topical Type',
       subName: 'Flesh Bridge Collagen',
       tagline: isJa ? '肌の気になるところに直接塗布' : 'Skin Healing Effect',
-      videoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
+      videoUrl: '/new_confidence_video.mp4',
       features: isJa
         ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用']
         : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics'],
