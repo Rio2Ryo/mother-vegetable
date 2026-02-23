@@ -13,92 +13,6 @@ export const metadata: Metadata = {
 /*  Healthcare / ALL 45E  –  Complete clinical product page            */
 /* ------------------------------------------------------------------ */
 
-/* ---------- static data ------------------------------------------- */
-
-const heroCards = [
-  {
-    value: '20-50%',
-    icon: 'users',
-    label: 'Nutritional gaps may occur',
-    sub: 'Reported ranges vary by cohort and screening criteria.',
-  },
-  {
-    value: 'Non-Synthetic',
-    icon: 'check',
-    label: 'Made from natural sources (no synthetics)',
-  },
-  {
-    value: 'Cofactor-Complete',
-    icon: 'heart',
-    label: '9 EAAs \u2022 13 Vitamins \u2022 16 Minerals',
-  },
-  {
-    value: 'Guideline-Informed',
-    icon: 'clipboard',
-    label: 'Supports micronutrient adequacy',
-  },
-];
-
-const purposeChecks = [
-  'Oral intake is limited, inconsistent, or inadequate',
-  'Metabolic demand is elevated due to acute illness, surgery, or physiological stress',
-  'Micronutrient adequacy is clinically indicated to support normal physiological function',
-];
-
-const purposeCards = [
-  { icon: 'hospital', text: 'Suboptimal Intake / Reduced Nutritional Intake' },
-  { icon: 'chart', text: 'Higher Metabolic Requirement' },
-  { icon: 'shield', text: 'Essential Micronutrient Support' },
-];
-
-const guidelineCards = [
-  {
-    title: 'ESPEN Micronutrient Guidelines',
-    text: 'Micronutrients, including vitamins and trace elements, should be provided from the start of nutrition therapy to prevent deficiency and support recovery.',
-    citation: 'Based on ESPEN practical clinical nutrition guidelines',
-  },
-  {
-    title: 'ASPEN Critical Care Guidance',
-    text: 'Standard feeding volumes may not fully meet micronutrient requirements, and supplementation may be necessary in critically ill patients.',
-    citation: 'Based on ASPEN clinical nutrition recommendations',
-  },
-  {
-    title: 'Surgery & ERAS Pathways',
-    text: 'Early nutritional support and adequate micronutrient intake are associated with reduced complications and improved postoperative recovery.',
-    citation: 'Based on ERAS perioperative nutrition principles',
-  },
-];
-
-const guidelineFits = [
-  { label: 'ERAS Perioperative Care', image: '/images/medical/benefit_1.png' },
-  { label: 'ICU and High-Risk Wards', image: '/images/medical/benefit_2.png' },
-  { label: 'Frailty and Sarcopenia Management', image: '/images/medical/benefit_3.png' },
-  { label: 'Wound Care and Pressure Injury Support', image: '/images/medical/benefit_4.png' },
-];
-
-const patientProfiles = [
-  { icon: 'clock', title: 'Post-Surgical Recovery', desc: 'Supports early oral intake and ERAS protocols' },
-  { icon: 'bed', title: 'Hospitalised or Immobilised Patients', desc: 'Bed rest, reduced mobility, or prolonged hospital stay' },
-  { icon: 'elderly', title: 'Older Adults & Frailty', desc: 'Reduced appetite, or nutritional vulnerability' },
-  { icon: 'doctor', title: 'Patients at Risk of Malnutrition', desc: 'Poor oral intake, nausea, or disease-related nutritional decline' },
-  { icon: 'heartPulse', title: 'Critical Care Recovery', desc: 'Recent ICU discharge or Higher nutrition needs' },
-  { icon: 'vial', title: 'Tube Feeding Adjunct', desc: 'Designed to complement ONS or EN regimens.' },
-];
-
-const benefitCards = [
-  { tag: 'Muscle Metabolism & Strength', desc: 'Leucine-rich EAAs stimulate muscle protein synthesis, especially important for older adults and immobilized patients.', image: '/images/medical/benefit_1.png' },
-  { tag: 'Safe, Natural, Non-Synthetic', desc: 'Designed for daily patient use with minimal risk and easy integration into existing feeding plans.', image: '/images/medical/benefit_2.png' },
-  { tag: 'Metabolic Energy Production', desc: 'B-vitamins + magnesium + iron \u2192 ATP creation and oxygen delivery.', image: '/images/medical/benefit_3.png' },
-  { tag: 'Wound & Tissue Repair', desc: 'Vitamin C, copper, zinc, lysine, and sulfur support collagen formation and antioxidant protection.', image: '/images/medical/benefit_4.png' },
-  { tag: 'Immune Stability', desc: 'Vitamin A, D, E, zinc, and selenium strengthen immune response pathways.', image: '/images/medical/benefit_5.png' },
-];
-
-
-const certDocuments = [
-  { label: 'JFRL Food Test Report', preview: '/Images/medical/pdf/cert/JFRL Food Test Preview.jpg', pdf: '/Images/medical/pdf/cert/JFRL Food Test Report.pdf' },
-  { label: 'Japan Import Permit', preview: '/Images/medical/pdf/cert/Japan Import Permit Preview.jpg', pdf: '/Images/medical/pdf/cert/Japan Import Permit.pdf' },
-];
-
 /* ---------- SVG icon helper (inline so no external dep) ----------- */
 
 function HeroIcon({ name }: { name: string }) {
@@ -174,6 +88,167 @@ export default async function HealthcarePage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const isJa = locale === 'ja';
+
+  /* ---------- localized static data -------------------------------- */
+
+  const heroCards = [
+    {
+      value: '20-50%',
+      icon: 'users',
+      label: isJa ? '栄養ギャップが生じる可能性' : 'Nutritional gaps may occur',
+      sub: isJa ? 'コホートやスクリーニング基準により報告範囲は異なります。' : 'Reported ranges vary by cohort and screening criteria.',
+    },
+    {
+      value: isJa ? '非合成' : 'Non-Synthetic',
+      icon: 'check',
+      label: isJa ? '天然由来成分のみ使用（合成品不使用）' : 'Made from natural sources (no synthetics)',
+    },
+    {
+      value: isJa ? 'コファクター完備' : 'Cofactor-Complete',
+      icon: 'heart',
+      label: isJa ? '必須アミノ酸9種 \u2022 ビタミン13種 \u2022 ミネラル16種' : '9 EAAs \u2022 13 Vitamins \u2022 16 Minerals',
+    },
+    {
+      value: isJa ? 'ガイドライン準拠' : 'Guideline-Informed',
+      icon: 'clipboard',
+      label: isJa ? '微量栄養素の充足をサポート' : 'Supports micronutrient adequacy',
+    },
+  ];
+
+  const purposeChecks = isJa
+    ? [
+        '経口摂取が制限、不安定、または不十分な場合',
+        '急性疾患、手術、または生理的ストレスにより代謝需要が増大している場合',
+        '正常な生理機能をサポートするために微量栄養素の充足が臨床的に適応される場合',
+      ]
+    : [
+        'Oral intake is limited, inconsistent, or inadequate',
+        'Metabolic demand is elevated due to acute illness, surgery, or physiological stress',
+        'Micronutrient adequacy is clinically indicated to support normal physiological function',
+      ];
+
+  const purposeCards = isJa
+    ? [
+        { icon: 'hospital', text: '不十分な摂取 / 栄養摂取の低下' },
+        { icon: 'chart', text: '代謝需要の増大' },
+        { icon: 'shield', text: '必須微量栄養素サポート' },
+      ]
+    : [
+        { icon: 'hospital', text: 'Suboptimal Intake / Reduced Nutritional Intake' },
+        { icon: 'chart', text: 'Higher Metabolic Requirement' },
+        { icon: 'shield', text: 'Essential Micronutrient Support' },
+      ];
+
+  const guidelineCards = isJa
+    ? [
+        {
+          title: 'ESPEN微量栄養素ガイドライン',
+          text: 'ビタミンや微量元素を含む微量栄養素は、欠乏を防ぎ回復を支援するために、栄養療法の開始時から提供されるべきです。',
+          citation: 'ESPEN臨床栄養ガイドラインに基づく',
+        },
+        {
+          title: 'ASPENクリティカルケアガイダンス',
+          text: '標準的な栄養投与量では微量栄養素の要件を完全に満たせない場合があり、重症患者では補充が必要になることがあります。',
+          citation: 'ASPEN臨床栄養推奨に基づく',
+        },
+        {
+          title: '手術・ERASパスウェイ',
+          text: '早期の栄養サポートと適切な微量栄養素摂取は、合併症の減少と術後回復の改善に関連しています。',
+          citation: 'ERAS周術期栄養原則に基づく',
+        },
+      ]
+    : [
+        {
+          title: 'ESPEN Micronutrient Guidelines',
+          text: 'Micronutrients, including vitamins and trace elements, should be provided from the start of nutrition therapy to prevent deficiency and support recovery.',
+          citation: 'Based on ESPEN practical clinical nutrition guidelines',
+        },
+        {
+          title: 'ASPEN Critical Care Guidance',
+          text: 'Standard feeding volumes may not fully meet micronutrient requirements, and supplementation may be necessary in critically ill patients.',
+          citation: 'Based on ASPEN clinical nutrition recommendations',
+        },
+        {
+          title: 'Surgery & ERAS Pathways',
+          text: 'Early nutritional support and adequate micronutrient intake are associated with reduced complications and improved postoperative recovery.',
+          citation: 'Based on ERAS perioperative nutrition principles',
+        },
+      ];
+
+  const guidelineFits = isJa
+    ? [
+        { label: 'ERAS周術期ケア', image: '/images/medical/benefit_1.png' },
+        { label: 'ICUおよびハイリスク病棟', image: '/images/medical/benefit_2.png' },
+        { label: 'フレイルとサルコペニア管理', image: '/images/medical/benefit_3.png' },
+        { label: '創傷ケアと褥瘡サポート', image: '/images/medical/benefit_4.png' },
+      ]
+    : [
+        { label: 'ERAS Perioperative Care', image: '/images/medical/benefit_1.png' },
+        { label: 'ICU and High-Risk Wards', image: '/images/medical/benefit_2.png' },
+        { label: 'Frailty and Sarcopenia Management', image: '/images/medical/benefit_3.png' },
+        { label: 'Wound Care and Pressure Injury Support', image: '/images/medical/benefit_4.png' },
+      ];
+
+  const patientProfiles = isJa
+    ? [
+        { icon: 'clock', title: '術後回復', desc: '早期経口摂取とERASプロトコルをサポート' },
+        { icon: 'bed', title: '入院中または安静中の患者', desc: '安静、活動制限、または長期入院' },
+        { icon: 'elderly', title: '高齢者とフレイル', desc: '食欲減退、または栄養的脆弱性' },
+        { icon: 'doctor', title: '栄養不良リスクのある患者', desc: '経口摂取不良、吐き気、または疾患関連の栄養低下' },
+        { icon: 'heartPulse', title: '集中治療後の回復', desc: 'ICU退室直後または高い栄養需要' },
+        { icon: 'vial', title: '経管栄養の補助', desc: 'ONSまたはEN療法を補完するよう設計' },
+      ]
+    : [
+        { icon: 'clock', title: 'Post-Surgical Recovery', desc: 'Supports early oral intake and ERAS protocols' },
+        { icon: 'bed', title: 'Hospitalised or Immobilised Patients', desc: 'Bed rest, reduced mobility, or prolonged hospital stay' },
+        { icon: 'elderly', title: 'Older Adults & Frailty', desc: 'Reduced appetite, or nutritional vulnerability' },
+        { icon: 'doctor', title: 'Patients at Risk of Malnutrition', desc: 'Poor oral intake, nausea, or disease-related nutritional decline' },
+        { icon: 'heartPulse', title: 'Critical Care Recovery', desc: 'Recent ICU discharge or Higher nutrition needs' },
+        { icon: 'vial', title: 'Tube Feeding Adjunct', desc: 'Designed to complement ONS or EN regimens.' },
+      ];
+
+  const benefitCards = isJa
+    ? [
+        { tag: '筋肉代謝と筋力', desc: 'ロイシンリッチな必須アミノ酸が筋タンパク質合成を促進し、特に高齢者や安静中の患者に重要です。', image: '/images/medical/benefit_1.png' },
+        { tag: '安全、天然、非合成', desc: '最小限のリスクで日常的な患者使用向けに設計され、既存の栄養計画に容易に統合できます。', image: '/images/medical/benefit_2.png' },
+        { tag: '代謝エネルギー生成', desc: 'ビタミンB群＋マグネシウム＋鉄 → ATP生成と酸素供給。', image: '/images/medical/benefit_3.png' },
+        { tag: '創傷・組織修復', desc: 'ビタミンC、銅、亜鉛、リジン、硫黄がコラーゲン形成と抗酸化保護をサポートします。', image: '/images/medical/benefit_4.png' },
+        { tag: '免疫安定性', desc: 'ビタミンA、D、E、亜鉛、セレンが免疫応答経路を強化します。', image: '/images/medical/benefit_5.png' },
+      ]
+    : [
+        { tag: 'Muscle Metabolism & Strength', desc: 'Leucine-rich EAAs stimulate muscle protein synthesis, especially important for older adults and immobilized patients.', image: '/images/medical/benefit_1.png' },
+        { tag: 'Safe, Natural, Non-Synthetic', desc: 'Designed for daily patient use with minimal risk and easy integration into existing feeding plans.', image: '/images/medical/benefit_2.png' },
+        { tag: 'Metabolic Energy Production', desc: 'B-vitamins + magnesium + iron \u2192 ATP creation and oxygen delivery.', image: '/images/medical/benefit_3.png' },
+        { tag: 'Wound & Tissue Repair', desc: 'Vitamin C, copper, zinc, lysine, and sulfur support collagen formation and antioxidant protection.', image: '/images/medical/benefit_4.png' },
+        { tag: 'Immune Stability', desc: 'Vitamin A, D, E, zinc, and selenium strengthen immune response pathways.', image: '/images/medical/benefit_5.png' },
+      ];
+
+  const certDocuments = isJa
+    ? [
+        { label: 'JFRL食品試験報告書', preview: '/Images/medical/pdf/cert/JFRL Food Test Preview.jpg', pdf: '/Images/medical/pdf/cert/JFRL Food Test Report.pdf' },
+        { label: '日本輸入許可証', preview: '/Images/medical/pdf/cert/Japan Import Permit Preview.jpg', pdf: '/Images/medical/pdf/cert/Japan Import Permit.pdf' },
+      ]
+    : [
+        { label: 'JFRL Food Test Report', preview: '/Images/medical/pdf/cert/JFRL Food Test Preview.jpg', pdf: '/Images/medical/pdf/cert/JFRL Food Test Report.pdf' },
+        { label: 'Japan Import Permit', preview: '/Images/medical/pdf/cert/Japan Import Permit Preview.jpg', pdf: '/Images/medical/pdf/cert/Japan Import Permit.pdf' },
+      ];
+
+  const blogEntries = isJa
+    ? [
+        { title: '回復リソースライブラリ', desc: '栄養が重要な理由と正しい摂り方を理解する', source: 'ESPEN Micronutrient Guideline (2022)' },
+        { title: '代謝・微量栄養素インサイト', desc: 'ビタミン、アミノ酸、体の回復メカニズムを解説する記事', source: 'ASPEN Critical Care Guidelines (ICU, 2020)' },
+        { title: '専門家の記事と研究', desc: '科学、回復、実際の患者ニーズをつなぐ知識', source: 'High-Leucine Essential Amino Acid Supplementation Study' },
+      ]
+    : [
+        { title: 'Your Recovery Resource Library', desc: 'Understand why nutrition matters\u2014and how to get it right', source: 'ESPEN Micronutrient Guideline (2022)' },
+        { title: 'Metabolic & Micronutrient Insights', desc: 'Articles explaining vitamins, amino acids, and how the body heals', source: 'ASPEN Critical Care Guidelines (ICU, 2020)' },
+        { title: 'Expert Articles & Research', desc: 'Knowledge that connects science, recovery, and real patient needs', source: 'High-Leucine Essential Amino Acid Supplementation Study' },
+      ];
+
+  const functionLabels = isJa
+    ? ['免疫防御', '細胞修復', 'コラーゲン形成', '筋タンパク質合成', 'エネルギー代謝']
+    : ['Immune Defense', 'Cellular Repair', 'Collagen Formation', 'Muscle Protein Synthesis', 'Energy Metabolism'];
 
   return (
     <div className="bg-white text-[#333] font-[Inter,sans-serif]">
@@ -207,18 +282,22 @@ export default async function HealthcarePage({
               Mother Vegetable | About
             </p>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-[1.1] mb-6">
-              ALL 45E:<br />
-              The Complete Cofactor Nutrition for Patient Recovery
+              {isJa ? (
+                <>ALL 45E:<br />患者回復のための完全コファクター栄養</>
+              ) : (
+                <>ALL 45E:<br />The Complete Cofactor Nutrition for Patient Recovery</>
+              )}
             </h1>
             <p className="text-base md:text-lg leading-relaxed text-[#333] mb-8 max-w-xl">
-              A natural, non-synthetic blend of all essential amino acids, vitamins and minerals designed to
-              support metabolic stability, tissue repair and immune function in hospitalised adults.
+              {isJa
+                ? '入院中の成人における代謝安定性、組織修復、免疫機能をサポートするために設計された、天然・非合成の必須アミノ酸、ビタミン、ミネラルのブレンドです。'
+                : 'A natural, non-synthetic blend of all essential amino acids, vitamins and minerals designed to support metabolic stability, tissue repair and immune function in hospitalised adults.'}
             </p>
             <a
               href="#what-is-all45e"
               className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-[#036A31] transition-colors"
             >
-              What is ALL 45E?
+              {isJa ? 'ALL 45Eとは？' : 'What is ALL 45E?'}
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
@@ -259,7 +338,9 @@ export default async function HealthcarePage({
               <svg className="ticker-star w-4 h-4 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
-              Clinical Nutrition &nbsp;|&nbsp; Perioperative Recovery &nbsp;|&nbsp; Critical Care &nbsp;|&nbsp; Geriatric Support &nbsp;|&nbsp; Wound Healing
+              {isJa
+                ? '臨床栄養 \u00a0|\u00a0 周術期回復 \u00a0|\u00a0 クリティカルケア \u00a0|\u00a0 高齢者サポート \u00a0|\u00a0 創傷治癒'
+                : 'Clinical Nutrition \u00a0|\u00a0 Perioperative Recovery \u00a0|\u00a0 Critical Care \u00a0|\u00a0 Geriatric Support \u00a0|\u00a0 Wound Healing'}
             </span>
           ))}
         </div>
@@ -273,14 +354,18 @@ export default async function HealthcarePage({
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left: text */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Clinical Purpose</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">
+                {isJa ? '臨床目的' : 'Clinical Purpose'}
+              </h2>
               <p className="text-base md:text-lg leading-relaxed mb-5">
-                ALL 45E is formulated to provide comprehensive micronutrient and essential amino acid support
-                where full nutritional coverage is required to aid recovery, maintain metabolic function, and
-                promote overall clinical stability.
+                {isJa
+                  ? 'ALL 45Eは、回復を助け、代謝機能を維持し、臨床的安定性を促進するために完全な栄養カバレッジが必要な場合に、包括的な微量栄養素と必須アミノ酸のサポートを提供するよう処方されています。'
+                  : 'ALL 45E is formulated to provide comprehensive micronutrient and essential amino acid support where full nutritional coverage is required to aid recovery, maintain metabolic function, and promote overall clinical stability.'}
               </p>
               <p className="text-base md:text-lg leading-relaxed mb-6">
-                It may be incorporated into a nutritional strategy in situations where:
+                {isJa
+                  ? '以下の状況において、栄養戦略に組み込むことができます：'
+                  : 'It may be incorporated into a nutritional strategy in situations where:'}
               </p>
 
               <div className="space-y-4">
@@ -314,7 +399,9 @@ export default async function HealthcarePage({
           {/* Footer quote */}
           <div className="mt-12 bg-[#f4f8f5] border border-[#036A31]/10 rounded-2xl p-6 md:p-8 text-center">
             <p className="text-base md:text-lg italic text-[#333] max-w-3xl mx-auto">
-              &ldquo;ALL 45E is designed to complement, not replace, standard clinical nutrition interventions.&rdquo;
+              {isJa
+                ? '\u201CALL 45Eは、標準的な臨床栄養介入を補完するものであり、代替するものではありません。\u201D'
+                : '\u201CALL 45E is designed to complement, not replace, standard clinical nutrition interventions.\u201D'}
             </p>
           </div>
         </div>
@@ -335,15 +422,24 @@ export default async function HealthcarePage({
         </div>
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-5 text-center text-white">
-          <p className="text-sm font-semibold tracking-widest text-[#BDF626] uppercase mb-4">Our Mission:</p>
+          <p className="text-sm font-semibold tracking-widest text-[#BDF626] uppercase mb-4">
+            {isJa ? '私たちのミッション：' : 'Our Mission:'}
+          </p>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-8 max-w-4xl mx-auto">
-            To provide the human body with every essential building block it needs &mdash; no more, no less.
+            {isJa
+              ? '人体に必要なすべてのビルディングブロックを過不足なく提供すること。'
+              : 'To provide the human body with every essential building block it needs \u2014 no more, no less.'}
           </h2>
           <div className="max-w-2xl mx-auto space-y-4 text-base md:text-lg text-white/90 leading-relaxed">
-            <p>At Mother Vegetable, we develop science-driven, natural raw materials for clinical nutrition.</p>
             <p>
-              Our formulations are designed to close daily nutritional gaps that silently compromise recovery,
-              particularly in hospital environments where intake is often unpredictable, insufficient or impaired.
+              {isJa
+                ? 'マザーベジタブルでは、臨床栄養のための科学的根拠に基づいた天然原料を開発しています。'
+                : 'At Mother Vegetable, we develop science-driven, natural raw materials for clinical nutrition.'}
+            </p>
+            <p>
+              {isJa
+                ? '当社の処方は、特に摂取が予測不能で不十分、または障害のある病院環境において、回復を静かに損なう日常的な栄養ギャップを埋めるよう設計されています。'
+                : 'Our formulations are designed to close daily nutritional gaps that silently compromise recovery, particularly in hospital environments where intake is often unpredictable, insufficient or impaired.'}
             </p>
           </div>
         </div>
@@ -358,34 +454,45 @@ export default async function HealthcarePage({
             {/* Left text */}
             <div>
               <p className="text-xs font-semibold tracking-widest text-[#036A31] uppercase mb-3">
-                Mother Vegetable | What is All 45E
+                {isJa ? 'Mother Vegetable | ALL 45Eとは' : 'Mother Vegetable | What is All 45E'}
               </p>
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">What Is ALL 45E?</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">
+                {isJa ? 'ALL 45Eとは？' : 'What Is ALL 45E?'}
+              </h2>
               <p className="text-base md:text-lg font-bold leading-relaxed mb-6">
-                ALL 45E is a cofactor-based medical nutrition formula designed to support metabolic recovery when
-                dietary intake does not meet physiological demands.
+                {isJa
+                  ? 'ALL 45Eは、食事摂取が生理的需要を満たさない場合に代謝回復をサポートするよう設計された、コファクターベースの医療栄養処方です。'
+                  : 'ALL 45E is a cofactor-based medical nutrition formula designed to support metabolic recovery when dietary intake does not meet physiological demands.'}
               </p>
               <p className="text-base md:text-lg leading-relaxed mb-6">
-                It provides a complete profile of essential amino acids, vitamins, and minerals to support protein
-                synthesis, energy metabolism, immune function, and cellular stability.
+                {isJa
+                  ? 'タンパク質合成、エネルギー代謝、免疫機能、細胞安定性をサポートするために、必須アミノ酸、ビタミン、ミネラルの完全なプロファイルを提供します。'
+                  : 'It provides a complete profile of essential amino acids, vitamins, and minerals to support protein synthesis, energy metabolism, immune function, and cellular stability.'}
               </p>
               <p className="text-base md:text-lg leading-relaxed">
-                ALL 45E is intended to help address clinically relevant micronutrient gaps commonly observed
-                following surgery, acute illness, or in older adults.
+                {isJa
+                  ? 'ALL 45Eは、手術後、急性疾患後、または高齢者に一般的に見られる臨床的に関連する微量栄養素ギャップに対処することを目的としています。'
+                  : 'ALL 45E is intended to help address clinically relevant micronutrient gaps commonly observed following surgery, acute illness, or in older adults.'}
               </p>
             </div>
 
             {/* Right: info box with floating labels */}
             <div className="relative bg-[#0B1F14] rounded-3xl p-8 md:p-10 min-h-[400px] flex flex-col justify-center">
               <div className="text-white space-y-4 mb-8">
-                <p className="text-base font-medium">ALL 45E does not replace calories or protein.</p>
+                <p className="text-base font-medium">
+                  {isJa
+                    ? 'ALL 45Eはカロリーやタンパク質を代替するものではありません。'
+                    : 'ALL 45E does not replace calories or protein.'}
+                </p>
                 <p className="text-base">
-                  Instead, it provides the essential micronutrient and amino acid foundation the body needs for:
+                  {isJa
+                    ? '代わりに、体が以下のために必要とする必須微量栄養素とアミノ酸の基盤を提供します：'
+                    : 'Instead, it provides the essential micronutrient and amino acid foundation the body needs for:'}
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-3">
-                {['Immune Defense', 'Cellular Repair', 'Collagen Formation', 'Muscle Protein Synthesis', 'Energy Metabolism'].map((label) => (
+                {functionLabels.map((label) => (
                   <span
                     key={label}
                     className="bg-[#BDF626] text-black text-xs md:text-sm font-semibold px-4 py-2 rounded-full"
@@ -406,10 +513,14 @@ export default async function HealthcarePage({
         <div className="max-w-[1400px] mx-auto px-5">
           <div className="text-center mb-12">
             <p className="text-xs font-semibold tracking-widest text-[#036A31] uppercase mb-3">
-              Mother Vegetable | Clinical Guidelines
+              {isJa ? 'Mother Vegetable | 臨床ガイドライン' : 'Mother Vegetable | Clinical Guidelines'}
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-4">Backed by Clinical Guidelines</h2>
-            <p className="text-base md:text-lg text-[#555]">ALL 45E aligns with major recommendations:</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
+              {isJa ? '臨床ガイドラインに裏付けられた' : 'Backed by Clinical Guidelines'}
+            </h2>
+            <p className="text-base md:text-lg text-[#555]">
+              {isJa ? 'ALL 45Eは主要な推奨事項に沿っています：' : 'ALL 45E aligns with major recommendations:'}
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
@@ -424,9 +535,13 @@ export default async function HealthcarePage({
 
           <div className="text-center mb-8">
             <p className="text-base text-[#555] mb-2">
-              Early nutrition is essential; micronutrient adequacy reduces complications and supports recovery.
+              {isJa
+                ? '早期の栄養は不可欠です。微量栄養素の充足は合併症を減らし、回復をサポートします。'
+                : 'Early nutrition is essential; micronutrient adequacy reduces complications and supports recovery.'}
             </p>
-            <p className="text-base font-bold">ALL 45E fits seamlessly into:</p>
+            <p className="text-base font-bold">
+              {isJa ? 'ALL 45Eは以下にシームレスに適合します：' : 'ALL 45E fits seamlessly into:'}
+            </p>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -454,8 +569,14 @@ export default async function HealthcarePage({
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-[1400px] mx-auto px-5">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-4">Indications &amp; Patient Profiles</h2>
-            <p className="text-base md:text-lg text-[#555]">ALL 45E may be considered for adult patients including:</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
+              {isJa ? '適応症と患者プロファイル' : 'Indications & Patient Profiles'}
+            </h2>
+            <p className="text-base md:text-lg text-[#555]">
+              {isJa
+                ? 'ALL 45Eは以下を含む成人患者に検討できます：'
+                : 'ALL 45E may be considered for adult patients including:'}
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -480,7 +601,9 @@ export default async function HealthcarePage({
       <section className="py-12 md:py-16 bg-[#f8faf8]">
         <div className="max-w-[1400px] mx-auto px-5">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-            <h2 className="text-2xl md:text-3xl font-extrabold">Certified By</h2>
+            <h2 className="text-2xl md:text-3xl font-extrabold">
+              {isJa ? '認証' : 'Certified By'}
+            </h2>
             <div className="flex items-center gap-8 md:gap-12">
               {['gmp', 'jfrl', 'haccp'].map((cert) => (
                 <Image
@@ -506,13 +629,15 @@ export default async function HealthcarePage({
             {/* Text card */}
             <div className="bg-[#0B1F14] text-white rounded-2xl p-8 md:p-10 flex flex-col justify-center lg:row-span-2">
               <p className="text-xs font-semibold tracking-widest text-[#BDF626] uppercase mb-3">
-                Mother Vegetable | Clinical Evidence
+                {isJa ? 'Mother Vegetable | 臨床エビデンス' : 'Mother Vegetable | Clinical Evidence'}
               </p>
               <h2 className="text-2xl md:text-3xl font-extrabold mb-6">
-                Clinical Benefits at a Glance
+                {isJa ? '臨床効果の概要' : 'Clinical Benefits at a Glance'}
               </h2>
               <p className="text-base text-white/80 leading-relaxed mb-6">
-                ALL 45E provides the essential nutritional foundation required for metabolic function, recovery, and clinical stability.
+                {isJa
+                  ? 'ALL 45Eは、代謝機能、回復、臨床的安定性に必要な必須栄養基盤を提供します。'
+                  : 'ALL 45E provides the essential nutritional foundation required for metabolic function, recovery, and clinical stability.'}
               </p>
               <ul className="space-y-3">
                 {benefitCards.map((b) => (
@@ -553,10 +678,16 @@ export default async function HealthcarePage({
         <div className="max-w-[1400px] mx-auto px-5 md:px-16 lg:px-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
-              International Guidelines &amp;<br />Published Clinical Research
+              {isJa ? (
+                <>国際ガイドラインと<br />公表された臨床研究</>
+              ) : (
+                <>International Guidelines &amp;<br />Published Clinical Research</>
+              )}
             </h2>
             <p className="text-base md:text-lg text-[#555] max-w-3xl mx-auto">
-              ALL 45E aligns with ESPEN, ASPEN, and ERAS guidelines supporting micronutrient adequacy for recovery.
+              {isJa
+                ? 'ALL 45Eは、回復のための微量栄養素の充足を支持するESPEN、ASPEN、ERASガイドラインに沿っています。'
+                : 'ALL 45E aligns with ESPEN, ASPEN, and ERAS guidelines supporting micronutrient adequacy for recovery.'}
             </p>
           </div>
 
@@ -572,36 +703,54 @@ export default async function HealthcarePage({
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left text */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">What&apos;s Inside ALL 45E</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">
+                {isJa ? 'ALL 45Eの成分' : 'What\u0027s Inside ALL 45E'}
+              </h2>
               <p className="text-base md:text-lg leading-relaxed mb-4">
-                ALL 45E is formulated to provide a complete profile of essential amino acids, vitamins, and minerals to support metabolic recovery.
+                {isJa
+                  ? 'ALL 45Eは、代謝回復をサポートするために、必須アミノ酸、ビタミン、ミネラルの完全なプロファイルを提供するよう処方されています。'
+                  : 'ALL 45E is formulated to provide a complete profile of essential amino acids, vitamins, and minerals to support metabolic recovery.'}
               </p>
               <p className="text-base md:text-lg leading-relaxed mb-8">
-                Each nutrient is selected for a defined physiological function&mdash;supporting energy metabolism, enzyme activation, immune stability, and tissue repair.
+                {isJa
+                  ? '各栄養素は、エネルギー代謝、酵素活性化、免疫安定性、組織修復をサポートする定義された生理的機能のために選択されています。'
+                  : 'Each nutrient is selected for a defined physiological function\u2014supporting energy metabolism, enzyme activation, immune stability, and tissue repair.'}
               </p>
 
-              <h3 className="text-lg font-bold mb-4">Key Ingredients &amp; Nutrient Groups</h3>
+              <h3 className="text-lg font-bold mb-4">
+                {isJa ? '主要成分・栄養素グループ' : 'Key Ingredients & Nutrient Groups'}
+              </h3>
 
               <div className="space-y-5">
                 <div>
-                  <p className="font-bold text-base mb-1">&bull; Essential Amino Acids (EAAs)</p>
+                  <p className="font-bold text-base mb-1">
+                    {isJa ? '\u2022 必須アミノ酸（EAA）' : '\u2022 Essential Amino Acids (EAAs)'}
+                  </p>
                   <p className="text-sm text-[#555] leading-relaxed">
-                    Leucine, Isoleucine, Valine, Lysine, Threonine, Methionine, Phenylalanine, Tryptophan, Histidine
+                    {isJa
+                      ? 'ロイシン、イソロイシン、バリン、リジン、スレオニン、メチオニン、フェニルアラニン、トリプトファン、ヒスチジン'
+                      : 'Leucine, Isoleucine, Valine, Lysine, Threonine, Methionine, Phenylalanine, Tryptophan, Histidine'}
                   </p>
                 </div>
                 <div>
-                  <p className="font-bold text-base mb-1">&bull; Vitamins</p>
+                  <p className="font-bold text-base mb-1">
+                    {isJa ? '\u2022 ビタミン' : '\u2022 Vitamins'}
+                  </p>
                   <p className="text-sm text-[#555] leading-relaxed mb-1">
-                    Vitamins A, C, D, E, K
+                    {isJa ? 'ビタミンA、C、D、E、K' : 'Vitamins A, C, D, E, K'}
                   </p>
                   <p className="text-sm text-[#555] leading-relaxed">
-                    B-complex vitamins (B1, B2, B3, B5, B6, B7, B9, B12)
+                    {isJa ? 'ビタミンB群（B1、B2、B3、B5、B6、B7、B9、B12）' : 'B-complex vitamins (B1, B2, B3, B5, B6, B7, B9, B12)'}
                   </p>
                 </div>
                 <div>
-                  <p className="font-bold text-base mb-1">&bull; Minerals &amp; Trace Elements</p>
+                  <p className="font-bold text-base mb-1">
+                    {isJa ? '\u2022 ミネラル・微量元素' : '\u2022 Minerals & Trace Elements'}
+                  </p>
                   <p className="text-sm text-[#555] leading-relaxed">
-                    Calcium, Magnesium, Zinc, Iron, Selenium, Copper, Iodine, Manganese, Chromium, Molybdenum
+                    {isJa
+                      ? 'カルシウム、マグネシウム、亜鉛、鉄、セレン、銅、ヨウ素、マンガン、クロム、モリブデン'
+                      : 'Calcium, Magnesium, Zinc, Iron, Selenium, Copper, Iodine, Manganese, Chromium, Molybdenum'}
                   </p>
                 </div>
               </div>
@@ -617,10 +766,14 @@ export default async function HealthcarePage({
               />
               {/* Overlays */}
               <div className="absolute top-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-xl p-4 text-sm leading-relaxed">
-                Each component in ALL 45E serves a defined metabolic role, supporting biochemical pathways essential for recovery.
+                {isJa
+                  ? 'ALL 45Eの各成分は、回復に不可欠な生化学的経路をサポートする定義された代謝的役割を果たします。'
+                  : 'Each component in ALL 45E serves a defined metabolic role, supporting biochemical pathways essential for recovery.'}
               </div>
               <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-xl p-4 text-sm leading-relaxed text-center">
-                Non-synthetic micronutrients &bull; Suitable for vegetarian diets &bull; Designed for clinical nutrition support
+                {isJa
+                  ? '非合成微量栄養素 \u2022 ベジタリアン対応 \u2022 臨床栄養サポート用に設計'
+                  : 'Non-synthetic micronutrients \u2022 Suitable for vegetarian diets \u2022 Designed for clinical nutrition support'}
               </div>
             </div>
           </div>
@@ -634,17 +787,18 @@ export default async function HealthcarePage({
         <div className="max-w-[1400px] mx-auto px-5">
           <div className="text-center mb-12">
             <p className="text-xs font-semibold tracking-widest text-[#036A31] uppercase mb-3">
-              Mother Vegetable | Certificate
+              {isJa ? 'Mother Vegetable | 認証' : 'Mother Vegetable | Certificate'}
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold mb-4 inline-flex items-center gap-3">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#036A31]">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
-              Quality, Safety &amp; Certifications
+              {isJa ? '品質、安全性、認証' : 'Quality, Safety & Certifications'}
             </h2>
             <p className="text-base md:text-lg text-[#555] max-w-3xl mx-auto">
-              ALL 45E is manufactured under a structured quality and safety framework designed to support
-              consistency, traceability, and institutional requirements.
+              {isJa
+                ? 'ALL 45Eは、一貫性、トレーサビリティ、施設要件をサポートするよう設計された構造化された品質・安全性フレームワークの下で製造されています。'
+                : 'ALL 45E is manufactured under a structured quality and safety framework designed to support consistency, traceability, and institutional requirements.'}
             </p>
           </div>
 
@@ -669,7 +823,7 @@ export default async function HealthcarePage({
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
                     <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white text-black text-sm font-semibold px-4 py-2 rounded-full flex items-center gap-2">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
-                      View
+                      {isJa ? '表示' : 'View'}
                     </span>
                   </div>
                 </div>
@@ -682,8 +836,11 @@ export default async function HealthcarePage({
 
           <div className="text-center">
             <p className="text-sm text-gray-400 italic max-w-xl mx-auto">
-              Intended for healthcare professional use.<br />
-              Application should follow institutional protocols and clinical judgment.
+              {isJa ? (
+                <>医療専門家向けです。<br />適用は施設のプロトコルと臨床判断に従ってください。</>
+              ) : (
+                <>Intended for healthcare professional use.<br />Application should follow institutional protocols and clinical judgment.</>
+              )}
             </p>
           </div>
         </div>
@@ -697,23 +854,23 @@ export default async function HealthcarePage({
           <div className="flex items-end justify-between mb-10">
             <div>
               <p className="text-xs font-semibold tracking-widest text-[#036A31] uppercase mb-2">
-                Mother Vegetable | News &amp; Blog
+                {isJa ? 'Mother Vegetable | ニュース＆ブログ' : 'Mother Vegetable | News & Blog'}
               </p>
               <h2 className="text-3xl md:text-4xl font-extrabold">
-                Our Latest<br />News &amp; Blog
+                {isJa ? (
+                  <>最新ニュース<br />＆ブログ</>
+                ) : (
+                  <>Our Latest<br />News &amp; Blog</>
+                )}
               </h2>
             </div>
             <a href="#" className="text-sm font-semibold text-[#036A31] hover:underline hidden md:inline-flex items-center gap-1">
-              View All Blog &rarr;
+              {isJa ? 'すべてのブログを見る \u2192' : 'View All Blog \u2192'}
             </a>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { title: 'Your Recovery Resource Library', desc: 'Understand why nutrition matters\u2014and how to get it right', source: 'ESPEN Micronutrient Guideline (2022)' },
-              { title: 'Metabolic & Micronutrient Insights', desc: 'Articles explaining vitamins, amino acids, and how the body heals', source: 'ASPEN Critical Care Guidelines (ICU, 2020)' },
-              { title: 'Expert Articles & Research', desc: 'Knowledge that connects science, recovery, and real patient needs', source: 'High-Leucine Essential Amino Acid Supplementation Study' },
-            ].map((blog) => (
+            {blogEntries.map((blog) => (
               <div key={blog.title} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                 <div className="h-48 bg-gray-100">
                   <Image
@@ -732,10 +889,10 @@ export default async function HealthcarePage({
                   <h3 className="text-base font-bold mb-2">{blog.title}</h3>
                   <p className="text-sm text-[#555] mb-3">{blog.desc}</p>
                   <a href="#" className="text-[#036A31] text-sm font-semibold hover:underline">
-                    Read More &rarr;
+                    {isJa ? '続きを読む \u2192' : 'Read More \u2192'}
                   </a>
                   <p className="text-[10px] text-gray-400 mt-1">
-                    Source: &ldquo;{blog.source}&rdquo;
+                    {isJa ? '出典' : 'Source'}: &ldquo;{blog.source}&rdquo;
                   </p>
                 </div>
               </div>

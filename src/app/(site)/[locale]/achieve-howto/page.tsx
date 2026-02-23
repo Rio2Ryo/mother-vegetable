@@ -495,17 +495,10 @@ const indianCurryDessertRecipes: Recipe[] = [
   },
 ];
 
-const categories: RecipeCategory[] = [
-  { name: 'Drinks', recipes: drinkRecipes },
-  { name: 'Japanese Cuisine', recipes: japaneseCuisineRecipes },
-  { name: 'Japanese Cuisine (Continued)', recipes: japaneseContinuedRecipes },
-  { name: 'Western / European', recipes: westernRecipes },
-  { name: 'Chinese', recipes: chineseRecipes },
-  { name: 'Korean', recipes: koreanRecipes },
-  { name: 'Indian / Curry / Dessert', recipes: indianCurryDessertRecipes },
-];
+function RecipeCard({ recipe, isJa }: { recipe: Recipe; isJa: boolean }) {
+  const lightLabel = isJa ? '薄めの色味の推奨量' : recipe.light.label;
+  const strongLabel = isJa ? '濃いめの色味の推奨量' : recipe.strong.label;
 
-function RecipeCard({ recipe }: { recipe: Recipe }) {
   return (
     <div className="bg-black border border-[#25C760] rounded-xl overflow-hidden mb-6">
       <div className="flex flex-col md:flex-row">
@@ -525,13 +518,13 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
           <p className="text-[#25C760] font-semibold text-sm md:text-base mb-4">{recipe.description}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-black/50 border border-[#25C760]/30 rounded-lg p-3">
-              <p className="text-[#25C760]/80 font-semibold text-xs mb-2">{recipe.light.label}</p>
+              <p className="text-[#25C760]/80 font-semibold text-xs mb-2">{lightLabel}</p>
               {recipe.light.items.map((item, i) => (
                 <p key={i} className="text-white text-sm leading-relaxed">{item}</p>
               ))}
             </div>
             <div className="bg-black/50 border border-[#25C760]/30 rounded-lg p-3">
-              <p className="text-[#25C760]/80 font-semibold text-xs mb-2">{recipe.strong.label}</p>
+              <p className="text-[#25C760]/80 font-semibold text-xs mb-2">{strongLabel}</p>
               {recipe.strong.items.map((item, i) => (
                 <p key={i} className="text-white text-sm leading-relaxed">{item}</p>
               ))}
@@ -549,11 +542,37 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
 export default async function AchieveHowToPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const isJa = locale === 'ja';
+
+  const categories: RecipeCategory[] = [
+    { name: isJa ? 'ドリンク' : 'Drinks', recipes: drinkRecipes },
+    { name: isJa ? '和食' : 'Japanese Cuisine', recipes: japaneseCuisineRecipes },
+    { name: isJa ? '和食（続き）' : 'Japanese Cuisine (Continued)', recipes: japaneseContinuedRecipes },
+    { name: isJa ? '洋食 / ヨーロッパ料理' : 'Western / European', recipes: westernRecipes },
+    { name: isJa ? '中華' : 'Chinese', recipes: chineseRecipes },
+    { name: isJa ? '韓国料理' : 'Korean', recipes: koreanRecipes },
+    { name: isJa ? 'インド / カレー / デザート' : 'Indian / Curry / Dessert', recipes: indianCurryDessertRecipes },
+  ];
+
+  const introFoodItems = [
+    { name: isJa ? '水' : 'Water', image: '/Images/Assets/achieve/mazekomu/water_green.png' },
+    { name: isJa ? 'ジュース' : 'Juice', image: '/Images/Assets/achieve/mazekomu/juice.png' },
+    { name: isJa ? 'コーラ' : 'Cola', image: '/Images/Assets/achieve/mazekomu/cola.png' },
+    { name: isJa ? 'ビール' : 'Beer', image: '/Images/Assets/achieve/mazekomu/beer.png' },
+    { name: isJa ? 'ヨーグルト' : 'Yogurt', image: '/Images/Assets/achieve/mazekomu/yogurt.png' },
+    { name: isJa ? 'サラダ' : 'Salad', image: '/Images/Assets/achieve/mazekomu/salad.png' },
+    { name: isJa ? 'パスタ' : 'Pasta', image: '/Images/Assets/achieve/mazekomu/pasta.png' },
+    { name: isJa ? 'ラーメン' : 'Ramen', image: '/Images/Assets/achieve/mazekomu/ramen.png' },
+    { name: isJa ? 'チャーハン' : 'Fried Rice', image: '/Images/Assets/achieve/mazekomu/friedRice.png' },
+    { name: isJa ? '天ぷら' : 'Tempura', image: '/Images/Assets/achieve/mazekomu/tempura.png' },
+    { name: isJa ? 'ハイボール' : 'Highball', image: '/Images/Assets/achieve/mazekomu/highball.png' },
+    { name: isJa ? '白ワイン' : 'White Wine', image: '/Images/Assets/achieve/mazekomu/whiteWine.png' },
+  ];
 
   return (
     <div className="bg-black min-h-screen py-8">
       <div className="max-w-[1400px] mx-auto px-5">
-        <h1 className="text-center font-bold text-3xl md:text-4xl text-[#25C760] tracking-wider mb-2">How to Use Achieve</h1>
+        <h1 className="text-center font-bold text-3xl md:text-4xl text-[#25C760] tracking-wider mb-2">{isJa ? 'Achieveの使い方' : 'How to Use Achieve'}</h1>
         <Image src="/Images/Assets/homepage/underline.png" alt="Underline" width={250} height={10} className="mx-auto mb-8 max-w-[80%] h-auto drop-shadow-[0_0_15px_rgba(37,199,96,0.5)]" />
 
         {/* Hero Product Image */}
@@ -571,25 +590,14 @@ export default async function AchieveHowToPage({ params }: { params: Promise<{ l
         <div className="bg-black border border-[#25C760] rounded-xl p-6 md:p-8 mb-8">
           <div className="flex flex-col md:flex-row gap-6">
             <div className="flex-1">
-              <h2 className="text-white font-bold text-xl mb-4">How to Take In</h2>
+              <h2 className="text-white font-bold text-xl mb-4">{isJa ? '摂取方法' : 'How to Take In'}</h2>
               <p className="text-white text-sm leading-relaxed opacity-90 mb-4">
-                Simply open one stick of Achieve and mix it into your favorite drink or meal. The powder dissolves easily and blends naturally, allowing you to take in all 48 essential nutrients without changing the taste of your food or drink.
+                {isJa
+                  ? 'Achieveのスティックを1本開けて、お好みの飲み物やお食事に混ぜるだけ。パウダーは簡単に溶け、自然になじむので、食べ物や飲み物の味を変えることなく48種の必須栄養素を摂取できます。'
+                  : 'Simply open one stick of Achieve and mix it into your favorite drink or meal. The powder dissolves easily and blends naturally, allowing you to take in all 48 essential nutrients without changing the taste of your food or drink.'}
               </p>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 mt-6">
-                {[
-                  { name: 'Water', image: '/Images/Assets/achieve/mazekomu/water_green.png' },
-                  { name: 'Juice', image: '/Images/Assets/achieve/mazekomu/juice.png' },
-                  { name: 'Cola', image: '/Images/Assets/achieve/mazekomu/cola.png' },
-                  { name: 'Beer', image: '/Images/Assets/achieve/mazekomu/beer.png' },
-                  { name: 'Yogurt', image: '/Images/Assets/achieve/mazekomu/yogurt.png' },
-                  { name: 'Salad', image: '/Images/Assets/achieve/mazekomu/salad.png' },
-                  { name: 'Pasta', image: '/Images/Assets/achieve/mazekomu/pasta.png' },
-                  { name: 'Ramen', image: '/Images/Assets/achieve/mazekomu/ramen.png' },
-                  { name: 'Fried Rice', image: '/Images/Assets/achieve/mazekomu/friedRice.png' },
-                  { name: 'Tempura', image: '/Images/Assets/achieve/mazekomu/tempura.png' },
-                  { name: 'Highball', image: '/Images/Assets/achieve/mazekomu/highball.png' },
-                  { name: 'White Wine', image: '/Images/Assets/achieve/mazekomu/whiteWine.png' },
-                ].map((item) => (
+                {introFoodItems.map((item) => (
                   <div key={item.name} className="flex flex-col items-center gap-2">
                     <Image src={item.image} alt={item.name} width={60} height={60} className="w-15 h-15 object-contain" />
                     <span className="text-white text-xs text-center">{item.name}</span>
@@ -621,7 +629,7 @@ export default async function AchieveHowToPage({ params }: { params: Promise<{ l
             </h3>
 
             {category.recipes.map((recipe) => (
-              <RecipeCard key={recipe.title} recipe={recipe} />
+              <RecipeCard key={recipe.title} recipe={recipe} isJa={isJa} />
             ))}
           </div>
         ))}
@@ -632,7 +640,7 @@ export default async function AchieveHowToPage({ params }: { params: Promise<{ l
             href="/product/achieve"
             className="inline-block bg-white text-black font-semibold py-3 px-8 rounded-lg no-underline hover:bg-[#25C760] hover:text-white transition-all duration-300"
           >
-            To Buy Achieve
+            {isJa ? 'Achieveを購入する' : 'To Buy Achieve'}
           </a>
         </div>
 
