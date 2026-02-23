@@ -340,7 +340,7 @@ Characteristics of the raw materials:
         <h2 className="text-xl md:text-5xl font-bold text-center mb-1 md:mb-2" style={{ color: '#25c760' }}>
           Cosmetic Function
         </h2>
-        <p className="text-sm md:text-2xl text-center mb-2 md:mb-4 text-white">
+        <p className="text-sm md:text-2xl text-center mb-2 md:mb-4" style={{ color: '#25c760' }}>
           {isJa ? '肌に塗るタイプのMother Vegetable' : 'Mother Vegetable for Skin Application'}
         </p>
         <p className="text-center text-white text-base md:text-xl mb-4">Confidence</p>
