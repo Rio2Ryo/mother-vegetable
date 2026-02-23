@@ -111,7 +111,7 @@ export default function ProductsSection() {
                   <h3 className="text-lg md:text-3xl font-bold" style={{ color: '#25c760' }}>
                     {product.name}
                   </h3>
-                  {product.type && <p className="text-white text-xs md:text-sm">{product.type}</p>}
+                  {product.type && <p className="text-xs md:text-sm" style={{ color: '#05df72' }}>{product.type}</p>}
                   <p className="text-green-400 text-xs md:text-sm">{product.subtitle}</p>
                 </div>
 
