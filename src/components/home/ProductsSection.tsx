@@ -118,7 +118,7 @@ export default function ProductsSection() {
                 {/* Features */}
                 <div className="space-y-1 mb-2 mt-5">
                   {product.features.map((feature, idx) => (
-                    <p key={idx} className="text-white text-[10px] md:text-lg flex items-start">
+                    <p key={idx} className="text-white text-[10px] md:text-lg flex items-start md:justify-center">
                       <span className="text-green-400 mr-1 md:mr-2">{'\u2713'}</span>
                       {feature}
                     </p>
