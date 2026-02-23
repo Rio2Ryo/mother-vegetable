@@ -336,13 +336,13 @@ Explain the expected effects from this ingredient group in the following areas:
         <div className="flex flex-col items-center gap-4 mb-8">
           <button
             onClick={handleCopy}
-            className="group flex items-center gap-2 md:gap-3 px-4 py-3 md:px-10 md:py-5 rounded-2xl font-bold text-[2.8vw] md:text-lg transition-all duration-300 hover:scale-105 border-2 border-[#25c760] bg-transparent hover:bg-[#25c760]/10"
+            className="group flex flex-col items-center gap-2 md:gap-3 px-6 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-xs md:text-lg transition-all duration-300 hover:scale-105 border-2 border-[#25c760] bg-transparent hover:bg-[#25c760]/10"
             style={{ color: '#25c760' }}
           >
-            <svg className="w-auto h-[3em] md:h-[2.5em] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
             </svg>
-            <span className="text-left">
+            <span className="text-center">
               {isJa ? (<>タップして上記成分を<br className="md:hidden" />クリップボードにコピーし<br />以下のボタンからAIに質問する</>) : (<>Tap to copy ingredients to clipboard<br />and ask AI using the buttons below</>)}
             </span>
           </button>
