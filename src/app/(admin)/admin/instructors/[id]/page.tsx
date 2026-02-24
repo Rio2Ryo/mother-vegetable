@@ -4,7 +4,7 @@ import { useEffect, useState, use } from "react";
 import Link from "next/link";
 import { ArrowLeft, Copy, Check, ExternalLink } from "lucide-react";
 import type { Instructor, Order } from "@/types/admin";
-import { getInstructorById } from "@/lib/admin-data";
+import { getInstructorById, updateInstructorStatus } from "@/lib/admin-data";
 import StatusBadge from "@/components/admin/StatusBadge";
 
 // Extended instructor detail from the API
@@ -59,6 +59,7 @@ export default function InstructorDetailPage({
   );
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [updating, setUpdating] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -79,6 +80,31 @@ export default function InstructorDetailPage({
     await navigator.clipboard.writeText(instructor.referralUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  }
+
+  async function handleStatusChange(
+    newStatus: "active" | "inactive" | "canceled"
+  ) {
+    if (!instructor) return;
+    setUpdating(true);
+    try {
+      const result = await updateInstructorStatus(instructor.id, newStatus);
+      setInstructor((prev) =>
+        prev
+          ? {
+              ...prev,
+              subscriptionStatus: result.subscriptionStatus,
+              status: result.status as "active" | "pending" | "inactive",
+            }
+          : prev
+      );
+    } catch (err) {
+      alert(
+        err instanceof Error ? err.message : "Failed to update status"
+      );
+    } finally {
+      setUpdating(false);
+    }
   }
 
   if (error) {
@@ -156,7 +182,27 @@ export default function InstructorDetailPage({
             })}
           </p>
         </div>
-        <StatusBadge status={instructor.status} />
+        <div className="flex items-center gap-2">
+          <StatusBadge status={instructor.status} />
+          {instructor.status !== "active" && (
+            <button
+              onClick={() => handleStatusChange("active")}
+              disabled={updating}
+              className="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-700 disabled:opacity-50"
+            >
+              Approve
+            </button>
+          )}
+          {instructor.status === "active" && (
+            <button
+              onClick={() => handleStatusChange("inactive")}
+              disabled={updating}
+              className="rounded-lg bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-50"
+            >
+              Deactivate
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">

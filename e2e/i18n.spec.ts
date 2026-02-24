@@ -51,9 +51,9 @@ test.describe('Internationalization (i18n)', () => {
         await page.waitForTimeout(400);
       }
 
-      // Header nav labels are not translated (always English)
-      await expect(page.locator('header').getByText('Food')).toBeVisible();
-      await expect(page.locator('header').getByText('Cosmetic')).toBeVisible();
+      // Header nav labels are now translated
+      await expect(page.locator('header').getByText('フード')).toBeVisible();
+      await expect(page.locator('header').getByText('コスメ')).toBeVisible();
     });
 
     test('product page loads with Japanese locale', async ({ page }) => {
@@ -103,9 +103,9 @@ test.describe('Internationalization (i18n)', () => {
         await page.waitForTimeout(400);
       }
 
-      // Header nav labels are not translated (always English)
-      await expect(page.locator('header').getByText('Food')).toBeVisible();
-      await expect(page.locator('header').getByText('Cosmetic')).toBeVisible();
+      // Header nav labels are now translated
+      await expect(page.locator('header').getByText('食品')).toBeVisible();
+      await expect(page.locator('header').getByText('化妆品')).toBeVisible();
     });
 
     test('URL has /zh prefix', async ({ page }) => {
@@ -146,13 +146,13 @@ test.describe('Internationalization (i18n)', () => {
       await waitForPageReady(page);
 
       // Navigate to a product page via Products dropdown
-      // Header nav is always English, so use English text
+      // Header nav is now translated per locale
       if (await page.viewportSize()!.width < 768) {
         await page.locator('header button').last().click();
         await page.waitForTimeout(400);
       }
 
-      const productsBtn = page.locator('header button', { hasText: 'Products' });
+      const productsBtn = page.locator('header button', { hasText: '製品' });
       await productsBtn.click();
       await page.waitForTimeout(300);
 

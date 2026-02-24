@@ -7,13 +7,16 @@
     "certifiedInstructor": "Certified Instructor",
     "healthcare": "Healthcare",
     "forHospital": "For Hospital",
-    "login": "Login",
+    "login": "LOGIN",
     "signup": "Sign Up",
+    "signUp": "Sign Up",
     "achieve": "Achieve",
     "confidence": "Confidence",
     "logout": "Logout",
     "dashboard": "Dashboard",
-    "instructorPortal": "Instructor Portal"
+    "instructorPortal": "Instructor Portal",
+    "orderHistory": "Order History",
+    "myCourses": "My Courses"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -97,7 +100,12 @@
     "companyTitle": "Company",
     "accountTitle": "Account",
     "groupTitle": "Mother Vegetable Group",
-    "copyright": "© {year} Mother Vegetable. All rights reserved."
+    "copyright": "© {year} Mother Vegetable. All rights reserved.",
+    "companyName": "Mother Vegetable Group",
+    "officialPage": "Official Page",
+    "privacyPolicy": "Privacy Policy",
+    "termsAndConditions": "Terms and Conditions",
+    "allRightsReserved": "All rights reserved."
   },
   "cart": {
     "title": "My Cart",

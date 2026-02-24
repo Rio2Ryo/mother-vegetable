@@ -1,7 +1,11 @@
+'use client';
+
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
+  const t = useTranslations('footer');
   return (
     <footer role="contentinfo" aria-label="Site footer" className="bg-black border-t-2 border-[#25C760] py-10 mt-20 max-md:py-[30px] max-md:mt-[60px] max-[480px]:py-[25px] max-[480px]:mt-10">
       <div className="max-w-[1400px] mx-auto px-5 text-center max-md:px-[15px]">
@@ -22,7 +26,7 @@ export default function Footer() {
             className="text-[#25C760] text-[clamp(10px,1.2vw,14px)] font-medium tracking-[-0.025em] m-0 max-md:text-[clamp(9px,2vw,12px)]"
             style={{ fontFamily: 'Arial, sans-serif' }}
           >
-            Mother Vegetable Group
+            {t('companyName')}
           </p>
 
           {/* Official Page link */}
@@ -36,7 +40,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-inherit no-underline"
             >
-              Official Page
+              {t('officialPage')}
             </a>
           </p>
 
@@ -64,11 +68,11 @@ export default function Footer() {
             style={{ fontFamily: 'Arial, sans-serif' }}
           >
             <Link href="/privacy" className="text-[#25C760] no-underline hover:underline">
-              Privacy Policy
+              {t('privacyPolicy')}
             </Link>
             {' | '}
             <Link href="/terms" className="text-[#25C760] no-underline hover:underline">
-              Terms and Conditions
+              {t('termsAndConditions')}
             </Link>
           </span>
 
@@ -83,7 +87,7 @@ export default function Footer() {
             className="text-white text-[clamp(10px,1.2vw,14px)] font-normal tracking-[-0.025em] m-0 leading-[1.4] opacity-80 -mt-2 max-md:text-[clamp(9px,2vw,12px)] max-[480px]:text-xs"
             style={{ fontFamily: 'Arial, sans-serif', color: '#25C760' }}
           >
-            All rights reserved.
+            {t('allRightsReserved')}
           </p>
         </div>
       </div>
