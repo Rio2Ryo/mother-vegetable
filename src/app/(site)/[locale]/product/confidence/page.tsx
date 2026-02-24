@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     description: 'Natural skin healing cream for all skin types.',
     images: [{ url: '/cdn/products_confidence_10001.png', width: 800, height: 800, alt: 'Mother Vegetable Confidence' }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mother Vegetable Confidence — Skin Healing Effect',
+    description: 'Natural skin healing cream for all skin types.',
+  },
 };
 
 function getConfidenceProduct(locale: string): ProductPageData {

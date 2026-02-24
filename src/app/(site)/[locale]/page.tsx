@@ -1,6 +1,8 @@
+import { Suspense } from 'react';
 import { setRequestLocale } from 'next-intl/server';
 import HeroSection from '@/components/home/HeroSection';
 import ProductsSection from '@/components/home/ProductsSection';
+import ProductsSkeleton from '@/components/home/ProductsSkeleton';
 import NewsSection from '@/components/home/NewsSection';
 import TrustSection from '@/components/home/TrustSection';
 import FoodFunctionSection from '@/components/home/FoodFunctionSection';
@@ -15,7 +17,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <HeroSection />
       <section className="bg-black py-12 md:py-24">
         <div className="max-w-[1500px] mx-auto px-5">
-          <ProductsSection />
+          <Suspense fallback={<ProductsSkeleton />}>
+            <ProductsSection />
+          </Suspense>
           <NewsSection />
           <TrustSection />
           <FoodFunctionSection />

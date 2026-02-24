@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     description: 'Natural supplement for your pet\'s gut health and longer, healthier life.',
     images: [{ url: '/cdn/products_forever_10001.png', width: 800, height: 800, alt: 'Mother Vegetable Forever' }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mother Vegetable Forever — Pet Health Supplement',
+    description: 'Natural supplement for your pet\'s gut health and longer, healthier life.',
+  },
 };
 
 function getForeverProduct(locale: string): ProductPageData {
