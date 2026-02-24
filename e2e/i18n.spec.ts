@@ -147,7 +147,7 @@ test.describe('Internationalization (i18n)', () => {
 
       // Navigate to a product page via Products dropdown
       // Header nav is now translated per locale
-      if (await page.viewportSize()!.width < 768) {
+      if (page.viewportSize()!.width < 1024) {
         await page.locator('header button').last().click();
         await page.waitForTimeout(400);
       }

@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { waitForPageReady } from './helpers';
 
-/** Helper: returns true when the viewport is narrower than Tailwind's md breakpoint (768px) */
+/** Helper: returns true when the viewport is narrower than Tailwind's lg breakpoint (1024px).
+ *  The Header component uses `lg:` for desktop layout, so anything below 1024 is "mobile". */
 async function isMobileViewport(page: import('@playwright/test').Page) {
   const vp = page.viewportSize();
-  return vp ? vp.width < 768 : false;
+  return vp ? vp.width < 1024 : false;
 }
 
 test.describe('Navigation', () => {

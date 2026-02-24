@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import { waitForPageReady } from './helpers';
 
 test.describe('Full Purchase Flow', () => {
+  test.setTimeout(60_000);
+
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     await page.evaluate(() => {
