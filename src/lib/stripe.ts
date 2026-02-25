@@ -18,11 +18,12 @@ export function getStripe(): Stripe {
 export const INSTRUCTOR_SUBSCRIPTION_PRICE_AMOUNT = 25000; // cents
 export const INSTRUCTOR_REFERRAL_REWARD = 5000; // $50 in cents
 
-// Product prices in cents
+// Product prices in cents — these IDs must match the frontend product IDs
+// used in ProductPage (product.id) and sent via the checkout API.
 export const PRODUCT_PRICES: Record<string, number> = {
-  "achieve-capsule-30": 15000, // $150
-  "confidence-tube-30": 18000, // $180
-  "forever-capsule-30": 12000, // $120
+  achieve: 3670, // $36.70
+  confidence: 3670, // $36.70
+  forever: 3670, // $36.70
 };
 
 // Referral discount price ($33)

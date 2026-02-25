@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { signIn, useSession } from 'next-auth/react';
@@ -130,14 +129,7 @@ export default function LoginPage() {
                       </button>
                     </div>
                   </div>
-                  <div className="flex justify-end text-sm">
-                    <Link
-                      href="/forgetPassword"
-                      className="text-[#25C760] underline hover:text-[#3C8063] transition-colors"
-                    >
-                      {t('forgotPassword')}
-                    </Link>
-                  </div>
+                  {/* Forgot password — not yet implemented */}
                   <div className="py-4">
                     <button
                       type="submit"
@@ -147,26 +139,7 @@ export default function LoginPage() {
                       {submitting ? '...' : t('loginNow')}
                     </button>
                   </div>
-                  <div className="flex items-center gap-3 py-2">
-                    <div className="flex-1 h-px bg-white/30" />
-                    <span className="text-white text-sm whitespace-nowrap">{t('orLoginWith')}</span>
-                    <div className="flex-1 h-px bg-white/30" />
-                  </div>
-                  <div className="flex justify-center py-1">
-                    <button
-                      type="button"
-                      onClick={() => signIn('google', { callbackUrl: '/' })}
-                      className="hover:scale-105 transition-transform cursor-pointer bg-transparent border-none p-0"
-                    >
-                      <Image
-                        src="/Images/Authenticate/google_logo.png"
-                        alt="Google"
-                        width={48}
-                        height={48}
-                        className="px-1"
-                      />
-                    </button>
-                  </div>
+                  {/* Google OAuth — hidden until credentials are configured */}
                 </form>
                 {/* Sign up link (visible on mobile, also shown at bottom) */}
                 <div className="md:hidden">
