@@ -112,9 +112,18 @@ function RegisterContent() {
       }
 
       if (data.url) {
-        // Store instructor ID for post-payment dashboard sync
+        // Store instructor ID and token for post-payment dashboard sync
         if (data.instructorId) {
           localStorage.setItem('mv-pending-instructor', data.instructorId);
+        }
+        if (data.token) {
+          // Pre-set the token in the store so the dashboard can sync after Stripe redirect
+          const { setCurrentInstructor } = useAffiliateStore.getState();
+          const currentState = useAffiliateStore.getState();
+          if (!currentState.instructorToken) {
+            // Store token without full instructor data (will be synced after redirect)
+            useAffiliateStore.setState({ instructorToken: data.token });
+          }
         }
         // Redirect to Stripe Checkout for $250/year subscription
         window.location.href = data.url;

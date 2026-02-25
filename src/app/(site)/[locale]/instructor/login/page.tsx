@@ -57,7 +57,7 @@ export default function InstructorLoginPage() {
         subscriptionStatus: data.subscriptionStatus,
         connectOnboarded: data.connectOnboarded,
         createdAt: data.createdAt,
-      });
+      }, data.token);
 
       router.push('/instructor/dashboard');
     } catch {

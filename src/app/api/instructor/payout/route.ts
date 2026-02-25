@@ -1,18 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
+import { requireInstructorAuth } from "@/lib/instructor-auth";
 
 export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
-    const { instructorId } = body;
+  // Verify instructor authentication
+  const auth = requireInstructorAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
-    if (!instructorId) {
-      return NextResponse.json(
-        { error: "Instructor ID is required" },
-        { status: 400 }
-      );
-    }
+  try {
+    const instructorId = auth.instructorId;
 
     const instructor = await prisma.instructor.findUnique({
       where: { id: instructorId },
@@ -122,15 +119,11 @@ export async function POST(request: NextRequest) {
 
 // GET: Get payout history and balance
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const instructorId = searchParams.get("instructorId");
+  // Verify instructor authentication
+  const auth = requireInstructorAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
-  if (!instructorId) {
-    return NextResponse.json(
-      { error: "Instructor ID is required" },
-      { status: 400 }
-    );
-  }
+  const instructorId = auth.instructorId;
 
   try {
     const instructor = await prisma.instructor.findUnique({
