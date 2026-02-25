@@ -170,6 +170,7 @@ test.describe('Internationalization (i18n)', () => {
       '/',
       '/product/achieve',
       '/healthcare',
+      '/about',
       '/login',
       '/privacy',
       '/terms',

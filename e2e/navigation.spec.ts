@@ -145,6 +145,16 @@ test.describe('Navigation', () => {
     await page.waitForURL('**/mv/certifiedInstructor');
   });
 
+  test('About link navigates correctly', async ({ page }) => {
+    if (await isMobileViewport(page)) {
+      await page.locator('header button').last().click();
+      await page.waitForTimeout(400);
+    }
+
+    await page.locator('header a', { hasText: 'About' }).click();
+    await page.waitForURL('**/about');
+  });
+
   test('language selector displays current language', async ({ page }) => {
     // The language selector should show "Eng" for the English locale
     const langSelector = page.locator('header .relative', { hasText: 'Eng' });

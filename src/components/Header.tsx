@@ -336,6 +336,16 @@ export default function Header() {
                     {t('certifiedInstructor')}
                   </Link>
                 </li>
+                <li className="max-lg:w-full">
+                  <Link
+                    href="/about"
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t('about')}
+                  </Link>
+                </li>
                 <li className="hidden max-lg:block list-none mt-3 w-full">
                   <Link
                     href="/healthcare"
