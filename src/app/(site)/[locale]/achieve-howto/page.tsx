@@ -5,6 +5,16 @@ import Image from 'next/image';
 export const metadata: Metadata = {
   title: 'How to Use Achieve Capsules',
   description: 'Learn how to prepare and enjoy Mother Vegetable Achieve capsules with delicious recipes for daily wellness.',
+  openGraph: {
+    title: 'How to Use Achieve Capsules',
+    description: 'Learn how to prepare and enjoy Mother Vegetable Achieve capsules with delicious recipes for daily wellness.',
+    images: [{ url: '/cdn/products_achieve_10001.png', width: 800, height: 800, alt: 'Mother Vegetable' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'How to Use Achieve Capsules',
+    description: 'Learn how to prepare and enjoy Mother Vegetable Achieve capsules with delicious recipes for daily wellness.',
+  },
 };
 
 const CDN = 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/achieve';

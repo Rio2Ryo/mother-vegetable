@@ -7,13 +7,17 @@
     "certifiedInstructor": "Certified Instructor",
     "healthcare": "Healthcare",
     "forHospital": "For Hospital",
-    "login": "Login",
+    "login": "LOGIN",
     "signup": "Sign Up",
+    "signUp": "Sign Up",
     "achieve": "Achieve",
     "confidence": "Confidence",
     "logout": "Logout",
     "dashboard": "Dashboard",
-    "instructorPortal": "Instructor Portal"
+    "instructorPortal": "Instructor Portal",
+    "orderHistory": "Order History",
+    "myCourses": "My Courses",
+    "about": "About"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -97,7 +101,13 @@
     "companyTitle": "Company",
     "accountTitle": "Account",
     "groupTitle": "Mother Vegetable Group",
-    "copyright": "© {year} Mother Vegetable. All rights reserved."
+    "copyright": "© {year} Mother Vegetable. All rights reserved.",
+    "companyName": "Mother Vegetable Group",
+    "officialPage": "Official Page",
+    "privacyPolicy": "Privacy Policy",
+    "termsAndConditions": "Terms and Conditions",
+    "allRightsReserved": "All rights reserved.",
+    "followUs": "Follow Us"
   },
   "cart": {
     "title": "My Cart",
@@ -303,5 +313,14 @@
     "registrationComplete": "Registration complete! Welcome to the instructor program.",
     "showPassword": "SHOW",
     "hidePassword": "HIDE"
+  },
+  "chatbot": {
+    "title": "Chat with us",
+    "greeting": "Hi! I'm Mother Vegetable's AI assistant. How can I help you today?",
+    "placeholder": "Type your message...",
+    "send": "Send",
+    "supportLink": "Contact support: support@mothervegetable.com",
+    "error": "Sorry, something went wrong. Please contact support@mothervegetable.com",
+    "close": "Close"
   }
 }

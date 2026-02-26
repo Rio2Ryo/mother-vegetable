@@ -9,11 +9,15 @@
     "forHospital": "医院专用",
     "login": "登录",
     "signup": "注册",
+    "signUp": "注册",
     "achieve": "Achieve",
     "confidence": "Confidence",
     "logout": "退出登录",
     "dashboard": "仪表盘",
-    "instructorPortal": "讲师门户"
+    "instructorPortal": "讲师门户",
+    "orderHistory": "订单记录",
+    "myCourses": "我的课程",
+    "about": "关于我们"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -97,7 +101,13 @@
     "companyTitle": "公司",
     "accountTitle": "账户",
     "groupTitle": "Mother Vegetable 集团",
-    "copyright": "© {year} Mother Vegetable. 保留所有权利。"
+    "copyright": "© {year} Mother Vegetable. 保留所有权利。",
+    "companyName": "Mother Vegetable Group",
+    "officialPage": "Official Page",
+    "privacyPolicy": "Privacy Policy",
+    "termsAndConditions": "Terms and Conditions",
+    "allRightsReserved": "All rights reserved.",
+    "followUs": "关注我们"
   },
   "cart": {
     "title": "我的购物车",
@@ -303,5 +313,14 @@
     "registrationComplete": "注册完成！欢迎加入讲师计划。",
     "showPassword": "显示",
     "hidePassword": "隐藏"
+  },
+  "chatbot": {
+    "title": "在线咨询",
+    "greeting": "您好！我是Mother Vegetable的AI助手。有什么可以帮您的吗？",
+    "placeholder": "输入消息...",
+    "send": "发送",
+    "supportLink": "联系客服: support@mothervegetable.com",
+    "error": "抱歉，出现了错误。请联系 support@mothervegetable.com",
+    "close": "关闭"
   }
 }

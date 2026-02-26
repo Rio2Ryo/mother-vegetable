@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getStripe, INSTRUCTOR_SUBSCRIPTION_PRICE_AMOUNT } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
+import { signInstructorToken } from "@/lib/instructor-auth";
 
 interface RegisterBody {
   fullName: string;
@@ -104,25 +105,27 @@ export async function POST(request: NextRequest) {
       data: { stripeCustomerId: customer.id },
     });
 
-    // Create Stripe Price for the subscription
-    const price = await getStripe().prices.create({
-      unit_amount: INSTRUCTOR_SUBSCRIPTION_PRICE_AMOUNT,
-      currency: "usd",
-      recurring: { interval: "year" },
-      product_data: {
-        name: "Mother Vegetable Instructor Program - Annual Subscription",
-      },
-    });
-
     const locale = body.locale || "en";
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
-    // Create Stripe Checkout Session for subscription
+    // Create Stripe Checkout Session for subscription (using inline price_data)
     const session = await getStripe().checkout.sessions.create({
       mode: "subscription",
       payment_method_types: ["card"],
       customer: customer.id,
-      line_items: [{ price: price.id, quantity: 1 }],
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            recurring: { interval: "year" },
+            unit_amount: INSTRUCTOR_SUBSCRIPTION_PRICE_AMOUNT,
+            product_data: {
+              name: "Mother Vegetable Instructor Program - Annual Subscription",
+            },
+          },
+          quantity: 1,
+        },
+      ],
       metadata: {
         instructorId: instructor.id,
         locale: locale,
@@ -131,9 +134,13 @@ export async function POST(request: NextRequest) {
       cancel_url: `${appUrl}/${locale}/instructor/register?canceled=true`,
     });
 
+    // Generate auth token so the dashboard can sync after Stripe redirect
+    const token = signInstructorToken(instructor.id);
+
     return NextResponse.json({
       url: session.url,
       instructorId: instructor.id,
+      token,
     });
   } catch (error) {
     console.error("Instructor registration failed:", error);

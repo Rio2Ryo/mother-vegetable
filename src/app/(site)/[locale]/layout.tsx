@@ -6,6 +6,7 @@ import { Inter, Noto_Sans_JP } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ChatBot from '@/components/ChatBot';
 import ReferralTracker from '@/components/ReferralTracker';
 import AuthProvider from '@/components/AuthProvider';
 import '../../globals.css';
@@ -118,6 +119,7 @@ export default async function LocaleLayout({
             <Header />
             <main id="main-content" role="main">{children}</main>
             <Footer />
+            <ChatBot />
           </NextIntlClientProvider>
         </AuthProvider>
       </body>

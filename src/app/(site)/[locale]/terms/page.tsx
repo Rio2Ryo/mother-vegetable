@@ -3,7 +3,18 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
+  description: 'Mother Vegetable terms of service. Read our terms and conditions for using mothervegetable.com.',
   robots: { index: true, follow: true },
+  openGraph: {
+    title: 'Terms of Service — Mother Vegetable',
+    description: 'Mother Vegetable terms of service. Read our terms and conditions for using mothervegetable.com.',
+    images: [{ url: '/cdn/products_achieve_10001.png', width: 800, height: 800, alt: 'Mother Vegetable' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Terms of Service — Mother Vegetable',
+    description: 'Mother Vegetable terms of service. Read our terms and conditions for using mothervegetable.com.',
+  },
 };
 
 export default async function TermsPage({ params }: { params: Promise<{ locale: string }> }) {

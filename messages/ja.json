@@ -9,11 +9,15 @@
     "forHospital": "病院向け",
     "login": "ログイン",
     "signup": "新規登録",
+    "signUp": "新規登録",
     "achieve": "Achieve",
     "confidence": "Confidence",
     "logout": "ログアウト",
     "dashboard": "ダッシュボード",
-    "instructorPortal": "インストラクターポータル"
+    "instructorPortal": "インストラクターポータル",
+    "orderHistory": "注文履歴",
+    "myCourses": "マイコース",
+    "about": "会社概要"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -97,7 +101,13 @@
     "companyTitle": "会社情報",
     "accountTitle": "アカウント",
     "groupTitle": "マザーベジタブルグループ",
-    "copyright": "© {year} Mother Vegetable. All rights reserved."
+    "copyright": "© {year} Mother Vegetable. All rights reserved.",
+    "companyName": "マザーベジタブルグループ",
+    "officialPage": "公式ページ",
+    "privacyPolicy": "プライバシーポリシー",
+    "termsAndConditions": "利用規約",
+    "allRightsReserved": "All rights reserved.",
+    "followUs": "フォローする"
   },
   "cart": {
     "title": "マイカート",
@@ -303,5 +313,14 @@
     "registrationComplete": "登録が完了しました！インストラクタープログラムへようこそ。",
     "showPassword": "表示",
     "hidePassword": "非表示"
+  },
+  "chatbot": {
+    "title": "チャットで質問",
+    "greeting": "こんにちは！マザーベジタブルのAIアシスタントです。何かお手伝いできることはありますか？",
+    "placeholder": "メッセージを入力...",
+    "send": "送信",
+    "supportLink": "サポートへ連絡: support@mothervegetable.com",
+    "error": "申し訳ありません、エラーが発生しました。support@mothervegetable.comにお問い合わせください。",
+    "close": "閉じる"
   }
 }

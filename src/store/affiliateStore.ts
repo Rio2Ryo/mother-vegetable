@@ -12,6 +12,7 @@ import {
 
 interface AffiliateState {
   currentInstructor: Instructor | null;
+  instructorToken: string | null;
   instructors: Instructor[];
   commissions: Commission[];
 
@@ -44,7 +45,7 @@ interface AffiliateState {
   getReferralSalesCount: (instructorId: string) => number;
 
   // Instructor data sync from server
-  setCurrentInstructor: (instructor: Instructor) => void;
+  setCurrentInstructor: (instructor: Instructor, token?: string) => void;
   updateInstructor: (id: string, data: Partial<Instructor>) => void;
 
   // Commission processing
@@ -64,6 +65,7 @@ export const useAffiliateStore = create<AffiliateState>()(
   persist(
     (set, get) => ({
       currentInstructor: null,
+      instructorToken: null,
       instructors: [],
       commissions: [],
 
@@ -81,7 +83,7 @@ export const useAffiliateStore = create<AffiliateState>()(
       },
 
       logout: () => {
-        set({ currentInstructor: null });
+        set({ currentInstructor: null, instructorToken: null });
       },
 
       register: (data) => {
@@ -234,8 +236,10 @@ export const useAffiliateStore = create<AffiliateState>()(
           .reduce((sum, c) => sum + c.commissionAmount, 0);
       },
 
-      setCurrentInstructor: (instructor: Instructor) => {
-        set({ currentInstructor: instructor });
+      setCurrentInstructor: (instructor: Instructor, token?: string) => {
+        const update: Partial<AffiliateState> = { currentInstructor: instructor };
+        if (token) update.instructorToken = token;
+        set(update);
         // Also update in the instructors list
         const state = get();
         const exists = state.instructors.some((i) => i.id === instructor.id);
@@ -332,6 +336,7 @@ export const useAffiliateStore = create<AffiliateState>()(
       name: "mv-affiliate",
       partialize: (state) => ({
         currentInstructor: state.currentInstructor,
+        instructorToken: state.instructorToken,
         instructors: state.instructors,
         commissions: state.commissions,
       }),

@@ -48,13 +48,16 @@ export async function POST(request: NextRequest) {
     const locale = body.locale || "en";
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
-    // Build line items for Stripe
+    // Build line items for Stripe — enforce server-side pricing
     const lineItems = body.items.map((item) => {
-      // Use discounted price if available (referral), otherwise standard price
-      const hasReferralDiscount = item.discountedPrice != null && item.discountedPrice < item.price;
-      const unitAmount = hasReferralDiscount
-        ? Math.round(item.discountedPrice! * 100)
-        : PRODUCT_PRICES[item.productId] || Math.round(item.price * 100);
+      const serverPrice = PRODUCT_PRICES[item.productId];
+      if (!serverPrice) {
+        throw new Error(`Unknown product: ${item.productId}`);
+      }
+
+      // Use referral discount if a referral code is present, otherwise server price
+      const hasReferralDiscount = body.referralCode && REFERRAL_DISCOUNT_PRICE < serverPrice;
+      const unitAmount = hasReferralDiscount ? REFERRAL_DISCOUNT_PRICE : serverPrice;
 
       return {
         price_data: {
@@ -80,12 +83,16 @@ export async function POST(request: NextRequest) {
         referralCode: body.referralCode || "",
         locale: locale,
         items: JSON.stringify(
-          body.items.map((i) => ({
-            productId: i.productId,
-            name: i.name,
-            price: i.discountedPrice ?? i.price,
-            quantity: i.quantity,
-          }))
+          body.items.map((i) => {
+            const sp = PRODUCT_PRICES[i.productId] || 0;
+            const hasDiscount = body.referralCode && REFERRAL_DISCOUNT_PRICE < sp;
+            return {
+              productId: i.productId,
+              name: i.name,
+              price: (hasDiscount ? REFERRAL_DISCOUNT_PRICE : sp) / 100,
+              quantity: i.quantity,
+            };
+          })
         ),
       },
       success_url: `${appUrl}/${locale}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,

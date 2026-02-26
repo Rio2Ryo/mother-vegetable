@@ -149,3 +149,79 @@ export async function GET(
     );
   }
 }
+
+// ---------------------------------------------------------------------------
+// PATCH /api/admin/instructors/[id] — update instructor status
+// ---------------------------------------------------------------------------
+
+interface PatchBody {
+  subscriptionStatus?: "active" | "inactive" | "canceled";
+}
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const denied = verifyAdmin(request);
+  if (denied) return denied;
+
+  const { id } = await params;
+
+  try {
+    const body: PatchBody = await request.json();
+
+    const instructor = await prisma.instructor.findUnique({ where: { id } });
+    if (!instructor) {
+      return NextResponse.json(
+        { error: "Instructor not found" },
+        { status: 404 }
+      );
+    }
+
+    const data: Record<string, string> = {};
+
+    if (body.subscriptionStatus) {
+      const allowed = ["active", "inactive", "canceled"];
+      if (!allowed.includes(body.subscriptionStatus)) {
+        return NextResponse.json(
+          { error: "Invalid subscription status" },
+          { status: 400 }
+        );
+      }
+      data.subscriptionStatus = body.subscriptionStatus;
+    }
+
+    if (Object.keys(data).length === 0) {
+      return NextResponse.json(
+        { error: "No valid fields to update" },
+        { status: 400 }
+      );
+    }
+
+    const updated = await prisma.instructor.update({
+      where: { id },
+      data,
+    });
+
+    // Derive admin status from subscriptionStatus
+    let status: "active" | "pending" | "inactive" = "inactive";
+    if (updated.subscriptionStatus === "active") status = "active";
+    else if (
+      updated.subscriptionStatus === "inactive" &&
+      !updated.stripeSubscriptionId
+    )
+      status = "pending";
+
+    return NextResponse.json({
+      id: updated.id,
+      subscriptionStatus: updated.subscriptionStatus,
+      status,
+    });
+  } catch (error) {
+    console.error("Failed to update instructor:", error);
+    return NextResponse.json(
+      { error: "Failed to update instructor" },
+      { status: 500 }
+    );
+  }
+}

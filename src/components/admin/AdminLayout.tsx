@@ -14,7 +14,9 @@ export default function AdminLayout({
   const [authenticated, setAuthenticated] = useState(false);
   const [checking, setChecking] = useState(true);
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   // Check if already authenticated
   useEffect(() => {
@@ -45,6 +47,13 @@ export default function AdminLayout({
       e.preventDefault();
       setLoginError("");
 
+      if (!password.trim()) {
+        setLoginError("Please enter a password.");
+        return;
+      }
+
+      setSubmitting(true);
+
       // Try the password as the admin secret
       try {
         const res = await fetch("/api/admin/stats", {
@@ -59,6 +68,8 @@ export default function AdminLayout({
         }
       } catch {
         setLoginError("Connection error. Please try again.");
+      } finally {
+        setSubmitting(false);
       }
     },
     [password]
@@ -91,14 +102,24 @@ export default function AdminLayout({
             >
               Password
             </label>
-            <input
-              id="admin-password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
-              placeholder="Admin secret"
-            />
+            <div className="relative mt-1">
+              <input
+                id="admin-password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                className="block w-full rounded-lg border border-gray-300 px-3 py-2 pr-16 text-sm shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                placeholder="Admin secret"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-xs font-medium text-gray-500 hover:text-gray-700"
+              >
+                {showPassword ? "HIDE" : "SHOW"}
+              </button>
+            </div>
           </div>
 
           {loginError && (
@@ -107,9 +128,10 @@ export default function AdminLayout({
 
           <button
             type="submit"
-            className="mt-6 w-full rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+            disabled={submitting}
+            className="mt-6 w-full rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50"
           >
-            Login
+            {submitting ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>

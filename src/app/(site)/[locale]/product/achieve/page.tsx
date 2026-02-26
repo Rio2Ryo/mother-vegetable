@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     description: 'Premium health supplement delivering 48 nutrients in one stick.',
     images: [{ url: '/cdn/products_achieve_10001.png', width: 800, height: 800, alt: 'Mother Vegetable Achieve' }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mother Vegetable Achieve — 48 Nutrients in One Stick',
+    description: 'Premium health supplement delivering 48 nutrients in one stick.',
+  },
 };
 
 function getAchieveProduct(locale: string): ProductPageData {

@@ -29,6 +29,7 @@ function DashboardContent() {
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
   const currentInstructor = useAffiliateStore((s) => s.currentInstructor);
+  const instructorToken = useAffiliateStore((s) => s.instructorToken);
   const logout = useAffiliateStore((s) => s.logout);
   const getDirectSalesTotal = useAffiliateStore((s) => s.getDirectSalesTotal);
   const getReferralSalesTotal = useAffiliateStore((s) => s.getReferralSalesTotal);
@@ -47,7 +48,12 @@ function DashboardContent() {
   // Sync instructor data from server after Stripe registration redirect
   const syncFromServer = useCallback(async (instructorId: string) => {
     try {
-      const res = await fetch(`/api/instructor/me?id=${instructorId}`);
+      const token = useAffiliateStore.getState().instructorToken;
+      if (!token) return false;
+
+      const res = await fetch('/api/instructor/me', {
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
       if (!res.ok) return false;
       const data = await res.json();
 
@@ -108,9 +114,11 @@ function DashboardContent() {
 
   // Fetch Connect status
   const fetchConnectStatus = useCallback(async () => {
-    if (!currentInstructor) return;
+    if (!currentInstructor || !instructorToken) return;
     try {
-      const res = await fetch(`/api/instructor/connect?instructorId=${currentInstructor.id}`);
+      const res = await fetch('/api/instructor/connect', {
+        headers: { 'Authorization': `Bearer ${instructorToken}` },
+      });
       if (res.ok) {
         const data = await res.json();
         setConnectStatus(data);
@@ -118,7 +126,7 @@ function DashboardContent() {
     } catch {
       // silently fail
     }
-  }, [currentInstructor]);
+  }, [currentInstructor, instructorToken]);
 
   useEffect(() => {
     if (mounted && currentInstructor) {
@@ -177,13 +185,16 @@ function DashboardContent() {
   }
 
   async function handleConnectStripe() {
-    if (!currentInstructor) return;
+    if (!currentInstructor || !instructorToken) return;
     setConnectLoading(true);
     try {
       const res = await fetch('/api/instructor/connect', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ instructorId: currentInstructor.id, locale }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${instructorToken}`,
+        },
+        body: JSON.stringify({ locale }),
       });
       const data = await res.json();
       if (data.url) {
@@ -197,14 +208,17 @@ function DashboardContent() {
   }
 
   async function handlePayout() {
-    if (!currentInstructor) return;
+    if (!currentInstructor || !instructorToken) return;
     setPayoutLoading(true);
     setPayoutMessage(null);
     try {
       const res = await fetch('/api/instructor/payout', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ instructorId: currentInstructor.id }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${instructorToken}`,
+        },
+        body: JSON.stringify({}),
       });
       const data = await res.json();
       if (res.ok) {

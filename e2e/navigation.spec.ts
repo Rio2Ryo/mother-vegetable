@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { waitForPageReady } from './helpers';
 
-/** Helper: returns true when the viewport is narrower than Tailwind's md breakpoint (768px) */
+/** Helper: returns true when the viewport is narrower than Tailwind's lg breakpoint (1024px).
+ *  The Header component uses `lg:` for desktop layout, so anything below 1024 is "mobile". */
 async function isMobileViewport(page: import('@playwright/test').Page) {
   const vp = page.viewportSize();
-  return vp ? vp.width < 768 : false;
+  return vp ? vp.width < 1024 : false;
 }
 
 test.describe('Navigation', () => {
@@ -49,15 +50,20 @@ test.describe('Navigation', () => {
   });
 
   test('Products dropdown shows product links (achieve, confidence only)', async ({ page }) => {
-    if (await isMobileViewport(page)) {
+    const mobile = await isMobileViewport(page);
+    if (mobile) {
       // Open mobile menu first
       await page.locator('header button').last().click();
       await page.waitForTimeout(400);
     }
 
-    // Click the Products button
+    // Desktop uses hover to open dropdown; mobile uses click toggle
     const productsBtn = page.locator('header button', { hasText: 'Products' });
-    await productsBtn.click();
+    if (mobile) {
+      await productsBtn.click();
+    } else {
+      await productsBtn.hover();
+    }
     await page.waitForTimeout(300);
 
     // Dropdown items should be visible
@@ -73,13 +79,18 @@ test.describe('Navigation', () => {
   });
 
   test('Products dropdown navigates to product page', async ({ page }) => {
-    if (await isMobileViewport(page)) {
+    const mobile = await isMobileViewport(page);
+    if (mobile) {
       await page.locator('header button').last().click();
       await page.waitForTimeout(400);
     }
 
     const productsBtn = page.locator('header button', { hasText: 'Products' });
-    await productsBtn.click();
+    if (mobile) {
+      await productsBtn.click();
+    } else {
+      await productsBtn.hover();
+    }
     await page.waitForTimeout(300);
 
     await page.locator('header a[href*="/product/achieve"]').click();
@@ -88,13 +99,18 @@ test.describe('Navigation', () => {
   });
 
   test('How To Use dropdown shows links (achieve, confidence only)', async ({ page }) => {
-    if (await isMobileViewport(page)) {
+    const mobile = await isMobileViewport(page);
+    if (mobile) {
       await page.locator('header button').last().click();
       await page.waitForTimeout(400);
     }
 
     const howToBtn = page.locator('header button', { hasText: 'How To Use' });
-    await howToBtn.click();
+    if (mobile) {
+      await howToBtn.click();
+    } else {
+      await howToBtn.hover();
+    }
     await page.waitForTimeout(300);
 
     await expect(page.locator('header a[href*="/achieve-howto"]')).toBeVisible();
@@ -113,7 +129,7 @@ test.describe('Navigation', () => {
       await page.locator('header nav a', { hasText: 'Healthcare' }).click();
     } else {
       // On desktop, the Healthcare link is outside the nav, use the desktop-only one
-      await page.locator('header a.hidden.md\\:inline-flex', { hasText: 'Healthcare' }).click();
+      await page.locator('header a.hidden.lg\\:inline-flex', { hasText: 'Healthcare' }).click();
     }
 
     await page.waitForURL('**/healthcare');
@@ -127,6 +143,16 @@ test.describe('Navigation', () => {
 
     await page.locator('header a', { hasText: 'Certified Instructor' }).click();
     await page.waitForURL('**/mv/certifiedInstructor');
+  });
+
+  test('About link navigates correctly', async ({ page }) => {
+    if (await isMobileViewport(page)) {
+      await page.locator('header button').last().click();
+      await page.waitForTimeout(400);
+    }
+
+    await page.locator('header a', { hasText: 'About' }).click();
+    await page.waitForURL('**/about');
   });
 
   test('language selector displays current language', async ({ page }) => {

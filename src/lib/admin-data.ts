@@ -91,6 +91,21 @@ export async function getInstructorById(
   return res.json();
 }
 
+export async function updateInstructorStatus(
+  id: string,
+  subscriptionStatus: "active" | "inactive" | "canceled"
+): Promise<{ status: string; subscriptionStatus: string }> {
+  const res = await adminFetch(
+    `/api/admin/instructors/${encodeURIComponent(id)}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({ subscriptionStatus }),
+    }
+  );
+  if (!res.ok) throw new Error("Failed to update instructor status");
+  return res.json();
+}
+
 // ---------------------------------------------------------------------------
 // Dashboard stats
 // ---------------------------------------------------------------------------

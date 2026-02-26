@@ -7,6 +7,16 @@ export const metadata: Metadata = {
   title: 'Become a Certified Instructor',
   description:
     'Join the Mother Vegetable instructor affiliate program. Earn 25% commission on direct sales and 10% on referral sales. $250/year subscription.',
+  openGraph: {
+    title: 'Become a Certified Instructor — Mother Vegetable',
+    description: 'Join the Mother Vegetable instructor affiliate program. Earn 25% commission on direct sales and 10% on referral sales.',
+    images: [{ url: '/cdn/products_achieve_10001.png', width: 800, height: 800, alt: 'Mother Vegetable' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Become a Certified Instructor — Mother Vegetable',
+    description: 'Join the Mother Vegetable instructor affiliate program. Earn 25% commission on direct sales and 10% on referral sales.',
+  },
 };
 
 /* ------------------------------------------------------------------ */

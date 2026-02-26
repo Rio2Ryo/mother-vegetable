@@ -1,16 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { requireInstructorAuth } from "@/lib/instructor-auth";
 
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const instructorId = searchParams.get("id");
+  // Verify instructor authentication
+  const auth = requireInstructorAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
-  if (!instructorId) {
-    return NextResponse.json(
-      { error: "Instructor ID is required" },
-      { status: 400 }
-    );
-  }
+  const instructorId = auth.instructorId;
 
   try {
     const instructor = await prisma.instructor.findUnique({

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
+import { signInstructorToken } from "@/lib/instructor-auth";
 
 interface LoginBody {
   email: string;
@@ -37,7 +38,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Return instructor data (excluding passwordHash)
+    // Return instructor data (excluding passwordHash) with session token
+    const token = signInstructorToken(instructor.id);
+
     return NextResponse.json({
       id: instructor.id,
       fullName: instructor.fullName,
@@ -52,6 +55,7 @@ export async function POST(request: NextRequest) {
       connectOnboarded: instructor.connectOnboarded,
       locale: instructor.locale,
       createdAt: instructor.createdAt.toISOString(),
+      token,
     });
   } catch (error) {
     console.error("Instructor login failed:", error);

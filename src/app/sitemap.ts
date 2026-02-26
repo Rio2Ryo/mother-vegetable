@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/confidence-howto",
     "/forever-howto",
     "/mv/certifiedInstructor",
+    "/about",
     "/privacy",
     "/terms",
   ];
