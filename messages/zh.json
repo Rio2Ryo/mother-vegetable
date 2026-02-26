@@ -17,7 +17,8 @@
     "instructorPortal": "讲师门户",
     "orderHistory": "订单记录",
     "myCourses": "我的课程",
-    "about": "关于我们"
+    "about": "关于我们",
+    "myAccount": "我的账户"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -322,5 +323,28 @@
     "supportLink": "联系客服: support@mothervegetable.com",
     "error": "抱歉，出现了错误。请联系 support@mothervegetable.com",
     "close": "关闭"
+  },
+  "account": {
+    "title": "我的账户",
+    "profile": "个人信息",
+    "memberSince": "注册日期",
+    "orderHistory": "订单历史",
+    "noOrders": "暂无订单。",
+    "startShopping": "开始购物，在这里查看您的订单。",
+    "browseProducts": "浏览产品",
+    "orderId": "订单号",
+    "date": "日期",
+    "status": "状态",
+    "total": "总计",
+    "items": "商品",
+    "item": "件",
+    "itemsCount": "件",
+    "status_pending": "待处理",
+    "status_confirmed": "已确认",
+    "status_shipped": "已发货",
+    "status_delivered": "已送达",
+    "status_cancelled": "已取消",
+    "loadingOrders": "正在加载订单...",
+    "errorLoading": "加载订单失败，请重试。"
   }
 }

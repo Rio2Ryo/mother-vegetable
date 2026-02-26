@@ -17,7 +17,8 @@
     "instructorPortal": "Instructor Portal",
     "orderHistory": "Order History",
     "myCourses": "My Courses",
-    "about": "About"
+    "about": "About",
+    "myAccount": "My Account"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -322,5 +323,28 @@
     "supportLink": "Contact support: support@mothervegetable.com",
     "error": "Sorry, something went wrong. Please contact support@mothervegetable.com",
     "close": "Close"
+  },
+  "account": {
+    "title": "My Account",
+    "profile": "Profile",
+    "memberSince": "Member since",
+    "orderHistory": "Order History",
+    "noOrders": "No orders yet.",
+    "startShopping": "Start shopping to see your orders here.",
+    "browseProducts": "Browse Products",
+    "orderId": "Order ID",
+    "date": "Date",
+    "status": "Status",
+    "total": "Total",
+    "items": "Items",
+    "item": "item",
+    "itemsCount": "items",
+    "status_pending": "Pending",
+    "status_confirmed": "Confirmed",
+    "status_shipped": "Shipped",
+    "status_delivered": "Delivered",
+    "status_cancelled": "Cancelled",
+    "loadingOrders": "Loading orders...",
+    "errorLoading": "Failed to load orders. Please try again."
   }
 }

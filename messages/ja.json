@@ -17,7 +17,8 @@
     "instructorPortal": "インストラクターポータル",
     "orderHistory": "注文履歴",
     "myCourses": "マイコース",
-    "about": "会社概要"
+    "about": "会社概要",
+    "myAccount": "マイページ"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -322,5 +323,28 @@
     "supportLink": "サポートへ連絡: support@mothervegetable.com",
     "error": "申し訳ありません、エラーが発生しました。support@mothervegetable.comにお問い合わせください。",
     "close": "閉じる"
+  },
+  "account": {
+    "title": "マイページ",
+    "profile": "プロフィール",
+    "memberSince": "登録日",
+    "orderHistory": "注文履歴",
+    "noOrders": "注文はまだありません。",
+    "startShopping": "お買い物をして注文履歴をご確認ください。",
+    "browseProducts": "商品を見る",
+    "orderId": "注文ID",
+    "date": "日付",
+    "status": "ステータス",
+    "total": "合計",
+    "items": "商品",
+    "item": "点",
+    "itemsCount": "点",
+    "status_pending": "処理中",
+    "status_confirmed": "確認済み",
+    "status_shipped": "発送済み",
+    "status_delivered": "配達完了",
+    "status_cancelled": "キャンセル",
+    "loadingOrders": "注文を読み込み中...",
+    "errorLoading": "注文の読み込みに失敗しました。もう一度お試しください。"
   }
 }

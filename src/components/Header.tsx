@@ -130,28 +130,16 @@ export default function Header() {
                       <p className="text-gray-400 text-xs mt-0.5">{displayEmail}</p>
                     </div>
                     {isUserLoggedIn && (
-                      <>
-                        <Link
-                          href="/orders"
-                          className="flex items-center w-full py-3 px-4 bg-black border-2 border-[#25C760] rounded-lg text-white text-base font-medium cursor-pointer transition-all duration-300 no-underline hover:bg-[rgba(37,199,96,0.1)] hover:border-[#3C8063]"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 576 512">
-                            <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                          </svg>
-                          {t('orderHistory')}
-                        </Link>
-                        <Link
-                          href="/courses"
-                          className="flex items-center w-full py-3 px-4 bg-black border-2 border-[#25C760] rounded-lg text-white text-base font-medium cursor-pointer transition-all duration-300 no-underline hover:bg-[rgba(37,199,96,0.1)] hover:border-[#3C8063]"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 512 512">
-                            <path d="M243.4 2.6l-224 96c-14 6-21.8 21-18.7 35.8S16.8 160 32 160v8c0 13.3 10.7 24 24 24H456c13.3 0 24-10.7 24-24v-8c15.2 0 28.3-10.7 31.3-25.6s-4.7-29.8-18.7-35.8l-224-96c-8-3.4-17.2-3.4-25.2 0zM128 224H64V420.3c-.6 .3-1.2 .7-1.8 1.1l-48 32c-11.7 7.8-17 22.4-12.9 35.9S17.9 512 32 512H480c14.1 0 26.5-9.2 30.6-22.7s-1.1-28.1-12.9-35.9l-48-32c-.6-.4-1.2-.7-1.8-1.1V224H384V416H320V224H256V416H192V224H128z" />
-                          </svg>
-                          {t('myCourses')}
-                        </Link>
-                      </>
+                      <Link
+                        href="/account"
+                        className="flex items-center w-full py-3 px-4 bg-black border-2 border-[#25C760] rounded-lg text-white text-base font-medium cursor-pointer transition-all duration-300 no-underline hover:bg-[rgba(37,199,96,0.1)] hover:border-[#3C8063]"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 576 512">
+                          <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                        </svg>
+                        {t('myAccount')}
+                      </Link>
                     )}
                     {isInstructorLoggedIn && (
                       <Link
@@ -442,26 +430,15 @@ export default function Header() {
                         <p className="text-gray-400 text-xs mt-0.5">{displayEmail}</p>
                       </div>
                       {isUserLoggedIn && (
-                        <>
-                          <Link
-                            href="/orders"
-                            className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] hover:bg-[#25C760] hover:text-white"
-                          >
-                            <svg className="w-[14px] h-[14px] mr-[10px]" fill="currentColor" viewBox="0 0 576 512">
-                              <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                            </svg>
-                            {t('orderHistory')}
-                          </Link>
-                          <Link
-                            href="/courses"
-                            className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] hover:bg-[#25C760] hover:text-white"
-                          >
-                            <svg className="w-[14px] h-[14px] mr-[10px]" fill="currentColor" viewBox="0 0 512 512">
-                              <path d="M243.4 2.6l-224 96c-14 6-21.8 21-18.7 35.8S16.8 160 32 160v8c0 13.3 10.7 24 24 24H456c13.3 0 24-10.7 24-24v-8c15.2 0 28.3-10.7 31.3-25.6s-4.7-29.8-18.7-35.8l-224-96c-8-3.4-17.2-3.4-25.2 0zM128 224H64V420.3c-.6 .3-1.2 .7-1.8 1.1l-48 32c-11.7 7.8-17 22.4-12.9 35.9S17.9 512 32 512H480c14.1 0 26.5-9.2 30.6-22.7s-1.1-28.1-12.9-35.9l-48-32c-.6-.4-1.2-.7-1.8-1.1V224H384V416H320V224H256V416H192V224H128z" />
-                            </svg>
-                            {t('myCourses')}
-                          </Link>
-                        </>
+                        <Link
+                          href="/account"
+                          className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] hover:bg-[#25C760] hover:text-white"
+                        >
+                          <svg className="w-[14px] h-[14px] mr-[10px]" fill="currentColor" viewBox="0 0 576 512">
+                            <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                          </svg>
+                          {t('myAccount')}
+                        </Link>
                       )}
                       {isInstructorLoggedIn && (
                         <Link
