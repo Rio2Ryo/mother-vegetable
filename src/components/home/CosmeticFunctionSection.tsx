@@ -254,44 +254,104 @@ export default function CosmeticFunctionSection() {
 **断定は避け**、あくまで一般的に知られている情報に基づいてください。
 
 前提条件として、原材料の特性は次の通りです。
+以下の特性や環境下で育ち作られた品種から作られた原材料がどのようなメリットが考えられるかを説明してください：
 ・植物の始祖にあたる天然素材のみを使用
 ・非晶質の無水ケイ酸が97.1%のパウダー形状
-・生命の証として、高純度無水ケイ酸97.1%でありながら、脂質や食物繊維がパウダーに残っている。
+・生命の証として、高純度無水ケイ酸97.1%でありながら、脂質や食物繊維がパウダーに残っている。高温処理や化学精製をしないため、天然の食物繊維等が残ったオーガニックの高純度無水ケイ酸。
 ・PM2.5などの外気や虫・鳥類などの混入が起こらない完全室内培養（Closed Bioreactor System）
 ・重金属・マイクロプラスチック汚染リスクを極限まで排除
 ・農薬・化学肥料 不使用
 ・保存料・人工着色料・香料 不使用
 ・動物や植物にも使用可能
 
+
 【出力形式（必ずこの順）】
 1) **肌に塗ることで期待できる効果トップ5**
-2) **特定領域への期待される効果**（切創、アレルギー肌、バリア機能、保湿、皮脂汚れ、頭皮、化粧下地の使用/テカり、体臭、肌のトーン）
-3) **犬や猫に塗布した際に期待される効果**（ダニ、被毛、アレルギー肌、口臭）
-4) **免責**
+以下の成分群から期待できる主な効果を、重要度順に5つ挙げてください。
+主成分：植物の始祖にあたる天然素材の1種類の品種からのみで作られた高純度無水ケイ酸97.1%（脂質や食物繊維がパウダーに残っている。高温処理や化学精製をしないため、天然の食物繊維等が残ったオーガニックの高純度無水ケイ酸。）
+各効果について：
+- どのような効果が期待できるか
+- その効果の裏付けとなる成分（この成分リストの中から該当するもの）
+- なぜその成分が肌に効くとされているか（簡潔に）
+
+2) **特定領域への期待される効果**
+以下の領域について、この成分群から期待できる効果を説明してください：
+- 切創（傷口に関与するため医療関係の論文の引用必須）
+- アレルギー肌（傷口に関与するため、医療関係の論文の引用必須）
+- バリア機能
+- 保湿
+- 皮脂汚れ
+- 頭皮
+- 化粧下地の使用/テカり
+- 体臭
+- 肌のトーン
+
+3) **犬や猫に塗布した際に期待される効果**
+以下の領域について、この成分群から期待できる効果を説明してください：
+- 毛に付着したダニ（論文要開示。昆虫脱水作用等）
+- 被毛
+- アレルギー肌
+- 口臭
+
+4) **免責**：これは医療アドバイスではないこと、一般公開情報であることを掲載してください。詳細は専門家や医師に相談することを推奨してください。
 
 【成分リスト（100g当たり）】
-- ${cosmeticNutrientsListForPrompt}`
-    : `Please tell me about the expected benefits of applying to the skin raw materials that meet Japanese Quasi-Drug Raw Material Standards containing the following ingredients, based on publicly available information.
+- 無水ケイ酸: 97.1g
+- たんぱく質: 2.4~2.6g
+- 炭水化物（食物繊維）: 0.3~0.5g
+- 脂質: 0.1g未満
+- 水分: 0.1g`
+    : `Please tell me about the expected benefits of applying to the skin raw materials that meet Japanese Quasi-Drug Raw Material Standards (and also meet FDA's Premium Food Powder Grade standards) containing the following ingredients, based on publicly available information.
 **Avoid definitive claims** and base your response on generally known information.
 
-Characteristics of the raw materials:
-- Uses only natural ingredients derived from the ancestor of plants
-- Amorphous Silicic Anhydride at 97.1% in powder form
-- Despite being 97.1% high-purity Silicic Anhydride, lipids and dietary fiber remain in the powder
-- Complete indoor cultivation (Closed Bioreactor System)
-- Minimized risk of heavy metal and microplastic contamination
-- No pesticides or chemical fertilizers
-- No preservatives, artificial colors, or fragrances
-- Can also be used on animals and plants
+As a prerequisite, the characteristics of the raw materials are as follows.
+Please explain what benefits can be expected from raw materials made from a variety grown and produced under the following characteristics and conditions:
+・Uses only natural ingredients derived from the ancestor of plants
+・Amorphous Silicic Anhydride at 97.1% in powder form
+・As evidence of life, despite being 97.1% high-purity Silicic Anhydride, lipids and dietary fiber remain in the powder. Because no high-temperature processing or chemical refining is used, natural dietary fiber remains — an organic high-purity Silicic Anhydride.
+・Complete indoor cultivation (Closed Bioreactor System) free from outdoor air pollutants such as PM2.5, insects, birds, etc.
+・Minimized risk of heavy metal and microplastic contamination
+・No pesticides or chemical fertilizers
+・No preservatives, artificial colors, or fragrances
+・Can also be used on animals and plants
+
 
 【Output Format (in this order)】
 1) **Top 5 Expected Benefits When Applied to Skin**
-2) **Expected Effects in Specific Areas** (Cuts, Allergy-prone skin, Barrier function, Moisturizing, Sebum/dirt, Scalp, Makeup base/Oiliness, Body odor, Skin tone)
-3) **Expected Effects When Applied to Dogs and Cats** (Mites, Coat, Allergy-prone skin, Bad breath)
-4) **Disclaimer**
+List the top 5 expected benefits from this ingredient group, in order of importance.
+Main component: 97.1% high-purity Silicic Anhydride made from only one variety of natural material — the ancestor of plants (lipids and dietary fiber remain in the powder. Because no high-temperature processing or chemical refining is used, natural dietary fiber remains — an organic high-purity Silicic Anhydride.)
+For each benefit:
+- What effect can be expected
+- Supporting ingredients from this list
+- Why these ingredients are believed to be effective for skin (briefly)
+
+2) **Expected Effects in Specific Areas**
+Explain the expected effects from this ingredient group in the following areas:
+- Cuts/lacerations (citation of medical literature required as it involves wound care)
+- Allergy-prone skin (citation of medical literature required as it involves wound care)
+- Barrier function
+- Moisturizing
+- Sebum/dirt removal
+- Scalp
+- Use as makeup base / Oiliness
+- Body odor
+- Skin tone
+
+3) **Expected Effects When Applied to Dogs and Cats**
+Explain the expected effects from this ingredient group in the following areas:
+- Mites attached to fur (disclosure of research papers required; insect dehydration effect, etc.)
+- Coat condition
+- Allergy-prone skin
+- Bad breath
+
+4) **Disclaimer**: This is NOT medical advice and is based on publicly available information. We recommend consulting a specialist or physician for details.
 
 【Ingredient List (per 100g)】
-- ${cosmeticNutrientsListForPrompt}`;
+- Silicic Anhydride: 97.1g
+- Protein: 2.4~2.6g
+- Carbohydrates (Dietary Fiber): 0.3~0.5g
+- Fat: 0.1g or less
+- Moisture: 0.1g`;
 
   const handleCopy = async () => {
     try {
