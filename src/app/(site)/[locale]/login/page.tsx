@@ -129,7 +129,11 @@ export default function LoginPage() {
                       </button>
                     </div>
                   </div>
-                  {/* Forgot password — not yet implemented */}
+                  <div className="text-right">
+                    <Link href="/forgot-password" className="text-[#25C760] text-xs hover:underline">
+                      {t('forgotPassword')}
+                    </Link>
+                  </div>
                   <div className="py-4">
                     <button
                       type="submit"

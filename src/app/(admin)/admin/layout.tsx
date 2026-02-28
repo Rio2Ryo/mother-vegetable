@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../../globals.css";
 import AdminLayoutClient from "@/components/admin/AdminLayout";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "Admin | Mother Vegetable",
@@ -18,7 +19,9 @@ export default function AdminRootLayout({
         <link rel="icon" href="/Images/favicon.png" />
       </head>
       <body className="bg-gray-50 text-gray-900 antialiased">
-        <AdminLayoutClient>{children}</AdminLayoutClient>
+        <SessionProvider>
+          <AdminLayoutClient>{children}</AdminLayoutClient>
+        </SessionProvider>
       </body>
     </html>
   );

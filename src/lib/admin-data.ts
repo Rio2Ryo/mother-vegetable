@@ -6,7 +6,8 @@ import type {
 } from "@/types/admin";
 
 // ---------------------------------------------------------------------------
-// Admin token (stored in sessionStorage after login)
+// Fetch helper — session cookies are auto-sent by the browser.
+// Falls back to bearer token from sessionStorage if present (API access).
 // ---------------------------------------------------------------------------
 
 const TOKEN_KEY = "mv-admin-token";
@@ -26,16 +27,13 @@ export function clearAdminToken(): void {
   sessionStorage.removeItem(TOKEN_KEY);
 }
 
-// ---------------------------------------------------------------------------
-// Fetch helper with auth header
-// ---------------------------------------------------------------------------
-
 async function adminFetch(path: string, options?: RequestInit): Promise<Response> {
-  const token = getAdminToken();
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
     ...(options?.headers as Record<string, string> || {}),
   };
+  // Attach bearer token only if present (backward compat for API access)
+  const token = getAdminToken();
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }

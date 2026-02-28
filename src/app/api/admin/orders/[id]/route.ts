@@ -6,7 +6,7 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const denied = verifyAdmin(request);
+  const denied = await verifyAdmin(request);
   if (denied) return denied;
 
   const { id } = await params;
@@ -85,7 +85,7 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const denied = verifyAdmin(request);
+  const denied = await verifyAdmin(request);
   if (denied) return denied;
 
   const { id } = await params;

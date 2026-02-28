@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { verifyAdmin } from "@/lib/admin-auth";
 
 export async function GET(request: NextRequest) {
-  const denied = verifyAdmin(request);
+  const denied = await verifyAdmin(request);
   if (denied) return denied;
 
   try {

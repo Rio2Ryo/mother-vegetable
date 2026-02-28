@@ -1,12 +1,17 @@
 "use client";
 
-import { Menu, Bell } from "lucide-react";
+import { Menu, Bell, LogOut } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
 
 interface Props {
   onMenuClick: () => void;
 }
 
 export default function AdminHeader({ onMenuClick }: Props) {
+  const { data: session } = useSession();
+  const user = session?.user;
+  const initial = (user?.name?.[0] || user?.email?.[0] || "A").toUpperCase();
+
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-gray-200 bg-white px-4 sm:px-6">
       <button
@@ -24,15 +29,22 @@ export default function AdminHeader({ onMenuClick }: Props) {
         <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-red-500" />
       </button>
 
-      {/* Admin avatar */}
+      {/* Admin avatar + info */}
       <div className="flex items-center gap-3">
         <div className="h-8 w-8 rounded-full bg-emerald-600 flex items-center justify-center text-white text-sm font-bold">
-          A
+          {initial}
         </div>
         <div className="hidden sm:block">
-          <p className="text-sm font-medium text-gray-900">Admin</p>
-          <p className="text-xs text-gray-500">admin@mothervegetable.com</p>
+          <p className="text-sm font-medium text-gray-900">{user?.name || "Admin"}</p>
+          <p className="text-xs text-gray-500">{user?.email || ""}</p>
         </div>
+        <button
+          onClick={() => signOut({ callbackUrl: "/" })}
+          className="rounded p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-700"
+          title="Sign out"
+        >
+          <LogOut className="h-4 w-4" />
+        </button>
       </div>
     </header>
   );

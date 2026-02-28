@@ -71,6 +71,58 @@ export async function sendOrderConfirmationEmail(
 }
 
 // ---------------------------------------------------------------------------
+// Email Verification
+// ---------------------------------------------------------------------------
+
+export async function sendEmailVerificationEmail(
+  user: { email: string; name: string; verifyUrl: string },
+  locale?: string
+) {
+  const l = resolveLocale(locale);
+  const t = emailTranslations.emailVerification[l];
+
+  await sendMail({
+    to: user.email,
+    subject: t.subject,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1 style="color: #25C760;">${t.heading}</h1>
+        <p>${t.greeting(user.name)}</p>
+        <p>${t.body}</p>
+        <a href="${user.verifyUrl}" style="display: inline-block; padding: 12px 24px; background-color: #25C760; color: #000; text-decoration: none; border-radius: 8px; font-weight: bold;">${t.cta}</a>
+        <p style="margin-top: 24px; color: #666; font-size: 14px;">${t.expiryNotice}</p>
+      </div>
+    `,
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Password Reset
+// ---------------------------------------------------------------------------
+
+export async function sendPasswordResetEmail(
+  user: { email: string; name: string; resetUrl: string },
+  locale?: string
+) {
+  const l = resolveLocale(locale);
+  const t = emailTranslations.passwordReset[l];
+
+  await sendMail({
+    to: user.email,
+    subject: t.subject,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1 style="color: #25C760;">${t.heading}</h1>
+        <p>${t.greeting(user.name)}</p>
+        <p>${t.body}</p>
+        <a href="${user.resetUrl}" style="display: inline-block; padding: 12px 24px; background-color: #25C760; color: #000; text-decoration: none; border-radius: 8px; font-weight: bold;">${t.cta}</a>
+        <p style="margin-top: 24px; color: #666; font-size: 14px;">${t.expiryNotice}</p>
+      </div>
+    `,
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Instructor Emails
 // ---------------------------------------------------------------------------
 

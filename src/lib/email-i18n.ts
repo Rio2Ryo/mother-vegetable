@@ -275,4 +275,57 @@ export const emailTranslations = {
       cta: "\u67e5\u770b\u63a7\u5236\u53f0",
     },
   },
+  passwordReset: {
+    en: {
+      subject: "Reset Your Password",
+      heading: "Password Reset",
+      greeting: (name: string) => `Hi ${name},`,
+      body: "We received a request to reset your password. Click the button below to set a new password.",
+      cta: "Reset Password",
+      expiryNotice: "This link will expire in 1 hour. If you didn't request a password reset, you can safely ignore this email.",
+    },
+    ja: {
+      subject: "パスワードリセット",
+      heading: "パスワードリセット",
+      greeting: (name: string) => `${name}さん、こんにちは。`,
+      body: "パスワードリセットのリクエストを受け付けました。以下のボタンをクリックして新しいパスワードを設定してください。",
+      cta: "パスワードをリセット",
+      expiryNotice: "このリンクは1時間後に期限切れになります。パスワードリセットをリクエストしていない場合は、このメールを無視してください。",
+    },
+    zh: {
+      subject: "重置您的密码",
+      heading: "密码重置",
+      greeting: (name: string) => `${name}，您好。`,
+      body: "我们收到了重置您密码的请求。请点击下方按钮设置新密码。",
+      cta: "重置密码",
+      expiryNotice: "此链接将在1小时后过期。如果您没有请求重置密码，请忽略此邮件。",
+    },
+  },
+
+  emailVerification: {
+    en: {
+      subject: "Verify Your Email Address",
+      heading: "Email Verification",
+      greeting: (name: string) => `Hi ${name},`,
+      body: "Thank you for signing up! Please click the button below to verify your email address.",
+      cta: "Verify Email",
+      expiryNotice: "This link will expire in 24 hours. If you didn't create an account, you can safely ignore this email.",
+    },
+    ja: {
+      subject: "メールアドレスの確認",
+      heading: "メールアドレス確認",
+      greeting: (name: string) => `${name}さん、こんにちは。`,
+      body: "ご登録ありがとうございます！以下のボタンをクリックしてメールアドレスを確認してください。",
+      cta: "メールを確認",
+      expiryNotice: "このリンクは24時間後に期限切れになります。アカウントを作成していない場合は、このメールを無視してください。",
+    },
+    zh: {
+      subject: "验证您的电子邮件地址",
+      heading: "邮箱验证",
+      greeting: (name: string) => `${name}，您好。`,
+      body: "感谢您注册！请点击下方按钮验证您的电子邮件地址。",
+      cta: "验证邮箱",
+      expiryNotice: "此链接将在24小时后过期。如果您没有创建账户，请忽略此邮件。",
+    },
+  },
 } as const;

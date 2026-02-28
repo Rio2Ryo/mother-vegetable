@@ -113,7 +113,15 @@ export default function AccountPage() {
 
         {/* Profile Card */}
         <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 mb-8">
-          <h2 className="text-lg font-semibold text-[#25C760] mb-4">{t('profile')}</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-[#25C760]">{t('profile')}</h2>
+            <Link
+              href="/account/edit"
+              className="text-sm text-[#25C760] hover:underline transition-colors"
+            >
+              {t('editProfile')}
+            </Link>
+          </div>
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-full bg-[#25C760]/20 flex items-center justify-center text-[#25C760] text-xl font-bold">
               {(user?.name?.[0] || user?.email?.[0] || '?').toUpperCase()}
@@ -171,9 +179,15 @@ export default function AccountPage() {
                   </thead>
                   <tbody>
                     {orders.map((order) => (
-                      <tr key={order.id} className="border-b border-gray-800/50">
-                        <td className="py-4 text-gray-300 font-mono text-xs">
-                          {order.id.substring(0, 12)}...
+                      <tr
+                        key={order.id}
+                        className="border-b border-gray-800/50 hover:bg-gray-800/40 transition-colors cursor-pointer"
+                        onClick={() => router.push(`/orders/${order.id}`)}
+                      >
+                        <td className="py-4 font-mono text-xs">
+                          <Link href={`/orders/${order.id}`} className="text-gray-300 hover:text-[#25C760] transition-colors">
+                            {order.id.substring(0, 12)}...
+                          </Link>
                         </td>
                         <td className="py-4 text-gray-300">
                           {new Date(order.createdAt).toLocaleDateString()}
@@ -198,24 +212,26 @@ export default function AccountPage() {
               {/* Mobile Cards */}
               <div className="sm:hidden space-y-3">
                 {orders.map((order) => (
-                  <div key={order.id} className="bg-black/50 border border-gray-800 rounded-lg p-4">
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="text-gray-400 font-mono text-xs">
-                        {order.id.substring(0, 12)}...
-                      </span>
-                      <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColor(order.status)}`}>
-                        {statusLabel(order.status)}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-end">
-                      <div>
-                        <p className="text-gray-500 text-xs">
-                          {new Date(order.createdAt).toLocaleDateString()} · {itemsSummary(order.items)}
-                        </p>
+                  <Link key={order.id} href={`/orders/${order.id}`} className="block">
+                    <div className="bg-black/50 border border-gray-800 rounded-lg p-4 hover:bg-gray-800/40 hover:border-gray-700 transition-colors">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="text-gray-400 font-mono text-xs">
+                          {order.id.substring(0, 12)}...
+                        </span>
+                        <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColor(order.status)}`}>
+                          {statusLabel(order.status)}
+                        </span>
                       </div>
-                      <p className="text-white font-semibold">${order.total.toFixed(2)}</p>
+                      <div className="flex justify-between items-end">
+                        <div>
+                          <p className="text-gray-500 text-xs">
+                            {new Date(order.createdAt).toLocaleDateString()} · {itemsSummary(order.items)}
+                          </p>
+                        </div>
+                        <p className="text-white font-semibold">${order.total.toFixed(2)}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </>
