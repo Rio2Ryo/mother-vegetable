@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe, PRODUCT_PRICES, REFERRAL_DISCOUNT_PRICE } from "@/lib/stripe";
+import { getProductBySlug } from "@/data/products";
 
 interface CheckoutItem {
   productId: string;
@@ -47,6 +48,17 @@ export async function POST(request: NextRequest) {
 
     const locale = body.locale || "en";
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
+    // Check stock availability before creating checkout session
+    for (const item of body.items) {
+      const product = getProductBySlug(item.productId);
+      if (product && !product.inStock) {
+        return NextResponse.json(
+          { error: `${item.name} is currently out of stock` },
+          { status: 400 }
+        );
+      }
+    }
 
     // Build line items for Stripe — enforce server-side pricing
     const lineItems = body.items.map((item) => {

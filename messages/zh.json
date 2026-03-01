@@ -125,7 +125,9 @@
     "ourTrust": "Our Trust",
     "howToUseTitle": "使用方法",
     "addedToCart": "已添加到购物车！",
-    "itemCount": "({count}) 件"
+    "itemCount": "({count}) 件",
+    "outOfStock": "缺货",
+    "outOfStockDesc": "此商品暂时无货。"
   },
   "checkout": {
     "title": "结算",

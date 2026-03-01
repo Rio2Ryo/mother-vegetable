@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import ProductPage, { type ProductPageData } from '@/components/ProductPage';
 import ProductJsonLd from '@/components/ProductJsonLd';
+import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
   title: 'Achieve — 48 Nutrients in One Stick',
@@ -32,6 +33,7 @@ function getAchieveProduct(locale: string): ProductPageData {
     price: 36.70,
     currency: 'USD',
     priceDisplay: 'USD 36.70',
+    inStock: getProductBySlug('achieve')?.inStock ?? true,
     productImage: '/cdn/products_achieve_10001.png',
     videoUrls: [
       'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/achieve/video_1.mp4',

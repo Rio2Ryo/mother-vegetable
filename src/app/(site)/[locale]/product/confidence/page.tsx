@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import ProductPage, { type ProductPageData } from '@/components/ProductPage';
 import ProductJsonLd from '@/components/ProductJsonLd';
+import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
   title: 'Confidence — Skin Healing Effect',
@@ -32,6 +33,7 @@ function getConfidenceProduct(locale: string): ProductPageData {
     price: 36.70,
     currency: 'USD',
     priceDisplay: 'USD 36.70',
+    inStock: getProductBySlug('confidence')?.inStock ?? true,
     productImage: '/cdn/products_achieve_10001.png',
     videoUrls: [
       'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/confidence/video_2.mp4',

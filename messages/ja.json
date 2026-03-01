@@ -125,7 +125,9 @@
     "ourTrust": "Our Trust",
     "howToUseTitle": "使い方",
     "addedToCart": "カートに追加しました！",
-    "itemCount": "({count}) 点"
+    "itemCount": "({count}) 点",
+    "outOfStock": "在庫切れ",
+    "outOfStockDesc": "この商品は現在お取り扱いできません。"
   },
   "checkout": {
     "title": "お会計",

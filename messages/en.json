@@ -125,7 +125,9 @@
     "ourTrust": "Our Trust",
     "howToUseTitle": "How to use",
     "addedToCart": "Added to cart!",
-    "itemCount": "({count}) items"
+    "itemCount": "({count}) items",
+    "outOfStock": "Out of Stock",
+    "outOfStockDesc": "This product is currently unavailable."
   },
   "checkout": {
     "title": "Checkout",

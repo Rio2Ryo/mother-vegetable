@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import ProductPage, { type ProductPageData } from '@/components/ProductPage';
 import ProductJsonLd from '@/components/ProductJsonLd';
+import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
   title: 'Forever — Pet Health Supplement',
@@ -31,6 +32,7 @@ function getForeverProduct(locale: string): ProductPageData {
     price: 36.70,
     currency: 'USD',
     priceDisplay: 'USD 36.70',
+    inStock: getProductBySlug('forever')?.inStock ?? true,
     productImage: '/cdn/products_achieve_10001.png',
     videoUrls: [
       'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/forever/video_1.mp4',

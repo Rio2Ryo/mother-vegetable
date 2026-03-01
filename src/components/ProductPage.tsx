@@ -65,6 +65,7 @@ export interface ProductPageData {
   price: number;
   currency: string;
   priceDisplay: string;
+  inStock: boolean;
   videoUrls: string[];
   mainVideoUrl: string;
   benefits: string[];
@@ -103,6 +104,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
   const effectivePrice = hasReferral ? REFERRAL_DISCOUNT_PRICE : product.price;
 
   const handleAddToCart = useCallback(() => {
+    if (!product.inStock) return;
     addItem({
       id: product.id,
       productId: product.id,
@@ -118,6 +120,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
   }, [addItem, product, hasReferral, quantity]);
 
   const handleBuyNow = useCallback(() => {
+    if (!product.inStock) return;
     addItem({
       id: product.id,
       productId: product.id,
@@ -532,7 +535,18 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                 </div>
 
                 <div className="action-buttons">
-                  <button className="action-btn" onClick={handleAddToCart}>
+                  {!product.inStock && (
+                    <div style={{ padding: '12px 16px', background: 'rgba(239,68,68,0.15)', border: '1px solid #ef4444', borderRadius: '8px', marginBottom: '8px', textAlign: 'center' }}>
+                      <span style={{ color: '#ef4444', fontWeight: 700, fontSize: '1rem' }}>{t('outOfStock')}</span>
+                      <p style={{ color: '#f87171', fontSize: '0.85rem', margin: '4px 0 0' }}>{t('outOfStockDesc')}</p>
+                    </div>
+                  )}
+                  <button
+                    className="action-btn"
+                    onClick={handleAddToCart}
+                    disabled={!product.inStock}
+                    style={!product.inStock ? { opacity: 0.4, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
+                  >
                     {addedFeedback ? (
                       <span className="flex items-center justify-center gap-2">
                         <svg className="w-5 h-5 text-[#25C760]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
@@ -540,7 +554,12 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                       </span>
                     ) : t('addToCart')}
                   </button>
-                  <button className="action-btn" onClick={handleBuyNow}>
+                  <button
+                    className="action-btn"
+                    onClick={handleBuyNow}
+                    disabled={!product.inStock}
+                    style={!product.inStock ? { opacity: 0.4, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
+                  >
                     {t('buyNow')}
                   </button>
                 </div>

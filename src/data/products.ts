@@ -272,8 +272,8 @@ const forever: ProductData = {
 // Exports
 // ---------------------------------------------------------------------------
 
-/** Active products shown on the site (Forever removed from catalog). */
-export const products: ProductData[] = [achieve, confidence];
+/** Active products shown on the site. */
+export const products: ProductData[] = [achieve, confidence, forever];
 
 /** All products including discontinued, for admin/order lookup. */
 export const allProducts: ProductData[] = [achieve, confidence, forever];
