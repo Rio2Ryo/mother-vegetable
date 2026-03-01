@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { verifyAdmin } from "@/lib/admin-auth";
+import { sendOrderStatusUpdateEmail } from "@/lib/email";
 
 export async function GET(
   request: NextRequest,
@@ -112,7 +113,32 @@ export async function PATCH(
     const order = await prisma.order.update({
       where: { id },
       data: { status },
+      include: {
+        user: { select: { name: true, email: true } },
+      },
     });
+
+    // Send status notification email to customer
+    const shipping = JSON.parse(order.shippingAddress || "{}");
+    const customerEmail = order.user?.email || shipping.email;
+    if (customerEmail) {
+      const customerName =
+        order.user?.name ||
+        `${shipping.firstName || ""} ${shipping.lastName || ""}`.trim() ||
+        "Customer";
+
+      sendOrderStatusUpdateEmail(
+        {
+          customerEmail,
+          customerName,
+          orderId: order.id,
+          status,
+        },
+        shipping.locale
+      ).catch((err) => {
+        console.error("Failed to send order status email:", err);
+      });
+    }
 
     return NextResponse.json({
       id: order.id,

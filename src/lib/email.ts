@@ -71,6 +71,40 @@ export async function sendOrderConfirmationEmail(
 }
 
 // ---------------------------------------------------------------------------
+// Order Status Update
+// ---------------------------------------------------------------------------
+
+export async function sendOrderStatusUpdateEmail(
+  order: {
+    customerEmail: string;
+    customerName: string;
+    orderId: string;
+    status: string;
+  },
+  locale?: string
+) {
+  const l = resolveLocale(locale);
+  const t = emailTranslations.orderStatusUpdate[l];
+
+  const localizedStatus = t.statusLabels[order.status] || order.status;
+  const orderUrl = `${APP_URL}/${l}/orders/${order.orderId}`;
+
+  await sendMail({
+    to: order.customerEmail,
+    subject: t.subject(order.orderId, localizedStatus),
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1 style="color: #25C760;">${t.heading}</h1>
+        <p>${t.greeting(order.customerName)}</p>
+        <p>${t.body(order.orderId, localizedStatus)}</p>
+        <a href="${orderUrl}" style="display: inline-block; padding: 12px 24px; background-color: #25C760; color: #000; text-decoration: none; border-radius: 8px; font-weight: bold;">${t.viewOrder}</a>
+        <p style="margin-top: 24px;">${t.thanks}</p>
+      </div>
+    `,
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Email Verification
 // ---------------------------------------------------------------------------
 

@@ -302,6 +302,63 @@ export const emailTranslations = {
     },
   },
 
+  orderStatusUpdate: {
+    en: {
+      subject: (orderId: string, status: string) =>
+        `Order ${orderId} — ${status}`,
+      heading: "Order Status Updated",
+      greeting: (name: string) => `Hi ${name},`,
+      body: (orderId: string, status: string) =>
+        `Your order <strong>${orderId}</strong> has been updated to <strong>${status}</strong>.`,
+      viewOrder: "View Order",
+      thanks: "Thank you for shopping with us!",
+      statusLabels: {
+        pending: "Pending",
+        confirmed: "Confirmed",
+        processing: "Processing",
+        shipped: "Shipped",
+        delivered: "Delivered",
+        cancelled: "Cancelled",
+      } as Record<string, string>,
+    },
+    ja: {
+      subject: (orderId: string, status: string) =>
+        `注文 ${orderId} — ${status}`,
+      heading: "注文ステータスが更新されました",
+      greeting: (name: string) => `${name}さん、こんにちは。`,
+      body: (orderId: string, status: string) =>
+        `ご注文 <strong>${orderId}</strong> のステータスが <strong>${status}</strong> に更新されました。`,
+      viewOrder: "注文を確認",
+      thanks: "ご利用ありがとうございます！",
+      statusLabels: {
+        pending: "保留中",
+        confirmed: "確認済み",
+        processing: "処理中",
+        shipped: "発送済み",
+        delivered: "配達完了",
+        cancelled: "キャンセル",
+      } as Record<string, string>,
+    },
+    zh: {
+      subject: (orderId: string, status: string) =>
+        `订单 ${orderId} — ${status}`,
+      heading: "订单状态已更新",
+      greeting: (name: string) => `${name}，您好。`,
+      body: (orderId: string, status: string) =>
+        `您的订单 <strong>${orderId}</strong> 已更新为 <strong>${status}</strong>。`,
+      viewOrder: "查看订单",
+      thanks: "感谢您的购买！",
+      statusLabels: {
+        pending: "待处理",
+        confirmed: "已确认",
+        processing: "处理中",
+        shipped: "已发货",
+        delivered: "已送达",
+        cancelled: "已取消",
+      } as Record<string, string>,
+    },
+  },
+
   emailVerification: {
     en: {
       subject: "Verify Your Email Address",
