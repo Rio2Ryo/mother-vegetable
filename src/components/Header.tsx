@@ -12,6 +12,7 @@ import CartPanel from './CartPanel';
 const langOptions = [
   { code: 'en' as const, label: 'Eng' },
   { code: 'ja' as const, label: '日本語' },
+  { code: 'zh' as const, label: '中文' },
 ];
 
 export default function Header() {
@@ -28,7 +29,7 @@ export default function Header() {
 
   const currentLangLabel = langOptions.find((l) => l.code === locale)?.label ?? 'Eng';
 
-  function switchLocale(newLocale: 'en' | 'ja') {
+  function switchLocale(newLocale: 'en' | 'ja' | 'zh') {
     router.replace(pathname, { locale: newLocale });
     setLangOpen(false);
   }
@@ -253,7 +254,7 @@ export default function Header() {
                     } static mt-2 ml-4 lg:mt-0 lg:ml-0`}
                   >
                     <ul className="lg:bg-black lg:shadow-[0_8px_20px_rgba(0,0,0,0.3)] lg:rounded-lg lg:border lg:border-[#25C760] lg:min-w-[180px] list-none p-0 m-0">
-                      {['achieve', 'confidence'].map((p) => (
+                      {['achieve', 'confidence', 'forever'].map((p) => (
                         <li key={p}>
                           <Link
                             href={`/product/${p}`}
@@ -300,7 +301,7 @@ export default function Header() {
                     } static mt-2 ml-4 lg:mt-0 lg:ml-0`}
                   >
                     <ul className="lg:bg-black lg:shadow-[0_8px_20px_rgba(0,0,0,0.3)] lg:rounded-lg lg:border lg:border-[#25C760] lg:min-w-[180px] list-none p-0 m-0">
-                      {['achieve', 'confidence'].map((p) => (
+                      {['achieve', 'confidence', 'forever'].map((p) => (
                         <li key={p}>
                           <Link
                             href={`/${p}-howto`}
