@@ -22,17 +22,20 @@ export async function POST(request: NextRequest) {
 
   let event: Stripe.Event;
 
+  if (!process.env.STRIPE_WEBHOOK_SECRET) {
+    console.error("STRIPE_WEBHOOK_SECRET is not configured. Webhook processing rejected.");
+    return NextResponse.json(
+      { error: "Webhook secret not configured" },
+      { status: 500 }
+    );
+  }
+
   try {
-    // If webhook secret is set, verify signature; otherwise parse directly (dev mode)
-    if (process.env.STRIPE_WEBHOOK_SECRET) {
-      event = getStripe().webhooks.constructEvent(
-        body,
-        signature,
-        process.env.STRIPE_WEBHOOK_SECRET
-      );
-    } else {
-      event = JSON.parse(body) as Stripe.Event;
-    }
+    event = getStripe().webhooks.constructEvent(
+      body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
   } catch (err) {
     console.error("Webhook signature verification failed:", err);
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
