@@ -103,11 +103,11 @@
     "accountTitle": "账户",
     "groupTitle": "Mother Vegetable 集团",
     "copyright": "© {year} Mother Vegetable. 保留所有权利。",
-    "companyName": "Mother Vegetable Group",
-    "officialPage": "Official Page",
-    "privacyPolicy": "Privacy Policy",
-    "termsAndConditions": "Terms and Conditions",
-    "allRightsReserved": "All rights reserved.",
+    "companyName": "Mother Vegetable 集团",
+    "officialPage": "官方网站",
+    "privacyPolicy": "隐私政策",
+    "termsAndConditions": "使用条款",
+    "allRightsReserved": "保留所有权利。",
     "followUs": "关注我们"
   },
   "cart": {
