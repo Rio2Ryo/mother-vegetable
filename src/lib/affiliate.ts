@@ -30,14 +30,6 @@ export interface Commission {
   createdAt: string;
 }
 
-export interface InstructorSale {
-  orderId: string;
-  orderTotal: number;
-  type: 'direct' | 'referral';
-  createdAt: string;
-  customerName: string;
-}
-
 /**
  * Generate a unique referral code for an instructor.
  * Format: INS-XXXXXXXX (8 random alphanumeric characters)
@@ -109,83 +101,3 @@ export function clearStoredReferralCode(): void {
   document.cookie = 'mv-referral=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
 }
 
-/**
- * Process an order for commission attribution.
- * 1. Check if order has a referralCode
- * 2. Find the instructor with that referralCode
- * 3. Add 25% direct commission to that instructor
- * 4. If that instructor has a parent, add 10% referral commission to parent
- */
-export function processOrderCommission(
-  orderId: string,
-  orderTotal: number,
-  referralCode: string | null,
-  customerName: string
-): Commission[] {
-  if (!referralCode) return [];
-
-  const instructorsRaw = localStorage.getItem('mv-instructors');
-  if (!instructorsRaw) return [];
-
-  const instructors: Instructor[] = JSON.parse(instructorsRaw);
-  const instructor = instructors.find((i) => i.referralCode === referralCode);
-  if (!instructor) return [];
-
-  const commissions: Commission[] = [];
-  const now = new Date().toISOString();
-
-  // Direct commission (25%)
-  const directCommission: Commission = {
-    id: crypto.randomUUID(),
-    orderId,
-    instructorId: instructor.id,
-    type: 'direct',
-    orderTotal,
-    commissionRate: DIRECT_COMMISSION_RATE,
-    commissionAmount: orderTotal * DIRECT_COMMISSION_RATE,
-    createdAt: now,
-  };
-  commissions.push(directCommission);
-
-  // Referral commission (10%) for parent instructor
-  if (instructor.parentInstructorId) {
-    const parentInstructor = instructors.find(
-      (i) => i.id === instructor.parentInstructorId
-    );
-    if (parentInstructor) {
-      const referralCommission: Commission = {
-        id: crypto.randomUUID(),
-        orderId,
-        instructorId: parentInstructor.id,
-        type: 'referral',
-        orderTotal,
-        commissionRate: REFERRAL_COMMISSION_RATE,
-        commissionAmount: orderTotal * REFERRAL_COMMISSION_RATE,
-        createdAt: now,
-      };
-      commissions.push(referralCommission);
-    }
-  }
-
-  // Store commissions
-  const existingCommissions: Commission[] = JSON.parse(
-    localStorage.getItem('mv-commissions') || '[]'
-  );
-  existingCommissions.push(...commissions);
-  localStorage.setItem('mv-commissions', JSON.stringify(existingCommissions));
-
-  // Store sale record
-  const existingSales: InstructorSale[] = JSON.parse(
-    localStorage.getItem('mv-instructor-sales') || '[]'
-  );
-  existingSales.push({
-    orderId,
-    orderTotal,
-    type: 'direct',
-    createdAt: now,
-    customerName,
-  });
-  localStorage.setItem('mv-instructor-sales', JSON.stringify(existingSales));
-
-  return commissions;
-}
