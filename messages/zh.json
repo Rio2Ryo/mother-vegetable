@@ -189,6 +189,8 @@
     "orLoginWith": "或通过以下方式登录",
     "or": "或",
     "signUpWithGoogle": "使用Google注册",
+    "facebook": "使用Facebook继续",
+    "signUpWithFacebook": "使用Facebook注册",
     "errorUsernameRequired": "请输入用户名。",
     "errorEmailRequired": "请输入有效的电子邮件地址。",
     "errorPasswordLength": "密码至少需要6个字符。",

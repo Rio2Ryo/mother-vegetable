@@ -189,6 +189,8 @@
     "orLoginWith": "または以下でログイン",
     "or": "または",
     "signUpWithGoogle": "Googleで新規登録",
+    "facebook": "Facebookで続行",
+    "signUpWithFacebook": "Facebookで新規登録",
     "errorUsernameRequired": "ユーザー名を入力してください。",
     "errorEmailRequired": "有効なメールアドレスを入力してください。",
     "errorPasswordLength": "パスワードは6文字以上で入力してください。",

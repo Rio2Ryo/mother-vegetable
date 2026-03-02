@@ -189,6 +189,8 @@
     "orLoginWith": "or Login with",
     "or": "or",
     "signUpWithGoogle": "Sign Up with Google",
+    "facebook": "Continue with Facebook",
+    "signUpWithFacebook": "Sign Up with Facebook",
     "errorUsernameRequired": "Please enter a username.",
     "errorEmailRequired": "Please enter a valid email address.",
     "errorPasswordLength": "Password must be at least 6 characters.",
