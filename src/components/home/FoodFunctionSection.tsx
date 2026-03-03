@@ -329,46 +329,8 @@ Explain the expected effects from this ingredient group in the following areas:
         </h3>
         <div className="text-gray-300 text-sm md:text-base text-left leading-relaxed mb-8 md:mb-10 space-y-4 max-w-3xl mx-auto">
           <p>{texts.effectsDescription1}</p>
-          <p>{texts.effectsDescription3}</p>
         </div>
 
-        {/* Copy Button */}
-        <div className="flex flex-col items-center gap-4 mb-8">
-          <button
-            onClick={handleCopy}
-            className="group flex flex-col items-center gap-2 md:gap-3 px-2 py-3 md:px-10 md:py-5 rounded-2xl font-bold text-[2.8vw] md:text-lg transition-all duration-300 hover:scale-105 border-2 border-[#25c760] bg-transparent hover:bg-[#25c760]/10 w-full md:w-auto"
-            style={{ color: '#25c760' }}
-          >
-            <svg className="w-6 h-6 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-            </svg>
-            <span className="text-center">
-              {isJa ? (<>タップして上記成分を<br className="md:hidden" />クリップボードにコピーし<br />以下のボタンからAIに質問する</>) : (<>Tap to copy ingredients to clipboard<br />and ask AI using the buttons below</>)}
-            </span>
-          </button>
-          {copied && (
-            <p className="text-green-400 text-sm md:text-base animate-pulse">{texts.copiedMessage}</p>
-          )}
-        </div>
-
-        {/* AI Links */}
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-6">
-          {aiServices.map((service, index) => (
-            <a
-              key={index}
-              href={service.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-3 md:px-6 md:py-3 rounded-xl font-semibold text-sm md:text-base transition-all duration-300 hover:scale-105 bg-gray-800 hover:bg-gray-700 border border-gray-600"
-            >
-              <Image src={service.logo} alt={service.name} width={24} height={24} className="w-5 h-5 md:w-6 md:h-6" />
-              <span className="text-white">{service.name}</span>
-            </a>
-          ))}
-        </div>
-
-        {/* Note */}
-        <p className="text-gray-400 text-xs md:text-sm text-center italic">{texts.featuresNote}</p>
       </div>
     </motion.div>
   );
