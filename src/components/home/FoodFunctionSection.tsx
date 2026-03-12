@@ -54,7 +54,7 @@ export default function FoodFunctionSection() {
     { name: '亜鉛', amount: '2.0mg', nameEN: 'Zinc' },
     { name: '銅', amount: '0.3~0.4mg', nameEN: 'Copper' },
     { name: 'マンガン', amount: '1.9mg', nameEN: 'Manganese' },
-    { name: 'ビタミンA（β-カロテン由来）', amount: '約100mg', nameEN: 'Vitamin A (from β-carotene)' },
+    { name: 'βカロテン（ビタミンAの前駆体）', amount: '約100mg', nameEN: 'β-Carotene (provitamin A)' },
     { name: 'ビタミンE', amount: '5mg', nameEN: 'Vitamin E' },
     { name: 'ビタミンK', amount: '25.5μg', nameEN: 'Vitamin K' },
     { name: 'ビタミンB1', amount: '2.38mg', nameEN: 'Vitamin B1' },
