@@ -36,13 +36,11 @@ function getAchieveProduct(locale: string): ProductPageData {
     inStock: getProductBySlug('achieve')?.inStock ?? true,
     productImage: '/cdn/products_achieve_10001.png',
     videoUrls: [
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/achieve/video_1.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/achieve/video_2.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/achieve/video_3.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/achieve/video_4.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/achieve/video_5.mp4',
+      '/01.mp4',
+      '/02.mp4',
+      '/03.mp4',
     ],
-    mainVideoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/achieve_video.mp4',
+    mainVideoUrl: '/01.mp4',
     benefits: isJa
       ? [
           '健康な腸をサポートし、全身の細胞再生を促進。',
