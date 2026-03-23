@@ -36,11 +36,12 @@ function getAchieveProduct(locale: string): ProductPageData {
     inStock: getProductBySlug('achieve')?.inStock ?? true,
     productImage: '/cdn/products_achieve_10001.png',
     videoUrls: [
+      '/new_achieve_video.mp4',
       '/01.mp4',
       '/02.mp4',
       '/03.mp4',
     ],
-    mainVideoUrl: '/01.mp4',
+    mainVideoUrl: '/new_achieve_video.mp4',
     benefits: isJa
       ? [
           '健康な腸をサポートし、全身の細胞再生を促進。',
