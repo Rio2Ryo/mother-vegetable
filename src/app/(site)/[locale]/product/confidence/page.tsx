@@ -36,13 +36,10 @@ function getConfidenceProduct(locale: string): ProductPageData {
     inStock: getProductBySlug('confidence')?.inStock ?? true,
     productImage: '/cdn/products_achieve_10001.png',
     videoUrls: [
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/confidence/video_2.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/confidence/video_1.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/confidence/video_3.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/confidence/video_4.mp4',
-      'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/confidence/video_5.mp4',
+      '/new_confidence_video.mp4',
+      '/04.mp4',
     ],
-    mainVideoUrl: 'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/homepage/confidence_v2.mp4',
+    mainVideoUrl: '/new_confidence_video.mp4',
     benefits: isJa
       ? [
           '強力なアンチエイジング効果。',
