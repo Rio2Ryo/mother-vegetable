@@ -74,7 +74,7 @@ const achieve: ProductData = {
   slug: "achieve",
   description:
     "48 different nutrients at once. Supports a healthy gut, regeneration of cells throughout the body.",
-  price: 150.0,
+  price: 36.70,
   currency: "USD",
   sku: "MV-ACH-030",
   category: "food",
@@ -140,7 +140,7 @@ const confidence: ProductData = {
   slug: "confidence",
   description:
     "Skin Healing Effect. Powerful anti-aging benefits.",
-  price: 180.0,
+  price: 36.70,
   currency: "USD",
   sku: "MV-CON-030",
   category: "cosmetic",
@@ -221,7 +221,7 @@ const forever: ProductData = {
   fullName: "Mother Vegetable Forever",
   slug: "forever",
   description: "Extend your pet's healthy life.",
-  price: 120.0,
+  price: 36.70,
   currency: "USD",
   sku: "MV-FOR-030",
   category: "pet",
