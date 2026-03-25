@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import { useLocale } from 'next-intl';
+import { useCartStore } from '@/store/cart';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -174,6 +176,10 @@ export default function ProductsSection() {
   const locale = useLocale();
   const isJa = locale === 'ja';
   const products = getProducts(isJa);
+  const addItem = useCartStore((s) => s.addItem);
+  const [quantities, setQuantities] = useState<Record<string, number>>(
+    () => Object.fromEntries(products.map((p) => [p.id, 1]))
+  );
 
   return (
     <motion.div
@@ -270,13 +276,40 @@ export default function ProductsSection() {
               </div>
             </div>
 
-            {/* Purchase Button */}
-            <div className="mt-4 md:mt-6 px-2 md:px-4 pb-1 md:pb-2">
+            {/* Quantity + Add to Cart */}
+            <div className="mt-4 md:mt-6 px-2 md:px-4 pb-1 md:pb-2 space-y-2">
+              {/* Quantity selector */}
+              <div className="flex items-center justify-center gap-3">
+                <button
+                  onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: Math.max(1, (prev[product.id] ?? 1) - 1) }))}
+                  className="w-8 h-8 rounded-full border border-[#25c760] text-[#25c760] font-bold text-lg flex items-center justify-center hover:bg-[#25c760]/10 transition-colors"
+                >−</button>
+                <span className="text-white font-bold text-sm w-6 text-center">{quantities[product.id] ?? 1}</span>
+                <button
+                  onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: (prev[product.id] ?? 1) + 1 }))}
+                  className="w-8 h-8 rounded-full border border-[#25c760] text-[#25c760] font-bold text-lg flex items-center justify-center hover:bg-[#25c760]/10 transition-colors"
+                >+</button>
+              </div>
+              {/* Add to cart */}
+              <button
+                onClick={() => addItem({
+                  id: product.id,
+                  productId: product.id,
+                  name: product.name,
+                  price: parseFloat(product.priceUsd.replace('$', '')),
+                  currency: 'USD',
+                  quantity: quantities[product.id] ?? 1,
+                  image: product.imageUrl ?? '',
+                })}
+                className="block w-full text-center py-2.5 md:py-3 bg-[#25c760] text-black font-semibold text-sm md:text-base rounded-full hover:bg-[#1da84e] transition-colors"
+              >
+                {isJa ? 'カートに追加' : 'Add to Cart'}
+              </button>
               <Link
                 href={product.productLink}
-                className="block w-full text-center py-2.5 md:py-3 bg-white text-black font-semibold text-sm md:text-base rounded-full hover:bg-gray-200 transition-colors no-underline"
+                className="block w-full text-center py-2 text-white/60 font-medium text-xs md:text-sm hover:text-white transition-colors no-underline"
               >
-                {isJa ? '購入ページ' : 'Purchase'}
+                {isJa ? '商品詳細' : 'View Details'}
               </Link>
             </div>
           </motion.div>
