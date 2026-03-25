@@ -269,14 +269,95 @@ const forever: ProductData = {
 };
 
 // ---------------------------------------------------------------------------
+// Tilapia
+// ---------------------------------------------------------------------------
+
+const tilapia: ProductData = {
+  id: 'tilapia-fish-1',
+  name: 'マザベジフィッシュ-ティラピア',
+  fullName: 'Mother Vegetable Fish - Tilapia',
+  slug: 'tilapia',
+  description: 'Fresh tilapia enriched with spirulina. 48 different nutrients for a healthy lifestyle.',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-TIL-001',
+  category: 'food',
+  images: ['/images/mv_tilapia.jpg'],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['48 different nutrients from tilapia and spirulina.', 'High protein, omega-3 fatty acids, and essential minerals.'],
+  taglineJp: '',
+  tagline: 'Fresh spirulina tilapia.',
+  subtitle: 'for Body',
+  howToUse: 'Cook and enjoy as part of your daily meal.',
+  howToLink: '#',
+  inStock: true,
+};
+
+// ---------------------------------------------------------------------------
+// MV Salt
+// ---------------------------------------------------------------------------
+
+const mvSalt: ProductData = {
+  id: 'mv-salt-50g',
+  name: 'マザベジ塩',
+  fullName: 'Mother Vegetable Salt',
+  slug: 'mv-salt',
+  description: 'Green spirulina infused salt. 50g. Rich in minerals and nutrients.',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-SAL-050',
+  category: 'food',
+  images: ['/images/mv_salt.jpg'],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Green spirulina salt rich in minerals.', 'Enhances flavor while adding 48 nutrients.'],
+  taglineJp: '',
+  tagline: 'Green spirulina salt.',
+  subtitle: '50g',
+  howToUse: 'Use as everyday salt in cooking and seasoning.',
+  howToLink: '#',
+  inStock: true,
+};
+
+// ---------------------------------------------------------------------------
+// MV Soy Sauce
+// ---------------------------------------------------------------------------
+
+const mvSoySauce: ProductData = {
+  id: 'mv-soy-sauce-150ml',
+  name: 'マザベジ醤油',
+  fullName: 'Mother Vegetable Soy Sauce',
+  slug: 'mv-soy-sauce',
+  description: 'Premium dark soy sauce with spirulina. 150ml. Rich umami with 48 nutrients.',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-SOY-150',
+  category: 'food',
+  images: ['/images/mv_soy_sauce.jpg'],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Spirulina-infused premium soy sauce.', 'Rich umami taste with added health benefits.'],
+  taglineJp: '',
+  tagline: 'Spirulina dark soy sauce.',
+  subtitle: '150ml',
+  howToUse: 'Use as everyday soy sauce for cooking and dipping.',
+  howToLink: '#',
+  inStock: true,
+};
+
+// ---------------------------------------------------------------------------
 // Exports
 // ---------------------------------------------------------------------------
 
 /** Active products shown on the site. */
-export const products: ProductData[] = [achieve, confidence, forever];
+export const products: ProductData[] = [achieve, confidence, forever, tilapia, mvSalt, mvSoySauce];
 
 /** All products including discontinued, for admin/order lookup. */
-export const allProducts: ProductData[] = [achieve, confidence, forever];
+export const allProducts: ProductData[] = [achieve, confidence, forever, tilapia, mvSalt, mvSoySauce];
 
 export function getProductBySlug(slug: string): ProductData | undefined {
   return allProducts.find((p) => p.slug === slug);

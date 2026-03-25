@@ -24,6 +24,9 @@ export const PRODUCT_PRICES: Record<string, number> = {
   achieve: 3670, // $36.70
   confidence: 3670, // $36.70
   forever: 3670, // $36.70
+  'tilapia': 1350,     // $13.50
+  'mv-salt': 1350,     // $13.50
+  'mv-soy-sauce': 1350, // $13.50
 };
 
 // Referral discount price ($33)
