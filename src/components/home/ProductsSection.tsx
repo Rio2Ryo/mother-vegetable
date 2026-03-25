@@ -257,8 +257,6 @@ export default function ProductsSection() {
 
                 {/* Price */}
                 <div className="flex flex-wrap gap-2 mt-3 mb-2">
-                  <span className="text-white font-bold text-xs md:text-sm">{product.priceUsd}</span>
-                  <span className="text-white/50 text-xs md:text-sm">/</span>
                   <span className="text-white font-bold text-xs md:text-sm">{product.priceJpy}</span>
                   <span className="text-white/50 text-xs md:text-sm">/</span>
                   <span className="text-[#25c760] font-bold text-xs md:text-sm">{product.priceMvt}</span>
@@ -277,17 +275,17 @@ export default function ProductsSection() {
             </div>
 
             {/* Quantity + Add to Cart */}
-            <div className="mt-4 md:mt-6 px-2 md:px-4 pb-1 md:pb-2 space-y-2">
+            <div className="mt-4 md:mt-6 px-2 md:px-4 pb-1 md:pb-2 space-y-3">
               {/* Quantity selector */}
-              <div className="flex items-center justify-center gap-3">
+              <div className="flex items-center justify-center gap-4 py-1">
                 <button
                   onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: Math.max(1, (prev[product.id] ?? 1) - 1) }))}
-                  className="w-8 h-8 rounded-full border border-[#25c760] text-[#25c760] font-bold text-lg flex items-center justify-center hover:bg-[#25c760]/10 transition-colors"
+                  className="w-9 h-9 rounded-full border-2 border-[#25c760] text-[#25c760] font-bold text-xl flex items-center justify-center hover:bg-[#25c760]/20 transition-colors"
                 >−</button>
-                <span className="text-white font-bold text-sm w-6 text-center">{quantities[product.id] ?? 1}</span>
+                <span className="text-white font-bold text-base w-8 text-center">{quantities[product.id] ?? 1}</span>
                 <button
                   onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: (prev[product.id] ?? 1) + 1 }))}
-                  className="w-8 h-8 rounded-full border border-[#25c760] text-[#25c760] font-bold text-lg flex items-center justify-center hover:bg-[#25c760]/10 transition-colors"
+                  className="w-9 h-9 rounded-full border-2 border-[#25c760] text-[#25c760] font-bold text-xl flex items-center justify-center hover:bg-[#25c760]/20 transition-colors"
                 >+</button>
               </div>
               {/* Add to cart */}
@@ -303,7 +301,7 @@ export default function ProductsSection() {
                 })}
                 className="block w-full text-center py-2.5 md:py-3 bg-[#25c760] text-black font-semibold text-sm md:text-base rounded-full hover:bg-[#1da84e] transition-colors"
               >
-                {isJa ? 'カートに追加' : 'Add to Cart'}
+                {isJa ? 'カートに入れる' : 'Add to Cart'}
               </button>
               <Link
                 href={product.productLink}
