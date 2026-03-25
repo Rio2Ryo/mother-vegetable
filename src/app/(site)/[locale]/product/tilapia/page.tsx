@@ -5,13 +5,13 @@ import ProductJsonLd from '@/components/ProductJsonLd';
 import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
-  title: 'マザベジフィッシュ-ティラピア — Mother Vegetable',
+  title: 'マザベジフィッシュ-イズミ鯛 — Mother Vegetable',
   description:
-    'Fresh tilapia enriched with spirulina. 48 different nutrients for a healthy lifestyle. USD 13.50.',
+    'Fresh Izumi Tai enriched with spirulina. 48 different nutrients for a healthy lifestyle. USD 13.50.',
   openGraph: {
-    title: 'マザベジフィッシュ-ティラピア — Mother Vegetable',
-    description: 'Fresh tilapia enriched with spirulina. 48 different nutrients.',
-    images: [{ url: '/images/mv_tilapia.jpg', width: 800, height: 800, alt: 'マザベジフィッシュ-ティラピア' }],
+    title: 'マザベジフィッシュ-イズミ鯛 — Mother Vegetable',
+    description: 'Fresh Izumi Tai enriched with spirulina. 48 different nutrients.',
+    images: [{ url: '/images/mv_tilapia.jpg', width: 800, height: 800, alt: 'マザベジフィッシュ-イズミ鯛' }],
   },
 };
 
@@ -20,11 +20,11 @@ function getTilapiaProduct(locale: string): ProductPageData {
 
   return {
     id: 'tilapia',
-    name: isJa ? 'マザベジフィッシュ-ティラピア' : 'MV Fish - Tilapia',
-    fullName: isJa ? 'マザベジフィッシュ-ティラピア / 1匹' : 'Mother Vegetable Fish - Tilapia / 1 fish',
+    name: isJa ? 'マザベジフィッシュ-イズミ鯛' : 'MV Fish - Izumi Tai',
+    fullName: isJa ? 'マザベジフィッシュ-イズミ鯛 / 1匹' : 'Mother Vegetable Fish - Izumi Tai / 1 fish',
     subtitle: isJa ? '身体のために' : 'for Body',
     taglineJp: '',
-    tagline: isJa ? 'スピルリナで育てた新鮮なティラピア。' : 'Fresh tilapia enriched with spirulina.',
+    tagline: isJa ? 'スピルリナで育てた新鮮なイズミ鯛。' : 'Fresh Izumi Tai enriched with spirulina.',
     price: 13.50,
     currency: 'USD',
     priceDisplay: 'USD 13.50',
@@ -34,11 +34,11 @@ function getTilapiaProduct(locale: string): ProductPageData {
     mainVideoUrl: '',
     benefits: isJa
       ? [
-          'スピルリナで育てた新鮮なティラピアで48種の栄養素を摂取。',
+          'スピルリナで育てた新鮮なイズミ鯛で48種の栄養素を摂取。',
           '高タンパク・オメガ3脂肪酸・必須ミネラルが豊富。',
         ]
       : [
-          '48 different nutrients from tilapia and spirulina.',
+          '48 different nutrients from Izumi Tai and spirulina.',
           'High protein, omega-3 fatty acids, and essential minerals.',
         ],
     howToUse: isJa ? '調理してお食事としてお楽しみください。' : 'Cook and enjoy as part of your daily meal.',
@@ -48,7 +48,7 @@ function getTilapiaProduct(locale: string): ProductPageData {
     centerTitle: '',
     centerImage: '',
     trust: {
-      productName: isJa ? 'マザベジフィッシュ-ティラピア' : 'MV Fish - Tilapia',
+      productName: isJa ? 'マザベジフィッシュ-イズミ鯛' : 'MV Fish - Izumi Tai',
       certification: isJa
         ? '厚生労働省によりヒューマングレード食品認定'
         : 'certified human grade food by Ministry of Health, Labour and Welfare (MHLW), Japan',
@@ -64,7 +64,7 @@ function getTilapiaProduct(locale: string): ProductPageData {
     functionSection: {
       type: 'food',
       title: 'Food Function',
-      subtitle: isJa ? 'マザベジフィッシュ-ティラピア' : 'MV Fish - Tilapia',
+      subtitle: isJa ? 'マザベジフィッシュ-イズミ鯛' : 'MV Fish - Izumi Tai',
       method: isJa ? '調理する' : 'Cook',
       videoUrl: '/Images/Assets/homepage/product/food_video.mov',
       circles: [
@@ -76,7 +76,7 @@ function getTilapiaProduct(locale: string): ProductPageData {
       ],
       summary: {
         total: '48 Nutrients',
-        description: 'Fresh tilapia enriched with spirulina provides a complete nutritional profile including essential fatty acids, amino acids, vitamins, and minerals.',
+        description: 'Fresh Izumi Tai enriched with spirulina provides a complete nutritional profile including essential fatty acids, amino acids, vitamins, and minerals.',
       },
       benefits: isJa
         ? [
@@ -102,8 +102,8 @@ export default async function TilapiaPage({ params }: { params: Promise<{ locale
   return (
     <>
       <ProductJsonLd
-        name="マザベジフィッシュ-ティラピア"
-        description="Fresh tilapia enriched with spirulina. 48 different nutrients."
+        name="マザベジフィッシュ-イズミ鯛"
+        description="Fresh Izumi Tai enriched with spirulina. 48 different nutrients."
         image="/images/mv_tilapia.jpg"
         price={13.50}
         slug="tilapia"

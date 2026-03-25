@@ -64,9 +64,9 @@ function getProducts(isJa: boolean) {
     {
       id: 'tilapia',
       name: isJa ? 'マザベジフィッシュ' : 'MV Fish',
-      subtitle: isJa ? 'ティラピア / 1匹' : 'Tilapia / 1 fish',
+      subtitle: isJa ? 'イズミ鯛 / 1匹' : 'Izumi Tai / 1 fish',
       subName: '',
-      tagline: isJa ? 'スピルリナで育てた新鮮なティラピア' : 'Fresh tilapia enriched with spirulina',
+      tagline: isJa ? 'スピルリナで育てた新鮮なイズミ鯛' : 'Fresh Izumi Tai enriched with spirulina',
       videoUrl: null,
       imageUrl: '/images/mv_tilapia.jpg',
       features: isJa
@@ -256,10 +256,16 @@ export default function ProductsSection() {
                 </div>
 
                 {/* Price */}
-                <div className="flex flex-wrap gap-2 mt-3 mb-2">
+                <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center">
                   <span className="text-white font-bold text-xs md:text-sm">{product.priceJpy}</span>
                   <span className="text-white/50 text-xs md:text-sm">/</span>
-                  <span className="text-[#25c760] font-bold text-xs md:text-sm">{product.priceMvt}</span>
+                  <span className="flex items-center gap-1 text-[#25c760] font-bold text-xs md:text-sm">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="11" stroke="#25c760" strokeWidth="2" fill="#25c760" fillOpacity="0.15"/>
+                      <text x="12" y="16" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#25c760">MVT</text>
+                    </svg>
+                    {product.priceMvt}
+                  </span>
                 </div>
 
                 {/* How to use */}
