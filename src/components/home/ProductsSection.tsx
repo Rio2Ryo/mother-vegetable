@@ -98,6 +98,51 @@ function getProducts(isJa: boolean) {
       howToLink: '/product/mv-soy-sauce',
       productLink: '/product/mv-soy-sauce',
     },
+    {
+      id: 'mv-toner',
+      name: isJa ? 'マザベジ化粧水' : 'MV Toner',
+      subtitle: '150ml',
+      subName: '',
+      tagline: isJa ? 'Confidenceコラーゲン配合の化粧水' : 'Confidence-powered skin toner',
+      videoUrl: null,
+      imageUrl: '/images/mv_toner.jpg',
+      features: isJa
+        ? ['肌トラブル改善・Confidenceコラーゲン配合', 'スピルリナで深い保湿・シワ軽減']
+        : ['Skin Healing Effect — Confidence collagen', 'Deep hydration & wrinkle reduction'],
+      howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
+      howToLink: '/product/mv-toner',
+      productLink: '/product/mv-toner',
+    },
+    {
+      id: 'mv-balm',
+      name: isJa ? 'マザベジバウム' : 'MV Balm',
+      subtitle: '50g',
+      subName: '',
+      tagline: isJa ? 'Confidenceコラーゲン配合のラグジュアリーバウム' : 'Confidence-powered luxury balm',
+      videoUrl: null,
+      imageUrl: '/images/mv_balm.jpg',
+      features: isJa
+        ? ['肌トラブル改善・集中的な肌修復', '顔・唇・ボディのマルチユース']
+        : ['Skin Healing Effect — intensive repair', 'Multi-use for face, lips & body'],
+      howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
+      howToLink: '/product/mv-balm',
+      productLink: '/product/mv-balm',
+    },
+    {
+      id: 'mv-soap',
+      name: isJa ? 'マザベジ石鹸' : 'MV Soap',
+      subtitle: '100g',
+      subName: '',
+      tagline: isJa ? 'Confidenceコラーゲン配合の手作り石鹸' : 'Confidence-powered spirulina soap',
+      videoUrl: null,
+      imageUrl: '/images/mv_soap.jpg',
+      features: isJa
+        ? ['肌トラブル改善・洗いながら肌を修復', 'スピルリナのディープクレンジング']
+        : ['Skin Healing Effect — cleanses & heals', 'Natural spirulina deep cleanse'],
+      howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
+      howToLink: '/product/mv-soap',
+      productLink: '/product/mv-soap',
+    },
   ];
 }
 

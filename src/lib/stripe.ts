@@ -27,6 +27,9 @@ export const PRODUCT_PRICES: Record<string, number> = {
   'tilapia': 1350,     // $13.50
   'mv-salt': 1350,     // $13.50
   'mv-soy-sauce': 1350, // $13.50
+  'mv-toner': 1350,     // $13.50
+  'mv-balm': 1350,      // $13.50
+  'mv-soap': 1350,      // $13.50
 };
 
 // Referral discount price ($33)

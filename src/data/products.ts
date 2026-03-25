@@ -350,14 +350,104 @@ const mvSoySauce: ProductData = {
 };
 
 // ---------------------------------------------------------------------------
+// MV Toner (化粧水)
+// ---------------------------------------------------------------------------
+
+const mvToner: ProductData = {
+  id: 'mv-toner-150ml',
+  name: 'マザベジ化粧水',
+  fullName: 'Mother Vegetable Toner',
+  slug: 'mv-toner',
+  description: 'Spirulina-infused facial toner with Confidence collagen. 150ml. Skin healing and anti-aging.',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-TON-150',
+  category: 'cosmetic',
+  images: ['/images/mv_toner.jpg'],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: [
+    'Skin Healing Effect — Confidence collagen repairs and restores skin.',
+    'Deeply hydrates and reduces wrinkles with spirulina nutrients.',
+  ],
+  taglineJp: '',
+  tagline: 'Confidence-powered skin toner.',
+  subtitle: '150ml',
+  howToUse: 'Apply to cleansed face and neck morning and evening.',
+  howToLink: '#',
+  inStock: true,
+};
+
+// ---------------------------------------------------------------------------
+// MV Balm (バウム)
+// ---------------------------------------------------------------------------
+
+const mvBalm: ProductData = {
+  id: 'mv-balm-50g',
+  name: 'マザベジバウム',
+  fullName: 'Mother Vegetable Balm',
+  slug: 'mv-balm',
+  description: 'Luxury spirulina balm with Confidence collagen. 50g. Multi-purpose skin healing.',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-BAL-050',
+  category: 'cosmetic',
+  images: ['/images/mv_balm.jpg'],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: [
+    'Skin Healing Effect — Confidence collagen for intensive skin repair.',
+    'Multi-use luxury balm for face, lips, and body.',
+  ],
+  taglineJp: '',
+  tagline: 'Confidence-powered luxury balm.',
+  subtitle: '50g',
+  howToUse: 'Apply a small amount to dry areas of skin as needed.',
+  howToLink: '#',
+  inStock: true,
+};
+
+// ---------------------------------------------------------------------------
+// MV Soap (石鹸)
+// ---------------------------------------------------------------------------
+
+const mvSoap: ProductData = {
+  id: 'mv-soap-100g',
+  name: 'マザベジ石鹸',
+  fullName: 'Mother Vegetable Soap',
+  slug: 'mv-soap',
+  description: 'Handcrafted green spirulina soap with Confidence collagen. 100g. Deep cleansing with skin care.',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-SOP-100',
+  category: 'cosmetic',
+  images: ['/images/mv_soap.jpg'],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: [
+    'Skin Healing Effect — Confidence collagen cleanses while healing skin.',
+    'Natural spirulina deep cleanse with anti-aging benefits.',
+  ],
+  taglineJp: '',
+  tagline: 'Confidence-powered spirulina soap.',
+  subtitle: '100g',
+  howToUse: 'Lather with water and massage onto face and body.',
+  howToLink: '#',
+  inStock: true,
+};
+
+// ---------------------------------------------------------------------------
 // Exports
 // ---------------------------------------------------------------------------
 
 /** Active products shown on the site. */
-export const products: ProductData[] = [achieve, confidence, forever, tilapia, mvSalt, mvSoySauce];
+export const products: ProductData[] = [achieve, confidence, forever, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap];
 
 /** All products including discontinued, for admin/order lookup. */
-export const allProducts: ProductData[] = [achieve, confidence, forever, tilapia, mvSalt, mvSoySauce];
+export const allProducts: ProductData[] = [achieve, confidence, forever, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap];
 
 export function getProductBySlug(slug: string): ProductData | undefined {
   return allProducts.find((p) => p.slug === slug);
