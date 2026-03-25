@@ -30,6 +30,7 @@ function getProducts(isJa: boolean) {
       subName: 'Flesh Dry Protein',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
       videoUrl: '/new_achieve_video.mp4',
+      imageUrl: null,
       features: isJa
         ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と']
         : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones'],
@@ -44,12 +45,58 @@ function getProducts(isJa: boolean) {
       subName: 'Flesh Bridge Collagen',
       tagline: isJa ? '肌の気になるところに直接塗布' : 'Skin Healing Effect',
       videoUrl: '/new_confidence_video.mp4',
+      imageUrl: null,
       features: isJa
         ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用']
         : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics'],
       howToUseLabel: isJa ? 'Confidenceの混ぜ方/使い方一覧' : 'Confidence Mixing & Usage Guide',
       howToLink: '/confidence-howto',
       productLink: '/product/confidence',
+    },
+    {
+      id: 'tilapia',
+      name: isJa ? 'マザベジフィッシュ' : 'MV Fish',
+      subtitle: isJa ? 'ティラピア / 1匹' : 'Tilapia / 1 fish',
+      subName: '',
+      tagline: isJa ? 'スピルリナで育てた新鮮なティラピア' : 'Fresh tilapia enriched with spirulina',
+      videoUrl: null,
+      imageUrl: '/images/mv_tilapia.jpg',
+      features: isJa
+        ? ['48種類の栄養素を含む高タンパク食品', 'オメガ3脂肪酸・必須ミネラル豊富']
+        : ['High protein with 48 different nutrients', 'Rich in omega-3 fatty acids & minerals'],
+      howToUseLabel: isJa ? '調理方法を見る' : 'How to Cook',
+      howToLink: '/product/tilapia',
+      productLink: '/product/tilapia',
+    },
+    {
+      id: 'mv-salt',
+      name: isJa ? 'マザベジ塩' : 'MV Salt',
+      subtitle: '50g',
+      subName: '',
+      tagline: isJa ? 'スピルリナ配合の緑色の塩' : 'Green spirulina infused salt',
+      videoUrl: null,
+      imageUrl: '/images/mv_salt.jpg',
+      features: isJa
+        ? ['48種類の栄養素が摂れる緑の塩', '毎日の料理に混ぜるだけ']
+        : ['Green salt with 48 different nutrients', 'Simply add to everyday cooking'],
+      howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
+      howToLink: '/product/mv-salt',
+      productLink: '/product/mv-salt',
+    },
+    {
+      id: 'mv-soy-sauce',
+      name: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
+      subtitle: '150ml',
+      subName: '',
+      tagline: isJa ? 'スピルリナ配合プレミアム醤油' : 'Premium spirulina dark soy sauce',
+      videoUrl: null,
+      imageUrl: '/images/mv_soy_sauce.jpg',
+      features: isJa
+        ? ['48種類の栄養素入りプレミアム醤油', '豊かな旨味と栄養素で毎日をサポート']
+        : ['Premium soy sauce with 48 nutrients', 'Rich umami with added health benefits'],
+      howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
+      howToLink: '/product/mv-soy-sauce',
+      productLink: '/product/mv-soy-sauce',
     },
   ];
 }
@@ -77,7 +124,7 @@ export default function ProductsSection() {
 
       {/* Product Cards */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -92,16 +139,24 @@ export default function ProductsSection() {
           >
             {/* Mobile: Horizontal Layout / Desktop: Vertical Layout */}
             <div className="flex flex-row md:flex-col gap-3 md:gap-0">
-              {/* Video */}
+              {/* Video or Image */}
               <div className="flex-shrink-0 self-stretch md:self-auto md:mb-4 md:flex md:justify-center">
-                <video
-                  src={product.videoUrl}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-24 h-full md:w-28 md:h-52 object-cover rounded-lg"
-                />
+                {product.videoUrl ? (
+                  <video
+                    src={product.videoUrl}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-24 h-full md:w-28 md:h-52 object-cover rounded-lg"
+                  />
+                ) : (
+                  <img
+                    src={product.imageUrl!}
+                    alt={product.name}
+                    className="w-24 h-24 md:w-28 md:h-52 object-cover rounded-lg"
+                  />
+                )}
               </div>
 
               {/* Text Content */}
