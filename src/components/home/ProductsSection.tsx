@@ -260,10 +260,7 @@ export default function ProductsSection() {
                   <span className="text-white font-bold text-xs md:text-sm">{product.priceJpy}</span>
                   <span className="text-white/50 text-xs md:text-sm">/</span>
                   <span className="flex items-center gap-1 text-[#25c760] font-bold text-xs md:text-sm">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="12" cy="12" r="11" stroke="#25c760" strokeWidth="2" fill="#25c760" fillOpacity="0.15"/>
-                      <text x="12" y="16" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#25c760">MVT</text>
-                    </svg>
+                    <img src="/images/mvt_coin.png" alt="MVT" width={16} height={16} className="inline-block" />
                     {product.priceMvt}
                   </span>
                 </div>
