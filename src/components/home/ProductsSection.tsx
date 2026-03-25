@@ -37,6 +37,9 @@ function getProducts(isJa: boolean) {
       howToUseLabel: isJa ? 'Achieveの料理/ドリンク一覧' : 'Achieve Recipes & Drinks',
       howToLink: '/achieve-howto',
       productLink: '/product/achieve',
+      priceUsd: '$36.70',
+      priceJpy: '¥5,500',
+      priceMvt: '10 MVT',
     },
     {
       id: 'confidence',
@@ -52,6 +55,9 @@ function getProducts(isJa: boolean) {
       howToUseLabel: isJa ? 'Confidenceの混ぜ方/使い方一覧' : 'Confidence Mixing & Usage Guide',
       howToLink: '/confidence-howto',
       productLink: '/product/confidence',
+      priceUsd: '$36.70',
+      priceJpy: '¥5,500',
+      priceMvt: '10 MVT',
     },
     {
       id: 'tilapia',
@@ -67,6 +73,9 @@ function getProducts(isJa: boolean) {
       howToUseLabel: isJa ? '調理方法を見る' : 'How to Cook',
       howToLink: '/product/tilapia',
       productLink: '/product/tilapia',
+      priceUsd: '$13.50',
+      priceJpy: '¥2,000',
+      priceMvt: '4 MVT',
     },
     {
       id: 'mv-salt',
@@ -82,6 +91,9 @@ function getProducts(isJa: boolean) {
       howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
       howToLink: '/product/mv-salt',
       productLink: '/product/mv-salt',
+      priceUsd: '$13.50',
+      priceJpy: '¥2,000',
+      priceMvt: '4 MVT',
     },
     {
       id: 'mv-soy-sauce',
@@ -97,6 +109,9 @@ function getProducts(isJa: boolean) {
       howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
       howToLink: '/product/mv-soy-sauce',
       productLink: '/product/mv-soy-sauce',
+      priceUsd: '$13.50',
+      priceJpy: '¥2,000',
+      priceMvt: '4 MVT',
     },
     {
       id: 'mv-toner',
@@ -112,6 +127,9 @@ function getProducts(isJa: boolean) {
       howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
       howToLink: '/product/mv-toner',
       productLink: '/product/mv-toner',
+      priceUsd: '$13.50',
+      priceJpy: '¥2,000',
+      priceMvt: '4 MVT',
     },
     {
       id: 'mv-balm',
@@ -127,6 +145,9 @@ function getProducts(isJa: boolean) {
       howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
       howToLink: '/product/mv-balm',
       productLink: '/product/mv-balm',
+      priceUsd: '$13.50',
+      priceJpy: '¥2,000',
+      priceMvt: '4 MVT',
     },
     {
       id: 'mv-soap',
@@ -142,6 +163,9 @@ function getProducts(isJa: boolean) {
       howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
       howToLink: '/product/mv-soap',
       productLink: '/product/mv-soap',
+      priceUsd: '$13.50',
+      priceJpy: '¥2,000',
+      priceMvt: '4 MVT',
     },
   ];
 }
@@ -223,6 +247,15 @@ export default function ProductsSection() {
                       {feature}
                     </p>
                   ))}
+                </div>
+
+                {/* Price */}
+                <div className="flex flex-wrap gap-2 mt-3 mb-2">
+                  <span className="text-white font-bold text-xs md:text-sm">{product.priceUsd}</span>
+                  <span className="text-white/50 text-xs md:text-sm">/</span>
+                  <span className="text-white font-bold text-xs md:text-sm">{product.priceJpy}</span>
+                  <span className="text-white/50 text-xs md:text-sm">/</span>
+                  <span className="text-[#25c760] font-bold text-xs md:text-sm">{product.priceMvt}</span>
                 </div>
 
                 {/* How to use */}
