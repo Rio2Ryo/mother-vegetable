@@ -153,3 +153,28 @@ model PayoutRequest {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model News {
+  id          String    @id @default(cuid())
+  title       String
+  content     String
+  slug        String    @unique
+  isPublished Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Coupon {
+  id             String    @id @default(cuid())
+  code           String    @unique
+  discountType   String    @default("percentage") // percentage or fixed
+  discountValue  Float
+  minOrderAmount Float?
+  maxUses        Int?
+  usedCount      Int       @default(0)
+  isActive       Boolean   @default(true)
+  expiresAt      DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}

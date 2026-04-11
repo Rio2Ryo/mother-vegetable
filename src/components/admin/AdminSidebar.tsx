@@ -6,6 +6,9 @@ import {
   LayoutDashboard,
   ShoppingCart,
   Users,
+  Package,
+  Newspaper,
+  Ticket,
   X,
   ChevronLeft,
 } from "lucide-react";
@@ -18,7 +21,10 @@ interface Props {
 const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
+  { href: "/admin/products", label: "Products", icon: Package },
   { href: "/admin/instructors", label: "Instructors", icon: Users },
+  { href: "/admin/news", label: "News", icon: Newspaper },
+  { href: "/admin/coupons", label: "Coupons", icon: Ticket },
 ];
 
 export default function AdminSidebar({ open, onClose }: Props) {
