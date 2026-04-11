@@ -172,6 +172,11 @@ function getProducts(isJa: boolean) {
   ];
 }
 
+type Category = 'all' | 'food' | 'cosmetic';
+
+const FOOD_IDS = new Set(['achieve', 'tilapia', 'mv-salt', 'mv-soy-sauce', 'forever']);
+const COSMETIC_IDS = new Set(['confidence', 'mv-toner', 'mv-balm', 'mv-soap']);
+
 export default function ProductsSection() {
   const locale = useLocale();
   const isJa = locale === 'ja';
@@ -180,6 +185,20 @@ export default function ProductsSection() {
   const [quantities, setQuantities] = useState<Record<string, number>>(
     () => Object.fromEntries(products.map((p) => [p.id, 1]))
   );
+  const [activeCategory, setActiveCategory] = useState<Category>('all');
+
+  const filteredProducts = products.filter((p) => {
+    if (activeCategory === 'all') return true;
+    if (activeCategory === 'food') return FOOD_IDS.has(p.id);
+    if (activeCategory === 'cosmetic') return COSMETIC_IDS.has(p.id);
+    return true;
+  });
+
+  const categories: { key: Category; label: string }[] = [
+    { key: 'all', label: isJa ? 'すべて' : 'All' },
+    { key: 'food', label: isJa ? 'フード' : 'Food' },
+    { key: 'cosmetic', label: isJa ? 'コスメ' : 'Cosmetic' },
+  ];
 
   return (
     <motion.div
@@ -195,7 +214,24 @@ export default function ProductsSection() {
         Products
       </h2>
 
-      <div className="w-32 md:w-48 h-1 md:h-1.5 bg-gradient-to-r from-transparent via-green-400 to-transparent mx-auto rounded-full mt-4 md:mt-6 mb-6 md:mb-12 opacity-80" />
+      <div className="w-32 md:w-48 h-1 md:h-1.5 bg-gradient-to-r from-transparent via-green-400 to-transparent mx-auto rounded-full mt-4 md:mt-6 mb-6 md:mb-8 opacity-80" />
+
+      {/* Category Filter */}
+      <div className="flex justify-center gap-2 md:gap-3 mb-6 md:mb-12">
+        {categories.map((cat) => (
+          <button
+            key={cat.key}
+            onClick={() => setActiveCategory(cat.key)}
+            className={`px-4 py-1.5 md:px-6 md:py-2 rounded-full text-xs md:text-sm font-semibold transition-colors ${
+              activeCategory === cat.key
+                ? 'bg-[#25c760] text-black'
+                : 'border border-[#25c760] text-[#25c760] hover:bg-[#25c760]/10'
+            }`}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
 
       {/* Product Cards */}
       <motion.div
@@ -205,7 +241,7 @@ export default function ProductsSection() {
         whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
       >
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <motion.div
             key={product.id}
             variants={cardVariants}
