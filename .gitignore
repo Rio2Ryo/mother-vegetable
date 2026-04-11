@@ -49,3 +49,4 @@ dev.db
 
 # workers
 workers/*/node_modules/
+.env*.local
