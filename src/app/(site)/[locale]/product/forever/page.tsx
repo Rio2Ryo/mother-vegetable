@@ -32,6 +32,8 @@ function getForeverProduct(locale: string): ProductPageData {
     price: 36.70,
     currency: 'USD',
     priceDisplay: 'USD 36.70',
+    priceJpy: '¥5,500',
+    priceMvt: '10 MVT',
     inStock: getProductBySlug('forever')?.inStock ?? true,
     productImage: '/cdn/products_achieve_10001.png',
     videoUrls: [

@@ -7,7 +7,7 @@ import { getProductBySlug } from '@/data/products';
 export const metadata: Metadata = {
   title: 'Achieve — 48 Nutrients in One Stick',
   description:
-    'Mother Vegetable Achieve delivers 48 different nutrients in a single stick. Premium health supplement for daily wellness. USD 36.70 with free worldwide shipping.',
+    'Mother Vegetable Achieve delivers 48 different nutrients in a single stick. Premium health supplement for daily wellness. ¥5,500 with free worldwide shipping.',
   openGraph: {
     title: 'Mother Vegetable Achieve — 48 Nutrients in One Stick',
     description: 'Premium health supplement delivering 48 nutrients in one stick.',
@@ -33,6 +33,8 @@ function getAchieveProduct(locale: string): ProductPageData {
     price: 36.70,
     currency: 'USD',
     priceDisplay: 'USD 36.70',
+    priceJpy: '¥5,500',
+    priceMvt: '10 MVT',
     inStock: getProductBySlug('achieve')?.inStock ?? true,
     productImage: '/cdn/products_achieve_10001.png',
     videoUrls: [

@@ -7,7 +7,7 @@ import { getProductBySlug } from '@/data/products';
 export const metadata: Metadata = {
   title: 'マザベジ醤油 — Mother Vegetable',
   description:
-    'Premium dark soy sauce with spirulina. 150ml. Rich umami with 48 nutrients. USD 13.50.',
+    'Premium dark soy sauce with spirulina. 150ml. Rich umami with 48 nutrients. ¥2,000.',
   openGraph: {
     title: 'マザベジ醤油 — Mother Vegetable',
     description: 'Spirulina-infused premium dark soy sauce with 48 nutrients.',
@@ -28,6 +28,8 @@ function getMvSoySauceProduct(locale: string): ProductPageData {
     price: 13.50,
     currency: 'USD',
     priceDisplay: 'USD 13.50',
+    priceJpy: '¥2,000',
+    priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-soy-sauce')?.inStock ?? true,
     productImage: '/images/mv_soy_sauce.jpg',
     videoUrls: [],

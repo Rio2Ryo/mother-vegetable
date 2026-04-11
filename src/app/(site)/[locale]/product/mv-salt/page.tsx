@@ -7,7 +7,7 @@ import { getProductBySlug } from '@/data/products';
 export const metadata: Metadata = {
   title: 'マザベジ塩 — Mother Vegetable',
   description:
-    'Green spirulina infused salt. 50g. Rich in minerals and 48 nutrients. USD 13.50.',
+    'Green spirulina infused salt. 50g. Rich in minerals and 48 nutrients. ¥2,000.',
   openGraph: {
     title: 'マザベジ塩 — Mother Vegetable',
     description: 'Green spirulina salt rich in minerals and 48 nutrients.',
@@ -28,6 +28,8 @@ function getMvSaltProduct(locale: string): ProductPageData {
     price: 13.50,
     currency: 'USD',
     priceDisplay: 'USD 13.50',
+    priceJpy: '¥2,000',
+    priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-salt')?.inStock ?? true,
     productImage: '/images/mv_salt.jpg',
     videoUrls: [],

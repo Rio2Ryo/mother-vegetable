@@ -7,7 +7,7 @@ import { getProductBySlug } from '@/data/products';
 export const metadata: Metadata = {
   title: 'Confidence — Skin Healing Effect',
   description:
-    'Mother Vegetable Confidence cream for all skin types. Natural skin healing and vitality. USD 36.70 with free worldwide shipping.',
+    'Mother Vegetable Confidence cream for all skin types. Natural skin healing and vitality. ¥5,500 with free worldwide shipping.',
   openGraph: {
     title: 'Mother Vegetable Confidence — Skin Healing Effect',
     description: 'Natural skin healing cream for all skin types.',
@@ -33,6 +33,8 @@ function getConfidenceProduct(locale: string): ProductPageData {
     price: 36.70,
     currency: 'USD',
     priceDisplay: 'USD 36.70',
+    priceJpy: '¥5,500',
+    priceMvt: '10 MVT',
     inStock: getProductBySlug('confidence')?.inStock ?? true,
     productImage: '/cdn/products_achieve_10001.png',
     videoUrls: [

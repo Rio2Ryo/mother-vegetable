@@ -65,6 +65,8 @@ export interface ProductPageData {
   price: number;
   currency: string;
   priceDisplay: string;
+  priceJpy?: string;
+  priceMvt?: string;
   inStock: boolean;
   videoUrls: string[];
   mainVideoUrl: string;
@@ -479,18 +481,18 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                 </div>
 
                 <h2 className="product-price" style={{ fontFamily: 'Arial, sans-serif' }}>
-                  {hasReferral ? (
-                    <>
-                      <span style={{ textDecoration: 'line-through', opacity: 0.5, fontSize: '0.7em', marginRight: '8px' }}>
-                        {product.priceDisplay}
-                      </span>
-                      <span style={{ color: '#25C760' }}>
-                        USD {REFERRAL_DISCOUNT_PRICE.toFixed(2)}
-                      </span>
-                    </>
-                  ) : (
-                    product.priceDisplay
+                  {product.priceJpy && (
+                    <span style={{ marginRight: product.priceMvt ? '12px' : '0' }}>
+                      {product.priceJpy}
+                    </span>
                   )}
+                  {product.priceMvt && (
+                    <span style={{ color: '#25C760', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                      <img src="/images/mvt_coin.png" alt="MVT" width={20} height={20} style={{ display: 'inline-block' }} />
+                      {product.priceMvt}
+                    </span>
+                  )}
+                  {!product.priceJpy && !product.priceMvt && product.priceDisplay}
                 </h2>
                 {hasReferral && (
                   <div style={{ display: 'inline-block', padding: '4px 12px', background: 'rgba(37,199,96,0.15)', border: '1px solid #25C760', borderRadius: '6px', marginBottom: '8px' }}>
