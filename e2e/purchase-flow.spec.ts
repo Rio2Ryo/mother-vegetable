@@ -1,6 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { waitForPageReady } from './helpers';
 
+// When Stripe keys are configured, tests hit the real API.
+// Without keys, tests use mock responses to verify UI/form behavior only.
+const HAS_STRIPE = !!(process.env.STRIPE_SECRET_KEY && process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+
 test.describe('Full Purchase Flow', () => {
   test.setTimeout(60_000);
 
@@ -49,27 +53,33 @@ test.describe('Full Purchase Flow', () => {
     const orderSummary = page.locator('.bg-gray-900');
     await expect(orderSummary.getByText('Achieve')).toBeVisible();
 
-    // Intercept checkout API to prevent Stripe redirect
+    // Mock API only when Stripe keys are not configured
     let apiCalled = false;
-    await page.route('**/api/checkout', async (route) => {
-      apiCalled = true;
-      await new Promise((r) => setTimeout(r, 500));
-      await route.fulfill({
-        status: 500,
-        contentType: 'application/json',
-        body: JSON.stringify({ error: 'Test mock: checkout intercepted' }),
+    if (!HAS_STRIPE) {
+      await page.route('**/api/checkout', async (route) => {
+        apiCalled = true;
+        await new Promise((r) => setTimeout(r, 500));
+        await route.fulfill({
+          status: 500,
+          contentType: 'application/json',
+          body: JSON.stringify({ error: 'Test mock: checkout intercepted' }),
+        });
       });
-    });
+    }
 
     // Step 6: Place order
     await page.getByRole('button', { name: 'Place Order' }).click();
-    await page.waitForTimeout(3000);
 
-    // Step 7: Verify checkout API was called (form submission works end-to-end)
-    expect(apiCalled).toBe(true);
-
-    // Page should remain on checkout (mock returned error)
-    expect(page.url()).toContain('checkout');
+    if (HAS_STRIPE) {
+      // Real Stripe: should redirect to Stripe hosted checkout
+      await page.waitForURL('**/checkout.stripe.com/**', { timeout: 30000 });
+      expect(page.url()).toContain('checkout.stripe.com');
+    } else {
+      // Mock: verify API was called and page stays on checkout
+      await page.waitForTimeout(3000);
+      expect(apiCalled).toBe(true);
+      expect(page.url()).toContain('checkout');
+    }
   });
 
   test('checkout success page renders correctly', async ({ page }) => {
@@ -117,16 +127,18 @@ test.describe('Full Purchase Flow', () => {
     await expect(orderSummary.getByText('Achieve')).toBeVisible();
     await expect(orderSummary.getByText('Confidence')).toBeVisible();
 
-    // Intercept checkout API
+    // Mock API only when Stripe keys are not configured
     let apiCalled = false;
-    await page.route('**/api/checkout', async (route) => {
-      apiCalled = true;
-      await route.fulfill({
-        status: 500,
-        contentType: 'application/json',
-        body: JSON.stringify({ error: 'Test mock' }),
+    if (!HAS_STRIPE) {
+      await page.route('**/api/checkout', async (route) => {
+        apiCalled = true;
+        await route.fulfill({
+          status: 500,
+          contentType: 'application/json',
+          body: JSON.stringify({ error: 'Test mock' }),
+        });
       });
-    });
+    }
 
     // Fill form and submit
     await page.getByPlaceholder('First Name').fill('Multi');
@@ -138,10 +150,14 @@ test.describe('Full Purchase Flow', () => {
     await page.getByPlaceholder('Country').fill('Japan');
 
     await page.getByRole('button', { name: 'Place Order' }).click();
-    await page.waitForTimeout(3000);
 
-    // Verify the API was called with multi-product cart
-    expect(apiCalled).toBe(true);
+    if (HAS_STRIPE) {
+      await page.waitForURL('**/checkout.stripe.com/**', { timeout: 30000 });
+      expect(page.url()).toContain('checkout.stripe.com');
+    } else {
+      await page.waitForTimeout(3000);
+      expect(apiCalled).toBe(true);
+    }
   });
 
   test('buy now button goes directly to checkout', async ({ page }) => {

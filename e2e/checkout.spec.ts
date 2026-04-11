@@ -1,6 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { waitForPageReady, addProductToCart } from './helpers';
 
+// When Stripe keys are configured, tests hit the real API.
+// Without keys, tests use mock responses to verify UI/form behavior only.
+const HAS_STRIPE = !!(process.env.STRIPE_SECRET_KEY && process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+
 test.describe('Checkout', () => {
   test.beforeEach(async ({ page }) => {
     // Start with clean state
@@ -125,19 +129,19 @@ test.describe('Checkout', () => {
     await page.goto('checkout');
     await waitForPageReady(page);
 
-    // Intercept the checkout API to prevent actual Stripe redirect
+    // Mock API only when Stripe keys are not configured
     let apiCalled = false;
-    await page.route('**/api/checkout', async (route) => {
-      apiCalled = true;
-      // Add a small delay so we can observe the submitting state
-      await new Promise((r) => setTimeout(r, 1000));
-      // Return a mock error so we can verify the submission flow
-      await route.fulfill({
-        status: 500,
-        contentType: 'application/json',
-        body: JSON.stringify({ error: 'Test mock: checkout intercepted' }),
+    if (!HAS_STRIPE) {
+      await page.route('**/api/checkout', async (route) => {
+        apiCalled = true;
+        await new Promise((r) => setTimeout(r, 1000));
+        await route.fulfill({
+          status: 500,
+          contentType: 'application/json',
+          body: JSON.stringify({ error: 'Test mock: checkout intercepted' }),
+        });
       });
-    });
+    }
 
     // Fill all required fields
     await page.getByPlaceholder('First Name').fill('Jane');
@@ -153,15 +157,16 @@ test.describe('Checkout', () => {
     const placeOrderBtn = page.getByRole('button', { name: 'Place Order' });
     await placeOrderBtn.click();
 
-    // Wait for the mocked API response to be processed
-    await page.waitForTimeout(3000);
-
-    // Verify the API was actually called
-    expect(apiCalled).toBe(true);
-
-    // Should remain on the checkout page (mock returned error)
-    const url = page.url();
-    expect(url).toContain('checkout');
+    if (HAS_STRIPE) {
+      // Real Stripe: should redirect to Stripe hosted checkout
+      await page.waitForURL('**/checkout.stripe.com/**', { timeout: 30000 });
+      expect(page.url()).toContain('checkout.stripe.com');
+    } else {
+      // Mock: verify API was called and page stays on checkout
+      await page.waitForTimeout(3000);
+      expect(apiCalled).toBe(true);
+      expect(page.url()).toContain('checkout');
+    }
   });
 
   test('checkout success page renders with i18n', async ({ page }) => {
