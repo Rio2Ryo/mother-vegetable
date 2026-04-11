@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
-import ProductPage, { type ProductPageData } from '@/components/ProductPage';
+import SimpleProductPage, { type SimpleProductPageData } from '@/components/SimpleProductPage';
 import ProductJsonLd from '@/components/ProductJsonLd';
 import { getProductBySlug } from '@/data/products';
 
@@ -15,40 +15,38 @@ export const metadata: Metadata = {
   },
 };
 
-function getMvSaltProduct(locale: string): ProductPageData {
+function getMvSaltProduct(locale: string): SimpleProductPageData {
   const isJa = locale === 'ja';
 
   return {
     id: 'mv-salt',
+    category: 'food',
     name: isJa ? 'マザベジ塩' : 'MV Salt',
     fullName: isJa ? 'マザベジ塩 / 50g' : 'Mother Vegetable Salt / 50g',
     subtitle: '50g',
-    taglineJp: '',
     tagline: isJa ? 'スピルリナ配合の緑色の塩。' : 'Green spirulina infused salt.',
     price: 13.50,
     currency: 'USD',
-    priceDisplay: 'USD 13.50',
     priceJpy: '¥2,000',
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-salt')?.inStock ?? true,
     productImage: '/cdn/mv_salt.jpg',
-    videoUrls: [],
-    mainVideoUrl: '',
     benefits: isJa
       ? [
-          'スピルリナ配合の緑色の塩で48種の栄養素を補給。',
-          '毎日の料理に混ぜるだけで栄養価アップ。',
+          'ミネラル豊富 — 天然塩にスピルリナの48種の栄養素が加わり、鉄・亜鉛・マグネシウムなどを効率的に摂取。',
+          '手軽に栄養強化 — 普段の塩をマザベジ塩に替えるだけで、毎日の食事の栄養価がアップ。',
+          '旨味を引き立てる — スピルリナ由来の天然アミノ酸が食材本来の味を深く引き出します。',
+          '万能調味料 — 調理・味付け・仕上げ・保存まで、あらゆるシーンで活躍する万能塩。',
         ]
       : [
-          'Green spirulina salt provides 48 different nutrients.',
-          'Simply add to everyday cooking for a nutritional boost.',
+          'Mineral-Rich — Combines natural salt with 48 spirulina nutrients including iron, zinc, and magnesium.',
+          'Effortless Nutrition — Simply replace your regular salt to boost daily nutritional intake.',
+          'Enhances Natural Flavor — Spirulina-derived amino acids bring out the deeper taste of every ingredient.',
+          'Versatile All-Purpose Salt — Perfect for cooking, seasoning, finishing, and even food preservation.',
         ],
-    howToUse: isJa ? '普通の塩と同様に料理や調味に使用してください。' : 'Use as everyday salt in cooking and seasoning.',
-    howToLink: '#',
-    leftSection: { title: '', items: [] },
-    rightSection: { title: '', items: [] },
-    centerTitle: '',
-    centerImage: '',
+    howToUse: isJa
+      ? '調理時：煮物・炒め物・スープなど通常の塩と同量でお使いください。味付け：食卓で料理の仕上げに一振り。おにぎり・サラダ・ゆで卵にもおすすめ。保存食：漬物や干物など伝統的な保存にも最適です。'
+      : 'Cooking: Use the same amount as regular salt in soups, stir-fries, and simmered dishes. Finishing: Sprinkle over salads, rice balls, boiled eggs, and grilled meats. Preserving: Ideal for traditional pickling and curing methods.',
     trust: {
       productName: isJa ? 'マザベジ塩' : 'MV Salt',
       certification: isJa
@@ -64,34 +62,26 @@ function getMvSaltProduct(locale: string): ProductPageData {
       ],
     },
     functionSection: {
-      type: 'food',
-      title: 'Food Function',
       subtitle: isJa ? 'マザベジ塩' : 'MV Salt',
-      method: isJa ? '加える / 振りかける' : 'Add / Sprinkle',
-      videoUrl: '/Images/Assets/homepage/product/food_video.mov',
       circles: [
-        { name: 'Essential Fatty Acids', detail: '9 types' },
-        { name: 'Amino Acids', detail: '10 types' },
-        { name: 'Vital Vitamins', detail: '18 types' },
-        { name: 'Key Minerals', detail: '3 types' },
-        { name: 'Spirulina Nutrients', detail: '48 types' },
+        { name: 'Natural Minerals', detail: 'Fe, Zn, Mg' },
+        { name: 'Electrolytes', detail: 'Na, K balance' },
+        { name: 'Trace Elements', detail: 'Iodine, Se' },
+        { name: 'Amino Acids', detail: 'Umami boost' },
+        { name: 'Spirulina Blend', detail: '48 nutrients' },
       ],
-      summary: {
-        total: '48 Nutrients',
-        description: 'Spirulina-infused green salt provides essential minerals, vitamins, and nutrients in every pinch.',
-      },
       benefits: isJa
         ? [
-            { title: '子ども', image: '/Images/Assets/homepage/foodFunction/children.png', items: ['ミネラル補給', '免疫力の向上', '骨の成長をサポート'] },
-            { title: '成人', image: '/Images/Assets/homepage/foodFunction/alduts.png', items: ['毎日の栄養補給', '代謝の改善', '疲労軽減'] },
-            { title: '高齢者', image: '/Images/Assets/homepage/foodFunction/seniors.png', items: ['ミネラルバランスの維持', '食欲と栄養摂取の向上', '骨密度の促進'] },
-            { title: 'アスリート', image: '/Images/Assets/homepage/foodFunction/athletes.png', items: ['電解質補給', '筋肉回復のサポート', '効率的な栄養吸収'] },
+            { title: '子ども', items: ['成長に必要なミネラル補給', '免疫力の向上', '骨の成長をサポート', '鉄分で集中力アップ', '偏食でもミネラル確保'] },
+            { title: '成人', items: ['毎日の栄養補給を手軽に', '代謝の改善', '疲労軽減', '電解質バランスの維持', '抗酸化ミネラルで細胞保護'] },
+            { title: '高齢者', items: ['ミネラルバランスの維持', '食欲と栄養摂取の向上', '骨密度の促進', '減塩しながら栄養補給', '消化を助けるミネラル配合'] },
+            { title: 'アスリート', items: ['電解質の効率的な補給', '筋肉回復のサポート', '効率的な栄養吸収', '運動後のミネラル補充', '持久力向上をサポート'] },
           ]
         : [
-            { title: 'Children', image: '/Images/Assets/homepage/foodFunction/children.png', items: ['Mineral supplementation', 'Boosts immunity', 'Supports bone growth'] },
-            { title: 'Adults', image: '/Images/Assets/homepage/foodFunction/alduts.png', items: ['Daily nutrition', 'Improves metabolism', 'Reduces fatigue'] },
-            { title: 'Seniors', image: '/Images/Assets/homepage/foodFunction/seniors.png', items: ['Maintains mineral balance', 'Boosts nutrient intake', 'Promotes bone density'] },
-            { title: 'Athletes', image: '/Images/Assets/homepage/foodFunction/athletes.png', items: ['Electrolyte replenishment', 'Supports muscle recovery', 'Efficient nutrient absorption'] },
+            { title: 'Children', items: ['Essential minerals for growth', 'Boosts immunity', 'Supports bone development', 'Iron improves focus & concentration', 'Ensures mineral intake for picky eaters'] },
+            { title: 'Adults', items: ['Effortless daily nutrition', 'Improves metabolism', 'Reduces fatigue', 'Maintains electrolyte balance', 'Antioxidant minerals protect cells'] },
+            { title: 'Seniors', items: ['Maintains mineral balance', 'Boosts appetite & nutrient intake', 'Promotes bone density', 'Nutrition boost with less sodium', 'Digestive-friendly mineral blend'] },
+            { title: 'Athletes', items: ['Efficient electrolyte replenishment', 'Supports muscle recovery', 'Enhanced nutrient absorption', 'Post-workout mineral restoration', 'Supports endurance performance'] },
           ],
     },
   };
@@ -110,7 +100,7 @@ export default async function MvSaltPage({ params }: { params: Promise<{ locale:
         price={13.50}
         slug="mv-salt"
       />
-      <ProductPage product={product} />
+      <SimpleProductPage product={product} />
     </>
   );
 }

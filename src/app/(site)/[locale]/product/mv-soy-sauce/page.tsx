@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
-import ProductPage, { type ProductPageData } from '@/components/ProductPage';
+import SimpleProductPage, { type SimpleProductPageData } from '@/components/SimpleProductPage';
 import ProductJsonLd from '@/components/ProductJsonLd';
 import { getProductBySlug } from '@/data/products';
 
@@ -15,40 +15,38 @@ export const metadata: Metadata = {
   },
 };
 
-function getMvSoySauceProduct(locale: string): ProductPageData {
+function getMvSoySauceProduct(locale: string): SimpleProductPageData {
   const isJa = locale === 'ja';
 
   return {
     id: 'mv-soy-sauce',
+    category: 'food',
     name: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
     fullName: isJa ? 'マザベジ醤油 / 150ml' : 'Mother Vegetable Soy Sauce / 150ml',
     subtitle: '150ml',
-    taglineJp: '',
     tagline: isJa ? 'スピルリナ配合のプレミアム醤油。' : 'Premium spirulina dark soy sauce.',
     price: 13.50,
     currency: 'USD',
-    priceDisplay: 'USD 13.50',
     priceJpy: '¥2,000',
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-soy-sauce')?.inStock ?? true,
     productImage: '/cdn/mv_soy_sauce.jpg',
-    videoUrls: [],
-    mainVideoUrl: '',
     benefits: isJa
       ? [
-          'スピルリナ配合のプレミアム醤油で48種の栄養素を補給。',
-          '豊かな旨味と栄養素で毎日の食事をサポート。',
+          '旨味を極める — スピルリナ由来の天然アミノ酸が醤油の旨味を深く引き立て、料理の味わいをワンランクアップ。',
+          '栄養強化調味料 — 48種の栄養素を含み、調味するだけで日々の栄養バランスを整えます。',
+          '和食との相性抜群 — 刺身・寿司・煮物など伝統的な和食をより一層引き立てる本格醤油。',
+          '職人仕込み — 伝統的な醸造技法にスピルリナを融合させた、こだわりの逸品。',
         ]
       : [
-          'Premium spirulina soy sauce provides 48 different nutrients.',
-          'Rich umami taste with added health benefits for daily meals.',
+          'Ultimate Umami — Spirulina-derived natural amino acids deepen the soy sauce flavor, elevating every dish.',
+          'Nutrient-Fortified Seasoning — Contains 48 nutrients, improving your daily nutritional balance with every use.',
+          'Perfect for Japanese Cuisine — Enhances sashimi, sushi, simmered dishes, and other traditional fare.',
+          'Artisanal Craft — A premium blend of traditional brewing techniques and spirulina infusion.',
         ],
-    howToUse: isJa ? '普通の醤油と同様に調理や付け醤油にご使用ください。' : 'Use as everyday soy sauce for cooking and dipping.',
-    howToLink: '#',
-    leftSection: { title: '', items: [] },
-    rightSection: { title: '', items: [] },
-    centerTitle: '',
-    centerImage: '',
+    howToUse: isJa
+      ? '調理に：煮物・炒め物・照り焼きの味付けに。付け醤油：刺身・寿司・冷奴などのつけダレとして。マリネ：肉や魚の下味に漬け込んで旨味をプラス。ドレッシング：オリーブオイルやお酢と合わせて和風ドレッシングに。'
+      : 'Cooking: Season simmered dishes, stir-fries, and teriyaki. Dipping: Serve alongside sashimi, sushi, and cold tofu. Marinades: Marinate meat or fish to infuse deep umami. Dressing: Mix with olive oil and vinegar for a Japanese-style dressing.',
     trust: {
       productName: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
       certification: isJa
@@ -64,34 +62,26 @@ function getMvSoySauceProduct(locale: string): ProductPageData {
       ],
     },
     functionSection: {
-      type: 'food',
-      title: 'Food Function',
       subtitle: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
-      method: isJa ? '加える / 付ける' : 'Add / Dip',
-      videoUrl: '/Images/Assets/homepage/product/food_video.mov',
       circles: [
-        { name: 'Essential Fatty Acids', detail: '9 types' },
-        { name: 'Amino Acids', detail: '10 types' },
-        { name: 'Vital Vitamins', detail: '18 types' },
-        { name: 'Key Minerals', detail: '3 types' },
-        { name: 'Spirulina Nutrients', detail: '48 types' },
+        { name: 'Umami Amino Acids', detail: 'Glutamic acid' },
+        { name: 'Fermented Enzymes', detail: 'Natural brew' },
+        { name: 'B Vitamins', detail: 'B1, B2, B6' },
+        { name: 'Antioxidants', detail: 'Polyphenols' },
+        { name: 'Spirulina Infusion', detail: '48 nutrients' },
       ],
-      summary: {
-        total: '48 Nutrients',
-        description: 'Spirulina-infused premium dark soy sauce delivers essential nutrients with every drop of rich umami flavor.',
-      },
       benefits: isJa
         ? [
-            { title: '子ども', image: '/Images/Assets/homepage/foodFunction/children.png', items: ['栄養豊富な調味料', '免疫力の向上', '食欲増進'] },
-            { title: '成人', image: '/Images/Assets/homepage/foodFunction/alduts.png', items: ['毎日の栄養補給', '代謝の改善', '細胞の老化抑制'] },
-            { title: '高齢者', image: '/Images/Assets/homepage/foodFunction/seniors.png', items: ['食欲と栄養摂取の向上', '内臓機能のサポート', '骨密度の促進'] },
-            { title: 'アスリート', image: '/Images/Assets/homepage/foodFunction/athletes.png', items: ['効率的な栄養吸収', '筋肉回復のサポート', '炎症軽減'] },
+            { title: '子ども', items: ['栄養豊富な調味料で偏食対策', '免疫力の向上', '食欲増進・食事が楽しくなる', '鉄分・亜鉛で成長をサポート', '消化を助ける発酵食品'] },
+            { title: '成人', items: ['毎日の食事で栄養補給', '代謝の改善', '細胞の老化を抑制', '腸内環境の改善', '抗酸化成分で疲労回復'] },
+            { title: '高齢者', items: ['食欲と栄養摂取の向上', '内臓機能のサポート', '骨密度の促進', '発酵パワーで消化をサポート', '少量で深い味わい・減塩に貢献'] },
+            { title: 'アスリート', items: ['効率的な栄養吸収', '筋肉回復のサポート', '炎症軽減', 'アミノ酸で持久力アップ', '発酵食品で腸内環境を整える'] },
           ]
         : [
-            { title: 'Children', image: '/Images/Assets/homepage/foodFunction/children.png', items: ['Nutrient-rich seasoning', 'Boosts immunity', 'Increases appetite'] },
-            { title: 'Adults', image: '/Images/Assets/homepage/foodFunction/alduts.png', items: ['Daily nutrition', 'Improves metabolism', 'Suppresses cellular aging'] },
-            { title: 'Seniors', image: '/Images/Assets/homepage/foodFunction/seniors.png', items: ['Boosts appetite and nutrient intake', 'Supports internal organ function', 'Promotes bone density'] },
-            { title: 'Athletes', image: '/Images/Assets/homepage/foodFunction/athletes.png', items: ['Efficient nutrient absorption', 'Supports muscle recovery', 'Reduces inflammation'] },
+            { title: 'Children', items: ['Nutrient-rich seasoning for picky eaters', 'Boosts immunity', 'Increases appetite & makes meals enjoyable', 'Iron & zinc support growth', 'Fermented food aids digestion'] },
+            { title: 'Adults', items: ['Daily nutrition through meals', 'Improves metabolism', 'Suppresses cellular aging', 'Improves gut health', 'Antioxidants aid fatigue recovery'] },
+            { title: 'Seniors', items: ['Boosts appetite & nutrient intake', 'Supports internal organ function', 'Promotes bone density', 'Fermented power aids digestion', 'Deep flavor in small amounts for lower sodium'] },
+            { title: 'Athletes', items: ['Efficient nutrient absorption', 'Supports muscle recovery', 'Reduces inflammation', 'Amino acids boost endurance', 'Fermented food supports gut health'] },
           ],
     },
   };
@@ -110,7 +100,7 @@ export default async function MvSoySaucePage({ params }: { params: Promise<{ loc
         price={13.50}
         slug="mv-soy-sauce"
       />
-      <ProductPage product={product} />
+      <SimpleProductPage product={product} />
     </>
   );
 }

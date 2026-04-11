@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
-import ProductPage, { type ProductPageData } from '@/components/ProductPage';
+import SimpleProductPage, { type SimpleProductPageData } from '@/components/SimpleProductPage';
 import ProductJsonLd from '@/components/ProductJsonLd';
 import { getProductBySlug } from '@/data/products';
 
@@ -14,33 +14,37 @@ export const metadata: Metadata = {
   },
 };
 
-function getMvTonerProduct(locale: string): ProductPageData {
+function getMvTonerProduct(locale: string): SimpleProductPageData {
   const isJa = locale === 'ja';
   return {
     id: 'mv-toner',
+    category: 'cosmetic',
     name: isJa ? 'マザベジ化粧水' : 'MV Toner',
     fullName: isJa ? 'マザベジ化粧水 / 150ml' : 'Mother Vegetable Toner / 150ml',
     subtitle: '150ml',
-    taglineJp: '',
     tagline: isJa ? 'Confidenceコラーゲン配合の化粧水。' : 'Confidence-powered skin toner.',
     price: 13.50,
     currency: 'USD',
-    priceDisplay: 'USD 13.50',
     priceJpy: '¥2,000',
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-toner')?.inStock ?? true,
     productImage: '/cdn/mv_toner.jpg',
-    videoUrls: [],
-    mainVideoUrl: '',
     benefits: isJa
-      ? ['肌トラブル改善 — Confidenceコラーゲンが肌を修復・再生。', 'スピルリナ栄養素で深く保湿し、シワを軽減。']
-      : ['Skin Healing Effect — Confidence collagen repairs and restores skin.', 'Deeply hydrates and reduces wrinkles with spirulina nutrients.'],
-    howToUse: isJa ? '洗顔後、朝晩に顔と首に馴染ませてください。' : 'Apply to cleansed face and neck morning and evening.',
-    howToLink: '#',
-    leftSection: { title: '', items: [] },
-    rightSection: { title: '', items: [] },
-    centerTitle: '',
-    centerImage: '',
+      ? [
+          'ディープ保湿 — Confidenceコラーゲンとスピルリナが角質層まで浸透し、長時間うるおいをキープ。',
+          'エイジングケア — コラーゲン生成を促進し、シワ・たるみ・くすみにアプローチ。',
+          '肌トラブル改善 — Confidenceコラーゲンの修復力で荒れ肌・赤み・炎症を鎮静。',
+          '低刺激処方 — 敏感肌にも安心の優しい処方。スピルリナの天然成分で肌をいたわります。',
+        ]
+      : [
+          'Deep Hydration — Confidence collagen and spirulina penetrate the stratum corneum for long-lasting moisture.',
+          'Anti-Aging Care — Promotes collagen production to target wrinkles, sagging, and dullness.',
+          'Skin Healing — Confidence collagen calms rough skin, redness, and inflammation.',
+          'Gentle Formula — A low-irritation formula safe for sensitive skin, using natural spirulina-derived ingredients.',
+        ],
+    howToUse: isJa
+      ? '朝晩の洗顔後、適量を手のひらまたはコットンに取り、顔全体と首に優しくパッティング。化粧水の後に美容液やクリームを重ねると効果的です。特に乾燥が気になる部分には重ね付けをおすすめします。'
+      : 'After cleansing morning and evening, pour an appropriate amount onto your palm or a cotton pad. Gently pat across the entire face and neck. Layer with serum or cream afterward for best results. Apply extra layers on particularly dry areas.',
     trust: {
       productName: isJa ? 'マザベジ化粧水' : 'MV Toner',
       certification: isJa ? '厚生労働省により医薬部外品認定' : 'quasi-drug certified by Ministry of Health, Labour and Welfare (MHLW), Japan',
@@ -54,11 +58,7 @@ function getMvTonerProduct(locale: string): ProductPageData {
       ],
     },
     functionSection: {
-      type: 'cosmetic',
-      title: 'Skin Function',
       subtitle: isJa ? 'マザベジ化粧水' : 'MV Toner',
-      method: isJa ? '塗る / 馴染ませる' : 'Apply / Pat in',
-      videoUrl: '/Images/Assets/homepage/product/food_video.mov',
       circles: [
         { name: 'Skin Healing', detail: 'Confidence' },
         { name: 'Anti-Aging', detail: 'Collagen' },
@@ -66,22 +66,18 @@ function getMvTonerProduct(locale: string): ProductPageData {
         { name: 'Brightening', detail: 'Vitamins' },
         { name: 'Nutrients', detail: '48 types' },
       ],
-      summary: {
-        total: '48 Nutrients',
-        description: 'Confidence collagen-powered toner with spirulina nutrients for deep hydration, skin healing, and anti-aging benefits.',
-      },
       benefits: isJa
         ? [
-            { title: '乾燥肌', image: '/Images/Assets/homepage/foodFunction/children.png', items: ['深い保湿効果', 'バリア機能の強化', 'キメを整える'] },
-            { title: '敏感肌', image: '/Images/Assets/homepage/foodFunction/alduts.png', items: ['肌トラブル改善', '炎症を抑制', '肌を落ち着かせる'] },
-            { title: '年齢肌', image: '/Images/Assets/homepage/foodFunction/seniors.png', items: ['シワ・たるみ改善', '肌の弾力を回復', '細胞の再生を促進'] },
-            { title: '美容重視', image: '/Images/Assets/homepage/foodFunction/athletes.png', items: ['透明感アップ', '毛穴を引き締める', '美白効果'] },
+            { title: '乾燥肌', items: ['深い保湿効果', 'バリア機能の強化', 'キメを整える', '長時間うるおいキープ', '乾燥による小ジワを予防'] },
+            { title: '敏感肌', items: ['肌トラブル改善', '炎症を抑制', '肌を落ち着かせる', '低刺激で毎日使える', '赤みをケア'] },
+            { title: '年齢肌', items: ['シワ・たるみ改善', '肌の弾力を回復', '細胞の再生を促進', 'くすみを解消し透明感アップ', 'ハリとツヤを取り戻す'] },
+            { title: '美容重視', items: ['透明感アップ', '毛穴を引き締める', '美白効果', '化粧ノリを改善', 'トーンアップ効果'] },
           ]
         : [
-            { title: 'Dry Skin', image: '/Images/Assets/homepage/foodFunction/children.png', items: ['Deep hydration', 'Strengthens skin barrier', 'Smooths texture'] },
-            { title: 'Sensitive Skin', image: '/Images/Assets/homepage/foodFunction/alduts.png', items: ['Skin healing effect', 'Reduces inflammation', 'Calms irritated skin'] },
-            { title: 'Mature Skin', image: '/Images/Assets/homepage/foodFunction/seniors.png', items: ['Reduces wrinkles & sagging', 'Restores elasticity', 'Promotes cell regeneration'] },
-            { title: 'Beauty Focus', image: '/Images/Assets/homepage/foodFunction/athletes.png', items: ['Brightening effect', 'Tightens pores', 'Whitening benefits'] },
+            { title: 'Dry Skin', items: ['Deep hydration', 'Strengthens skin barrier', 'Smooths texture', 'Long-lasting moisture retention', 'Prevents fine lines from dryness'] },
+            { title: 'Sensitive Skin', items: ['Skin healing effect', 'Reduces inflammation', 'Calms irritated skin', 'Gentle enough for daily use', 'Soothes redness'] },
+            { title: 'Mature Skin', items: ['Reduces wrinkles & sagging', 'Restores elasticity', 'Promotes cell regeneration', 'Clears dullness for radiant skin', 'Revives firmness & glow'] },
+            { title: 'Beauty Focus', items: ['Brightening effect', 'Tightens pores', 'Whitening benefits', 'Improves makeup adherence', 'Even skin tone'] },
           ],
     },
   };
@@ -100,7 +96,7 @@ export default async function MvTonerPage({ params }: { params: Promise<{ locale
         price={13.50}
         slug="mv-toner"
       />
-      <ProductPage product={product} />
+      <SimpleProductPage product={product} />
     </>
   );
 }
