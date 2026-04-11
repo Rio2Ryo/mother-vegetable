@@ -43,7 +43,7 @@ function getMvBalmProduct(locale: string): ProductPageData {
     centerImage: '',
     trust: {
       productName: isJa ? 'マザベジバウム' : 'MV Balm',
-      certification: isJa ? '厚生労働省によりヒューマングレード食品認定' : 'certified human grade food by Ministry of Health, Labour and Welfare (MHLW), Japan',
+      certification: isJa ? '厚生労働省により医薬部外品認定' : 'quasi-drug certified by Ministry of Health, Labour and Welfare (MHLW), Japan',
       partners: [
         '/Images/Assets/homepage/company/partner_1.png',
         '/Images/Assets/homepage/company/partner_2.png',
@@ -54,7 +54,7 @@ function getMvBalmProduct(locale: string): ProductPageData {
       ],
     },
     functionSection: {
-      type: 'food',
+      type: 'cosmetic',
       title: 'Skin Function',
       subtitle: isJa ? 'マザベジバウム' : 'MV Balm',
       method: isJa ? '塗る / 保護する' : 'Apply / Protect',

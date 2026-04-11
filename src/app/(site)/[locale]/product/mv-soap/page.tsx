@@ -43,7 +43,7 @@ function getMvSoapProduct(locale: string): ProductPageData {
     centerImage: '',
     trust: {
       productName: isJa ? 'マザベジ石鹸' : 'MV Soap',
-      certification: isJa ? '厚生労働省によりヒューマングレード食品認定' : 'certified human grade food by Ministry of Health, Labour and Welfare (MHLW), Japan',
+      certification: isJa ? '厚生労働省により医薬部外品認定' : 'quasi-drug certified by Ministry of Health, Labour and Welfare (MHLW), Japan',
       partners: [
         '/Images/Assets/homepage/company/partner_1.png',
         '/Images/Assets/homepage/company/partner_2.png',
@@ -54,7 +54,7 @@ function getMvSoapProduct(locale: string): ProductPageData {
       ],
     },
     functionSection: {
-      type: 'food',
+      type: 'cosmetic',
       title: 'Skin Function',
       subtitle: isJa ? 'マザベジ石鹸' : 'MV Soap',
       method: isJa ? '泡立て / 洗う' : 'Lather / Cleanse',

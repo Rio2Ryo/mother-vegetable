@@ -35,7 +35,7 @@ function getForeverProduct(locale: string): ProductPageData {
     priceJpy: '¥5,500',
     priceMvt: '10 MVT',
     inStock: getProductBySlug('forever')?.inStock ?? true,
-    productImage: '/cdn/products_achieve_10001.png',
+    productImage: '/cdn/products_forever_10001.png',
     videoUrls: [
       'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/forever/video_1.mp4',
       'https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com/products/forever/video_2.mp4',
