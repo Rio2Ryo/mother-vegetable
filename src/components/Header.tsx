@@ -389,7 +389,7 @@ export default function Header() {
             {/* Cart Button */}
             <button
               onClick={toggleCart}
-              className="bg-black text-white border border-white px-6 py-3 rounded-[5px] font-semibold text-sm cursor-pointer relative overflow-hidden flex items-center gap-2 h-10 hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300 max-lg:px-4 max-lg:text-xs max-[600px]:px-3 max-[600px]:text-[11px]"
+              className="bg-black text-white border border-white px-6 py-3 rounded-[5px] font-semibold text-sm cursor-pointer relative flex items-center gap-2 h-10 hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300 max-lg:px-4 max-lg:text-xs max-[600px]:px-3 max-[600px]:text-[11px]"
               style={{ fontFamily: 'Arial, sans-serif' }}
             >
               <svg className="w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 576 512">
