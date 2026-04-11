@@ -7,10 +7,10 @@ import { getProductBySlug } from '@/data/products';
 export const metadata: Metadata = {
   title: 'マザベジ塩 — Mother Vegetable',
   description:
-    'Green spirulina infused salt. 50g. Rich in minerals and 48 nutrients. ¥2,000.',
+    'Green nutrient-infused salt. 50g. Rich in minerals and 48 nutrients. ¥2,000.',
   openGraph: {
     title: 'マザベジ塩 — Mother Vegetable',
-    description: 'Green spirulina salt rich in minerals and 48 nutrients.',
+    description: 'Green mineral-rich salt with 48 natural nutrients.',
     images: [{ url: '/cdn/mv_salt.jpg', width: 800, height: 800, alt: 'マザベジ塩' }],
   },
 };
@@ -24,7 +24,7 @@ function getMvSaltProduct(locale: string): SimpleProductPageData {
     name: isJa ? 'マザベジ塩' : 'MV Salt',
     fullName: isJa ? 'マザベジ塩 / 50g' : 'Mother Vegetable Salt / 50g',
     subtitle: '50g',
-    tagline: isJa ? 'スピルリナ配合の緑色の塩。' : 'Green spirulina infused salt.',
+    tagline: isJa ? '48種の栄養素配合の緑色の塩。' : 'Green nutrient-infused salt.',
     price: 13.50,
     currency: 'USD',
     priceJpy: '¥2,000',
@@ -33,15 +33,15 @@ function getMvSaltProduct(locale: string): SimpleProductPageData {
     productImage: '/cdn/mv_salt.jpg',
     benefits: isJa
       ? [
-          'ミネラル豊富 — 天然塩にスピルリナの48種の栄養素が加わり、鉄・亜鉛・マグネシウムなどを効率的に摂取。',
+          'ミネラル豊富 — 天然塩に48種の植物由来栄養素が加わり、鉄・亜鉛・マグネシウムなどを効率的に摂取。',
           '手軽に栄養強化 — 普段の塩をマザベジ塩に替えるだけで、毎日の食事の栄養価がアップ。',
-          '旨味を引き立てる — スピルリナ由来の天然アミノ酸が食材本来の味を深く引き出します。',
+          '旨味を引き立てる — 植物由来の天然アミノ酸が食材本来の味を深く引き出します。',
           '万能調味料 — 調理・味付け・仕上げ・保存まで、あらゆるシーンで活躍する万能塩。',
         ]
       : [
-          'Mineral-Rich — Combines natural salt with 48 spirulina nutrients including iron, zinc, and magnesium.',
+          'Mineral-Rich — Combines natural salt with 48 plant-based nutrients including iron, zinc, and magnesium.',
           'Effortless Nutrition — Simply replace your regular salt to boost daily nutritional intake.',
-          'Enhances Natural Flavor — Spirulina-derived amino acids bring out the deeper taste of every ingredient.',
+          'Enhances Natural Flavor — Plant-derived amino acids bring out the deeper taste of every ingredient.',
           'Versatile All-Purpose Salt — Perfect for cooking, seasoning, finishing, and even food preservation.',
         ],
     howToUse: isJa
@@ -68,7 +68,7 @@ function getMvSaltProduct(locale: string): SimpleProductPageData {
         { name: 'Electrolytes', detail: 'Na, K balance' },
         { name: 'Trace Elements', detail: 'Iodine, Se' },
         { name: 'Amino Acids', detail: 'Umami boost' },
-        { name: 'Spirulina Blend', detail: '48 nutrients' },
+        { name: 'Nutrient Blend', detail: '48 nutrients' },
       ],
       benefits: isJa
         ? [
@@ -95,7 +95,7 @@ export default async function MvSaltPage({ params }: { params: Promise<{ locale:
     <>
       <ProductJsonLd
         name="マザベジ塩"
-        description="Green spirulina infused salt. 50g. Rich in minerals and 48 nutrients."
+        description="Green nutrient-infused salt. 50g. Rich in minerals and 48 nutrients."
         image="/cdn/mv_salt.jpg"
         price={13.50}
         slug="mv-salt"

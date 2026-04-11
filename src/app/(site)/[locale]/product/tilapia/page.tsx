@@ -7,10 +7,10 @@ import { getProductBySlug } from '@/data/products';
 export const metadata: Metadata = {
   title: 'マザベジフィッシュ-イズミ鯛 — Mother Vegetable',
   description:
-    'Fresh Izumi Tai enriched with spirulina. 48 different nutrients for a healthy lifestyle. ¥2,000.',
+    'Fresh Izumi Tai enriched with 48 natural nutrients for a healthy lifestyle. ¥2,000.',
   openGraph: {
     title: 'マザベジフィッシュ-イズミ鯛 — Mother Vegetable',
-    description: 'Fresh Izumi Tai enriched with spirulina. 48 different nutrients.',
+    description: 'Fresh Izumi Tai enriched with 48 natural nutrients.',
     images: [{ url: '/cdn/mv_tilapia.jpg', width: 800, height: 800, alt: 'マザベジフィッシュ-イズミ鯛' }],
   },
 };
@@ -24,7 +24,7 @@ function getTilapiaProduct(locale: string): SimpleProductPageData {
     name: isJa ? 'マザベジフィッシュ-イズミ鯛' : 'MV Fish - Izumi Tai',
     fullName: isJa ? 'マザベジフィッシュ-イズミ鯛 / 1匹' : 'Mother Vegetable Fish - Izumi Tai / 1 fish',
     subtitle: isJa ? '身体のために' : 'for Body',
-    tagline: isJa ? 'スピルリナで育てた新鮮なイズミ鯛。' : 'Fresh Izumi Tai enriched with spirulina.',
+    tagline: isJa ? '48種の栄養素で育てた新鮮なイズミ鯛。' : 'Fresh Izumi Tai enriched with 48 nutrients.',
     price: 13.50,
     currency: 'USD',
     priceJpy: '¥2,000',
@@ -36,13 +36,13 @@ function getTilapiaProduct(locale: string): SimpleProductPageData {
           'オメガ3脂肪酸が豊富 — 心臓の健康と脳機能をサポートする良質な不飽和脂肪酸を含有。',
           '良質な完全タンパク質 — 全9種の必須アミノ酸を含み、筋肉の成長・修復を促進。',
           '低脂肪・高栄養 — 余分な脂質を抑えながら48種の栄養素をしっかり摂取。',
-          'サステナブル養殖 — スピルリナ飼料による環境負荷の低い持続可能な養殖方法で育成。',
+          'サステナブル養殖 — 天然栄養素の飼料による環境負荷の低い持続可能な養殖方法で育成。',
         ]
       : [
           'Rich in Omega-3 — High-quality unsaturated fatty acids that support heart health and brain function.',
           'Complete Protein — Contains all 9 essential amino acids to promote muscle growth and repair.',
           'Low-Fat, High-Nutrition — Delivers 48 nutrients while keeping excess fat to a minimum.',
-          'Sustainable Aquaculture — Raised using eco-friendly spirulina-based feed for minimal environmental impact.',
+          'Sustainable Aquaculture — Raised using eco-friendly plant-based feed for minimal environmental impact.',
         ],
     howToUse: isJa
       ? 'グリル：塩を振ってシンプルに焼くだけで栄養満点の一品に。蒸し料理：野菜と一緒に蒸して素材の旨味を引き出します。刺身：新鮮なまま薄切りにして、わさび醤油でお楽しみください。煮物・鍋：和風だしとの相性も抜群です。'
@@ -68,7 +68,7 @@ function getTilapiaProduct(locale: string): SimpleProductPageData {
         { name: 'Complete Protein', detail: '20g per serving' },
         { name: 'Vitamin D & B12', detail: 'Bone & Nerve' },
         { name: 'Selenium & Phosphorus', detail: 'Antioxidant' },
-        { name: 'Spirulina Boost', detail: '48 nutrients' },
+        { name: 'Nutrient Boost', detail: '48 nutrients' },
       ],
       benefits: isJa
         ? [
@@ -95,7 +95,7 @@ export default async function TilapiaPage({ params }: { params: Promise<{ locale
     <>
       <ProductJsonLd
         name="マザベジフィッシュ-イズミ鯛"
-        description="Fresh Izumi Tai enriched with spirulina. 48 different nutrients."
+        description="Fresh Izumi Tai enriched with 48 natural nutrients."
         image="/cdn/mv_tilapia.jpg"
         price={13.50}
         slug="tilapia"

@@ -200,7 +200,7 @@ export default function Header() {
                 )}
               </div>
 
-              <ul className="flex flex-col lg:flex-row gap-[5px] lg:gap-[35px] list-none m-0 p-0 max-[600px]:pt-[25px] max-[600px]:relative max-[600px]:z-[-1] max-[600px]:w-full">
+              <ul className="flex flex-col lg:flex-row gap-[5px] lg:gap-[35px] list-none m-0 p-0 max-[600px]:pt-[25px] max-[600px]:relative max-[600px]:z-[1] max-[600px]:w-full">
                 <li className="max-lg:w-full">
                   <Link
                     href="/#food-function"

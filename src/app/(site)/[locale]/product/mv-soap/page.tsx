@@ -6,10 +6,10 @@ import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
   title: 'マザベジ石鹸 — Mother Vegetable',
-  description: 'Handcrafted green spirulina soap with Confidence collagen. 100g. Deep cleansing with skin care.',
+  description: 'Handcrafted green nutrient-rich soap with Confidence collagen. 100g. Deep cleansing with skin care.',
   openGraph: {
     title: 'マザベジ石鹸 — Mother Vegetable',
-    description: 'Confidence collagen spirulina soap for deep cleansing and skin healing.',
+    description: 'Confidence collagen natural soap for deep cleansing and skin healing.',
     images: [{ url: '/cdn/mv_soap.jpg', width: 800, height: 800, alt: 'マザベジ石鹸' }],
   },
 };
@@ -22,7 +22,7 @@ function getMvSoapProduct(locale: string): SimpleProductPageData {
     name: isJa ? 'マザベジ石鹸' : 'MV Soap',
     fullName: isJa ? 'マザベジ石鹸 / 100g' : 'Mother Vegetable Soap / 100g',
     subtitle: '100g',
-    tagline: isJa ? 'Confidenceコラーゲン配合の手作り石鹸。' : 'Confidence-powered spirulina soap.',
+    tagline: isJa ? 'Confidenceコラーゲン配合の手作り石鹸。' : 'Confidence-powered natural soap.',
     price: 13.50,
     currency: 'USD',
     priceJpy: '¥2,000',
@@ -34,13 +34,13 @@ function getMvSoapProduct(locale: string): SimpleProductPageData {
           'やさしい洗浄力 — Confidenceコラーゲンが肌のうるおいを守りながら、汚れと余分な皮脂をしっかり落とします。',
           '極上の泡立ち — きめ細やかで弾力のある泡が肌を包み込み、摩擦を軽減しながら洗い上げます。',
           '顔にもボディにも — 洗顔・ボディウォッシュ・ハンドウォッシュとして全身に使える万能石鹸。',
-          '手作りの品質 — 一つひとつ丁寧に手作りされた、スピルリナとコラーゲン配合のプレミアム石鹸。',
+          '手作りの品質 — 一つひとつ丁寧に手作りされた、48種の栄養素とコラーゲン配合のプレミアム石鹸。',
         ]
       : [
           'Gentle Cleansing — Confidence collagen protects moisture while thoroughly removing dirt and excess sebum.',
           'Luxurious Lather — Fine, resilient foam envelops skin, reducing friction for a smooth wash.',
           'Face & Body — An all-in-one soap for face wash, body wash, and hand wash.',
-          'Handcrafted Quality — Each bar is carefully handmade with premium spirulina and collagen.',
+          'Handcrafted Quality — Each bar is carefully handmade with premium plant-based nutrients and collagen.',
         ],
     howToUse: isJa
       ? '洗顔：ぬるま湯で十分に泡立て、泡で顔を包み込むように優しく洗います。こすらずに泡の力で汚れを浮かせ、ぬるま湯でしっかりすすいでください。ボディ：たっぷりの泡で全身を優しくマッサージ。手洗い：日常の手洗いにもお使いいただけます。'
@@ -61,7 +61,7 @@ function getMvSoapProduct(locale: string): SimpleProductPageData {
       subtitle: isJa ? 'マザベジ石鹸' : 'MV Soap',
       circles: [
         { name: 'Skin Healing', detail: 'Confidence' },
-        { name: 'Deep Cleanse', detail: 'Spirulina' },
+        { name: 'Deep Cleanse', detail: 'Natural' },
         { name: 'Anti-Aging', detail: 'Collagen' },
         { name: 'Moisturizing', detail: 'Natural oils' },
         { name: 'Nutrients', detail: '48 types' },
@@ -91,7 +91,7 @@ export default async function MvSoapPage({ params }: { params: Promise<{ locale:
     <>
       <ProductJsonLd
         name="マザベジ石鹸"
-        description="Handcrafted green spirulina soap with Confidence collagen. 100g."
+        description="Handcrafted green nutrient-rich soap with Confidence collagen. 100g."
         image="/cdn/mv_soap.jpg"
         price={13.50}
         slug="mv-soap"

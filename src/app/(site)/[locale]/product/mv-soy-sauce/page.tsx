@@ -7,10 +7,10 @@ import { getProductBySlug } from '@/data/products';
 export const metadata: Metadata = {
   title: 'マザベジ醤油 — Mother Vegetable',
   description:
-    'Premium dark soy sauce with spirulina. 150ml. Rich umami with 48 nutrients. ¥2,000.',
+    'Premium dark soy sauce with 48 nutrients. 150ml. Rich umami flavor. ¥2,000.',
   openGraph: {
     title: 'マザベジ醤油 — Mother Vegetable',
-    description: 'Spirulina-infused premium dark soy sauce with 48 nutrients.',
+    description: 'Nutrient-infused premium dark soy sauce with 48 natural nutrients.',
     images: [{ url: '/cdn/mv_soy_sauce.jpg', width: 800, height: 800, alt: 'マザベジ醤油' }],
   },
 };
@@ -24,7 +24,7 @@ function getMvSoySauceProduct(locale: string): SimpleProductPageData {
     name: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
     fullName: isJa ? 'マザベジ醤油 / 150ml' : 'Mother Vegetable Soy Sauce / 150ml',
     subtitle: '150ml',
-    tagline: isJa ? 'スピルリナ配合のプレミアム醤油。' : 'Premium spirulina dark soy sauce.',
+    tagline: isJa ? '48種の栄養素配合のプレミアム醤油。' : 'Premium nutrient-rich dark soy sauce.',
     price: 13.50,
     currency: 'USD',
     priceJpy: '¥2,000',
@@ -33,16 +33,16 @@ function getMvSoySauceProduct(locale: string): SimpleProductPageData {
     productImage: '/cdn/mv_soy_sauce.jpg',
     benefits: isJa
       ? [
-          '旨味を極める — スピルリナ由来の天然アミノ酸が醤油の旨味を深く引き立て、料理の味わいをワンランクアップ。',
+          '旨味を極める — 植物由来の天然アミノ酸が醤油の旨味を深く引き立て、料理の味わいをワンランクアップ。',
           '栄養強化調味料 — 48種の栄養素を含み、調味するだけで日々の栄養バランスを整えます。',
           '和食との相性抜群 — 刺身・寿司・煮物など伝統的な和食をより一層引き立てる本格醤油。',
-          '職人仕込み — 伝統的な醸造技法にスピルリナを融合させた、こだわりの逸品。',
+          '職人仕込み — 伝統的な醸造技法に48種の栄養素を融合させた、こだわりの逸品。',
         ]
       : [
-          'Ultimate Umami — Spirulina-derived natural amino acids deepen the soy sauce flavor, elevating every dish.',
+          'Ultimate Umami — Plant-derived natural amino acids deepen the soy sauce flavor, elevating every dish.',
           'Nutrient-Fortified Seasoning — Contains 48 nutrients, improving your daily nutritional balance with every use.',
           'Perfect for Japanese Cuisine — Enhances sashimi, sushi, simmered dishes, and other traditional fare.',
-          'Artisanal Craft — A premium blend of traditional brewing techniques and spirulina infusion.',
+          'Artisanal Craft — A premium blend of traditional brewing techniques and natural nutrient infusion.',
         ],
     howToUse: isJa
       ? '調理に：煮物・炒め物・照り焼きの味付けに。付け醤油：刺身・寿司・冷奴などのつけダレとして。マリネ：肉や魚の下味に漬け込んで旨味をプラス。ドレッシング：オリーブオイルやお酢と合わせて和風ドレッシングに。'
@@ -68,7 +68,7 @@ function getMvSoySauceProduct(locale: string): SimpleProductPageData {
         { name: 'Fermented Enzymes', detail: 'Natural brew' },
         { name: 'B Vitamins', detail: 'B1, B2, B6' },
         { name: 'Antioxidants', detail: 'Polyphenols' },
-        { name: 'Spirulina Infusion', detail: '48 nutrients' },
+        { name: 'Nutrient Infusion', detail: '48 nutrients' },
       ],
       benefits: isJa
         ? [
@@ -95,7 +95,7 @@ export default async function MvSoySaucePage({ params }: { params: Promise<{ loc
     <>
       <ProductJsonLd
         name="マザベジ醤油"
-        description="Premium dark soy sauce with spirulina. 150ml. Rich umami with 48 nutrients."
+        description="Premium dark soy sauce with 48 nutrients. 150ml. Rich umami flavor."
         image="/cdn/mv_soy_sauce.jpg"
         price={13.50}
         slug="mv-soy-sauce"

@@ -6,7 +6,7 @@ import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
   title: 'マザベジ化粧水 — Mother Vegetable',
-  description: 'Spirulina-infused facial toner with Confidence collagen. 150ml. Skin healing and anti-aging.',
+  description: 'Nutrient-infused facial toner with Confidence collagen. 150ml. Skin healing and anti-aging.',
   openGraph: {
     title: 'マザベジ化粧水 — Mother Vegetable',
     description: 'Confidence collagen toner for skin healing and anti-aging.',
@@ -31,16 +31,16 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
     productImage: '/cdn/mv_toner.jpg',
     benefits: isJa
       ? [
-          'ディープ保湿 — Confidenceコラーゲンとスピルリナが角質層まで浸透し、長時間うるおいをキープ。',
+          'ディープ保湿 — Confidenceコラーゲンと天然栄養素が角質層まで浸透し、長時間うるおいをキープ。',
           'エイジングケア — コラーゲン生成を促進し、シワ・たるみ・くすみにアプローチ。',
           '肌トラブル改善 — Confidenceコラーゲンの修復力で荒れ肌・赤み・炎症を鎮静。',
-          '低刺激処方 — 敏感肌にも安心の優しい処方。スピルリナの天然成分で肌をいたわります。',
+          '低刺激処方 — 敏感肌にも安心の優しい処方。植物由来の天然成分で肌をいたわります。',
         ]
       : [
-          'Deep Hydration — Confidence collagen and spirulina penetrate the stratum corneum for long-lasting moisture.',
+          'Deep Hydration — Confidence collagen and natural nutrients penetrate the stratum corneum for long-lasting moisture.',
           'Anti-Aging Care — Promotes collagen production to target wrinkles, sagging, and dullness.',
           'Skin Healing — Confidence collagen calms rough skin, redness, and inflammation.',
-          'Gentle Formula — A low-irritation formula safe for sensitive skin, using natural spirulina-derived ingredients.',
+          'Gentle Formula — A low-irritation formula safe for sensitive skin, using natural plant-derived ingredients.',
         ],
     howToUse: isJa
       ? '朝晩の洗顔後、適量を手のひらまたはコットンに取り、顔全体と首に優しくパッティング。化粧水の後に美容液やクリームを重ねると効果的です。特に乾燥が気になる部分には重ね付けをおすすめします。'
@@ -62,7 +62,7 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
       circles: [
         { name: 'Skin Healing', detail: 'Confidence' },
         { name: 'Anti-Aging', detail: 'Collagen' },
-        { name: 'Hydration', detail: 'Spirulina' },
+        { name: 'Hydration', detail: 'Natural' },
         { name: 'Brightening', detail: 'Vitamins' },
         { name: 'Nutrients', detail: '48 types' },
       ],
@@ -91,7 +91,7 @@ export default async function MvTonerPage({ params }: { params: Promise<{ locale
     <>
       <ProductJsonLd
         name="マザベジ化粧水"
-        description="Spirulina-infused facial toner with Confidence collagen. 150ml."
+        description="Nutrient-infused facial toner with Confidence collagen. 150ml."
         image="/cdn/mv_toner.jpg"
         price={13.50}
         slug="mv-toner"

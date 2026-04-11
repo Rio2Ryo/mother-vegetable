@@ -66,7 +66,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジフィッシュ' : 'MV Fish',
       subtitle: isJa ? 'イズミ鯛 / 1匹' : 'Izumi Tai / 1 fish',
       subName: '',
-      tagline: isJa ? 'スピルリナで育てた新鮮なイズミ鯛' : 'Fresh Izumi Tai enriched with spirulina',
+      tagline: isJa ? '48種の栄養素で育てた新鮮なイズミ鯛' : 'Fresh Izumi Tai enriched with 48 nutrients',
       videoUrl: null,
       imageUrl: '/cdn/mv_tilapia.jpg',
       features: isJa
@@ -84,7 +84,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジ塩' : 'MV Salt',
       subtitle: '50g',
       subName: '',
-      tagline: isJa ? 'スピルリナ配合の緑色の塩' : 'Green spirulina infused salt',
+      tagline: isJa ? '48種の栄養素配合の緑色の塩' : 'Green nutrient-infused salt',
       videoUrl: null,
       imageUrl: '/cdn/mv_salt.jpg',
       features: isJa
@@ -102,7 +102,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
       subtitle: '150ml',
       subName: '',
-      tagline: isJa ? 'スピルリナ配合プレミアム醤油' : 'Premium spirulina dark soy sauce',
+      tagline: isJa ? '48種の栄養素配合プレミアム醤油' : 'Premium nutrient-rich dark soy sauce',
       videoUrl: null,
       imageUrl: '/cdn/mv_soy_sauce.jpg',
       features: isJa
@@ -124,8 +124,8 @@ function getProducts(isJa: boolean) {
       videoUrl: null,
       imageUrl: '/cdn/mv_toner.jpg',
       features: isJa
-        ? ['肌トラブル改善・Confidenceコラーゲン配合', 'スピルリナで深い保湿・シワ軽減']
-        : ['Skin Healing Effect — Confidence collagen', 'Deep hydration & wrinkle reduction'],
+        ? ['肌トラブル改善・Confidenceコラーゲン配合', '天然栄養素で深い保湿・シワ軽減']
+        : ['Skin Healing Effect — Confidence collagen', 'Deep hydration & wrinkle reduction with natural nutrients'],
       howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
       howToLink: '/product/mv-toner',
       productLink: '/product/mv-toner',
@@ -156,12 +156,12 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジ石鹸' : 'MV Soap',
       subtitle: '100g',
       subName: '',
-      tagline: isJa ? 'Confidenceコラーゲン配合の手作り石鹸' : 'Confidence-powered spirulina soap',
+      tagline: isJa ? 'Confidenceコラーゲン配合の手作り石鹸' : 'Confidence-powered natural soap',
       videoUrl: null,
       imageUrl: '/cdn/mv_soap.jpg',
       features: isJa
-        ? ['肌トラブル改善・洗いながら肌を修復', 'スピルリナのディープクレンジング']
-        : ['Skin Healing Effect — cleanses & heals', 'Natural spirulina deep cleanse'],
+        ? ['肌トラブル改善・洗いながら肌を修復', '天然成分のディープクレンジング']
+        : ['Skin Healing Effect — cleanses & heals', 'Natural plant-based deep cleanse'],
       howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
       howToLink: '/product/mv-soap',
       productLink: '/product/mv-soap',

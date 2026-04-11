@@ -5,6 +5,7 @@ import { useState, useCallback } from 'react';
 import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
 import { getStoredReferralCode } from '@/lib/affiliate';
+import { useLocale } from 'next-intl';
 
 export interface SimpleProductPageData {
   id: string;
@@ -38,6 +39,8 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
   const [addedFeedback, setAddedFeedback] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
   const router = useRouter();
+  const locale = useLocale();
+  const isJa = locale === 'ja';
 
   const handleAddToCart = useCallback(() => {
     addItem({
@@ -100,7 +103,7 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
                 <img src="/cdn/mvt_coin.png" alt="MVT" width={20} height={20} />
                 {product.priceMvt}
               </span>
-              <span className="ml-2 text-[#25C760] text-xs border border-[#25C760] rounded px-2 py-0.5">Free Shipping</span>
+              <span className="ml-2 text-[#25C760] text-xs border border-[#25C760] rounded px-2 py-0.5">{isJa ? '送料無料' : 'Free Shipping'}</span>
             </div>
 
             {/* Benefits */}
@@ -116,7 +119,7 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
             {/* Quantity + CTA */}
             <div className="flex flex-col gap-3 pt-2">
               <div className="flex items-center gap-3">
-                <span className="text-xs text-gray-500 uppercase tracking-wider">Qty</span>
+                <span className="text-xs text-gray-500 uppercase tracking-wider">{isJa ? '数量' : 'Qty'}</span>
                 <div className="flex items-center border-2 border-[#25C760] rounded-lg">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -135,14 +138,14 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
                 disabled={!product.inStock}
                 className="w-full py-3 bg-white text-black font-bold rounded-lg text-sm uppercase tracking-wider border-2 border-[#25C760] hover:bg-[#25C760] hover:text-white transition disabled:opacity-50"
               >
-                {addedFeedback ? '✓ Added to Cart' : 'Add to Cart'}
+                {addedFeedback ? (isJa ? '✓ カートに追加しました' : '✓ Added to Cart') : (isJa ? 'カートに入れる' : 'Add to Cart')}
               </button>
               <button
                 onClick={handleBuyNow}
                 disabled={!product.inStock}
                 className="w-full py-3 bg-[#25C760] text-white font-bold rounded-lg text-sm uppercase tracking-wider hover:bg-[#1da84e] transition disabled:opacity-50"
               >
-                Buy Now
+                {isJa ? '今すぐ購入' : 'Buy Now'}
               </button>
             </div>
           </div>
@@ -152,7 +155,7 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
       {/* How to Use */}
       <section className="border-t border-gray-800">
         <div className="max-w-3xl mx-auto px-4 py-10 md:py-14">
-          <h2 className="text-lg font-bold text-[#25C760] mb-4 text-center uppercase tracking-wider">How to Use</h2>
+          <h2 className="text-lg font-bold text-[#25C760] mb-4 text-center uppercase tracking-wider">{isJa ? '使い方' : 'How to Use'}</h2>
           <p className="text-gray-300 text-center leading-relaxed text-sm">{product.howToUse}</p>
         </div>
       </section>
@@ -161,7 +164,9 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
       <section className="border-t border-gray-800">
         <div className="max-w-4xl mx-auto px-4 py-10 md:py-14">
           <h2 className="text-lg font-bold text-[#25C760] mb-8 text-center uppercase tracking-wider">
-            Key {product.category === 'cosmetic' ? 'Benefits' : 'Nutrients'}
+            {isJa
+              ? (product.category === 'cosmetic' ? '主な効果' : '主な栄養素')
+              : `Key ${product.category === 'cosmetic' ? 'Benefits' : 'Nutrients'}`}
           </h2>
           <div className="flex flex-wrap justify-center gap-5">
             {product.functionSection.circles.map((c, i) => (
