@@ -488,7 +488,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                   )}
                   {product.priceMvt && (
                     <span style={{ color: '#25C760', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                      <img src="/images/mvt_coin.png" alt="MVT" width={20} height={20} style={{ display: 'inline-block' }} />
+                      <img src="/cdn/mvt_coin.png" alt="MVT" width={20} height={20} style={{ display: 'inline-block' }} />
                       {product.priceMvt}
                     </span>
                   )}

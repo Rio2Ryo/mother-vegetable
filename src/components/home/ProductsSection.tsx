@@ -68,7 +68,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'スピルリナで育てた新鮮なイズミ鯛' : 'Fresh Izumi Tai enriched with spirulina',
       videoUrl: null,
-      imageUrl: '/images/mv_tilapia.jpg',
+      imageUrl: '/cdn/mv_tilapia.jpg',
       features: isJa
         ? ['48種類の栄養素を含む高タンパク食品', 'オメガ3脂肪酸・必須ミネラル豊富']
         : ['High protein with 48 different nutrients', 'Rich in omega-3 fatty acids & minerals'],
@@ -86,7 +86,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'スピルリナ配合の緑色の塩' : 'Green spirulina infused salt',
       videoUrl: null,
-      imageUrl: '/images/mv_salt.jpg',
+      imageUrl: '/cdn/mv_salt.jpg',
       features: isJa
         ? ['48種類の栄養素が摂れる緑の塩', '毎日の料理に混ぜるだけ']
         : ['Green salt with 48 different nutrients', 'Simply add to everyday cooking'],
@@ -104,7 +104,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'スピルリナ配合プレミアム醤油' : 'Premium spirulina dark soy sauce',
       videoUrl: null,
-      imageUrl: '/images/mv_soy_sauce.jpg',
+      imageUrl: '/cdn/mv_soy_sauce.jpg',
       features: isJa
         ? ['48種類の栄養素入りプレミアム醤油', '豊かな旨味と栄養素で毎日をサポート']
         : ['Premium soy sauce with 48 nutrients', 'Rich umami with added health benefits'],
@@ -122,7 +122,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合の化粧水' : 'Confidence-powered skin toner',
       videoUrl: null,
-      imageUrl: '/images/mv_toner.jpg',
+      imageUrl: '/cdn/mv_toner.jpg',
       features: isJa
         ? ['肌トラブル改善・Confidenceコラーゲン配合', 'スピルリナで深い保湿・シワ軽減']
         : ['Skin Healing Effect — Confidence collagen', 'Deep hydration & wrinkle reduction'],
@@ -140,7 +140,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合のラグジュアリーバウム' : 'Confidence-powered luxury balm',
       videoUrl: null,
-      imageUrl: '/images/mv_balm.jpg',
+      imageUrl: '/cdn/mv_balm.jpg',
       features: isJa
         ? ['肌トラブル改善・集中的な肌修復', '顔・唇・ボディのマルチユース']
         : ['Skin Healing Effect — intensive repair', 'Multi-use for face, lips & body'],
@@ -158,7 +158,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合の手作り石鹸' : 'Confidence-powered spirulina soap',
       videoUrl: null,
-      imageUrl: '/images/mv_soap.jpg',
+      imageUrl: '/cdn/mv_soap.jpg',
       features: isJa
         ? ['肌トラブル改善・洗いながら肌を修復', 'スピルリナのディープクレンジング']
         : ['Skin Healing Effect — cleanses & heals', 'Natural spirulina deep cleanse'],
@@ -260,7 +260,7 @@ export default function ProductsSection() {
                   <span className="text-white font-bold text-xs md:text-sm">{product.priceJpy}</span>
                   <span className="text-white/50 text-xs md:text-sm">/</span>
                   <span className="flex items-center gap-1 text-[#25c760] font-bold text-xs md:text-sm">
-                    <img src="/images/mvt_coin.png" alt="MVT" width={16} height={16} className="inline-block" />
+                    <img src="/cdn/mvt_coin.png" alt="MVT" width={16} height={16} className="inline-block" />
                     {product.priceMvt}
                   </span>
                 </div>

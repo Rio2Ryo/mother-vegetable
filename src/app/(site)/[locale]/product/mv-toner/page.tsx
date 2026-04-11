@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ化粧水 — Mother Vegetable',
     description: 'Confidence collagen toner for skin healing and anti-aging.',
-    images: [{ url: '/images/mv_toner.jpg', width: 800, height: 800, alt: 'マザベジ化粧水' }],
+    images: [{ url: '/cdn/mv_toner.jpg', width: 800, height: 800, alt: 'マザベジ化粧水' }],
   },
 };
 
@@ -29,7 +29,7 @@ function getMvTonerProduct(locale: string): ProductPageData {
     priceJpy: '¥2,000',
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-toner')?.inStock ?? true,
-    productImage: '/images/mv_toner.jpg',
+    productImage: '/cdn/mv_toner.jpg',
     videoUrls: [],
     mainVideoUrl: '',
     benefits: isJa
@@ -96,7 +96,7 @@ export default async function MvTonerPage({ params }: { params: Promise<{ locale
       <ProductJsonLd
         name="マザベジ化粧水"
         description="Spirulina-infused facial toner with Confidence collagen. 150ml."
-        image="/images/mv_toner.jpg"
+        image="/cdn/mv_toner.jpg"
         price={13.50}
         slug="mv-toner"
       />

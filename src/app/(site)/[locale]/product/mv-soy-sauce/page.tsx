@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ醤油 — Mother Vegetable',
     description: 'Spirulina-infused premium dark soy sauce with 48 nutrients.',
-    images: [{ url: '/images/mv_soy_sauce.jpg', width: 800, height: 800, alt: 'マザベジ醤油' }],
+    images: [{ url: '/cdn/mv_soy_sauce.jpg', width: 800, height: 800, alt: 'マザベジ醤油' }],
   },
 };
 
@@ -31,7 +31,7 @@ function getMvSoySauceProduct(locale: string): ProductPageData {
     priceJpy: '¥2,000',
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-soy-sauce')?.inStock ?? true,
-    productImage: '/images/mv_soy_sauce.jpg',
+    productImage: '/cdn/mv_soy_sauce.jpg',
     videoUrls: [],
     mainVideoUrl: '',
     benefits: isJa
@@ -106,7 +106,7 @@ export default async function MvSoySaucePage({ params }: { params: Promise<{ loc
       <ProductJsonLd
         name="マザベジ醤油"
         description="Premium dark soy sauce with spirulina. 150ml. Rich umami with 48 nutrients."
-        image="/images/mv_soy_sauce.jpg"
+        image="/cdn/mv_soy_sauce.jpg"
         price={13.50}
         slug="mv-soy-sauce"
       />

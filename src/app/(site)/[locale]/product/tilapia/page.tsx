@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジフィッシュ-イズミ鯛 — Mother Vegetable',
     description: 'Fresh Izumi Tai enriched with spirulina. 48 different nutrients.',
-    images: [{ url: '/images/mv_tilapia.jpg', width: 800, height: 800, alt: 'マザベジフィッシュ-イズミ鯛' }],
+    images: [{ url: '/cdn/mv_tilapia.jpg', width: 800, height: 800, alt: 'マザベジフィッシュ-イズミ鯛' }],
   },
 };
 
@@ -31,7 +31,7 @@ function getTilapiaProduct(locale: string): ProductPageData {
     priceJpy: '¥2,000',
     priceMvt: '4 MVT',
     inStock: getProductBySlug('tilapia')?.inStock ?? true,
-    productImage: '/images/mv_tilapia.jpg',
+    productImage: '/cdn/mv_tilapia.jpg',
     videoUrls: [],
     mainVideoUrl: '',
     benefits: isJa
@@ -106,7 +106,7 @@ export default async function TilapiaPage({ params }: { params: Promise<{ locale
       <ProductJsonLd
         name="マザベジフィッシュ-イズミ鯛"
         description="Fresh Izumi Tai enriched with spirulina. 48 different nutrients."
-        image="/images/mv_tilapia.jpg"
+        image="/cdn/mv_tilapia.jpg"
         price={13.50}
         slug="tilapia"
       />

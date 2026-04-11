@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ石鹸 — Mother Vegetable',
     description: 'Confidence collagen spirulina soap for deep cleansing and skin healing.',
-    images: [{ url: '/images/mv_soap.jpg', width: 800, height: 800, alt: 'マザベジ石鹸' }],
+    images: [{ url: '/cdn/mv_soap.jpg', width: 800, height: 800, alt: 'マザベジ石鹸' }],
   },
 };
 
@@ -29,7 +29,7 @@ function getMvSoapProduct(locale: string): ProductPageData {
     priceJpy: '¥2,000',
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-soap')?.inStock ?? true,
-    productImage: '/images/mv_soap.jpg',
+    productImage: '/cdn/mv_soap.jpg',
     videoUrls: [],
     mainVideoUrl: '',
     benefits: isJa
@@ -96,7 +96,7 @@ export default async function MvSoapPage({ params }: { params: Promise<{ locale:
       <ProductJsonLd
         name="マザベジ石鹸"
         description="Handcrafted green spirulina soap with Confidence collagen. 100g."
-        image="/images/mv_soap.jpg"
+        image="/cdn/mv_soap.jpg"
         price={13.50}
         slug="mv-soap"
       />

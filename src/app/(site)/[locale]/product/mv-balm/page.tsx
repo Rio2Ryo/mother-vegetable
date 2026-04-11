@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジバウム — Mother Vegetable',
     description: 'Confidence collagen luxury balm for intensive skin repair.',
-    images: [{ url: '/images/mv_balm.jpg', width: 800, height: 800, alt: 'マザベジバウム' }],
+    images: [{ url: '/cdn/mv_balm.jpg', width: 800, height: 800, alt: 'マザベジバウム' }],
   },
 };
 
@@ -29,7 +29,7 @@ function getMvBalmProduct(locale: string): ProductPageData {
     priceJpy: '¥2,000',
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-balm')?.inStock ?? true,
-    productImage: '/images/mv_balm.jpg',
+    productImage: '/cdn/mv_balm.jpg',
     videoUrls: [],
     mainVideoUrl: '',
     benefits: isJa
@@ -96,7 +96,7 @@ export default async function MvBalmPage({ params }: { params: Promise<{ locale:
       <ProductJsonLd
         name="マザベジバウム"
         description="Luxury spirulina balm with Confidence collagen. 50g."
-        image="/images/mv_balm.jpg"
+        image="/cdn/mv_balm.jpg"
         price={13.50}
         slug="mv-balm"
       />

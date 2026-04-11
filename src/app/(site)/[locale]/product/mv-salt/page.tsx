@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ塩 — Mother Vegetable',
     description: 'Green spirulina salt rich in minerals and 48 nutrients.',
-    images: [{ url: '/images/mv_salt.jpg', width: 800, height: 800, alt: 'マザベジ塩' }],
+    images: [{ url: '/cdn/mv_salt.jpg', width: 800, height: 800, alt: 'マザベジ塩' }],
   },
 };
 
@@ -31,7 +31,7 @@ function getMvSaltProduct(locale: string): ProductPageData {
     priceJpy: '¥2,000',
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-salt')?.inStock ?? true,
-    productImage: '/images/mv_salt.jpg',
+    productImage: '/cdn/mv_salt.jpg',
     videoUrls: [],
     mainVideoUrl: '',
     benefits: isJa
@@ -106,7 +106,7 @@ export default async function MvSaltPage({ params }: { params: Promise<{ locale:
       <ProductJsonLd
         name="マザベジ塩"
         description="Green spirulina infused salt. 50g. Rich in minerals and 48 nutrients."
-        image="/images/mv_salt.jpg"
+        image="/cdn/mv_salt.jpg"
         price={13.50}
         slug="mv-salt"
       />
