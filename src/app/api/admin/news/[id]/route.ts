@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { verifyAdmin } from "@/lib/admin-auth";
+import { ensureNewTables } from "@/lib/ensure-tables";
 
 export async function PATCH(
   request: NextRequest,

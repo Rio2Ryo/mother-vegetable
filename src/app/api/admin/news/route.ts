@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { verifyAdmin } from "@/lib/admin-auth";
+import { ensureNewTables } from "@/lib/ensure-tables";
 
 export async function GET(request: NextRequest) {
   const denied = await verifyAdmin(request);
   if (denied) return denied;
+  await ensureNewTables();
 
   try {
     const news = await prisma.news.findMany({
@@ -35,6 +37,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const denied = await verifyAdmin(request);
   if (denied) return denied;
+  await ensureNewTables();
 
   try {
     const body = await request.json();
