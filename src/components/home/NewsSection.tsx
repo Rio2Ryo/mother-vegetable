@@ -120,7 +120,7 @@ export default function NewsSection() {
       {/* View All link */}
       <div className="text-center mt-6 md:mt-8">
         <a
-          href="#"
+          href="/news"
           className="inline-block px-6 py-2 md:px-8 md:py-3 border-2 border-[#25c760] text-[#25c760] font-semibold text-sm md:text-base rounded-full hover:bg-[#25c760]/10 transition-colors"
         >
           {isJa ? 'すべてのニュースを見る' : 'View All News'}

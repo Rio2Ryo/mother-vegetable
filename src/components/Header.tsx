@@ -317,6 +317,26 @@ export default function Header() {
                 </li>
                 <li className="max-lg:w-full">
                   <Link
+                    href="/products"
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t('allProducts')}
+                  </Link>
+                </li>
+                <li className="max-lg:w-full">
+                  <Link
+                    href="/news"
+                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t('news')}
+                  </Link>
+                </li>
+                <li className="max-lg:w-full">
+                  <Link
                     href="/mv/certifiedInstructor"
                     className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}

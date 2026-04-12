@@ -7,6 +7,11 @@ import { useRouter } from '@/i18n/navigation';
 import { getStoredReferralCode } from '@/lib/affiliate';
 import { useLocale } from 'next-intl';
 
+export interface GalleryImageData {
+  url: string;
+  alt: string;
+}
+
 export interface SimpleProductPageData {
   id: string;
   name: string;
@@ -19,6 +24,7 @@ export interface SimpleProductPageData {
   priceMvt: string;
   inStock: boolean;
   productImage: string;
+  galleryImages?: GalleryImageData[];
   benefits: string[];
   howToUse: string;
   category: 'food' | 'cosmetic';
@@ -37,6 +43,12 @@ export interface SimpleProductPageData {
 export default function SimpleProductPage({ product }: { product: SimpleProductPageData }) {
   const [quantity, setQuantity] = useState(1);
   const [addedFeedback, setAddedFeedback] = useState(false);
+  const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0);
+
+  const galleryImages = product.galleryImages ?? [
+    { url: product.productImage, alt: product.name },
+  ];
+  const activeImage = galleryImages[selectedGalleryIndex] ?? galleryImages[0];
   const addItem = useCartStore((s) => s.addItem);
   const router = useRouter();
   const locale = useLocale();
@@ -74,17 +86,48 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
       {/* Hero Section */}
       <section className="max-w-5xl mx-auto px-4 py-12 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-          {/* Product Image */}
-          <div className="flex justify-center">
+          {/* Product Image Gallery */}
+          <div className="flex flex-col items-center gap-3">
+            {/* Main image */}
             <div className="relative w-full max-w-sm aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-gray-800">
               <Image
-                src={product.productImage}
-                alt={product.name}
+                src={activeImage.url}
+                alt={activeImage.alt}
                 fill
                 className="object-contain p-6"
                 sizes="(max-width: 768px) 100vw, 400px"
               />
             </div>
+            {/* Thumbnail strip */}
+            {galleryImages.length > 1 && (
+              <div className="flex gap-2 justify-center">
+                {galleryImages.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedGalleryIndex(i)}
+                    className={`relative w-14 h-14 rounded-lg overflow-hidden border-2 transition ${
+                      i === selectedGalleryIndex
+                        ? 'border-[#25C760]'
+                        : 'border-gray-700 hover:border-gray-500'
+                    } bg-gray-900`}
+                  >
+                    <Image
+                      src={img.url}
+                      alt={img.alt}
+                      fill
+                      className="object-contain p-1"
+                      sizes="56px"
+                    />
+                    {/* Placeholder overlay for future images */}
+                    {i > 0 && (
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        <span className="text-[8px] text-gray-400 font-medium">{i + 1}</span>
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Product Info */}

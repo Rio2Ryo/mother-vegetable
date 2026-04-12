@@ -29,6 +29,7 @@ function getMvBalmProduct(locale: string): SimpleProductPageData {
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-balm')?.inStock ?? true,
     productImage: '/cdn/mv_balm.jpg',
+    galleryImages: getProductBySlug('mv-balm')?.galleryImages,
     benefits: isJa
       ? [
           '集中リペア — Confidenceコラーゲンが乾燥・ひび割れ・荒れた肌を集中的に修復・保護。',

@@ -29,6 +29,7 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-toner')?.inStock ?? true,
     productImage: '/cdn/mv_toner.jpg',
+    galleryImages: getProductBySlug('mv-toner')?.galleryImages,
     benefits: isJa
       ? [
           'ディープ保湿 — Confidenceコラーゲンと天然栄養素が角質層まで浸透し、長時間うるおいをキープ。',

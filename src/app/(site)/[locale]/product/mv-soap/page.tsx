@@ -29,6 +29,7 @@ function getMvSoapProduct(locale: string): SimpleProductPageData {
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-soap')?.inStock ?? true,
     productImage: '/cdn/mv_soap.jpg',
+    galleryImages: getProductBySlug('mv-soap')?.galleryImages,
     benefits: isJa
       ? [
           'やさしい洗浄力 — Confidenceコラーゲンが肌のうるおいを守りながら、汚れと余分な皮脂をしっかり落とします。',

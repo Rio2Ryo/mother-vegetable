@@ -31,6 +31,7 @@ function getTilapiaProduct(locale: string): SimpleProductPageData {
     priceMvt: '4 MVT',
     inStock: getProductBySlug('tilapia')?.inStock ?? true,
     productImage: '/cdn/mv_tilapia.jpg',
+    galleryImages: getProductBySlug('tilapia')?.galleryImages,
     benefits: isJa
       ? [
           'オメガ3脂肪酸が豊富 — 心臓の健康と脳機能をサポートする良質な不飽和脂肪酸を含有。',

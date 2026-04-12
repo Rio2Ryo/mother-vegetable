@@ -31,6 +31,7 @@ function getMvSaltProduct(locale: string): SimpleProductPageData {
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-salt')?.inStock ?? true,
     productImage: '/cdn/mv_salt.jpg',
+    galleryImages: getProductBySlug('mv-salt')?.galleryImages,
     benefits: isJa
       ? [
           'ミネラル豊富 — 天然塩に48種の植物由来栄養素が加わり、鉄・亜鉛・マグネシウムなどを効率的に摂取。',

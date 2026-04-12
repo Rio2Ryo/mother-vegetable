@@ -5,6 +5,11 @@ const CDN_BASE =
 // Types
 // ---------------------------------------------------------------------------
 
+export interface GalleryImage {
+  url: string;
+  alt: string;
+}
+
 export interface MixItem {
   label: string;
   image: string;
@@ -31,6 +36,7 @@ export interface ProductData {
   howToUse: string;
   howToLink: string;
   inStock: boolean;
+  galleryImages: GalleryImage[];
   // category-specific mix-in items
   drinkItems?: MixItem[];
   foodItems?: MixItem[];
@@ -79,6 +85,13 @@ const achieve: ProductData = {
   sku: "MV-ACH-030",
   category: "food",
   images: ["/cdn/products_achieve_10001.png"],
+  galleryImages: [
+    { url: "/cdn/products_achieve_10001.png", alt: "Achieve green superfood supplement packaging with 30 individual stick packets" },
+    { url: "/cdn/products_achieve_10001.png", alt: "Achieve supplement stick being mixed into a refreshing glass of water" },
+    { url: "/cdn/products_achieve_10001.png", alt: "Close-up of Achieve powder showing fine green plant-based nutrient texture" },
+    { url: "/cdn/products_achieve_10001.png", alt: "Achieve supplement alongside fresh fruits, salads, and healthy meal ingredients" },
+    { url: "/cdn/products_achieve_10001.png", alt: "Active person enjoying improved energy and gut health from daily Achieve routine" },
+  ],
   thumbnails: thumbnails("products_achieve", 10002, 10010),
   videoUrls: videoRange("achieve", 4),
   mainVideoUrl: `${CDN_BASE}/products/achieve/achieve_video_1.mp4`,
@@ -145,6 +158,13 @@ const confidence: ProductData = {
   sku: "MV-CON-030",
   category: "cosmetic",
   images: ["/cdn/products_confidence_10001.png"],
+  galleryImages: [
+    { url: "/cdn/products_confidence_10001.png", alt: "Confidence skincare tube packaging with sleek green and white design" },
+    { url: "/cdn/products_confidence_10001.png", alt: "Confidence cream being gently applied to facial skin for anti-aging care" },
+    { url: "/cdn/products_confidence_10001.png", alt: "Close-up of Confidence gel texture showing smooth collagen-rich formula" },
+    { url: "/cdn/products_confidence_10001.png", alt: "Confidence tube displayed with natural botanical ingredients and cosmetic tools" },
+    { url: "/cdn/products_confidence_10001.png", alt: "Radiant glowing skin after consistent use of Confidence skincare treatment" },
+  ],
   thumbnails: thumbnails("products_confidence", 10002, 10010),
   videoUrls: videoRange("confidence", 4),
   mainVideoUrl: `${CDN_BASE}/products/confidence/confidence_video_1.mp4`,
@@ -226,6 +246,13 @@ const forever: ProductData = {
   sku: "MV-FOR-030",
   category: "pet",
   images: ["/cdn/products_forever_10001.png"],
+  galleryImages: [
+    { url: "/cdn/products_forever_10001.png", alt: "Forever pet supplement packaging with vibrant green design and stick packets" },
+    { url: "/cdn/products_forever_10001.png", alt: "Happy dog eating food mixed with Forever plant-based nutrient powder" },
+    { url: "/cdn/products_forever_10001.png", alt: "Close-up of Forever powder granules showing natural green superfood blend" },
+    { url: "/cdn/products_forever_10001.png", alt: "Forever supplement next to premium pet food bowls and fresh treats" },
+    { url: "/cdn/products_forever_10001.png", alt: "Healthy dog and cat with shiny coats enjoying vitality from Forever supplement" },
+  ],
   thumbnails: thumbnails("products_forever", 10002, 10010),
   videoUrls: videoRange("forever", 4),
   mainVideoUrl: `${CDN_BASE}/products/forever/forever_video_1.mp4`,
@@ -283,6 +310,13 @@ const tilapia: ProductData = {
   sku: 'MV-TIL-001',
   category: 'food',
   images: ['/cdn/mv_tilapia.jpg'],
+  galleryImages: [
+    { url: '/cdn/mv_tilapia.jpg', alt: 'Mother Vegetable Izumi Tai fish product in premium packaging' },
+    { url: '/cdn/mv_tilapia.jpg', alt: 'Izumi Tai fillet being prepared as a grilled dish with vegetables' },
+    { url: '/cdn/mv_tilapia.jpg', alt: 'Close-up of fresh Izumi Tai flesh showing firm texture and natural color' },
+    { url: '/cdn/mv_tilapia.jpg', alt: 'Izumi Tai served on a plate with rice, miso soup, and seasonal sides' },
+    { url: '/cdn/mv_tilapia.jpg', alt: 'Nutrient-enriched Izumi Tai providing 48 essential vitamins and minerals' },
+  ],
   thumbnails: [],
   videoUrls: [],
   mainVideoUrl: '',
@@ -310,6 +344,13 @@ const mvSalt: ProductData = {
   sku: 'MV-SAL-050',
   category: 'food',
   images: ['/cdn/mv_salt.jpg'],
+  galleryImages: [
+    { url: '/cdn/mv_salt.jpg', alt: 'Mother Vegetable Salt 50g jar with distinctive green mineral-rich crystals' },
+    { url: '/cdn/mv_salt.jpg', alt: 'Green nutrient salt being sprinkled over a freshly grilled steak' },
+    { url: '/cdn/mv_salt.jpg', alt: 'Close-up of green salt crystals showing natural mineral-rich coloring' },
+    { url: '/cdn/mv_salt.jpg', alt: 'Mother Vegetable Salt displayed alongside herbs, spices, and cooking utensils' },
+    { url: '/cdn/mv_salt.jpg', alt: 'Mineral comparison chart showing 48 nutrients in each pinch of green salt' },
+  ],
   thumbnails: [],
   videoUrls: [],
   mainVideoUrl: '',
@@ -337,6 +378,13 @@ const mvSoySauce: ProductData = {
   sku: 'MV-SOY-150',
   category: 'food',
   images: ['/cdn/mv_soy_sauce.jpg'],
+  galleryImages: [
+    { url: '/cdn/mv_soy_sauce.jpg', alt: 'Mother Vegetable Soy Sauce 150ml bottle with rich dark color' },
+    { url: '/cdn/mv_soy_sauce.jpg', alt: 'Nutrient-rich soy sauce being poured over fresh sashimi' },
+    { url: '/cdn/mv_soy_sauce.jpg', alt: 'Close-up of dark soy sauce showing deep umami color with green nutrient infusion' },
+    { url: '/cdn/mv_soy_sauce.jpg', alt: 'Soy sauce bottle beside sushi, tofu, and traditional Japanese dishes' },
+    { url: '/cdn/mv_soy_sauce.jpg', alt: 'Rich umami soy sauce delivering 48 natural nutrients with every drop' },
+  ],
   thumbnails: [],
   videoUrls: [],
   mainVideoUrl: '',
@@ -364,6 +412,13 @@ const mvToner: ProductData = {
   sku: 'MV-TON-150',
   category: 'cosmetic',
   images: ['/cdn/mv_toner.jpg'],
+  galleryImages: [
+    { url: '/cdn/mv_toner.jpg', alt: 'Mother Vegetable Toner 150ml bottle with elegant green-tinted formula' },
+    { url: '/cdn/mv_toner.jpg', alt: 'Toner being applied to face with cotton pad for morning skincare routine' },
+    { url: '/cdn/mv_toner.jpg', alt: 'Close-up of toner liquid showing translucent plant-based nutrient infusion' },
+    { url: '/cdn/mv_toner.jpg', alt: 'Toner bottle arranged with serum, moisturizer, and natural botanical decor' },
+    { url: '/cdn/mv_toner.jpg', alt: 'Hydrated and youthful skin demonstrating anti-aging toner benefits' },
+  ],
   thumbnails: [],
   videoUrls: [],
   mainVideoUrl: '',
@@ -394,6 +449,13 @@ const mvBalm: ProductData = {
   sku: 'MV-BAL-050',
   category: 'cosmetic',
   images: ['/cdn/mv_balm.jpg'],
+  galleryImages: [
+    { url: '/cdn/mv_balm.jpg', alt: 'Mother Vegetable Balm 50g tin with premium green and gold packaging' },
+    { url: '/cdn/mv_balm.jpg', alt: 'Balm being applied to hands and cuticles for deep moisturizing care' },
+    { url: '/cdn/mv_balm.jpg', alt: 'Close-up of rich balm texture showing smooth nutrient-dense cream formula' },
+    { url: '/cdn/mv_balm.jpg', alt: 'Luxury balm tin displayed with lip care items and natural skincare essentials' },
+    { url: '/cdn/mv_balm.jpg', alt: 'Soft repaired skin on lips and hands after regular balm application' },
+  ],
   thumbnails: [],
   videoUrls: [],
   mainVideoUrl: '',
@@ -424,6 +486,13 @@ const mvSoap: ProductData = {
   sku: 'MV-SOP-100',
   category: 'cosmetic',
   images: ['/cdn/mv_soap.jpg'],
+  galleryImages: [
+    { url: '/cdn/mv_soap.jpg', alt: 'Mother Vegetable Soap 100g bar with natural green color and artisan finish' },
+    { url: '/cdn/mv_soap.jpg', alt: 'Green nutrient soap creating a rich lather on hands during face wash' },
+    { url: '/cdn/mv_soap.jpg', alt: 'Close-up of handcrafted soap bar showing marbled green plant-based ingredients' },
+    { url: '/cdn/mv_soap.jpg', alt: 'Soap bar on a wooden dish with towels, bath accessories, and dried botanicals' },
+    { url: '/cdn/mv_soap.jpg', alt: 'Clean refreshed skin with natural glow after washing with nutrient-rich soap' },
+  ],
   thumbnails: [],
   videoUrls: [],
   mainVideoUrl: '',

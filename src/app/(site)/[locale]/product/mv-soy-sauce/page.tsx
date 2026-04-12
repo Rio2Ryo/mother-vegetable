@@ -31,6 +31,7 @@ function getMvSoySauceProduct(locale: string): SimpleProductPageData {
     priceMvt: '4 MVT',
     inStock: getProductBySlug('mv-soy-sauce')?.inStock ?? true,
     productImage: '/cdn/mv_soy_sauce.jpg',
+    galleryImages: getProductBySlug('mv-soy-sauce')?.galleryImages,
     benefits: isJa
       ? [
           '旨味を極める — 植物由来の天然アミノ酸が醤油の旨味を深く引き立て、料理の味わいをワンランクアップ。',
