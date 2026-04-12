@@ -41,7 +41,6 @@ function getProducts(isJa: boolean) {
       productLink: '/product/achieve',
       priceUsd: '$36.70',
       priceJpy: '¥5,500',
-      priceMvt: '10 MVT',
     },
     {
       id: 'confidence',
@@ -59,7 +58,6 @@ function getProducts(isJa: boolean) {
       productLink: '/product/confidence',
       priceUsd: '$36.70',
       priceJpy: '¥5,500',
-      priceMvt: '10 MVT',
     },
     {
       id: 'tilapia',
@@ -77,7 +75,6 @@ function getProducts(isJa: boolean) {
       productLink: '/product/tilapia',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
-      priceMvt: '4 MVT',
     },
     {
       id: 'mv-salt',
@@ -95,7 +92,6 @@ function getProducts(isJa: boolean) {
       productLink: '/product/mv-salt',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
-      priceMvt: '4 MVT',
     },
     {
       id: 'mv-soy-sauce',
@@ -113,7 +109,6 @@ function getProducts(isJa: boolean) {
       productLink: '/product/mv-soy-sauce',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
-      priceMvt: '4 MVT',
     },
     {
       id: 'mv-toner',
@@ -131,7 +126,6 @@ function getProducts(isJa: boolean) {
       productLink: '/product/mv-toner',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
-      priceMvt: '4 MVT',
     },
     {
       id: 'mv-balm',
@@ -149,7 +143,6 @@ function getProducts(isJa: boolean) {
       productLink: '/product/mv-balm',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
-      priceMvt: '4 MVT',
     },
     {
       id: 'mv-soap',
@@ -167,7 +160,6 @@ function getProducts(isJa: boolean) {
       productLink: '/product/mv-soap',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
-      priceMvt: '4 MVT',
     },
   ];
 }
@@ -294,11 +286,6 @@ export default function ProductsSection() {
                 {/* Price */}
                 <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center">
                   <span className="text-white font-bold text-xs md:text-sm">{product.priceJpy}</span>
-                  <span className="text-white/50 text-xs md:text-sm">/</span>
-                  <span className="flex items-center gap-1 text-[#25c760] font-bold text-xs md:text-sm">
-                    <img src="/cdn/mvt_coin.png" alt="MVT" width={16} height={16} className="inline-block" />
-                    {product.priceMvt}
-                  </span>
                 </div>
 
                 {/* How to use */}

@@ -178,3 +178,15 @@ model Coupon {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 }
+
+model BotConfig {
+  id             String   @id @default(cuid())
+  name           String   @default("MV Assistant")
+  systemPrompt   String   @default("")
+  persona        String   @default("")
+  status         String   @default("active")
+  welcomeMessage String   @default("")
+  trainingNotes  String   @default("")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

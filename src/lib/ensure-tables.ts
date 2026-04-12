@@ -44,6 +44,19 @@ export async function ensureNewTables() {
     await (prisma as any).$executeRawUnsafe(`
       CREATE UNIQUE INDEX IF NOT EXISTS "Coupon_code_key" ON "Coupon"("code")
     `);
+    await (prisma as any).$executeRawUnsafe(`
+      CREATE TABLE IF NOT EXISTS "BotConfig" (
+        "id" TEXT NOT NULL PRIMARY KEY,
+        "name" TEXT NOT NULL DEFAULT 'MV Assistant',
+        "systemPrompt" TEXT NOT NULL DEFAULT '',
+        "persona" TEXT NOT NULL DEFAULT '',
+        "status" TEXT NOT NULL DEFAULT 'active',
+        "welcomeMessage" TEXT NOT NULL DEFAULT '',
+        "trainingNotes" TEXT NOT NULL DEFAULT '',
+        "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        "updatedAt" DATETIME NOT NULL
+      )
+    `);
   } catch (e) {
     console.error("[ensureNewTables] Error:", e);
   }

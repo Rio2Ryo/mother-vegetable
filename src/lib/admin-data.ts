@@ -268,6 +268,40 @@ export async function deleteCoupon(id: string): Promise<void> {
 }
 
 // ---------------------------------------------------------------------------
+// CRUD - Bot Config
+// ---------------------------------------------------------------------------
+
+export interface BotConfig {
+  id: string;
+  name: string;
+  systemPrompt: string;
+  persona: string;
+  status: string;
+  welcomeMessage: string;
+  trainingNotes: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export async function getBotConfig(): Promise<BotConfig> {
+  const res = await adminFetch("/api/admin/bot");
+  if (!res.ok) throw new Error("Failed to fetch bot config");
+  return res.json();
+}
+
+export async function updateBotConfig(data: Partial<BotConfig>): Promise<BotConfig> {
+  const res = await adminFetch("/api/admin/bot", {
+    method: "PATCH",
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "Failed to update bot config" }));
+    throw new Error(err.error || "Failed to update bot config");
+  }
+  return res.json();
+}
+
+// ---------------------------------------------------------------------------
 // Dashboard stats
 // ---------------------------------------------------------------------------
 

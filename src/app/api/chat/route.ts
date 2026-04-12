@@ -1,5 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest } from 'next/server';
+import prisma from '@/lib/prisma';
+import { ensureNewTables } from '@/lib/ensure-tables';
 
 const SYSTEM_PROMPT_EN = `You are Mother Vegetable's customer support assistant. Answer questions about products (Achieve for body wellness, Confidence for skin care), pricing ($36.70 each), shipping (free worldwide), and usage. Achieve is a food supplement with 48 nutrients — add one stick to your drink or meal. Confidence is a certified quasi-drug cosmetic — apply directly or mix into your cosmetics. All products are certified by Japanese government agencies. Keep answers concise and helpful. If you cannot answer a question, direct the user to support@mothervegetable.com. Always end every reply with exactly this line on its own: "For further assistance, contact us at support@mothervegetable.com"`;
 
@@ -7,10 +9,31 @@ const SYSTEM_PROMPT_JA = `あなたはマザーベジタブルのカスタマー
 
 const SYSTEM_PROMPT_ZH = `你是Mother Vegetable的客服助手。请回答关于产品（Achieve身体保健、Confidence护肤）、价格（每件$36.70）、配送（全球免邮）和使用方法的问题。Achieve是含有48种营养素的食品补充剂——每天一条加入饮品或餐食中。Confidence是经认证的准药妆——直接涂抹或混入化妆品中使用。所有产品均经日本政府机构认证。请给出简洁实用的回答。如无法回答，请引导用户联系support@mothervegetable.com。每次回复末尾必须附上这一行："如需进一步帮助，请联系 support@mothervegetable.com"`;
 
-function getSystemPrompt(locale: string): string {
+function getDefaultSystemPrompt(locale: string): string {
   if (locale === 'ja') return SYSTEM_PROMPT_JA;
   if (locale === 'zh') return SYSTEM_PROMPT_ZH;
   return SYSTEM_PROMPT_EN;
+}
+
+async function getSystemPrompt(locale: string): Promise<string> {
+  try {
+    await ensureNewTables();
+    const config = await prisma.botConfig.findFirst();
+    if (config && config.status === 'active' && config.systemPrompt) {
+      // Build a combined prompt from DB fields
+      let prompt = config.systemPrompt;
+      if (config.persona) {
+        prompt += `\n\nPersona: ${config.persona}`;
+      }
+      if (config.trainingNotes) {
+        prompt += `\n\nAdditional knowledge:\n${config.trainingNotes}`;
+      }
+      return prompt;
+    }
+  } catch (e) {
+    console.error('[chat] Failed to load BotConfig, using default:', e);
+  }
+  return getDefaultSystemPrompt(locale);
 }
 
 // ---------------------------------------------------------------------------
@@ -116,7 +139,7 @@ export async function POST(request: NextRequest) {
   const stream = client.messages.stream({
     model: 'claude-haiku-4-5',
     max_tokens: 1024,
-    system: getSystemPrompt(locale || 'en'),
+    system: await getSystemPrompt(locale || 'en'),
     messages,
   });
 

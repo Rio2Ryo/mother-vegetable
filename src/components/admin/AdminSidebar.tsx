@@ -9,6 +9,7 @@ import {
   Package,
   Newspaper,
   Ticket,
+  Bot,
   X,
   ChevronLeft,
 } from "lucide-react";
@@ -25,6 +26,7 @@ const NAV_ITEMS = [
   { href: "/admin/instructors", label: "Instructors", icon: Users },
   { href: "/admin/news", label: "News", icon: Newspaper },
   { href: "/admin/coupons", label: "Coupons", icon: Ticket },
+  { href: "/admin/bot", label: "AI Bot", icon: Bot },
 ];
 
 export default function AdminSidebar({ open, onClose }: Props) {

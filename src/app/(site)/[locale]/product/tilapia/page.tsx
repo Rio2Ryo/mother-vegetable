@@ -28,7 +28,7 @@ function getTilapiaProduct(locale: string): SimpleProductPageData {
     price: 13.50,
     currency: 'USD',
     priceJpy: '¥2,000',
-    priceMvt: '4 MVT',
+
     inStock: getProductBySlug('tilapia')?.inStock ?? true,
     productImage: '/cdn/mv_tilapia.jpg',
     galleryImages: getProductBySlug('tilapia')?.galleryImages,

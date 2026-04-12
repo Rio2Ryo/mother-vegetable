@@ -26,7 +26,7 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
     price: 13.50,
     currency: 'USD',
     priceJpy: '¥2,000',
-    priceMvt: '4 MVT',
+
     inStock: getProductBySlug('mv-toner')?.inStock ?? true,
     productImage: '/cdn/mv_toner.jpg',
     galleryImages: getProductBySlug('mv-toner')?.galleryImages,

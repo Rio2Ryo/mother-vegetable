@@ -39,7 +39,6 @@ export interface ProductData {
   howToLink: string;
   inStock: boolean;
   priceJpy: string;
-  priceMvt: string;
   galleryImages: GalleryImage[];
   // category-specific mix-in items
   drinkItems?: MixItem[];
@@ -113,7 +112,6 @@ const achieve: ProductData = {
   howToLink: "/achieve-howto",
   inStock: true,
   priceJpy: '¥5,500',
-  priceMvt: '10 MVT',
   drinkItems: [
     { label: "Beer", image: "/Images/Assets/achieve/mazekomu/beer.png" },
     { label: "Cola", image: "/Images/Assets/achieve/mazekomu/cola.png" },
@@ -190,7 +188,6 @@ const confidence: ProductData = {
   howToLink: "/confidence-howto",
   inStock: true,
   priceJpy: '¥5,500',
-  priceMvt: '10 MVT',
   cosmeticItems: [
     {
       label: "Shampoo",
@@ -278,7 +275,6 @@ const tilapia: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
-  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------
@@ -316,7 +312,6 @@ const mvSalt: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
-  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------
@@ -354,7 +349,6 @@ const mvSoySauce: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
-  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------
@@ -395,7 +389,6 @@ const mvToner: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
-  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------
@@ -436,7 +429,6 @@ const mvBalm: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
-  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------
@@ -477,7 +469,6 @@ const mvSoap: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
-  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------

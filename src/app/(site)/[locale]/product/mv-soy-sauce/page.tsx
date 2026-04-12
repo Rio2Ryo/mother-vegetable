@@ -28,7 +28,7 @@ function getMvSoySauceProduct(locale: string): SimpleProductPageData {
     price: 13.50,
     currency: 'USD',
     priceJpy: '¥2,000',
-    priceMvt: '4 MVT',
+
     inStock: getProductBySlug('mv-soy-sauce')?.inStock ?? true,
     productImage: '/cdn/mv_soy_sauce.jpg',
     galleryImages: getProductBySlug('mv-soy-sauce')?.galleryImages,

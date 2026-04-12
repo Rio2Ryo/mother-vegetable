@@ -135,7 +135,6 @@ function ProductCard({
 }) {
   const isJa = locale === 'ja';
   const priceJpy = product.priceJpy;
-  const priceMvt = product.priceMvt;
 
   const displayName = isJa && product.nameJa ? product.nameJa : product.name;
   const displayDescription = isJa && product.descriptionJa ? product.descriptionJa : product.description;
@@ -193,14 +192,9 @@ function ProductCard({
         <div className="flex items-center justify-between">
           <div>
             {isJa ? (
-              <>
-                <span className="text-[#25C760] font-bold text-base">
-                  {priceJpy}
-                </span>
-                <span className="text-gray-500 text-sm ml-2">
-                  / {priceMvt}
-                </span>
-              </>
+              <span className="text-[#25C760] font-bold text-base">
+                {priceJpy}
+              </span>
             ) : (
               <>
                 <span className="text-[#25C760] font-bold text-base">

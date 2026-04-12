@@ -34,7 +34,7 @@ function getConfidenceProduct(locale: string): ProductPageData {
     currency: 'USD',
     priceDisplay: 'USD 36.70',
     priceJpy: '¥5,500',
-    priceMvt: '10 MVT',
+
     inStock: getProductBySlug('confidence')?.inStock ?? true,
     productImage: '/cdn/products_confidence_10001.png',
     videoUrls: [

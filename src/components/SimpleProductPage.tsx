@@ -21,7 +21,6 @@ export interface SimpleProductPageData {
   price: number;
   currency: string;
   priceJpy: string;
-  priceMvt: string;
   inStock: boolean;
   productImage: string;
   galleryImages?: GalleryImageData[];
@@ -146,11 +145,6 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
             {/* Price */}
             <div className="flex items-center gap-3">
               <span className="text-2xl font-bold text-white">{product.priceJpy}</span>
-              <span className="text-gray-600">/</span>
-              <span className="flex items-center gap-1.5 text-[#25C760] font-bold text-lg">
-                <img src="/cdn/mvt_coin.png" alt="MVT" width={20} height={20} />
-                {product.priceMvt}
-              </span>
               <span className="ml-2 text-[#25C760] text-xs border border-[#25C760] rounded px-2 py-0.5">{isJa ? '送料無料' : 'Free Shipping'}</span>
             </div>
 
