@@ -35,7 +35,9 @@ export interface SimpleProductPageData {
   };
   functionSection: {
     subtitle: string;
-    circles: { name: string; detail: string }[];
+    ingredientInfo?: { label: string; value: string }[];
+    nutritionalDetails?: { name: string; value: string }[];
+    characteristics?: string[];
     benefits: { title: string; items: string[] }[];
     nutrientCount?: string;
     nutrientList?: string;
@@ -211,35 +213,58 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
         <div className="max-w-5xl mx-auto px-4 py-12 md:py-16">
           {/* Title */}
           <h2 className="text-2xl md:text-3xl font-bold text-[#25C760] mb-2 text-center">
-            {product.category === 'food'
-              ? (isJa ? 'Food Function' : 'Food Function')
-              : (isJa ? 'Cosmetic Function' : 'Cosmetic Function')}
+            {product.category === 'food' ? 'Food Function' : 'Cosmetic Function'}
           </h2>
           {/* Subtitle */}
-          <p className="text-sm md:text-base text-gray-400 text-center mb-8">
+          <p className="text-sm md:text-base text-gray-400 text-center mb-10">
             {product.functionSection.subtitle}
           </p>
 
-          {/* Oval / Pill-shaped circles */}
-          <div className="flex flex-wrap justify-center gap-4 md:gap-5">
-            {product.functionSection.circles.map((c, i) => (
-              <div
-                key={i}
-                className="flex items-center justify-center px-5 py-4 md:px-6 md:py-5 rounded-[50px] min-w-[130px] md:min-w-[150px] text-center"
-                style={{
-                  background: 'linear-gradient(135deg, #0a3d1a 0%, #1a6b2a 40%, #25C760 100%)',
-                  border: '1px solid rgba(37, 199, 96, 0.3)',
-                }}
-              >
-                <span className="text-white font-semibold text-xs md:text-sm leading-snug">
-                  {c.detail}
-                </span>
+          {/* Ingredient Information Table */}
+          {product.functionSection.ingredientInfo && product.functionSection.ingredientInfo.length > 0 && (
+            <div className="mb-12">
+              <h3 className="text-lg md:text-xl font-bold text-[#25C760] mb-4">
+                {isJa ? '成分情報' : 'Ingredient Information'}
+                <span className="text-xs text-gray-500 font-normal ml-2">/ 100g</span>
+              </h3>
+              <div className="border border-gray-800 rounded-lg overflow-hidden">
+                {product.functionSection.ingredientInfo.map((row, i) => (
+                  <div
+                    key={i}
+                    className={`flex justify-between items-center px-4 py-3 text-sm ${
+                      i < product.functionSection.ingredientInfo!.length - 1 ? 'border-b border-gray-800' : ''
+                    }`}
+                  >
+                    <span className="text-gray-300">{row.label}</span>
+                    <span className="text-white font-semibold">{row.value}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          )}
 
-          {/* Below circles: nutrient list (food) or medical text (cosmetic) */}
-          {product.category === 'food' && product.functionSection.nutrientCount && (
+          {/* Food: Nutritional Breakdown */}
+          {product.category === 'food' && product.functionSection.nutritionalDetails && product.functionSection.nutritionalDetails.length > 0 && (
+            <div>
+              <h3 className="text-lg md:text-xl font-bold text-[#25C760] mb-2">
+                {isJa ? '栄養素詳細' : 'Nutritional Breakdown'}
+              </h3>
+              {product.functionSection.nutrientCount && (
+                <p className="text-sm text-gray-400 mb-4">{product.functionSection.nutrientCount}</p>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+                {product.functionSection.nutritionalDetails.map((item, i) => (
+                  <div key={i} className="flex justify-between items-center py-2 border-b border-gray-800">
+                    <span className="text-gray-300 text-sm">{item.name}</span>
+                    <span className="text-white text-sm font-medium">{item.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Food fallback: nutrient list text */}
+          {product.category === 'food' && !product.functionSection.nutritionalDetails && product.functionSection.nutrientCount && (
             <div className="mt-10 text-center">
               <h3 className="text-xl md:text-2xl font-bold text-[#25C760] mb-4">
                 {product.functionSection.nutrientCount}
@@ -252,7 +277,29 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
             </div>
           )}
 
-          {product.category === 'cosmetic' && product.functionSection.medicalText && (
+          {/* Cosmetic: Characteristics checklist */}
+          {product.category === 'cosmetic' && product.functionSection.characteristics && product.functionSection.characteristics.length > 0 && (
+            <div>
+              <h3 className="text-lg md:text-xl font-bold text-[#25C760] mb-4">
+                {isJa ? '特徴' : 'Characteristics'}
+              </h3>
+              <ul className="space-y-3">
+                {product.functionSection.characteristics.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="text-[#25C760] mt-0.5 flex-shrink-0">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </span>
+                    <span className="text-gray-300 text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Cosmetic fallback: medical text */}
+          {product.category === 'cosmetic' && !product.functionSection.characteristics && product.functionSection.medicalText && (
             <div className="mt-10 text-center">
               <p className="text-gray-300 text-sm leading-relaxed max-w-3xl mx-auto">
                 {product.functionSection.medicalText}

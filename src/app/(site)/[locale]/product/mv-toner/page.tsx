@@ -59,21 +59,38 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
       ],
     },
     functionSection: {
-      subtitle: isJa ? '自信' : 'Confidence',
-      circles: isJa
+      subtitle: isJa ? 'マザベジ化粧水' : 'MV Toner',
+      ingredientInfo: isJa
         ? [
-            { name: 'くすみケア', detail: 'くすみ・色むらケア' },
-            { name: '肌荒れケア', detail: '肌荒れ・吹き出物ケア' },
-            { name: '集中ケア', detail: '集中スキンケア' },
-            { name: 'ニオイケア', detail: 'ボディフレッシュケア' },
-            { name: 'ツヤ・うるおい', detail: 'ツヤ・うるおいケア' },
+            { label: '主成分', value: '97.1g' },
+            { label: 'タンパク質', value: '2.4〜2.6g' },
+            { label: '食物繊維', value: '0.3〜0.5g' },
+            { label: '脂質', value: '0.1g以下' },
+            { label: '水分', value: '0.1g' },
           ]
         : [
-            { name: 'Tone Care', detail: 'Uneven Tone Care' },
-            { name: 'Blemish Care', detail: 'Blemish & Skin Care' },
-            { name: 'Intensive Care', detail: 'Intensive Skin Care' },
-            { name: 'Fresh Care', detail: 'Body Fresh Care' },
-            { name: 'Glow Care', detail: 'Glow & Moisture Care' },
+            { label: 'Main Component', value: '97.1g' },
+            { label: 'Protein', value: '2.4~2.6g' },
+            { label: 'Dietary Fiber', value: '0.3~0.5g' },
+            { label: 'Fat', value: '0.1g or less' },
+            { label: 'Moisture', value: '0.1g' },
+          ],
+      characteristics: isJa
+        ? [
+            '天然素材のみで作られています',
+            '汚染物質のない完全室内栽培',
+            '重金属・マイクロプラスチック汚染リスクを最小化',
+            '防腐剤・人工着色料・香料不使用',
+            '抽出工程のない自然な形状',
+            '厳格な検査による品質認定',
+          ]
+        : [
+            'Made entirely from natural materials',
+            'Complete indoor cultivation free from contaminants',
+            'Minimizes heavy metal and microplastic contamination risks',
+            'No preservatives, artificial colors, or fragrances',
+            'Natural form without extraction processes',
+            'Certified quality through rigorous testing',
           ],
       medicalText: '医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。肌の自然な治癒力とバランス回復をサポートします。',
       benefits: isJa
