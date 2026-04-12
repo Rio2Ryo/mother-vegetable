@@ -14,16 +14,6 @@ const REFERRAL_DISCOUNT_PRICE = 33.00;
 /* Types                                                               */
 /* ------------------------------------------------------------------ */
 
-interface MixItem {
-  name: string;
-  image: string;
-}
-
-interface MazekomuSection {
-  title: string;
-  items: MixItem[];
-}
-
 interface FunctionCircle {
   name: string;
   detail: string;
@@ -88,11 +78,6 @@ export interface ProductPageData {
   howToUse: string;
   howToLink: string;
   productImage: string;
-  // MAZEKOMU grid sections
-  leftSection: MazekomuSection;
-  rightSection: MazekomuSection;
-  centerTitle: string;
-  centerImage: string;
   // Trust
   trust: TrustSection;
   // Function
@@ -221,32 +206,6 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         .usage-item span:last-child { font-size: 0.95rem; color: #FFFFFF; line-height: 1.4; }
 
         /* ============================================================================
-           MAZEKOMU GRID LAYOUT
-           ============================================================================ */
-        .mazekomu-grid { height: 500px; display: grid; grid-template-columns: 3fr 1fr 3fr; grid-template-rows: repeat(5, 1fr); width: 100%; gap: 0; background: black; margin: 40px 0; }
-        .mazekomu-cell { background: black; border: none; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 18px; }
-        .mazekomu-left-box { grid-column: 1; grid-row: 1 / 6; border-top: 1px solid #25C760; border-left: 1px solid #25C760; border-bottom: 1px solid #25C760; border-top-left-radius: 20px; border-bottom-left-radius: 20px; }
-        .mazekomu-right-box { grid-column: 3; grid-row: 1 / 6; border-top: 1px solid #25C760; border-right: 1px solid #25C760; border-bottom: 1px solid #25C760; border-top-right-radius: 20px; border-bottom-right-radius: 20px; }
-        .mazekomu-box-1-2 { grid-column: 2; grid-row: 1; border-left: 1px solid #25C760; border-right: 1px solid #25C760; }
-        .mazekomu-box-2-2 { grid-column: 2; grid-row: 2; border-left: 1px solid #25C760; border-right: 1px solid #25C760; border-bottom: 1px solid #25C760; }
-        .mazekomu-box-3-2 { grid-column: 2; grid-row: 3; }
-        .mazekomu-box-4-2 { grid-column: 2; grid-row: 4; border-left: 1px solid #25C760; border-right: 1px solid #25C760; border-top: 1px solid #25C760; }
-        .mazekomu-box-5-2 { grid-column: 2; grid-row: 5; border-left: 1px solid #25C760; border-right: 1px solid #25C760; }
-
-        .content-section { padding: 20px; height: 100%; width: 100%; display: flex; justify-content: center; flex-direction: column; }
-        .content-section .section-title { font-family: Arial, sans-serif; font-size: 1.5rem; font-weight: 700; color: #ff0000; margin-bottom: 10px; text-align: center; }
-        .content-section .section-title-center { text-align: center; }
-        .red-hero-underline-img { display: block; width: 100px; max-width: 80%; height: auto; margin: 0 auto 20px auto; filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.5)); }
-        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px; }
-        .grid-container.cols-3 { grid-template-columns: repeat(3, 1fr); }
-        .grid-item { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        .grid-image { width: 50%; height: auto; margin-bottom: 8px; object-fit: contain; }
-        .text-label { font-family: Arial, sans-serif; font-size: 0.9rem; color: #FFFFFF; }
-        .mazekomu-grid .test-tube-icon { width: 70%; object-fit: contain; }
-        .test-tube-container { text-align: center; }
-        .mazekomu-content-section { padding: 10px 0; }
-
-        /* ============================================================================
            HERO UNDERLINE
            ============================================================================ */
         .hero-underline-img { display: block; width: 250px; max-width: 80%; height: auto; margin: 20px auto; filter: drop-shadow(0 0 15px rgba(37, 199, 96, 0.5)); }
@@ -345,10 +304,6 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
            RESPONSIVE
            ============================================================================ */
         @media (max-width: 1024px) {
-          .grid-container { grid-template-columns: repeat(2, 1fr); }
-          .grid-container.cols-3 { grid-template-columns: repeat(3, 1fr); }
-          .mazekomu-grid { margin: 20px 0; }
-          .content-section .red-hero-underline-img { width: 80px; margin: 0 auto 15px; }
           .function-content { margin: 30px 0; padding: 24px; }
           .function-title { font-size: 2rem; }
           .fn-nutrient-heading { font-size: 1.5rem; }
@@ -385,8 +340,6 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
           .thumbnail-video { width: 100%; height: auto; object-fit: contain; }
           .product-name { font-size: 1.2rem; line-height: 1.3; margin-bottom: 8px; }
           .product-info-cart { padding: 30px 20px; margin-top: 30px; }
-          .mazekomu-grid { margin: 20px 0; }
-          .content-section .section-title { font-size: 1.2rem; }
           .trust-title { font-size: 1rem; margin-bottom: 5px; }
           .trust-content { margin: 20px 0; padding: 10px; }
           .trust-content p { font-size: 0.6rem; }
@@ -419,31 +372,11 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
           .fn-char-text { font-size: 0.75rem; }
           .medical-text { font-size: 0.9rem; }
           .skin-healing-video { max-width: 80%; }
-          .mazekomu-grid { height: 450px; }
-          .grid-container { grid-template-columns: repeat(2, 1fr); padding-top: 20px; }
-          .grid-container.cols-3 { grid-template-columns: repeat(3, 1fr); }
-          .content-section .red-hero-underline-img { width: 70px; margin: 0 auto 10px; }
         }
 
         @media (max-width: 620px) {
-          .mazekomu-grid { height: 420px; }
-          .content-section { padding: 0; }
-          .content-section .section-title { font-size: 0.8rem; }
-          .mazekomu-grid .text-label { font-size: 0.5rem; }
-          .grid-container { gap: 5px; padding-top: 10px; }
-          .mazekomu-content-section { padding: 10px 0; }
-          .content-section .red-hero-underline-img { width: 50px; margin: 0 auto 8px; }
           .medical-grade-content { padding: 15px 0; }
           .product-name { font-size: 1.1rem; }
-        }
-
-        @media (max-width: 580px) {
-          .content-section .section-title { font-size: 0.6rem; }
-          .mazekomu-grid { height: 400px; }
-        }
-
-        @media (max-width: 540px) {
-          .mazekomu-grid { height: 350px; }
         }
 
         @media (max-width: 530px) {
@@ -453,7 +386,6 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         }
 
         @media (max-width: 480px) {
-          .grid-container, .grid-container.cols-3 { grid-template-columns: repeat(2, 1fr); }
           .card-content { display: grid; grid-template-columns: 0.5fr 1.3fr; grid-template-rows: auto auto auto auto; gap: 10px 12px; }
           .card-product-image { height: 100%; grid-column: 1; grid-row: 1 / 5; display: flex; align-items: center; justify-content: center; padding: 0; }
           .card-product-video { width: 100%; max-width: 100%; height: auto; padding: 0; }
@@ -465,11 +397,6 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
           .card-how-to-use h4 { font-size: 0.7rem; }
           .usage-item span:last-child { font-size: 0.7rem; }
           .trust-content p { font-size: 0.6rem; padding-top: 10px; }
-        }
-
-        @media (max-width: 420px) {
-          .mazekomu-grid { height: 250px; }
-          .content-section .red-hero-underline-img { width: 40px; margin: 0 auto 5px; }
         }
 
         @media (max-width: 400px) {
@@ -649,83 +576,6 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                     <span className="checkmark">&#10003;</span>
                     <span>{product.howToUse}</span>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* MAZEKOMU Grid Section */}
-        <div className="gallery-container">
-          <div className="mazekomu-grid">
-            {/* Left Box */}
-            <div className="mazekomu-cell mazekomu-left-box">
-              <div className="content-section">
-                <h4 className="section-title">{product.leftSection.title}</h4>
-                <Image
-                  src={`/Images/Assets/${product.id === 'achieve' ? 'achieve' : 'confidence'}/mazekomu/red_underline.png`}
-                  alt="Underline"
-                  width={100}
-                  height={10}
-                  className="red-hero-underline-img"
-                />
-                <div className={`grid-container${product.leftSection.items.length > 4 ? ' cols-3' : ''}`}>
-                  {product.leftSection.items.map((item, i) => (
-                    <div key={i} className="grid-item">
-                      <Image src={item.image} alt={item.name} width={80} height={80} className="grid-image" />
-                      <span className="text-label">{item.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Center connector cells */}
-            <div className="mazekomu-cell mazekomu-box-1-2" />
-            <div className="mazekomu-cell mazekomu-box-2-2" />
-            <div className="mazekomu-cell mazekomu-box-3-2">
-              <div className="content-section mazekomu-content-section">
-                <h4 className="section-title section-title-center">{product.centerTitle}</h4>
-                <Image
-                  src={`/Images/Assets/${product.id === 'achieve' ? 'achieve' : 'confidence'}/mazekomu/red_underline.png`}
-                  alt="Underline"
-                  width={100}
-                  height={10}
-                  className="red-hero-underline-img"
-                />
-                <div className="test-tube-container">
-                  <Image
-                    src={product.centerImage}
-                    alt={product.centerTitle}
-                    width={200}
-                    height={300}
-                    className="test-tube-icon"
-                    style={{ width: '70%', height: 'auto', objectFit: 'contain' }}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="mazekomu-cell mazekomu-box-4-2" />
-            <div className="mazekomu-cell mazekomu-box-5-2" />
-
-            {/* Right Box */}
-            <div className="mazekomu-cell mazekomu-right-box">
-              <div className="content-section">
-                <h4 className="section-title">{product.rightSection.title}</h4>
-                <Image
-                  src={`/Images/Assets/${product.id === 'achieve' ? 'achieve' : 'confidence'}/mazekomu/red_underline.png`}
-                  alt="Underline"
-                  width={100}
-                  height={10}
-                  className="red-hero-underline-img"
-                />
-                <div className={`grid-container${product.rightSection.items.length > 4 ? ' cols-3' : ''}`}>
-                  {product.rightSection.items.map((item, i) => (
-                    <div key={i} className="grid-item">
-                      <Image src={item.image} alt={item.name} width={80} height={80} className="grid-image" />
-                      <span className="text-label">{item.name}</span>
-                    </div>
-                  ))}
                 </div>
               </div>
             </div>

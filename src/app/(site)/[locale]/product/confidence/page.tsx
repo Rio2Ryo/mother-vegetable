@@ -56,33 +56,6 @@ function getConfidenceProduct(locale: string): ProductPageData {
       : 'Apply directly or mix into your current cosmetics.',
     howToLink: '/confidence-howto',
 
-    leftSection: {
-      title: isJa ? '直接塗る' : 'Apply Directly',
-      items: [
-        { name: isJa ? '顔' : 'Face', image: '/Images/Assets/confidence/mazekomu/darkSpot.png' },
-        { name: isJa ? '首・デコルテ' : 'Neck', image: '/Images/Assets/confidence/mazekomu/acne.png' },
-        { name: isJa ? '手・指先' : 'Hands', image: '/Images/Assets/confidence/mazekomu/woundBurn.png' },
-        { name: isJa ? 'ボディ' : 'Body', image: '/Images/Assets/confidence/mazekomu/smell.png' },
-        { name: isJa ? '足元' : 'Feet', image: '/Images/Assets/confidence/mazekomu/freckles.png' },
-        { name: isJa ? '頭皮・髪' : 'Scalp & Hair', image: '/Images/Assets/confidence/mazekomu/allergy.png' },
-      ],
-    },
-
-    rightSection: {
-      title: isJa ? '混ぜる' : 'Mix In',
-      items: [
-        { name: isJa ? '化粧品' : 'Cosmetic', image: '/Images/Assets/confidence/mazekomu/cosmetic.png' },
-        { name: isJa ? 'マニキュア' : 'Manicure', image: '/Images/Assets/confidence/mazekomu/manicure.png' },
-        { name: isJa ? 'シャンプー' : 'Shampoo Conditioner', image: '/Images/Assets/confidence/mazekomu/shampoo.png' },
-        { name: isJa ? 'バスタブ' : 'Bath Tub', image: '/Images/Assets/confidence/mazekomu/bathtub.png' },
-        { name: isJa ? '歯磨き粉' : 'Tooth Paste', image: '/Images/Assets/confidence/mazekomu/toothpaste.png' },
-        { name: isJa ? 'リップバーム' : 'Lip Balm', image: '/Images/Assets/confidence/mazekomu/ripbalm.png' },
-      ],
-    },
-
-    centerTitle: isJa ? '混ぜる' : 'Mix In',
-    centerImage: '/Images/Assets/confidence/mazekomu/white_product.png',
-
     trust: {
       productName: 'Confidence',
       certification: isJa

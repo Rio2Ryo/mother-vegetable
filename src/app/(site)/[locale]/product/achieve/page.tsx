@@ -58,31 +58,6 @@ function getAchieveProduct(locale: string): ProductPageData {
       : 'Simply add one stick into your drink or meal.',
     howToLink: '/achieve-howto',
 
-    leftSection: {
-      title: isJa ? '飲み物' : 'Drink',
-      items: [
-        { name: isJa ? '水' : 'Water', image: '/Images/Assets/achieve/mazekomu/water_green.png' },
-        { name: isJa ? 'ジュース' : 'Juice', image: '/Images/Assets/achieve/mazekomu/juice.png' },
-        { name: isJa ? 'コーラ' : 'Cola', image: '/Images/Assets/achieve/mazekomu/cola.png' },
-        { name: isJa ? 'ビール' : 'Beer', image: '/Images/Assets/achieve/mazekomu/beer.png' },
-        { name: isJa ? 'ワイン' : 'White wine', image: '/Images/Assets/achieve/mazekomu/whiteWine.png' },
-        { name: isJa ? 'ハイボール' : 'Highball', image: '/Images/Assets/achieve/mazekomu/highball.png' },
-      ],
-    },
-    rightSection: {
-      title: isJa ? '食べ物' : 'Food',
-      items: [
-        { name: isJa ? 'チャーハン' : 'Fried Rice', image: '/Images/Assets/achieve/mazekomu/friedRice.png' },
-        { name: isJa ? 'ラーメン' : 'Ramen', image: '/Images/Assets/achieve/mazekomu/ramen.png' },
-        { name: isJa ? 'サラダ' : 'Salad', image: '/Images/Assets/achieve/mazekomu/salad.png' },
-        { name: isJa ? 'ヨーグルト' : 'Yogurt', image: '/Images/Assets/achieve/mazekomu/yogurt.png' },
-        { name: isJa ? 'パスタ' : 'Pasta', image: '/Images/Assets/achieve/mazekomu/pasta.png' },
-        { name: isJa ? '天ぷら' : 'Tempura', image: '/Images/Assets/achieve/mazekomu/tempura.png' },
-      ],
-    },
-    centerTitle: isJa ? '混ぜる' : 'Mix In',
-    centerImage: '/Images/Assets/achieve/mazekomu/mazekomu.png',
-
     trust: {
       productName: 'Achieve',
       certification: isJa
