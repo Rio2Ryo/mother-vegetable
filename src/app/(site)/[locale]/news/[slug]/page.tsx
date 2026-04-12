@@ -15,7 +15,7 @@ async function fetchNewsBySlug(slug: string): Promise<NewsArticle | null> {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
   try {
     const res = await fetch(`${baseUrl}/api/public/news/${slug}`, {
-      next: { revalidate: 60 },
+      cache: 'no-store',
     });
     if (!res.ok) return null;
     return await res.json();

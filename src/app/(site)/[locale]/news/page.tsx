@@ -46,7 +46,7 @@ async function fetchNews(): Promise<NewsItem[]> {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
   try {
     const res = await fetch(`${baseUrl}/api/public/news`, {
-      next: { revalidate: 60 },
+      cache: 'no-store',
     });
     if (!res.ok) return [];
     const data = await res.json();
