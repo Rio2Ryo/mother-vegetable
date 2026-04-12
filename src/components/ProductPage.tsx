@@ -60,7 +60,7 @@ interface FunctionSection {
   // Ingredient & nutritional info (food)
   ingredientInfo?: IngredientRow[];
   nutritionalDetails?: NutritionalDetail[];
-  // Characteristics (cosmetic)
+  // Characteristics (food & cosmetic)
   characteristics?: string[];
 }
 
@@ -817,7 +817,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                   </div>
                 )}
 
-                {/* Characteristics (Cosmetic) */}
+                {/* Characteristics (Cosmetic - inline) */}
                 {product.functionSection.characteristics && (
                   <div style={{
                     width: '100%',
@@ -885,6 +885,43 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                     </div>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {/* Characteristics (Food - after nutritional breakdown) */}
+            {product.functionSection.type === 'food' && product.functionSection.characteristics && (
+              <div style={{
+                width: '100%',
+                maxWidth: '800px',
+                margin: '24px auto 32px',
+              }}>
+                <h4 style={{
+                  color: '#25C760',
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  marginBottom: '12px',
+                  textAlign: 'center',
+                }}>Characteristics</h4>
+                <ul style={{
+                  listStyle: 'none',
+                  padding: 0,
+                  margin: 0,
+                }}>
+                  {product.functionSection.characteristics.map((item, i) => (
+                    <li key={i} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      padding: '10px 12px',
+                      borderBottom: '1px solid #2a2a2a',
+                      color: '#fff',
+                      fontSize: '14px',
+                    }}>
+                      <span style={{ color: '#25C760', fontSize: '18px', flexShrink: 0 }}>&#10003;</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
 
