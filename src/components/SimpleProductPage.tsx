@@ -37,6 +37,9 @@ export interface SimpleProductPageData {
     subtitle: string;
     circles: { name: string; detail: string }[];
     benefits: { title: string; items: string[] }[];
+    nutrientCount?: string;
+    nutrientList?: string;
+    medicalText?: string;
   };
 }
 
@@ -203,22 +206,59 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
         </div>
       </section>
 
-      {/* Key Nutrients / Function */}
+      {/* Function Section */}
       <section className="border-t border-gray-800">
-        <div className="max-w-4xl mx-auto px-4 py-10 md:py-14">
-          <h2 className="text-lg font-bold text-[#25C760] mb-8 text-center uppercase tracking-wider">
-            {isJa ? '主な原材料' : 'Key Ingredients'}
+        <div className="max-w-5xl mx-auto px-4 py-12 md:py-16">
+          {/* Title */}
+          <h2 className="text-2xl md:text-3xl font-bold text-[#25C760] mb-2 text-center">
+            {product.category === 'food'
+              ? (isJa ? 'Food Function' : 'Food Function')
+              : (isJa ? 'Cosmetic Function' : 'Cosmetic Function')}
           </h2>
-          <div className="flex flex-wrap justify-center gap-5">
+          {/* Subtitle */}
+          <p className="text-sm md:text-base text-gray-400 text-center mb-8">
+            {product.functionSection.subtitle}
+          </p>
+
+          {/* Oval / Pill-shaped circles */}
+          <div className="flex flex-wrap justify-center gap-4 md:gap-5">
             {product.functionSection.circles.map((c, i) => (
-              <div key={i} className="flex flex-col items-center gap-2 w-24">
-                <div className="w-16 h-16 rounded-full border border-[#25C760] flex items-center justify-center">
-                  <span className="text-[#25C760] font-bold text-[10px] text-center px-1 leading-tight">{c.detail}</span>
-                </div>
-                {/* name displayed inside circle; no duplicate below */}
+              <div
+                key={i}
+                className="flex items-center justify-center px-5 py-4 md:px-6 md:py-5 rounded-[50px] min-w-[130px] md:min-w-[150px] text-center"
+                style={{
+                  background: 'linear-gradient(135deg, #0a3d1a 0%, #1a6b2a 40%, #25C760 100%)',
+                  border: '1px solid rgba(37, 199, 96, 0.3)',
+                }}
+              >
+                <span className="text-white font-semibold text-xs md:text-sm leading-snug">
+                  {c.detail}
+                </span>
               </div>
             ))}
           </div>
+
+          {/* Below circles: nutrient list (food) or medical text (cosmetic) */}
+          {product.category === 'food' && product.functionSection.nutrientCount && (
+            <div className="mt-10 text-center">
+              <h3 className="text-xl md:text-2xl font-bold text-[#25C760] mb-4">
+                {product.functionSection.nutrientCount}
+              </h3>
+              {product.functionSection.nutrientList && (
+                <p className="text-gray-300 text-sm leading-relaxed max-w-3xl mx-auto">
+                  {product.functionSection.nutrientList}
+                </p>
+              )}
+            </div>
+          )}
+
+          {product.category === 'cosmetic' && product.functionSection.medicalText && (
+            <div className="mt-10 text-center">
+              <p className="text-gray-300 text-sm leading-relaxed max-w-3xl mx-auto">
+                {product.functionSection.medicalText}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 

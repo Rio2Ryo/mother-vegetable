@@ -59,22 +59,23 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
       ],
     },
     functionSection: {
-      subtitle: isJa ? 'マザベジ化粧水' : 'MV Toner',
+      subtitle: isJa ? '自信' : 'Confidence',
       circles: isJa
         ? [
-            { name: 'ヒアルロン酸', detail: 'ヒアルロン酸' },
-            { name: 'コラーゲンエキス', detail: 'コラーゲンエキス' },
-            { name: 'アロエベラ', detail: 'アロエベラ' },
-            { name: 'ビタミンC', detail: 'ビタミンC' },
-            { name: '緑茶エキス', detail: '緑茶エキス' },
+            { name: 'シミ・そばかす', detail: 'シミ・そばかす' },
+            { name: 'ニキビ・ニキビ跡', detail: 'ニキビ・ニキビ跡' },
+            { name: '傷跡・火傷跡', detail: '傷跡・やけど跡' },
+            { name: '臭い', detail: '臭い：顔、首、脇、Vゾーン、足' },
+            { name: 'ツヤ', detail: 'ツヤ：清潔感を保つ、ナチュラル/アーストーン' },
           ]
         : [
-            { name: 'Hyaluronic Acid', detail: 'Hyaluronic Acid' },
-            { name: 'Collagen Extract', detail: 'Collagen Extract' },
-            { name: 'Aloe Vera', detail: 'Aloe Vera' },
-            { name: 'Vitamin C', detail: 'Vitamin C' },
-            { name: 'Green Tea Extract', detail: 'Green Tea Extract' },
+            { name: 'Dark Spots', detail: 'Dark Spots, Freckles' },
+            { name: 'Acne', detail: 'Acne, Acne scars' },
+            { name: 'Wounds & Scars', detail: 'Wounds, Scars, Burn Marks' },
+            { name: 'Odor', detail: 'Odor: Face, Neck, Underarms, V-Zone, Feet' },
+            { name: 'Shine', detail: 'Shine: Maintains A Clean Look, Natural/Earth Tones' },
           ],
+      medicalText: '医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。肌の自然な治癒力とバランス回復をサポートします。',
       benefits: isJa
         ? [
             { title: '乾燥肌', items: ['深い保湿効果', 'バリア機能の強化', 'キメを整える', '長時間うるおいキープ', '乾燥による小ジワを予防'] },

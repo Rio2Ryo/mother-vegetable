@@ -66,19 +66,21 @@ function getTilapiaProduct(locale: string): SimpleProductPageData {
       subtitle: isJa ? 'マザベジフィッシュ-イズミ鯛' : 'MV Fish - Izumi Tai',
       circles: isJa
         ? [
-            { name: 'オメガ3 DHA/EPA', detail: 'オメガ3 DHA/EPA' },
-            { name: '天然タンパク質', detail: '天然タンパク質' },
-            { name: 'ビタミンD', detail: 'ビタミンD' },
-            { name: 'ビタミンB12', detail: 'ビタミンB12' },
-            { name: '亜鉛・鉄', detail: '亜鉛・鉄' },
+            { name: '必須脂肪酸', detail: '必須脂肪酸 (9種)' },
+            { name: 'アミノ酸', detail: 'アミノ酸 (10種)' },
+            { name: 'ビタミン', detail: '必須ビタミン (18種)' },
+            { name: 'ミネラル', detail: '主要ミネラル (3種)' },
+            { name: 'その他', detail: 'その他の機能性成分 (9種)' },
           ]
         : [
-            { name: 'Omega-3 DHA/EPA', detail: 'Omega-3 DHA/EPA' },
-            { name: 'Natural Protein', detail: 'Natural Protein' },
-            { name: 'Vitamin D', detail: 'Vitamin D' },
-            { name: 'Vitamin B12', detail: 'Vitamin B12' },
-            { name: 'Zinc & Iron', detail: 'Zinc & Iron' },
+            { name: 'Essential Fatty Acids', detail: 'Essential Fatty Acids (9 types)' },
+            { name: 'Amino Acids', detail: 'Amino Acids (10 types)' },
+            { name: 'Vital Vitamins', detail: 'Vital Vitamins (18 types)' },
+            { name: 'Key Minerals', detail: 'Key Minerals For Balance (3 types)' },
+            { name: 'Other Functional', detail: 'Other Functional Ingredients (9 types)' },
           ],
+      nutrientCount: isJa ? '48種の栄養素' : '48 Nutrients',
+      nutrientList: 'Potassium, sodium, magnesium, calcium, phosphorus, iron, manganese, zinc, copper, Vitamin A, B1, B2, B3, B5, B6, B9, C, E, K, tryptophan, threonine, leucine, isoleucine, lysine, methionine, phenylalanine, valine, histidine, arginine, cystine, tyrosine, alanine, aspartic acid, glutamic acid, serine, glycine, proline, saturated fatty acids, omega-3 fatty acids, omega-6 fatty acids, C-phycocyanin, chlorophyll a, total carotenoids, nucleic acids, glycogen-like polysaccharides, glucan-like polysaccharides, cellulose',
       benefits: isJa
         ? [
             { title: '子ども', items: ['高タンパクで成長をサポート', '骨の成長をサポート', '免疫力の向上', 'DHAが学習能力を向上', '偏食でも栄養バランスを確保'] },

@@ -66,19 +66,21 @@ function getMvSoySauceProduct(locale: string): SimpleProductPageData {
       subtitle: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
       circles: isJa
         ? [
-            { name: '発酵大豆', detail: '発酵大豆' },
-            { name: '小麦', detail: '小麦' },
-            { name: '海塩', detail: '海塩' },
-            { name: '天然酵素', detail: '天然酵素' },
-            { name: 'アミノ酸', detail: 'アミノ酸' },
+            { name: '必須脂肪酸', detail: '必須脂肪酸 (9種)' },
+            { name: 'アミノ酸', detail: 'アミノ酸 (10種)' },
+            { name: 'ビタミン', detail: '必須ビタミン (18種)' },
+            { name: 'ミネラル', detail: '主要ミネラル (3種)' },
+            { name: 'その他', detail: 'その他の機能性成分 (9種)' },
           ]
         : [
-            { name: 'Fermented Soybeans', detail: 'Fermented Soybeans' },
-            { name: 'Wheat', detail: 'Wheat' },
-            { name: 'Sea Salt', detail: 'Sea Salt' },
-            { name: 'Natural Enzymes', detail: 'Natural Enzymes' },
-            { name: 'Amino Acids', detail: 'Amino Acids' },
+            { name: 'Essential Fatty Acids', detail: 'Essential Fatty Acids (9 types)' },
+            { name: 'Amino Acids', detail: 'Amino Acids (10 types)' },
+            { name: 'Vital Vitamins', detail: 'Vital Vitamins (18 types)' },
+            { name: 'Key Minerals', detail: 'Key Minerals For Balance (3 types)' },
+            { name: 'Other Functional', detail: 'Other Functional Ingredients (9 types)' },
           ],
+      nutrientCount: isJa ? '48種の栄養素' : '48 Nutrients',
+      nutrientList: 'Potassium, sodium, magnesium, calcium, phosphorus, iron, manganese, zinc, copper, Vitamin A, B1, B2, B3, B5, B6, B9, C, E, K, tryptophan, threonine, leucine, isoleucine, lysine, methionine, phenylalanine, valine, histidine, arginine, cystine, tyrosine, alanine, aspartic acid, glutamic acid, serine, glycine, proline, saturated fatty acids, omega-3 fatty acids, omega-6 fatty acids, C-phycocyanin, chlorophyll a, total carotenoids, nucleic acids, glycogen-like polysaccharides, glucan-like polysaccharides, cellulose',
       benefits: isJa
         ? [
             { title: '子ども', items: ['栄養豊富な調味料で偏食対策', '免疫力の向上', '食欲増進・食事が楽しくなる', '鉄分・亜鉛で成長をサポート', '消化を助ける発酵食品'] },

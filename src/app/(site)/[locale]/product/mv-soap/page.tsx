@@ -59,22 +59,23 @@ function getMvSoapProduct(locale: string): SimpleProductPageData {
       ],
     },
     functionSection: {
-      subtitle: isJa ? 'マザベジ石鹸' : 'MV Soap',
+      subtitle: isJa ? '自信' : 'Confidence',
       circles: isJa
         ? [
-            { name: 'オリーブオイル', detail: 'オリーブオイル' },
-            { name: 'ココナッツオイル', detail: 'ココナッツオイル' },
-            { name: 'シアバター', detail: 'シアバター' },
-            { name: 'グリセリン', detail: 'グリセリン' },
-            { name: 'エッセンシャルオイル', detail: 'エッセンシャルオイル' },
+            { name: 'シミ・そばかす', detail: 'シミ・そばかす' },
+            { name: 'ニキビ・ニキビ跡', detail: 'ニキビ・ニキビ跡' },
+            { name: '傷跡・火傷跡', detail: '傷跡・やけど跡' },
+            { name: '臭い', detail: '臭い：顔、首、脇、Vゾーン、足' },
+            { name: 'ツヤ', detail: 'ツヤ：清潔感を保つ、ナチュラル/アーストーン' },
           ]
         : [
-            { name: 'Olive Oil', detail: 'Olive Oil' },
-            { name: 'Coconut Oil', detail: 'Coconut Oil' },
-            { name: 'Shea Butter', detail: 'Shea Butter' },
-            { name: 'Glycerin', detail: 'Glycerin' },
-            { name: 'Essential Oils', detail: 'Essential Oils' },
+            { name: 'Dark Spots', detail: 'Dark Spots, Freckles' },
+            { name: 'Acne', detail: 'Acne, Acne scars' },
+            { name: 'Wounds & Scars', detail: 'Wounds, Scars, Burn Marks' },
+            { name: 'Odor', detail: 'Odor: Face, Neck, Underarms, V-Zone, Feet' },
+            { name: 'Shine', detail: 'Shine: Maintains A Clean Look, Natural/Earth Tones' },
           ],
+      medicalText: '医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。肌の自然な治癒力とバランス回復をサポートします。',
       benefits: isJa
         ? [
             { title: '普通肌', items: ['毎日のクレンジング', '毛穴をすっきり洗浄', '肌のキメを整える', '洗い上がりしっとり', '皮脂バランスを整える'] },
