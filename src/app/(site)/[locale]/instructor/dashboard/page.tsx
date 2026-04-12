@@ -86,6 +86,8 @@ function DashboardContent() {
             commissionRate: c.commissionRate,
             commissionAmount: c.commissionAmount,
             paidOut: c.paidOut,
+            buyerName: c.buyerName ?? null,
+            buyerEmail: c.buyerEmail ?? null,
             createdAt: c.createdAt,
           });
         }
@@ -434,6 +436,7 @@ function DashboardContent() {
                   <thead>
                     <tr className="border-b border-gray-800">
                       <th className="text-left text-gray-400 pb-3 font-medium">{t('date')}</th>
+                      <th className="text-left text-gray-400 pb-3 font-medium">{t('buyer')}</th>
                       <th className="text-left text-gray-400 pb-3 font-medium">{t('type')}</th>
                       <th className="text-right text-gray-400 pb-3 font-medium">{t('commission')}</th>
                     </tr>
@@ -443,6 +446,9 @@ function DashboardContent() {
                       <tr key={c.id} className="border-b border-gray-800/50">
                         <td className="py-3 text-gray-300">
                           {new Date(c.createdAt).toLocaleDateString()}
+                        </td>
+                        <td className="py-3 text-gray-300 text-xs">
+                          {c.buyerName || <span className="text-gray-600">--</span>}
                         </td>
                         <td className="py-3">
                           <span
@@ -502,6 +508,58 @@ function DashboardContent() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Sales Details */}
+        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 mb-8">
+          <h2 className="text-lg font-semibold text-[#25C760] mb-4">{t('salesDetails')}</h2>
+          {allCommissions.length === 0 ? (
+            <p className="text-gray-500 text-sm text-center py-8">{t('noSalesYet')}</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="text-left text-gray-400 pb-3 font-medium">{t('buyer')}</th>
+                    <th className="text-left text-gray-400 pb-3 font-medium">{t('date')}</th>
+                    <th className="text-right text-gray-400 pb-3 font-medium">{t('orderTotal')}</th>
+                    <th className="text-right text-gray-400 pb-3 font-medium">{t('commission')}</th>
+                    <th className="text-center text-gray-400 pb-3 font-medium">{t('status')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {allCommissions.map((c) => (
+                    <tr key={c.id} className="border-b border-gray-800/50">
+                      <td className="py-3">
+                        <div className="text-white text-sm">{c.buyerName || '--'}</div>
+                        {c.buyerEmail && (
+                          <div className="text-gray-500 text-xs">{c.buyerEmail}</div>
+                        )}
+                      </td>
+                      <td className="py-3 text-gray-300">
+                        {new Date(c.createdAt).toLocaleDateString()}
+                      </td>
+                      <td className="py-3 text-right text-gray-300">
+                        ${c.orderTotal.toFixed(2)}
+                      </td>
+                      <td className="py-3 text-right font-medium text-[#25C760]">
+                        +${c.commissionAmount.toFixed(2)}
+                      </td>
+                      <td className="py-3 text-center">
+                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${
+                          c.paidOut
+                            ? 'bg-[#25C760]/20 text-[#25C760]'
+                            : 'bg-yellow-500/20 text-yellow-400'
+                        }`}>
+                          {c.paidOut ? t('paid') : t('unpaid')}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
 
         {/* Commission Breakdown */}

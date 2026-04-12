@@ -27,6 +27,8 @@ export interface Commission {
   commissionRate: number;
   commissionAmount: number;
   paidOut?: boolean;
+  buyerName?: string | null;
+  buyerEmail?: string | null;
   createdAt: string;
 }
 

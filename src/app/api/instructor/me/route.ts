@@ -13,7 +13,10 @@ export async function GET(request: NextRequest) {
     const instructor = await prisma.instructor.findUnique({
       where: { id: instructorId },
       include: {
-        commissions: { orderBy: { createdAt: "desc" } },
+        commissions: {
+          orderBy: { createdAt: "desc" },
+          include: { order: { select: { shippingAddress: true } } },
+        },
         referredInstructors: {
           select: {
             id: true,
@@ -46,16 +49,34 @@ export async function GET(request: NextRequest) {
       connectOnboarded: instructor.connectOnboarded,
       locale: instructor.locale,
       createdAt: instructor.createdAt.toISOString(),
-      commissions: instructor.commissions.map((c) => ({
-        id: c.id,
-        orderId: c.orderId,
-        type: c.type,
-        orderTotal: c.orderTotal,
-        commissionRate: c.commissionRate,
-        commissionAmount: c.commissionAmount,
-        paidOut: c.paidOut,
-        createdAt: c.createdAt.toISOString(),
-      })),
+      commissions: instructor.commissions.map((c) => {
+        let buyerName: string | null = null;
+        let buyerEmail: string | null = null;
+        const order = (c as Record<string, unknown>).order as { shippingAddress?: string } | null;
+        if (order?.shippingAddress) {
+          try {
+            const addr = JSON.parse(order.shippingAddress);
+            const first = addr.firstName || "";
+            const last = addr.lastName || "";
+            buyerName = [first, last].filter(Boolean).join(" ") || null;
+            buyerEmail = addr.email || null;
+          } catch {
+            // ignore malformed JSON
+          }
+        }
+        return {
+          id: c.id,
+          orderId: c.orderId,
+          type: c.type,
+          orderTotal: c.orderTotal,
+          commissionRate: c.commissionRate,
+          commissionAmount: c.commissionAmount,
+          paidOut: c.paidOut,
+          buyerName,
+          buyerEmail,
+          createdAt: c.createdAt.toISOString(),
+        };
+      }),
       referredInstructors: instructor.referredInstructors.map((ri) => ({
         id: ri.id,
         fullName: ri.fullName,

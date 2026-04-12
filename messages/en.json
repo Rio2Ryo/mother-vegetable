@@ -332,7 +332,13 @@
     "subscription_canceled": "Canceled",
     "registrationComplete": "Registration complete! Welcome to the instructor program.",
     "showPassword": "SHOW",
-    "hidePassword": "HIDE"
+    "hidePassword": "HIDE",
+    "buyer": "Buyer",
+    "salesDetails": "Sales Details",
+    "noSalesYet": "No sales yet. Share your referral link to start earning!",
+    "status": "Status",
+    "paid": "Paid",
+    "unpaid": "Unpaid"
   },
   "chatbot": {
     "title": "Chat with us",

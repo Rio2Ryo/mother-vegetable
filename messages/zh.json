@@ -332,7 +332,13 @@
     "subscription_canceled": "已取消",
     "registrationComplete": "注册完成！欢迎加入讲师计划。",
     "showPassword": "显示",
-    "hidePassword": "隐藏"
+    "hidePassword": "隐藏",
+    "buyer": "购买者",
+    "salesDetails": "销售详情",
+    "noSalesYet": "暂无销售记录。分享您的推荐链接开始赚取佣金！",
+    "status": "状态",
+    "paid": "已支付",
+    "unpaid": "未支付"
   },
   "chatbot": {
     "title": "在线咨询",

@@ -332,7 +332,13 @@
     "subscription_canceled": "解約済み",
     "registrationComplete": "登録が完了しました！インストラクタープログラムへようこそ。",
     "showPassword": "表示",
-    "hidePassword": "非表示"
+    "hidePassword": "非表示",
+    "buyer": "購入者",
+    "salesDetails": "販売詳細",
+    "noSalesYet": "まだ販売実績がありません。紹介リンクを共有して収益を始めましょう！",
+    "status": "ステータス",
+    "paid": "支払済",
+    "unpaid": "未払い"
   },
   "chatbot": {
     "title": "チャットで質問",
