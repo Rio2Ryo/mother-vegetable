@@ -38,6 +38,8 @@ export interface ProductData {
   howToUse: string;
   howToLink: string;
   inStock: boolean;
+  priceJpy: string;
+  priceMvt: string;
   galleryImages: GalleryImage[];
   // category-specific mix-in items
   drinkItems?: MixItem[];
@@ -110,6 +112,8 @@ const achieve: ProductData = {
     "Simply add one stick into your drink or meal.",
   howToLink: "/achieve-howto",
   inStock: true,
+  priceJpy: '¥5,500',
+  priceMvt: '10 MVT',
   drinkItems: [
     { label: "Beer", image: "/Images/Assets/achieve/mazekomu/beer.png" },
     { label: "Cola", image: "/Images/Assets/achieve/mazekomu/cola.png" },
@@ -185,6 +189,8 @@ const confidence: ProductData = {
     "Apply directly or mix into your current cosmetics.",
   howToLink: "/confidence-howto",
   inStock: true,
+  priceJpy: '¥5,500',
+  priceMvt: '10 MVT',
   cosmeticItems: [
     {
       label: "Shampoo",
@@ -275,6 +281,8 @@ const forever: ProductData = {
     "Simply mix one stick into your pet's food.",
   howToLink: "/forever-howto",
   inStock: true,
+  priceJpy: '¥5,500',
+  priceMvt: '10 MVT',
   petItems: [
     {
       label: "Dog Treats",
@@ -337,6 +345,8 @@ const tilapia: ProductData = {
   howToUse: 'Cook and enjoy as part of your daily meal.',
   howToLink: '#',
   inStock: true,
+  priceJpy: '¥2,000',
+  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------
@@ -373,6 +383,8 @@ const mvSalt: ProductData = {
   howToUse: 'Use as everyday salt in cooking and seasoning.',
   howToLink: '#',
   inStock: true,
+  priceJpy: '¥2,000',
+  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------
@@ -409,6 +421,8 @@ const mvSoySauce: ProductData = {
   howToUse: 'Use as everyday soy sauce for cooking and dipping.',
   howToLink: '#',
   inStock: true,
+  priceJpy: '¥2,000',
+  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------
@@ -448,6 +462,8 @@ const mvToner: ProductData = {
   howToUse: 'Apply to cleansed face and neck morning and evening.',
   howToLink: '#',
   inStock: true,
+  priceJpy: '¥2,000',
+  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------
@@ -487,6 +503,8 @@ const mvBalm: ProductData = {
   howToUse: 'Apply a small amount to dry areas of skin as needed.',
   howToLink: '#',
   inStock: true,
+  priceJpy: '¥2,000',
+  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------
@@ -526,6 +544,8 @@ const mvSoap: ProductData = {
   howToUse: 'Lather with water and massage onto face and body.',
   howToLink: '#',
   inStock: true,
+  priceJpy: '¥2,000',
+  priceMvt: '4 MVT',
 };
 
 // ---------------------------------------------------------------------------

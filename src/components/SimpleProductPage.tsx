@@ -215,7 +215,7 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
                 <div className="w-16 h-16 rounded-full border border-[#25C760] flex items-center justify-center">
                   <span className="text-[#25C760] font-bold text-[10px] text-center px-1 leading-tight">{c.detail}</span>
                 </div>
-                <span className="text-[10px] text-gray-400 text-center leading-tight">{c.detail}</span>
+                {/* name displayed inside circle; no duplicate below */}
               </div>
             ))}
           </div>

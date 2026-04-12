@@ -124,10 +124,8 @@ function ProductCard({
   t: (en: string, ja: string, zh: string) => string;
 }) {
   const isJa = locale === 'ja';
-  const priceJpy = product.price
-    ? `\u00a5${Math.round(product.price * 150).toLocaleString()}`
-    : '';
-  const priceMvt = `${Math.round(product.price / 9)} MVT`;
+  const priceJpy = product.priceJpy;
+  const priceMvt = product.priceMvt;
 
   const displayName = isJa && product.nameJa ? product.nameJa : product.name;
   const displayDescription = isJa && product.descriptionJa ? product.descriptionJa : product.description;

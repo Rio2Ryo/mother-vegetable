@@ -6,10 +6,10 @@ import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
   title: 'マザベジ化粧水 — Mother Vegetable',
-  description: 'Nutrient-infused facial toner with Confidence collagen. 150ml. Skin healing and anti-aging.',
+  description: 'Nutrient-infused facial toner with natural collagen. 150ml. Skin healing and anti-aging.',
   openGraph: {
     title: 'マザベジ化粧水 — Mother Vegetable',
-    description: 'Confidence collagen toner for skin healing and anti-aging.',
+    description: 'Natural collagen toner for skin healing and anti-aging.',
     images: [{ url: '/cdn/mv_toner.jpg', width: 800, height: 800, alt: 'マザベジ化粧水' }],
   },
 };
@@ -22,7 +22,7 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
     name: isJa ? 'マザベジ化粧水' : 'MV Toner',
     fullName: isJa ? 'マザベジ化粧水 / 150ml' : 'Mother Vegetable Toner / 150ml',
     subtitle: '150ml',
-    tagline: isJa ? 'Confidenceコラーゲン配合の化粧水。' : 'Confidence-powered skin toner.',
+    tagline: isJa ? '天然コラーゲン配合の化粧水。' : 'Premium natural collagen skin toner.',
     price: 13.50,
     currency: 'USD',
     priceJpy: '¥2,000',
@@ -32,15 +32,15 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
     galleryImages: getProductBySlug('mv-toner')?.galleryImages,
     benefits: isJa
       ? [
-          'ディープ保湿 — Confidenceコラーゲンと天然栄養素が角質層まで浸透し、長時間うるおいをキープ。',
+          'ディープ保湿 — 天然コラーゲンと天然栄養素が角質層まで浸透し、長時間うるおいをキープ。',
           'エイジングケア — コラーゲン生成を促進し、シワ・たるみ・くすみにアプローチ。',
-          '肌トラブル改善 — Confidenceコラーゲンの修復力で荒れ肌・赤み・炎症を鎮静。',
+          '肌トラブル改善 — 天然コラーゲンの修復力で荒れ肌・赤み・炎症を鎮静。',
           '低刺激処方 — 敏感肌にも安心の優しい処方。植物由来の天然成分で肌をいたわります。',
         ]
       : [
-          'Deep Hydration — Confidence collagen and natural nutrients penetrate the stratum corneum for long-lasting moisture.',
+          'Deep Hydration — Natural collagen and nutrients penetrate the stratum corneum for long-lasting moisture.',
           'Anti-Aging Care — Promotes collagen production to target wrinkles, sagging, and dullness.',
-          'Skin Healing — Confidence collagen calms rough skin, redness, and inflammation.',
+          'Skin Healing — Natural collagen calms rough skin, redness, and inflammation.',
           'Gentle Formula — A low-irritation formula safe for sensitive skin, using natural plant-derived ingredients.',
         ],
     howToUse: isJa
@@ -100,7 +100,7 @@ export default async function MvTonerPage({ params }: { params: Promise<{ locale
     <>
       <ProductJsonLd
         name="マザベジ化粧水"
-        description="Nutrient-infused facial toner with Confidence collagen. 150ml."
+        description="Nutrient-infused facial toner with natural collagen. 150ml."
         image="/cdn/mv_toner.jpg"
         price={13.50}
         slug="mv-toner"

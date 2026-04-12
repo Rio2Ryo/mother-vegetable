@@ -6,10 +6,10 @@ import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
   title: 'マザベジバウム — Mother Vegetable',
-  description: 'Luxury nutrient-rich balm with Confidence collagen. 50g. Multi-purpose skin healing.',
+  description: 'Luxury nutrient-rich balm with natural collagen. 50g. Multi-purpose skin healing.',
   openGraph: {
     title: 'マザベジバウム — Mother Vegetable',
-    description: 'Confidence collagen luxury balm for intensive skin repair.',
+    description: 'Natural collagen luxury balm for intensive skin repair.',
     images: [{ url: '/cdn/mv_balm.jpg', width: 800, height: 800, alt: 'マザベジバウム' }],
   },
 };
@@ -22,7 +22,7 @@ function getMvBalmProduct(locale: string): SimpleProductPageData {
     name: isJa ? 'マザベジバウム' : 'MV Balm',
     fullName: isJa ? 'マザベジバウム / 50g' : 'Mother Vegetable Balm / 50g',
     subtitle: '50g',
-    tagline: isJa ? 'Confidenceコラーゲン配合のラグジュアリーバウム。' : 'Confidence-powered luxury balm.',
+    tagline: isJa ? '天然コラーゲン配合のラグジュアリーバウム。' : 'Premium natural collagen luxury balm.',
     price: 13.50,
     currency: 'USD',
     priceJpy: '¥2,000',
@@ -32,13 +32,13 @@ function getMvBalmProduct(locale: string): SimpleProductPageData {
     galleryImages: getProductBySlug('mv-balm')?.galleryImages,
     benefits: isJa
       ? [
-          '集中リペア — Confidenceコラーゲンが乾燥・ひび割れ・荒れた肌を集中的に修復・保護。',
+          '集中リペア — 天然コラーゲンが乾燥・ひび割れ・荒れた肌を集中的に修復・保護。',
           'マルチユース — 唇・手・肘・かかと・目元など、全身の乾燥が気になる部分にこれ1つでケア。',
           'ポータブル — コンパクトサイズで持ち運びに便利。外出先でもいつでもケア可能。',
           '天然成分配合 — 48種の栄養素と天然由来オイルをベースに、肌に優しいナチュラル処方。',
         ]
       : [
-          'Intensive Repair — Confidence collagen intensively restores and protects dry, cracked, and rough skin.',
+          'Intensive Repair — Natural collagen intensively restores and protects dry, cracked, and rough skin.',
           'Multi-Use — One balm for lips, hands, elbows, heels, eye area, and any dry zone on the body.',
           'Portable — Compact size for on-the-go care anytime, anywhere.',
           'Natural Ingredients — A gentle, natural formula based on plant-based nutrients and plant-derived oils.',
@@ -100,7 +100,7 @@ export default async function MvBalmPage({ params }: { params: Promise<{ locale:
     <>
       <ProductJsonLd
         name="マザベジバウム"
-        description="Luxury nutrient-rich balm with Confidence collagen. 50g."
+        description="Luxury nutrient-rich balm with natural collagen. 50g."
         image="/cdn/mv_balm.jpg"
         price={13.50}
         slug="mv-balm"

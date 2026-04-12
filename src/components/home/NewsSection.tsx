@@ -73,7 +73,7 @@ export default function NewsSection() {
       transition={{ duration: 0.6 }}
     >
       <h2 className="text-xl md:text-5xl font-bold text-center mb-2 md:mb-4" style={{ color: '#25c760' }}>
-        News
+        {isJa ? '最新ニュース' : 'Latest News'}
       </h2>
 
       <div className="w-32 md:w-48 h-1 md:h-1.5 bg-gradient-to-r from-transparent via-green-400 to-transparent mx-auto rounded-full mt-4 md:mt-6 mb-6 md:mb-8 opacity-80" />
