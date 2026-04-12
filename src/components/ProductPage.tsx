@@ -270,12 +270,13 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         .function-content:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(37, 199, 96, 0.2); }
         .function-title { color: #25C760; margin-bottom: 10px; text-align: center; font-family: Arial, sans-serif; font-weight: 700; font-size: 2.5rem; letter-spacing: 2px; }
         .function-subtitle { color: #FFFFFF; font-family: Arial, sans-serif; font-weight: 400; font-size: 1.5rem; text-align: center; }
-        .function-diagram { position: relative; display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; }
-        .function-diagram .test-tube-icon { margin-left: -10px; margin-bottom: 0; line-height: 0; width: unset; }
-        .function-diagram .product-video { max-width: 240px; height: auto; transition: transform 0.3s ease; object-fit: cover; border-radius: 8px; }
-        .bracket-icon { margin-bottom: 20px; line-height: 0; }
-        .bracket-img { width: 100%; max-width: 800px; height: auto; transition: transform 0.3s ease; }
+        .function-diagram { position: relative; display: flex; flex-direction: row; align-items: stretch; margin-bottom: 40px; gap: 0; }
+        .function-diagram .test-tube-icon { margin: 0; line-height: 0; width: auto; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .function-diagram .product-video { max-width: 200px; height: auto; transition: transform 0.3s ease; object-fit: cover; border-radius: 8px; }
+        .bracket-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 0 8px; }
+        .bracket-img { width: auto; max-height: 300px; height: 100%; transition: transform 0.3s ease; }
         .bracket-img:hover { transform: scale(1.02); }
+        .function-diagram .ingredient-info-wrapper { flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .function-branches { position: relative; width: 100%; display: flex; justify-content: center; }
         .function-circle-div { display: flex; justify-content: space-between; width: 100%; max-width: 800px; gap: 1%; }
         .function-circle { background-color: #3C8063; border-radius: 50%; width: 19%; height: auto; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; transition: all 0.3s ease; position: relative; z-index: 2; }
@@ -367,6 +368,10 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         @media (max-width: 767px) {
           .function-content { margin: 20px 0; padding: 10px; }
           .function-subtitle { font-size: 0.9rem; }
+          .function-diagram { flex-direction: column !important; align-items: center !important; }
+          .function-diagram .test-tube-icon { margin-bottom: 16px; }
+          .bracket-icon { padding: 8px 0 !important; }
+          .bracket-img { max-height: none !important; max-width: 300px !important; width: 100% !important; height: auto !important; }
           .function-content .product-video { max-width: 90px; }
           .function-total { font-size: 1.2rem; margin-bottom: 10px; }
           .function-description { font-size: 0.9rem; }
@@ -742,135 +747,146 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
               className="hero-underline-img"
             />
             <div className="function-diagram">
+              {/* Left: Video */}
               <div className="test-tube-icon">
                 <video className="product-video" autoPlay muted loop playsInline>
                   <source src={product.functionSection.videoUrl} type="video/mp4" />
                 </video>
               </div>
-              {/* Ingredient Information Table */}
-              {product.functionSection.ingredientInfo && (
-                <div style={{
-                  width: '100%',
-                  maxWidth: '600px',
-                  margin: '32px auto',
-                  border: '1px solid #333',
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                }}>
+
+              {/* Center: Bracket image */}
+              <div className="bracket-icon">
+                <Image
+                  src="/Images/Assets/homepage/bracket_v2.png"
+                  alt="Bracket"
+                  width={60}
+                  height={300}
+                  className="bracket-img"
+                />
+              </div>
+
+              {/* Right: Ingredient info */}
+              <div className="ingredient-info-wrapper">
+                {/* Ingredient Information Table */}
+                {product.functionSection.ingredientInfo && (
                   <div style={{
-                    background: '#1a1a1a',
-                    padding: '12px 16px',
-                    borderBottom: '1px solid #333',
+                    width: '100%',
+                    border: '1px solid #333',
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    marginBottom: '16px',
+                  }}>
+                    <div style={{
+                      background: '#1a1a1a',
+                      padding: '12px 16px',
+                      borderBottom: '1px solid #333',
+                    }}>
+                      <h4 style={{
+                        color: '#25C760',
+                        margin: 0,
+                        fontSize: '16px',
+                        fontWeight: 600,
+                      }}>
+                        Ingredient Information (per 100g)
+                      </h4>
+                    </div>
+                    <table style={{
+                      width: '100%',
+                      borderCollapse: 'collapse',
+                    }}>
+                      <tbody>
+                        {product.functionSection.ingredientInfo.map((row, i) => (
+                          <tr key={i} style={{ borderBottom: i < product.functionSection.ingredientInfo!.length - 1 ? '1px solid #2a2a2a' : 'none' }}>
+                            <td style={{
+                              padding: '10px 16px',
+                              color: '#ccc',
+                              fontSize: '14px',
+                              width: '50%',
+                            }}>{row.label}</td>
+                            <td style={{
+                              padding: '10px 16px',
+                              color: '#fff',
+                              fontSize: '14px',
+                              textAlign: 'right',
+                              fontWeight: 500,
+                            }}>{row.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
+                {/* Characteristics (Cosmetic) */}
+                {product.functionSection.characteristics && (
+                  <div style={{
+                    width: '100%',
+                    marginBottom: '16px',
                   }}>
                     <h4 style={{
                       color: '#25C760',
-                      margin: 0,
                       fontSize: '16px',
                       fontWeight: 600,
+                      marginBottom: '12px',
+                    }}>Characteristics</h4>
+                    <ul style={{
+                      listStyle: 'none',
+                      padding: 0,
+                      margin: 0,
                     }}>
-                      {product.functionSection.type === 'food' ? 'Ingredient Information (per 100g)' : 'Ingredient Information (per 100g)'}
-                    </h4>
-                  </div>
-                  <table style={{
-                    width: '100%',
-                    borderCollapse: 'collapse',
-                  }}>
-                    <tbody>
-                      {product.functionSection.ingredientInfo.map((row, i) => (
-                        <tr key={i} style={{ borderBottom: i < product.functionSection.ingredientInfo!.length - 1 ? '1px solid #2a2a2a' : 'none' }}>
-                          <td style={{
-                            padding: '10px 16px',
-                            color: '#ccc',
-                            fontSize: '14px',
-                            width: '50%',
-                          }}>{row.label}</td>
-                          <td style={{
-                            padding: '10px 16px',
-                            color: '#fff',
-                            fontSize: '14px',
-                            textAlign: 'right',
-                            fontWeight: 500,
-                          }}>{row.value}</td>
-                        </tr>
+                      {product.functionSection.characteristics.map((item, i) => (
+                        <li key={i} style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '12px',
+                          padding: '10px 12px',
+                          borderBottom: '1px solid #2a2a2a',
+                          color: '#fff',
+                          fontSize: '14px',
+                        }}>
+                          <span style={{ color: '#25C760', fontSize: '18px', flexShrink: 0 }}>&#10003;</span>
+                          {item}
+                        </li>
                       ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-
-              {/* Nutritional Breakdown (Food) */}
-              {product.functionSection.nutritionalDetails && (
-                <div style={{
-                  width: '100%',
-                  maxWidth: '600px',
-                  margin: '24px auto 32px',
-                }}>
-                  <h4 style={{
-                    color: '#25C760',
-                    fontSize: '16px',
-                    fontWeight: 600,
-                    marginBottom: '16px',
-                    textAlign: 'center',
-                  }}>Nutritional Breakdown</h4>
-                  <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '8px 24px',
-                  }}>
-                    {product.functionSection.nutritionalDetails.map((item, i) => (
-                      <div key={i} style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        padding: '8px 12px',
-                        borderBottom: '1px solid #2a2a2a',
-                      }}>
-                        <span style={{ color: '#ccc', fontSize: '13px' }}>{item.name}</span>
-                        <span style={{ color: '#fff', fontSize: '13px', fontWeight: 500 }}>{item.value}</span>
-                      </div>
-                    ))}
+                    </ul>
                   </div>
-                </div>
-              )}
-
-              {/* Characteristics (Cosmetic) */}
-              {product.functionSection.characteristics && (
-                <div style={{
-                  width: '100%',
-                  maxWidth: '600px',
-                  margin: '24px auto 32px',
-                }}>
-                  <h4 style={{
-                    color: '#25C760',
-                    fontSize: '16px',
-                    fontWeight: 600,
-                    marginBottom: '16px',
-                    textAlign: 'center',
-                  }}>Characteristics</h4>
-                  <ul style={{
-                    listStyle: 'none',
-                    padding: 0,
-                    margin: 0,
-                  }}>
-                    {product.functionSection.characteristics.map((item, i) => (
-                      <li key={i} style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '12px',
-                        padding: '10px 12px',
-                        borderBottom: '1px solid #2a2a2a',
-                        color: '#fff',
-                        fontSize: '14px',
-                      }}>
-                        <span style={{ color: '#25C760', fontSize: '18px', flexShrink: 0 }}>✓</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Old circles removed — ingredient table above replaces them */}
+                )}
+              </div>
             </div>
+
+            {/* Nutritional Breakdown (below the horizontal layout) */}
+            {product.functionSection.nutritionalDetails && (
+              <div style={{
+                width: '100%',
+                maxWidth: '800px',
+                margin: '24px auto 32px',
+              }}>
+                <h4 style={{
+                  color: '#25C760',
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  marginBottom: '16px',
+                  textAlign: 'center',
+                }}>Nutritional Breakdown</h4>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: '8px 24px',
+                }}>
+                  {product.functionSection.nutritionalDetails.map((item, i) => (
+                    <div key={i} style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      padding: '8px 12px',
+                      borderBottom: '1px solid #2a2a2a',
+                    }}>
+                      <span style={{ color: '#ccc', fontSize: '13px' }}>{item.name}</span>
+                      <span style={{ color: '#fff', fontSize: '13px', fontWeight: 500 }}>{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Food Function Summary */}
             {product.functionSection.summary && (

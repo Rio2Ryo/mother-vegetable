@@ -70,8 +70,8 @@ function getProducts(isJa: boolean) {
       features: isJa
         ? ['48種類の栄養素を含む高タンパク食品', 'オメガ3脂肪酸・必須ミネラル豊富']
         : ['High protein with 48 different nutrients', 'Rich in omega-3 fatty acids & minerals'],
-      howToUseLabel: isJa ? '調理方法を見る' : 'How to Cook',
-      howToLink: '/product/tilapia',
+      howToUseLabel: '',
+      howToLink: '',
       productLink: '/product/tilapia',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
@@ -87,8 +87,8 @@ function getProducts(isJa: boolean) {
       features: isJa
         ? ['48種類の栄養素が摂れる緑の塩', '毎日の料理に混ぜるだけ']
         : ['Green salt with 48 different nutrients', 'Simply add to everyday cooking'],
-      howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
-      howToLink: '/product/mv-salt',
+      howToUseLabel: '',
+      howToLink: '',
       productLink: '/product/mv-salt',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
@@ -104,8 +104,8 @@ function getProducts(isJa: boolean) {
       features: isJa
         ? ['48種類の栄養素入りプレミアム醤油', '豊かな旨味と栄養素で毎日をサポート']
         : ['Premium soy sauce with 48 nutrients', 'Rich umami with added health benefits'],
-      howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
-      howToLink: '/product/mv-soy-sauce',
+      howToUseLabel: '',
+      howToLink: '',
       productLink: '/product/mv-soy-sauce',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
@@ -121,8 +121,8 @@ function getProducts(isJa: boolean) {
       features: isJa
         ? ['肌トラブル改善・Confidenceコラーゲン配合', '天然栄養素で深い保湿・シワ軽減']
         : ['Skin Healing Effect — Confidence collagen', 'Deep hydration & wrinkle reduction with natural nutrients'],
-      howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
-      howToLink: '/product/mv-toner',
+      howToUseLabel: '',
+      howToLink: '',
       productLink: '/product/mv-toner',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
@@ -138,8 +138,8 @@ function getProducts(isJa: boolean) {
       features: isJa
         ? ['肌トラブル改善・集中的な肌修復', '顔・唇・ボディのマルチユース']
         : ['Skin Healing Effect — intensive repair', 'Multi-use for face, lips & body'],
-      howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
-      howToLink: '/product/mv-balm',
+      howToUseLabel: '',
+      howToLink: '',
       productLink: '/product/mv-balm',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
@@ -155,8 +155,8 @@ function getProducts(isJa: boolean) {
       features: isJa
         ? ['肌トラブル改善・洗いながら肌を修復', '天然成分のディープクレンジング']
         : ['Skin Healing Effect — cleanses & heals', 'Natural plant-based deep cleanse'],
-      howToUseLabel: isJa ? '使い方を見る' : 'How to Use',
-      howToLink: '/product/mv-soap',
+      howToUseLabel: '',
+      howToLink: '',
       productLink: '/product/mv-soap',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
@@ -285,20 +285,9 @@ export default function ProductsSection() {
 
                 {/* Price */}
                 <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center">
-                  <span className="text-white font-bold text-xs md:text-sm">{product.priceJpy}</span>
+                  <span className="text-white font-bold text-xl md:text-2xl">{product.priceJpy}</span>
                 </div>
 
-                {/* How to use */}
-                {product.howToUseLabel && (
-                  <div className="mb-2 md:mt-6 md:mb-2">
-                    <Link
-                      href={product.howToLink}
-                      className="text-green-400 font-semibold text-xs md:text-xl mb-1 hover:underline block text-center"
-                    >
-                      {product.howToUseLabel}
-                    </Link>
-                  </div>
-                )}
               </div>
             </div>
 
