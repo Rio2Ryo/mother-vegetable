@@ -264,42 +264,46 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         .partner-logo:hover { transform: scale(1.1); }
 
         /* ============================================================================
-           FUNCTION SECTION
+           FUNCTION SECTION (.com card-based layout)
            ============================================================================ */
-        .function-content { background-color: black; border: 1px solid #25C760; border-radius: 12px; padding: 40px; margin: 40px 0; transition: all 0.3s ease; }
-        .function-content:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(37, 199, 96, 0.2); }
-        .function-title { color: #25C760; margin-bottom: 10px; text-align: center; font-family: Arial, sans-serif; font-weight: 700; font-size: 2.5rem; letter-spacing: 2px; }
-        .function-subtitle { color: #FFFFFF; font-family: Arial, sans-serif; font-weight: 400; font-size: 1.5rem; text-align: center; }
-        .function-diagram { display: flex; flex-direction: row; align-items: stretch; gap: 20px; margin: 40px 0; }
-        .function-diagram .test-tube-icon { flex: 0 0 30%; display: flex; align-items: center; justify-content: center; }
-        .function-diagram .product-video { width: 100%; max-width: 250px; height: auto; transition: transform 0.3s ease; object-fit: cover; border-radius: 8px; }
-        .bracket-icon { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 0 8px; }
-        .bracket-img { width: auto; max-height: 300px; height: 100%; transition: transform 0.3s ease; }
-        .bracket-img:hover { transform: scale(1.02); }
-        .function-diagram .ingredient-info-wrapper { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-        .about-characteristics { width: 100%; max-width: 800px; margin: 24px auto 32px; }
-        .function-branches { position: relative; width: 100%; display: flex; justify-content: center; }
-        .function-circle-div { display: flex; justify-content: space-between; width: 100%; max-width: 800px; gap: 1%; }
-        .function-circle { background-color: #3C8063; border-radius: 50%; width: 19%; height: auto; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; transition: all 0.3s ease; position: relative; z-index: 2; }
-        .function-circle:hover { transform: scale(1.1); box-shadow: 0 10px 25px rgba(37, 199, 96, 0.4); }
-        .function-circle-text { font-size: clamp(0.7rem, 1vw + 0.5rem, 1rem); font-family: Arial, sans-serif; font-weight: 300; color: #FFFFFF; line-height: 1.2; display: block; }
-        .function-summary { text-align: center; margin-top: 40px; }
-        .function-total { font-family: Arial, sans-serif; font-weight: 700; font-size: 2rem; color: #25C760; margin-bottom: 20px; }
-        .function-description { font-family: Arial, sans-serif; font-size: 1rem; color: #FFFFFF; line-height: 1.6; text-align: center; max-width: 800px; margin: 0 auto; opacity: 0.9; }
+        .function-content { background-color: black; border: 2px solid #25C760; border-radius: 12px; padding: 16px 16px 32px; margin: 40px 0; }
+        .function-title { color: #25C760; margin-bottom: 4px; text-align: center; font-family: Arial, sans-serif; font-weight: 700; font-size: 1.25rem; letter-spacing: 2px; }
+        .function-subtitle-green { color: #25C760; font-family: Arial, sans-serif; font-weight: 400; font-size: 0.875rem; text-align: center; margin-bottom: 8px; }
+        .function-product-name { color: #FFFFFF; font-family: Arial, sans-serif; font-weight: 400; font-size: 1rem; text-align: center; margin-bottom: 16px; }
+        .function-divider { width: 128px; height: 4px; background: linear-gradient(to right, transparent, #4ade80, transparent); margin: 16px auto 24px; border-radius: 9999px; opacity: 0.8; }
+        .function-video-center { display: flex; justify-content: center; margin-bottom: 0; }
+        .function-video-center video { height: 96px; width: auto; object-fit: contain; border-radius: 8px; }
+        .function-bracket-center { display: flex; justify-content: center; margin-bottom: 16px; }
+        .function-bracket-center img { width: 100%; max-width: 672px; object-fit: contain; }
 
-        /* Benefits Section */
-        .benefits-section { padding-top: 5%; }
-        .benefits-section .benefits-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; width: 100%; }
-        .benefits-section .benefits-col { width: 50%; padding: 10px; }
-        .benefits-section .benefit-flex { display: flex; justify-content: center; }
-        .benefits-section .benefit-image { width: 30%; display: flex; justify-content: flex-end; }
-        .benefits-section .benefit-image img { width: 100%; height: auto; max-width: 100%; max-height: 200px; object-fit: contain; }
-        .benefits-section .benefit-content { width: 70%; }
-        .benefits-section .benefit-content .benefit-title { font-size: 1.4rem; font-weight: 700; color: #25C760; margin-bottom: 0px; }
-        .benefits-section .benefit-content .title-underline { width: 100%; max-width: 500px; margin: 5px 0 8px 0; height: 2px; background-color: #25C760; border-radius: 1px; }
-        .benefits-section .benefit-content .benefit-list { list-style: disc; padding-left: 20px; }
-        .benefits-section .benefit-content .benefit-list li { font-size: 1.1rem; color: #FFFFFF; font-weight: normal; }
-        .benefits-section .benefit-content .benefit-list li::marker { color: #25C760; }
+        /* Nutrient heading */
+        .fn-nutrient-heading { color: #25C760; font-family: Arial, sans-serif; font-weight: 700; font-size: 1.125rem; text-align: center; margin-bottom: 8px; }
+        .fn-nutrient-sub { color: #9ca3af; font-size: 0.75rem; text-align: center; margin-bottom: 16px; }
+
+        /* Main 5 oval pills */
+        .fn-main-nutrients { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 24px; max-width: 768px; margin-left: auto; margin-right: auto; }
+        .fn-pill { border: 2px solid #4ade80; border-radius: 8px; padding: 8px 8px; background: rgba(22, 101, 52, 0.4); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 28%; }
+        .fn-pill-label { color: #f3f4f6; font-size: 9px; font-weight: 600; margin-bottom: 4px; line-height: 1.2; }
+        .fn-pill-value { color: #86efac; font-size: 9px; font-weight: 700; }
+
+        /* Detail grid cards */
+        .fn-detail-heading { color: rgba(34, 197, 94, 0.8); font-family: Arial, sans-serif; font-weight: 700; font-size: 0.875rem; text-align: center; margin-bottom: 12px; }
+        .fn-detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-width: 768px; margin: 0 auto 32px; }
+        .fn-detail-card { border: 1px solid rgba(34, 197, 94, 0.4); border-radius: 8px; padding: 8px; background: rgba(22, 101, 52, 0.2); transition: background 0.2s; }
+        .fn-detail-card:hover { background: rgba(22, 101, 52, 0.4); }
+        .fn-detail-name { color: #e5e7eb; font-size: 10px; font-weight: 500; line-height: 1.3; }
+        .fn-detail-value { color: #4ade80; font-size: 11px; font-weight: 700; }
+
+        /* Characteristics 2-col */
+        .fn-chars-heading { color: #25C760; font-family: Arial, sans-serif; font-weight: 700; font-size: 1.125rem; text-align: center; margin-bottom: 24px; }
+        .fn-chars-grid { display: grid; grid-template-columns: 1fr; gap: 20px 32px; max-width: 896px; margin: 0 auto 48px; padding: 0 16px; }
+        .fn-char-item { display: flex; align-items: flex-start; gap: 12px; }
+        .fn-char-dot { margin-top: 8px; width: 6px; height: 6px; min-width: 6px; border-radius: 9999px; background: #25C760; }
+        .fn-char-text { color: #e5e7eb; font-size: 0.75rem; }
+
+        /* Disclaimer section */
+        .fn-disclaimer-heading { color: #25C760; font-family: Arial, sans-serif; font-weight: 700; font-size: 1.125rem; text-align: center; margin-bottom: 24px; }
+        .fn-disclaimer-text { color: #d1d5db; font-size: 0.875rem; text-align: left; line-height: 1.6; margin-bottom: 32px; max-width: 768px; margin-left: auto; margin-right: auto; }
 
         /* Medical Grade Content (Confidence only) */
         .medical-grade-content { display: flex; flex-direction: column; gap: 15px; padding: 30px; border-radius: 12px; }
@@ -310,6 +314,34 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         .skin-healing-video:hover { transform: scale(1.02); }
 
         /* ============================================================================
+           FUNCTION SECTION — DESKTOP OVERRIDES
+           ============================================================================ */
+        @media (min-width: 768px) {
+          .function-content { padding: 32px; }
+          .function-title { font-size: 3rem; }
+          .function-subtitle-green { font-size: 1.5rem; margin-bottom: 8px; }
+          .function-product-name { font-size: 1.25rem; margin-bottom: 16px; }
+          .function-divider { width: 192px; height: 6px; margin: 24px auto 32px; }
+          .function-video-center video { height: 96px; }
+          .fn-nutrient-heading { font-size: 1.875rem; }
+          .fn-nutrient-sub { font-size: 0.875rem; margin-bottom: 24px; }
+          .fn-main-nutrients { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+          .fn-pill { padding: 16px; width: auto; }
+          .fn-pill-label { font-size: 0.875rem; }
+          .fn-pill-value { font-size: 1.125rem; }
+          .fn-detail-heading { font-size: 1.125rem; margin-bottom: 16px; }
+          .fn-detail-grid { grid-template-columns: repeat(6, 1fr); gap: 12px; }
+          .fn-detail-name { font-size: 0.75rem; }
+          .fn-detail-value { font-size: 0.875rem; }
+          .fn-detail-card { padding: 12px; }
+          .fn-chars-heading { font-size: 1.875rem; margin-bottom: 32px; }
+          .fn-chars-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 32px; }
+          .fn-char-text { font-size: 0.875rem; }
+          .fn-disclaimer-heading { font-size: 1.875rem; margin-bottom: 32px; }
+          .fn-disclaimer-text { font-size: 1rem; }
+        }
+
+        /* ============================================================================
            RESPONSIVE
            ============================================================================ */
         @media (max-width: 1024px) {
@@ -317,9 +349,17 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
           .grid-container.cols-3 { grid-template-columns: repeat(3, 1fr); }
           .mazekomu-grid { margin: 20px 0; }
           .content-section .red-hero-underline-img { width: 80px; margin: 0 auto 15px; }
-          .function-content { margin: 30px 0; padding: 30px; }
-          .function-total { font-size: 1.6rem; }
-          .function-description { font-size: 0.9rem; }
+          .function-content { margin: 30px 0; padding: 24px; }
+          .function-title { font-size: 2rem; }
+          .fn-nutrient-heading { font-size: 1.5rem; }
+          .fn-pill { padding: 12px 16px; width: auto; }
+          .fn-pill-label { font-size: 0.8rem; }
+          .fn-pill-value { font-size: 1rem; }
+          .fn-detail-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+          .fn-detail-name { font-size: 0.75rem; }
+          .fn-detail-value { font-size: 0.85rem; }
+          .fn-chars-grid { grid-template-columns: repeat(2, 1fr); }
+          .fn-char-text { font-size: 0.85rem; }
           .trust-title { font-size: 2rem; }
           .trust-content { margin: 30px 0; padding: 30px; }
           .trust-logos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 0 20px; }
@@ -330,9 +370,6 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
           .benefit-item span:last-child { font-size: 1rem; }
           .card-how-to-use h4 { font-size: 1rem; }
           .usage-item span:last-child { font-size: 1rem; }
-          .benefits-section .benefit-content .benefit-title { font-size: 1.2rem; }
-          .benefits-section .benefit-content .benefit-list li { font-size: 0.9rem; }
-          .benefits-section .benefit-image img { max-height: 150px; }
         }
 
         @media (max-width: 820px) {
@@ -368,19 +405,18 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
 
         @media (max-width: 767px) {
           .function-content { margin: 20px 0; padding: 10px; }
-          .function-subtitle { font-size: 0.9rem; }
-          .function-diagram { flex-direction: column !important; align-items: center !important; gap: 10px !important; }
-          .function-diagram .test-tube-icon { flex: 0 0 auto !important; margin-bottom: 16px; }
-          .bracket-icon { padding: 8px 0 !important; }
-          .bracket-img { max-height: none !important; max-width: 300px !important; width: 100% !important; height: auto !important; }
-          .function-diagram .ingredient-info-wrapper { flex: 0 0 auto !important; width: 100% !important; }
-          .function-content .product-video { max-width: 90px; }
-          .function-total { font-size: 1.2rem; margin-bottom: 10px; }
-          .function-description { font-size: 0.9rem; }
-          .function-circle-text { font-size: clamp(0.4rem, 0.85vw + 0.45rem, 0.7rem); font-weight: 300; }
-          .benefits-section .benefit-content .benefit-title { font-size: 1rem; }
-          .benefits-section .benefit-content .benefit-list li { font-size: 0.8rem; }
-          .benefits-section .benefit-image img { max-height: 100px; }
+          .function-title { font-size: 1.5rem; }
+          .function-subtitle-green { font-size: 0.8rem; }
+          .fn-nutrient-heading { font-size: 1.2rem; }
+          .fn-main-nutrients { gap: 6px; }
+          .fn-pill { width: 28%; padding: 8px; }
+          .fn-pill-label { font-size: 9px; }
+          .fn-pill-value { font-size: 9px; }
+          .fn-detail-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+          .fn-detail-name { font-size: 10px; }
+          .fn-detail-value { font-size: 11px; }
+          .fn-chars-grid { grid-template-columns: 1fr; gap: 16px; }
+          .fn-char-text { font-size: 0.75rem; }
           .medical-text { font-size: 0.9rem; }
           .skin-healing-video { max-width: 80%; }
           .mazekomu-grid { height: 450px; }
@@ -397,11 +433,8 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
           .grid-container { gap: 5px; padding-top: 10px; }
           .mazekomu-content-section { padding: 10px 0; }
           .content-section .red-hero-underline-img { width: 50px; margin: 0 auto 8px; }
-          .function-total { font-size: 1rem; }
-          .function-description { font-size: 0.8rem; }
           .medical-grade-content { padding: 15px 0; }
           .product-name { font-size: 1.1rem; }
-          .benefits-section .benefits-col { width: 100%; }
         }
 
         @media (max-width: 580px) {
@@ -415,8 +448,6 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
 
         @media (max-width: 530px) {
           .product-name { font-size: 1rem; }
-          .function-total { font-size: 1rem; }
-          .function-description { font-size: 0.75rem; }
           .medical-text { font-size: 0.85rem; }
           .skin-healing-video { max-width: 100%; }
         }
@@ -734,165 +765,117 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
           </div>
         </div>
 
-        {/* Function Section */}
+        {/* ================================================================
+            Function Section — .com card-based layout
+            ================================================================ */}
         <div className="gallery-container">
           <div className="function-content">
+            {/* 1. Title */}
             <h2 className="function-title">
               {product.functionSection.type === 'food' ? 'Food Function' : 'Cosmetic Function'}
             </h2>
-            <h3 className="function-subtitle">{product.functionSection.subtitle}</h3>
-            <Image
-              src="/Images/Assets/homepage/underline.png"
-              alt="Underline"
-              width={250}
-              height={20}
-              className="hero-underline-img"
-            />
-            <div className="function-diagram">
-              {/* Left: Video */}
-              <div className="test-tube-icon">
-                <video className="product-video" autoPlay muted loop playsInline>
-                  <source src={product.functionSection.videoUrl} type="video/mp4" />
-                </video>
-              </div>
 
-              {/* Center: Bracket image */}
-              <div className="bracket-icon">
-                <Image
-                  src="/Images/Assets/homepage/bracket_v2.png"
-                  alt="Bracket"
-                  width={60}
-                  height={300}
-                  className="bracket-img"
-                />
-              </div>
+            {/* 2. Subtitle */}
+            <p className="function-subtitle-green">
+              {product.functionSection.type === 'food'
+                ? '\u98F2\u3080\u30BF\u30A4\u30D7\u306EMother Vegetable'
+                : '\u808C\u306B\u5857\u308B\u30BF\u30A4\u30D7\u306EMother Vegetable'}
+            </p>
 
-              {/* Right: Ingredient info + Nutritional breakdown */}
-              <div className="ingredient-info-wrapper">
-                {/* Ingredient Information Table */}
-                {product.functionSection.ingredientInfo && (
-                  <div style={{
-                    width: '100%',
-                    border: '1px solid #333',
-                    borderRadius: '8px',
-                    overflow: 'hidden',
-                    marginBottom: '16px',
-                  }}>
-                    <div style={{
-                      background: '#1a1a1a',
-                      padding: '12px 16px',
-                      borderBottom: '1px solid #333',
-                    }}>
-                      <h4 style={{
-                        color: '#25C760',
-                        margin: 0,
-                        fontSize: '16px',
-                        fontWeight: 600,
-                      }}>
-                        Ingredient Information (per 100g)
-                      </h4>
-                    </div>
-                    <table style={{
-                      width: '100%',
-                      borderCollapse: 'collapse',
-                    }}>
-                      <tbody>
-                        {product.functionSection.ingredientInfo.map((row, i) => (
-                          <tr key={i} style={{ borderBottom: i < product.functionSection.ingredientInfo!.length - 1 ? '1px solid #2a2a2a' : 'none' }}>
-                            <td style={{
-                              padding: '10px 16px',
-                              color: '#ccc',
-                              fontSize: '14px',
-                              width: '50%',
-                            }}>{row.label}</td>
-                            <td style={{
-                              padding: '10px 16px',
-                              color: '#fff',
-                              fontSize: '14px',
-                              textAlign: 'right',
-                              fontWeight: 500,
-                            }}>{row.value}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+            {/* 3. Product name */}
+            <p className="function-product-name">{product.functionSection.subtitle}</p>
 
-                {/* Nutritional Breakdown (inside right column) */}
-                {product.functionSection.nutritionalDetails && (
-                  <div style={{
-                    width: '100%',
-                    marginTop: '8px',
-                  }}>
-                    <h4 style={{
-                      color: '#25C760',
-                      fontSize: '16px',
-                      fontWeight: 600,
-                      marginBottom: '16px',
-                    }}>Nutritional Breakdown</h4>
-                    <div style={{
-                      display: 'grid',
-                      gridTemplateColumns: '1fr 1fr',
-                      gap: '8px 24px',
-                    }}>
-                      {product.functionSection.nutritionalDetails.map((item, i) => (
-                        <div key={i} style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          padding: '8px 12px',
-                          borderBottom: '1px solid #2a2a2a',
-                        }}>
-                          <span style={{ color: '#ccc', fontSize: '13px' }}>{item.name}</span>
-                          <span style={{ color: '#fff', fontSize: '13px', fontWeight: 500 }}>{item.value}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+            {/* Divider */}
+            <div className="function-divider" />
+
+            {/* 4. Product video */}
+            <div className="function-video-center">
+              <video autoPlay muted loop playsInline>
+                <source src={product.functionSection.videoUrl} type="video/mp4" />
+              </video>
             </div>
 
-            {/* Characteristics - BELOW the entire function-diagram row */}
-            {product.functionSection.characteristics && (
-              <div className="about-characteristics">
-                <h4 style={{
-                  color: '#25C760',
-                  fontSize: '16px',
-                  fontWeight: 600,
-                  marginBottom: '12px',
-                  textAlign: 'center',
-                }}>Characteristics</h4>
-                <ul style={{
-                  listStyle: 'none',
-                  padding: 0,
-                  margin: 0,
-                }}>
-                  {product.functionSection.characteristics.map((item, i) => (
-                    <li key={i} style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                      padding: '10px 12px',
-                      borderBottom: '1px solid #2a2a2a',
-                      color: '#fff',
-                      fontSize: '14px',
-                    }}>
-                      <span style={{ color: '#25C760', fontSize: '18px', flexShrink: 0 }}>&#10003;</span>
-                      {item}
-                    </li>
+            {/* 5. Bracket image */}
+            <div className="function-bracket-center">
+              <Image
+                src="/Images/Assets/homepage/bracket_v2.png"
+                alt="Bracket"
+                width={800}
+                height={40}
+              />
+            </div>
+
+            {/* 6. Nutrient heading */}
+            <div style={{ maxWidth: '768px', margin: '0 auto', padding: '0' }}>
+              <h3 className="fn-nutrient-heading">
+                {product.functionSection.type === 'food'
+                  ? '\u6804\u990A\u6210\u5206\u8868\u793A'
+                  : '\u6210\u5206\u8868\u793A'}
+              </h3>
+              <p className="fn-nutrient-sub">
+                {'\uFF08100g\u5F53\u305F\u308A\uFF09'}
+              </p>
+
+              {/* 7. Main 5 oval/pill cards */}
+              {product.functionSection.ingredientInfo && (
+                <div className="fn-main-nutrients">
+                  {product.functionSection.ingredientInfo.map((row, i) => (
+                    <div key={i} className="fn-pill">
+                      <div className="fn-pill-label">{row.label}</div>
+                      <div className="fn-pill-value">{row.value}</div>
+                    </div>
                   ))}
-                </ul>
+                </div>
+              )}
+
+              {/* 8. Detailed breakdown heading + grid (food only) */}
+              {product.functionSection.nutritionalDetails && product.functionSection.nutritionalDetails.length > 0 && (
+                <>
+                  <h4 className="fn-detail-heading">
+                    {'\u6804\u990A\u5206\u306E\u5185\u8A33\uFF08\u8A73\u7D30\uFF09'}
+                  </h4>
+                  <div className="fn-detail-grid">
+                    {product.functionSection.nutritionalDetails.map((item, i) => (
+                      <div key={i} className="fn-detail-card">
+                        <div className="fn-detail-name">{item.name}</div>
+                        <div className="fn-detail-value">{item.value}</div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* 10. Characteristics heading + 2-col checklist */}
+            {product.functionSection.characteristics && product.functionSection.characteristics.length > 0 && (
+              <div style={{ maxWidth: '896px', margin: '48px auto 0' }}>
+                <h3 className="fn-chars-heading">
+                  {product.functionSection.type === 'food'
+                    ? 'Achieve\u306E\u7279\u6027\u306B\u3064\u3044\u3066'
+                    : 'Confidence\u306E\u7279\u6027\u306B\u3064\u3044\u3066'}
+                </h3>
+                <div className="fn-chars-grid">
+                  {product.functionSection.characteristics.map((item, i) => (
+                    <div key={i} className="fn-char-item">
+                      <span className="fn-char-dot" />
+                      <span className="fn-char-text">{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
-            {/* Food Function Summary */}
-            {product.functionSection.summary && (
-              <div className="function-summary">
-                <h4 className="function-total">{product.functionSection.summary.total}</h4>
-                <p className="function-description">{product.functionSection.summary.description}</p>
-              </div>
-            )}
+            {/* 12. Disclaimer section */}
+            <div style={{ maxWidth: '896px', margin: '0 auto' }}>
+              <h3 className="fn-disclaimer-heading">
+                {'\u52B9\u679C\u52B9\u80FD\u306E\u8868\u73FE\u898F\u5236\u306B\u3064\u3044\u3066'}
+              </h3>
+              <p className="fn-disclaimer-text">
+                {product.functionSection.type === 'food'
+                  ? '\u79C1\u305F\u3061Mother Vegetable\u30B0\u30EB\u30FC\u30D7\u306F\u3001\u4E16\u754C\u5404\u5730\u3067\u6D3B\u52D5\u3092\u884C\u3063\u3066\u3044\u308B\u305F\u3081\u3001\u52B9\u679C\u52B9\u80FD\u306B\u95A2\u3059\u308B\u8868\u73FE\u306B\u3064\u3044\u3066\u3082\u5404\u56FD\u306E\u6CD5\u5F8B\u30FB\u30AC\u30A4\u30C9\u30E9\u30A4\u30F3\u3092\u9075\u5B88\u3057\u307E\u3059\u3002'
+                  : '\u79C1\u305F\u3061Mother Vegetable\u30B0\u30EB\u30FC\u30D7\u306F\u3001\u4E16\u754C\u5404\u5730\u3067\u6D3B\u52D5\u3092\u884C\u3063\u3066\u3044\u308B\u305F\u3081\u3001\u52B9\u679C\u52B9\u80FD\u306B\u95A2\u3059\u308B\u8868\u73FE\u306B\u3064\u3044\u3066\u3082\u5404\u56FD\u306E\u6CD5\u5F8B\u30FB\u30AC\u30A4\u30C9\u30E9\u30A4\u30F3\u3092\u9075\u5B88\u3057\u307E\u3059\u3002'}
+              </p>
+            </div>
 
             {/* Cosmetic Medical Grade Content */}
             {product.functionSection.medicalText && (
