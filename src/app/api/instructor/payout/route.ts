@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getStripe } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
 import { requireInstructorAuth } from "@/lib/instructor-auth";
 
@@ -10,6 +9,8 @@ export async function POST(request: NextRequest) {
 
   try {
     const instructorId = auth.instructorId;
+    const body = await request.json();
+    const { amount: requestedAmount, bankAccountInfo } = body;
 
     const instructor = await prisma.instructor.findUnique({
       where: { id: instructorId },
@@ -23,14 +24,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!instructor.stripeConnectId || !instructor.connectOnboarded) {
-      return NextResponse.json(
-        { error: "Stripe Connect account not set up. Please connect your account first." },
-        { status: 400 }
-      );
-    }
-
-    // Calculate available balance (total commissions - already paid out)
+    // Calculate available balance (total commissions - already paid out - pending)
     const totalCommissions = instructor.commissions.reduce(
       (sum, c) => sum + c.commissionAmount,
       0
@@ -39,79 +33,47 @@ export async function POST(request: NextRequest) {
       .filter((p) => p.status === "completed")
       .reduce((sum, p) => sum + p.amount, 0);
     const pendingPayouts = instructor.payoutRequests
-      .filter((p) => p.status === "pending" || p.status === "processing")
+      .filter((p) => p.status === "pending" || p.status === "approved")
       .reduce((sum, p) => sum + p.amount, 0);
 
     const availableBalance = totalCommissions - totalPaidOut - pendingPayouts;
 
-    if (availableBalance < 1) {
+    const amount = requestedAmount != null ? Number(requestedAmount) : availableBalance;
+
+    if (amount < 1 || amount > availableBalance) {
       return NextResponse.json(
         { error: "Insufficient balance for payout (minimum $1.00)" },
         { status: 400 }
       );
     }
 
-    // Create payout request
+    if (!bankAccountInfo || !bankAccountInfo.trim()) {
+      return NextResponse.json(
+        { error: "Bank account info is required" },
+        { status: 400 }
+      );
+    }
+
+    // Create payout request with "pending" status (no Stripe call)
     const payoutRequest = await prisma.payoutRequest.create({
       data: {
         instructorId: instructor.id,
-        amount: availableBalance,
-        status: "processing",
+        amount,
+        status: "pending",
+        bankAccountInfo: bankAccountInfo.trim(),
       },
     });
 
-    try {
-      // Create Stripe Transfer to Connect account
-      const transfer = await getStripe().transfers.create({
-        amount: Math.round(availableBalance * 100), // cents
-        currency: "usd",
-        destination: instructor.stripeConnectId,
-        metadata: {
-          instructorId: instructor.id,
-          payoutRequestId: payoutRequest.id,
-        },
-      });
-
-      // Mark commissions as paid out
-      await prisma.commission.updateMany({
-        where: {
-          instructorId: instructor.id,
-          paidOut: false,
-        },
-        data: { paidOut: true },
-      });
-
-      // Update payout request
-      await prisma.payoutRequest.update({
-        where: { id: payoutRequest.id },
-        data: {
-          status: "completed",
-          stripeTransferId: transfer.id,
-        },
-      });
-
-      return NextResponse.json({
-        success: true,
-        amount: availableBalance,
-        transferId: transfer.id,
-      });
-    } catch (transferError) {
-      // Mark payout as failed
-      await prisma.payoutRequest.update({
-        where: { id: payoutRequest.id },
-        data: { status: "failed" },
-      });
-
-      console.error("Stripe transfer failed:", transferError);
-      return NextResponse.json(
-        { error: "Transfer failed. Please try again later." },
-        { status: 500 }
-      );
-    }
+    return NextResponse.json({
+      success: true,
+      amount: payoutRequest.amount,
+      requestId: payoutRequest.id,
+      status: payoutRequest.status,
+    });
   } catch (error) {
     console.error("Payout request failed:", error);
     return NextResponse.json(
-      { error: "Failed to process payout" },
+      { error: "Failed to process payout request" },
       { status: 500 }
     );
   }
@@ -149,7 +111,7 @@ export async function GET(request: NextRequest) {
       .filter((p) => p.status === "completed")
       .reduce((sum, p) => sum + p.amount, 0);
     const pendingPayouts = instructor.payoutRequests
-      .filter((p) => p.status === "pending" || p.status === "processing")
+      .filter((p) => p.status === "pending" || p.status === "approved")
       .reduce((sum, p) => sum + p.amount, 0);
 
     return NextResponse.json({

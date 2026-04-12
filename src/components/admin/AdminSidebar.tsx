@@ -10,6 +10,7 @@ import {
   Newspaper,
   Ticket,
   Bot,
+  Banknote,
   X,
   ChevronLeft,
 } from "lucide-react";
@@ -25,6 +26,7 @@ const NAV_ITEMS = [
   { href: "/admin/products", label: "Products", icon: Package },
   { href: "/admin/instructors", label: "Instructors", icon: Users },
   { href: "/admin/news", label: "News", icon: Newspaper },
+  { href: "/admin/payouts", label: "Payouts", icon: Banknote },
   { href: "/admin/coupons", label: "Coupons", icon: Ticket },
   { href: "/admin/bot", label: "AI Bot", icon: Bot },
 ];

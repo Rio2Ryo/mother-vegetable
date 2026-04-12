@@ -57,6 +57,10 @@ export async function ensureNewTables() {
         "updatedAt" DATETIME NOT NULL
       )
     `);
+    // Add bankAccountInfo column to PayoutRequest if missing
+    await (prisma as any).$executeRawUnsafe(`
+      ALTER TABLE "PayoutRequest" ADD COLUMN "bankAccountInfo" TEXT
+    `).catch(() => {/* column may already exist */});
   } catch (e) {
     console.error("[ensureNewTables] Error:", e);
   }

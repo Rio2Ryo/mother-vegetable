@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense, useEffect, useState, useCallback } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useAffiliateStore } from '@/store/affiliateStore';
 import { buildReferralUrl } from '@/lib/affiliate';
@@ -18,15 +18,15 @@ export default function InstructorDashboardPage() {
 function DashboardContent() {
   const router = useRouter();
   const t = useTranslations('instructor');
-  const locale = useLocale();
   const searchParams = useSearchParams();
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [connectLoading, setConnectLoading] = useState(false);
   const [payoutLoading, setPayoutLoading] = useState(false);
   const [payoutMessage, setPayoutMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  const [connectStatus, setConnectStatus] = useState<{ connected: boolean; onboarded: boolean } | null>(null);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [showPayoutForm, setShowPayoutForm] = useState(false);
+  const [payoutAmount, setPayoutAmount] = useState('');
+  const [bankAccountInfo, setBankAccountInfo] = useState('');
 
   const currentInstructor = useAffiliateStore((s) => s.currentInstructor);
   const instructorToken = useAffiliateStore((s) => s.instructorToken);
@@ -114,27 +114,6 @@ function DashboardContent() {
     }
   }, [searchParams, currentInstructor, syncFromServer]);
 
-  // Fetch Connect status
-  const fetchConnectStatus = useCallback(async () => {
-    if (!currentInstructor || !instructorToken) return;
-    try {
-      const res = await fetch('/api/instructor/connect', {
-        headers: { 'Authorization': `Bearer ${instructorToken}` },
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setConnectStatus(data);
-      }
-    } catch {
-      // silently fail
-    }
-  }, [currentInstructor, instructorToken]);
-
-  useEffect(() => {
-    if (mounted && currentInstructor) {
-      fetchConnectStatus();
-    }
-  }, [mounted, currentInstructor, fetchConnectStatus]);
 
   useEffect(() => {
     if (mounted && !currentInstructor) {
@@ -186,31 +165,24 @@ function DashboardContent() {
     router.push('/instructor/login');
   }
 
-  async function handleConnectStripe() {
-    if (!currentInstructor || !instructorToken) return;
-    setConnectLoading(true);
-    try {
-      const res = await fetch('/api/instructor/connect', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${instructorToken}`,
-        },
-        body: JSON.stringify({ locale }),
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      }
-    } catch {
-      // silently fail
-    } finally {
-      setConnectLoading(false);
-    }
+  function handleOpenPayoutForm() {
+    setPayoutAmount(availableBalance.toFixed(2));
+    setBankAccountInfo('');
+    setPayoutMessage(null);
+    setShowPayoutForm(true);
   }
 
   async function handlePayout() {
     if (!currentInstructor || !instructorToken) return;
+    const amount = parseFloat(payoutAmount);
+    if (isNaN(amount) || amount < 1 || amount > availableBalance) {
+      setPayoutMessage({ type: 'error', text: t('payoutFailed') });
+      return;
+    }
+    if (!bankAccountInfo.trim()) {
+      setPayoutMessage({ type: 'error', text: t('payoutFailed') });
+      return;
+    }
     setPayoutLoading(true);
     setPayoutMessage(null);
     try {
@@ -220,11 +192,12 @@ function DashboardContent() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${instructorToken}`,
         },
-        body: JSON.stringify({}),
+        body: JSON.stringify({ amount, bankAccountInfo: bankAccountInfo.trim() }),
       });
       const data = await res.json();
       if (res.ok) {
-        setPayoutMessage({ type: 'success', text: `$${data.amount.toFixed(2)} ${t('payoutSuccess')}` });
+        setPayoutMessage({ type: 'success', text: t('payoutRequestAccepted') });
+        setShowPayoutForm(false);
       } else {
         setPayoutMessage({ type: 'error', text: data.error || t('payoutFailed') });
       }
@@ -305,23 +278,13 @@ function DashboardContent() {
               </p>
             </div>
             <div className="flex flex-col gap-2">
-              {connectStatus?.onboarded ? (
-                <button
-                  onClick={handlePayout}
-                  disabled={payoutLoading || availableBalance < 1}
-                  className="px-6 py-3 bg-[#25C760] text-black font-semibold rounded-lg hover:bg-[#1ea84e] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {payoutLoading ? t('processing') : t('requestPayout')}
-                </button>
-              ) : (
-                <button
-                  onClick={handleConnectStripe}
-                  disabled={connectLoading}
-                  className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500 transition-colors disabled:opacity-50"
-                >
-                  {connectLoading ? t('processing') : t('connectStripe')}
-                </button>
-              )}
+              <button
+                onClick={handleOpenPayoutForm}
+                disabled={payoutLoading || availableBalance < 1}
+                className="px-6 py-3 bg-[#25C760] text-black font-semibold rounded-lg hover:bg-[#1ea84e] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {payoutLoading ? t('processing') : t('requestPayout')}
+              </button>
             </div>
           </div>
           {payoutMessage && (
@@ -330,6 +293,59 @@ function DashboardContent() {
             </p>
           )}
         </div>
+
+        {/* Payout Request Form Modal */}
+        {showPayoutForm && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+            <div className="w-full max-w-md bg-gray-900 border border-gray-700 rounded-2xl p-6 mx-4">
+              <h2 className="text-xl font-bold text-[#25C760] mb-4">{t('requestPayout')}</h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">{t('payoutAmount')}</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="1"
+                    max={availableBalance}
+                    value={payoutAmount}
+                    onChange={(e) => setPayoutAmount(e.target.value)}
+                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-[#25C760] focus:outline-none focus:ring-1 focus:ring-[#25C760]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">{t('bankAccountInfoLabel')}</label>
+                  <textarea
+                    value={bankAccountInfo}
+                    onChange={(e) => setBankAccountInfo(e.target.value)}
+                    placeholder={t('bankAccountInfoPlaceholder')}
+                    rows={3}
+                    className="w-full bg-black border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-[#25C760] focus:outline-none focus:ring-1 focus:ring-[#25C760] resize-none"
+                  />
+                </div>
+                {payoutMessage && (
+                  <p className={`text-sm ${payoutMessage.type === 'success' ? 'text-[#25C760]' : 'text-red-400'}`}>
+                    {payoutMessage.text}
+                  </p>
+                )}
+                <div className="flex gap-3 pt-2">
+                  <button
+                    onClick={() => setShowPayoutForm(false)}
+                    className="flex-1 px-4 py-3 border border-gray-600 text-gray-400 rounded-lg hover:border-gray-400 hover:text-white transition-colors"
+                  >
+                    {t('cancel')}
+                  </button>
+                  <button
+                    onClick={handlePayout}
+                    disabled={payoutLoading}
+                    className="flex-1 px-4 py-3 bg-[#25C760] text-black font-semibold rounded-lg hover:bg-[#1ea84e] transition-colors disabled:opacity-50"
+                  >
+                    {payoutLoading ? t('processing') : t('submitRequest')}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">

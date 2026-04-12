@@ -142,10 +142,11 @@ model Commission {
 }
 
 model PayoutRequest {
-  id            String  @id @default(cuid())
-  instructorId  String
-  amount        Float
-  status        String  @default("pending") // pending, processing, completed, failed
+  id              String  @id @default(cuid())
+  instructorId    String
+  amount          Float
+  status          String  @default("pending") // pending, approved, rejected, completed
+  bankAccountInfo String?
   stripeTransferId String?
 
   instructor Instructor @relation(fields: [instructorId], references: [id], onDelete: Cascade)
