@@ -235,11 +235,11 @@ export default function ProductsSection() {
 
       {/* Product Cards */}
       <motion.div
+        key={activeCategory}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-50px' }}
+        animate="visible"
       >
         {filteredProducts.map((product) => (
           <motion.div
