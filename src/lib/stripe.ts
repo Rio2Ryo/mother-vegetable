@@ -31,5 +31,5 @@ export const PRODUCT_PRICES: Record<string, number> = {
   'mv-soap': 1350,      // $13.50
 };
 
-// Referral discount price ($33)
-export const REFERRAL_DISCOUNT_PRICE = 3300; // cents
+// Referral discount rate (10% off)
+export const REFERRAL_DISCOUNT_RATE = 0.10;

@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { getStoredReferralCode } from '@/lib/affiliate';
 
-const REFERRAL_DISCOUNT_PRICE = 33.00;
+const REFERRAL_DISCOUNT_RATE = 0.10; // 10% off
 
 /* ------------------------------------------------------------------ */
 /* Types                                                               */
@@ -102,7 +102,8 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
     if (code) setHasReferral(true);
   }, []);
 
-  const effectivePrice = hasReferral ? REFERRAL_DISCOUNT_PRICE : product.price;
+  const discountedPrice = parseFloat((product.price * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2));
+  const effectivePrice = hasReferral ? discountedPrice : product.price;
 
   const handleAddToCart = useCallback(() => {
     if (!product.inStock) return;
@@ -111,7 +112,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       productId: product.id,
       name: product.fullName,
       price: product.price,
-      discountedPrice: hasReferral ? REFERRAL_DISCOUNT_PRICE : undefined,
+      discountedPrice: hasReferral ? discountedPrice : undefined,
       image: product.productImage,
       currency: product.currency,
       quantity,
@@ -127,7 +128,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       productId: product.id,
       name: product.fullName,
       price: product.price,
-      discountedPrice: hasReferral ? REFERRAL_DISCOUNT_PRICE : undefined,
+      discountedPrice: hasReferral ? discountedPrice : undefined,
       image: product.productImage,
       currency: product.currency,
       quantity,
@@ -459,17 +460,28 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                   </h1>
                 </div>
 
-                <h2 className="product-price" style={{ fontFamily: 'Arial, sans-serif' }}>
-                  {product.priceJpy ? (
-                    <span>{product.priceJpy}</span>
-                  ) : (
-                    product.priceDisplay
-                  )}
-                </h2>
-                {hasReferral && (
-                  <div style={{ display: 'inline-block', padding: '4px 12px', background: 'rgba(37,199,96,0.15)', border: '1px solid #25C760', borderRadius: '6px', marginBottom: '8px' }}>
-                    <span style={{ color: '#25C760', fontSize: '13px', fontWeight: 600 }}>{t('referralDiscount')}</span>
-                  </div>
+                {hasReferral ? (
+                  <>
+                    <h2 className="product-price" style={{ fontFamily: 'Arial, sans-serif' }}>
+                      <span style={{ textDecoration: 'line-through', opacity: 0.5, marginRight: '10px' }}>
+                        {product.priceJpy ? product.priceJpy : product.priceDisplay}
+                      </span>
+                      <span style={{ color: '#25C760' }}>
+                        ${effectivePrice.toFixed(2)}
+                      </span>
+                    </h2>
+                    <div style={{ display: 'inline-block', padding: '4px 12px', background: 'rgba(37,199,96,0.15)', border: '1px solid #25C760', borderRadius: '6px', marginBottom: '8px' }}>
+                      <span style={{ color: '#25C760', fontSize: '13px', fontWeight: 600 }}>10% OFF - {t('referralDiscount')}</span>
+                    </div>
+                  </>
+                ) : (
+                  <h2 className="product-price" style={{ fontFamily: 'Arial, sans-serif' }}>
+                    {product.priceJpy ? (
+                      <span>{product.priceJpy}</span>
+                    ) : (
+                      product.priceDisplay
+                    )}
+                  </h2>
                 )}
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '12px' }}>

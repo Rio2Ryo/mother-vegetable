@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getStripe, PRODUCT_PRICES, REFERRAL_DISCOUNT_PRICE } from "@/lib/stripe";
+import { getStripe, PRODUCT_PRICES, REFERRAL_DISCOUNT_RATE } from "@/lib/stripe";
 import { getProductBySlug } from "@/data/products";
 
 interface CheckoutItem {
@@ -68,8 +68,8 @@ export async function POST(request: NextRequest) {
       }
 
       // Use referral discount if a referral code is present, otherwise server price
-      const hasReferralDiscount = body.referralCode && REFERRAL_DISCOUNT_PRICE < serverPrice;
-      const unitAmount = hasReferralDiscount ? REFERRAL_DISCOUNT_PRICE : serverPrice;
+      const hasReferralDiscount = !!body.referralCode;
+      const unitAmount = hasReferralDiscount ? Math.round(serverPrice * (1 - REFERRAL_DISCOUNT_RATE)) : serverPrice;
 
       return {
         price_data: {
@@ -97,11 +97,11 @@ export async function POST(request: NextRequest) {
         items: JSON.stringify(
           body.items.map((i) => {
             const sp = PRODUCT_PRICES[i.productId] || 0;
-            const hasDiscount = body.referralCode && REFERRAL_DISCOUNT_PRICE < sp;
+            const hasDiscount = !!body.referralCode;
             return {
               productId: i.productId,
               name: i.name,
-              price: (hasDiscount ? REFERRAL_DISCOUNT_PRICE : sp) / 100,
+              price: (hasDiscount ? Math.round(sp * (1 - REFERRAL_DISCOUNT_RATE)) : sp) / 100,
               quantity: i.quantity,
             };
           })
