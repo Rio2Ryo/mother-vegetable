@@ -5,18 +5,18 @@ import ProductJsonLd from '@/components/ProductJsonLd';
 import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
-  title: 'Confidence — Skin Healing Effect',
+  title: 'Confidence — Skin Care Support',
   description:
-    'Mother Vegetable Confidence cream for all skin types. Natural skin healing and vitality. ¥5,500 with free worldwide shipping.',
+    'Mother Vegetable Confidence cream for all skin types. Natural skin care and vitality. ¥5,500 with free worldwide shipping.',
   openGraph: {
-    title: 'Mother Vegetable Confidence — Skin Healing Effect',
-    description: 'Natural skin healing cream for all skin types.',
+    title: 'Mother Vegetable Confidence — Skin Care Support',
+    description: 'Natural skin care cream for all skin types.',
     images: [{ url: '/cdn/products_confidence_10001.png', width: 800, height: 800, alt: 'Mother Vegetable Confidence' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mother Vegetable Confidence — Skin Healing Effect',
-    description: 'Natural skin healing cream for all skin types.',
+    title: 'Mother Vegetable Confidence — Skin Care Support',
+    description: 'Natural skin care cream for all skin types.',
   },
 };
 
@@ -29,7 +29,7 @@ function getConfidenceProduct(locale: string): ProductPageData {
     fullName: 'Mother Vegetable Confidence - 30 sticks',
     subtitle: isJa ? 'すべての肌に' : 'For All Skin',
     taglineJp: '',
-    tagline: isJa ? '肌のヒーリング効果' : 'Skin Healing Effect',
+    tagline: isJa ? '肌のうるおいケア' : 'Skin Care Support',
     price: 36.70,
     currency: 'USD',
     priceDisplay: 'USD 36.70',
@@ -44,12 +44,12 @@ function getConfidenceProduct(locale: string): ProductPageData {
     mainVideoUrl: '/new_confidence_video.mp4',
     benefits: isJa
       ? [
-          '強力なアンチエイジング効果。',
-          'シミ、ニキビ、臭い、肌ダメージの改善をサポート。',
+          'エイジングケア。',
+          '肌のお悩みケアをサポート。',
         ]
       : [
-          'Powerful anti-aging benefits.',
-          'Helps improve dark spots, acne, odor, and skin damage.',
+          'Aging care support.',
+          'Supports daily skin care concerns.',
         ],
     howToUse: isJa
       ? '直接塗るか、お使いの化粧品に混ぜてご使用ください。'
@@ -59,12 +59,12 @@ function getConfidenceProduct(locale: string): ProductPageData {
     leftSection: {
       title: isJa ? '直接塗る' : 'Apply Directly',
       items: [
-        { name: isJa ? 'シミ' : 'Dark Spot', image: '/Images/Assets/confidence/mazekomu/darkSpot.png' },
-        { name: isJa ? 'ニキビ' : 'Acne', image: '/Images/Assets/confidence/mazekomu/acne.png' },
-        { name: isJa ? '傷・火傷' : 'Wound Burn', image: '/Images/Assets/confidence/mazekomu/woundBurn.png' },
-        { name: isJa ? '臭い' : 'Smell', image: '/Images/Assets/confidence/mazekomu/smell.png' },
-        { name: isJa ? 'そばかす' : 'Freckles', image: '/Images/Assets/confidence/mazekomu/freckles.png' },
-        { name: isJa ? 'アレルギー' : 'Allergy', image: '/Images/Assets/confidence/mazekomu/allergy.png' },
+        { name: isJa ? '顔' : 'Face', image: '/Images/Assets/confidence/mazekomu/darkSpot.png' },
+        { name: isJa ? '首・デコルテ' : 'Neck', image: '/Images/Assets/confidence/mazekomu/acne.png' },
+        { name: isJa ? '手・指先' : 'Hands', image: '/Images/Assets/confidence/mazekomu/woundBurn.png' },
+        { name: isJa ? 'ボディ' : 'Body', image: '/Images/Assets/confidence/mazekomu/smell.png' },
+        { name: isJa ? '足元' : 'Feet', image: '/Images/Assets/confidence/mazekomu/freckles.png' },
+        { name: isJa ? '頭皮・髪' : 'Scalp & Hair', image: '/Images/Assets/confidence/mazekomu/allergy.png' },
       ],
     },
 
@@ -104,13 +104,7 @@ function getConfidenceProduct(locale: string): ProductPageData {
       subtitle: 'Confidence',
       method: isJa ? '塗る / 混ぜる' : 'Apply / Mix In',
       videoUrl: '/Images/Assets/homepage/product/cosmetic_video.mov',
-      circles: [
-        { name: 'Dark Spots', detail: 'Freckles' },
-        { name: 'Acne', detail: 'Acne scars' },
-        { name: 'Wounds', detail: 'Scars, Burn Marks' },
-        { name: 'Odor', detail: 'Face, Neck, Underarms, V-Zone, Feet' },
-        { name: 'Shine', detail: 'Maintains A Clean Look, Natural/ Earth Tones' },
-      ],
+      circles: [],
       ingredientInfo: [
         { label: isJa ? '主成分' : 'Main Component', value: '97.1g' },
         { label: isJa ? 'タンパク質' : 'Protein', value: '2.4~2.6g' },
@@ -136,54 +130,10 @@ function getConfidenceProduct(locale: string): ProductPageData {
             'Certified quality through testing',
           ],
       medicalText: isJa
-        ? '医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。肌の自然な治癒力とバランス回復をサポートします。'
-        : 'Mother Vegetable, certified as a medical-grade quasi-drug, is trusted by medical institutions worldwide for its healing properties \u2014 used in post-surgery recovery, burn scar improvement, cancer care, and even to help control skin shine. It supports the skin\u2019s natural ability to heal and restore balance.',
+        ? '医薬部外品として認定されたマザーベジタブルは、肌のコンディションを整え、自然な美しさをサポートします。'
+        : 'Mother Vegetable, certified as a quasi-drug, helps condition the skin and supports its natural beauty.',
       skinVideoUrl: '/Images/Assets/homepage/product/skin.mp4',
-      benefits: isJa
-        ? [
-            {
-              title: 'シミ・そばかす',
-              image: '/Images/Assets/confidence/mazekomu/darkSpot.png',
-              items: ['シミ・そばかすの軽減', '均一な肌色を促進', '肌の明るさをサポート'],
-            },
-            {
-              title: 'ニキビ・ニキビ跡',
-              image: '/Images/Assets/confidence/mazekomu/acne.png',
-              items: ['ニキビ・ニキビ跡の改善をサポート', '肌の回復をサポート', '肌の炎症を軽減'],
-            },
-            {
-              title: '傷・火傷',
-              image: '/Images/Assets/confidence/mazekomu/woundBurn.png',
-              items: ['傷・火傷跡の改善をサポート', '術後の肌回復をサポート', '自然な肌の治癒を促進'],
-            },
-            {
-              title: '臭い・テカリコントロール',
-              image: '/Images/Assets/confidence/mazekomu/smell.png',
-              items: ['顔、首、脇、Vゾーン、足の臭いをコントロール', 'ナチュラルなトーンでクリーンな見た目を維持', 'テカリのコントロールをサポート'],
-            },
-          ]
-        : [
-            {
-              title: 'Dark Spots & Freckles',
-              image: '/Images/Assets/confidence/mazekomu/darkSpot.png',
-              items: ['Reduces dark spots and freckles', 'Promotes even skin tone', 'Supports skin brightening'],
-            },
-            {
-              title: 'Acne & Scars',
-              image: '/Images/Assets/confidence/mazekomu/acne.png',
-              items: ['Helps improve acne and acne scars', 'Supports skin recovery', 'Reduces skin inflammation'],
-            },
-            {
-              title: 'Wounds & Burns',
-              image: '/Images/Assets/confidence/mazekomu/woundBurn.png',
-              items: ['Aids wound and burn scar improvement', 'Supports post-surgery skin recovery', 'Promotes natural skin healing'],
-            },
-            {
-              title: 'Odor & Shine Control',
-              image: '/Images/Assets/confidence/mazekomu/smell.png',
-              items: ['Controls odor on face, neck, underarms, V-zone, and feet', 'Maintains a clean look with natural earth tones', 'Helps control skin shine'],
-            },
-          ],
+      benefits: [],
     },
   };
 }
@@ -196,7 +146,7 @@ export default async function ConfidencePage({ params }: { params: Promise<{ loc
     <>
       <ProductJsonLd
         name="Mother Vegetable Confidence"
-        description="Natural skin healing cream for all skin types. Powerful anti-aging benefits."
+        description="Natural skin care cream for all skin types. Aging care support."
         image="/cdn/products_confidence_10001.png"
         price={36.70}
         slug="confidence"

@@ -877,25 +877,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                 </div>
               )}
 
-              <div className="bracket-icon">
-                <Image
-                  src="/Images/Assets/homepage/bracket_v2.png"
-                  alt="Bracket"
-                  width={800}
-                  height={100}
-                  className="bracket-img"
-                />
-              </div>
-              <div className="function-branches">
-                <div className={`function-circle-div${product.functionSection.type === 'cosmetic' ? ' cosmetic-function-circle' : ''}`}>
-                  {product.functionSection.circles.map((circle, i) => (
-                    <div key={i} className="function-circle">
-                      <span className="function-circle-text">{circle.name}</span>
-                      <span className="function-circle-text">{circle.detail}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              {/* Old circles removed — ingredient table above replaces them */}
             </div>
 
             {/* Food Function Summary */}
@@ -921,30 +903,6 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                 )}
               </div>
             )}
-
-            {/* Benefits Grid */}
-            <div className="benefits-section">
-              <div className="benefits-row">
-                {product.functionSection.benefits.map((category, i) => (
-                  <div key={i} className="benefits-col">
-                    <div className="benefit-flex">
-                      <div className="benefit-image">
-                        <Image src={category.image} alt={category.title} width={200} height={200} />
-                      </div>
-                      <div className="benefit-content">
-                        <h4 className="benefit-title">{category.title}</h4>
-                        <div className="title-underline" />
-                        <ul className="benefit-list">
-                          {category.items.map((item, j) => (
-                            <li key={j}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>
