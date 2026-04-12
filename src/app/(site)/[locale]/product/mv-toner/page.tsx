@@ -62,18 +62,18 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
       subtitle: isJa ? '自信' : 'Confidence',
       circles: isJa
         ? [
-            { name: 'シミ・そばかす', detail: 'シミ・そばかす' },
-            { name: 'ニキビ・ニキビ跡', detail: 'ニキビ・ニキビ跡' },
-            { name: '傷跡・火傷跡', detail: '傷跡・やけど跡' },
-            { name: '臭い', detail: '臭い：顔、首、脇、Vゾーン、足' },
-            { name: 'ツヤ', detail: 'ツヤ：清潔感を保つ、ナチュラル/アーストーン' },
+            { name: 'くすみケア', detail: 'くすみ・色むらケア' },
+            { name: '肌荒れケア', detail: '肌荒れ・吹き出物ケア' },
+            { name: '集中ケア', detail: '集中スキンケア' },
+            { name: 'ニオイケア', detail: 'ボディフレッシュケア' },
+            { name: 'ツヤ・うるおい', detail: 'ツヤ・うるおいケア' },
           ]
         : [
-            { name: 'Dark Spots', detail: 'Dark Spots, Freckles' },
-            { name: 'Acne', detail: 'Acne, Acne scars' },
-            { name: 'Wounds & Scars', detail: 'Wounds, Scars, Burn Marks' },
-            { name: 'Odor', detail: 'Odor: Face, Neck, Underarms, V-Zone, Feet' },
-            { name: 'Shine', detail: 'Shine: Maintains A Clean Look, Natural/Earth Tones' },
+            { name: 'Tone Care', detail: 'Uneven Tone Care' },
+            { name: 'Blemish Care', detail: 'Blemish & Skin Care' },
+            { name: 'Intensive Care', detail: 'Intensive Skin Care' },
+            { name: 'Fresh Care', detail: 'Body Fresh Care' },
+            { name: 'Glow Care', detail: 'Glow & Moisture Care' },
           ],
       medicalText: '医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。肌の自然な治癒力とバランス回復をサポートします。',
       benefits: isJa
