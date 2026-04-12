@@ -270,13 +270,14 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         .function-content:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(37, 199, 96, 0.2); }
         .function-title { color: #25C760; margin-bottom: 10px; text-align: center; font-family: Arial, sans-serif; font-weight: 700; font-size: 2.5rem; letter-spacing: 2px; }
         .function-subtitle { color: #FFFFFF; font-family: Arial, sans-serif; font-weight: 400; font-size: 1.5rem; text-align: center; }
-        .function-diagram { position: relative; display: flex; flex-direction: row; align-items: stretch; margin-bottom: 40px; gap: 0; }
-        .function-diagram .test-tube-icon { margin: 0; line-height: 0; width: auto; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-        .function-diagram .product-video { max-width: 200px; height: auto; transition: transform 0.3s ease; object-fit: cover; border-radius: 8px; }
-        .bracket-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 0 8px; }
+        .function-diagram { display: flex; flex-direction: row; align-items: stretch; gap: 20px; margin: 40px 0; }
+        .function-diagram .test-tube-icon { flex: 0 0 30%; display: flex; align-items: center; justify-content: center; }
+        .function-diagram .product-video { width: 100%; max-width: 250px; height: auto; transition: transform 0.3s ease; object-fit: cover; border-radius: 8px; }
+        .bracket-icon { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 0 8px; }
         .bracket-img { width: auto; max-height: 300px; height: 100%; transition: transform 0.3s ease; }
         .bracket-img:hover { transform: scale(1.02); }
         .function-diagram .ingredient-info-wrapper { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .about-characteristics { width: 100%; max-width: 800px; margin: 24px auto 32px; }
         .function-branches { position: relative; width: 100%; display: flex; justify-content: center; }
         .function-circle-div { display: flex; justify-content: space-between; width: 100%; max-width: 800px; gap: 1%; }
         .function-circle { background-color: #3C8063; border-radius: 50%; width: 19%; height: auto; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; transition: all 0.3s ease; position: relative; z-index: 2; }
@@ -368,10 +369,11 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         @media (max-width: 767px) {
           .function-content { margin: 20px 0; padding: 10px; }
           .function-subtitle { font-size: 0.9rem; }
-          .function-diagram { flex-direction: column !important; align-items: center !important; }
-          .function-diagram .test-tube-icon { margin-bottom: 16px; }
+          .function-diagram { flex-direction: column !important; align-items: center !important; gap: 10px !important; }
+          .function-diagram .test-tube-icon { flex: 0 0 auto !important; margin-bottom: 16px; }
           .bracket-icon { padding: 8px 0 !important; }
           .bracket-img { max-height: none !important; max-width: 300px !important; width: 100% !important; height: auto !important; }
+          .function-diagram .ingredient-info-wrapper { flex: 0 0 auto !important; width: 100% !important; }
           .function-content .product-video { max-width: 90px; }
           .function-total { font-size: 1.2rem; margin-bottom: 10px; }
           .function-description { font-size: 0.9rem; }
@@ -765,7 +767,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                 />
               </div>
 
-              {/* Right: Ingredient info */}
+              {/* Right: Ingredient info + Nutritional breakdown */}
               <div className="ingredient-info-wrapper">
                 {/* Ingredient Information Table */}
                 {product.functionSection.ingredientInfo && (
@@ -817,84 +819,43 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                   </div>
                 )}
 
-                {/* Characteristics (Cosmetic - inline) */}
-                {product.functionSection.characteristics && (
+                {/* Nutritional Breakdown (inside right column) */}
+                {product.functionSection.nutritionalDetails && (
                   <div style={{
                     width: '100%',
-                    marginBottom: '16px',
+                    marginTop: '8px',
                   }}>
                     <h4 style={{
                       color: '#25C760',
                       fontSize: '16px',
                       fontWeight: 600,
-                      marginBottom: '12px',
-                    }}>Characteristics</h4>
-                    <ul style={{
-                      listStyle: 'none',
-                      padding: 0,
-                      margin: 0,
+                      marginBottom: '16px',
+                    }}>Nutritional Breakdown</h4>
+                    <div style={{
+                      display: 'grid',
+                      gridTemplateColumns: '1fr 1fr',
+                      gap: '8px 24px',
                     }}>
-                      {product.functionSection.characteristics.map((item, i) => (
-                        <li key={i} style={{
+                      {product.functionSection.nutritionalDetails.map((item, i) => (
+                        <div key={i} style={{
                           display: 'flex',
-                          alignItems: 'center',
-                          gap: '12px',
-                          padding: '10px 12px',
+                          justifyContent: 'space-between',
+                          padding: '8px 12px',
                           borderBottom: '1px solid #2a2a2a',
-                          color: '#fff',
-                          fontSize: '14px',
                         }}>
-                          <span style={{ color: '#25C760', fontSize: '18px', flexShrink: 0 }}>&#10003;</span>
-                          {item}
-                        </li>
+                          <span style={{ color: '#ccc', fontSize: '13px' }}>{item.name}</span>
+                          <span style={{ color: '#fff', fontSize: '13px', fontWeight: 500 }}>{item.value}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Nutritional Breakdown (below the horizontal layout) */}
-            {product.functionSection.nutritionalDetails && (
-              <div style={{
-                width: '100%',
-                maxWidth: '800px',
-                margin: '24px auto 32px',
-              }}>
-                <h4 style={{
-                  color: '#25C760',
-                  fontSize: '16px',
-                  fontWeight: 600,
-                  marginBottom: '16px',
-                  textAlign: 'center',
-                }}>Nutritional Breakdown</h4>
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '8px 24px',
-                }}>
-                  {product.functionSection.nutritionalDetails.map((item, i) => (
-                    <div key={i} style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      padding: '8px 12px',
-                      borderBottom: '1px solid #2a2a2a',
-                    }}>
-                      <span style={{ color: '#ccc', fontSize: '13px' }}>{item.name}</span>
-                      <span style={{ color: '#fff', fontSize: '13px', fontWeight: 500 }}>{item.value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Characteristics (Food - after nutritional breakdown) */}
-            {product.functionSection.type === 'food' && product.functionSection.characteristics && (
-              <div style={{
-                width: '100%',
-                maxWidth: '800px',
-                margin: '24px auto 32px',
-              }}>
+            {/* Characteristics - BELOW the entire function-diagram row */}
+            {product.functionSection.characteristics && (
+              <div className="about-characteristics">
                 <h4 style={{
                   color: '#25C760',
                   fontSize: '16px',
