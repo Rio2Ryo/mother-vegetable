@@ -111,6 +111,25 @@ function getAchieveProduct(locale: string): ProductPageData {
         { name: 'Key Minerals For Balance', detail: '3 types' },
         { name: 'Other Functional Ingredients', detail: '9 types' },
       ],
+      ingredientInfo: [
+        { label: isJa ? 'エネルギー' : 'Energy', value: '398kcal' },
+        { label: isJa ? 'タンパク質' : 'Protein', value: '65g' },
+        { label: isJa ? '脂質' : 'Fat', value: '6.5g' },
+        { label: isJa ? '炭水化物' : 'Carbohydrates', value: '20g' },
+        { label: isJa ? 'ミネラル' : 'Minerals', value: '8g' },
+      ],
+      nutritionalDetails: [
+        { name: isJa ? 'C-フィコシアニン' : 'C-Phycocyanin', value: isJa ? '約16〜20g' : 'approx. 16-20g' },
+        { name: isJa ? 'バリン' : 'Valine', value: '3.51g' },
+        { name: isJa ? 'グリシン' : 'Glycine', value: '3.10g' },
+        { name: isJa ? '食塩相当量' : 'Salt Equivalent', value: '1,050mg' },
+        { name: isJa ? 'マンガン' : 'Manganese', value: '1.9mg' },
+        { name: isJa ? 'ビタミンB6' : 'Vitamin B6', value: '0.36mg' },
+        { name: isJa ? 'トリプトファン' : 'Tryptophan', value: '0.93g' },
+        { name: isJa ? 'ヒスチジン' : 'Histidine', value: '1.09g' },
+        { name: isJa ? 'プロリン' : 'Proline', value: '2.38g' },
+        { name: isJa ? 'カリウム' : 'Potassium', value: '1,410mg' },
+      ],
       summary: {
         total: '48 Nutrients',
         description:

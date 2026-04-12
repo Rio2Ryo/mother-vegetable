@@ -35,6 +35,16 @@ interface BenefitCategory {
   items: string[];
 }
 
+interface IngredientRow {
+  label: string;
+  value: string;
+}
+
+interface NutritionalDetail {
+  name: string;
+  value: string;
+}
+
 interface FunctionSection {
   type: 'food' | 'cosmetic';
   title: string;
@@ -47,6 +57,11 @@ interface FunctionSection {
   // Cosmetic-specific
   medicalText?: string;
   skinVideoUrl?: string;
+  // Ingredient & nutritional info (food)
+  ingredientInfo?: IngredientRow[];
+  nutritionalDetails?: NutritionalDetail[];
+  // Characteristics (cosmetic)
+  characteristics?: string[];
 }
 
 interface TrustSection {
@@ -740,6 +755,128 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                   <source src={product.functionSection.videoUrl} type="video/mp4" />
                 </video>
               </div>
+              {/* Ingredient Information Table */}
+              {product.functionSection.ingredientInfo && (
+                <div style={{
+                  width: '100%',
+                  maxWidth: '600px',
+                  margin: '32px auto',
+                  border: '1px solid #333',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                }}>
+                  <div style={{
+                    background: '#1a1a1a',
+                    padding: '12px 16px',
+                    borderBottom: '1px solid #333',
+                  }}>
+                    <h4 style={{
+                      color: '#25C760',
+                      margin: 0,
+                      fontSize: '16px',
+                      fontWeight: 600,
+                    }}>
+                      {product.functionSection.type === 'food' ? 'Ingredient Information (per 100g)' : 'Ingredient Information (per 100g)'}
+                    </h4>
+                  </div>
+                  <table style={{
+                    width: '100%',
+                    borderCollapse: 'collapse',
+                  }}>
+                    <tbody>
+                      {product.functionSection.ingredientInfo.map((row, i) => (
+                        <tr key={i} style={{ borderBottom: i < product.functionSection.ingredientInfo!.length - 1 ? '1px solid #2a2a2a' : 'none' }}>
+                          <td style={{
+                            padding: '10px 16px',
+                            color: '#ccc',
+                            fontSize: '14px',
+                            width: '50%',
+                          }}>{row.label}</td>
+                          <td style={{
+                            padding: '10px 16px',
+                            color: '#fff',
+                            fontSize: '14px',
+                            textAlign: 'right',
+                            fontWeight: 500,
+                          }}>{row.value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {/* Nutritional Breakdown (Food) */}
+              {product.functionSection.nutritionalDetails && (
+                <div style={{
+                  width: '100%',
+                  maxWidth: '600px',
+                  margin: '24px auto 32px',
+                }}>
+                  <h4 style={{
+                    color: '#25C760',
+                    fontSize: '16px',
+                    fontWeight: 600,
+                    marginBottom: '16px',
+                    textAlign: 'center',
+                  }}>Nutritional Breakdown</h4>
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '8px 24px',
+                  }}>
+                    {product.functionSection.nutritionalDetails.map((item, i) => (
+                      <div key={i} style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        padding: '8px 12px',
+                        borderBottom: '1px solid #2a2a2a',
+                      }}>
+                        <span style={{ color: '#ccc', fontSize: '13px' }}>{item.name}</span>
+                        <span style={{ color: '#fff', fontSize: '13px', fontWeight: 500 }}>{item.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Characteristics (Cosmetic) */}
+              {product.functionSection.characteristics && (
+                <div style={{
+                  width: '100%',
+                  maxWidth: '600px',
+                  margin: '24px auto 32px',
+                }}>
+                  <h4 style={{
+                    color: '#25C760',
+                    fontSize: '16px',
+                    fontWeight: 600,
+                    marginBottom: '16px',
+                    textAlign: 'center',
+                  }}>Characteristics</h4>
+                  <ul style={{
+                    listStyle: 'none',
+                    padding: 0,
+                    margin: 0,
+                  }}>
+                    {product.functionSection.characteristics.map((item, i) => (
+                      <li key={i} style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '12px',
+                        padding: '10px 12px',
+                        borderBottom: '1px solid #2a2a2a',
+                        color: '#fff',
+                        fontSize: '14px',
+                      }}>
+                        <span style={{ color: '#25C760', fontSize: '18px', flexShrink: 0 }}>✓</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               <div className="bracket-icon">
                 <Image
                   src="/Images/Assets/homepage/bracket_v2.png"

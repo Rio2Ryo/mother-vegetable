@@ -111,6 +111,30 @@ function getConfidenceProduct(locale: string): ProductPageData {
         { name: 'Odor', detail: 'Face, Neck, Underarms, V-Zone, Feet' },
         { name: 'Shine', detail: 'Maintains A Clean Look, Natural/ Earth Tones' },
       ],
+      ingredientInfo: [
+        { label: isJa ? '主成分' : 'Main Component', value: '97.1g' },
+        { label: isJa ? 'タンパク質' : 'Protein', value: '2.4~2.6g' },
+        { label: isJa ? '食物繊維' : 'Dietary Fiber', value: '0.3~0.5g' },
+        { label: isJa ? '脂質' : 'Fat', value: isJa ? '0.1g以下' : '0.1g or less' },
+        { label: isJa ? '水分' : 'Moisture', value: '0.1g' },
+      ],
+      characteristics: isJa
+        ? [
+            '天然素材のみで製造',
+            '完全室内栽培',
+            '汚染リスクを最小限に抑制',
+            '保存料・人工添加物不使用',
+            '抽出なしの自然形態',
+            '検査による品質認証済み',
+          ]
+        : [
+            'Made entirely from natural materials',
+            'Complete indoor cultivation',
+            'Minimizes contamination risks',
+            'No preservatives or artificial additives',
+            'Natural form without extraction',
+            'Certified quality through testing',
+          ],
       medicalText: isJa
         ? '医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。肌の自然な治癒力とバランス回復をサポートします。'
         : 'Mother Vegetable, certified as a medical-grade quasi-drug, is trusted by medical institutions worldwide for its healing properties \u2014 used in post-surgery recovery, burn scar improvement, cancer care, and even to help control skin shine. It supports the skin\u2019s natural ability to heal and restore balance.',
