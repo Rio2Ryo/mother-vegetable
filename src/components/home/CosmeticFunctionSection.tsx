@@ -217,7 +217,7 @@ export default function CosmeticFunctionSection() {
 
   // Cosmetic ingredients
   const cosmeticNutrients = [
-    { name: '無水ケイ酸', amount: '97.1g', nameEN: 'Silicic Anhydride' },
+    { name: '無水ケイ酸', amount: '97.1g', nameEN: 'Main Component' },
     { name: 'たんぱく質', amount: '2.4~2.6g', nameEN: 'Protein' },
     { name: '炭水化物（食物繊維）', amount: '0.3~0.5g', nameEN: 'Carbohydrates (Dietary Fiber)' },
     { name: '脂質', amount: '0.1g未満', nameEN: 'Fat' },
@@ -233,9 +233,9 @@ export default function CosmeticFunctionSection() {
         ['動物や植物への使用が可能', '長期保存が可能'],
       ]
     : [
-        ['Made entirely from natural materials/nutrients derived solely from Mother Vegetable, the ancestor of plants and algae', 'The main component of topical Mother Vegetable is amorphous Silicic Anhydride'],
+        ['Made entirely from natural materials/nutrients derived solely from Mother Vegetable, the ancestor of plants and algae', 'The main component of topical Mother Vegetable is amorphous Main Component'],
         ['Complete indoor cultivation free from PM2.5, insects, birds, and other contaminants', 'Minimizes heavy metal and microplastic contamination risks'],
-        ['No preservatives, artificial colors, or fragrances', 'No extraction process for Silicic Anhydride \u2014 simply dried Mother Vegetable in its natural form'],
+        ['No preservatives, artificial colors, or fragrances', 'No extraction process for Main Component \u2014 simply dried Mother Vegetable in its natural form'],
         ['No pesticides or chemical fertilizers', 'Meets quasi-drug raw material standards'],
         ['Can be used on animals and plants', 'Suitable for long-term storage'],
       ];
@@ -307,8 +307,8 @@ export default function CosmeticFunctionSection() {
 As a prerequisite, the characteristics of the raw materials are as follows.
 Please explain what benefits can be expected from raw materials made from a variety grown and produced under the following characteristics and conditions:
 ・Uses only natural ingredients derived from the ancestor of plants
-・Amorphous Silicic Anhydride at 97.1% in powder form
-・As evidence of life, despite being 97.1% high-purity Silicic Anhydride, lipids and dietary fiber remain in the powder. Because no high-temperature processing or chemical refining is used, natural dietary fiber remains — an organic high-purity Silicic Anhydride.
+・Amorphous Main Component at 97.1% in powder form
+・As evidence of life, despite being 97.1% high-purity Main Component, lipids and dietary fiber remain in the powder. Because no high-temperature processing or chemical refining is used, natural dietary fiber remains — an organic high-purity Main Component.
 ・Complete indoor cultivation (Closed Bioreactor System) free from outdoor air pollutants such as PM2.5, insects, birds, etc.
 ・Minimized risk of heavy metal and microplastic contamination
 ・No pesticides or chemical fertilizers
@@ -319,7 +319,7 @@ Please explain what benefits can be expected from raw materials made from a vari
 【Output Format (in this order)】
 1) **Top 5 Expected Benefits When Applied to Skin**
 List the top 5 expected benefits from this ingredient group, in order of importance.
-Main component: 97.1% high-purity Silicic Anhydride made from only one variety of natural material — the ancestor of plants (lipids and dietary fiber remain in the powder. Because no high-temperature processing or chemical refining is used, natural dietary fiber remains — an organic high-purity Silicic Anhydride.)
+Main component: 97.1% high-purity Main Component made from only one variety of natural material — the ancestor of plants (lipids and dietary fiber remain in the powder. Because no high-temperature processing or chemical refining is used, natural dietary fiber remains — an organic high-purity Main Component.)
 For each benefit:
 - What effect can be expected
 - Supporting ingredients from this list
@@ -347,7 +347,7 @@ Explain the expected effects from this ingredient group in the following areas:
 4) **Disclaimer**: This is NOT medical advice and is based on publicly available information. We recommend consulting a specialist or physician for details.
 
 【Ingredient List (per 100g)】
-- Silicic Anhydride: 97.1g
+- Main Component: 97.1g
 - Protein: 2.4~2.6g
 - Carbohydrates (Dietary Fiber): 0.3~0.5g
 - Fat: 0.1g or less
