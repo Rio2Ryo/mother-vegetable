@@ -1,10 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { useLocale } from 'next-intl';
 import { products, type ProductData } from '@/data/products';
+import { getStoredReferralCode } from '@/lib/affiliate';
+
+const REFERRAL_DISCOUNT_RATE = 0.10;
+
+function parseJpyPrice(priceStr: string): number {
+  return parseInt(priceStr.replace(/[¥,]/g, ''), 10);
+}
+
+function formatJpyPrice(amount: number): string {
+  return '¥' + amount.toLocaleString();
+}
 
 type CategoryFilter = 'all' | 'food' | 'cosmetic';
 
@@ -42,6 +53,12 @@ export default function ProductsListingPage() {
   const isJa = locale === 'ja';
   const isZh = locale === 'zh';
   const [filter, setFilter] = useState<CategoryFilter>('all');
+  const [hasReferral, setHasReferral] = useState(false);
+
+  useEffect(() => {
+    const code = getStoredReferralCode();
+    if (code) setHasReferral(true);
+  }, []);
 
   const t = (en: string, ja: string, zh: string) => (isJa ? ja : isZh ? zh : en);
 
@@ -108,7 +125,7 @@ export default function ProductsListingPage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} locale={locale} t={t} />
+              <ProductCard key={product.id} product={product} locale={locale} t={t} hasReferral={hasReferral} />
             ))}
           </div>
           {filteredProducts.length === 0 && (
@@ -128,10 +145,12 @@ function ProductCard({
   product,
   locale,
   t,
+  hasReferral,
 }: {
   product: ProductData;
   locale: string;
   t: (en: string, ja: string, zh: string) => string;
+  hasReferral: boolean;
 }) {
   const isJa = locale === 'ja';
   const priceJpy = product.priceJpy;
@@ -190,17 +209,45 @@ function ProductCard({
           {displayDescription}
         </p>
         <div className="flex items-center justify-between">
-          <div>
+          <div className="flex flex-wrap items-center gap-1.5">
             {isJa ? (
-              <span className="text-[#25C760] font-bold text-base">
-                {priceJpy}
-              </span>
+              hasReferral && priceJpy ? (
+                <>
+                  <span className="text-gray-500 line-through text-sm">
+                    {priceJpy}
+                  </span>
+                  <span className="text-[#25C760] font-bold text-base">
+                    {formatJpyPrice(Math.round(parseJpyPrice(priceJpy) * (1 - REFERRAL_DISCOUNT_RATE)))}
+                  </span>
+                  <span className="text-[10px] font-semibold text-[#25C760] bg-[#25C760]/15 border border-[#25C760] rounded px-1.5 py-0.5">
+                    10% OFF
+                  </span>
+                </>
+              ) : (
+                <span className="text-[#25C760] font-bold text-base">
+                  {priceJpy}
+                </span>
+              )
             ) : (
               <>
-                <span className="text-[#25C760] font-bold text-base">
-                  USD {product.price.toFixed(2)}
-                </span>
-                {priceJpy && (
+                {hasReferral ? (
+                  <>
+                    <span className="text-gray-500 line-through text-sm">
+                      USD {product.price.toFixed(2)}
+                    </span>
+                    <span className="text-[#25C760] font-bold text-base">
+                      USD {(product.price * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2)}
+                    </span>
+                    <span className="text-[10px] font-semibold text-[#25C760] bg-[#25C760]/15 border border-[#25C760] rounded px-1.5 py-0.5">
+                      10% OFF
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-[#25C760] font-bold text-base">
+                    USD {product.price.toFixed(2)}
+                  </span>
+                )}
+                {priceJpy && !hasReferral && (
                   <span className="text-gray-500 text-sm ml-2">
                     ({priceJpy})
                   </span>

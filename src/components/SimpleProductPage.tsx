@@ -1,11 +1,21 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
 import { getStoredReferralCode } from '@/lib/affiliate';
 import { useLocale } from 'next-intl';
+
+const REFERRAL_DISCOUNT_RATE = 0.10;
+
+function parseJpyPrice(priceStr: string): number {
+  return parseInt(priceStr.replace(/[¥,]/g, ''), 10);
+}
+
+function formatJpyPrice(amount: number): string {
+  return '¥' + amount.toLocaleString();
+}
 
 export interface GalleryImageData {
   url: string;
@@ -57,6 +67,14 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
   const router = useRouter();
   const locale = useLocale();
   const isJa = locale === 'ja';
+  const [hasReferral, setHasReferral] = useState(false);
+
+  useEffect(() => {
+    const code = getStoredReferralCode();
+    if (code) setHasReferral(true);
+  }, []);
+
+  const discountedPrice = parseFloat((product.price * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2));
 
   const handleAddToCart = useCallback(() => {
     addItem({
@@ -64,13 +82,14 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
       productId: product.id,
       name: product.name,
       price: product.price,
+      discountedPrice: hasReferral ? discountedPrice : undefined,
       image: product.productImage,
       currency: product.currency,
       quantity,
     });
     setAddedFeedback(true);
     setTimeout(() => setAddedFeedback(false), 2000);
-  }, [addItem, product, quantity]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity]);
 
   const handleBuyNow = useCallback(() => {
     addItem({
@@ -78,12 +97,13 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
       productId: product.id,
       name: product.name,
       price: product.price,
+      discountedPrice: hasReferral ? discountedPrice : undefined,
       image: product.productImage,
       currency: product.currency,
       quantity,
     });
     router.push('/checkout');
-  }, [addItem, product, quantity, router]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity, router]);
 
   return (
     <div className="bg-black min-h-screen text-white">
@@ -143,8 +163,20 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
             </div>
 
             {/* Price */}
-            <div className="flex items-center gap-3">
-              <span className="text-2xl font-bold text-white">{product.priceJpy}</span>
+            <div className="flex items-center gap-3 flex-wrap">
+              {hasReferral ? (
+                <>
+                  <span className="text-lg text-white/50 line-through">{product.priceJpy}</span>
+                  <span className="text-2xl font-bold text-white">
+                    {formatJpyPrice(Math.round(parseJpyPrice(product.priceJpy) * (1 - REFERRAL_DISCOUNT_RATE)))}
+                  </span>
+                  <span className="text-xs font-semibold text-[#25C760] bg-[#25C760]/15 border border-[#25C760] rounded px-2 py-0.5">
+                    10% OFF
+                  </span>
+                </>
+              ) : (
+                <span className="text-2xl font-bold text-white">{product.priceJpy}</span>
+              )}
               <span className="ml-2 text-[#25C760] text-xs border border-[#25C760] rounded px-2 py-0.5">{isJa ? '送料無料' : 'Free Shipping'}</span>
             </div>
 

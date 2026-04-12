@@ -1,10 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import { useLocale } from 'next-intl';
 import { useCartStore } from '@/store/cart';
+import { getStoredReferralCode } from '@/lib/affiliate';
+
+const REFERRAL_DISCOUNT_RATE = 0.10;
+
+function parseJpyPrice(priceStr: string): number {
+  return parseInt(priceStr.replace(/[¥,]/g, ''), 10);
+}
+
+function formatJpyPrice(amount: number): string {
+  return '¥' + amount.toLocaleString();
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -178,6 +189,12 @@ export default function ProductsSection() {
     () => Object.fromEntries(products.map((p) => [p.id, 1]))
   );
   const [activeCategory, setActiveCategory] = useState<Category>('all');
+  const [hasReferral, setHasReferral] = useState(false);
+
+  useEffect(() => {
+    const code = getStoredReferralCode();
+    if (code) setHasReferral(true);
+  }, []);
 
   const filteredProducts = products.filter((p) => {
     if (activeCategory === 'all') return true;
@@ -285,7 +302,19 @@ export default function ProductsSection() {
 
                 {/* Price */}
                 <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center">
-                  <span className="text-white font-bold text-xl md:text-2xl">{product.priceJpy}</span>
+                  {hasReferral ? (
+                    <>
+                      <span className="text-white/50 line-through text-base md:text-lg">{product.priceJpy}</span>
+                      <span className="text-white font-bold text-xl md:text-2xl">
+                        {formatJpyPrice(Math.round(parseJpyPrice(product.priceJpy) * (1 - REFERRAL_DISCOUNT_RATE)))}
+                      </span>
+                      <span className="text-xs font-semibold text-[#25C760] bg-[#25C760]/15 border border-[#25C760] rounded px-2 py-0.5">
+                        10% OFF
+                      </span>
+                    </>
+                  ) : (
+                    <span className="text-white font-bold text-xl md:text-2xl">{product.priceJpy}</span>
+                  )}
                 </div>
 
               </div>
@@ -307,15 +336,19 @@ export default function ProductsSection() {
               </div>
               {/* Add to cart */}
               <button
-                onClick={() => addItem({
-                  id: product.id,
-                  productId: product.id,
-                  name: product.name,
-                  price: parseFloat(product.priceUsd.replace('$', '')),
-                  currency: 'USD',
-                  quantity: quantities[product.id] ?? 1,
-                  image: product.imageUrl ?? '',
-                })}
+                onClick={() => {
+                  const basePrice = parseFloat(product.priceUsd.replace('$', ''));
+                  addItem({
+                    id: product.id,
+                    productId: product.id,
+                    name: product.name,
+                    price: basePrice,
+                    discountedPrice: hasReferral ? parseFloat((basePrice * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2)) : undefined,
+                    currency: 'USD',
+                    quantity: quantities[product.id] ?? 1,
+                    image: product.imageUrl ?? '',
+                  });
+                }}
                 className="block w-full text-center py-2.5 md:py-3 bg-[#25c760] text-black font-semibold text-sm md:text-base rounded-full hover:bg-[#1da84e] transition-colors"
               >
                 {isJa ? 'カートに入れる' : 'Add to Cart'}
