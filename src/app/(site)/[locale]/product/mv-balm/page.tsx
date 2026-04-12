@@ -60,13 +60,21 @@ function getMvBalmProduct(locale: string): SimpleProductPageData {
     },
     functionSection: {
       subtitle: isJa ? 'マザベジバウム' : 'MV Balm',
-      circles: [
-        { name: 'Shea Butter', detail: 'Moisturizer' },
-        { name: 'Beeswax', detail: 'Sealant' },
-        { name: 'Jojoba Oil', detail: 'Nourishing' },
-        { name: 'Vitamin E', detail: 'Antioxidant' },
-        { name: 'Coconut Oil', detail: 'Hydration' },
-      ],
+      circles: isJa
+        ? [
+            { name: 'シアバター', detail: 'シアバター' },
+            { name: 'ミツロウ', detail: 'ミツロウ' },
+            { name: 'ホホバオイル', detail: 'ホホバオイル' },
+            { name: 'ビタミンE', detail: 'ビタミンE' },
+            { name: 'ココナッツオイル', detail: 'ココナッツオイル' },
+          ]
+        : [
+            { name: 'Shea Butter', detail: 'Shea Butter' },
+            { name: 'Beeswax', detail: 'Beeswax' },
+            { name: 'Jojoba Oil', detail: 'Jojoba Oil' },
+            { name: 'Vitamin E', detail: 'Vitamin E' },
+            { name: 'Coconut Oil', detail: 'Coconut Oil' },
+          ],
       benefits: isJa
         ? [
             { title: '乾燥・荒れ肌', items: ['集中保湿・修復', 'かさつき改善', 'バリア機能を強化', '肌荒れを鎮静', '長時間の保護膜形成'] },

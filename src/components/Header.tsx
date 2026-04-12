@@ -105,7 +105,7 @@ export default function Header() {
           </Link>
 
           {/* Nav */}
-          <div className="flex items-center gap-4 lg:gap-5 max-lg:gap-3">
+          <div className="flex items-center gap-2.5 lg:gap-4">
             <nav
               aria-label="Main navigation"
               className={`${
@@ -190,12 +190,12 @@ export default function Header() {
                 )}
               </div>
 
-              <ul className="flex flex-col lg:flex-row gap-0 lg:gap-8 list-none m-0 p-0 max-lg:pt-4">
+              <ul className="flex flex-col lg:flex-row gap-0 lg:gap-8 list-none m-0 p-0 max-lg:pt-2">
                 {/* Products */}
                 <li className="max-lg:w-full">
                   <Link
                     href="/products"
-                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-3 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -209,7 +209,7 @@ export default function Header() {
                   onMouseLeave={closeHowTo}
                 >
                   <button
-                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-1 bg-transparent border-none cursor-pointer py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-3 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-1 bg-transparent border-none cursor-pointer py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setHowToOpen(!howToOpen)}
                   >
@@ -254,7 +254,7 @@ export default function Header() {
                 <li className="max-lg:w-full">
                   <Link
                     href="/news"
-                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-3 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -265,52 +265,34 @@ export default function Header() {
                 <li className="max-lg:w-full">
                   <Link
                     href="/mv/certifiedInstructor"
-                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-3 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t('certifiedInstructor')}
                   </Link>
                 </li>
-                {/* Healthcare (mobile only) */}
-                <li className="hidden max-lg:block list-none mt-4 w-full">
-                  <Link
-                    href="/healthcare"
-                    className="inline-flex flex-col items-center justify-center w-fit py-1.5 px-5 border border-white rounded-md text-white text-sm font-semibold no-underline bg-black transition-all duration-300 hover:bg-[#25C760] hover:text-black hover:border-[#25C760]"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {t('healthcare')}
-                    <span className="block text-[13px] font-medium opacity-95">{t('forHospital')}</span>
-                  </Link>
-                </li>
               </ul>
             </nav>
 
-            {/* Healthcare Button (Desktop) */}
-            <Link
-              href="/healthcare"
-              className="hidden lg:inline-flex flex-col items-center justify-center h-10 bg-black text-white border border-white px-3 rounded-md text-[11px] font-semibold leading-[1.2] no-underline hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-0.5 transition-all duration-300 text-center"
-              style={{ fontFamily: 'Arial, sans-serif' }}
-            >
-              {t('healthcare')}
-              <span className="text-[10px] font-medium whitespace-nowrap">{t('forHospital')}</span>
-            </Link>
-
             {/* Language Selector */}
             <div
-              className="relative border border-white rounded-md bg-transparent text-white px-4 py-2 font-medium text-sm cursor-pointer min-w-[60px] text-center h-10 flex items-center justify-center hover:bg-[#25C760] hover:border-[#25C760] hover:-translate-y-[3px] transition-all duration-300"
+              className="relative border border-white/60 rounded bg-transparent text-white px-2 py-1.5 font-medium text-xs cursor-pointer min-w-[44px] text-center h-9 flex items-center justify-center gap-1 hover:bg-[#25C760] hover:border-[#25C760] hover:text-black transition-all duration-300"
               style={{ fontFamily: 'Arial, sans-serif' }}
               onClick={() => setLangOpen(!langOpen)}
             >
-              <span className="block">{currentLangLabel}</span>
+              <svg className="w-3.5 h-3.5 opacity-70" fill="currentColor" viewBox="0 0 512 512">
+                <path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7 10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5 11.5 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.5-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm245.1 0c-10 63.9-29.8 117.4-55.3 151.6 78.3-20.7 142-77.5 171.9-151.6H376.7z" />
+              </svg>
+              <span>{currentLangLabel}</span>
               {langOpen && (
                 <>
                   <div className="fixed inset-0 z-[999]" onClick={(e) => { e.stopPropagation(); setLangOpen(false); }} />
-                  <div className="absolute top-full left-0 right-0 bg-black border border-[#25C760] rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[1000] mt-1 overflow-hidden">
+                  <div className="absolute top-full left-0 right-0 bg-black border border-[#25C760] rounded shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[1000] mt-1 overflow-hidden min-w-[80px]">
                     {langOptions.map((lang) => (
                       <div
                         key={lang.code}
-                        className="px-4 py-[10px] text-white hover:bg-[#25C760] transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] last:border-b-0 cursor-pointer text-center font-medium"
+                        className="px-3 py-2 text-white text-xs hover:bg-[#25C760] hover:text-black transition-all duration-200 border-b border-[rgba(37,199,96,0.1)] last:border-b-0 cursor-pointer text-center font-medium"
                         onClick={(e) => {
                           e.stopPropagation();
                           switchLocale(lang.code);
@@ -327,8 +309,7 @@ export default function Header() {
             {/* Cart Button */}
             <button
               onClick={toggleCart}
-              className="bg-black text-white border border-white px-6 py-3 rounded-[5px] font-semibold text-sm cursor-pointer relative flex items-center gap-2 h-10 hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300 max-lg:px-4 max-lg:text-xs max-[600px]:px-3 max-[600px]:text-[11px]"
-              style={{ fontFamily: 'Arial, sans-serif' }}
+              className="bg-black text-white border border-white/60 rounded w-9 h-9 cursor-pointer relative flex items-center justify-center hover:bg-[#25C760] hover:border-[#25C760] hover:text-black transition-all duration-300"
             >
               <svg className="w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 576 512">
                 <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
@@ -342,8 +323,8 @@ export default function Header() {
 
             {/* Profile Button (Desktop) */}
             <div
-              className="hidden lg:flex relative text-white bg-black border border-white cursor-pointer h-10 rounded-[5px] items-center justify-center hover:shadow-[0_8px_25px_rgba(37,199,96,0.4)] hover:-translate-y-[3px] hover:bg-[#25C760] transition-all duration-300"
-              style={{ minWidth: isLoggedIn ? 'auto' : '40px', paddingInline: isLoggedIn ? '12px' : '0' }}
+              className="hidden lg:flex relative text-white bg-black border border-white/60 cursor-pointer h-9 rounded items-center justify-center hover:bg-[#25C760] hover:border-[#25C760] hover:text-black transition-all duration-300"
+              style={{ minWidth: isLoggedIn ? 'auto' : '36px', paddingInline: isLoggedIn ? '10px' : '0' }}
               onMouseEnter={openProfile}
               onMouseLeave={closeProfile}
             >

@@ -60,13 +60,21 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
     },
     functionSection: {
       subtitle: isJa ? 'マザベジ化粧水' : 'MV Toner',
-      circles: [
-        { name: 'Hyaluronic Acid', detail: 'Hydration' },
-        { name: 'Collagen Extract', detail: 'Firmness' },
-        { name: 'Aloe Vera', detail: 'Soothing' },
-        { name: 'Vitamin C', detail: 'Brightening' },
-        { name: 'Green Tea Extract', detail: 'Antioxidant' },
-      ],
+      circles: isJa
+        ? [
+            { name: 'ヒアルロン酸', detail: 'ヒアルロン酸' },
+            { name: 'コラーゲンエキス', detail: 'コラーゲンエキス' },
+            { name: 'アロエベラ', detail: 'アロエベラ' },
+            { name: 'ビタミンC', detail: 'ビタミンC' },
+            { name: '緑茶エキス', detail: '緑茶エキス' },
+          ]
+        : [
+            { name: 'Hyaluronic Acid', detail: 'Hyaluronic Acid' },
+            { name: 'Collagen Extract', detail: 'Collagen Extract' },
+            { name: 'Aloe Vera', detail: 'Aloe Vera' },
+            { name: 'Vitamin C', detail: 'Vitamin C' },
+            { name: 'Green Tea Extract', detail: 'Green Tea Extract' },
+          ],
       benefits: isJa
         ? [
             { title: '乾燥肌', items: ['深い保湿効果', 'バリア機能の強化', 'キメを整える', '長時間うるおいキープ', '乾燥による小ジワを予防'] },

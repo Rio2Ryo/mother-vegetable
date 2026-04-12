@@ -64,13 +64,21 @@ function getMvSaltProduct(locale: string): SimpleProductPageData {
     },
     functionSection: {
       subtitle: isJa ? 'マザベジ塩' : 'MV Salt',
-      circles: [
-        { name: 'Sea Salt', detail: 'Natural Salt' },
-        { name: 'Iron', detail: 'Mineral' },
-        { name: 'Magnesium', detail: 'Mineral' },
-        { name: 'Potassium', detail: 'Mineral' },
-        { name: 'Calcium', detail: 'Mineral' },
-      ],
+      circles: isJa
+        ? [
+            { name: '海塩', detail: '海塩' },
+            { name: '鉄', detail: '鉄' },
+            { name: 'マグネシウム', detail: 'マグネシウム' },
+            { name: 'カリウム', detail: 'カリウム' },
+            { name: 'カルシウム', detail: 'カルシウム' },
+          ]
+        : [
+            { name: 'Sea Salt', detail: 'Sea Salt' },
+            { name: 'Iron', detail: 'Iron' },
+            { name: 'Magnesium', detail: 'Magnesium' },
+            { name: 'Potassium', detail: 'Potassium' },
+            { name: 'Calcium', detail: 'Calcium' },
+          ],
       benefits: isJa
         ? [
             { title: '子ども', items: ['成長に必要なミネラル補給', '免疫力の向上', '骨の成長をサポート', '鉄分で集中力アップ', '偏食でもミネラル確保'] },

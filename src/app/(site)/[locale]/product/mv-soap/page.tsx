@@ -60,13 +60,21 @@ function getMvSoapProduct(locale: string): SimpleProductPageData {
     },
     functionSection: {
       subtitle: isJa ? 'マザベジ石鹸' : 'MV Soap',
-      circles: [
-        { name: 'Olive Oil', detail: 'Base Oil' },
-        { name: 'Coconut Oil', detail: 'Lather' },
-        { name: 'Shea Butter', detail: 'Moisturizer' },
-        { name: 'Glycerin', detail: 'Hydration' },
-        { name: 'Essential Oils', detail: 'Fragrance' },
-      ],
+      circles: isJa
+        ? [
+            { name: 'オリーブオイル', detail: 'オリーブオイル' },
+            { name: 'ココナッツオイル', detail: 'ココナッツオイル' },
+            { name: 'シアバター', detail: 'シアバター' },
+            { name: 'グリセリン', detail: 'グリセリン' },
+            { name: 'エッセンシャルオイル', detail: 'エッセンシャルオイル' },
+          ]
+        : [
+            { name: 'Olive Oil', detail: 'Olive Oil' },
+            { name: 'Coconut Oil', detail: 'Coconut Oil' },
+            { name: 'Shea Butter', detail: 'Shea Butter' },
+            { name: 'Glycerin', detail: 'Glycerin' },
+            { name: 'Essential Oils', detail: 'Essential Oils' },
+          ],
       benefits: isJa
         ? [
             { title: '普通肌', items: ['毎日のクレンジング', '毛穴をすっきり洗浄', '肌のキメを整える', '洗い上がりしっとり', '皮脂バランスを整える'] },

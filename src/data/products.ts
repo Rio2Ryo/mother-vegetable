@@ -18,9 +18,11 @@ export interface MixItem {
 export interface ProductData {
   id: string;
   name: string;
+  nameJa?: string;
   fullName: string;
   slug: string;
   description: string;
+  descriptionJa?: string;
   price: number;
   currency: string;
   sku: string;
@@ -76,10 +78,12 @@ function videoRange(product: string, count: number): string[] {
 const achieve: ProductData = {
   id: "achieve-capsule-30",
   name: "Achieve",
+  nameJa: "アチーブ",
   fullName: "Mother Vegetable Achieve",
   slug: "achieve",
   description:
     "48 different nutrients at once. Supports a healthy gut, regeneration of cells throughout the body.",
+  descriptionJa: "48種の栄養素を一度に摂取。腸の健康と全身の細胞再生をサポート。",
   price: 36.70,
   currency: "USD",
   sku: "MV-ACH-030",
@@ -149,10 +153,12 @@ const achieve: ProductData = {
 const confidence: ProductData = {
   id: "confidence-tube-30",
   name: "Confidence",
+  nameJa: "コンフィデンス",
   fullName: "Mother Vegetable Confidence",
   slug: "confidence",
   description:
     "Skin Healing Effect. Powerful anti-aging benefits.",
+  descriptionJa: "肌の修復効果。強力なアンチエイジング効果。",
   price: 36.70,
   currency: "USD",
   sku: "MV-CON-030",
@@ -238,9 +244,11 @@ const confidence: ProductData = {
 const forever: ProductData = {
   id: "forever-capsule-30",
   name: "Forever",
+  nameJa: "フォーエバー",
   fullName: "Mother Vegetable Forever",
   slug: "forever",
   description: "Extend your pet's healthy life.",
+  descriptionJa: "ペットの健康寿命を延ばします。",
   price: 36.70,
   currency: "USD",
   sku: "MV-FOR-030",
@@ -302,9 +310,11 @@ const forever: ProductData = {
 const tilapia: ProductData = {
   id: 'tilapia-fish-1',
   name: 'マザベジフィッシュ-イズミ鯛',
+  nameJa: 'マザベジフィッシュ-イズミ鯛',
   fullName: 'Mother Vegetable Fish - Izumi Tai',
   slug: 'tilapia',
   description: 'Fresh Izumi Tai enriched with 48 natural nutrients for a healthy lifestyle.',
+  descriptionJa: '48種の天然栄養素で育てた新鮮なイズミ鯛。健康的な食生活に。',
   price: 13.50,
   currency: 'USD',
   sku: 'MV-TIL-001',
@@ -336,9 +346,11 @@ const tilapia: ProductData = {
 const mvSalt: ProductData = {
   id: 'mv-salt-50g',
   name: 'マザベジ塩',
+  nameJa: 'マザベジ塩',
   fullName: 'Mother Vegetable Salt',
   slug: 'mv-salt',
   description: 'Green nutrient-infused salt. 50g. Rich in minerals and 48 nutrients.',
+  descriptionJa: '48種の栄養素配合の緑色の塩。50g。ミネラル豊富。',
   price: 13.50,
   currency: 'USD',
   sku: 'MV-SAL-050',
@@ -370,9 +382,11 @@ const mvSalt: ProductData = {
 const mvSoySauce: ProductData = {
   id: 'mv-soy-sauce-150ml',
   name: 'マザベジ醤油',
+  nameJa: 'マザベジ醤油',
   fullName: 'Mother Vegetable Soy Sauce',
   slug: 'mv-soy-sauce',
   description: 'Premium dark soy sauce with 48 nutrients. 150ml. Rich umami flavor.',
+  descriptionJa: '48種の栄養素配合のプレミアム醤油。150ml。豊かな旨味。',
   price: 13.50,
   currency: 'USD',
   sku: 'MV-SOY-150',
@@ -404,9 +418,11 @@ const mvSoySauce: ProductData = {
 const mvToner: ProductData = {
   id: 'mv-toner-150ml',
   name: 'マザベジ化粧水',
+  nameJa: 'マザベジ化粧水',
   fullName: 'Mother Vegetable Toner',
   slug: 'mv-toner',
   description: 'Nutrient-infused facial toner with Confidence collagen. 150ml. Skin healing and anti-aging.',
+  descriptionJa: 'Confidenceコラーゲン配合の化粧水。150ml。肌の修復とエイジングケア。',
   price: 13.50,
   currency: 'USD',
   sku: 'MV-TON-150',
@@ -441,9 +457,11 @@ const mvToner: ProductData = {
 const mvBalm: ProductData = {
   id: 'mv-balm-50g',
   name: 'マザベジバウム',
+  nameJa: 'マザベジバウム',
   fullName: 'Mother Vegetable Balm',
   slug: 'mv-balm',
   description: 'Luxury nutrient-rich balm with Confidence collagen. 50g. Multi-purpose skin healing.',
+  descriptionJa: 'Confidenceコラーゲン配合のラグジュアリーバウム。50g。マルチユーススキンケア。',
   price: 13.50,
   currency: 'USD',
   sku: 'MV-BAL-050',
@@ -478,9 +496,11 @@ const mvBalm: ProductData = {
 const mvSoap: ProductData = {
   id: 'mv-soap-100g',
   name: 'マザベジ石鹸',
+  nameJa: 'マザベジ石鹸',
   fullName: 'Mother Vegetable Soap',
   slug: 'mv-soap',
   description: 'Handcrafted green nutrient-rich soap with Confidence collagen. 100g. Deep cleansing with skin care.',
+  descriptionJa: 'Confidenceコラーゲン配合の手作り石鹸。100g。洗浄しながらスキンケア。',
   price: 13.50,
   currency: 'USD',
   sku: 'MV-SOP-100',

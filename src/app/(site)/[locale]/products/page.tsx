@@ -123,9 +123,14 @@ function ProductCard({
   locale: string;
   t: (en: string, ja: string, zh: string) => string;
 }) {
+  const isJa = locale === 'ja';
   const priceJpy = product.price
     ? `\u00a5${Math.round(product.price * 150).toLocaleString()}`
     : '';
+  const priceMvt = `${Math.round(product.price / 9)} MVT`;
+
+  const displayName = isJa && product.nameJa ? product.nameJa : product.name;
+  const displayDescription = isJa && product.descriptionJa ? product.descriptionJa : product.description;
 
   return (
     <Link
@@ -152,20 +157,33 @@ function ProductCard({
       {/* Info */}
       <div className="p-5">
         <h2 className="text-white text-lg font-bold mb-2 group-hover:text-[#25C760] transition-colors duration-300">
-          {product.name}
+          {displayName}
         </h2>
         <p className="text-gray-400 text-sm mb-3 line-clamp-2">
-          {product.description}
+          {displayDescription}
         </p>
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-[#25C760] font-bold text-base">
-              USD {product.price.toFixed(2)}
-            </span>
-            {priceJpy && (
-              <span className="text-gray-500 text-sm ml-2">
-                ({priceJpy})
-              </span>
+            {isJa ? (
+              <>
+                <span className="text-[#25C760] font-bold text-base">
+                  {priceJpy}
+                </span>
+                <span className="text-gray-500 text-sm ml-2">
+                  / {priceMvt}
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="text-[#25C760] font-bold text-base">
+                  USD {product.price.toFixed(2)}
+                </span>
+                {priceJpy && (
+                  <span className="text-gray-500 text-sm ml-2">
+                    ({priceJpy})
+                  </span>
+                )}
+              </>
             )}
           </div>
           <span className="text-[#25C760] text-sm font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-300">

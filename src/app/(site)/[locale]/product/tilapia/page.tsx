@@ -64,13 +64,21 @@ function getTilapiaProduct(locale: string): SimpleProductPageData {
     },
     functionSection: {
       subtitle: isJa ? 'マザベジフィッシュ-イズミ鯛' : 'MV Fish - Izumi Tai',
-      circles: [
-        { name: 'Omega-3 DHA/EPA', detail: 'Fatty Acids' },
-        { name: 'Natural Protein', detail: 'Fish Protein' },
-        { name: 'Vitamin D', detail: 'Sunshine Vit' },
-        { name: 'Vitamin B12', detail: 'Essential B' },
-        { name: 'Zinc & Iron', detail: 'Minerals' },
-      ],
+      circles: isJa
+        ? [
+            { name: 'オメガ3 DHA/EPA', detail: 'オメガ3 DHA/EPA' },
+            { name: '天然タンパク質', detail: '天然タンパク質' },
+            { name: 'ビタミンD', detail: 'ビタミンD' },
+            { name: 'ビタミンB12', detail: 'ビタミンB12' },
+            { name: '亜鉛・鉄', detail: '亜鉛・鉄' },
+          ]
+        : [
+            { name: 'Omega-3 DHA/EPA', detail: 'Omega-3 DHA/EPA' },
+            { name: 'Natural Protein', detail: 'Natural Protein' },
+            { name: 'Vitamin D', detail: 'Vitamin D' },
+            { name: 'Vitamin B12', detail: 'Vitamin B12' },
+            { name: 'Zinc & Iron', detail: 'Zinc & Iron' },
+          ],
       benefits: isJa
         ? [
             { title: '子ども', items: ['高タンパクで成長をサポート', '骨の成長をサポート', '免疫力の向上', 'DHAが学習能力を向上', '偏食でも栄養バランスを確保'] },

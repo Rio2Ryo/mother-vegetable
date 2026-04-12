@@ -64,13 +64,21 @@ function getMvSoySauceProduct(locale: string): SimpleProductPageData {
     },
     functionSection: {
       subtitle: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
-      circles: [
-        { name: 'Fermented Soybeans', detail: 'Base' },
-        { name: 'Wheat', detail: 'Grain' },
-        { name: 'Sea Salt', detail: 'Natural Salt' },
-        { name: 'Natural Enzymes', detail: 'Fermented' },
-        { name: 'Amino Acids', detail: 'Umami' },
-      ],
+      circles: isJa
+        ? [
+            { name: '発酵大豆', detail: '発酵大豆' },
+            { name: '小麦', detail: '小麦' },
+            { name: '海塩', detail: '海塩' },
+            { name: '天然酵素', detail: '天然酵素' },
+            { name: 'アミノ酸', detail: 'アミノ酸' },
+          ]
+        : [
+            { name: 'Fermented Soybeans', detail: 'Fermented Soybeans' },
+            { name: 'Wheat', detail: 'Wheat' },
+            { name: 'Sea Salt', detail: 'Sea Salt' },
+            { name: 'Natural Enzymes', detail: 'Natural Enzymes' },
+            { name: 'Amino Acids', detail: 'Amino Acids' },
+          ],
       benefits: isJa
         ? [
             { title: '子ども', items: ['栄養豊富な調味料で偏食対策', '免疫力の向上', '食欲増進・食事が楽しくなる', '鉄分・亜鉛で成長をサポート', '消化を助ける発酵食品'] },
