@@ -100,71 +100,27 @@ function getForeverProduct(locale: string): ProductPageData {
       subtitle: 'Forever',
       method: isJa ? '加える / 混ぜる' : 'Add / Mix In',
       videoUrl: '/Images/Assets/homepage/product/food_video.mov',
-      circles: [
-        { name: 'Essential Fatty Acids', detail: '9 types' },
-        { name: 'Amino Acids', detail: '10 types' },
-        { name: 'Vital Vitamins', detail: '18 types' },
-        { name: 'Key Minerals For Balance', detail: '3 types' },
-        { name: 'Other Functional Ingredients', detail: '9 types' },
+      circles: [],
+      ingredientInfo: [
+        { label: isJa ? 'エネルギー' : 'Energy', value: '398kcal' },
+        { label: isJa ? 'たんぱく質' : 'Protein', value: '65g' },
+        { label: isJa ? '脂質' : 'Fat', value: '6.5g' },
+        { label: isJa ? '炭水化物' : 'Carbohydrates', value: '20g' },
+        { label: isJa ? 'ミネラル' : 'Minerals', value: '8g' },
       ],
-      summary: {
-        total: '48 Nutrients',
-        description:
-          'Potassium, sodium, magnesium, calcium, phosphorus, iron, manganese, zinc, copper, Vitamin A, B1, B2, B3, B5, B6, B9, C, E, K, tryptophan, threonine, leucine, isoleucine, lysine, methionine, phenylalanine, valine, histidine, arginine, cystine, tyrosine, alanine, aspartic acid, glutamic acid, serine, glycine, proline, saturated fatty acids, omega-3 fatty acids, omega-6 fatty acids, C-phycocyanin, chlorophyll a, total carotenoids, nucleic acids, spirulan, glycogen-like polysaccharides, β-glucan-like polysaccharides, cellulose.',
-      },
-      benefits: isJa
-        ? [
-            {
-              title: '犬',
-              image: '/Images/Assets/homepage/foodFunction/dog.png',
-              items: [
-                '涙やけの軽減',
-                '排泄臭の改善',
-                '食欲増進',
-                '消化の健康をサポート',
-                '深い睡眠を促進',
-                '体臭の軽減',
-              ],
-            },
-            {
-              title: '猫',
-              image: '/Images/Assets/homepage/foodFunction/cat.png',
-              items: [
-                '涙やけの軽減',
-                '排泄臭の改善',
-                '食欲増進',
-                '消化の健康をサポート',
-                '深い睡眠を促進',
-                '体臭の軽減',
-              ],
-            },
-          ]
-        : [
-            {
-              title: 'Dog',
-              image: '/Images/Assets/homepage/foodFunction/dog.png',
-              items: [
-                'Reduces tear stains',
-                'Improves waste odor',
-                'Increases appetite',
-                'Supports digestive health',
-                'Promotes deep sleep',
-                'Reduces body odor',
-              ],
-            },
-            {
-              title: 'Cat',
-              image: '/Images/Assets/homepage/foodFunction/cat.png',
-              items: [
-                'Reduces tear stains',
-                'Improves waste odor',
-                'Increases appetite',
-                'Supports digestive health',
-                'Promotes deep sleep',
-                'Reduces body odor',
-              ],
-            },
-          ],
+      nutritionalDetails: [
+        { name: 'C-Phycocyanin', value: isJa ? '約16-20g' : 'approx. 16-20g' },
+        { name: isJa ? 'バリン' : 'Valine', value: '3.51g' },
+        { name: isJa ? 'グリシン' : 'Glycine', value: '3.10g' },
+        { name: isJa ? '食塩相当量' : 'Salt Equivalent', value: '1,050mg' },
+        { name: isJa ? 'マンガン' : 'Manganese', value: '1.9mg' },
+        { name: isJa ? 'ビタミンB6' : 'Vitamin B6', value: '0.36mg' },
+        { name: isJa ? 'トリプトファン' : 'Tryptophan', value: '0.93g' },
+        { name: isJa ? 'ヒスチジン' : 'Histidine', value: '1.09g' },
+        { name: isJa ? 'プロリン' : 'Proline', value: '2.38g' },
+        { name: isJa ? 'カリウム' : 'Potassium', value: '1,410mg' },
+      ],
+      benefits: [],
     },
   };
 }
