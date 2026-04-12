@@ -1,11 +1,11 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextRequest } from 'next/server';
 
-const SYSTEM_PROMPT_EN = `You are Mother Vegetable's customer support assistant. Answer questions about products (Achieve for body wellness, Confidence for skin care, Forever for pets), pricing ($36.70 each), shipping (free worldwide), and usage. Achieve is a food supplement with 48 nutrients — add one stick to your drink or meal. Confidence is a certified quasi-drug cosmetic — apply directly or mix into your cosmetics. Forever is a pet supplement — mix one stick into your pet's food. All products are certified by Japanese government agencies. Keep answers concise and helpful. If you cannot answer a question, direct the user to support@mothervegetable.com. Always end every reply with exactly this line on its own: "For further assistance, contact us at support@mothervegetable.com"`;
+const SYSTEM_PROMPT_EN = `You are Mother Vegetable's customer support assistant. Answer questions about products (Achieve for body wellness, Confidence for skin care), pricing ($36.70 each), shipping (free worldwide), and usage. Achieve is a food supplement with 48 nutrients — add one stick to your drink or meal. Confidence is a certified quasi-drug cosmetic — apply directly or mix into your cosmetics. All products are certified by Japanese government agencies. Keep answers concise and helpful. If you cannot answer a question, direct the user to support@mothervegetable.com. Always end every reply with exactly this line on its own: "For further assistance, contact us at support@mothervegetable.com"`;
 
-const SYSTEM_PROMPT_JA = `あなたはマザーベジタブルのカスタマーサポートアシスタントです。製品（身体のためのAchieve、肌のためのConfidence、ペットのためのForever）、価格（各$36.70）、配送（全世界送料無料）、使い方についての質問にお答えください。Achieveは48種の栄養素を含む食品サプリメントです。スティック1本をお飲み物やお食事に加えてください。Confidenceは医薬部外品認定のコスメです。直接塗るか化粧品に混ぜてください。Foreverはペット用サプリメントです。スティック1本をペットのフードに混ぜてください。すべての製品は日本の政府機関により認定されています。簡潔で分かりやすい回答をしてください。お答えできない場合は、support@mothervegetable.comへご案内ください。必ず毎回の返答の最後に次の一行を追加してください: 「その他のご質問は support@mothervegetable.com までお問い合わせください」`;
+const SYSTEM_PROMPT_JA = `あなたはマザーベジタブルのカスタマーサポートアシスタントです。製品（身体のためのAchieve、肌のためのConfidence）、価格（各$36.70）、配送（全世界送料無料）、使い方についての質問にお答えください。Achieveは48種の栄養素を含む食品サプリメントです。スティック1本をお飲み物やお食事に加えてください。Confidenceは医薬部外品認定のコスメです。直接塗るか化粧品に混ぜてください。すべての製品は日本の政府機関により認定されています。簡潔で分かりやすい回答をしてください。お答えできない場合は、support@mothervegetable.comへご案内ください。必ず毎回の返答の最後に次の一行を追加してください: 「その他のご質問は support@mothervegetable.com までお問い合わせください」`;
 
-const SYSTEM_PROMPT_ZH = `你是Mother Vegetable的客服助手。请回答关于产品（Achieve身体保健、Confidence护肤、Forever宠物保健）、价格（每件$36.70）、配送（全球免邮）和使用方法的问题。Achieve是含有48种营养素的食品补充剂——每天一条加入饮品或餐食中。Confidence是经认证的准药妆——直接涂抹或混入化妆品中使用。Forever是宠物补充剂——每天一条混入宠物食物中。所有产品均经日本政府机构认证。请给出简洁实用的回答。如无法回答，请引导用户联系support@mothervegetable.com。每次回复末尾必须附上这一行："如需进一步帮助，请联系 support@mothervegetable.com"`;
+const SYSTEM_PROMPT_ZH = `你是Mother Vegetable的客服助手。请回答关于产品（Achieve身体保健、Confidence护肤）、价格（每件$36.70）、配送（全球免邮）和使用方法的问题。Achieve是含有48种营养素的食品补充剂——每天一条加入饮品或餐食中。Confidence是经认证的准药妆——直接涂抹或混入化妆品中使用。所有产品均经日本政府机构认证。请给出简洁实用的回答。如无法回答，请引导用户联系support@mothervegetable.com。每次回复末尾必须附上这一行："如需进一步帮助，请联系 support@mothervegetable.com"`;
 
 function getSystemPrompt(locale: string): string {
   if (locale === 'ja') return SYSTEM_PROMPT_JA;
@@ -38,16 +38,10 @@ const DEMO_RESPONSES: DemoEntry[] = [
     zh: `Confidence是我们经认证的准药妆护肤品，采用天然深海矿物配方。\n\n使用方法：直接涂抹于皮肤或混入现有化妆品中。\n\n价格：每支 $36.70\n\n如需进一步帮助，请联系 support@mothervegetable.com`,
   },
   {
-    keywords: /forever|pet|宠物/i,
-    en: `Forever is our supplement specially formulated for pets, providing essential nutrients from deep-sea minerals.\n\nHow to use: Mix one stick into your pet's food daily.\n\nPrice: $36.70 per box (30 sticks).\n\nFor further assistance, contact us at support@mothervegetable.com`,
-    ja: `Foreverは、深海ミネラル由来の必須栄養素をペットに届けるために開発されたサプリメントです。\n\n使い方：1日1スティックをペットのフードに混ぜてください。\n\n価格：1箱（30スティック入り）$36.70\n\nその他のご質問は support@mothervegetable.com までお問い合わせください`,
-    zh: `Forever是我们专为宠物研发的补充剂，提供源自深海矿物的必需营养素。\n\n使用方法：每天将一条混入宠物食物中。\n\n价格：每盒（30条）$36.70\n\n如需进一步帮助，请联系 support@mothervegetable.com`,
-  },
-  {
-    keywords: /price|cost|how much|值段|価格|いくら|价格|多少钱/i,
-    en: `All Mother Vegetable products are priced at $36.70 each:\n\n• Achieve (food supplement) — $36.70\n• Confidence (skin care) — $36.70\n• Forever (pet supplement) — $36.70\n\nShipping is free worldwide!\n\nFor further assistance, contact us at support@mothervegetable.com`,
-    ja: `マザーベジタブル製品はすべて各$36.70です：\n\n• Achieve（食品サプリメント）— $36.70\n• Confidence（スキンケア）— $36.70\n• Forever（ペット用サプリメント）— $36.70\n\n全世界送料無料です！\n\nその他のご質問は support@mothervegetable.com までお問い合わせください`,
-    zh: `Mother Vegetable所有产品均为每件$36.70：\n\n• Achieve（食品补充剂）— $36.70\n• Confidence（护肤品）— $36.70\n• Forever（宠物补充剂）— $36.70\n\n全球免邮！\n\n如需进一步帮助，请联系 support@mothervegetable.com`,
+    keywords: /price|cost|how much|値段|価格|いくら|价格|多少钱/i,
+    en: `Mother Vegetable product prices:\n\n• Achieve (food supplement) — $36.70\n• Confidence (skin care) — $36.70\n\nWe also offer MV Fish, MV Salt, MV Soy Sauce, MV Toner, MV Balm, and MV Soap at $13.50 each.\n\nShipping is free worldwide!\n\nFor further assistance, contact us at support@mothervegetable.com`,
+    ja: `マザーベジタブル製品の価格：\n\n• Achieve（食品サプリメント）— $36.70\n• Confidence（スキンケア）— $36.70\n\nその他、マザベジ塩・醤油・化粧水・バウム・石鹸は各$13.50です。\n\n全世界送料無料です！\n\nその他のご質問は support@mothervegetable.com までお問い合わせください`,
+    zh: `Mother Vegetable产品价格：\n\n• Achieve（食品补充剂）— $36.70\n• Confidence（护肤品）— $36.70\n\n另有MV盐、MV酱油、MV化妆水、MV润肤膏、MV香皂，各$13.50。\n\n全球免邮！\n\n如需进一步帮助，请联系 support@mothervegetable.com`,
   },
   {
     keywords: /ship|deliver|送料|配送|届|运费|配送|快递/i,
@@ -57,15 +51,15 @@ const DEMO_RESPONSES: DemoEntry[] = [
   },
   {
     keywords: /how to use|usage|使い方|使用方法|怎么用|用法/i,
-    en: `Here's how to use each product:\n\n• Achieve: Add one stick to your drink or meal daily.\n• Confidence: Apply directly to skin or mix into your cosmetics.\n• Forever: Mix one stick into your pet's food daily.\n\nFor further assistance, contact us at support@mothervegetable.com`,
-    ja: `各製品の使い方：\n\n• Achieve：1日1スティックをお飲み物やお食事に加えてください。\n• Confidence：直接お肌に塗るか、化粧品に混ぜてください。\n• Forever：1日1スティックをペットのフードに混ぜてください。\n\nその他のご質問は support@mothervegetable.com までお問い合わせください`,
-    zh: `各产品使用方法：\n\n• Achieve：每天一条加入饮品或餐食中。\n• Confidence：直接涂抹于皮肤或混入化妆品中。\n• Forever：每天一条混入宠物食物中。\n\n如需进一步帮助，请联系 support@mothervegetable.com`,
+    en: `Here's how to use each product:\n\n• Achieve: Add one stick to your drink or meal daily.\n• Confidence: Apply directly to skin or mix into your cosmetics.\n\nFor further assistance, contact us at support@mothervegetable.com`,
+    ja: `各製品の使い方：\n\n• Achieve：1日1スティックをお飲み物やお食事に加えてください。\n• Confidence：直接お肌に塗るか、化粧品に混ぜてください。\n\nその他のご質問は support@mothervegetable.com までお問い合わせください`,
+    zh: `各产品使用方法：\n\n• Achieve：每天一条加入饮品或餐食中。\n• Confidence：直接涂抹于皮肤或混入化妆品中。\n\n如需进一步帮助，请联系 support@mothervegetable.com`,
   },
   {
     keywords: /product|商品|製品|产品/i,
-    en: `Mother Vegetable offers three products, all certified by Japanese government agencies:\n\n1. Achieve — A food supplement with 48 nutrients for body wellness ($36.70)\n2. Confidence — A certified quasi-drug cosmetic for skin care ($36.70)\n3. Forever — A pet supplement for your furry friends ($36.70)\n\nAll products are derived from Earth's 3.5 billion-year-old deep-sea life force.\n\nFor further assistance, contact us at support@mothervegetable.com`,
-    ja: `マザーベジタブルは、日本の政府機関認定の3つの製品をご提供しています：\n\n1. Achieve — 48種の栄養素を含む食品サプリメント（$36.70）\n2. Confidence — 医薬部外品認定のスキンケアコスメ（$36.70）\n3. Forever — ペット用サプリメント（$36.70）\n\nすべての製品は35億年前の深海の生命力から生まれました。\n\nその他のご質問は support@mothervegetable.com までお問い合わせください`,
-    zh: `Mother Vegetable提供三款产品，均经日本政府机构认证：\n\n1. Achieve — 含48种营养素的食品补充剂（$36.70）\n2. Confidence — 经认证的准药妆护肤品（$36.70）\n3. Forever — 宠物补充剂（$36.70）\n\n所有产品源自地球35亿年前的深海生命力。\n\n如需进一步帮助，请联系 support@mothervegetable.com`,
+    en: `Mother Vegetable offers a range of products, all certified by Japanese government agencies:\n\n1. Achieve — A food supplement with 48 nutrients for body wellness ($36.70)\n2. Confidence — A certified quasi-drug cosmetic for skin care ($36.70)\n\nWe also offer MV Fish (Izumi Tai), MV Salt, MV Soy Sauce, MV Toner, MV Balm, and MV Soap.\n\nAll products are derived from Earth's 3.5 billion-year-old deep-sea life force.\n\nFor further assistance, contact us at support@mothervegetable.com`,
+    ja: `マザーベジタブルは、日本の政府機関認定の製品をご提供しています：\n\n1. Achieve — 48種の栄養素を含む食品サプリメント（$36.70）\n2. Confidence — 医薬部外品認定のスキンケアコスメ（$36.70）\n\nその他、マザベジフィッシュ・塩・醤油・化粧水・バウム・石鹸もございます。\n\nすべての製品は35億年前の深海の生命力から生まれました。\n\nその他のご質問は support@mothervegetable.com までお問い合わせください`,
+    zh: `Mother Vegetable提供多款产品，均经日本政府机构认证：\n\n1. Achieve — 含48种营养素的食品补充剂（$36.70）\n2. Confidence — 经认证的准药妆护肤品（$36.70）\n\n另有MV鱼、MV盐、MV酱油、MV化妆水、MV润肤膏、MV香皂。\n\n所有产品源自地球35亿年前的深海生命力。\n\n如需进一步帮助，请联系 support@mothervegetable.com`,
   },
   {
     keywords: /instructor|インストラクター|讲师/i,
@@ -75,11 +69,11 @@ const DEMO_RESPONSES: DemoEntry[] = [
   },
 ];
 
-const DEFAULT_RESPONSE_EN = `Thank you for your message! Here's what I can help you with:\n\n• Product information (Achieve, Confidence, Forever)\n• Pricing ($36.70 each)\n• Shipping (free worldwide)\n• How to use our products\n• Instructor program\n\nFeel free to ask about any of these topics!\n\nFor further assistance, contact us at support@mothervegetable.com`;
+const DEFAULT_RESPONSE_EN = `Thank you for your message! Here's what I can help you with:\n\n• Product information (Achieve, Confidence, and more)\n• Pricing\n• Shipping (free worldwide)\n• How to use our products\n• Instructor program\n\nFeel free to ask about any of these topics!\n\nFor further assistance, contact us at support@mothervegetable.com`;
 
-const DEFAULT_RESPONSE_JA = `お問い合わせありがとうございます！以下についてご案内できます：\n\n• 製品情報（Achieve、Confidence、Forever）\n• 価格（各$36.70）\n• 配送（全世界送料無料）\n• 製品の使い方\n• インストラクタープログラム\n\nお気軽にご質問ください！\n\nその他のご質問は support@mothervegetable.com までお問い合わせください`;
+const DEFAULT_RESPONSE_JA = `お問い合わせありがとうございます！以下についてご案内できます：\n\n• 製品情報（Achieve、Confidenceなど）\n• 価格\n• 配送（全世界送料無料）\n• 製品の使い方\n• インストラクタープログラム\n\nお気軽にご質問ください！\n\nその他のご質問は support@mothervegetable.com までお問い合わせください`;
 
-const DEFAULT_RESPONSE_ZH = `感谢您的咨询！我可以帮您了解以下内容：\n\n• 产品信息（Achieve、Confidence、Forever）\n• 价格（每件$36.70）\n• 配送（全球免邮）\n• 产品使用方法\n• 讲师计划\n\n请随时提问！\n\n如需进一步帮助，请联系 support@mothervegetable.com`;
+const DEFAULT_RESPONSE_ZH = `感谢您的咨询！我可以帮您了解以下内容：\n\n• 产品信息（Achieve、Confidence等）\n• 价格\n• 配送（全球免邮）\n• 产品使用方法\n• 讲师计划\n\n请随时提问！\n\n如需进一步帮助，请联系 support@mothervegetable.com`;
 
 function getDemoResponse(userMessage: string, locale: string): string {
   const lower = userMessage.toLowerCase();

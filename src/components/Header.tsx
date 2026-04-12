@@ -38,11 +38,15 @@ export default function Header() {
 
   // Zustand store for instructor auth (separate system)
   const currentInstructor = useAffiliateStore((s) => s.currentInstructor);
+  const instructorToken = useAffiliateStore((s) => s.instructorToken);
   const instructorLogout = useAffiliateStore((s) => s.logout);
 
   const isUserLoggedIn = mounted && status === 'authenticated' && !!session?.user;
   const isInstructorLoggedIn = mounted && !!currentInstructor;
   const isLoggedIn = isUserLoggedIn || isInstructorLoggedIn;
+
+  // Instructor-registered check: show instructor menu if token or currentInstructor exists (no active login required)
+  const isRegisteredInstructor = mounted && (!!instructorToken || !!currentInstructor);
 
   const displayName = isUserLoggedIn
     ? (session?.user?.name || session?.user?.email || '')
@@ -236,7 +240,7 @@ export default function Header() {
                     } static mt-0 ml-4 lg:mt-0 lg:ml-0`}
                   >
                     <ul className="lg:bg-black lg:shadow-[0_8px_20px_rgba(0,0,0,0.3)] lg:rounded-lg lg:border lg:border-[#25C760] lg:min-w-[180px] list-none p-0 m-0">
-                      {['achieve', 'confidence', 'forever'].map((p) => (
+                      {['achieve', 'confidence'].map((p) => (
                         <li key={p}>
                           <Link
                             href={`/${p}-howto`}
@@ -261,17 +265,42 @@ export default function Header() {
                     {t('news')}
                   </Link>
                 </li>
-                {/* Certified Instructor */}
-                <li className="max-lg:w-full">
-                  <Link
-                    href="/mv/certifiedInstructor"
-                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
-                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {t('certifiedInstructor')}
-                  </Link>
-                </li>
+                {/* Instructor-specific or regular menu items */}
+                {isRegisteredInstructor ? (
+                  <>
+                    <li className="max-lg:w-full">
+                      <Link
+                        href="/instructor/dashboard"
+                        className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
+                        style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {t('dashboard')}
+                      </Link>
+                    </li>
+                    <li className="max-lg:w-full">
+                      <Link
+                        href="/mv/certifiedInstructor"
+                        className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
+                        style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {t('certifiedInstructor')}
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <li className="max-lg:w-full">
+                    <Link
+                      href="/mv/certifiedInstructor"
+                      className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
+                      style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {t('certifiedInstructor')}
+                    </Link>
+                  </li>
+                )}
               </ul>
             </nav>
 

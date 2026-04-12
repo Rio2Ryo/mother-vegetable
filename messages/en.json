@@ -20,7 +20,7 @@
     "about": "About",
     "myAccount": "My Account",
     "news": "News",
-    "allProducts": "All Products"
+    "allProducts": "Product List"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -52,24 +52,12 @@
         "Helps improve dark spots, acne, odor, and skin damage."
       ],
       "howToUse": "Apply directly or mix into your current cosmetics."
-    },
-    "forever": {
-      "name": "Forever",
-      "subtitle": "for Pet",
-      "taglineJp": "",
-      "tagline": "to extend your pet's healthy life.",
-      "benefits": [
-        "Supports tear stain reduction and gut health.",
-        "Helps reduce body and waste odors, boosts appetite."
-      ],
-      "howToUse": "Simply mix one stick into your pet's food."
     }
   },
   "trust": {
     "title": "Our Trust",
     "achieveDesc": "certified human grade food by Ministry of Health, Labour and Welfare (MHLW), Japan",
-    "confidenceDesc": "certified cosmetic \"The Japanese Standards of Quasi-Drug Ingredients (JSQI)\" by MHLW, Japan",
-    "foreverDesc": "certified pet grade food by Ministry of Agriculture, Forestry and Fisheries (MAFF), Japan"
+    "confidenceDesc": "certified cosmetic \"The Japanese Standards of Quasi-Drug Ingredients (JSQI)\" by MHLW, Japan"
   },
   "foodFunction": {
     "title": "Food Function",

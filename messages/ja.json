@@ -20,7 +20,7 @@
     "about": "会社概要",
     "myAccount": "マイページ",
     "news": "ニュース",
-    "allProducts": "全製品"
+    "allProducts": "製品一覧"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -52,24 +52,12 @@
         "シミ、ニキビ、臭い、肌ダメージの改善をサポート。"
       ],
       "howToUse": "直接塗るか、お使いの化粧品に混ぜてご使用ください。"
-    },
-    "forever": {
-      "name": "Forever",
-      "subtitle": "ペットのために",
-      "taglineJp": "",
-      "tagline": "ペットの健康寿命を延ばす。",
-      "benefits": [
-        "涙やけの軽減と腸の健康をサポート。",
-        "体臭・排泄臭の軽減、食欲増進。"
-      ],
-      "howToUse": "スティック1本をペットのフードに混ぜるだけ。"
     }
   },
   "trust": {
     "title": "Our Trust",
     "achieveDesc": "厚生労働省によりヒューマングレード食品認定",
-    "confidenceDesc": "厚生労働省により「日本薬局方医薬部外品原料規格（JSQI）」認定コスメ",
-    "foreverDesc": "農林水産省によりペットフードグレード認定"
+    "confidenceDesc": "厚生労働省により「日本薬局方医薬部外品原料規格（JSQI）」認定コスメ"
   },
   "foodFunction": {
     "title": "Food Function",

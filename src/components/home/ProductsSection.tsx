@@ -36,8 +36,8 @@ function getProducts(isJa: boolean) {
       features: isJa
         ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と']
         : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones'],
-      howToUseLabel: isJa ? 'Achieveの料理/ドリンク一覧' : 'Achieve Recipes & Drinks',
-      howToLink: '/achieve-howto',
+      howToUseLabel: '',
+      howToLink: '',
       productLink: '/product/achieve',
       priceUsd: '$36.70',
       priceJpy: '¥5,500',
@@ -54,8 +54,8 @@ function getProducts(isJa: boolean) {
       features: isJa
         ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用']
         : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics'],
-      howToUseLabel: isJa ? 'Confidenceの混ぜ方/使い方一覧' : 'Confidence Mixing & Usage Guide',
-      howToLink: '/confidence-howto',
+      howToUseLabel: '',
+      howToLink: '',
       productLink: '/product/confidence',
       priceUsd: '$36.70',
       priceJpy: '¥5,500',
@@ -174,7 +174,7 @@ function getProducts(isJa: boolean) {
 
 type Category = 'all' | 'food' | 'cosmetic';
 
-const FOOD_IDS = new Set(['achieve', 'tilapia', 'mv-salt', 'mv-soy-sauce', 'forever']);
+const FOOD_IDS = new Set(['achieve', 'tilapia', 'mv-salt', 'mv-soy-sauce']);
 const COSMETIC_IDS = new Set(['confidence', 'mv-toner', 'mv-balm', 'mv-soap']);
 
 export default function ProductsSection() {
@@ -302,14 +302,16 @@ export default function ProductsSection() {
                 </div>
 
                 {/* How to use */}
-                <div className="mb-2 md:mt-6 md:mb-2">
-                  <Link
-                    href={product.howToLink}
-                    className="text-green-400 font-semibold text-xs md:text-xl mb-1 hover:underline block text-center"
-                  >
-                    {product.howToUseLabel}
-                  </Link>
-                </div>
+                {product.howToUseLabel && (
+                  <div className="mb-2 md:mt-6 md:mb-2">
+                    <Link
+                      href={product.howToLink}
+                      className="text-green-400 font-semibold text-xs md:text-xl mb-1 hover:underline block text-center"
+                    >
+                      {product.howToUseLabel}
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
 

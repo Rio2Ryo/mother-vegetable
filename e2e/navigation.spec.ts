@@ -73,9 +73,6 @@ test.describe('Navigation', () => {
     const confidenceLink = page.locator('header a[href*="/product/confidence"]');
     await expect(confidenceLink).toBeVisible();
 
-    // Forever should NOT be in dropdown
-    const foreverLink = page.locator('header a[href*="/product/forever"]');
-    await expect(foreverLink).toHaveCount(0);
   });
 
   test('Products dropdown navigates to product page', async ({ page }) => {
@@ -116,9 +113,6 @@ test.describe('Navigation', () => {
     await expect(page.locator('header a[href*="/achieve-howto"]')).toBeVisible();
     await expect(page.locator('header a[href*="/confidence-howto"]')).toBeVisible();
 
-    // Forever howto should NOT be in dropdown
-    const foreverHowto = page.locator('header a[href*="/forever-howto"]');
-    await expect(foreverHowto).toHaveCount(0);
   });
 
   test('Healthcare link navigates correctly', async ({ page }) => {

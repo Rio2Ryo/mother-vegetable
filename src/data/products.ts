@@ -244,74 +244,6 @@ const confidence: ProductData = {
 };
 
 // ---------------------------------------------------------------------------
-// Forever
-// ---------------------------------------------------------------------------
-
-const forever: ProductData = {
-  id: "forever-capsule-30",
-  name: "Forever",
-  nameJa: "フォーエバー",
-  fullName: "Mother Vegetable Forever",
-  slug: "forever",
-  description: "Extend your pet's healthy life.",
-  descriptionJa: "ペットの健康寿命を延ばします。",
-  price: 36.70,
-  currency: "USD",
-  sku: "MV-FOR-030",
-  category: "pet",
-  images: ["/cdn/products_forever_10001.png"],
-  galleryImages: [
-    { url: "/cdn/products_forever_10001.png", alt: "Forever pet supplement packaging with vibrant green design and stick packets" },
-    { url: "/cdn/products_forever_10001.png", alt: "Happy dog eating food mixed with Forever plant-based nutrient powder" },
-    { url: "/cdn/products_forever_10001.png", alt: "Close-up of Forever powder granules showing natural green superfood blend" },
-    { url: "/cdn/products_forever_10001.png", alt: "Forever supplement next to premium pet food bowls and fresh treats" },
-    { url: "/cdn/products_forever_10001.png", alt: "Healthy dog and cat with shiny coats enjoying vitality from Forever supplement" },
-  ],
-  thumbnails: thumbnails("products_forever", 10002, 10010),
-  videoUrls: videoRange("forever", 4),
-  mainVideoUrl: `${CDN_BASE}/products/forever/forever_video_1.mp4`,
-  benefits: [
-    "Extend your pet's healthy life with 48 different nutrients.",
-    "Supports digestion, coat health, and overall vitality for your pet.",
-  ],
-  taglineJp: "",
-  tagline: "to extend your pet's healthy life.",
-  subtitle: "for Pet",
-  howToUse:
-    "Simply mix one stick into your pet's food.",
-  howToLink: "/forever-howto",
-  inStock: true,
-  priceJpy: '¥5,500',
-  priceMvt: '10 MVT',
-  petItems: [
-    {
-      label: "Dog Treats",
-      image: "/Images/Assets/forever/mazekomu/dogTreats.png",
-    },
-    {
-      label: "Dog Water",
-      image: "/Images/Assets/forever/mazekomu/dogWater.png",
-    },
-    {
-      label: "Cat Treats",
-      image: "/Images/Assets/forever/mazekomu/catTreats.png",
-    },
-    {
-      label: "Cat Water",
-      image: "/Images/Assets/forever/mazekomu/catWater.png",
-    },
-    {
-      label: "Dry Food",
-      image: "/Images/Assets/forever/mazekomu/dryFood.png",
-    },
-    {
-      label: "Wet Food",
-      image: "/Images/Assets/forever/mazekomu/wetFood.png",
-    },
-  ],
-};
-
-// ---------------------------------------------------------------------------
 // Tilapia
 // ---------------------------------------------------------------------------
 
@@ -553,10 +485,10 @@ const mvSoap: ProductData = {
 // ---------------------------------------------------------------------------
 
 /** Active products shown on the site. */
-export const products: ProductData[] = [achieve, confidence, forever, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap];
+export const products: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap];
 
 /** All products including discontinued, for admin/order lookup. */
-export const allProducts: ProductData[] = [achieve, confidence, forever, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap];
+export const allProducts: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap];
 
 export function getProductBySlug(slug: string): ProductData | undefined {
   return allProducts.find((p) => p.slug === slug);

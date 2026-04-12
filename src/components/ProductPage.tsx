@@ -633,7 +633,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
               <div className="content-section">
                 <h4 className="section-title">{product.leftSection.title}</h4>
                 <Image
-                  src={`/Images/Assets/${product.id === 'achieve' ? 'achieve' : product.id === 'confidence' ? 'confidence' : 'forever'}/mazekomu/red_underline.png`}
+                  src={`/Images/Assets/${product.id === 'achieve' ? 'achieve' : 'confidence'}/mazekomu/red_underline.png`}
                   alt="Underline"
                   width={100}
                   height={10}
@@ -657,7 +657,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
               <div className="content-section mazekomu-content-section">
                 <h4 className="section-title section-title-center">{product.centerTitle}</h4>
                 <Image
-                  src={`/Images/Assets/${product.id === 'achieve' ? 'achieve' : product.id === 'confidence' ? 'confidence' : 'forever'}/mazekomu/red_underline.png`}
+                  src={`/Images/Assets/${product.id === 'achieve' ? 'achieve' : 'confidence'}/mazekomu/red_underline.png`}
                   alt="Underline"
                   width={100}
                   height={10}
@@ -683,7 +683,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
               <div className="content-section">
                 <h4 className="section-title">{product.rightSection.title}</h4>
                 <Image
-                  src={`/Images/Assets/${product.id === 'achieve' ? 'achieve' : product.id === 'confidence' ? 'confidence' : 'forever'}/mazekomu/red_underline.png`}
+                  src={`/Images/Assets/${product.id === 'achieve' ? 'achieve' : 'confidence'}/mazekomu/red_underline.png`}
                   alt="Underline"
                   width={100}
                   height={10}

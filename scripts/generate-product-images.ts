@@ -89,41 +89,6 @@ const productPrompts: ProductPrompts[] = [
   },
 
   // -----------------------------------------------------------------------
-  // Forever
-  // -----------------------------------------------------------------------
-  {
-    slug: "forever",
-    name: "Forever",
-    prompts: [
-      {
-        label: "Packaging shot",
-        prompt:
-          "Pet health supplement in vibrant green packaging with stick packets, placed next to a small paw-print bowl, warm studio lighting, pet product photography, 4k",
-      },
-      {
-        label: "Lifestyle / in-use shot",
-        prompt:
-          "Happy golden retriever eating from a bowl with green plant-based nutrient powder mixed in, bright kitchen background, pet lifestyle photography, 4k",
-      },
-      {
-        label: "Texture / ingredients close-up",
-        prompt:
-          "Green superfood powder being sprinkled from a stick packet onto premium dry pet food in a stainless steel bowl, macro detail, 4k",
-      },
-      {
-        label: "Complementary items",
-        prompt:
-          "Pet supplement packet next to a variety of premium pet treats, a water bowl, and a small toy, clean white background, product flat lay, 4k",
-      },
-      {
-        label: "Benefit visualization",
-        prompt:
-          "Healthy dog and cat sitting together, shiny glossy coats, bright eyes, park setting with green grass, representing pet vitality, 4k",
-      },
-    ],
-  },
-
-  // -----------------------------------------------------------------------
   // Tilapia (Izumi Tai)
   // -----------------------------------------------------------------------
   {

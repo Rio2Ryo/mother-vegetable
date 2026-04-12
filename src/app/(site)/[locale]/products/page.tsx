@@ -74,22 +74,32 @@ export default function ProductsListingPage() {
         </div>
       </section>
 
-      {/* Category Filter */}
+      {/* Category Tabs */}
       <section className="px-6 pb-8">
-        <div className="max-w-5xl mx-auto flex justify-center gap-3 flex-wrap">
-          {filterButtons.map((btn) => (
-            <button
-              key={btn.key}
-              onClick={() => setFilter(btn.key)}
-              className={`px-6 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 cursor-pointer ${
-                filter === btn.key
-                  ? 'bg-[#25C760] text-black border-[#25C760]'
-                  : 'bg-transparent text-[#25C760] border-[#25C760] hover:bg-[#25C760]/10'
-              }`}
-            >
-              {btn.label}
-            </button>
-          ))}
+        <div className="max-w-5xl mx-auto flex justify-center">
+          <div className="inline-flex border-b-2 border-[rgba(37,199,96,0.2)]">
+            {filterButtons.map((btn) => (
+              <button
+                key={btn.key}
+                onClick={() => setFilter(btn.key)}
+                className={`relative px-8 py-3 text-sm font-semibold transition-all duration-300 cursor-pointer bg-transparent border-none ${
+                  filter === btn.key
+                    ? 'text-[#25C760]'
+                    : 'text-gray-400 hover:text-[#25C760]/70'
+                }`}
+              >
+                {btn.label}
+                {/* Active tab indicator */}
+                <span
+                  className={`absolute bottom-[-2px] left-0 w-full h-[2px] transition-all duration-300 ${
+                    filter === btn.key
+                      ? 'bg-[#25C760] scale-x-100'
+                      : 'bg-transparent scale-x-0'
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -135,15 +145,35 @@ function ProductCard({
       href={`/product/${product.slug}`}
       className="group block border border-[rgba(37,199,96,0.3)] rounded-xl overflow-hidden bg-[rgba(37,199,96,0.02)] hover:bg-[rgba(37,199,96,0.08)] hover:border-[#25C760] transition-all duration-300 no-underline"
     >
-      {/* Image */}
+      {/* Image or Video */}
       <div className="relative w-full aspect-square bg-black/50 flex items-center justify-center p-4">
-        <Image
-          src={product.images[0] || '/Images/Assets/General/logo.png'}
-          alt={product.fullName}
-          width={300}
-          height={300}
-          className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300"
-        />
+        {product.slug === 'achieve' ? (
+          <video
+            src="/new_achieve_video.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+          />
+        ) : product.slug === 'confidence' ? (
+          <video
+            src="/new_confidence_video.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+          />
+        ) : (
+          <Image
+            src={product.images[0] || '/Images/Assets/General/logo.png'}
+            alt={product.fullName}
+            width={300}
+            height={300}
+            className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300"
+          />
+        )}
         {/* Category Badge */}
         <span
           className={`absolute top-3 right-3 px-3 py-1 text-xs font-bold rounded-full border ${getCategoryBadgeColor(product.category)}`}

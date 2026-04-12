@@ -106,7 +106,7 @@ test.describe('Homepage Content Regression', () => {
     await page.waitForTimeout(300);
   });
 
-  test('Products section has correct video URLs for achieve and confidence (no forever)', async ({ page }) => {
+  test('Products section has correct video URLs for achieve and confidence', async ({ page }) => {
     await scrollFullPage(page);
 
     const achieveVideo = page.locator('video[src*="new_achieve_video.mp4"]');
@@ -115,9 +115,6 @@ test.describe('Homepage Content Regression', () => {
     const confidenceVideo = page.locator('video[src*="new_confidence_video.mp4"]');
     await expect(confidenceVideo).toHaveCount(1);
 
-    // Forever should NOT exist
-    const foreverVideo = page.locator('video[src*="forever_video.mp4"]');
-    await expect(foreverVideo).toHaveCount(0);
   });
 
   test('Products section shows product type subtitles', async ({ page }) => {
@@ -141,7 +138,6 @@ test.describe('Homepage Content Regression', () => {
     await scrollFullPage(page);
     await expect(page.getByText('Our Trust')).toBeVisible();
 
-    // Should have trust items for Achieve and Confidence only (no Forever)
     const trustText = await page.locator('body').textContent();
     expect(trustText).toContain('Achieve');
     expect(trustText).toContain('Confidence');
@@ -213,17 +209,6 @@ test.describe('Product Page Content Regression', () => {
     });
   }
 
-  // Forever product page exists in data but is NOT linked from homepage or navigation
-  test('Forever product is not linked from homepage products section', async ({ page }) => {
-    await page.goto('/');
-    await waitForPageReady(page);
-    await scrollFullPage(page);
-
-    // The product listing section should NOT have a link to forever
-    const productSection = page.locator('#product-listing');
-    const foreverLink = productSection.locator('a[href*="forever"]');
-    await expect(foreverLink).toHaveCount(0);
-  });
 });
 
 /* ================================================================== */

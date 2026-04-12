@@ -69,17 +69,6 @@ const products = [
     inStock: true,
   },
   {
-    name: "Forever",
-    slug: "forever",
-    description: "Extend your pet's healthy life.",
-    price: 36.7,
-    currency: "USD",
-    images: JSON.stringify(["/cdn/products_forever_10001.png"]),
-    category: "food",
-    sku: "MV-FOR-030",
-    inStock: true,
-  },
-  {
     name: "Tilapia",
     slug: "tilapia",
     description:
