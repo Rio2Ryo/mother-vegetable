@@ -65,11 +65,11 @@ function getMvSaltProduct(locale: string): SimpleProductPageData {
     functionSection: {
       subtitle: isJa ? 'マザベジ塩' : 'MV Salt',
       circles: [
-        { name: 'Natural Minerals', detail: 'Fe, Zn, Mg' },
-        { name: 'Electrolytes', detail: 'Na, K balance' },
-        { name: 'Trace Elements', detail: 'Iodine, Se' },
-        { name: 'Amino Acids', detail: 'Umami boost' },
-        { name: 'Nutrient Blend', detail: '48 nutrients' },
+        { name: 'Sea Salt', detail: 'Natural Salt' },
+        { name: 'Iron', detail: 'Mineral' },
+        { name: 'Magnesium', detail: 'Mineral' },
+        { name: 'Potassium', detail: 'Mineral' },
+        { name: 'Calcium', detail: 'Mineral' },
       ],
       benefits: isJa
         ? [

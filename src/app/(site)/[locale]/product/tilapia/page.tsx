@@ -65,11 +65,11 @@ function getTilapiaProduct(locale: string): SimpleProductPageData {
     functionSection: {
       subtitle: isJa ? 'マザベジフィッシュ-イズミ鯛' : 'MV Fish - Izumi Tai',
       circles: [
-        { name: 'Omega-3 DHA/EPA', detail: 'Brain & Heart' },
-        { name: 'Complete Protein', detail: '20g per serving' },
-        { name: 'Vitamin D & B12', detail: 'Bone & Nerve' },
-        { name: 'Selenium & Phosphorus', detail: 'Antioxidant' },
-        { name: 'Nutrient Boost', detail: '48 nutrients' },
+        { name: 'Omega-3 DHA/EPA', detail: 'Fatty Acids' },
+        { name: 'Natural Protein', detail: 'Fish Protein' },
+        { name: 'Vitamin D', detail: 'Sunshine Vit' },
+        { name: 'Vitamin B12', detail: 'Essential B' },
+        { name: 'Zinc & Iron', detail: 'Minerals' },
       ],
       benefits: isJa
         ? [

@@ -207,9 +207,7 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
       <section className="border-t border-gray-800">
         <div className="max-w-4xl mx-auto px-4 py-10 md:py-14">
           <h2 className="text-lg font-bold text-[#25C760] mb-8 text-center uppercase tracking-wider">
-            {isJa
-              ? (product.category === 'cosmetic' ? '主な効果' : '主な栄養素')
-              : `Key ${product.category === 'cosmetic' ? 'Benefits' : 'Nutrients'}`}
+            {isJa ? '主な原材料' : 'Key Ingredients'}
           </h2>
           <div className="flex flex-wrap justify-center gap-5">
             {product.functionSection.circles.map((c, i) => (

@@ -61,11 +61,11 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
     functionSection: {
       subtitle: isJa ? 'マザベジ化粧水' : 'MV Toner',
       circles: [
-        { name: 'Skin Healing', detail: 'Confidence' },
-        { name: 'Anti-Aging', detail: 'Collagen' },
-        { name: 'Hydration', detail: 'Natural' },
-        { name: 'Brightening', detail: 'Vitamins' },
-        { name: 'Nutrients', detail: '48 types' },
+        { name: 'Hyaluronic Acid', detail: 'Hydration' },
+        { name: 'Collagen Extract', detail: 'Firmness' },
+        { name: 'Aloe Vera', detail: 'Soothing' },
+        { name: 'Vitamin C', detail: 'Brightening' },
+        { name: 'Green Tea Extract', detail: 'Antioxidant' },
       ],
       benefits: isJa
         ? [

@@ -61,11 +61,11 @@ function getMvBalmProduct(locale: string): SimpleProductPageData {
     functionSection: {
       subtitle: isJa ? 'マザベジバウム' : 'MV Balm',
       circles: [
-        { name: 'Skin Healing', detail: 'Confidence' },
-        { name: 'Intensive Repair', detail: 'Collagen' },
-        { name: 'Moisturizing', detail: 'Deep nourish' },
-        { name: 'Protection', detail: 'Barrier care' },
-        { name: 'Nutrients', detail: '48 types' },
+        { name: 'Shea Butter', detail: 'Moisturizer' },
+        { name: 'Beeswax', detail: 'Sealant' },
+        { name: 'Jojoba Oil', detail: 'Nourishing' },
+        { name: 'Vitamin E', detail: 'Antioxidant' },
+        { name: 'Coconut Oil', detail: 'Hydration' },
       ],
       benefits: isJa
         ? [

@@ -65,11 +65,11 @@ function getMvSoySauceProduct(locale: string): SimpleProductPageData {
     functionSection: {
       subtitle: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
       circles: [
-        { name: 'Umami Amino Acids', detail: 'Glutamic acid' },
-        { name: 'Fermented Enzymes', detail: 'Natural brew' },
-        { name: 'B Vitamins', detail: 'B1, B2, B6' },
-        { name: 'Antioxidants', detail: 'Polyphenols' },
-        { name: 'Nutrient Infusion', detail: '48 nutrients' },
+        { name: 'Fermented Soybeans', detail: 'Base' },
+        { name: 'Wheat', detail: 'Grain' },
+        { name: 'Sea Salt', detail: 'Natural Salt' },
+        { name: 'Natural Enzymes', detail: 'Fermented' },
+        { name: 'Amino Acids', detail: 'Umami' },
       ],
       benefits: isJa
         ? [

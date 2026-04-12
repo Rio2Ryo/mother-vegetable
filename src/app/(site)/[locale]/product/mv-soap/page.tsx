@@ -61,11 +61,11 @@ function getMvSoapProduct(locale: string): SimpleProductPageData {
     functionSection: {
       subtitle: isJa ? 'マザベジ石鹸' : 'MV Soap',
       circles: [
-        { name: 'Skin Healing', detail: 'Confidence' },
-        { name: 'Deep Cleanse', detail: 'Natural' },
-        { name: 'Anti-Aging', detail: 'Collagen' },
-        { name: 'Moisturizing', detail: 'Natural oils' },
-        { name: 'Nutrients', detail: '48 types' },
+        { name: 'Olive Oil', detail: 'Base Oil' },
+        { name: 'Coconut Oil', detail: 'Lather' },
+        { name: 'Shea Butter', detail: 'Moisturizer' },
+        { name: 'Glycerin', detail: 'Hydration' },
+        { name: 'Essential Oils', detail: 'Fragrance' },
       ],
       benefits: isJa
         ? [

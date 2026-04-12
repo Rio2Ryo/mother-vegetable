@@ -17,7 +17,6 @@ const langOptions = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
   const [howToOpen, setHowToOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -68,17 +67,8 @@ export default function Header() {
   }
 
   // Timeout refs for delayed dropdown close
-  const productsTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const howToTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const profileTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const openProducts = useCallback(() => {
-    if (productsTimeout.current) { clearTimeout(productsTimeout.current); productsTimeout.current = null; }
-    setProductsOpen(true);
-  }, []);
-  const closeProducts = useCallback(() => {
-    productsTimeout.current = setTimeout(() => setProductsOpen(false), 150);
-  }, []);
 
   const openHowTo = useCallback(() => {
     if (howToTimeout.current) { clearTimeout(howToTimeout.current); howToTimeout.current = null; }
@@ -115,7 +105,7 @@ export default function Header() {
           </Link>
 
           {/* Nav */}
-          <div className="flex items-center gap-5 max-lg:gap-[10px]">
+          <div className="flex items-center gap-4 lg:gap-5 max-lg:gap-3">
             <nav
               aria-label="Main navigation"
               className={`${
@@ -200,87 +190,32 @@ export default function Header() {
                 )}
               </div>
 
-              <ul className="flex flex-col lg:flex-row gap-[5px] lg:gap-[35px] list-none m-0 p-0 max-[600px]:pt-[25px] max-[600px]:relative max-[600px]:z-[1] max-[600px]:w-full">
+              <ul className="flex flex-col lg:flex-row gap-0 lg:gap-8 list-none m-0 p-0 max-lg:pt-4">
+                {/* Products */}
                 <li className="max-lg:w-full">
                   <Link
-                    href="/#food-function"
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
+                    href="/products"
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-3 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    {t('food')}
+                    {t('allProducts')}
                   </Link>
                 </li>
-                <li className="max-lg:w-full">
-                  <Link
-                    href="/#cosmetic-function"
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
-                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {t('cosmetic')}
-                  </Link>
-                </li>
-                <li
-                  className="relative group max-lg:w-full"
-                  onMouseEnter={openProducts}
-                  onMouseLeave={closeProducts}
-                >
-                  <button
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-[5px] bg-transparent border-none cursor-pointer py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
-                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
-                    onClick={() => setProductsOpen(!productsOpen)}
-                  >
-                    {t('products')}
-                    <svg
-                      className={`w-3 h-3 transition-transform duration-300 ml-[5px] ${productsOpen ? 'rotate-180' : ''}`}
-                      width="12"
-                      height="12"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                  <div
-                    className={`lg:absolute lg:top-full lg:left-0 lg:z-[1000] lg:pt-2 transition-all duration-300 ${
-                      productsOpen
-                        ? 'opacity-100 visible translate-y-0 pointer-events-auto'
-                        : 'lg:opacity-0 lg:invisible lg:-translate-y-[10px] lg:pointer-events-none'
-                    } static mt-2 ml-4 lg:mt-0 lg:ml-0`}
-                  >
-                    <ul className="lg:bg-black lg:shadow-[0_8px_20px_rgba(0,0,0,0.3)] lg:rounded-lg lg:border lg:border-[#25C760] lg:min-w-[180px] list-none p-0 m-0">
-                      {['achieve', 'confidence', 'forever'].map((p) => (
-                        <li key={p}>
-                          <Link
-                            href={`/product/${p}`}
-                            className="block px-2 py-2 text-white font-medium text-sm hover:bg-[#25C760] hover:text-white transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
-                            onClick={() => setMobileMenuOpen(false)}
-                          >
-                            {p.charAt(0).toUpperCase() + p.slice(1)}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
+                {/* How to Use */}
                 <li
                   className="relative group max-lg:w-full"
                   onMouseEnter={openHowTo}
                   onMouseLeave={closeHowTo}
                 >
                   <button
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-[5px] bg-transparent border-none cursor-pointer py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-1 bg-transparent border-none cursor-pointer py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-3 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setHowToOpen(!howToOpen)}
                   >
                     {t('howToUse')}
                     <svg
-                      className={`w-3 h-3 transition-transform duration-300 ml-[5px] ${howToOpen ? 'rotate-180' : ''}`}
+                      className={`w-3 h-3 transition-transform duration-300 ${howToOpen ? 'rotate-180' : ''}`}
                       width="12"
                       height="12"
                       fill="currentColor"
@@ -297,15 +232,15 @@ export default function Header() {
                     className={`lg:absolute lg:top-full lg:left-0 lg:z-[1000] lg:pt-2 transition-all duration-300 ${
                       howToOpen
                         ? 'opacity-100 visible translate-y-0 pointer-events-auto'
-                        : 'lg:opacity-0 lg:invisible lg:-translate-y-[10px] lg:pointer-events-none'
-                    } static mt-2 ml-4 lg:mt-0 lg:ml-0`}
+                        : 'lg:opacity-0 lg:invisible lg:-translate-y-[10px] lg:pointer-events-none max-lg:hidden'
+                    } static mt-0 ml-4 lg:mt-0 lg:ml-0`}
                   >
                     <ul className="lg:bg-black lg:shadow-[0_8px_20px_rgba(0,0,0,0.3)] lg:rounded-lg lg:border lg:border-[#25C760] lg:min-w-[180px] list-none p-0 m-0">
                       {['achieve', 'confidence', 'forever'].map((p) => (
                         <li key={p}>
                           <Link
                             href={`/${p}-howto`}
-                            className="block px-2 py-2 text-white font-medium text-sm hover:bg-[#25C760] hover:text-white transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
+                            className="block px-4 py-2.5 text-white font-medium text-sm hover:bg-[#25C760] hover:text-white transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
                             onClick={() => setMobileMenuOpen(false)}
                           >
                             {p.charAt(0).toUpperCase() + p.slice(1)}
@@ -315,40 +250,33 @@ export default function Header() {
                     </ul>
                   </div>
                 </li>
-                <li className="max-lg:w-full">
-                  <Link
-                    href="/products"
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
-                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {t('allProducts')}
-                  </Link>
-                </li>
+                {/* News */}
                 <li className="max-lg:w-full">
                   <Link
                     href="/news"
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-3 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t('news')}
                   </Link>
                 </li>
+                {/* Certified Instructor */}
                 <li className="max-lg:w-full">
                   <Link
                     href="/mv/certifiedInstructor"
-                    className="text-[#25C760] text-base hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline py-2 lg:py-0 max-lg:text-lg max-lg:text-white max-lg:py-[10px] max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:block max-lg:hover:text-[#25C760] max-lg:hover:translate-x-[10px] max-lg:hover:translate-y-0 max-[600px]:text-base"
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-3 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
                     style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t('certifiedInstructor')}
                   </Link>
                 </li>
-                <li className="hidden max-lg:block list-none mt-3 w-full">
+                {/* Healthcare (mobile only) */}
+                <li className="hidden max-lg:block list-none mt-4 w-full">
                   <Link
                     href="/healthcare"
-                    className="inline-flex flex-col items-center justify-center w-fit py-[5px] px-5 border border-white rounded-md text-white text-sm font-semibold no-underline bg-black transition-all duration-300 hover:bg-[#25C760] hover:text-black hover:border-[#25C760] hover:translate-x-0"
+                    className="inline-flex flex-col items-center justify-center w-fit py-1.5 px-5 border border-white rounded-md text-white text-sm font-semibold no-underline bg-black transition-all duration-300 hover:bg-[#25C760] hover:text-black hover:border-[#25C760]"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t('healthcare')}
