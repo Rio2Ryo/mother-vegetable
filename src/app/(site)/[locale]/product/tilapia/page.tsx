@@ -5,13 +5,13 @@ import ProductJsonLd from '@/components/ProductJsonLd';
 import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
-  title: 'マザベジフィッシュ-イズミ鯛 — Mother Vegetable',
+  title: 'マザベジフィッシュ — Mother Vegetable',
   description:
-    'Fresh Izumi Tai enriched with 48 natural nutrients for a healthy lifestyle. ¥2,000.',
+    'Fresh MV Fish enriched with 48 natural nutrients for a healthy lifestyle. ¥2,000.',
   openGraph: {
-    title: 'マザベジフィッシュ-イズミ鯛 — Mother Vegetable',
-    description: 'Fresh Izumi Tai enriched with 48 natural nutrients.',
-    images: [{ url: '/cdn/mv_tilapia.jpg', width: 800, height: 800, alt: 'マザベジフィッシュ-イズミ鯛' }],
+    title: 'マザベジフィッシュ — Mother Vegetable',
+    description: 'Fresh MV Fish enriched with 48 natural nutrients.',
+    images: [{ url: '/cdn/mv_tilapia.jpg', width: 800, height: 800, alt: 'マザベジフィッシュ' }],
   },
 };
 
@@ -21,10 +21,10 @@ function getTilapiaProduct(locale: string): SimpleProductPageData {
   return {
     id: 'tilapia',
     category: 'food',
-    name: isJa ? 'マザベジフィッシュ-イズミ鯛' : 'MV Fish - Izumi Tai',
-    fullName: isJa ? 'マザベジフィッシュ-イズミ鯛 / 1匹' : 'Mother Vegetable Fish - Izumi Tai / 1 fish',
+    name: isJa ? 'マザベジフィッシュ' : 'MV Fish',
+    fullName: isJa ? 'マザベジフィッシュ-1匹' : 'Mother Vegetable Fish - 1 fish',
     subtitle: isJa ? '身体のために' : 'for Body',
-    tagline: isJa ? '48種の栄養素で育てた新鮮なイズミ鯛。' : 'Fresh Izumi Tai enriched with 48 nutrients.',
+    tagline: isJa ? '48種の栄養素で育てた新鮮なマザベジフィッシュ。' : 'Fresh MV Fish enriched with 48 nutrients.',
     price: 13.50,
     currency: 'USD',
     priceJpy: '¥2,000',
@@ -49,7 +49,7 @@ function getTilapiaProduct(locale: string): SimpleProductPageData {
       ? 'グリル：塩を振ってシンプルに焼くだけで栄養満点の一品に。蒸し料理：野菜と一緒に蒸して素材の旨味を引き出します。刺身：新鮮なまま薄切りにして、わさび醤油でお楽しみください。煮物・鍋：和風だしとの相性も抜群です。'
       : 'Grill: Season with salt and grill for a simple, nutritious dish. Steam: Steam with vegetables to bring out natural umami. Sashimi: Slice fresh and serve with wasabi soy sauce. Simmer: Excellent in hot pots and simmered dishes with dashi broth.',
     trust: {
-      productName: isJa ? 'マザベジフィッシュ-イズミ鯛' : 'MV Fish - Izumi Tai',
+      productName: isJa ? 'マザベジフィッシュ' : 'MV Fish',
       certification: isJa
         ? '厚生労働省によりヒューマングレード食品認定'
         : 'certified human grade food by Ministry of Health, Labour and Welfare (MHLW), Japan',
@@ -63,7 +63,7 @@ function getTilapiaProduct(locale: string): SimpleProductPageData {
       ],
     },
     functionSection: {
-      subtitle: isJa ? 'マザベジフィッシュ-イズミ鯛' : 'MV Fish - Izumi Tai',
+      subtitle: isJa ? 'マザベジフィッシュ' : 'MV Fish',
       ingredientInfo: isJa
         ? [
             { label: 'エネルギー', value: '398kcal' },
@@ -203,8 +203,8 @@ export default async function TilapiaPage({ params }: { params: Promise<{ locale
   return (
     <>
       <ProductJsonLd
-        name="マザベジフィッシュ-イズミ鯛"
-        description="Fresh Izumi Tai enriched with 48 natural nutrients."
+        name="マザベジフィッシュ"
+        description="Fresh MV Fish enriched with 48 natural nutrients."
         image="/cdn/mv_tilapia.jpg"
         price={13.50}
         slug="tilapia"

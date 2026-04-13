@@ -80,7 +80,7 @@ const DEMO_RESPONSES: DemoEntry[] = [
   },
   {
     keywords: /product|商品|製品|产品/i,
-    en: `Mother Vegetable offers a range of products, all certified by Japanese government agencies:\n\n1. Achieve — A food supplement with 48 nutrients for body wellness ($36.70)\n2. Confidence — A certified quasi-drug cosmetic for skin care ($36.70)\n\nWe also offer MV Fish (Izumi Tai), MV Salt, MV Soy Sauce, MV Toner, MV Balm, and MV Soap.\n\nAll products are derived from Earth's 3.5 billion-year-old deep-sea life force.\n\nFor further assistance, contact us at support@mothervegetable.com`,
+    en: `Mother Vegetable offers a range of products, all certified by Japanese government agencies:\n\n1. Achieve — A food supplement with 48 nutrients for body wellness ($36.70)\n2. Confidence — A certified quasi-drug cosmetic for skin care ($36.70)\n\nWe also offer MV Fish (MV Fish), MV Salt, MV Soy Sauce, MV Toner, MV Balm, and MV Soap.\n\nAll products are derived from Earth's 3.5 billion-year-old deep-sea life force.\n\nFor further assistance, contact us at support@mothervegetable.com`,
     ja: `マザーベジタブルは、日本の政府機関認定の製品をご提供しています：\n\n1. Achieve — 48種の栄養素を含む食品サプリメント（$36.70）\n2. Confidence — 医薬部外品認定のスキンケアコスメ（$36.70）\n\nその他、マザベジフィッシュ・塩・醤油・化粧水・バウム・石鹸もございます。\n\nすべての製品は35億年前の深海の生命力から生まれました。\n\nその他のご質問は support@mothervegetable.com までお問い合わせください`,
     zh: `Mother Vegetable提供多款产品，均经日本政府机构认证：\n\n1. Achieve — 含48种营养素的食品补充剂（$36.70）\n2. Confidence — 经认证的准药妆护肤品（$36.70）\n\n另有MV鱼、MV盐、MV酱油、MV化妆水、MV润肤膏、MV香皂。\n\n所有产品源自地球35亿年前的深海生命力。\n\n如需进一步帮助，请联系 support@mothervegetable.com`,
   },

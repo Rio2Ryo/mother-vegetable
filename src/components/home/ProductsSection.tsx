@@ -73,9 +73,9 @@ function getProducts(isJa: boolean) {
     {
       id: 'tilapia',
       name: isJa ? 'マザベジフィッシュ' : 'MV Fish',
-      subtitle: isJa ? 'イズミ鯛 / 1匹' : 'Izumi Tai / 1 fish',
+      subtitle: isJa ? '1匹' : '1 fish',
       subName: '',
-      tagline: isJa ? '48種の栄養素で育てた新鮮なイズミ鯛' : 'Fresh Izumi Tai enriched with 48 nutrients',
+      tagline: isJa ? '48種の栄養素で育てた新鮮なマザベジフィッシュ' : 'Fresh MV Fish enriched with 48 nutrients',
       videoUrl: null,
       imageUrl: '/cdn/mv_tilapia.jpg',
       features: isJa
