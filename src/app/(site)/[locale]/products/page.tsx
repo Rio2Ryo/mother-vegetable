@@ -66,6 +66,14 @@ export default function ProductsListingPage() {
     ? products
     : products.filter((p) => p.category === filter);
 
+  const regularProducts = filteredProducts.filter((p) => p.tier === 'regular');
+  const product100Products = filteredProducts.filter((p) => p.tier === 'product100');
+
+  const tierLabels = {
+    regular: t('Regular', 'レギュラー商品', '常规产品'),
+    product100: t('Product 100', 'プロダクト100', 'Product 100'),
+  };
+
   const filterButtons: { key: CategoryFilter; label: string }[] = [
     { key: 'all', label: t('All', 'すべて', '全部') },
     { key: 'food', label: t('Food', 'フード', '食品') },
@@ -120,14 +128,37 @@ export default function ProductsListingPage() {
         </div>
       </section>
 
-      {/* Products Grid */}
+      {/* Products Grid - Tier Grouped */}
       <section className="px-6 pb-20">
         <div className="max-w-5xl mx-auto">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} locale={locale} t={t} hasReferral={hasReferral} />
-            ))}
-          </div>
+          {/* Regular Products */}
+          {regularProducts.length > 0 && (
+            <div className="mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center" style={{ color: '#25C760' }}>
+                {tierLabels.regular}
+              </h2>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {regularProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} locale={locale} t={t} hasReferral={hasReferral} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Product 100 */}
+          {product100Products.length > 0 && (
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center" style={{ color: '#25C760' }}>
+                {tierLabels.product100}
+              </h2>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {product100Products.map((product) => (
+                  <ProductCard key={product.id} product={product} locale={locale} t={t} hasReferral={hasReferral} />
+                ))}
+              </div>
+            </div>
+          )}
+
           {filteredProducts.length === 0 && (
             <div className="text-center py-20">
               <p className="text-gray-400 text-lg">

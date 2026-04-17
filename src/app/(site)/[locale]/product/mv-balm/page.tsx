@@ -6,10 +6,10 @@ import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
   title: 'マザベジバウム — Mother Vegetable',
-  description: 'Luxury nutrient-rich balm with natural collagen. 50g. Multi-purpose skin healing.',
+  description: 'Luxury nutrient-rich balm with natural collagen. 50g. Multi-purpose care.',
   openGraph: {
     title: 'マザベジバウム — Mother Vegetable',
-    description: 'Natural collagen luxury balm for intensive skin repair.',
+    description: 'Natural collagen luxury balm. 50g.',
     images: [{ url: '/cdn/mv_balm.jpg', width: 800, height: 800, alt: 'マザベジバウム' }],
   },
 };
@@ -92,19 +92,18 @@ function getMvBalmProduct(locale: string): SimpleProductPageData {
             'Natural form without extraction processes',
             'Certified quality through rigorous testing',
           ],
-      medicalText: '医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。肌の自然な治癒力とバランス回復をサポートします。',
       benefits: isJa
         ? [
-            { title: '乾燥・荒れ肌', items: ['集中保湿・修復', 'かさつき改善', 'バリア機能を強化', '肌荒れを鎮静', '長時間の保護膜形成'] },
-            { title: '唇・目元', items: ['唇の乾燥・荒れ改善', '目元の保湿', 'デリケートゾーンケア', 'ひび割れ唇の集中修復', '縦ジワを目立たなくする'] },
-            { title: 'ボディケア', items: ['手・肘・かかとのケア', '乾燥ライン改善', '全身保湿', 'キューティクルケア', 'ネイル周りの保護'] },
-            { title: 'アンチエイジング', items: ['シワ・たるみ改善', '肌の弾力を回復', '細胞の再生を促進', 'コラーゲンでハリを与える', '乾燥小ジワを予防'] },
+            { title: '乾燥・荒れ肌', items: ['集中保湿ケア', 'かさつきをケア', 'バリア機能をサポート', '肌を落ち着かせる', '長時間の保護膜形成'] },
+            { title: '唇・目元', items: ['唇の乾燥をケア', '目元の保湿', 'デリケートゾーンケア', '唇のうるおいを守る', '乾燥から守る'] },
+            { title: 'ボディケア', items: ['手・肘・かかとのケア', '乾燥をケア', '全身保湿', 'キューティクルケア', 'ネイル周りの保護'] },
+            { title: '毎日のケア', items: ['肌にハリを与える', '肌をすこやかに保つ', 'うるおいを補給', 'コラーゲン配合', '乾燥から肌を守る'] },
           ]
         : [
-            { title: 'Dry & Rough Skin', items: ['Intensive moisture & repair', 'Reduces flakiness', 'Strengthens skin barrier', 'Calms irritated skin', 'Forms long-lasting protective layer'] },
-            { title: 'Lips & Eye Area', items: ['Heals dry & chapped lips', 'Moisturizes eye area', 'Delicate zone care', 'Intensive lip crack repair', 'Smooths fine lip lines'] },
-            { title: 'Body Care', items: ['Hand, elbow & heel care', 'Improves dry lines', 'Full body moisturizing', 'Cuticle care', 'Protects nail surroundings'] },
-            { title: 'Anti-Aging', items: ['Reduces wrinkles & sagging', 'Restores elasticity', 'Promotes cell regeneration', 'Collagen adds firmness', 'Prevents fine lines from dryness'] },
+            { title: 'Dry & Rough Skin', items: ['Intensive moisture care', 'Cares for flakiness', 'Supports skin barrier', 'Calms skin', 'Forms long-lasting protective layer'] },
+            { title: 'Lips & Eye Area', items: ['Cares for dry lips', 'Moisturizes eye area', 'Delicate zone care', 'Keeps lips moisturized', 'Protects from dryness'] },
+            { title: 'Body Care', items: ['Hand, elbow & heel care', 'Cares for dryness', 'Full body moisturizing', 'Cuticle care', 'Protects nail surroundings'] },
+            { title: 'Daily Care', items: ['Adds firmness to skin', 'Keeps skin healthy', 'Replenishes moisture', 'Collagen-infused', 'Protects skin from dryness'] },
           ],
     },
   };

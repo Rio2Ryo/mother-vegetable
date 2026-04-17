@@ -31,6 +31,8 @@
   "products": {
     "title": "Products",
     "toBuy": "To Buy",
+    "regular": "Regular",
+    "product100": "Product 100",
     "achieve": {
       "name": "Achieve",
       "subtitle": "for Body",
@@ -46,10 +48,10 @@
       "name": "Confidence",
       "subtitle": "For All Skin",
       "taglineJp": "",
-      "tagline": "Skin Healing Effect",
+      "tagline": "For All Skin Types",
       "benefits": [
-        "Powerful anti-aging benefits.",
-        "Helps improve dark spots, acne, odor, and skin damage."
+        "Supports your daily beauty care.",
+        "Helps keep skin looking healthy."
       ],
       "howToUse": "Apply directly or mix into your current cosmetics."
     }
@@ -76,7 +78,7 @@
     "title": "Cosmetic Function",
     "subtitle": "Confidence",
     "method": "Apply / Mix In",
-    "description": "Mother Vegetable, certified as a medical-grade quasi-drug, is trusted by medical institutions worldwide for its healing properties — used in post-surgery recovery, burn scar improvement, cancer care, and even to help control skin shine. It supports the skin's natural ability to heal and restore balance.",
+    "description": "Mother Vegetable, certified as a quasi-drug, helps condition the skin and supports its natural beauty.",
     "beforeAfter": "Before & After"
   },
   "twoOnlyOnes": {
@@ -86,7 +88,7 @@
     "sefTitle": "Small Earth Factory (SEF)"
   },
   "footer": {
-    "description": "Mother Vegetable - Natural healing products born from Earth's life force 3.5 billion years ago.",
+    "description": "Mother Vegetable - Natural products born from Earth's life force 3.5 billion years ago.",
     "productsTitle": "Products",
     "howToUseTitle": "How To Use",
     "companyTitle": "Company",

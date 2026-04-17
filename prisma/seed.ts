@@ -60,7 +60,7 @@ const products = [
   {
     name: "Confidence",
     slug: "confidence",
-    description: "Skin Healing Effect. Powerful anti-aging benefits.",
+    description: "Natural skin care for all skin types.",
     price: 36.7,
     currency: "USD",
     images: JSON.stringify(["/cdn/products_confidence_10001.png"]),
@@ -108,7 +108,7 @@ const products = [
     name: "MV Toner",
     slug: "mv-toner",
     description:
-      "Nutrient-infused facial toner with Confidence collagen. 150ml. Skin healing and anti-aging.",
+      "Nutrient-infused facial toner with natural collagen. 150ml.",
     price: 13.5,
     currency: "USD",
     images: JSON.stringify(["/cdn/mv_toner.jpg"]),
@@ -120,7 +120,7 @@ const products = [
     name: "MV Balm",
     slug: "mv-balm",
     description:
-      "Luxury nutrient-rich balm with Confidence collagen. 50g. Multi-purpose skin healing.",
+      "Luxury nutrient-rich balm with natural collagen. 50g. Multi-purpose care.",
     price: 13.5,
     currency: "USD",
     images: JSON.stringify(["/cdn/mv_balm.jpg"]),
@@ -132,7 +132,7 @@ const products = [
     name: "MV Soap",
     slug: "mv-soap",
     description:
-      "Handcrafted green nutrient-rich soap with Confidence collagen. 100g. Deep cleansing with skin care.",
+      "Handcrafted green nutrient-rich soap with natural collagen. 100g.",
     price: 13.5,
     currency: "USD",
     images: JSON.stringify(["/cdn/mv_soap.jpg"]),

@@ -27,6 +27,7 @@ export interface ProductData {
   currency: string;
   sku: string;
   category: "food" | "cosmetic" | "pet";
+  tier: 'regular' | 'product100';
   images: string[];
   thumbnails: string[];
   videoUrls: string[];
@@ -89,6 +90,7 @@ const achieve: ProductData = {
   currency: "USD",
   sku: "MV-ACH-030",
   category: "food",
+  tier: 'regular',
   images: ["/cdn/products_achieve_10001.png"],
   galleryImages: [
     { url: "/cdn/products_achieve_10001.png", alt: "Achieve green superfood supplement packaging with 30 individual stick packets" },
@@ -159,16 +161,17 @@ const confidence: ProductData = {
   fullName: "Mother Vegetable Confidence",
   slug: "confidence",
   description:
-    "Skin Healing Effect. Powerful anti-aging benefits.",
-  descriptionJa: "肌の修復効果。強力なアンチエイジング効果。",
+    "Natural skin care for all skin types.",
+  descriptionJa: "すべての肌タイプに。天然スキンケア。",
   price: 36.70,
   currency: "USD",
   sku: "MV-CON-030",
   category: "cosmetic",
+  tier: 'regular',
   images: ["/cdn/products_confidence_10001.png"],
   galleryImages: [
     { url: "/cdn/products_confidence_10001.png", alt: "Confidence skincare tube packaging with sleek green and white design" },
-    { url: "/cdn/products_confidence_10001.png", alt: "Confidence cream being gently applied to facial skin for anti-aging care" },
+    { url: "/cdn/products_confidence_10001.png", alt: "Confidence cream being gently applied to facial skin for daily care" },
     { url: "/cdn/products_confidence_10001.png", alt: "Close-up of Confidence gel texture showing smooth collagen-rich formula" },
     { url: "/cdn/products_confidence_10001.png", alt: "Confidence tube displayed with natural botanical ingredients and cosmetic tools" },
     { url: "/cdn/products_confidence_10001.png", alt: "Radiant glowing skin after consistent use of Confidence skincare treatment" },
@@ -177,11 +180,11 @@ const confidence: ProductData = {
   videoUrls: videoRange("confidence", 4),
   mainVideoUrl: `${CDN_BASE}/products/confidence/confidence_video_1.mp4`,
   benefits: [
-    "Skin Healing Effect. Powerful anti-aging benefits.",
-    "Helps improve skin texture, reduce wrinkles, and restore radiance.",
+    "Supports your daily beauty care.",
+    "Helps keep skin looking healthy and radiant.",
   ],
   taglineJp: "",
-  tagline: "Skin Healing Effect",
+  tagline: "For All Skin Types",
   subtitle: "For All Skin",
   howToUse:
     "Apply directly or mix into your current cosmetics.",
@@ -256,6 +259,7 @@ const tilapia: ProductData = {
   currency: 'USD',
   sku: 'MV-TIL-001',
   category: 'food',
+  tier: 'product100',
   images: ['/cdn/mv_tilapia.jpg'],
   galleryImages: [
     { url: '/cdn/mv_tilapia.jpg', alt: 'Mother Vegetable MV Fish fish product in premium packaging' },
@@ -293,6 +297,7 @@ const mvSalt: ProductData = {
   currency: 'USD',
   sku: 'MV-SAL-050',
   category: 'food',
+  tier: 'product100',
   images: ['/cdn/mv_salt.jpg'],
   galleryImages: [
     { url: '/cdn/mv_salt.jpg', alt: 'Mother Vegetable Salt 50g jar with distinctive green mineral-rich crystals' },
@@ -330,6 +335,7 @@ const mvSoySauce: ProductData = {
   currency: 'USD',
   sku: 'MV-SOY-150',
   category: 'food',
+  tier: 'product100',
   images: ['/cdn/mv_soy_sauce.jpg'],
   galleryImages: [
     { url: '/cdn/mv_soy_sauce.jpg', alt: 'Mother Vegetable Soy Sauce 150ml bottle with rich dark color' },
@@ -361,26 +367,27 @@ const mvToner: ProductData = {
   nameJa: 'マザベジ化粧水',
   fullName: 'Mother Vegetable Toner',
   slug: 'mv-toner',
-  description: 'Nutrient-infused facial toner with Confidence collagen. 150ml. Skin healing and anti-aging.',
-  descriptionJa: 'Confidenceコラーゲン配合の化粧水。150ml。肌の修復とエイジングケア。',
+  description: 'Nutrient-infused facial toner with natural collagen. 150ml.',
+  descriptionJa: '天然コラーゲン配合の化粧水。150ml。毎日のスキンケアに。',
   price: 13.50,
   currency: 'USD',
   sku: 'MV-TON-150',
   category: 'cosmetic',
+  tier: 'product100',
   images: ['/cdn/mv_toner.jpg'],
   galleryImages: [
     { url: '/cdn/mv_toner.jpg', alt: 'Mother Vegetable Toner 150ml bottle with elegant green-tinted formula' },
     { url: '/cdn/mv_toner.jpg', alt: 'Toner being applied to face with cotton pad for morning skincare routine' },
     { url: '/cdn/mv_toner.jpg', alt: 'Close-up of toner liquid showing translucent plant-based nutrient infusion' },
     { url: '/cdn/mv_toner.jpg', alt: 'Toner bottle arranged with serum, moisturizer, and natural botanical decor' },
-    { url: '/cdn/mv_toner.jpg', alt: 'Hydrated and youthful skin demonstrating anti-aging toner benefits' },
+    { url: '/cdn/mv_toner.jpg', alt: 'Hydrated and healthy-looking skin after using natural collagen toner' },
   ],
   thumbnails: [],
   videoUrls: [],
   mainVideoUrl: '',
   benefits: [
-    'Skin Healing Effect — Confidence collagen repairs and restores skin.',
-    'Deeply hydrates and reduces wrinkles with plant-based nutrients.',
+    'Natural collagen formula for your daily skincare routine.',
+    'Plant-based nutrients help keep skin moisturized.',
   ],
   taglineJp: '',
   tagline: 'Confidence-powered skin toner.',
@@ -401,12 +408,13 @@ const mvBalm: ProductData = {
   nameJa: 'マザベジバウム',
   fullName: 'Mother Vegetable Balm',
   slug: 'mv-balm',
-  description: 'Luxury nutrient-rich balm with Confidence collagen. 50g. Multi-purpose skin healing.',
-  descriptionJa: 'Confidenceコラーゲン配合のラグジュアリーバウム。50g。マルチユーススキンケア。',
+  description: 'Luxury nutrient-rich balm with natural collagen. 50g. Multi-purpose care.',
+  descriptionJa: '天然コラーゲン配合のラグジュアリーバウム。50g。マルチユーススキンケア。',
   price: 13.50,
   currency: 'USD',
   sku: 'MV-BAL-050',
   category: 'cosmetic',
+  tier: 'product100',
   images: ['/cdn/mv_balm.jpg'],
   galleryImages: [
     { url: '/cdn/mv_balm.jpg', alt: 'Mother Vegetable Balm 50g tin with premium green and gold packaging' },
@@ -419,7 +427,7 @@ const mvBalm: ProductData = {
   videoUrls: [],
   mainVideoUrl: '',
   benefits: [
-    'Skin Healing Effect — Confidence collagen for intensive skin repair.',
+    'Natural collagen formula for daily moisturizing care.',
     'Multi-use luxury balm for face, lips, and body.',
   ],
   taglineJp: '',
@@ -441,12 +449,13 @@ const mvSoap: ProductData = {
   nameJa: 'マザベジ石鹸',
   fullName: 'Mother Vegetable Soap',
   slug: 'mv-soap',
-  description: 'Handcrafted green nutrient-rich soap with Confidence collagen. 100g. Deep cleansing with skin care.',
-  descriptionJa: 'Confidenceコラーゲン配合の手作り石鹸。100g。洗浄しながらスキンケア。',
+  description: 'Handcrafted green nutrient-rich soap with natural collagen. 100g.',
+  descriptionJa: '天然コラーゲン配合の手作り石鹸。100g。毎日の洗浄に。',
   price: 13.50,
   currency: 'USD',
   sku: 'MV-SOP-100',
   category: 'cosmetic',
+  tier: 'product100',
   images: ['/cdn/mv_soap.jpg'],
   galleryImages: [
     { url: '/cdn/mv_soap.jpg', alt: 'Mother Vegetable Soap 100g bar with natural green color and artisan finish' },
@@ -459,8 +468,8 @@ const mvSoap: ProductData = {
   videoUrls: [],
   mainVideoUrl: '',
   benefits: [
-    'Skin Healing Effect — Confidence collagen cleanses while healing skin.',
-    'Natural plant-based deep cleanse with anti-aging benefits.',
+    'Natural collagen formula for gentle, thorough cleansing.',
+    'Natural plant-based deep cleanse for everyday use.',
   ],
   taglineJp: '',
   tagline: 'Confidence-powered natural soap.',

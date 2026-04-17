@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe, PRODUCT_PRICES, REFERRAL_DISCOUNT_RATE } from "@/lib/stripe";
 import { getProductBySlug } from "@/data/products";
+import prisma from "@/lib/prisma";
+import { ensureNewTables } from "@/lib/ensure-tables";
 
 interface CheckoutItem {
   productId: string;
@@ -25,6 +27,7 @@ interface CheckoutBody {
     country: string;
   };
   referralCode?: string;
+  couponCode?: string;
   locale?: string;
 }
 
@@ -60,16 +63,97 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // --- Coupon validation ---
+    let coupon: {
+      id: string;
+      code: string;
+      discountType: string;
+      discountValue: number;
+      minOrderAmount: number | null;
+      maxUses: number | null;
+      usedCount: number;
+      isActive: boolean;
+      expiresAt: Date | null;
+    } | null = null;
+
+    if (body.couponCode) {
+      await ensureNewTables();
+      coupon = await (prisma.coupon as any).findUnique({
+        where: { code: body.couponCode },
+      });
+
+      if (!coupon) {
+        return NextResponse.json(
+          { error: "Invalid coupon code" },
+          { status: 400 }
+        );
+      }
+
+      if (!coupon.isActive) {
+        return NextResponse.json(
+          { error: "This coupon is no longer active" },
+          { status: 400 }
+        );
+      }
+
+      if (coupon.expiresAt && new Date(coupon.expiresAt) < new Date()) {
+        return NextResponse.json(
+          { error: "This coupon has expired" },
+          { status: 400 }
+        );
+      }
+
+      if (coupon.maxUses !== null && coupon.usedCount >= coupon.maxUses) {
+        return NextResponse.json(
+          { error: "This coupon has reached its maximum number of uses" },
+          { status: 400 }
+        );
+      }
+
+      // Check minimum order amount against subtotal (before coupon, after referral)
+      const hasReferral = !!body.referralCode;
+      const subtotal = body.items.reduce((sum, item) => {
+        const sp = PRODUCT_PRICES[item.productId] || 0;
+        const price = hasReferral ? Math.round(sp * (1 - REFERRAL_DISCOUNT_RATE)) : sp;
+        return sum + price * item.quantity;
+      }, 0);
+
+      if (coupon.minOrderAmount !== null && subtotal < coupon.minOrderAmount * 100) {
+        return NextResponse.json(
+          { error: `Minimum order amount for this coupon is $${coupon.minOrderAmount}` },
+          { status: 400 }
+        );
+      }
+    }
+
     // Build line items for Stripe — enforce server-side pricing
+    // Apply referral discount first, then coupon discount stacks on top
     const lineItems = body.items.map((item) => {
       const serverPrice = PRODUCT_PRICES[item.productId];
       if (!serverPrice) {
         throw new Error(`Unknown product: ${item.productId}`);
       }
 
-      // Use referral discount if a referral code is present, otherwise server price
+      // Step 1: Apply referral discount if present
       const hasReferralDiscount = !!body.referralCode;
-      const unitAmount = hasReferralDiscount ? Math.round(serverPrice * (1 - REFERRAL_DISCOUNT_RATE)) : serverPrice;
+      let unitAmount = hasReferralDiscount ? Math.round(serverPrice * (1 - REFERRAL_DISCOUNT_RATE)) : serverPrice;
+
+      // Step 2: Apply coupon discount (stacks with referral)
+      if (coupon) {
+        if (coupon.discountType === "percentage") {
+          unitAmount = Math.round(unitAmount * (1 - coupon.discountValue / 100));
+        } else if (coupon.discountType === "fixed") {
+          // Fixed discount is in dollars — convert to cents and distribute proportionally
+          // For simplicity, apply fixed amount evenly across total (handled below via Stripe coupon line)
+          // We apply per-unit: divide fixed discount (in cents) across total quantity
+          const totalQuantity = body.items.reduce((sum, i) => sum + i.quantity, 0);
+          const perUnitDiscount = Math.round((coupon.discountValue * 100) / totalQuantity);
+          unitAmount = Math.max(0, unitAmount - perUnitDiscount);
+        }
+      }
+
+      // Ensure unit amount is at least 1 cent (Stripe minimum)
+      unitAmount = Math.max(unitAmount, 1);
 
       return {
         price_data: {
@@ -84,6 +168,14 @@ export async function POST(request: NextRequest) {
       };
     });
 
+    // Increment coupon usedCount before creating session
+    if (coupon) {
+      await (prisma.coupon as any).update({
+        where: { id: coupon.id },
+        data: { usedCount: coupon.usedCount + 1, updatedAt: new Date() },
+      });
+    }
+
     // Create Stripe Checkout Session
     const session = await getStripe().checkout.sessions.create({
       mode: "payment",
@@ -93,15 +185,32 @@ export async function POST(request: NextRequest) {
       metadata: {
         shipping: JSON.stringify(body.shipping),
         referralCode: body.referralCode || "",
+        couponCode: coupon ? coupon.code : "",
+        couponDiscount: coupon
+          ? `${coupon.discountType === "percentage" ? `${coupon.discountValue}%` : `$${coupon.discountValue}`}`
+          : "",
         locale: locale,
         items: JSON.stringify(
           body.items.map((i) => {
             const sp = PRODUCT_PRICES[i.productId] || 0;
             const hasDiscount = !!body.referralCode;
+            let price = hasDiscount ? Math.round(sp * (1 - REFERRAL_DISCOUNT_RATE)) : sp;
+
+            // Apply coupon to item metadata price as well
+            if (coupon) {
+              if (coupon.discountType === "percentage") {
+                price = Math.round(price * (1 - coupon.discountValue / 100));
+              } else if (coupon.discountType === "fixed") {
+                const totalQuantity = body.items.reduce((sum, it) => sum + it.quantity, 0);
+                const perUnitDiscount = Math.round((coupon.discountValue * 100) / totalQuantity);
+                price = Math.max(0, price - perUnitDiscount);
+              }
+            }
+
             return {
               productId: i.productId,
               name: i.name,
-              price: (hasDiscount ? Math.round(sp * (1 - REFERRAL_DISCOUNT_RATE)) : sp) / 100,
+              price: Math.max(price, 1) / 100,
               quantity: i.quantity,
             };
           })

@@ -110,7 +110,7 @@ export default async function ConfidenceHowToPage({ params }: { params: Promise<
   const skinConditions: ApplicationSection[] = [
     {
       number: 1,
-      title: isJa ? 'シミ / しわ' : 'Dark Spots / Wrinkles',
+      title: isJa ? '気になる部分に' : 'Areas of Concern',
       image: '10002.jpg',
       method: isJa ? '直接塗る' : 'Apply directly',
       amount: isJa ? '適量' : 'As needed',
@@ -431,8 +431,8 @@ export default async function ConfidenceHowToPage({ params }: { params: Promise<
             <h2 className="text-white font-bold text-xl mb-4">{isJa ? '混ぜる・混合' : 'Mix - Mix In'}</h2>
             <p className="text-white text-sm leading-relaxed opacity-90">
               {isJa
-                ? 'Confidenceパウダーをお手持ちの化粧品、スキンケア製品、日用品に混ぜてご使用ください。愛用製品のヒーリング効果を高めることができます。'
-                : 'Mix Confidence powder into your existing cosmetics, skincare products, or daily essentials. This allows you to enhance the healing properties of products you already use and love.'}
+                ? 'Confidenceパウダーをお手持ちの化粧品、スキンケア製品、日用品に混ぜてご使用ください。愛用製品の美容ケアをサポートします。'
+                : 'Mix Confidence powder into your existing cosmetics, skincare products, or daily essentials. This allows you to enhance the beauty care of products you already use and love.'}
             </p>
           </div>
         </div>

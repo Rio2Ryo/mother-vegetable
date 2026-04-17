@@ -6,10 +6,10 @@ import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
   title: 'マザベジ石鹸 — Mother Vegetable',
-  description: 'Handcrafted green nutrient-rich soap with natural collagen. 100g. Deep cleansing with skin care.',
+  description: 'Handcrafted green nutrient-rich soap with natural collagen. 100g.',
   openGraph: {
     title: 'マザベジ石鹸 — Mother Vegetable',
-    description: 'Natural collagen soap for deep cleansing and skin healing.',
+    description: 'Natural collagen handcrafted soap. 100g.',
     images: [{ url: '/cdn/mv_soap.jpg', width: 800, height: 800, alt: 'マザベジ石鹸' }],
   },
 };
@@ -92,19 +92,18 @@ function getMvSoapProduct(locale: string): SimpleProductPageData {
             'Natural form without extraction processes',
             'Certified quality through rigorous testing',
           ],
-      medicalText: '医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。肌の自然な治癒力とバランス回復をサポートします。',
       benefits: isJa
         ? [
             { title: '普通肌', items: ['毎日のクレンジング', '毛穴をすっきり洗浄', '肌のキメを整える', '洗い上がりしっとり', '皮脂バランスを整える'] },
-            { title: '肌トラブル', items: ['肌トラブル改善', 'にきび・炎症を抑制', '肌を落ち着かせる', '余分な皮脂を優しく除去', '敏感肌にも使える低刺激'] },
-            { title: '年齢肌', items: ['アンチエイジング洗顔', '肌の弾力を回復', 'シワ・たるみ予防', 'くすみを落とし透明感アップ', 'コラーゲンで洗いながら保湿'] },
-            { title: 'ボディケア', items: ['全身の保湿洗浄', '体臭・汗の予防', '肌のツヤアップ', '手荒れを防ぐハンドウォッシュ', '背中・デコルテのケアにも'] },
+            { title: '敏感肌', items: ['肌をやさしくケア', '肌を落ち着かせる', '余分な皮脂を優しく除去', '敏感肌にも使える低刺激', '毎日使えるやさしさ'] },
+            { title: 'すこやか肌', items: ['肌をすこやかに洗う', '肌にハリを与える', '透明感のある肌へ', 'コラーゲン配合で洗いながらうるおう', '毎日のケアに'] },
+            { title: 'ボディケア', items: ['全身のうるおい洗浄', '清潔感をキープ', '肌のツヤをサポート', '手肌をやさしく洗うハンドウォッシュ', '背中・デコルテのケアにも'] },
           ]
         : [
             { title: 'Normal Skin', items: ['Daily cleansing', 'Deep pore cleanse', 'Smooths skin texture', 'Leaves skin soft after wash', 'Balances sebum levels'] },
-            { title: 'Skin Trouble', items: ['Skin healing effect', 'Reduces acne & inflammation', 'Calms irritated skin', 'Gently removes excess oil', 'Low-irritation for sensitive skin'] },
-            { title: 'Mature Skin', items: ['Anti-aging cleanse', 'Restores elasticity', 'Prevents wrinkles & sagging', 'Removes dullness for radiant skin', 'Collagen moisturizes while cleansing'] },
-            { title: 'Body Care', items: ['Moisturizing full-body wash', 'Prevents body odor', 'Adds skin radiance', 'Gentle hand wash prevents dryness', 'Back & decolletage care'] },
+            { title: 'Sensitive Skin', items: ['Gentle skin care', 'Calms skin', 'Gently removes excess oil', 'Low-irritation for sensitive skin', 'Gentle enough for daily use'] },
+            { title: 'Healthy Skin', items: ['Cleanses for healthy skin', 'Adds firmness to skin', 'For radiant-looking skin', 'Collagen moisturizes while cleansing', 'For daily care'] },
+            { title: 'Body Care', items: ['Moisturizing full-body wash', 'Keeps you feeling fresh', 'Supports skin radiance', 'Gentle hand wash for soft hands', 'Back & decolletage care'] },
           ],
     },
   };

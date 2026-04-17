@@ -29,12 +29,6 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 text-center max-w-7xl mx-auto px-4 transition-all duration-1500 pt-40 md:pt-48 lg:pt-56">
-        {/* Sample notice */}
-        <div className="absolute top-4 left-0 right-0 flex justify-center z-20">
-          <div className="bg-yellow-400/90 text-black text-xs md:text-sm font-bold px-4 py-1.5 rounded-full shadow-lg">
-            {isJa ? 'このページはサンプルです' : 'This page is a sample'}
-          </div>
-        </div>
         {/* Title Section */}
         <div className="mb-12">
           {/* Logo */}

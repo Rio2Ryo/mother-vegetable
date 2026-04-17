@@ -83,7 +83,7 @@ const productPrompts: ProductPrompts[] = [
       {
         label: "Benefit visualization",
         prompt:
-          "Close-up portrait of radiant glowing skin, dewy and smooth complexion, soft ring light, beauty portrait showing anti-aging results, 4k",
+          "Close-up portrait of radiant glowing skin, dewy and smooth complexion, soft ring light, beauty portrait showing healthy skin, 4k",
       },
     ],
   },

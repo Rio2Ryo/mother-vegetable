@@ -44,12 +44,12 @@ function getConfidenceProduct(locale: string): ProductPageData {
     mainVideoUrl: '/new_confidence_video.mp4',
     benefits: isJa
       ? [
-          'エイジングケア。',
-          '肌のお悩みケアをサポート。',
+          '毎日の美容ケアをサポート。',
+          '肌をすこやかに保ちます。',
         ]
       : [
-          'Aging care support.',
-          'Supports daily skin care concerns.',
+          'Supports your daily beauty care.',
+          'Helps keep skin looking healthy.',
         ],
     howToUse: isJa
       ? '直接塗るか、お使いの化粧品に混ぜてご使用ください。'
@@ -125,7 +125,7 @@ export default async function ConfidencePage({ params }: { params: Promise<{ loc
     <>
       <ProductJsonLd
         name="Mother Vegetable Confidence"
-        description="Natural skin care cream for all skin types. Aging care support."
+        description="Natural skin care cream for all skin types."
         image="/cdn/products_confidence_10001.png"
         price={36.70}
         slug="confidence"

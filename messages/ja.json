@@ -31,6 +31,8 @@
   "products": {
     "title": "製品",
     "toBuy": "購入する",
+    "regular": "レギュラー商品",
+    "product100": "プロダクト100",
     "achieve": {
       "name": "Achieve",
       "subtitle": "身体のために",
@@ -46,10 +48,10 @@
       "name": "Confidence",
       "subtitle": "すべての肌に",
       "taglineJp": "",
-      "tagline": "肌のヒーリング効果",
+      "tagline": "毎日の美容ケアに",
       "benefits": [
-        "強力なアンチエイジング効果。",
-        "シミ、ニキビ、臭い、肌ダメージの改善をサポート。"
+        "毎日の美容ケアをサポート。",
+        "肌をすこやかに保ちます。"
       ],
       "howToUse": "直接塗るか、お使いの化粧品に混ぜてご使用ください。"
     }
@@ -76,7 +78,7 @@
     "title": "Cosmetic Function",
     "subtitle": "Confidence",
     "method": "塗る / 混ぜる",
-    "description": "医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。",
+    "description": "医薬部外品として認定されたマザーベジタブルは、肌のコンディションを整え、自然な美しさをサポートします。",
     "beforeAfter": "ビフォー＆アフター"
   },
   "twoOnlyOnes": {
@@ -86,7 +88,7 @@
     "sefTitle": "スモールアースファクトリー（SEF）"
   },
   "footer": {
-    "description": "マザーベジタブル - 35億年前の地球の生命力から生まれた自然治癒製品。",
+    "description": "マザーベジタブル - 35億年前の地球の生命力から生まれた天然由来製品。",
     "productsTitle": "製品",
     "howToUseTitle": "使い方",
     "companyTitle": "会社情報",

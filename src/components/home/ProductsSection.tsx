@@ -34,11 +34,16 @@ const cardVariants = {
   },
 };
 
+type Tier = 'regular' | 'product100';
+
+const REGULAR_IDS = new Set(['achieve', 'confidence']);
+
 function getProducts(isJa: boolean) {
   return [
     {
       id: 'achieve',
       name: 'Achieve',
+      tier: 'regular' as Tier,
       subtitle: isJa ? '飲むタイプ' : 'Drinkable Type',
       subName: isJa ? 'フレッシュドライプロテイン' : 'Flesh Dry Protein',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
@@ -56,9 +61,10 @@ function getProducts(isJa: boolean) {
     {
       id: 'confidence',
       name: 'Confidence',
+      tier: 'regular' as Tier,
       subtitle: isJa ? '肌に塗るタイプ' : 'Topical Type',
       subName: isJa ? 'フレッシュブリッジコラーゲン' : 'Flesh Bridge Collagen',
-      tagline: isJa ? '肌の気になるところに直接塗布' : 'Skin Healing Effect',
+      tagline: isJa ? '肌の気になるところに直接塗布' : 'For All Skin Types',
       videoUrl: '/new_confidence_video.mp4',
       imageUrl: null,
       features: isJa
@@ -73,6 +79,7 @@ function getProducts(isJa: boolean) {
     {
       id: 'tilapia',
       name: isJa ? 'マザベジフィッシュ' : 'MV Fish',
+      tier: 'product100' as Tier,
       subtitle: isJa ? '1匹' : '1 fish',
       subName: '',
       tagline: isJa ? '48種の栄養素で育てた新鮮なマザベジフィッシュ' : 'Fresh MV Fish enriched with 48 nutrients',
@@ -90,6 +97,7 @@ function getProducts(isJa: boolean) {
     {
       id: 'mv-salt',
       name: isJa ? 'マザベジ塩' : 'MV Salt',
+      tier: 'product100' as Tier,
       subtitle: '50g',
       subName: '',
       tagline: isJa ? '48種の栄養素配合の緑色の塩' : 'Green nutrient-infused salt',
@@ -107,6 +115,7 @@ function getProducts(isJa: boolean) {
     {
       id: 'mv-soy-sauce',
       name: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
+      tier: 'product100' as Tier,
       subtitle: '150ml',
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアム醤油' : 'Premium nutrient-rich dark soy sauce',
@@ -124,14 +133,15 @@ function getProducts(isJa: boolean) {
     {
       id: 'mv-toner',
       name: isJa ? 'マザベジ化粧水' : 'MV Toner',
+      tier: 'product100' as Tier,
       subtitle: '150ml',
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合の化粧水' : 'Confidence-powered skin toner',
       videoUrl: null,
       imageUrl: '/cdn/mv_toner.jpg',
       features: isJa
-        ? ['肌トラブル改善・Confidenceコラーゲン配合', '天然栄養素で深い保湿・シワ軽減']
-        : ['Skin Healing Effect — Confidence collagen', 'Deep hydration & wrinkle reduction with natural nutrients'],
+        ? ['天然コラーゲン配合・毎日のスキンケアに', '天然栄養素でうるおいケア']
+        : ['Natural collagen for daily skincare', 'Moisture care with natural nutrients'],
       howToUseLabel: '',
       howToLink: '',
       productLink: '/product/mv-toner',
@@ -141,14 +151,15 @@ function getProducts(isJa: boolean) {
     {
       id: 'mv-balm',
       name: isJa ? 'マザベジバウム' : 'MV Balm',
+      tier: 'product100' as Tier,
       subtitle: '50g',
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合のラグジュアリーバウム' : 'Confidence-powered luxury balm',
       videoUrl: null,
       imageUrl: '/cdn/mv_balm.jpg',
       features: isJa
-        ? ['肌トラブル改善・集中的な肌修復', '顔・唇・ボディのマルチユース']
-        : ['Skin Healing Effect — intensive repair', 'Multi-use for face, lips & body'],
+        ? ['天然コラーゲン配合・集中保湿ケア', '顔・唇・ボディのマルチユース']
+        : ['Natural collagen for intensive moisture care', 'Multi-use for face, lips & body'],
       howToUseLabel: '',
       howToLink: '',
       productLink: '/product/mv-balm',
@@ -158,14 +169,15 @@ function getProducts(isJa: boolean) {
     {
       id: 'mv-soap',
       name: isJa ? 'マザベジ石鹸' : 'MV Soap',
+      tier: 'product100' as Tier,
       subtitle: '100g',
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合の手作り石鹸' : 'Confidence-powered natural soap',
       videoUrl: null,
       imageUrl: '/cdn/mv_soap.jpg',
       features: isJa
-        ? ['肌トラブル改善・洗いながら肌を修復', '天然成分のディープクレンジング']
-        : ['Skin Healing Effect — cleanses & heals', 'Natural plant-based deep cleanse'],
+        ? ['天然コラーゲン配合・やさしく洗う', '天然成分のディープクレンジング']
+        : ['Natural collagen for gentle cleansing', 'Natural plant-based deep cleanse'],
       howToUseLabel: '',
       howToLink: '',
       productLink: '/product/mv-soap',
@@ -202,6 +214,14 @@ export default function ProductsSection() {
     if (activeCategory === 'cosmetic') return COSMETIC_IDS.has(p.id);
     return true;
   });
+
+  const regularProducts = filteredProducts.filter((p) => p.tier === 'regular');
+  const product100Products = filteredProducts.filter((p) => p.tier === 'product100');
+
+  const tierLabels = {
+    regular: isJa ? 'レギュラー商品' : 'Regular',
+    product100: isJa ? 'プロダクト100' : 'Product 100',
+  };
 
   const categories: { key: Category; label: string }[] = [
     { key: 'all', label: isJa ? 'すべて' : 'All' },
@@ -242,15 +262,149 @@ export default function ProductsSection() {
         ))}
       </div>
 
-      {/* Product Cards */}
-      <motion.div
-        key={activeCategory}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {filteredProducts.map((product) => (
+      {/* Regular Products */}
+      {regularProducts.length > 0 && (
+        <>
+          <h3 className="text-lg md:text-2xl font-bold text-center mb-4 md:mb-6" style={{ color: '#25c760' }}>
+            {tierLabels.regular}
+          </h3>
+          <motion.div
+            key={`regular-${activeCategory}`}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto mb-8 md:mb-12"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {regularProducts.map((product) => (
+              <motion.div
+                key={product.id}
+                variants={cardVariants}
+                className="rounded-lg p-3 md:p-6"
+                style={{ border: '1px solid #25c760' }}
+              >
+                {/* Mobile: Horizontal Layout / Desktop: Vertical Layout */}
+                <div className="flex flex-row md:flex-col gap-3 md:gap-0">
+                  {/* Video or Image */}
+                  <div className="flex-shrink-0 self-stretch md:self-auto md:mb-4 md:flex md:justify-center">
+                    {product.videoUrl ? (
+                      <video
+                        src={product.videoUrl}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-24 h-full md:w-28 md:h-52 object-cover rounded-lg"
+                      />
+                    ) : (
+                      <img
+                        src={product.imageUrl!}
+                        alt={product.name}
+                        className="w-24 h-24 md:w-28 md:h-52 object-cover rounded-lg"
+                      />
+                    )}
+                  </div>
+
+                  {/* Text Content */}
+                  <div className="flex-1 flex flex-col">
+                    {/* Title & Subtitle */}
+                    <div className="mb-1 md:text-center">
+                      <h3 className="text-lg md:text-3xl font-bold" style={{ color: '#25c760' }}>
+                        {product.name}
+                      </h3>
+                      <p className="text-green-400 text-xs md:text-sm">{product.subtitle}</p>
+                      {product.subName && <p className="text-green-400 text-xs md:text-sm">{product.subName}</p>}
+                    </div>
+
+                    {/* Features */}
+                    <div className="space-y-1 mb-2 mt-5">
+                      {product.features.map((feature, idx) => (
+                        <p key={idx} className="text-white text-[10px] md:text-lg flex items-start md:justify-center">
+                          <span className="text-green-400 mr-1 md:mr-2">{'\u2713'}</span>
+                          {feature}
+                        </p>
+                      ))}
+                    </div>
+
+                    {/* Price */}
+                    <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center">
+                      {hasReferral ? (
+                        <>
+                          <span className="text-white/50 line-through text-base md:text-lg">{product.priceJpy}</span>
+                          <span className="text-white font-bold text-xl md:text-2xl">
+                            {formatJpyPrice(Math.round(parseJpyPrice(product.priceJpy) * (1 - REFERRAL_DISCOUNT_RATE)))}
+                          </span>
+                          <span className="text-xs font-semibold text-[#25C760] bg-[#25C760]/15 border border-[#25C760] rounded px-2 py-0.5">
+                            10% OFF
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-white font-bold text-xl md:text-2xl">{product.priceJpy}</span>
+                      )}
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* Quantity + Add to Cart */}
+                <div className="mt-4 md:mt-6 px-2 md:px-4 pb-1 md:pb-2 space-y-3">
+                  {/* Quantity selector */}
+                  <div className="flex items-center justify-center gap-4 py-1">
+                    <button
+                      onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: Math.max(1, (prev[product.id] ?? 1) - 1) }))}
+                      className="w-9 h-9 rounded-full border-2 border-[#25c760] text-[#25c760] font-bold text-xl flex items-center justify-center hover:bg-[#25c760]/20 transition-colors"
+                    >{'\u2212'}</button>
+                    <span className="text-white font-bold text-base w-8 text-center">{quantities[product.id] ?? 1}</span>
+                    <button
+                      onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: (prev[product.id] ?? 1) + 1 }))}
+                      className="w-9 h-9 rounded-full border-2 border-[#25c760] text-[#25c760] font-bold text-xl flex items-center justify-center hover:bg-[#25c760]/20 transition-colors"
+                    >+</button>
+                  </div>
+                  {/* Add to cart */}
+                  <button
+                    onClick={() => {
+                      const basePrice = parseFloat(product.priceUsd.replace('$', ''));
+                      addItem({
+                        id: product.id,
+                        productId: product.id,
+                        name: product.name,
+                        price: basePrice,
+                        discountedPrice: hasReferral ? parseFloat((basePrice * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2)) : undefined,
+                        currency: 'USD',
+                        quantity: quantities[product.id] ?? 1,
+                        image: product.imageUrl ?? '',
+                      });
+                    }}
+                    className="block w-full text-center py-2.5 md:py-3 bg-[#25c760] text-black font-semibold text-sm md:text-base rounded-full hover:bg-[#1da84e] transition-colors"
+                  >
+                    {isJa ? 'カートに入れる' : 'Add to Cart'}
+                  </button>
+                  <Link
+                    href={product.productLink}
+                    className="block w-full text-center py-2 text-white/60 font-medium text-xs md:text-sm hover:text-white transition-colors no-underline"
+                  >
+                    {isJa ? '商品詳細' : 'View Details'}
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </>
+      )}
+
+      {/* Product 100 */}
+      {product100Products.length > 0 && (
+        <>
+          <h3 className="text-lg md:text-2xl font-bold text-center mb-4 md:mb-6" style={{ color: '#25c760' }}>
+            {tierLabels.product100}
+          </h3>
+          <motion.div
+            key={`product100-${activeCategory}`}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {product100Products.map((product) => (
           <motion.div
             key={product.id}
             variants={cardVariants}
@@ -362,7 +516,9 @@ export default function ProductsSection() {
             </div>
           </motion.div>
         ))}
-      </motion.div>
+          </motion.div>
+        </>
+      )}
 
     </motion.div>
   );

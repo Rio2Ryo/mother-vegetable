@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
 
       await prisma.verificationToken.create({
         data: {
-          identifier: email.trim(),
+          identifier: `verify:${email.trim()}`,
           token: hashedToken,
           expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
         },

@@ -6,10 +6,10 @@ import { getProductBySlug } from '@/data/products';
 
 export const metadata: Metadata = {
   title: 'マザベジ化粧水 — Mother Vegetable',
-  description: 'Nutrient-infused facial toner with natural collagen. 150ml. Skin healing and anti-aging.',
+  description: 'Nutrient-infused facial toner with natural collagen. 150ml.',
   openGraph: {
     title: 'マザベジ化粧水 — Mother Vegetable',
-    description: 'Natural collagen toner for skin healing and anti-aging.',
+    description: 'Natural collagen facial toner. 150ml.',
     images: [{ url: '/cdn/mv_toner.jpg', width: 800, height: 800, alt: 'マザベジ化粧水' }],
   },
 };
@@ -32,15 +32,15 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
     galleryImages: getProductBySlug('mv-toner')?.galleryImages,
     benefits: isJa
       ? [
-          'ディープ保湿 — 天然コラーゲンと天然栄養素が角質層まで浸透し、長時間うるおいをキープ。',
-          'エイジングケア — コラーゲン生成を促進し、シワ・たるみ・くすみにアプローチ。',
-          '肌トラブル改善 — 天然コラーゲンの修復力で荒れ肌・赤み・炎症を鎮静。',
+          'うるおいケア — 天然コラーゲンと天然栄養素が角質層まで浸透し、長時間うるおいをキープ。',
+          '肌をすこやかに — 天然コラーゲンと栄養素で肌のコンディションを整えます。',
+          '毎日のスキンケアに — 天然コラーゲン配合で、日々のお手入れをサポート。',
           '低刺激処方 — 敏感肌にも安心の優しい処方。植物由来の天然成分で肌をいたわります。',
         ]
       : [
-          'Deep Hydration — Natural collagen and nutrients penetrate the stratum corneum for long-lasting moisture.',
-          'Anti-Aging Care — Promotes collagen production to target wrinkles, sagging, and dullness.',
-          'Skin Healing — Natural collagen calms rough skin, redness, and inflammation.',
+          'Moisture Care — Natural collagen and nutrients penetrate the stratum corneum for long-lasting moisture.',
+          'Healthy Skin — Natural collagen and nutrients help keep skin looking its best.',
+          'Daily Skincare — Natural collagen formula supports your everyday skincare routine.',
           'Gentle Formula — A low-irritation formula safe for sensitive skin, using natural plant-derived ingredients.',
         ],
     howToUse: isJa
@@ -92,19 +92,18 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
             'Natural form without extraction processes',
             'Certified quality through rigorous testing',
           ],
-      medicalText: '医薬部外品として認定されたマザーベジタブルは、術後回復、火傷跡の改善、がんケア、皮脂コントロールなど、世界中の医療機関で信頼されています。肌の自然な治癒力とバランス回復をサポートします。',
       benefits: isJa
         ? [
-            { title: '乾燥肌', items: ['深い保湿効果', 'バリア機能の強化', 'キメを整える', '長時間うるおいキープ', '乾燥による小ジワを予防'] },
-            { title: '敏感肌', items: ['肌トラブル改善', '炎症を抑制', '肌を落ち着かせる', '低刺激で毎日使える', '赤みをケア'] },
-            { title: '年齢肌', items: ['シワ・たるみ改善', '肌の弾力を回復', '細胞の再生を促進', 'くすみを解消し透明感アップ', 'ハリとツヤを取り戻す'] },
-            { title: '美容重視', items: ['透明感アップ', '毛穴を引き締める', '美白効果', '化粧ノリを改善', 'トーンアップ効果'] },
+            { title: '乾燥肌', items: ['うるおいを与える', 'バリア機能をサポート', 'キメを整える', '長時間うるおいキープ', '乾燥から肌を守る'] },
+            { title: '敏感肌', items: ['肌をやさしくケア', '肌を落ち着かせる', '低刺激で毎日使える', '天然成分配合', '肌のコンディションを整える'] },
+            { title: 'エイジングサイン', items: ['肌にハリを与える', '肌をすこやかに保つ', 'うるおいを補給', '透明感のある肌へ', '毎日のケアに'] },
+            { title: '美容ケア', items: ['透明感アップ', '毛穴をケア', '肌のトーンを整える', '化粧ノリをサポート', '肌をなめらかに'] },
           ]
         : [
-            { title: 'Dry Skin', items: ['Deep hydration', 'Strengthens skin barrier', 'Smooths texture', 'Long-lasting moisture retention', 'Prevents fine lines from dryness'] },
-            { title: 'Sensitive Skin', items: ['Skin healing effect', 'Reduces inflammation', 'Calms irritated skin', 'Gentle enough for daily use', 'Soothes redness'] },
-            { title: 'Mature Skin', items: ['Reduces wrinkles & sagging', 'Restores elasticity', 'Promotes cell regeneration', 'Clears dullness for radiant skin', 'Revives firmness & glow'] },
-            { title: 'Beauty Focus', items: ['Brightening effect', 'Tightens pores', 'Whitening benefits', 'Improves makeup adherence', 'Even skin tone'] },
+            { title: 'Dry Skin', items: ['Provides moisture', 'Supports skin barrier', 'Smooths texture', 'Long-lasting moisture retention', 'Protects from dryness'] },
+            { title: 'Sensitive Skin', items: ['Gentle skin care', 'Calms skin', 'Gentle enough for daily use', 'Natural ingredients', 'Supports skin condition'] },
+            { title: 'Aging Signs', items: ['Adds firmness to skin', 'Keeps skin healthy', 'Replenishes moisture', 'For radiant-looking skin', 'For daily care'] },
+            { title: 'Beauty Care', items: ['Brightening care', 'Pore care', 'Evens skin tone', 'Supports makeup adherence', 'Smooths skin'] },
           ],
     },
   };
