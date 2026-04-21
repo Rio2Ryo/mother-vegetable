@@ -263,6 +263,7 @@ const tilapia: ProductData = {
   category: 'food',
   tier: 'product100',
   subcategory: 'fish',
+  subscriptionMonth: 5,
   images: ['/cdn/mv_tilapia.jpg'],
   galleryImages: [
     { url: '/cdn/mv_tilapia.jpg', alt: 'Mother Vegetable MV Fish fish product in premium packaging' },
@@ -302,6 +303,7 @@ const mvSalt: ProductData = {
   category: 'food',
   tier: 'product100',
   subcategory: 'seasoning',
+  subscriptionMonth: 6,
   images: ['/cdn/mv_salt.jpg'],
   galleryImages: [
     { url: '/cdn/mv_salt.jpg', alt: 'Mother Vegetable Salt 50g jar with distinctive green mineral-rich crystals' },
@@ -341,6 +343,7 @@ const mvSoySauce: ProductData = {
   category: 'food',
   tier: 'product100',
   subcategory: 'seasoning',
+  subscriptionMonth: 7,
   images: ['/cdn/mv_soy_sauce.jpg'],
   galleryImages: [
     { url: '/cdn/mv_soy_sauce.jpg', alt: 'Mother Vegetable Soy Sauce 150ml bottle with rich dark color' },
@@ -380,6 +383,7 @@ const mvToner: ProductData = {
   category: 'cosmetic',
   tier: 'product100',
   subcategory: 'cosmetic',
+  subscriptionMonth: 10,
   images: ['/cdn/mv_toner.jpg'],
   galleryImages: [
     { url: '/cdn/mv_toner.jpg', alt: 'Mother Vegetable Toner 150ml bottle with elegant green-tinted formula' },
@@ -422,6 +426,7 @@ const mvBalm: ProductData = {
   category: 'cosmetic',
   tier: 'product100',
   subcategory: 'cosmetic',
+  subscriptionMonth: 11,
   images: ['/cdn/mv_balm.jpg'],
   galleryImages: [
     { url: '/cdn/mv_balm.jpg', alt: 'Mother Vegetable Balm 50g tin with premium green and gold packaging' },
@@ -464,6 +469,7 @@ const mvSoap: ProductData = {
   category: 'cosmetic',
   tier: 'product100',
   subcategory: 'cosmetic',
+  subscriptionMonth: 12,
   images: ['/cdn/mv_soap.jpg'],
   galleryImages: [
     { url: '/cdn/mv_soap.jpg', alt: 'Mother Vegetable Soap 100g bar with natural green color and artisan finish' },
@@ -506,6 +512,7 @@ const mvMiso: ProductData = {
   category: 'food',
   tier: 'product100',
   subcategory: 'seasoning',
+  subscriptionMonth: 8,
   images: ['/cdn/mv_miso.jpg'],
   galleryImages: [],
   thumbnails: [],
@@ -539,6 +546,7 @@ const mvWasabi: ProductData = {
   category: 'food',
   tier: 'product100',
   subcategory: 'seasoning',
+  subscriptionMonth: 9,
   images: ['/cdn/mv_wasabi.jpg'],
   galleryImages: [],
   thumbnails: [],
@@ -844,7 +852,7 @@ const mvBodyMist: ProductData = {
   category: 'cosmetic',
   tier: 'product100',
   subcategory: 'cosmetic',
-  subscriptionMonth: 7,
+  subscriptionMonth: 11,
   images: ['/cdn/mv_body_mist.jpg'],
   galleryImages: [],
   thumbnails: [],
@@ -1048,7 +1056,7 @@ const mvHairOil: ProductData = {
   category: 'cosmetic',
   tier: 'product100',
   subcategory: 'cosmetic',
-  subscriptionMonth: 9,
+  subscriptionMonth: 10,
   images: ['/cdn/mv_hair_oil.jpg'],
   galleryImages: [],
   thumbnails: [],
@@ -1375,10 +1383,10 @@ const mvManuka: ProductData = {
 // ---------------------------------------------------------------------------
 
 /** Active products shown on the site. */
-export const products: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi, mvMatchaLatte, mvGreenSmoothie, mvMatcha, mvDressing, mvHerbSalt, mvOlive, mvSuncare, mvBodyMist, mvHandCream, mvTsuyu, mvFurikake, mvPonzu, mvFaceMist, mvHairOil, mvLipBalm, mvPonzuYuzu, mvCookingSake, mvVinegar, mvBathBomb, mvBodyCream, mvBathSalt, mvGingerTea, mvManuka, mvHoney];
+export const products: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi, mvMatcha, mvDressing, mvOlive, mvSuncare, mvBodyMist, mvHandCream, mvPonzu, mvFaceMist, mvHairOil, mvLipBalm, mvVinegar, mvBathSalt, mvGingerTea, mvHoney];
 
 /** All products including discontinued, for admin/order lookup. */
-export const allProducts: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi, mvMatchaLatte, mvGreenSmoothie, mvMatcha, mvDressing, mvHerbSalt, mvOlive, mvSuncare, mvBodyMist, mvHandCream, mvTsuyu, mvFurikake, mvPonzu, mvFaceMist, mvHairOil, mvLipBalm, mvPonzuYuzu, mvCookingSake, mvVinegar, mvBathBomb, mvBodyCream, mvBathSalt, mvGingerTea, mvManuka, mvHoney];
+export const allProducts: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi, mvMatcha, mvDressing, mvOlive, mvSuncare, mvBodyMist, mvHandCream, mvPonzu, mvFaceMist, mvHairOil, mvLipBalm, mvVinegar, mvBathSalt, mvGingerTea, mvHoney];
 
 export function getProductBySlug(slug: string): ProductData | undefined {
   return allProducts.find((p) => p.slug === slug);

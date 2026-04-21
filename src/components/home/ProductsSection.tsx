@@ -115,6 +115,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジフィッシュ' : 'MV Fish',
       tier: 'product100' as Tier,
       subcategory: 'fish' as Subcategory,
+      subscriptionMonth: 5,
       subtitle: isJa ? '1匹' : '1 fish',
       subName: '',
       tagline: isJa ? '48種の栄養素で育てた新鮮なマザベジフィッシュ' : 'Fresh MV Fish enriched with 48 nutrients',
@@ -134,6 +135,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジ塩' : 'MV Salt',
       tier: 'product100' as Tier,
       subcategory: 'seasoning' as Subcategory,
+      subscriptionMonth: 6,
       subtitle: '50g',
       subName: '',
       tagline: isJa ? '48種の栄養素配合の緑色の塩' : 'Green nutrient-infused salt',
@@ -153,6 +155,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
       tier: 'product100' as Tier,
       subcategory: 'seasoning' as Subcategory,
+      subscriptionMonth: 7,
       subtitle: '150ml',
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアム醤油' : 'Premium nutrient-rich dark soy sauce',
@@ -172,6 +175,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジ化粧水' : 'MV Toner',
       tier: 'product100' as Tier,
       subcategory: 'cosmetic' as Subcategory,
+      subscriptionMonth: 10,
       subtitle: '150ml',
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合の化粧水' : 'Confidence-powered skin toner',
@@ -191,6 +195,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジバウム' : 'MV Balm',
       tier: 'product100' as Tier,
       subcategory: 'cosmetic' as Subcategory,
+      subscriptionMonth: 11,
       subtitle: '50g',
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合のラグジュアリーバウム' : 'Confidence-powered luxury balm',
@@ -210,6 +215,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジ石鹸' : 'MV Soap',
       tier: 'product100' as Tier,
       subcategory: 'cosmetic' as Subcategory,
+      subscriptionMonth: 12,
       subtitle: '100g',
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合の手作り石鹸' : 'Confidence-powered natural soap',
@@ -229,6 +235,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジ味噌' : 'MV Miso',
       tier: 'product100' as Tier,
       subcategory: 'seasoning' as Subcategory,
+      subscriptionMonth: 8,
       subtitle: '200g',
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアム味噌' : 'Nutrient-rich premium miso',
@@ -248,7 +255,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジわさび' : 'MV Wasabi',
       tier: 'product100' as Tier,
       subcategory: 'seasoning' as Subcategory,
-      subscriptionMonth: undefined as number | undefined,
+      subscriptionMonth: 9,
       subtitle: '50g',
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアムわさび' : 'Nutrient-rich premium wasabi',
@@ -260,46 +267,6 @@ function getProducts(isJa: boolean) {
       howToUseLabel: '',
       howToLink: '',
       productLink: '/product/mv-wasabi',
-      priceUsd: '$13.50',
-      priceJpy: '¥2,000',
-    },
-    {
-      id: 'mv-matcha-latte',
-      name: isJa ? 'マザベジ抹茶ラテミックス' : 'MV Matcha Latte Mix',
-      tier: 'product100' as Tier,
-      subcategory: 'supplement' as Subcategory,
-      subscriptionMonth: 5,
-      subtitle: '30g',
-      subName: '',
-      tagline: isJa ? 'マザベジブレンドの抹茶ラテミックス' : 'Nutrient-rich matcha latte mix',
-      videoUrl: null,
-      imageUrl: '/cdn/mv_matcha_latte.jpg',
-      features: isJa
-        ? ['48種類の栄養素入り抹茶ラテ', 'クリーミーで栄養豊富な毎日のドリンク']
-        : ['Matcha latte with 48 nutrients', 'Creamy and nutritious daily drink'],
-      howToUseLabel: '',
-      howToLink: '',
-      productLink: '/product/mv-matcha-latte',
-      priceUsd: '$13.50',
-      priceJpy: '¥2,000',
-    },
-    {
-      id: 'mv-green-smoothie',
-      name: isJa ? 'マザベジグリーンスムージー' : 'MV Green Smoothie',
-      tier: 'product100' as Tier,
-      subcategory: 'supplement' as Subcategory,
-      subscriptionMonth: 5,
-      subtitle: '30g',
-      subName: '',
-      tagline: isJa ? 'マザベジブレンドのグリーンスムージー' : 'Nutrient-rich green smoothie',
-      videoUrl: null,
-      imageUrl: '/cdn/mv_green_smoothie.jpg',
-      features: isJa
-        ? ['48種類の栄養素入りグリーンスムージー', 'リフレッシュできる毎日の健康ドリンク']
-        : ['Green smoothie with 48 nutrients', 'Refreshing and nutritious daily drink'],
-      howToUseLabel: '',
-      howToLink: '',
-      productLink: '/product/mv-green-smoothie',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
     },
@@ -340,26 +307,6 @@ function getProducts(isJa: boolean) {
       howToUseLabel: '',
       howToLink: '',
       productLink: '/product/mv-dressing',
-      priceUsd: '$13.50',
-      priceJpy: '¥2,000',
-    },
-    {
-      id: 'mv-herb-salt',
-      name: isJa ? 'マザベジハーブソルト' : 'MV Herb Salt',
-      tier: 'product100' as Tier,
-      subcategory: 'seasoning' as Subcategory,
-      subscriptionMonth: 6,
-      subtitle: '50g',
-      subName: '',
-      tagline: isJa ? '48種の栄養素配合ハーブソルト' : 'Nutrient-rich herb salt',
-      videoUrl: null,
-      imageUrl: '/cdn/mv_herb_salt.jpg',
-      features: isJa
-        ? ['48種類の栄養素入りハーブソルト', '肉・魚・野菜の味付けに']
-        : ['Herb salt with 48 nutrients', 'Aromatic seasoning for everyday cooking'],
-      howToUseLabel: '',
-      howToLink: '',
-      productLink: '/product/mv-herb-salt',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
     },
@@ -408,7 +355,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジボディミスト' : 'MV Body Mist',
       tier: 'product100' as Tier,
       subcategory: 'cosmetic' as Subcategory,
-      subscriptionMonth: 7,
+      subscriptionMonth: 11,
       subtitle: '50ml',
       subName: '',
       tagline: isJa ? '天然栄養素配合のボディミスト' : 'Nutrient-rich body mist',
@@ -440,46 +387,6 @@ function getProducts(isJa: boolean) {
       howToUseLabel: '',
       howToLink: '',
       productLink: '/product/mv-handcream',
-      priceUsd: '$13.50',
-      priceJpy: '¥2,000',
-    },
-    {
-      id: 'mv-tsuyu',
-      name: isJa ? 'マザベジめんつゆ' : 'MV Tsuyu',
-      tier: 'product100' as Tier,
-      subcategory: 'seasoning' as Subcategory,
-      subscriptionMonth: 8,
-      subtitle: '150ml',
-      subName: '',
-      tagline: isJa ? '48種の栄養素配合めんつゆ' : 'Nutrient-rich tsuyu sauce',
-      videoUrl: null,
-      imageUrl: '/cdn/mv_tsuyu.jpg',
-      features: isJa
-        ? ['48種類の栄養素入りめんつゆ', 'そうめん・そば・うどんに最適']
-        : ['Nutrient-rich noodle dipping sauce', 'Perfect for somen, soba, and udon'],
-      howToUseLabel: '',
-      howToLink: '',
-      productLink: '/product/mv-tsuyu',
-      priceUsd: '$13.50',
-      priceJpy: '¥2,000',
-    },
-    {
-      id: 'mv-furikake',
-      name: isJa ? 'マザベジふりかけ' : 'MV Furikake',
-      tier: 'product100' as Tier,
-      subcategory: 'seasoning' as Subcategory,
-      subscriptionMonth: 8,
-      subtitle: '30g',
-      subName: '',
-      tagline: isJa ? '48種の栄養素配合ふりかけ' : 'Nutrient-rich furikake',
-      videoUrl: null,
-      imageUrl: '/cdn/mv_furikake.jpg',
-      features: isJa
-        ? ['48種類の栄養素入りふりかけ', 'ご飯・おにぎり・お弁当に']
-        : ['Nutrient-rich rice seasoning', 'Add nutrition to every bowl of rice'],
-      howToUseLabel: '',
-      howToLink: '',
-      productLink: '/product/mv-furikake',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
     },
@@ -528,7 +435,7 @@ function getProducts(isJa: boolean) {
       name: isJa ? 'マザベジヘアオイル' : 'MV Hair Oil',
       tier: 'product100' as Tier,
       subcategory: 'cosmetic' as Subcategory,
-      subscriptionMonth: 9,
+      subscriptionMonth: 10,
       subtitle: '30ml',
       subName: '',
       tagline: isJa ? '天然植物由来成分のヘアオイル' : 'Nutrient-rich hair oil',
@@ -564,46 +471,6 @@ function getProducts(isJa: boolean) {
       priceJpy: '¥2,000',
     },
     {
-      id: 'mv-ponzu-yuzu',
-      name: isJa ? 'マザベジゆずポン酢' : 'MV Yuzu Ponzu',
-      tier: 'product100' as Tier,
-      subcategory: 'seasoning' as Subcategory,
-      subscriptionMonth: 10,
-      subtitle: '150ml',
-      subName: '',
-      tagline: isJa ? '48種の栄養素配合ゆずポン酢' : 'Nutrient-rich yuzu ponzu',
-      videoUrl: null,
-      imageUrl: '/cdn/mv_ponzu_yuzu.jpg',
-      features: isJa
-        ? ['48種類の栄養素入りゆずポン酢', 'さわやかな柚子の香りと栄養素']
-        : ['Yuzu-flavored ponzu with 48 nutrients', 'Refreshing citrus taste for any dish'],
-      howToUseLabel: '',
-      howToLink: '',
-      productLink: '/product/mv-ponzu-yuzu',
-      priceUsd: '$13.50',
-      priceJpy: '¥2,000',
-    },
-    {
-      id: 'mv-cooking-sake',
-      name: isJa ? 'マザベジ料理酒' : 'MV Cooking Sake',
-      tier: 'product100' as Tier,
-      subcategory: 'seasoning' as Subcategory,
-      subscriptionMonth: 10,
-      subtitle: '150ml',
-      subName: '',
-      tagline: isJa ? '48種の栄養素配合料理酒' : 'Nutrient-rich cooking sake',
-      videoUrl: null,
-      imageUrl: '/cdn/mv_cooking_sake.jpg',
-      features: isJa
-        ? ['48種類の栄養素入り料理酒', '毎日の和食に栄養素をプラス']
-        : ['Nutrient-rich cooking sake', 'Enhances flavor with 48 nutrients'],
-      howToUseLabel: '',
-      howToLink: '',
-      productLink: '/product/mv-cooking-sake',
-      priceUsd: '$13.50',
-      priceJpy: '¥2,000',
-    },
-    {
       id: 'mv-vinegar',
       name: isJa ? 'マザベジ酢' : 'MV Vinegar',
       tier: 'product100' as Tier,
@@ -620,46 +487,6 @@ function getProducts(isJa: boolean) {
       howToUseLabel: '',
       howToLink: '',
       productLink: '/product/mv-vinegar',
-      priceUsd: '$13.50',
-      priceJpy: '¥2,000',
-    },
-    {
-      id: 'mv-bath-bomb',
-      name: isJa ? 'マザベジバスボム' : 'MV Bath Bomb',
-      tier: 'product100' as Tier,
-      subcategory: 'cosmetic' as Subcategory,
-      subscriptionMonth: 11,
-      subtitle: '3個入',
-      subName: '',
-      tagline: isJa ? '栄養素配合のバスボム' : 'Nutrient-rich bath bombs',
-      videoUrl: null,
-      imageUrl: '/cdn/mv_bath_bomb.jpg',
-      features: isJa
-        ? ['栄養素配合バスボム', 'シュワシュワ香るリラックスバスタイム']
-        : ['Nutrient-rich bath bombs for relaxation', 'Fizzy and aromatic bath experience'],
-      howToUseLabel: '',
-      howToLink: '',
-      productLink: '/product/mv-bath-bomb',
-      priceUsd: '$13.50',
-      priceJpy: '¥2,000',
-    },
-    {
-      id: 'mv-body-cream',
-      name: isJa ? 'マザベジボディクリーム' : 'MV Body Cream',
-      tier: 'product100' as Tier,
-      subcategory: 'cosmetic' as Subcategory,
-      subscriptionMonth: 11,
-      subtitle: '50g',
-      subName: '',
-      tagline: isJa ? '天然コラーゲン配合のボディクリーム' : 'Nutrient-rich body cream',
-      videoUrl: null,
-      imageUrl: '/cdn/mv_body_cream.jpg',
-      features: isJa
-        ? ['天然コラーゲン配合ボディクリーム', 'お風呂上がりの全身保湿に']
-        : ['Natural collagen body cream', 'Deep moisture for smooth and healthy skin'],
-      howToUseLabel: '',
-      howToLink: '',
-      productLink: '/product/mv-body-cream',
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
     },
@@ -704,26 +531,6 @@ function getProducts(isJa: boolean) {
       priceJpy: '¥2,000',
     },
     {
-      id: 'mv-manuka',
-      name: isJa ? 'マザベジマヌカブレンド' : 'MV Manuka Blend',
-      tier: 'product100' as Tier,
-      subcategory: 'supplement' as Subcategory,
-      subscriptionMonth: 12,
-      subtitle: '50g',
-      subName: '',
-      tagline: isJa ? 'マザベジ栄養素ブレンドのマヌカハニー' : 'Nutrient-rich manuka blend',
-      videoUrl: null,
-      imageUrl: '/cdn/mv_manuka.jpg',
-      features: isJa
-        ? ['48種類の栄養素入りマヌカブレンド', 'プレミアムウェルネスサプリメント']
-        : ['Manuka honey blend with 48 nutrients', 'Premium wellness supplement'],
-      howToUseLabel: '',
-      howToLink: '',
-      productLink: '/product/mv-manuka',
-      priceUsd: '$13.50',
-      priceJpy: '¥2,000',
-    },
-    {
       id: 'mv-honey',
       name: isJa ? 'マザベジ蜂蜜' : 'MV Honey',
       tier: 'product100' as Tier,
@@ -748,8 +555,8 @@ function getProducts(isJa: boolean) {
 
 type Category = 'all' | 'food' | 'cosmetic';
 
-const FOOD_IDS = new Set(['achieve', 'tilapia', 'mv-salt', 'mv-soy-sauce', 'mv-miso', 'mv-wasabi', 'mv-matcha-latte', 'mv-green-smoothie', 'mv-matcha', 'mv-dressing', 'mv-herb-salt', 'mv-olive', 'mv-tsuyu', 'mv-furikake', 'mv-ponzu', 'mv-ponzu-yuzu', 'mv-cooking-sake', 'mv-vinegar', 'mv-ginger-tea', 'mv-manuka', 'mv-honey']);
-const COSMETIC_IDS = new Set(['confidence', 'mv-toner', 'mv-balm', 'mv-soap', 'mv-suncare', 'mv-body-mist', 'mv-handcream', 'mv-face-mist', 'mv-hair-oil', 'mv-lipbalm', 'mv-bath-bomb', 'mv-body-cream', 'mv-bathsalt']);
+const FOOD_IDS = new Set(['achieve', 'tilapia', 'mv-salt', 'mv-soy-sauce', 'mv-miso', 'mv-wasabi', 'mv-matcha', 'mv-dressing', 'mv-olive', 'mv-ponzu', 'mv-vinegar', 'mv-ginger-tea', 'mv-honey']);
+const COSMETIC_IDS = new Set(['confidence', 'mv-toner', 'mv-balm', 'mv-soap', 'mv-suncare', 'mv-body-mist', 'mv-handcream', 'mv-face-mist', 'mv-hair-oil', 'mv-lipbalm', 'mv-bathsalt']);
 
 const SUBCATEGORY_LABELS: Record<string, Record<Subcategory | 'all', string>> = {
   ja: {
@@ -1150,26 +957,27 @@ export default function ProductsSection() {
           <motion.div
             key={product.id}
             variants={cardVariants}
-            className="relative rounded-lg p-3 md:p-6"
+            className="rounded-lg p-3 md:p-6"
             style={{ border: '1px solid #25c760' }}
           >
-            {/* Month Badge */}
-            {product.subscriptionMonth && (
-              <span className={`absolute top-2 left-2 md:top-3 md:left-3 z-10 ${getMonthBadgeColor(product.subscriptionMonth)} text-white text-[10px] md:text-xs font-bold px-2 py-0.5 md:px-2.5 md:py-1 rounded-full shadow-md`}>
-                {mLabels[product.subscriptionMonth]}
-              </span>
-            )}
-            {/* Stock Count */}
-            {(() => {
-              const stock = getStockCount(product.id);
-              return (
-                <span className={`absolute top-2 right-2 md:top-3 md:right-3 z-10 text-[10px] md:text-xs font-bold px-2 py-0.5 md:px-2.5 md:py-1 rounded-full shadow-sm bg-white/90 border ${
-                  stock <= 10 ? 'border-red-200 text-red-500' : stock <= 30 ? 'border-orange-200 text-orange-500' : 'border-gray-200 text-gray-600'
-                }`}>
-                  {isJa ? `残り${stock}個` : `${stock} left`}
+            {/* Badge Row */}
+            <div className="flex flex-wrap items-center gap-1.5 mb-2">
+              {product.subscriptionMonth && (
+                <span className={`${getMonthBadgeColor(product.subscriptionMonth)} text-white text-[10px] md:text-xs font-bold px-2 py-0.5 md:px-2.5 md:py-1 rounded-full`}>
+                  {mLabels[product.subscriptionMonth]}
                 </span>
-              );
-            })()}
+              )}
+              {(() => {
+                const stock = getStockCount(product.id);
+                return (
+                  <span className={`text-[10px] md:text-xs font-bold px-2 py-0.5 md:px-2.5 md:py-1 rounded-full border ${
+                    stock <= 10 ? 'border-red-400/50 text-red-400 bg-red-500/10' : stock <= 30 ? 'border-orange-400/50 text-orange-400 bg-orange-500/10' : 'border-white/20 text-white/50 bg-white/5'
+                  }`}>
+                    {isJa ? `残り${stock}個` : `${stock} left`}
+                  </span>
+                );
+              })()}
+            </div>
             {/* Mobile: Horizontal Layout / Desktop: Vertical Layout */}
             <div className="flex flex-row md:flex-col gap-3 md:gap-0">
               {/* Video or Image */}

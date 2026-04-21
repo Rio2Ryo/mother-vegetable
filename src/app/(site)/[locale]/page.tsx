@@ -5,6 +5,7 @@ import HeroSection from '@/components/home/HeroSection';
 import ProductsSection from '@/components/home/ProductsSection';
 import ProductsSkeleton from '@/components/home/ProductsSkeleton';
 import NewsSection from '@/components/home/NewsSection';
+import JackpotMeter from '@/components/home/JackpotMeter';
 
 export const metadata: Metadata = {
   title: 'Mother Vegetable - Natural Health Products',
@@ -28,6 +29,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <Suspense fallback={<ProductsSkeleton />}>
             <ProductsSection />
           </Suspense>
+        </div>
+      </section>
+      <section className="bg-black py-12 md:py-24">
+        <div className="max-w-3xl mx-auto px-5">
+          <JackpotMeter />
         </div>
       </section>
       <section className="bg-black py-12 md:py-24">

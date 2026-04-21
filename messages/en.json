@@ -429,5 +429,15 @@
     "backToAccount": "Back to My Account",
     "loading": "Loading...",
     "orderNotFound": "Order not found."
+  },
+  "jackpot": {
+    "title": "MV Jackpot",
+    "subtitle": "Let's reach the jackpot with everyone's purchases",
+    "progress": "{current} / {target}",
+    "remaining": "{count} more purchases to go!",
+    "achieved": "Jackpot reached! Everyone gets MVT 1.0 as a reward!",
+    "recentPurchases": "Recent Purchases",
+    "purchasedBy": "{name} purchased {product}",
+    "ago": "{time} ago"
   }
 }

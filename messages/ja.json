@@ -429,5 +429,15 @@
     "backToAccount": "マイページに戻る",
     "loading": "読み込み中...",
     "orderNotFound": "注文が見つかりません。"
+  },
+  "jackpot": {
+    "title": "MV ジャックポット",
+    "subtitle": "みんなの購入でジャックポットを目指そう",
+    "progress": "{current} / {target}",
+    "remaining": "あと{count}個の購入で達成！",
+    "achieved": "ジャックポット達成！全員にMVT 1.0をプレゼント！",
+    "recentPurchases": "最近の購入",
+    "purchasedBy": "{name}さんが{product}を購入",
+    "ago": "{time}前"
   }
 }

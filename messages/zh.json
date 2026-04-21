@@ -429,5 +429,15 @@
     "backToAccount": "返回我的账户",
     "loading": "加载中...",
     "orderNotFound": "未找到该订单。"
+  },
+  "jackpot": {
+    "title": "MV 大奖",
+    "subtitle": "大家一起购买，冲刺大奖吧",
+    "progress": "{current} / {target}",
+    "remaining": "再购买{count}个即可达成！",
+    "achieved": "大奖达成！所有人获得 MVT 1.0 奖励！",
+    "recentPurchases": "最近购买",
+    "purchasedBy": "{name}购买了{product}",
+    "ago": "{time}前"
   }
 }
