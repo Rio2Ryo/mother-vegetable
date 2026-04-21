@@ -71,7 +71,16 @@
     "month9": "September",
     "month10": "October",
     "month11": "November",
-    "month12": "December"
+    "month12": "December",
+    "subscriptionPlans": "Subscription Plans",
+    "planLight": "Light Plan",
+    "planStandard": "Standard Plan",
+    "planPremium": "Premium Plan",
+    "planLightDesc": "1 random product delivered monthly",
+    "planStandardDesc": "2 products delivered monthly",
+    "planPremiumDesc": "All 3 products delivered monthly",
+    "perMonth": "/mo",
+    "furusatoNouzeiDesc": "Mother Vegetable's Furusato Nouzei is coming soon"
   },
   "trust": {
     "title": "Our Trust",

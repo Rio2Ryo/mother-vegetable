@@ -71,7 +71,16 @@
     "month9": "9月",
     "month10": "10月",
     "month11": "11月",
-    "month12": "12月"
+    "month12": "12月",
+    "subscriptionPlans": "サブスクリプションプラン",
+    "planLight": "ライトプラン",
+    "planStandard": "スタンダードプラン",
+    "planPremium": "プレミアムプラン",
+    "planLightDesc": "毎月ランダムで1個お届け",
+    "planStandardDesc": "毎月2個お届け",
+    "planPremiumDesc": "毎月3個すべてお届け",
+    "perMonth": "/月",
+    "furusatoNouzeiDesc": "マザーベジタブルのふるさと納税は準備中です"
   },
   "trust": {
     "title": "Our Trust",

@@ -71,7 +71,16 @@
     "month9": "9月",
     "month10": "10月",
     "month11": "11月",
-    "month12": "12月"
+    "month12": "12月",
+    "subscriptionPlans": "订阅计划",
+    "planLight": "轻量计划",
+    "planStandard": "标准计划",
+    "planPremium": "高级计划",
+    "planLightDesc": "每月随机配送1件商品",
+    "planStandardDesc": "每月配送2件商品",
+    "planPremiumDesc": "每月配送全部3件商品",
+    "perMonth": "/月",
+    "furusatoNouzeiDesc": "Mother Vegetable的故乡纳税正在准备中"
   },
   "trust": {
     "title": "我们的信誉",
