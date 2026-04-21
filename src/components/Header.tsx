@@ -254,6 +254,17 @@ export default function Header() {
                     </ul>
                   </div>
                 </li>
+                {/* Super Wood */}
+                <li className="max-lg:w-full">
+                  <Link
+                    href="/superwood"
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t('superWood')}
+                  </Link>
+                </li>
                 {/* News */}
                 <li className="max-lg:w-full">
                   <Link

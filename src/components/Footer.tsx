@@ -86,7 +86,7 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Privacy and Terms links */}
+          {/* Privacy, Terms, and Dealer links */}
           <span
             className="text-[#25C760] text-[clamp(10px,1.2vw,14px)] font-medium tracking-[-0.025em] max-md:text-[clamp(9px,2vw,12px)]"
             style={{ fontFamily: 'Arial, sans-serif' }}
@@ -97,6 +97,10 @@ export default function Footer() {
             {' | '}
             <Link href="/terms" className="text-[#25C760] no-underline hover:underline">
               {t('termsAndConditions')}
+            </Link>
+            {' | '}
+            <Link href="/dealer" className="text-[#25C760] no-underline hover:underline">
+              {t('dealer')}
             </Link>
           </span>
 

@@ -20,7 +20,8 @@
     "about": "会社概要",
     "myAccount": "マイページ",
     "news": "ニュース",
-    "allProducts": "製品一覧"
+    "allProducts": "製品一覧",
+    "superWood": "Super Wood"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -126,7 +127,8 @@
     "privacyPolicy": "プライバシーポリシー",
     "termsAndConditions": "利用規約",
     "allRightsReserved": "無断転載を禁じます。",
-    "followUs": "フォローする"
+    "followUs": "フォローする",
+    "dealer": "代理店"
   },
   "cart": {
     "title": "マイカート",
@@ -429,6 +431,74 @@
     "backToAccount": "マイページに戻る",
     "loading": "読み込み中...",
     "orderNotFound": "注文が見つかりません。"
+  },
+  "superwood": {
+    "hero": {
+      "title": "Super Wood — スーパーウッド",
+      "subtitle": "マザーベジタブルから生まれた次世代建材"
+    },
+    "blocks": {
+      "heading": "レゴブロックのように組み立てる次世代建材",
+      "description": "Super Woodブロックを組み合わせて、あなただけの構造物を作りましょう。ホームセンター感覚で1ピースから購入できます。",
+      "addToCart": "カートに追加",
+      "items": {
+        "straight": { "name": "ストレートブロック (30cm)" },
+        "corner": { "name": "コーナーブロック" },
+        "tJoint": { "name": "Tジョイントブロック" },
+        "flatPanel": { "name": "フラットパネル (30×30cm)" },
+        "roofPanel": { "name": "ルーフパネル" },
+        "doorWindow": { "name": "ドア/窓フレーム" }
+      }
+    },
+    "scaleSef": {
+      "heading": "1/100 スケール SEF",
+      "description": "みんなで建てる Small Earth Factory — 100人が購入すると、実物のSEFが建設されます。",
+      "progress": "{current}/{goal} 人が購入済み",
+      "remaining": "あと{count}人で実物のSEFが建ちます！",
+      "buy": "購入する"
+    },
+    "fullSef": {
+      "heading": "Small Earth Factory (SEF)",
+      "subtitle": "地球と共生する次世代ファクトリー",
+      "priceNote": "完成品一棟の価格",
+      "desc1": "Small Earth Factory（SEF）は、マザーベジタブル由来のSuper Woodで建設される次世代型施設です。",
+      "desc2": "CO2を吸収し酸素を生成しながら、内部でマザーベジタブルの栽培・加工を行います。建物自体が地球環境の改善に貢献します。",
+      "desc3": "設置場所の気候や用途に合わせたカスタム設計が可能です。詳しくはお問い合わせください。",
+      "contact": "お問い合わせ"
+    }
+  },
+  "dealer": {
+    "title": "代理店プログラム",
+    "subtitle": "Mother Vegetable Dealer Program",
+    "description": "マザーベジタブルの正規代理店として、あなたのビジネスを拡大しませんか。",
+    "benefits": "代理店の特典",
+    "highCommission": "高コミッション率",
+    "highCommissionDesc": "販売額の25%",
+    "support": "サポート体制",
+    "supportDesc": "マーケティング素材・研修提供",
+    "exclusiveArea": "独占エリア",
+    "exclusiveAreaDesc": "エリア限定の販売権",
+    "howItWorks": "ご利用の流れ",
+    "step1": "申し込み",
+    "step1Desc": "フォームから応募",
+    "step2": "審査・契約",
+    "step2Desc": "審査後に契約締結",
+    "step3": "販売開始",
+    "step3Desc": "専用リンクで販売スタート",
+    "applyNow": "代理店に応募する",
+    "contact": "お問い合わせ",
+    "applyTitle": "代理店お申し込み",
+    "companyName": "会社名",
+    "fullName": "氏名",
+    "email": "メールアドレス",
+    "phone": "電話番号",
+    "area": "希望エリア",
+    "message": "メッセージ",
+    "submit": "申し込む",
+    "submitted": "お申し込みを受け付けました",
+    "submittedDesc": "内容を確認のうえ、5営業日以内にご連絡いたします。",
+    "backToDealer": "代理店プログラムに戻る",
+    "navLabel": "代理店"
   },
   "jackpot": {
     "title": "MV ジャックポット",

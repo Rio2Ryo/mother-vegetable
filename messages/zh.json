@@ -20,7 +20,8 @@
     "about": "关于我们",
     "myAccount": "我的账户",
     "news": "新闻",
-    "allProducts": "产品列表"
+    "allProducts": "产品列表",
+    "superWood": "Super Wood"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -126,7 +127,8 @@
     "privacyPolicy": "隐私政策",
     "termsAndConditions": "使用条款",
     "allRightsReserved": "保留所有权利。",
-    "followUs": "关注我们"
+    "followUs": "关注我们",
+    "dealer": "经销商"
   },
   "cart": {
     "title": "我的购物车",
@@ -429,6 +431,74 @@
     "backToAccount": "返回我的账户",
     "loading": "加载中...",
     "orderNotFound": "未找到该订单。"
+  },
+  "superwood": {
+    "hero": {
+      "title": "Super Wood — 超级木材",
+      "subtitle": "源自Mother Vegetable的下一代建材"
+    },
+    "blocks": {
+      "heading": "像乐高积木一样组装的下一代建材",
+      "description": "组合Super Wood积木，打造属于你的建筑。像在建材超市一样，可以单块购买。",
+      "addToCart": "加入购物车",
+      "items": {
+        "straight": { "name": "直线积木 (30cm)" },
+        "corner": { "name": "转角积木" },
+        "tJoint": { "name": "T型接头积木" },
+        "flatPanel": { "name": "平板 (30×30cm)" },
+        "roofPanel": { "name": "屋顶板" },
+        "doorWindow": { "name": "门/窗框" }
+      }
+    },
+    "scaleSef": {
+      "heading": "1/100 比例 SEF",
+      "description": "一起建造 Small Earth Factory — 100人购买后，将建造一座真正的SEF。",
+      "progress": "已有 {current}/{goal} 人购买",
+      "remaining": "还差{count}人就能建造真正的SEF！",
+      "buy": "购买"
+    },
+    "fullSef": {
+      "heading": "Small Earth Factory (SEF)",
+      "subtitle": "与地球共生的下一代工厂",
+      "priceNote": "一栋完整单元的价格",
+      "desc1": "Small Earth Factory（SEF）是使用源自Mother Vegetable的Super Wood建造的下一代设施。",
+      "desc2": "它在吸收CO2、产生氧气的同时，在内部进行Mother Vegetable的种植和加工。建筑本身就在为改善地球环境做贡献。",
+      "desc3": "可根据安装地点的气候和用途进行定制设计。详情请咨询我们。",
+      "contact": "联系我们"
+    }
+  },
+  "dealer": {
+    "title": "经销商计划",
+    "subtitle": "Mother Vegetable Dealer Program",
+    "description": "成为Mother Vegetable授权经销商，拓展您的业务。",
+    "benefits": "经销商优势",
+    "highCommission": "高佣金率",
+    "highCommissionDesc": "销售额的25%",
+    "support": "全面支持",
+    "supportDesc": "提供营销材料和培训",
+    "exclusiveArea": "独家区域",
+    "exclusiveAreaDesc": "区域独家销售权",
+    "howItWorks": "如何运作",
+    "step1": "申请",
+    "step1Desc": "通过表单提交申请",
+    "step2": "审核与签约",
+    "step2Desc": "审核后签订协议",
+    "step3": "开始销售",
+    "step3Desc": "获取专属链接开始销售",
+    "applyNow": "立即申请",
+    "contact": "联系我们",
+    "applyTitle": "经销商申请",
+    "companyName": "公司名称",
+    "fullName": "姓名",
+    "email": "电子邮件",
+    "phone": "电话号码",
+    "area": "期望区域",
+    "message": "留言",
+    "submit": "提交申请",
+    "submitted": "申请已提交",
+    "submittedDesc": "我们将在5个工作日内与您联系。",
+    "backToDealer": "返回经销商计划",
+    "navLabel": "经销商"
   },
   "jackpot": {
     "title": "MV 大奖",

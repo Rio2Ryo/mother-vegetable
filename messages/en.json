@@ -20,7 +20,8 @@
     "about": "About",
     "myAccount": "My Account",
     "news": "News",
-    "allProducts": "Product List"
+    "allProducts": "Product List",
+    "superWood": "Super Wood"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",
@@ -126,7 +127,8 @@
     "privacyPolicy": "Privacy Policy",
     "termsAndConditions": "Terms and Conditions",
     "allRightsReserved": "All rights reserved.",
-    "followUs": "Follow Us"
+    "followUs": "Follow Us",
+    "dealer": "Dealer"
   },
   "cart": {
     "title": "My Cart",
@@ -429,6 +431,74 @@
     "backToAccount": "Back to My Account",
     "loading": "Loading...",
     "orderNotFound": "Order not found."
+  },
+  "superwood": {
+    "hero": {
+      "title": "Super Wood — スーパーウッド",
+      "subtitle": "Next-generation building material born from Mother Vegetable"
+    },
+    "blocks": {
+      "heading": "Next-gen building blocks — assemble like Lego",
+      "description": "Combine Super Wood blocks to build your own structures. Buy individual pieces just like at a home center.",
+      "addToCart": "Add to Cart",
+      "items": {
+        "straight": { "name": "Straight Block (30cm)" },
+        "corner": { "name": "Corner Block" },
+        "tJoint": { "name": "T-Joint Block" },
+        "flatPanel": { "name": "Flat Panel (30×30cm)" },
+        "roofPanel": { "name": "Roof Panel" },
+        "doorWindow": { "name": "Door/Window Frame" }
+      }
+    },
+    "scaleSef": {
+      "heading": "1/100 Scale SEF",
+      "description": "Build a Small Earth Factory together — when 100 people buy, a real SEF gets built.",
+      "progress": "{current}/{goal} purchased",
+      "remaining": "{count} more to build a real SEF!",
+      "buy": "Buy Now"
+    },
+    "fullSef": {
+      "heading": "Small Earth Factory (SEF)",
+      "subtitle": "A next-generation factory that coexists with Earth",
+      "priceNote": "Price for one complete unit",
+      "desc1": "The Small Earth Factory (SEF) is a next-generation facility built with Super Wood derived from Mother Vegetable.",
+      "desc2": "It absorbs CO2, generates oxygen, and cultivates & processes Mother Vegetable inside. The building itself contributes to improving the global environment.",
+      "desc3": "Custom designs are available based on climate and intended use. Contact us for details.",
+      "contact": "Contact Us"
+    }
+  },
+  "dealer": {
+    "title": "Dealer Program",
+    "subtitle": "Mother Vegetable Dealer Program",
+    "description": "Partner with Mother Vegetable as an authorized dealer.",
+    "benefits": "Dealer Benefits",
+    "highCommission": "High Commission",
+    "highCommissionDesc": "25% of sales",
+    "support": "Full Support",
+    "supportDesc": "Marketing materials & training provided",
+    "exclusiveArea": "Exclusive Territory",
+    "exclusiveAreaDesc": "Exclusive sales rights in your area",
+    "howItWorks": "How It Works",
+    "step1": "Apply",
+    "step1Desc": "Submit your application through our form",
+    "step2": "Review & Contract",
+    "step2Desc": "We review and finalize the agreement",
+    "step3": "Start Selling",
+    "step3Desc": "Get your dealer link and start selling",
+    "applyNow": "Apply Now",
+    "contact": "Contact Us",
+    "applyTitle": "Dealer Application",
+    "companyName": "Company Name",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "area": "Desired Area",
+    "message": "Message",
+    "submit": "Submit Application",
+    "submitted": "Application Submitted",
+    "submittedDesc": "We will review your application and contact you within 5 business days.",
+    "backToDealer": "Back to Dealer Program",
+    "navLabel": "Dealer"
   },
   "jackpot": {
     "title": "MV Jackpot",
