@@ -1,0 +1,217 @@
+import { setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
+import SimpleProductPage, { type SimpleProductPageData } from '@/components/SimpleProductPage';
+import ProductJsonLd from '@/components/ProductJsonLd';
+import { getProductBySlug } from '@/data/products';
+
+export const metadata: Metadata = {
+  title: 'マザベジ味噌 — Mother Vegetable',
+  description:
+    'Premium miso paste with 48 nutrients. 200g. ¥2,000.',
+  openGraph: {
+    title: 'マザベジ味噌 — Mother Vegetable',
+    description: 'Nutrient-rich premium miso with 48 natural nutrients.',
+    images: [{ url: '/cdn/mv_miso.jpg', width: 800, height: 800, alt: 'マザベジ味噌' }],
+  },
+};
+
+function getMvMisoProduct(locale: string): SimpleProductPageData {
+  const isJa = locale === 'ja';
+
+  return {
+    id: 'mv-miso',
+    category: 'food',
+    name: isJa ? 'マザベジ味噌' : 'MV Miso',
+    fullName: isJa ? 'マザベジ味噌 / 200g' : 'Mother Vegetable Miso / 200g',
+    subtitle: '200g',
+    tagline: isJa ? '48種の栄養素配合のプレミアム味噌。' : 'Nutrient-rich premium miso.',
+    price: 13.50,
+    currency: 'USD',
+    priceJpy: '¥2,000',
+
+    inStock: getProductBySlug('mv-miso')?.inStock ?? true,
+    productImage: '/cdn/mv_miso.jpg',
+    galleryImages: (getProductBySlug('mv-miso')?.galleryImages?.length ?? 0) > 0
+      ? getProductBySlug('mv-miso')!.galleryImages
+      : undefined,
+    benefits: isJa
+      ? [
+          '栄養豊富 — 48種の植物由来栄養素を配合したプレミアム味噌。',
+          '伝統の味わい — 伝統的な味噌の旨味に植物由来の栄養をプラス。',
+          '手軽に栄養強化 — 普段の味噌をマザベジ味噌に替えるだけで栄養価がアップ。',
+          '万能調味料 — 味噌汁・炒め物・ドレッシングなど幅広く使える。',
+        ]
+      : [
+          'Nutrient-Rich — Premium miso paste enhanced with 48 plant-based nutrients.',
+          'Traditional Flavor — Classic miso taste with added plant-based nutrition.',
+          'Effortless Nutrition — Simply replace your regular miso to boost daily intake.',
+          'Versatile Ingredient — Perfect for miso soup, stir-fries, dressings, and marinades.',
+        ],
+    howToUse: isJa
+      ? '味噌汁：お湯に溶かして具材を加えるだけ。調理：炒め物・煮物の味付けに。ドレッシング：酢やオイルと混ぜてサラダに。'
+      : 'Miso Soup: Dissolve in hot water and add ingredients. Cooking: Use as seasoning for stir-fries and simmered dishes. Dressing: Mix with vinegar and oil for salads.',
+    trust: {
+      productName: isJa ? 'マザベジ味噌' : 'MV Miso',
+      certification: isJa
+        ? '厚生労働省によりヒューマングレード食品認定'
+        : 'certified human grade food by Ministry of Health, Labour and Welfare (MHLW), Japan',
+      partners: [
+        '/Images/Assets/homepage/company/partner_1.png',
+        '/Images/Assets/homepage/company/partner_2.png',
+        '/Images/Assets/homepage/company/partner_3.png',
+        '/Images/Assets/homepage/company/partner_4.png',
+        '/Images/Assets/homepage/company/partner_5.png',
+        '/Images/Assets/homepage/company/partner_6.png',
+      ],
+    },
+    functionSection: {
+      subtitle: isJa ? 'マザベジ味噌' : 'MV Miso',
+      ingredientInfo: isJa
+        ? [
+            { label: 'エネルギー', value: '398kcal' },
+            { label: 'タンパク質', value: '65g' },
+            { label: '脂質', value: '6.5g' },
+            { label: '炭水化物', value: '20g' },
+            { label: 'ミネラル', value: '8g' },
+          ]
+        : [
+            { label: 'Energy', value: '398kcal' },
+            { label: 'Protein', value: '65g' },
+            { label: 'Fat', value: '6.5g' },
+            { label: 'Carbohydrates', value: '20g' },
+            { label: 'Minerals', value: '8g' },
+          ],
+      nutritionalDetails: isJa
+        ? [
+            { name: 'カリウム', value: '含有' },
+            { name: 'ナトリウム', value: '含有' },
+            { name: 'マグネシウム', value: '含有' },
+            { name: 'カルシウム', value: '含有' },
+            { name: 'リン', value: '含有' },
+            { name: '鉄', value: '含有' },
+            { name: 'マンガン', value: '含有' },
+            { name: '亜鉛', value: '含有' },
+            { name: '銅', value: '含有' },
+            { name: 'ビタミンA', value: '含有' },
+            { name: 'ビタミンB1', value: '含有' },
+            { name: 'ビタミンB2', value: '含有' },
+            { name: 'ビタミンB3', value: '含有' },
+            { name: 'ビタミンB5', value: '含有' },
+            { name: 'ビタミンB6', value: '含有' },
+            { name: 'ビタミンB9', value: '含有' },
+            { name: 'ビタミンC', value: '含有' },
+            { name: 'ビタミンE', value: '含有' },
+            { name: 'ビタミンK', value: '含有' },
+            { name: 'トリプトファン', value: '含有' },
+            { name: 'スレオニン', value: '含有' },
+            { name: 'ロイシン', value: '含有' },
+            { name: 'イソロイシン', value: '含有' },
+            { name: 'リジン', value: '含有' },
+            { name: 'メチオニン', value: '含有' },
+            { name: 'フェニルアラニン', value: '含有' },
+            { name: 'バリン', value: '含有' },
+            { name: 'ヒスチジン', value: '含有' },
+            { name: 'アルギニン', value: '含有' },
+            { name: 'シスチン', value: '含有' },
+            { name: 'チロシン', value: '含有' },
+            { name: 'アラニン', value: '含有' },
+            { name: 'アスパラギン酸', value: '含有' },
+            { name: 'グルタミン酸', value: '含有' },
+            { name: 'セリン', value: '含有' },
+            { name: 'グリシン', value: '含有' },
+            { name: 'プロリン', value: '含有' },
+            { name: '飽和脂肪酸', value: '含有' },
+            { name: 'オメガ3脂肪酸', value: '含有' },
+            { name: 'オメガ6脂肪酸', value: '含有' },
+            { name: 'C-フィコシアニン', value: '含有' },
+            { name: 'クロロフィルa', value: '含有' },
+            { name: '総カロテノイド', value: '含有' },
+            { name: '核酸', value: '含有' },
+            { name: 'グリコーゲン様多糖類', value: '含有' },
+            { name: 'グルカン様多糖類', value: '含有' },
+            { name: 'セルロース', value: '含有' },
+          ]
+        : [
+            { name: 'Potassium', value: 'Included' },
+            { name: 'Sodium', value: 'Included' },
+            { name: 'Magnesium', value: 'Included' },
+            { name: 'Calcium', value: 'Included' },
+            { name: 'Phosphorus', value: 'Included' },
+            { name: 'Iron', value: 'Included' },
+            { name: 'Manganese', value: 'Included' },
+            { name: 'Zinc', value: 'Included' },
+            { name: 'Copper', value: 'Included' },
+            { name: 'Vitamin A', value: 'Included' },
+            { name: 'Vitamin B1', value: 'Included' },
+            { name: 'Vitamin B2', value: 'Included' },
+            { name: 'Vitamin B3', value: 'Included' },
+            { name: 'Vitamin B5', value: 'Included' },
+            { name: 'Vitamin B6', value: 'Included' },
+            { name: 'Vitamin B9', value: 'Included' },
+            { name: 'Vitamin C', value: 'Included' },
+            { name: 'Vitamin E', value: 'Included' },
+            { name: 'Vitamin K', value: 'Included' },
+            { name: 'Tryptophan', value: 'Included' },
+            { name: 'Threonine', value: 'Included' },
+            { name: 'Leucine', value: 'Included' },
+            { name: 'Isoleucine', value: 'Included' },
+            { name: 'Lysine', value: 'Included' },
+            { name: 'Methionine', value: 'Included' },
+            { name: 'Phenylalanine', value: 'Included' },
+            { name: 'Valine', value: 'Included' },
+            { name: 'Histidine', value: 'Included' },
+            { name: 'Arginine', value: 'Included' },
+            { name: 'Cystine', value: 'Included' },
+            { name: 'Tyrosine', value: 'Included' },
+            { name: 'Alanine', value: 'Included' },
+            { name: 'Aspartic Acid', value: 'Included' },
+            { name: 'Glutamic Acid', value: 'Included' },
+            { name: 'Serine', value: 'Included' },
+            { name: 'Glycine', value: 'Included' },
+            { name: 'Proline', value: 'Included' },
+            { name: 'Saturated Fatty Acids', value: 'Included' },
+            { name: 'Omega-3 Fatty Acids', value: 'Included' },
+            { name: 'Omega-6 Fatty Acids', value: 'Included' },
+            { name: 'C-Phycocyanin', value: 'Included' },
+            { name: 'Chlorophyll a', value: 'Included' },
+            { name: 'Total Carotenoids', value: 'Included' },
+            { name: 'Nucleic Acids', value: 'Included' },
+            { name: 'Glycogen-like Polysaccharides', value: 'Included' },
+            { name: 'Glucan-like Polysaccharides', value: 'Included' },
+            { name: 'Cellulose', value: 'Included' },
+          ],
+      nutrientCount: isJa ? '48種の栄養素' : '48 Nutrients',
+      benefits: isJa
+        ? [
+            { title: '子ども', items: ['成長に必要なミネラル補給', '免疫力の向上', '骨の成長をサポート', '鉄分で集中力アップ', '偏食でもミネラル確保'] },
+            { title: '成人', items: ['毎日の栄養補給を手軽に', '代謝の改善', '疲労軽減', '電解質バランスの維持', '抗酸化ミネラルで細胞保護'] },
+            { title: '高齢者', items: ['ミネラルバランスの維持', '食欲と栄養摂取の向上', '骨密度の促進', '減塩しながら栄養補給', '消化を助けるミネラル配合'] },
+            { title: 'アスリート', items: ['電解質の効率的な補給', '筋肉回復のサポート', '効率的な栄養吸収', '運動後のミネラル補充', '持久力向上をサポート'] },
+          ]
+        : [
+            { title: 'Children', items: ['Essential minerals for growth', 'Boosts immunity', 'Supports bone development', 'Iron improves focus & concentration', 'Ensures mineral intake for picky eaters'] },
+            { title: 'Adults', items: ['Effortless daily nutrition', 'Improves metabolism', 'Reduces fatigue', 'Maintains electrolyte balance', 'Antioxidant minerals protect cells'] },
+            { title: 'Seniors', items: ['Maintains mineral balance', 'Boosts appetite & nutrient intake', 'Promotes bone density', 'Nutrition boost with less sodium', 'Digestive-friendly mineral blend'] },
+            { title: 'Athletes', items: ['Efficient electrolyte replenishment', 'Supports muscle recovery', 'Enhanced nutrient absorption', 'Post-workout mineral restoration', 'Supports endurance performance'] },
+          ],
+    },
+  };
+}
+
+export default async function MvMisoPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const product = getMvMisoProduct(locale);
+  return (
+    <>
+      <ProductJsonLd
+        name="マザベジ味噌"
+        description="Premium miso paste with 48 nutrients. 200g."
+        image="/cdn/mv_miso.jpg"
+        price={13.50}
+        slug="mv-miso"
+      />
+      <SimpleProductPage product={product} />
+    </>
+  );
+}

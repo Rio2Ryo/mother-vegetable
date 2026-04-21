@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import { useLocale } from 'next-intl';
@@ -35,6 +35,7 @@ const cardVariants = {
 };
 
 type Tier = 'regular' | 'product100';
+type Subcategory = 'seasoning' | 'supplement' | 'cosmetic' | 'fish';
 
 const REGULAR_IDS = new Set(['achieve', 'confidence']);
 
@@ -44,6 +45,7 @@ function getProducts(isJa: boolean) {
       id: 'achieve',
       name: 'Achieve',
       tier: 'regular' as Tier,
+      subcategory: undefined as Subcategory | undefined,
       subtitle: isJa ? '飲むタイプ' : 'Drinkable Type',
       subName: isJa ? 'フレッシュドライプロテイン' : 'Flesh Dry Protein',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
@@ -62,6 +64,7 @@ function getProducts(isJa: boolean) {
       id: 'confidence',
       name: 'Confidence',
       tier: 'regular' as Tier,
+      subcategory: undefined as Subcategory | undefined,
       subtitle: isJa ? '肌に塗るタイプ' : 'Topical Type',
       subName: isJa ? 'フレッシュブリッジコラーゲン' : 'Flesh Bridge Collagen',
       tagline: isJa ? '肌の気になるところに直接塗布' : 'For All Skin Types',
@@ -80,6 +83,7 @@ function getProducts(isJa: boolean) {
       id: 'tilapia',
       name: isJa ? 'マザベジフィッシュ' : 'MV Fish',
       tier: 'product100' as Tier,
+      subcategory: 'fish' as Subcategory,
       subtitle: isJa ? '1匹' : '1 fish',
       subName: '',
       tagline: isJa ? '48種の栄養素で育てた新鮮なマザベジフィッシュ' : 'Fresh MV Fish enriched with 48 nutrients',
@@ -98,6 +102,7 @@ function getProducts(isJa: boolean) {
       id: 'mv-salt',
       name: isJa ? 'マザベジ塩' : 'MV Salt',
       tier: 'product100' as Tier,
+      subcategory: 'seasoning' as Subcategory,
       subtitle: '50g',
       subName: '',
       tagline: isJa ? '48種の栄養素配合の緑色の塩' : 'Green nutrient-infused salt',
@@ -116,6 +121,7 @@ function getProducts(isJa: boolean) {
       id: 'mv-soy-sauce',
       name: isJa ? 'マザベジ醤油' : 'MV Soy Sauce',
       tier: 'product100' as Tier,
+      subcategory: 'seasoning' as Subcategory,
       subtitle: '150ml',
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアム醤油' : 'Premium nutrient-rich dark soy sauce',
@@ -134,6 +140,7 @@ function getProducts(isJa: boolean) {
       id: 'mv-toner',
       name: isJa ? 'マザベジ化粧水' : 'MV Toner',
       tier: 'product100' as Tier,
+      subcategory: 'cosmetic' as Subcategory,
       subtitle: '150ml',
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合の化粧水' : 'Confidence-powered skin toner',
@@ -152,6 +159,7 @@ function getProducts(isJa: boolean) {
       id: 'mv-balm',
       name: isJa ? 'マザベジバウム' : 'MV Balm',
       tier: 'product100' as Tier,
+      subcategory: 'cosmetic' as Subcategory,
       subtitle: '50g',
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合のラグジュアリーバウム' : 'Confidence-powered luxury balm',
@@ -170,6 +178,7 @@ function getProducts(isJa: boolean) {
       id: 'mv-soap',
       name: isJa ? 'マザベジ石鹸' : 'MV Soap',
       tier: 'product100' as Tier,
+      subcategory: 'cosmetic' as Subcategory,
       subtitle: '100g',
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合の手作り石鹸' : 'Confidence-powered natural soap',
@@ -184,13 +193,68 @@ function getProducts(isJa: boolean) {
       priceUsd: '$13.50',
       priceJpy: '¥2,000',
     },
+    {
+      id: 'mv-miso',
+      name: isJa ? 'マザベジ味噌' : 'MV Miso',
+      tier: 'product100' as Tier,
+      subcategory: 'seasoning' as Subcategory,
+      subtitle: '200g',
+      subName: '',
+      tagline: isJa ? '48種の栄養素配合プレミアム味噌' : 'Nutrient-rich premium miso',
+      videoUrl: null,
+      imageUrl: '/cdn/mv_miso.jpg',
+      features: isJa
+        ? ['48種類の栄養素入りプレミアム味噌', '伝統の味わいに植物由来の栄養をプラス']
+        : ['Premium miso with 48 nutrients', 'Traditional flavor with plant-based nutrition'],
+      howToUseLabel: '',
+      howToLink: '',
+      productLink: '/product/mv-miso',
+      priceUsd: '$13.50',
+      priceJpy: '¥2,000',
+    },
+    {
+      id: 'mv-wasabi',
+      name: isJa ? 'マザベジわさび' : 'MV Wasabi',
+      tier: 'product100' as Tier,
+      subcategory: 'seasoning' as Subcategory,
+      subtitle: '50g',
+      subName: '',
+      tagline: isJa ? '48種の栄養素配合プレミアムわさび' : 'Nutrient-rich premium wasabi',
+      videoUrl: null,
+      imageUrl: '/cdn/mv_wasabi.jpg',
+      features: isJa
+        ? ['48種類の栄養素入りプレミアムわさび', '新鮮なわさびの風味に栄養素をプラス']
+        : ['Premium wasabi with 48 nutrients', 'Fresh wasabi flavor with added health benefits'],
+      howToUseLabel: '',
+      howToLink: '',
+      productLink: '/product/mv-wasabi',
+      priceUsd: '$13.50',
+      priceJpy: '¥2,000',
+    },
   ];
 }
 
 type Category = 'all' | 'food' | 'cosmetic';
 
-const FOOD_IDS = new Set(['achieve', 'tilapia', 'mv-salt', 'mv-soy-sauce']);
+const FOOD_IDS = new Set(['achieve', 'tilapia', 'mv-salt', 'mv-soy-sauce', 'mv-miso', 'mv-wasabi']);
 const COSMETIC_IDS = new Set(['confidence', 'mv-toner', 'mv-balm', 'mv-soap']);
+
+const SUBCATEGORY_LABELS: Record<string, Record<Subcategory | 'all', string>> = {
+  ja: {
+    all: 'すべて',
+    seasoning: '調味料',
+    supplement: 'サプリ',
+    cosmetic: 'コスメ',
+    fish: 'フィッシュ',
+  },
+  en: {
+    all: 'All',
+    seasoning: 'Seasoning',
+    supplement: 'Supplement',
+    cosmetic: 'Cosmetic',
+    fish: 'Fish',
+  },
+};
 
 export default function ProductsSection() {
   const locale = useLocale();
@@ -201,6 +265,7 @@ export default function ProductsSection() {
     () => Object.fromEntries(products.map((p) => [p.id, 1]))
   );
   const [activeCategory, setActiveCategory] = useState<Category>('all');
+  const [activeSubcategory, setActiveSubcategory] = useState<Subcategory | 'all'>('all');
   const [hasReferral, setHasReferral] = useState(false);
 
   useEffect(() => {
@@ -218,15 +283,39 @@ export default function ProductsSection() {
   const regularProducts = filteredProducts.filter((p) => p.tier === 'regular');
   const product100Products = filteredProducts.filter((p) => p.tier === 'product100');
 
+  // Determine which subcategories exist in the current product100 list
+  const availableSubcategories = useMemo(() => {
+    const subs = new Set<Subcategory>();
+    product100Products.forEach((p) => {
+      if (p.subcategory) subs.add(p.subcategory);
+    });
+    return subs;
+  }, [product100Products]);
+
+  // Filter product100 by subcategory
+  const filteredProduct100 = activeSubcategory === 'all'
+    ? product100Products
+    : product100Products.filter((p) => p.subcategory === activeSubcategory);
+
   const tierLabels = {
     regular: isJa ? 'レギュラー商品' : 'Regular',
-    product100: isJa ? 'プロダクト100' : 'Product 100',
+    product100: isJa ? 'MV プロダクト100' : 'MV Product 100',
   };
 
   const categories: { key: Category; label: string }[] = [
     { key: 'all', label: isJa ? 'すべて' : 'All' },
     { key: 'food', label: isJa ? 'フード' : 'Food' },
     { key: 'cosmetic', label: isJa ? 'コスメ' : 'Cosmetic' },
+  ];
+
+  const subcatLabels = SUBCATEGORY_LABELS[isJa ? 'ja' : 'en'] ?? SUBCATEGORY_LABELS.en;
+
+  // Build subcategory filter buttons (only show categories that have products)
+  const subcategoryButtons: { key: Subcategory | 'all'; label: string }[] = [
+    { key: 'all', label: subcatLabels.all },
+    ...(['seasoning', 'supplement', 'cosmetic', 'fish'] as Subcategory[])
+      .filter((s) => availableSubcategories.has(s))
+      .map((s) => ({ key: s, label: subcatLabels[s] })),
   ];
 
   return (
@@ -397,14 +486,34 @@ export default function ProductsSection() {
           <h3 className="text-lg md:text-2xl font-bold text-center mb-4 md:mb-6" style={{ color: '#25c760' }}>
             {tierLabels.product100}
           </h3>
+
+          {/* Subcategory Filter */}
+          {subcategoryButtons.length > 2 && (
+            <div className="flex flex-wrap justify-center gap-2 md:gap-2 mb-6 md:mb-8">
+              {subcategoryButtons.map((sub) => (
+                <button
+                  key={sub.key}
+                  onClick={() => setActiveSubcategory(sub.key)}
+                  className={`px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-semibold transition-colors ${
+                    activeSubcategory === sub.key
+                      ? 'bg-[#25c760]/20 text-[#25c760] border border-[#25c760]'
+                      : 'border border-white/20 text-white/50 hover:border-[#25c760]/50 hover:text-[#25c760]/70'
+                  }`}
+                >
+                  {sub.label}
+                </button>
+              ))}
+            </div>
+          )}
+
           <motion.div
-            key={`product100-${activeCategory}`}
+            key={`product100-${activeCategory}-${activeSubcategory}`}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            {product100Products.map((product) => (
+            {filteredProduct100.map((product) => (
           <motion.div
             key={product.id}
             variants={cardVariants}
@@ -481,7 +590,7 @@ export default function ProductsSection() {
                 <button
                   onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: Math.max(1, (prev[product.id] ?? 1) - 1) }))}
                   className="w-9 h-9 rounded-full border-2 border-[#25c760] text-[#25c760] font-bold text-xl flex items-center justify-center hover:bg-[#25c760]/20 transition-colors"
-                >−</button>
+                >{'\u2212'}</button>
                 <span className="text-white font-bold text-base w-8 text-center">{quantities[product.id] ?? 1}</span>
                 <button
                   onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: (prev[product.id] ?? 1) + 1 }))}
@@ -517,6 +626,34 @@ export default function ProductsSection() {
           </motion.div>
         ))}
           </motion.div>
+
+          {/* Coming Soon */}
+          <div className="mt-8 md:mt-12 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+              <div className="rounded-lg border border-white/10 bg-white/5 p-4 md:p-5 flex items-center gap-3">
+                <span className="text-2xl">{'🎁'}</span>
+                <div className="flex-1">
+                  <p className="text-white/40 text-sm md:text-base font-medium">
+                    {isJa ? '月額サブスクリプション（5月〜12月）' : 'Monthly Subscription (May - December)'}
+                  </p>
+                </div>
+                <span className="text-[10px] md:text-xs font-semibold text-white/30 bg-white/10 rounded px-2 py-0.5 whitespace-nowrap">
+                  Coming Soon
+                </span>
+              </div>
+              <div className="rounded-lg border border-white/10 bg-white/5 p-4 md:p-5 flex items-center gap-3">
+                <span className="text-2xl">{'🏠'}</span>
+                <div className="flex-1">
+                  <p className="text-white/40 text-sm md:text-base font-medium">
+                    {isJa ? 'ふるさと納税' : 'Furusato Nouzei (Hometown Tax)'}
+                  </p>
+                </div>
+                <span className="text-[10px] md:text-xs font-semibold text-white/30 bg-white/10 rounded px-2 py-0.5 whitespace-nowrap">
+                  Coming Soon
+                </span>
+              </div>
+            </div>
+          </div>
         </>
       )}
 

@@ -32,7 +32,7 @@
     "title": "Products",
     "toBuy": "To Buy",
     "regular": "Regular",
-    "product100": "Product 100",
+    "product100": "MV Product 100",
     "achieve": {
       "name": "Achieve",
       "subtitle": "for Body",
@@ -54,7 +54,15 @@
         "Helps keep skin looking healthy."
       ],
       "howToUse": "Apply directly or mix into your current cosmetics."
-    }
+    },
+    "subcategory_all": "All",
+    "subcategory_seasoning": "Seasoning",
+    "subcategory_supplement": "Supplement",
+    "subcategory_cosmetic": "Cosmetic",
+    "subcategory_fish": "Fish",
+    "comingSoon": "Coming Soon",
+    "monthlySubscription": "Monthly Subscription (May - December)",
+    "furusatoNouzei": "Furusato Nouzei (Hometown Tax)"
   },
   "trust": {
     "title": "Our Trust",

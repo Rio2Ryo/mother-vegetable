@@ -32,7 +32,7 @@
     "title": "产品",
     "toBuy": "立即购买",
     "regular": "常规产品",
-    "product100": "Product 100",
+    "product100": "MV Product 100",
     "achieve": {
       "name": "Achieve",
       "subtitle": "身体健康",
@@ -54,7 +54,15 @@
         "帮助保持肌肤健康状态。"
       ],
       "howToUse": "直接涂抹或混入您的化妆品中。"
-    }
+    },
+    "subcategory_all": "全部",
+    "subcategory_seasoning": "调味料",
+    "subcategory_supplement": "保健品",
+    "subcategory_cosmetic": "化妆品",
+    "subcategory_fish": "鱼类",
+    "comingSoon": "Coming Soon",
+    "monthlySubscription": "月度订阅（5月至12月）",
+    "furusatoNouzei": "故乡纳税"
   },
   "trust": {
     "title": "我们的信誉",

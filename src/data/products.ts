@@ -41,6 +41,8 @@ export interface ProductData {
   inStock: boolean;
   priceJpy: string;
   galleryImages: GalleryImage[];
+  subscriptionMonth?: number; // 5-12 for May-December monthly subscription
+  subcategory?: 'seasoning' | 'supplement' | 'cosmetic' | 'fish';
   // category-specific mix-in items
   drinkItems?: MixItem[];
   foodItems?: MixItem[];
@@ -260,6 +262,7 @@ const tilapia: ProductData = {
   sku: 'MV-TIL-001',
   category: 'food',
   tier: 'product100',
+  subcategory: 'fish',
   images: ['/cdn/mv_tilapia.jpg'],
   galleryImages: [
     { url: '/cdn/mv_tilapia.jpg', alt: 'Mother Vegetable MV Fish fish product in premium packaging' },
@@ -298,6 +301,7 @@ const mvSalt: ProductData = {
   sku: 'MV-SAL-050',
   category: 'food',
   tier: 'product100',
+  subcategory: 'seasoning',
   images: ['/cdn/mv_salt.jpg'],
   galleryImages: [
     { url: '/cdn/mv_salt.jpg', alt: 'Mother Vegetable Salt 50g jar with distinctive green mineral-rich crystals' },
@@ -336,6 +340,7 @@ const mvSoySauce: ProductData = {
   sku: 'MV-SOY-150',
   category: 'food',
   tier: 'product100',
+  subcategory: 'seasoning',
   images: ['/cdn/mv_soy_sauce.jpg'],
   galleryImages: [
     { url: '/cdn/mv_soy_sauce.jpg', alt: 'Mother Vegetable Soy Sauce 150ml bottle with rich dark color' },
@@ -374,6 +379,7 @@ const mvToner: ProductData = {
   sku: 'MV-TON-150',
   category: 'cosmetic',
   tier: 'product100',
+  subcategory: 'cosmetic',
   images: ['/cdn/mv_toner.jpg'],
   galleryImages: [
     { url: '/cdn/mv_toner.jpg', alt: 'Mother Vegetable Toner 150ml bottle with elegant green-tinted formula' },
@@ -415,6 +421,7 @@ const mvBalm: ProductData = {
   sku: 'MV-BAL-050',
   category: 'cosmetic',
   tier: 'product100',
+  subcategory: 'cosmetic',
   images: ['/cdn/mv_balm.jpg'],
   galleryImages: [
     { url: '/cdn/mv_balm.jpg', alt: 'Mother Vegetable Balm 50g tin with premium green and gold packaging' },
@@ -456,6 +463,7 @@ const mvSoap: ProductData = {
   sku: 'MV-SOP-100',
   category: 'cosmetic',
   tier: 'product100',
+  subcategory: 'cosmetic',
   images: ['/cdn/mv_soap.jpg'],
   galleryImages: [
     { url: '/cdn/mv_soap.jpg', alt: 'Mother Vegetable Soap 100g bar with natural green color and artisan finish' },
@@ -481,14 +489,80 @@ const mvSoap: ProductData = {
 };
 
 // ---------------------------------------------------------------------------
+// MV Miso (味噌)
+// ---------------------------------------------------------------------------
+
+const mvMiso: ProductData = {
+  id: 'mv-miso-200g',
+  name: 'マザベジ味噌',
+  nameJa: 'マザベジ味噌',
+  fullName: 'Mother Vegetable Miso',
+  slug: 'mv-miso',
+  description: 'Premium miso paste with 48 nutrients. 200g.',
+  descriptionJa: '48種の栄養素配合のプレミアム味噌。200g。',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-MIS-200',
+  category: 'food',
+  tier: 'product100',
+  subcategory: 'seasoning',
+  images: ['/cdn/mv_miso.jpg'],
+  galleryImages: [],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Nutrient-rich premium miso with 48 nutrients.', 'Traditional flavor enhanced with plant-based nutrition.'],
+  taglineJp: '',
+  tagline: 'Nutrient-rich premium miso.',
+  subtitle: '200g',
+  howToUse: 'Use as everyday miso for soup and cooking.',
+  howToLink: '#',
+  inStock: true,
+  priceJpy: '¥2,000',
+};
+
+// ---------------------------------------------------------------------------
+// MV Wasabi (わさび)
+// ---------------------------------------------------------------------------
+
+const mvWasabi: ProductData = {
+  id: 'mv-wasabi-50g',
+  name: 'マザベジわさび',
+  nameJa: 'マザベジわさび',
+  fullName: 'Mother Vegetable Wasabi',
+  slug: 'mv-wasabi',
+  description: 'Premium wasabi paste with 48 nutrients. 50g.',
+  descriptionJa: '48種の栄養素配合のプレミアムわさび。50g。',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-WAS-050',
+  category: 'food',
+  tier: 'product100',
+  subcategory: 'seasoning',
+  images: ['/cdn/mv_wasabi.jpg'],
+  galleryImages: [],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Nutrient-rich premium wasabi with 48 nutrients.', 'Fresh wasabi flavor with added health benefits.'],
+  taglineJp: '',
+  tagline: 'Nutrient-rich premium wasabi.',
+  subtitle: '50g',
+  howToUse: 'Use as condiment with sushi, sashimi, and other dishes.',
+  howToLink: '#',
+  inStock: true,
+  priceJpy: '¥2,000',
+};
+
+// ---------------------------------------------------------------------------
 // Exports
 // ---------------------------------------------------------------------------
 
 /** Active products shown on the site. */
-export const products: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap];
+export const products: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi];
 
 /** All products including discontinued, for admin/order lookup. */
-export const allProducts: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap];
+export const allProducts: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi];
 
 export function getProductBySlug(slug: string): ProductData | undefined {
   return allProducts.find((p) => p.slug === slug);

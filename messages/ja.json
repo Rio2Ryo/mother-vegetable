@@ -32,7 +32,7 @@
     "title": "製品",
     "toBuy": "購入する",
     "regular": "レギュラー商品",
-    "product100": "プロダクト100",
+    "product100": "MV プロダクト100",
     "achieve": {
       "name": "Achieve",
       "subtitle": "身体のために",
@@ -54,7 +54,15 @@
         "肌をすこやかに保ちます。"
       ],
       "howToUse": "直接塗るか、お使いの化粧品に混ぜてご使用ください。"
-    }
+    },
+    "subcategory_all": "すべて",
+    "subcategory_seasoning": "調味料",
+    "subcategory_supplement": "サプリ",
+    "subcategory_cosmetic": "コスメ",
+    "subcategory_fish": "フィッシュ",
+    "comingSoon": "Coming Soon",
+    "monthlySubscription": "月額サブスクリプション（5月〜12月）",
+    "furusatoNouzei": "ふるさと納税"
   },
   "trust": {
     "title": "Our Trust",
