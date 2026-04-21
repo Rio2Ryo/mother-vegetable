@@ -506,8 +506,10 @@
     "progress": "{current} / {target}",
     "remaining": "あと{count}個の購入で達成！",
     "achieved": "ジャックポット達成！全員にMVT 1.0をプレゼント！",
+    "charging": "MVパワーチャージ中...",
+    "jackpotFull": "JACKPOT!",
     "recentPurchases": "最近の購入",
-    "purchasedBy": "{name}さんが{product}を購入",
+    "purchasedBy": "{name}さんが {product} を購入",
     "ago": "{time}前"
   }
 }

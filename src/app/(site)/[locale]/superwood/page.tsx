@@ -22,12 +22,20 @@ export default function SuperWoodPage() {
     <main className="min-h-screen bg-black text-white">
       {/* ─── Hero ─── */}
       <section
-        className="relative py-24 px-6 text-center overflow-hidden"
+        className="relative py-32 px-6 text-center overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, #0a2e14 0%, #0d3b1a 40%, #134d23 70%, #1a6b30 100%)',
         }}
       >
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 30% 50%, #25c760 0%, transparent 60%)' }} />
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&h=600&fit=crop)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
         <div className="relative max-w-3xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4">
             {t('hero.title')}
@@ -38,26 +46,29 @@ export default function SuperWoodPage() {
       </section>
 
       {/* ─── Section 1: Super Wood Blocks ─── */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
+      <section className="max-w-6xl mx-auto px-6 py-24">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
           {t('blocks.heading')}
         </h2>
-        <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+        <p className="text-gray-400 text-center mb-16 max-w-2xl mx-auto leading-relaxed">
           {t('blocks.description')}
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {blocks.map((b) => (
             <div
               key={b.key}
               className="border border-[#25c760]/30 rounded-2xl p-6 bg-[#0d1f12] hover:border-[#25c760] transition-colors duration-300 flex flex-col"
             >
-              {/* Placeholder image area */}
-              <div className="w-full aspect-square rounded-xl bg-[#1a2e1f] mb-5 flex items-center justify-center">
-                <svg className="w-16 h-16 text-[#25c760]/40" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25" />
-                </svg>
-              </div>
+              {/* Block product image */}
+              <div
+                className="w-full aspect-square rounded-xl bg-[#1a2e1f] mb-5 overflow-hidden"
+                style={{
+                  backgroundImage: 'url(https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=400&h=300&fit=crop)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
               <h3 className="text-lg font-semibold mb-1">{t(`blocks.items.${b.key}.name`)}</h3>
               <p className="text-[#25c760] text-2xl font-bold mb-4">{b.price}</p>
               <button className="mt-auto w-full py-3 rounded-xl bg-[#25c760] text-black font-bold text-sm hover:bg-[#1fb350] transition-colors duration-200 cursor-pointer">
@@ -69,7 +80,7 @@ export default function SuperWoodPage() {
       </section>
 
       {/* ─── Section 2: 1/100 Scale SEF ─── */}
-      <section className="bg-[#0a1a0f] py-20 px-6">
+      <section className="bg-[#0a1a0f] py-24 px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
             {t('scaleSef.heading')}
@@ -78,7 +89,17 @@ export default function SuperWoodPage() {
             {t('scaleSef.description')}
           </p>
 
-          <div className="border border-[#25c760]/30 rounded-2xl p-8 md:p-12 bg-[#0d1f12] text-center">
+          <div className="border border-[#25c760]/30 rounded-2xl overflow-hidden bg-[#0d1f12]">
+            {/* SEF concept image */}
+            <div
+              className="w-full h-56 md:h-72"
+              style={{
+                backgroundImage: 'url(https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&h=400&fit=crop)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            />
+            <div className="p-8 md:p-12 text-center">
             <p className="text-[#25c760] text-5xl font-extrabold mb-2">¥100,000</p>
             <p className="text-gray-400 text-sm mb-8">($670)</p>
 
@@ -102,12 +123,13 @@ export default function SuperWoodPage() {
             <button className="px-10 py-4 rounded-xl bg-[#25c760] text-black font-bold text-lg hover:bg-[#1fb350] transition-colors duration-200 cursor-pointer">
               {t('scaleSef.buy')}
             </button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ─── Section 3: Full SEF ─── */}
-      <section className="max-w-4xl mx-auto px-6 py-20">
+      <section className="max-w-4xl mx-auto px-6 py-24">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
           {t('fullSef.heading')}
         </h2>

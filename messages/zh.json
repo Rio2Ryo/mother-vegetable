@@ -506,6 +506,8 @@
     "progress": "{current} / {target}",
     "remaining": "再购买{count}个即可达成！",
     "achieved": "大奖达成！所有人获得 MVT 1.0 奖励！",
+    "charging": "MV能量充电中...",
+    "jackpotFull": "JACKPOT!",
     "recentPurchases": "最近购买",
     "purchasedBy": "{name}购买了{product}",
     "ago": "{time}前"

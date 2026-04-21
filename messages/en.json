@@ -506,6 +506,8 @@
     "progress": "{current} / {target}",
     "remaining": "{count} more purchases to go!",
     "achieved": "Jackpot reached! Everyone gets MVT 1.0 as a reward!",
+    "charging": "MV Power Charging...",
+    "jackpotFull": "JACKPOT!",
     "recentPurchases": "Recent Purchases",
     "purchasedBy": "{name} purchased {product}",
     "ago": "{time} ago"
