@@ -62,7 +62,16 @@
     "subcategory_fish": "フィッシュ",
     "comingSoon": "Coming Soon",
     "monthlySubscription": "月額サブスクリプション（5月〜12月）",
-    "furusatoNouzei": "ふるさと納税"
+    "furusatoNouzei": "ふるさと納税",
+    "monthFilter": "配送月",
+    "month5": "5月",
+    "month6": "6月",
+    "month7": "7月",
+    "month8": "8月",
+    "month9": "9月",
+    "month10": "10月",
+    "month11": "11月",
+    "month12": "12月"
   },
   "trust": {
     "title": "Our Trust",

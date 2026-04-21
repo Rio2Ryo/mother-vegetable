@@ -62,7 +62,16 @@
     "subcategory_fish": "Fish",
     "comingSoon": "Coming Soon",
     "monthlySubscription": "Monthly Subscription (May - December)",
-    "furusatoNouzei": "Furusato Nouzei (Hometown Tax)"
+    "furusatoNouzei": "Furusato Nouzei (Hometown Tax)",
+    "monthFilter": "Delivery Month",
+    "month5": "May",
+    "month6": "June",
+    "month7": "July",
+    "month8": "August",
+    "month9": "September",
+    "month10": "October",
+    "month11": "November",
+    "month12": "December"
   },
   "trust": {
     "title": "Our Trust",

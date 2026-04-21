@@ -555,14 +555,286 @@ const mvWasabi: ProductData = {
 };
 
 // ---------------------------------------------------------------------------
+// MV Matcha (抹茶) - May
+// ---------------------------------------------------------------------------
+
+const mvMatcha: ProductData = {
+  id: 'mv-matcha-30g',
+  name: 'マザベジ抹茶',
+  nameJa: 'マザベジ抹茶',
+  fullName: 'Mother Vegetable Matcha',
+  slug: 'mv-matcha',
+  description: 'Premium matcha green tea powder blended with Mother Vegetable. 30g.',
+  descriptionJa: 'マザベジブレンドの抹茶パウダー。30g。',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-MAT-030',
+  category: 'food',
+  tier: 'product100',
+  subcategory: 'supplement',
+  subscriptionMonth: 5,
+  images: ['/cdn/mv_matcha.jpg'],
+  galleryImages: [],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Premium matcha blended with 48 nutrients.', 'Antioxidant-rich daily wellness drink.'],
+  taglineJp: '',
+  tagline: 'Nutrient-rich matcha blend.',
+  subtitle: '30g',
+  howToUse: 'Mix with hot water or milk for a nutrient-rich matcha drink.',
+  howToLink: '#',
+  inStock: true,
+  priceJpy: '¥2,000',
+};
+
+// ---------------------------------------------------------------------------
+// MV Olive Oil (オリーブオイル) - June
+// ---------------------------------------------------------------------------
+
+const mvOlive: ProductData = {
+  id: 'mv-olive-100ml',
+  name: 'マザベジオリーブオイル',
+  nameJa: 'マザベジオリーブオイル',
+  fullName: 'Mother Vegetable Olive Oil',
+  slug: 'mv-olive',
+  description: 'Extra virgin olive oil infused with Mother Vegetable nutrients. 100ml.',
+  descriptionJa: 'マザベジ栄養素配合のエクストラバージンオリーブオイル。100ml。',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-OLV-100',
+  category: 'food',
+  tier: 'product100',
+  subcategory: 'seasoning',
+  subscriptionMonth: 6,
+  images: ['/cdn/mv_olive.jpg'],
+  galleryImages: [],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Premium olive oil with 48 nutrients.', 'Perfect for salads, cooking, and dipping.'],
+  taglineJp: '',
+  tagline: 'Nutrient-rich olive oil.',
+  subtitle: '100ml',
+  howToUse: 'Use as everyday cooking oil or salad dressing.',
+  howToLink: '#',
+  inStock: true,
+  priceJpy: '¥2,000',
+};
+
+// ---------------------------------------------------------------------------
+// MV Hand Cream (ハンドクリーム) - July
+// ---------------------------------------------------------------------------
+
+const mvHandCream: ProductData = {
+  id: 'mv-handcream-30g',
+  name: 'マザベジハンドクリーム',
+  nameJa: 'マザベジハンドクリーム',
+  fullName: 'Mother Vegetable Hand Cream',
+  slug: 'mv-handcream',
+  description: 'Moisturizing hand cream with natural collagen. 30g.',
+  descriptionJa: '天然コラーゲン配合のハンドクリーム。30g。',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-HCR-030',
+  category: 'cosmetic',
+  tier: 'product100',
+  subcategory: 'cosmetic',
+  subscriptionMonth: 7,
+  images: ['/cdn/mv_handcream.jpg'],
+  galleryImages: [],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Natural collagen hand cream.', 'Keeps hands soft and moisturized.'],
+  taglineJp: '',
+  tagline: 'Natural collagen hand cream.',
+  subtitle: '30g',
+  howToUse: 'Apply to hands as needed throughout the day.',
+  howToLink: '#',
+  inStock: true,
+  priceJpy: '¥2,000',
+};
+
+// ---------------------------------------------------------------------------
+// MV Ponzu (ポン酢) - August
+// ---------------------------------------------------------------------------
+
+const mvPonzu: ProductData = {
+  id: 'mv-ponzu-150ml',
+  name: 'マザベジポン酢',
+  nameJa: 'マザベジポン酢',
+  fullName: 'Mother Vegetable Ponzu',
+  slug: 'mv-ponzu',
+  description: 'Citrus ponzu sauce with 48 nutrients. 150ml.',
+  descriptionJa: '48種の栄養素配合のポン酢。150ml。',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-PON-150',
+  category: 'food',
+  tier: 'product100',
+  subcategory: 'seasoning',
+  subscriptionMonth: 8,
+  images: ['/cdn/mv_ponzu.jpg'],
+  galleryImages: [],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Nutrient-rich citrus ponzu.', 'Perfect for nabe, salad, and grilled dishes.'],
+  taglineJp: '',
+  tagline: 'Nutrient-rich ponzu sauce.',
+  subtitle: '150ml',
+  howToUse: 'Use as dipping sauce or dressing.',
+  howToLink: '#',
+  inStock: true,
+  priceJpy: '¥2,000',
+};
+
+// ---------------------------------------------------------------------------
+// MV Lip Balm (リップバーム) - September
+// ---------------------------------------------------------------------------
+
+const mvLipBalm: ProductData = {
+  id: 'mv-lipbalm-5g',
+  name: 'マザベジリップバーム',
+  nameJa: 'マザベジリップバーム',
+  fullName: 'Mother Vegetable Lip Balm',
+  slug: 'mv-lipbalm',
+  description: 'Natural collagen lip balm. 5g.',
+  descriptionJa: '天然コラーゲン配合のリップバーム。5g。',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-LIP-005',
+  category: 'cosmetic',
+  tier: 'product100',
+  subcategory: 'cosmetic',
+  subscriptionMonth: 9,
+  images: ['/cdn/mv_lipbalm.jpg'],
+  galleryImages: [],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Natural collagen lip balm.', 'Keeps lips soft and moisturized.'],
+  taglineJp: '',
+  tagline: 'Natural collagen lip care.',
+  subtitle: '5g',
+  howToUse: 'Apply to lips as needed.',
+  howToLink: '#',
+  inStock: true,
+  priceJpy: '¥2,000',
+};
+
+// ---------------------------------------------------------------------------
+// MV Vinegar (酢) - October
+// ---------------------------------------------------------------------------
+
+const mvVinegar: ProductData = {
+  id: 'mv-vinegar-150ml',
+  name: 'マザベジ酢',
+  nameJa: 'マザベジ酢',
+  fullName: 'Mother Vegetable Vinegar',
+  slug: 'mv-vinegar',
+  description: 'Premium rice vinegar with 48 nutrients. 150ml.',
+  descriptionJa: '48種の栄養素配合のプレミアム酢。150ml。',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-VIN-150',
+  category: 'food',
+  tier: 'product100',
+  subcategory: 'seasoning',
+  subscriptionMonth: 10,
+  images: ['/cdn/mv_vinegar.jpg'],
+  galleryImages: [],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Nutrient-rich premium vinegar.', 'Versatile for cooking and health drinks.'],
+  taglineJp: '',
+  tagline: 'Nutrient-rich rice vinegar.',
+  subtitle: '150ml',
+  howToUse: 'Use in cooking, dressings, or dilute with water as a health drink.',
+  howToLink: '#',
+  inStock: true,
+  priceJpy: '¥2,000',
+};
+
+// ---------------------------------------------------------------------------
+// MV Bath Salt (バスソルト) - November
+// ---------------------------------------------------------------------------
+
+const mvBathSalt: ProductData = {
+  id: 'mv-bathsalt-200g',
+  name: 'マザベジバスソルト',
+  nameJa: 'マザベジバスソルト',
+  fullName: 'Mother Vegetable Bath Salt',
+  slug: 'mv-bathsalt',
+  description: 'Mineral-rich bath salt with 48 nutrients. 200g.',
+  descriptionJa: '48種の栄養素配合のバスソルト。200g。',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-BST-200',
+  category: 'cosmetic',
+  tier: 'product100',
+  subcategory: 'cosmetic',
+  subscriptionMonth: 11,
+  images: ['/cdn/mv_bathsalt.jpg'],
+  galleryImages: [],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Nutrient-rich mineral bath salt.', 'Relaxing bath experience with 48 nutrients.'],
+  taglineJp: '',
+  tagline: 'Nutrient-rich bath salt.',
+  subtitle: '200g',
+  howToUse: 'Add to bath water and enjoy a relaxing soak.',
+  howToLink: '#',
+  inStock: true,
+  priceJpy: '¥2,000',
+};
+
+// ---------------------------------------------------------------------------
+// MV Honey (蜂蜜) - December
+// ---------------------------------------------------------------------------
+
+const mvHoney: ProductData = {
+  id: 'mv-honey-100g',
+  name: 'マザベジ蜂蜜',
+  nameJa: 'マザベジ蜂蜜',
+  fullName: 'Mother Vegetable Honey',
+  slug: 'mv-honey',
+  description: 'Pure honey blended with Mother Vegetable nutrients. 100g.',
+  descriptionJa: 'マザベジ栄養素ブレンドの蜂蜜。100g。',
+  price: 13.50,
+  currency: 'USD',
+  sku: 'MV-HNY-100',
+  category: 'food',
+  tier: 'product100',
+  subcategory: 'supplement',
+  subscriptionMonth: 12,
+  images: ['/cdn/mv_honey.jpg'],
+  galleryImages: [],
+  thumbnails: [],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Premium honey with 48 nutrients.', 'Perfect for drinks, toast, and cooking.'],
+  taglineJp: '',
+  tagline: 'Nutrient-rich honey.',
+  subtitle: '100g',
+  howToUse: 'Add to drinks, spread on toast, or use in cooking.',
+  howToLink: '#',
+  inStock: true,
+  priceJpy: '¥2,000',
+};
+
+// ---------------------------------------------------------------------------
 // Exports
 // ---------------------------------------------------------------------------
 
 /** Active products shown on the site. */
-export const products: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi];
+export const products: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi, mvMatcha, mvOlive, mvHandCream, mvPonzu, mvLipBalm, mvVinegar, mvBathSalt, mvHoney];
 
 /** All products including discontinued, for admin/order lookup. */
-export const allProducts: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi];
+export const allProducts: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi, mvMatcha, mvOlive, mvHandCream, mvPonzu, mvLipBalm, mvVinegar, mvBathSalt, mvHoney];
 
 export function getProductBySlug(slug: string): ProductData | undefined {
   return allProducts.find((p) => p.slug === slug);
