@@ -240,7 +240,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアム味噌' : 'Nutrient-rich premium miso',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1607301405390-d831c242f59b?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1585325701165-351af820e72c?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りプレミアム味噌', '伝統の味わいに植物由来の栄養をプラス']
         : ['Premium miso with 48 nutrients', 'Traditional flavor with plant-based nutrition'],
@@ -260,7 +260,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアムわさび' : 'Nutrient-rich premium wasabi',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1625938144755-652e08e359b7?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りプレミアムわさび', '新鮮なわさびの風味に栄養素をプラス']
         : ['Premium wasabi with 48 nutrients', 'Fresh wasabi flavor with added health benefits'],
@@ -280,7 +280,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'マザベジブレンドの抹茶パウダー' : 'Nutrient-rich matcha blend',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りプレミアム抹茶', '抗酸化物質豊富な毎日の健康ドリンク']
         : ['Premium matcha blended with 48 nutrients', 'Antioxidant-rich daily wellness drink'],
@@ -300,7 +300,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合ドレッシング' : 'Nutrient-rich dressing',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1609501676725-7186f017a4b7?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りプレミアムドレッシング', 'サラダ・温野菜に最適']
         : ['Premium dressing with 48 nutrients', 'Perfect for salads and vegetables'],
@@ -320,7 +320,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'マザベジ栄養素配合オリーブオイル' : 'Nutrient-rich olive oil',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1476837579993-f1d3948f17be?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りオリーブオイル', 'サラダ・料理・ディップに最適']
         : ['Premium olive oil with 48 nutrients', 'Perfect for salads, cooking, and dipping'],
@@ -340,7 +340,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然植物由来成分のサンケアジェル' : 'Nutrient-rich suncare gel',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1556227834-09f1de7a7d14?w=400&h=400&fit=crop',
       features: isJa
         ? ['天然植物由来成分配合サンケアジェル', 'やさしい日焼け対策に']
         : ['Natural suncare with plant-based nutrients', 'Gentle protection for daily use'],
@@ -360,7 +360,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然栄養素配合のボディミスト' : 'Nutrient-rich body mist',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1594119326516-4e0add083a3f?w=400&h=400&fit=crop',
       features: isJa
         ? ['天然栄養素配合ボディミスト', '毎日のリフレッシュに']
         : ['Refreshing body mist with natural nutrients', 'Light fragrance for everyday freshness'],
@@ -380,7 +380,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然コラーゲン配合のハンドクリーム' : 'Natural collagen hand cream',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1611080541599-8c6dbde6ed28?w=400&h=400&fit=crop',
       features: isJa
         ? ['天然コラーゲン配合ハンドクリーム', '手をやわらかくしっとり保湿']
         : ['Natural collagen hand cream', 'Keeps hands soft and moisturized'],
@@ -400,7 +400,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合ポン酢' : 'Nutrient-rich ponzu sauce',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りポン酢', '鍋・サラダ・焼き物に最適']
         : ['Nutrient-rich citrus ponzu', 'Perfect for nabe, salad, and grilled dishes'],
@@ -420,7 +420,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然コラーゲン配合のフェイスミスト' : 'Nutrient-rich face mist',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1570194065650-d99fb4a38b35?w=400&h=400&fit=crop',
       features: isJa
         ? ['天然コラーゲン配合フェイスミスト', 'いつでもどこでもうるおい補給']
         : ['Natural collagen face mist', 'Refreshing hydration throughout the day'],
@@ -440,7 +440,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然植物由来成分のヘアオイル' : 'Nutrient-rich hair oil',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1585652757173-57de5e3ca65f?w=400&h=400&fit=crop',
       features: isJa
         ? ['天然植物由来成分配合ヘアオイル', '髪をなめらかに栄養補給']
         : ['Natural hair oil with plant-based nutrients', 'Keeps hair smooth and nourished'],
@@ -460,7 +460,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然コラーゲン配合のリップバーム' : 'Natural collagen lip care',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1631730359585-38a4bf2bf7d8?w=400&h=400&fit=crop',
       features: isJa
         ? ['天然コラーゲン配合リップバーム', '唇をやわらかくしっとり保湿']
         : ['Natural collagen lip balm', 'Keeps lips soft and moisturized'],
@@ -480,7 +480,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアム酢' : 'Nutrient-rich rice vinegar',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りプレミアム酢', '料理・ドレッシング・健康ドリンクに']
         : ['Nutrient-rich premium vinegar', 'Versatile for cooking and health drinks'],
@@ -500,7 +500,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合バスソルト' : 'Nutrient-rich bath salt',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1600428877878-1a0ff561571c?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りバスソルト', 'リラックスバスタイムに栄養素をプラス']
         : ['Nutrient-rich mineral bath salt', 'Relaxing bath experience with 48 nutrients'],
@@ -520,7 +520,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'マザベジ栄養素ブレンドの生姜茶' : 'Nutrient-rich ginger tea',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1563911892437-1feda0179e1b?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入り生姜茶', '冬のあたたかい健康ドリンク']
         : ['Warming ginger tea with 48 nutrients', 'Perfect winter wellness drink'],
@@ -540,7 +540,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'マザベジ栄養素ブレンドの蜂蜜' : 'Nutrient-rich honey',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りプレミアム蜂蜜', 'ドリンク・トースト・料理に最適']
         : ['Premium honey with 48 nutrients', 'Perfect for drinks, toast, and cooking'],
