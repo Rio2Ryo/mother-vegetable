@@ -189,7 +189,70 @@ export default function SuperWoodPage() {
         </div>
       </section>
 
-      {/* ─── Section 4: Full SEF ─── */}
+      {/* ─── Section 4: Agriculture Kit ─── */}
+      <section className="bg-[#0a1a0f] py-24 px-6">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+            アグリカルチャーキット
+          </h2>
+          <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto">
+            あなたの農地を「スーパーファーム」に変える — Mother Vegetable栽培システム
+          </p>
+
+          <div className="border border-[#25c760]/30 rounded-2xl overflow-hidden bg-[#0d1f12]">
+            <div
+              className="w-full h-56 md:h-72"
+              style={{
+                backgroundImage: 'url(https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=400&fit=crop)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            />
+            <div className="p-8 md:p-12">
+              <div className="text-center mb-8">
+                <p className="text-[#25c760] text-5xl font-extrabold mb-1">¥1,000,000</p>
+                <p className="text-gray-400 text-sm">($6,700) — 設置・導入サポート込み</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-[#1a2e1f] rounded-xl p-5">
+                  <h4 className="font-bold text-[#25c760] mb-2">キット内容</h4>
+                  <ul className="text-gray-300 text-sm space-y-1.5">
+                    <li>• Mother Vegetable室内栽培装置</li>
+                    <li>• LED光源システム（24h自動制御）</li>
+                    <li>• 培養液循環システム</li>
+                    <li>• CO₂吸収・酸素生成モジュール</li>
+                    <li>• 温度・湿度自動管理センサー</li>
+                    <li>• 収穫・加工マニュアル</li>
+                  </ul>
+                </div>
+                <div className="bg-[#1a2e1f] rounded-xl p-5">
+                  <h4 className="font-bold text-[#25c760] mb-2">導入効果</h4>
+                  <ul className="text-gray-300 text-sm space-y-1.5">
+                    <li>• 室内でMother Vegetableを栽培</li>
+                    <li>• 年間を通じた安定生産</li>
+                    <li>• 天候・害虫の影響なし</li>
+                    <li>• CO₂を杉の700倍吸収</li>
+                    <li>• 収穫物の販売で収益化</li>
+                    <li>• 24/7 リモートモニタリング</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <Link
+                  href="/about"
+                  className="inline-block px-10 py-4 rounded-xl bg-[#25c760] text-black font-bold text-lg hover:bg-[#1fb350] transition-colors duration-200 no-underline"
+                >
+                  お問い合わせ・導入相談
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Section 5: Full SEF ─── */}
       <section className="max-w-4xl mx-auto px-6 py-24">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
           {t('fullSef.heading')}
