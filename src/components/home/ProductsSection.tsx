@@ -240,7 +240,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアム味噌' : 'Nutrient-rich premium miso',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1585325701165-351af820e72c?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りプレミアム味噌', '伝統の味わいに植物由来の栄養をプラス']
         : ['Premium miso with 48 nutrients', 'Traditional flavor with plant-based nutrition'],
@@ -320,7 +320,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'マザベジ栄養素配合オリーブオイル' : 'Nutrient-rich olive oil',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1476837579993-f1d3948f17be?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りオリーブオイル', 'サラダ・料理・ディップに最適']
         : ['Premium olive oil with 48 nutrients', 'Perfect for salads, cooking, and dipping'],
@@ -360,7 +360,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然栄養素配合のボディミスト' : 'Nutrient-rich body mist',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1594119326516-4e0add083a3f?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=400&fit=crop',
       features: isJa
         ? ['天然栄養素配合ボディミスト', '毎日のリフレッシュに']
         : ['Refreshing body mist with natural nutrients', 'Light fragrance for everyday freshness'],
@@ -420,7 +420,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然コラーゲン配合のフェイスミスト' : 'Nutrient-rich face mist',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1570194065650-d99fb4a38b35?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=400&fit=crop',
       features: isJa
         ? ['天然コラーゲン配合フェイスミスト', 'いつでもどこでもうるおい補給']
         : ['Natural collagen face mist', 'Refreshing hydration throughout the day'],
@@ -440,7 +440,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然植物由来成分のヘアオイル' : 'Nutrient-rich hair oil',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1585652757173-57de5e3ca65f?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=400&h=400&fit=crop',
       features: isJa
         ? ['天然植物由来成分配合ヘアオイル', '髪をなめらかに栄養補給']
         : ['Natural hair oil with plant-based nutrients', 'Keeps hair smooth and nourished'],
@@ -460,7 +460,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然コラーゲン配合のリップバーム' : 'Natural collagen lip care',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1631730359585-38a4bf2bf7d8?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=400&fit=crop',
       features: isJa
         ? ['天然コラーゲン配合リップバーム', '唇をやわらかくしっとり保湿']
         : ['Natural collagen lip balm', 'Keeps lips soft and moisturized'],
@@ -500,7 +500,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合バスソルト' : 'Nutrient-rich bath salt',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1600428877878-1a0ff561571c?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りバスソルト', 'リラックスバスタイムに栄養素をプラス']
         : ['Nutrient-rich mineral bath salt', 'Relaxing bath experience with 48 nutrients'],
