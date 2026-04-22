@@ -4,12 +4,12 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 
 const blocks = [
-  { key: 'straight', price: '¥500' },
-  { key: 'corner', price: '¥800' },
-  { key: 'tJoint', price: '¥1,000' },
-  { key: 'flatPanel', price: '¥1,500' },
-  { key: 'roofPanel', price: '¥2,000' },
-  { key: 'doorWindow', price: '¥3,000' },
+  { key: 'straight', price: '¥500', img: 'https://images.unsplash.com/photo-1541123603104-512919d6a96c?w=400&h=400&fit=crop' },
+  { key: 'corner', price: '¥800', img: 'https://images.unsplash.com/photo-1504198266287-1659872e6590?w=400&h=400&fit=crop' },
+  { key: 'tJoint', price: '¥1,000', img: 'https://images.unsplash.com/photo-1520038410233-7141be7e6f97?w=400&h=400&fit=crop' },
+  { key: 'flatPanel', price: '¥1,500', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=400&fit=crop' },
+  { key: 'roofPanel', price: '¥2,000', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop' },
+  { key: 'doorWindow', price: '¥3,000', img: 'https://images.unsplash.com/photo-1555041469-a586c1b0e114?w=400&h=400&fit=crop' },
 ] as const;
 
 const SEF_PROGRESS = 23;
@@ -64,7 +64,7 @@ export default function SuperWoodPage() {
               <div
                 className="w-full aspect-square rounded-xl bg-[#1a2e1f] mb-5 overflow-hidden"
                 style={{
-                  backgroundImage: 'url(https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=400&h=300&fit=crop)',
+                  backgroundImage: `url(${b.img})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
@@ -128,7 +128,68 @@ export default function SuperWoodPage() {
         </div>
       </section>
 
-      {/* ─── Section 3: Full SEF ─── */}
+      {/* ─── Section 3: Aquaculture Kit ─── */}
+      <section className="max-w-4xl mx-auto px-6 py-24">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
+          アクアカルチャーキット
+        </h2>
+        <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto">
+          あなたの池を「スーパー池」に変える — Mother Vegetable養殖システム
+        </p>
+
+        <div className="border border-[#25c760]/30 rounded-2xl overflow-hidden bg-[#0d1f12]">
+          <div
+            className="w-full h-56 md:h-72"
+            style={{
+              backgroundImage: 'url(https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=400&fit=crop)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+          <div className="p-8 md:p-12">
+            <div className="text-center mb-8">
+              <p className="text-[#25c760] text-5xl font-extrabold mb-1">¥1,000,000</p>
+              <p className="text-gray-400 text-sm">($6,700) — 設置・導入サポート込み</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="bg-[#1a2e1f] rounded-xl p-5">
+                <h4 className="font-bold text-[#25c760] mb-2">キット内容</h4>
+                <ul className="text-gray-300 text-sm space-y-1.5">
+                  <li>• Mother Vegetable培養装置</li>
+                  <li>• 水質浄化フィルターシステム</li>
+                  <li>• 養殖用マザベジフィード</li>
+                  <li>• CO₂吸収・酸素生成モジュール</li>
+                  <li>• 水質モニタリングセンサー</li>
+                  <li>• 設置マニュアル・リモートサポート</li>
+                </ul>
+              </div>
+              <div className="bg-[#1a2e1f] rounded-xl p-5">
+                <h4 className="font-bold text-[#25c760] mb-2">導入効果</h4>
+                <ul className="text-gray-300 text-sm space-y-1.5">
+                  <li>• 既存の池をMV養殖池に変換</li>
+                  <li>• 48種の栄養素で育つ高品質な魚</li>
+                  <li>• 水質の自然浄化</li>
+                  <li>• CO₂吸収で環境貢献</li>
+                  <li>• 年間収穫で投資回収</li>
+                  <li>• 24/7 リモートモニタリング</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <Link
+                href="/about"
+                className="inline-block px-10 py-4 rounded-xl bg-[#25c760] text-black font-bold text-lg hover:bg-[#1fb350] transition-colors duration-200 no-underline"
+              >
+                お問い合わせ・導入相談
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Section 4: Full SEF ─── */}
       <section className="max-w-4xl mx-auto px-6 py-24">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
           {t('fullSef.heading')}
