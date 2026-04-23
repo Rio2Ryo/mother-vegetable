@@ -510,6 +510,14 @@
     "jackpotFull": "JACKPOT!",
     "recentPurchases": "最近购买",
     "purchasedBy": "{name}购买了{product}",
-    "ago": "{time}前"
+    "ago": "{time}前",
+    "rewardsTitle": "大奖达成，全员获得奖励！",
+    "rewardsSubtitle": "能量条达到100%时，所有人都将获得：",
+    "rewardDiscount": "下次购买享9折优惠",
+    "rewardDiscountDesc": "下次订单享受10%折扣",
+    "rewardGoods": "限量MV周边赠送",
+    "rewardGoodsDesc": "赢取非卖品原创周边",
+    "rewardToken": "MVT代币双倍发放",
+    "rewardTokenDesc": "下次购买时获得2倍MVT代币"
   }
 }

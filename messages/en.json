@@ -510,6 +510,14 @@
     "jackpotFull": "JACKPOT!",
     "recentPurchases": "Recent Purchases",
     "purchasedBy": "{name} purchased {product}",
-    "ago": "{time} ago"
+    "ago": "{time} ago",
+    "rewardsTitle": "Everyone gets rewards at jackpot!",
+    "rewardsSubtitle": "When the meter hits 100%, everyone receives:",
+    "rewardDiscount": "10% OFF Next Purchase",
+    "rewardDiscountDesc": "10% discount on your next order",
+    "rewardGoods": "Limited MV Goods Giveaway",
+    "rewardGoodsDesc": "Win exclusive, non-sale original goods",
+    "rewardToken": "Double MVT Tokens",
+    "rewardTokenDesc": "Earn 2x MVT tokens on your next purchase"
   }
 }

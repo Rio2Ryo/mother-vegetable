@@ -34,21 +34,6 @@ const cardVariants = {
   },
 };
 
-// Deterministic "random" stock count based on product ID (1-100)
-function getStockCount(productId: string): number {
-  let hash = 0;
-  for (let i = 0; i < productId.length; i++) {
-    hash = ((hash << 5) - hash + productId.charCodeAt(i)) | 0;
-  }
-  return Math.abs(hash % 100) + 1;
-}
-
-function getStockColor(stock: number): string {
-  if (stock <= 10) return 'text-red-500';
-  if (stock <= 30) return 'text-orange-500';
-  return 'text-gray-500';
-}
-
 function getMonthBadgeColor(month: number | undefined): string {
   if (!month) return 'bg-gray-500';
   // Spring green -> Summer blue -> Autumn orange -> Winter red
@@ -240,7 +225,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアム味噌' : 'Nutrient-rich premium miso',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りプレミアム味噌', '伝統の味わいに植物由来の栄養をプラス']
         : ['Premium miso with 48 nutrients', 'Traditional flavor with plant-based nutrition'],
@@ -260,7 +245,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアムわさび' : 'Nutrient-rich premium wasabi',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1625938144755-652e08e359b7?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りプレミアムわさび', '新鮮なわさびの風味に栄養素をプラス']
         : ['Premium wasabi with 48 nutrients', 'Fresh wasabi flavor with added health benefits'],
@@ -400,7 +385,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合ポン酢' : 'Nutrient-rich ponzu sauce',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りポン酢', '鍋・サラダ・焼き物に最適']
         : ['Nutrient-rich citrus ponzu', 'Perfect for nabe, salad, and grilled dishes'],
@@ -460,7 +445,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然コラーゲン配合のリップバーム' : 'Natural collagen lip care',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1599305090598-fe179d501227?w=400&h=400&fit=crop',
       features: isJa
         ? ['天然コラーゲン配合リップバーム', '唇をやわらかくしっとり保湿']
         : ['Natural collagen lip balm', 'Keeps lips soft and moisturized'],
@@ -480,7 +465,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアム酢' : 'Nutrient-rich rice vinegar',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1620574387735-3624d75b2dbc?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入りプレミアム酢', '料理・ドレッシング・健康ドリンクに']
         : ['Nutrient-rich premium vinegar', 'Versatile for cooking and health drinks'],
@@ -520,7 +505,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'マザベジ栄養素ブレンドの生姜茶' : 'Nutrient-rich ginger tea',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1563911892437-1feda0179e1b?w=400&h=400&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=400&fit=crop',
       features: isJa
         ? ['48種類の栄養素入り生姜茶', '冬のあたたかい健康ドリンク']
         : ['Warming ginger tea with 48 nutrients', 'Perfect winter wellness drink'],
@@ -973,16 +958,6 @@ export default function ProductsSection() {
                   {mLabels[product.subscriptionMonth]}
                 </span>
               )}
-              {(() => {
-                const stock = getStockCount(product.id);
-                return (
-                  <span className={`text-[10px] md:text-xs font-bold px-2 py-0.5 md:px-2.5 md:py-1 rounded-full border ${
-                    stock <= 10 ? 'border-red-400/50 text-red-400 bg-red-500/10' : stock <= 30 ? 'border-orange-400/50 text-orange-400 bg-orange-500/10' : 'border-white/20 text-white/50 bg-white/5'
-                  }`}>
-                    {isJa ? `残り${stock}個` : `${stock} left`}
-                  </span>
-                );
-              })()}
             </div>
             {/* Mobile: Horizontal Layout / Desktop: Vertical Layout */}
             <div className="flex flex-row md:flex-col gap-3 md:gap-0">

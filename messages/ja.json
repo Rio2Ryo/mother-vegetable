@@ -510,6 +510,14 @@
     "jackpotFull": "JACKPOT!",
     "recentPurchases": "最近の購入",
     "purchasedBy": "{name}さんが {product} を購入",
-    "ago": "{time}前"
+    "ago": "{time}前",
+    "rewardsTitle": "ジャックポット達成で全員に特典！",
+    "rewardsSubtitle": "メーターが100%になると以下の特典が全員に！",
+    "rewardDiscount": "次回購入10%OFF",
+    "rewardDiscountDesc": "次回のお買い物が10%割引",
+    "rewardGoods": "限定MVグッズプレゼント",
+    "rewardGoodsDesc": "非売品のオリジナルグッズが当たる",
+    "rewardToken": "MVTトークン2倍付与",
+    "rewardTokenDesc": "次回購入時のMVTが2倍に"
   }
 }

@@ -38,6 +38,15 @@ const sparkleCSS = `
 `;
 
 /* ------------------------------------------------------------------ */
+/* Reward items data                                                   */
+/* ------------------------------------------------------------------ */
+const REWARDS = [
+  { icon: "🏷️", key: "rewardDiscount", descKey: "rewardDiscountDesc" },
+  { icon: "🎁", key: "rewardGoods", descKey: "rewardGoodsDesc" },
+  { icon: "🪙", key: "rewardToken", descKey: "rewardTokenDesc" },
+] as const;
+
+/* ------------------------------------------------------------------ */
 /* Small sparkle component                                             */
 /* ------------------------------------------------------------------ */
 function Sparkles({ count = 8 }: { count?: number }) {
@@ -208,6 +217,62 @@ export default function JackpotMeter() {
             </ul>
           </div>
         </div>
+
+        {/* ─── Jackpot Rewards Section ─── */}
+        <motion.div
+          className="relative mt-8 rounded-xl border border-[#25c760]/20 bg-gradient-to-br from-[#25c760]/5 to-transparent p-5 md:p-7"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
+        >
+          {/* Section header */}
+          <div className="mb-5 text-center">
+            <motion.h3
+              className="text-lg md:text-xl font-bold text-white"
+              animate={{ scale: [1, 1.02, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <span className="mr-2" role="img" aria-label="gift">
+                🎉
+              </span>
+              {t("rewardsTitle")}
+            </motion.h3>
+            <p className="mt-1 text-xs md:text-sm text-gray-400">
+              {t("rewardsSubtitle")}
+            </p>
+          </div>
+
+          {/* Reward cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {REWARDS.map((reward, i) => (
+              <motion.div
+                key={reward.key}
+                className="group relative overflow-hidden rounded-lg border border-white/5 bg-black/40 p-4 text-center transition-colors hover:border-[#25c760]/30"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 + i * 0.15, duration: 0.4 }}
+                whileHover={{ scale: 1.03 }}
+              >
+                {/* Subtle glow on hover */}
+                <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 50% 50%, rgba(37,199,96,0.08) 0%, transparent 70%)",
+                  }}
+                />
+                <span className="relative block text-3xl mb-2" role="img">
+                  {reward.icon}
+                </span>
+                <p className="relative text-sm md:text-base font-bold text-[#25c760]">
+                  {t(reward.key)}
+                </p>
+                <p className="relative mt-1 text-xs text-gray-400">
+                  {t(reward.descKey)}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </>
   );
