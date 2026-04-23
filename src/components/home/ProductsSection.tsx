@@ -580,6 +580,27 @@ export default function ProductsSection() {
     if (code) setHasReferral(true);
   }, []);
 
+  const handleSubscribe = async (planId: string) => {
+    try {
+      const res = await fetch('/api/checkout/subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          planId,
+          email: '', // Will be collected on Stripe checkout page
+          locale: locale || 'ja',
+          referralCode: getStoredReferralCode() || undefined,
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error('Subscription checkout failed:', error);
+    }
+  };
+
   const filteredProducts = products.filter((p) => {
     if (activeCategory === 'all') return true;
     if (activeCategory === 'food') return FOOD_IDS.has(p.id);
@@ -946,6 +967,15 @@ export default function ProductsSection() {
                 </button>
               ))}
             </div>
+            {/* Subscribe Button */}
+            <div className="flex justify-center mt-5">
+              <button
+                onClick={() => handleSubscribe(selectedPlan)}
+                className="px-8 py-3 md:px-12 md:py-4 bg-[#25c760] text-black font-bold text-sm md:text-lg rounded-full hover:bg-[#1da84e] transition-colors shadow-lg shadow-[#25c760]/20"
+              >
+                {isJa ? 'サブスクリプションを開始する' : 'Start Subscription'}
+              </button>
+            </div>
           </div>
 
           {/* Monthly Timeline */}
@@ -1107,6 +1137,13 @@ export default function ProductsSection() {
                                 className="block w-full text-center py-2.5 md:py-3 bg-[#25c760] text-black font-semibold text-sm md:text-base rounded-full hover:bg-[#1da84e] transition-colors"
                               >
                                 {isJa ? 'カートに入れる' : 'Add to Cart'}
+                              </button>
+                              {/* Subscribe button */}
+                              <button
+                                onClick={() => handleSubscribe(selectedPlan)}
+                                className="block w-full text-center py-2.5 md:py-3 border-2 border-[#25c760] text-[#25c760] font-semibold text-sm md:text-base rounded-full hover:bg-[#25c760]/10 transition-colors"
+                              >
+                                {isJa ? 'サブスクで購入' : 'Subscribe'}
                               </button>
                               <Link
                                 href={product.productLink}
