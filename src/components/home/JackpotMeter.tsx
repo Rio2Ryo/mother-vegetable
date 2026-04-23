@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 /* ------------------------------------------------------------------ */
 /* Demo data                                                           */
 /* ------------------------------------------------------------------ */
-const CURRENT_PURCHASES = 67;
+const CURRENT_PURCHASES = 100;
 const TARGET_PURCHASES = 100;
 const PROGRESS_PCT = (CURRENT_PURCHASES / TARGET_PURCHASES) * 100;
 const IS_ACHIEVED = CURRENT_PURCHASES >= TARGET_PURCHASES;
@@ -17,6 +17,13 @@ const MOCK_RECENT_PURCHASES = [
   { name: "MV愛用者", product: "Confidence", time: "12分" },
   { name: "グリーンライフ", product: "マザベジ味噌", time: "18分" },
   { name: "ナチュラルさん", product: "MV ソープ", time: "25分" },
+  { name: "べジータ", product: "マザベジわさび", time: "30分" },
+  { name: "オーガニック派", product: "MV トナー", time: "38分" },
+  { name: "味噌っ子", product: "マザベジポン酢", time: "42分" },
+  { name: "美肌ママ", product: "MV バーム", time: "51分" },
+  { name: "抹茶ラバー", product: "マザベジ抹茶", time: "55分" },
+  { name: "発酵おじさん", product: "マザベジ味噌", time: "63分" },
+  { name: "スキンケア命", product: "MV ソープ", time: "70分" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -368,6 +375,18 @@ export default function JackpotMeter() {
                 </motion.li>
               ))}
             </ul>
+          </div>
+
+          {/* ─── SEF Gallery ─── */}
+          <div className="relative w-full mt-4 md:mt-0 md:col-span-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="rounded-xl overflow-hidden border border-white/10">
+                <img src="/cdn/sef_greenhouse.png" alt="SEF Greenhouse" className="w-full h-48 object-cover" />
+              </div>
+              <div className="rounded-xl overflow-hidden border border-white/10">
+                <img src="/cdn/sef_factory.jpg" alt="SEF Factory" className="w-full h-48 object-cover" />
+              </div>
+            </div>
           </div>
         </div>
 

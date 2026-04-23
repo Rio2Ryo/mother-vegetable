@@ -4,11 +4,11 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 
 const blocks = [
-  { key: 'straight', price: '¥500', img: 'https://images.unsplash.com/photo-1541123603104-512919d6a96c?w=400&h=400&fit=crop' },
-  { key: 'corner', price: '¥800', img: 'https://images.unsplash.com/photo-1504198266287-1659872e6590?w=400&h=400&fit=crop' },
-  { key: 'tJoint', price: '¥1,000', img: 'https://images.unsplash.com/photo-1520038410233-7141be7e6f97?w=400&h=400&fit=crop' },
-  { key: 'flatPanel', price: '¥1,500', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=400&fit=crop' },
-  { key: 'roofPanel', price: '¥2,000', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop' },
+  { key: 'straight', price: '¥500', img: 'https://images.unsplash.com/photo-1610505466182-6ca09516b300?w=400&h=400&fit=crop' },
+  { key: 'corner', price: '¥800', img: 'https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=400&h=400&fit=crop' },
+  { key: 'tJoint', price: '¥1,000', img: 'https://images.unsplash.com/photo-1594844532765-baf0bfc56797?w=400&h=400&fit=crop' },
+  { key: 'flatPanel', price: '¥1,500', img: 'https://images.unsplash.com/photo-1605152276897-4f618f831968?w=400&h=400&fit=crop' },
+  { key: 'roofPanel', price: '¥2,000', img: 'https://images.unsplash.com/photo-1622993288687-a9cf4f441354?w=400&h=400&fit=crop' },
   { key: 'doorWindow', price: '¥3,000', img: 'https://images.unsplash.com/photo-1555041469-a586c1b0e114?w=400&h=400&fit=crop' },
 ] as const;
 
@@ -30,7 +30,7 @@ export default function SuperWoodPage() {
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&h=600&fit=crop)',
+            backgroundImage: 'url(/cdn/superwood_hero.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -90,15 +90,32 @@ export default function SuperWoodPage() {
           </p>
 
           <div className="border border-[#25c760]/30 rounded-2xl overflow-hidden bg-[#0d1f12]">
-            {/* SEF concept image */}
-            <div
-              className="w-full h-56 md:h-72"
-              style={{
-                backgroundImage: 'url(https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&h=400&fit=crop)',
+            {/* SEF Side-by-side */}
+            <div className="flex flex-col md:flex-row">
+              {/* Left: Full SEF */}
+              <div className="w-full md:w-1/2 h-64 md:h-80" style={{
+                backgroundImage: 'url(/cdn/sef_greenhouse.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-              }}
-            />
+              }} />
+              {/* Right: 1/100 Grid */}
+              <div className="w-full md:w-1/2 p-4 bg-[#0a1a0f]">
+                <div className="grid grid-cols-10 gap-0.5">
+                  {Array.from({ length: 100 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="aspect-square bg-cover bg-center rounded-sm"
+                      style={{
+                        backgroundImage: 'url(/cdn/sef_greenhouse.png)',
+                        opacity: i < 2 ? 1 : 0.25,
+                        border: i < 2 ? '1px solid #25c760' : '1px solid transparent',
+                      }}
+                    />
+                  ))}
+                </div>
+                <p className="text-center text-gray-400 text-xs mt-2">2 / 100 購入済み</p>
+              </div>
+            </div>
             <div className="p-8 md:p-12 text-center">
             <p className="text-[#25c760] text-5xl font-extrabold mb-2">¥100,000</p>
             <p className="text-gray-400 text-sm mb-8">($670)</p>
@@ -144,7 +161,7 @@ export default function SuperWoodPage() {
           <div
             className="w-full h-56 md:h-72"
             style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=400&fit=crop)',
+              backgroundImage: 'url(/cdn/aquaculture_kit_bg.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -218,7 +235,7 @@ export default function SuperWoodPage() {
             <div
               className="w-full h-56 md:h-72"
               style={{
-                backgroundImage: 'url(https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=400&fit=crop)',
+                backgroundImage: 'url(/cdn/agriculture_kit_bg.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
@@ -267,37 +284,6 @@ export default function SuperWoodPage() {
         </div>
       </section>
 
-      {/* ─── Section 5: Full SEF ─── */}
-      <section className="max-w-4xl mx-auto px-6 py-24">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
-          {t('fullSef.heading')}
-        </h2>
-        <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto">
-          {t('fullSef.subtitle')}
-        </p>
-
-        <div className="border border-[#25c760]/30 rounded-2xl p-8 md:p-12 bg-[#0d1f12]">
-          <div className="text-center mb-8">
-            <p className="text-[#25c760] text-5xl font-extrabold mb-1">$1,000,000</p>
-            <p className="text-gray-400 text-sm">{t('fullSef.priceNote')}</p>
-          </div>
-
-          <div className="space-y-4 text-gray-300 leading-relaxed mb-10 max-w-2xl mx-auto">
-            <p>{t('fullSef.desc1')}</p>
-            <p>{t('fullSef.desc2')}</p>
-            <p>{t('fullSef.desc3')}</p>
-          </div>
-
-          <div className="text-center">
-            <Link
-              href="/about"
-              className="inline-block px-10 py-4 rounded-xl border-2 border-[#25c760] text-[#25c760] font-bold text-lg hover:bg-[#25c760] hover:text-black transition-colors duration-200 no-underline"
-            >
-              {t('fullSef.contact')}
-            </Link>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

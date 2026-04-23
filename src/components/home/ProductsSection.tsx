@@ -572,6 +572,7 @@ export default function ProductsSection() {
   const [activeSubcategory, setActiveSubcategory] = useState<Subcategory | 'all'>('all');
   const [activeMonth, setActiveMonth] = useState<number | 'all'>('all');
   const [selectedPlan, setSelectedPlan] = useState<'light' | 'standard' | 'premium'>('standard');
+  const [expandedMonth, setExpandedMonth] = useState<number | null>(null);
   const [hasReferral, setHasReferral] = useState(false);
 
   useEffect(() => {
@@ -610,6 +611,16 @@ export default function ProductsSection() {
       const mb = b.subscriptionMonth ?? Infinity;
       return ma - mb;
     });
+
+  // Group product100 by subscription month for timeline view
+  const productsByMonth = useMemo(() => {
+    return filteredProduct100.reduce((acc, product) => {
+      const month = product.subscriptionMonth || 0;
+      if (!acc[month]) acc[month] = [];
+      acc[month].push(product);
+      return acc;
+    }, {} as Record<number, typeof filteredProduct100>);
+  }, [filteredProduct100]);
 
   const MONTH_OPTIONS = [5, 6, 7, 8, 9, 10, 11, 12] as const;
   const monthLabels: Record<string, Record<number | 'all', string>> = {
@@ -937,134 +948,181 @@ export default function ProductsSection() {
             </div>
           </div>
 
-          <motion.div
-            key={`product100-${activeCategory}-${activeSubcategory}-${activeMonth}`}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {filteredProduct100.map((product) => (
-          <motion.div
-            key={product.id}
-            variants={cardVariants}
-            className="rounded-lg p-3 md:p-6"
-            style={{ border: '1px solid #25c760' }}
-          >
-            {/* Badge Row */}
-            <div className="flex flex-wrap items-center gap-1.5 mb-2">
-              {product.subscriptionMonth && (
-                <span className={`${getMonthBadgeColor(product.subscriptionMonth)} text-white text-[10px] md:text-xs font-bold px-2 py-0.5 md:px-2.5 md:py-1 rounded-full`}>
-                  {mLabels[product.subscriptionMonth]}
-                </span>
-              )}
-            </div>
-            {/* Mobile: Horizontal Layout / Desktop: Vertical Layout */}
-            <div className="flex flex-row md:flex-col gap-3 md:gap-0">
-              {/* Video or Image */}
-              <div className="flex-shrink-0 self-stretch md:self-auto md:mb-4 md:flex md:justify-center">
-                {product.videoUrl ? (
-                  <video
-                    src={product.videoUrl}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-24 h-full md:w-28 md:h-52 object-cover rounded-lg"
-                  />
-                ) : (
-                  <img
-                    src={product.imageUrl!}
-                    alt={product.name}
-                    className="w-24 h-24 md:w-28 md:h-52 object-cover rounded-lg"
-                  />
-                )}
-              </div>
+          {/* Monthly Timeline */}
+          <div className="space-y-2 max-w-6xl mx-auto">
+            {Object.entries(productsByMonth)
+              .sort(([a], [b]) => Number(a) - Number(b))
+              .map(([month, products]) => (
+                <div key={month}>
+                  {/* Month row - clickable header */}
+                  <div
+                    className={`flex items-center gap-3 md:gap-4 cursor-pointer p-3 md:p-4 rounded-lg transition-colors ${
+                      expandedMonth === Number(month)
+                        ? 'bg-[#25c760]/10 border border-[#25c760]/30'
+                        : 'hover:bg-white/5 border border-transparent'
+                    }`}
+                    onClick={() => setExpandedMonth(expandedMonth === Number(month) ? null : Number(month))}
+                  >
+                    {/* Month badge */}
+                    <span className={`${getMonthBadgeColor(Number(month))} text-white text-xs md:text-sm font-bold px-3 py-1 md:px-4 md:py-1.5 rounded-full min-w-[48px] md:min-w-[56px] text-center shrink-0`}>
+                      {mLabels[Number(month)]}
+                    </span>
 
-              {/* Text Content */}
-              <div className="flex-1 flex flex-col">
-                {/* Title & Subtitle */}
-                <div className="mb-1 md:text-center">
-                  <h3 className="text-lg md:text-3xl font-bold" style={{ color: '#25c760' }}>
-                    {product.name}
-                  </h3>
-                  <p className="text-green-400 text-xs md:text-sm">{product.subtitle}</p>
-                  {product.subName && <p className="text-green-400 text-xs md:text-sm">{product.subName}</p>}
-                </div>
+                    {/* Product thumbnails row */}
+                    <div className="flex items-center gap-2 md:gap-3 flex-1 overflow-x-auto scrollbar-hide">
+                      {products.map((p) => (
+                        <div key={p.id} className="flex items-center gap-1.5 shrink-0">
+                          <div
+                            className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-cover bg-center border-2 border-white/20"
+                            style={{ backgroundImage: `url(${p.imageUrl})` }}
+                          />
+                          <span className="text-[10px] md:text-xs text-gray-300 max-w-[80px] md:max-w-[120px] truncate">
+                            {p.name}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
 
-                {/* Features */}
-                <div className="space-y-1 mb-2 mt-5">
-                  {product.features.map((feature, idx) => (
-                    <p key={idx} className="text-white text-[10px] md:text-lg flex items-start md:justify-center">
-                      <span className="text-green-400 mr-1 md:mr-2">{'\u2713'}</span>
-                      {feature}
-                    </p>
-                  ))}
-                </div>
-
-                {/* Price */}
-                <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center">
-                  {hasReferral ? (
-                    <>
-                      <span className="text-white/50 line-through text-base md:text-lg">{product.priceJpy}</span>
-                      <span className="text-white font-bold text-xl md:text-2xl">
-                        {formatJpyPrice(Math.round(parseJpyPrice(product.priceJpy) * (1 - REFERRAL_DISCOUNT_RATE)))}
+                    {/* Product count + expand indicator */}
+                    <div className="flex items-center gap-2 shrink-0">
+                      <span className="text-[10px] md:text-xs text-white/40">
+                        {products.length} {isJa ? '商品' : products.length === 1 ? 'item' : 'items'}
                       </span>
-                      <span className="text-xs font-semibold text-[#25C760] bg-[#25C760]/15 border border-[#25C760] rounded px-2 py-0.5">
-                        10% OFF
+                      <span className={`text-gray-500 text-sm transition-transform duration-200 ${expandedMonth === Number(month) ? 'rotate-180' : ''}`}>
+                        {'\u25BC'}
                       </span>
-                    </>
-                  ) : (
-                    <span className="text-white font-bold text-xl md:text-2xl">{product.priceJpy}</span>
+                    </div>
+                  </div>
+
+                  {/* Expanded product cards */}
+                  {expandedMonth === Number(month) && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 p-3 md:p-4 border border-white/10 rounded-lg mt-2 bg-black/30">
+                        {products.map((product) => (
+                          <motion.div
+                            key={product.id}
+                            variants={cardVariants}
+                            initial="hidden"
+                            animate="visible"
+                            className="rounded-lg p-3 md:p-6"
+                            style={{ border: '1px solid #25c760' }}
+                          >
+                            {/* Mobile: Horizontal Layout / Desktop: Vertical Layout */}
+                            <div className="flex flex-row md:flex-col gap-3 md:gap-0">
+                              {/* Video or Image */}
+                              <div className="flex-shrink-0 self-stretch md:self-auto md:mb-4 md:flex md:justify-center">
+                                {product.videoUrl ? (
+                                  <video
+                                    src={product.videoUrl}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="w-24 h-full md:w-28 md:h-52 object-cover rounded-lg"
+                                  />
+                                ) : (
+                                  <img
+                                    src={product.imageUrl!}
+                                    alt={product.name}
+                                    className="w-24 h-24 md:w-28 md:h-52 object-cover rounded-lg"
+                                  />
+                                )}
+                              </div>
+
+                              {/* Text Content */}
+                              <div className="flex-1 flex flex-col">
+                                {/* Title & Subtitle */}
+                                <div className="mb-1 md:text-center">
+                                  <h3 className="text-lg md:text-3xl font-bold" style={{ color: '#25c760' }}>
+                                    {product.name}
+                                  </h3>
+                                  <p className="text-green-400 text-xs md:text-sm">{product.subtitle}</p>
+                                  {product.subName && <p className="text-green-400 text-xs md:text-sm">{product.subName}</p>}
+                                </div>
+
+                                {/* Features */}
+                                <div className="space-y-1 mb-2 mt-5">
+                                  {product.features.map((feature, idx) => (
+                                    <p key={idx} className="text-white text-[10px] md:text-lg flex items-start md:justify-center">
+                                      <span className="text-green-400 mr-1 md:mr-2">{'\u2713'}</span>
+                                      {feature}
+                                    </p>
+                                  ))}
+                                </div>
+
+                                {/* Price */}
+                                <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center">
+                                  {hasReferral ? (
+                                    <>
+                                      <span className="text-white/50 line-through text-base md:text-lg">{product.priceJpy}</span>
+                                      <span className="text-white font-bold text-xl md:text-2xl">
+                                        {formatJpyPrice(Math.round(parseJpyPrice(product.priceJpy) * (1 - REFERRAL_DISCOUNT_RATE)))}
+                                      </span>
+                                      <span className="text-xs font-semibold text-[#25C760] bg-[#25C760]/15 border border-[#25C760] rounded px-2 py-0.5">
+                                        10% OFF
+                                      </span>
+                                    </>
+                                  ) : (
+                                    <span className="text-white font-bold text-xl md:text-2xl">{product.priceJpy}</span>
+                                  )}
+                                </div>
+
+                              </div>
+                            </div>
+
+                            {/* Quantity + Add to Cart */}
+                            <div className="mt-4 md:mt-6 px-2 md:px-4 pb-1 md:pb-2 space-y-3">
+                              {/* Quantity selector */}
+                              <div className="flex items-center justify-center gap-4 py-1">
+                                <button
+                                  onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: Math.max(1, (prev[product.id] ?? 1) - 1) }))}
+                                  className="w-9 h-9 rounded-full border-2 border-[#25c760] text-[#25c760] font-bold text-xl flex items-center justify-center hover:bg-[#25c760]/20 transition-colors"
+                                >{'\u2212'}</button>
+                                <span className="text-white font-bold text-base w-8 text-center">{quantities[product.id] ?? 1}</span>
+                                <button
+                                  onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: (prev[product.id] ?? 1) + 1 }))}
+                                  className="w-9 h-9 rounded-full border-2 border-[#25c760] text-[#25c760] font-bold text-xl flex items-center justify-center hover:bg-[#25c760]/20 transition-colors"
+                                >+</button>
+                              </div>
+                              {/* Add to cart */}
+                              <button
+                                onClick={() => {
+                                  const basePrice = parseFloat(product.priceUsd.replace('$', ''));
+                                  addItem({
+                                    id: product.id,
+                                    productId: product.id,
+                                    name: product.name,
+                                    price: basePrice,
+                                    discountedPrice: hasReferral ? parseFloat((basePrice * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2)) : undefined,
+                                    currency: 'USD',
+                                    quantity: quantities[product.id] ?? 1,
+                                    image: product.imageUrl ?? '',
+                                  });
+                                }}
+                                className="block w-full text-center py-2.5 md:py-3 bg-[#25c760] text-black font-semibold text-sm md:text-base rounded-full hover:bg-[#1da84e] transition-colors"
+                              >
+                                {isJa ? 'カートに入れる' : 'Add to Cart'}
+                              </button>
+                              <Link
+                                href={product.productLink}
+                                className="block w-full text-center py-2 text-white/60 font-medium text-xs md:text-sm hover:text-white transition-colors no-underline"
+                              >
+                                {isJa ? '商品詳細' : 'View Details'}
+                              </Link>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
                   )}
                 </div>
-
-              </div>
-            </div>
-
-            {/* Quantity + Add to Cart */}
-            <div className="mt-4 md:mt-6 px-2 md:px-4 pb-1 md:pb-2 space-y-3">
-              {/* Quantity selector */}
-              <div className="flex items-center justify-center gap-4 py-1">
-                <button
-                  onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: Math.max(1, (prev[product.id] ?? 1) - 1) }))}
-                  className="w-9 h-9 rounded-full border-2 border-[#25c760] text-[#25c760] font-bold text-xl flex items-center justify-center hover:bg-[#25c760]/20 transition-colors"
-                >{'\u2212'}</button>
-                <span className="text-white font-bold text-base w-8 text-center">{quantities[product.id] ?? 1}</span>
-                <button
-                  onClick={() => setQuantities((prev) => ({ ...prev, [product.id]: (prev[product.id] ?? 1) + 1 }))}
-                  className="w-9 h-9 rounded-full border-2 border-[#25c760] text-[#25c760] font-bold text-xl flex items-center justify-center hover:bg-[#25c760]/20 transition-colors"
-                >+</button>
-              </div>
-              {/* Add to cart */}
-              <button
-                onClick={() => {
-                  const basePrice = parseFloat(product.priceUsd.replace('$', ''));
-                  addItem({
-                    id: product.id,
-                    productId: product.id,
-                    name: product.name,
-                    price: basePrice,
-                    discountedPrice: hasReferral ? parseFloat((basePrice * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2)) : undefined,
-                    currency: 'USD',
-                    quantity: quantities[product.id] ?? 1,
-                    image: product.imageUrl ?? '',
-                  });
-                }}
-                className="block w-full text-center py-2.5 md:py-3 bg-[#25c760] text-black font-semibold text-sm md:text-base rounded-full hover:bg-[#1da84e] transition-colors"
-              >
-                {isJa ? 'カートに入れる' : 'Add to Cart'}
-              </button>
-              <Link
-                href={product.productLink}
-                className="block w-full text-center py-2 text-white/60 font-medium text-xs md:text-sm hover:text-white transition-colors no-underline"
-              >
-                {isJa ? '商品詳細' : 'View Details'}
-              </Link>
-            </div>
-          </motion.div>
-        ))}
-          </motion.div>
+              ))}
+          </div>
 
         </>
       )}
