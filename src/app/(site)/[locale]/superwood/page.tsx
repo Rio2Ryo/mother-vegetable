@@ -133,8 +133,11 @@ export default function SuperWoodPage() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
           アクアカルチャーキット
         </h2>
-        <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto">
+        <p className="text-gray-400 text-center mb-4 max-w-2xl mx-auto">
           あなたの池を「スーパー池」に変える — Mother Vegetable養殖システム
+        </p>
+        <p className="text-xl md:text-2xl text-center text-white/90 font-medium mb-10 max-w-2xl mx-auto">
+          池や水槽さえあればOK。<br className="md:hidden" />自分のプロテイン、自分で作りませんか？
         </p>
 
         <div className="border border-[#25c760]/30 rounded-2xl overflow-hidden bg-[#0d1f12]">
@@ -147,12 +150,16 @@ export default function SuperWoodPage() {
             }}
           />
           <div className="p-8 md:p-12">
-            <div className="text-center mb-8">
-              <p className="text-[#25c760] text-5xl font-extrabold mb-1">¥1,000,000</p>
+            {/* Catch copy */}
+            <div className="text-center mb-8 space-y-2">
+              <p className="text-lg md:text-xl text-white/80">
+                どこでも養殖キット — 空き家でも、ビルの中でも。
+              </p>
+              <p className="text-[#25c760] text-5xl font-extrabold">¥1,000,000</p>
               <p className="text-gray-400 text-sm">($6,700) — 設置・導入サポート込み</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="bg-[#1a2e1f] rounded-xl p-5">
                 <h4 className="font-bold text-[#25c760] mb-2">キット内容</h4>
                 <ul className="text-gray-300 text-sm space-y-1.5">
@@ -165,15 +172,23 @@ export default function SuperWoodPage() {
                 </ul>
               </div>
               <div className="bg-[#1a2e1f] rounded-xl p-5">
-                <h4 className="font-bold text-[#25c760] mb-2">導入効果</h4>
+                <h4 className="font-bold text-[#25c760] mb-2">ここがスゴい</h4>
                 <ul className="text-gray-300 text-sm space-y-1.5">
-                  <li>• 既存の池をMV養殖池に変換</li>
-                  <li>• 48種の栄養素で育つ高品質な魚</li>
-                  <li>• 水質の自然浄化</li>
-                  <li>• CO₂吸収で環境貢献</li>
-                  <li>• 年間収穫で投資回収</li>
-                  <li>• 24/7 リモートモニタリング</li>
+                  <li>• 池・水槽があればどこでも導入可</li>
+                  <li>• 空き家やビルの屋内でも養殖OK</li>
+                  <li>• AIで遠隔チェック（ノッティンガムシステム）</li>
+                  <li>• 全分析データをリアルタイム管理</li>
+                  <li>• 餌と魚が自動で循環生産される</li>
+                  <li>• 収穫した魚・餌の買取提案も可能</li>
                 </ul>
+              </div>
+              <div className="bg-[#1a2e1f] rounded-xl p-5">
+                <h4 className="font-bold text-[#25c760] mb-2">ランニングコスト</h4>
+                <ul className="text-gray-300 text-sm space-y-1.5">
+                  <li>• メンテナンスフィー（月額）</li>
+                  <li>• 魚の稚魚（補充時）</li>
+                </ul>
+                <p className="text-gray-400 text-xs mt-3">※ 詳細はお問い合わせください</p>
               </div>
             </div>
 
