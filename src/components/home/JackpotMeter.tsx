@@ -100,8 +100,8 @@ export default function JackpotMeter() {
         {/* Header */}
         <div className="relative mb-6 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white tracking-wide">
-            <span className="mr-2" role="img" aria-label="jackpot">
-              🎰
+            <span className="mr-2" role="img" aria-label="power">
+              ⚡
             </span>
             {t("title")}
           </h2>
