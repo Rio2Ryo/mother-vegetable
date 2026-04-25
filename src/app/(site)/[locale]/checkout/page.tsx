@@ -1,12 +1,50 @@
 "use client";
 
-import { useState, useEffect, useCallback, memo, type FormEvent, type ChangeEvent } from "react";
+import { Suspense, useState, useEffect, useCallback, memo, type FormEvent, type ChangeEvent } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useCartStore } from "@/store/cart";
 import { useAffiliateStore } from "@/store/affiliateStore";
 import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { getStoredReferralCode } from "@/lib/affiliate";
+
+/* -----------------------------------------------------------------------
+   Subscription plan catalog — kept in sync with /api/checkout/subscription
+   (basic/standard/premium). USD prices match the API; ¥ prices match the
+   home page plan picker. Locale-aware names.
+   ----------------------------------------------------------------------- */
+type SubPlanId = "basic" | "standard" | "premium";
+
+const SUBSCRIPTION_PLANS: Record<SubPlanId, {
+  priceUsdCents: number;
+  priceJpy: number;
+  productsPerMonth: number;
+  nameJa: string;
+  nameEn: string;
+}> = {
+  basic:    { priceUsdCents: 1350, priceJpy: 2000, productsPerMonth: 1, nameJa: "ライトプラン", nameEn: "Basic Plan" },
+  standard: { priceUsdCents: 2350, priceJpy: 3500, productsPerMonth: 2, nameJa: "スタンダードプラン", nameEn: "Standard Plan" },
+  premium:  { priceUsdCents: 3350, priceJpy: 5000, productsPerMonth: 3, nameJa: "プレミアムプラン", nameEn: "Premium Plan" },
+};
+
+// Per-product JPY price (mirrors PRODUCT_PRICES_JPY in @/lib/stripe).
+// Inlined so we don't pull the server-side stripe SDK into the client bundle.
+const PRODUCT_PRICES_JPY: Record<string, number> = {
+  achieve: 5500,
+  confidence: 5500,
+  'tilapia': 2000,
+  'mv-salt': 2000,
+  'mv-soy-sauce': 2000,
+  'mv-toner': 2000,
+  'mv-balm': 2000,
+  'mv-soap': 2000,
+};
+
+function fmtPrice(amount: number, isJpy: boolean): string {
+  if (isJpy) return '¥' + Math.round(amount).toLocaleString();
+  return '$' + amount.toFixed(2);
+}
 
 interface ShippingForm {
   firstName: string;
@@ -76,17 +114,44 @@ const Field = memo(function Field({
 });
 
 export default function CheckoutPage() {
+  // useSearchParams() must run inside a Suspense boundary for static export.
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <CheckoutContent />
+    </Suspense>
+  );
+}
+
+function CheckoutContent() {
   const { items, totalPrice } = useCartStore();
   const getInstructorByReferralCode = useAffiliateStore((s) => s.getInstructorByReferralCode);
   const locale = useLocale();
   const t = useTranslations('checkout');
+  const searchParams = useSearchParams();
+  const subParam = (searchParams?.get("subscription") || "").toLowerCase();
+  const subscriptionPlan: SubPlanId | null =
+    subParam === "basic" || subParam === "standard" || subParam === "premium"
+      ? subParam
+      : null;
+  const isSubscriptionMode = subscriptionPlan !== null;
+
   const [form, setForm] = useState<ShippingForm>(emptyForm);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [referralCode, setReferralCode] = useState<string | null>(null);
   const [referrerName, setReferrerName] = useState<string | null>(null);
 
-  const total = totalPrice();
+  const isJpy = locale === 'ja';
+
+  const subPlanInfo = subscriptionPlan ? SUBSCRIPTION_PLANS[subscriptionPlan] : null;
+  // Per-line and total are computed in whichever currency the page is showing.
+  // Cart items are stored as USD in the cart store; for JPY display we look up
+  // the JPY price by productId.
+  const cartTotal = isJpy
+    ? items.reduce((sum, it) => sum + (PRODUCT_PRICES_JPY[it.productId] ?? 0) * it.quantity, 0)
+    : totalPrice();
+  const subPlanPrice = subPlanInfo ? (isJpy ? subPlanInfo.priceJpy : subPlanInfo.priceUsdCents / 100) : 0;
+  const total = isSubscriptionMode ? subPlanPrice : cartTotal;
 
   // Retrieve referral code from storage on mount
   useEffect(() => {
@@ -144,24 +209,39 @@ export default function CheckoutPage() {
     setSubmitting(true);
 
     try {
-      // Create Stripe Checkout Session
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          items: items.map((item) => ({
-            productId: item.productId,
-            name: item.name,
-            price: item.price,
-            discountedPrice: item.discountedPrice,
-            quantity: item.quantity,
-            image: item.image,
-          })),
-          shipping: form,
-          referralCode: referralCode || undefined,
-          locale,
-        }),
-      });
+      let res: Response;
+      if (isSubscriptionMode && subscriptionPlan) {
+        // Subscription flow: re-use the existing /api/checkout/subscription
+        // endpoint, but now with the user's email/shipping collected here.
+        res = await fetch("/api/checkout/subscription", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            planId: subscriptionPlan,
+            email: form.email,
+            locale,
+            referralCode: referralCode || undefined,
+          }),
+        });
+      } else {
+        res = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: items.map((item) => ({
+              productId: item.productId,
+              name: item.name,
+              price: item.price,
+              discountedPrice: item.discountedPrice,
+              quantity: item.quantity,
+              image: item.image,
+            })),
+            shipping: form,
+            referralCode: referralCode || undefined,
+            locale,
+          }),
+        });
+      }
 
       const data = await res.json();
 
@@ -185,9 +265,9 @@ export default function CheckoutPage() {
   }
 
   // -----------------------------------------------------------------------
-  // Empty cart
+  // Empty cart (only for cart flow — subscription flow always has a plan)
   // -----------------------------------------------------------------------
-  if (items.length === 0) {
+  if (!isSubscriptionMode && items.length === 0) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
         <div className="max-w-md w-full text-center space-y-6">
@@ -212,7 +292,19 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-10">{t('title')}</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2">
+          {isSubscriptionMode
+            ? (locale === 'ja' ? 'サブスクリプション登録' : 'Subscribe')
+            : t('title')}
+        </h1>
+        {isSubscriptionMode && subPlanInfo && (
+          <p className="text-gray-400 mb-10">
+            {locale === 'ja'
+              ? `${subPlanInfo.nameJa} を月額で開始します`
+              : `Starting ${subPlanInfo.nameEn} monthly subscription`}
+          </p>
+        )}
+        {!isSubscriptionMode && <div className="mb-10" />}
 
         <form
           onSubmit={handleSubmit}
@@ -263,37 +355,66 @@ export default function CheckoutPage() {
               )}
 
               <div className="space-y-4 max-h-80 overflow-y-auto pr-1">
-                {items.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex items-center gap-4 border-b border-gray-800 pb-4"
-                  >
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      width={56}
-                      height={56}
-                      className="w-14 h-14 rounded-lg object-cover bg-gray-800"
-                    />
+                {isSubscriptionMode && subPlanInfo ? (
+                  <div className="flex items-center gap-4 border-b border-gray-800 pb-4">
+                    <div className="w-14 h-14 rounded-lg bg-[#25C760]/15 border border-[#25C760]/40 flex items-center justify-center text-2xl">
+                      {'\u{1F4E6}'}
+                    </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-medium truncate">{item.name}</p>
+                      <p className="font-medium truncate">
+                        {locale === 'ja' ? subPlanInfo.nameJa : subPlanInfo.nameEn}
+                      </p>
                       <p className="text-sm text-gray-400">
-                        {t('qty')}: {item.quantity}
+                        {locale === 'ja'
+                          ? `毎月${subPlanInfo.productsPerMonth}個お届け`
+                          : `${subPlanInfo.productsPerMonth} product${subPlanInfo.productsPerMonth > 1 ? 's' : ''} / month`}
                       </p>
                     </div>
-                    <p className="font-semibold whitespace-nowrap">
-                      $
-                      {(
-                        (item.discountedPrice ?? item.price) * item.quantity
-                      ).toFixed(2)}
-                    </p>
+                    <div className="text-right whitespace-nowrap">
+                      <p className="font-semibold">{fmtPrice(subPlanPrice, isJpy)}</p>
+                      <p className="text-xs text-gray-500">
+                        {locale === 'ja' ? '/ 月' : '/ month'}
+                      </p>
+                    </div>
                   </div>
-                ))}
+                ) : (
+                  items.map((item) => {
+                    const lineUsd = (item.discountedPrice ?? item.price) * item.quantity;
+                    const lineJpy = (PRODUCT_PRICES_JPY[item.productId] ?? 0) * item.quantity;
+                    return (
+                      <div
+                        key={item.id}
+                        className="flex items-center gap-4 border-b border-gray-800 pb-4"
+                      >
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          width={56}
+                          height={56}
+                          className="w-14 h-14 rounded-lg object-cover bg-gray-800"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium truncate">{item.name}</p>
+                          <p className="text-sm text-gray-400">
+                            {t('qty')}: {item.quantity}
+                          </p>
+                        </div>
+                        <p className="font-semibold whitespace-nowrap">
+                          {isJpy ? fmtPrice(lineJpy, true) : fmtPrice(lineUsd, false)}
+                        </p>
+                      </div>
+                    );
+                  })
+                )}
               </div>
 
               <div className="border-t border-gray-700 pt-4 flex justify-between text-lg font-bold">
-                <span>{t('total')}</span>
-                <span className="text-[#25C760]">${total.toFixed(2)}</span>
+                <span>
+                  {isSubscriptionMode
+                    ? (locale === 'ja' ? '月額合計' : 'Total / month')
+                    : t('total')}
+                </span>
+                <span className="text-[#25C760]">{fmtPrice(total, isJpy)}</span>
               </div>
 
               {error && (

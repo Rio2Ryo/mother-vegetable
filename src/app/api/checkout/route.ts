@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getStripe, PRODUCT_PRICES, REFERRAL_DISCOUNT_RATE } from "@/lib/stripe";
+import { getStripe, PRODUCT_PRICES, PRODUCT_PRICES_JPY, REFERRAL_DISCOUNT_RATE, resolveLocaleAndCurrency } from "@/lib/stripe";
 import { getProductBySlug } from "@/data/products";
 import prisma from "@/lib/prisma";
 import { ensureNewTables } from "@/lib/ensure-tables";
@@ -126,10 +126,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Currency = JPY for Japanese site, USD otherwise. JPY is zero-decimal (yen),
+    // USD is 2-decimal (cents). The price tables are already in the right scale.
+    const { stripeLocale, currency } = resolveLocaleAndCurrency(locale);
+    const priceTable = currency === "jpy" ? PRODUCT_PRICES_JPY : PRODUCT_PRICES;
+
     // Build line items for Stripe — enforce server-side pricing
     // Apply referral discount first, then coupon discount stacks on top
     const lineItems = body.items.map((item) => {
-      const serverPrice = PRODUCT_PRICES[item.productId];
+      const serverPrice = priceTable[item.productId];
       if (!serverPrice) {
         throw new Error(`Unknown product: ${item.productId}`);
       }
@@ -143,21 +148,22 @@ export async function POST(request: NextRequest) {
         if (coupon.discountType === "percentage") {
           unitAmount = Math.round(unitAmount * (1 - coupon.discountValue / 100));
         } else if (coupon.discountType === "fixed") {
-          // Fixed discount is in dollars — convert to cents and distribute proportionally
-          // For simplicity, apply fixed amount evenly across total (handled below via Stripe coupon line)
-          // We apply per-unit: divide fixed discount (in cents) across total quantity
+          // Fixed coupon is denominated in the major currency unit (USD dollars,
+          // JPY yen). Convert to minor units to match unit_amount.
           const totalQuantity = body.items.reduce((sum, i) => sum + i.quantity, 0);
-          const perUnitDiscount = Math.round((coupon.discountValue * 100) / totalQuantity);
+          const fixedInMinor = currency === "jpy"
+            ? Math.round(coupon.discountValue) // JPY: discountValue is yen
+            : Math.round(coupon.discountValue * 100); // USD: dollars → cents
+          const perUnitDiscount = Math.round(fixedInMinor / totalQuantity);
           unitAmount = Math.max(0, unitAmount - perUnitDiscount);
         }
       }
 
-      // Ensure unit amount is at least 1 cent (Stripe minimum)
       unitAmount = Math.max(unitAmount, 1);
 
       return {
         price_data: {
-          currency: "usd",
+          currency,
           product_data: {
             name: item.name,
             ...(item.image ? { images: [item.image.startsWith("http") ? item.image : `${appUrl}${item.image}`] } : {}),
@@ -176,9 +182,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Create Stripe Checkout Session
+    // Create Stripe Checkout Session (stripeLocale resolved above)
     const session = await getStripe().checkout.sessions.create({
       mode: "payment",
+      locale: stripeLocale,
       payment_method_types: ["card"],
       line_items: lineItems,
       customer_email: body.shipping.email,

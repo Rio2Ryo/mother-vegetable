@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useCartStore } from '@/store/cart';
 import { getStoredReferralCode } from '@/lib/affiliate';
 
@@ -563,6 +563,7 @@ const SUBCATEGORY_LABELS: Record<string, Record<Subcategory | 'all', string>> = 
 export default function ProductsSection() {
   const locale = useLocale();
   const isJa = locale === 'ja';
+  const tMvt = useTranslations('mvt');
   const products = getProducts(isJa);
   const addItem = useCartStore((s) => s.addItem);
   const [quantities, setQuantities] = useState<Record<string, number>>(
@@ -574,31 +575,29 @@ export default function ProductsSection() {
   const [selectedPlan, setSelectedPlan] = useState<'light' | 'standard' | 'premium'>('standard');
   const [expandedMonth, setExpandedMonth] = useState<number | null>(null);
   const [hasReferral, setHasReferral] = useState(false);
+  const [subscribing, setSubscribing] = useState(false);
 
   useEffect(() => {
     const code = getStoredReferralCode();
     if (code) setHasReferral(true);
   }, []);
 
-  const handleSubscribe = async (planId: string) => {
-    try {
-      const res = await fetch('/api/checkout/subscription', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          planId,
-          email: '', // Will be collected on Stripe checkout page
-          locale: locale || 'ja',
-          referralCode: getStoredReferralCode() || undefined,
-        }),
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      }
-    } catch (error) {
-      console.error('Subscription checkout failed:', error);
-    }
+  // Map UI plan keys to API plan IDs (`light` → `basic` on the server).
+  const toApiPlanId = (planKey: 'light' | 'standard' | 'premium'): string => {
+    if (planKey === 'light') return 'basic';
+    return planKey;
+  };
+
+  // Send the user to the unified /checkout page (same UI as cart checkout)
+  // with the chosen subscription plan in the query string. The checkout page
+  // detects the `subscription` param and submits to /api/checkout/subscription
+  // instead of the cart route.
+  const handleSubscribe = (planKey: 'light' | 'standard' | 'premium') => {
+    if (subscribing) return;
+    setSubscribing(true);
+    const planId = toApiPlanId(planKey);
+    const target = `/${locale || 'ja'}/checkout?subscription=${encodeURIComponent(planId)}`;
+    window.location.href = target;
   };
 
   const filteredProducts = products.filter((p) => {
@@ -666,6 +665,56 @@ export default function ProductsSection() {
 
   const subcatLabels = SUBCATEGORY_LABELS[isJa ? 'ja' : 'en'] ?? SUBCATEGORY_LABELS.en;
 
+  // Render the green MVT earn chip + env impact line for a product card.
+  // Fields (co2SavedKg, proteinGrams, chemicalReducedGrams, mvtReward) are
+  // read defensively from the product via an index lookup so this works
+  // whether or not the local product shape has been extended yet. If no
+  // fields are present, nothing renders.
+  const renderMvtBadge = (product: Record<string, unknown>) => {
+    const mvtReward = typeof product.mvtReward === 'number' ? product.mvtReward : undefined;
+    const co2 = typeof product.co2SavedKg === 'number' ? product.co2SavedKg : undefined;
+    const protein = typeof product.proteinGrams === 'number' ? product.proteinGrams : undefined;
+    const chemical =
+      typeof product.chemicalReducedGrams === 'number' ? product.chemicalReducedGrams : undefined;
+
+    if (
+      mvtReward === undefined &&
+      co2 === undefined &&
+      protein === undefined &&
+      chemical === undefined
+    ) {
+      return null;
+    }
+
+    const hasImpact = co2 !== undefined || protein !== undefined || chemical !== undefined;
+
+    return (
+      <div className="mt-1 mb-1 space-y-1">
+        {mvtReward !== undefined && (
+          <span
+            className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] md:text-xs font-semibold border"
+            style={{
+              color: '#25c760',
+              backgroundColor: 'rgba(37, 199, 96, 0.12)',
+              borderColor: 'rgba(37, 199, 96, 0.45)',
+            }}
+            aria-label={tMvt('earnPrefix')}
+          >
+            <span aria-hidden="true">🪙</span>
+            <span>
+              +{mvtReward} MVT
+            </span>
+          </span>
+        )}
+        {hasImpact && (
+          <p className="text-[9px] md:text-[11px] text-white/60 leading-snug">
+            {tMvt('co2Label')} {co2 ?? 0}kg / {tMvt('proteinLabel')} {protein ?? 0}g / {tMvt('chemicalLabel')} {chemical ?? 0}g
+          </p>
+        )}
+      </div>
+    );
+  };
+
   // Build subcategory filter buttons (only show categories that have products)
   const subcategoryButtons: { key: Subcategory | 'all'; label: string }[] = [
     { key: 'all', label: subcatLabels.all },
@@ -729,7 +778,7 @@ export default function ProductsSection() {
               >
                 {/* Mobile: Horizontal Layout / Desktop: Vertical Layout */}
                 <div className="flex flex-row md:flex-col gap-3 md:gap-0">
-                  {/* Video or Image */}
+                  {/* Video or Image — Achieve/Confidence keep the original portrait look on desktop */}
                   <div className="flex-shrink-0 self-stretch md:self-auto md:mb-4 md:flex md:justify-center">
                     {product.videoUrl ? (
                       <video
@@ -787,6 +836,9 @@ export default function ProductsSection() {
                       )}
                     </div>
 
+                    {/* MVT earn preview */}
+                    {renderMvtBadge(product as unknown as Record<string, unknown>)}
+
                   </div>
                 </div>
 
@@ -842,57 +894,6 @@ export default function ProductsSection() {
           <h3 className="text-lg md:text-2xl font-bold text-center mb-4 md:mb-6" style={{ color: '#25c760' }}>
             {tierLabels.product100}
           </h3>
-
-          {/* Subcategory Filter */}
-          {subcategoryButtons.length > 2 && (
-            <div className="flex flex-wrap justify-center gap-2 md:gap-2 mb-4 md:mb-6">
-              {subcategoryButtons.map((sub) => (
-                <button
-                  key={sub.key}
-                  onClick={() => setActiveSubcategory(sub.key)}
-                  className={`px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-semibold transition-colors ${
-                    activeSubcategory === sub.key
-                      ? 'bg-[#25c760]/20 text-[#25c760] border border-[#25c760]'
-                      : 'border border-white/20 text-white/50 hover:border-[#25c760]/50 hover:text-[#25c760]/70'
-                  }`}
-                >
-                  {sub.label}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Month Filter */}
-          {hasMonthlyProducts && (
-            <div className="flex flex-wrap justify-center gap-2 md:gap-2 mb-6 md:mb-8">
-              <span className="text-white/40 text-[10px] md:text-xs font-medium self-center mr-1">
-                {isJa ? '配送月' : 'Month'}:
-              </span>
-              <button
-                onClick={() => setActiveMonth('all')}
-                className={`px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-semibold transition-colors ${
-                  activeMonth === 'all'
-                    ? 'bg-[#25c760]/20 text-[#25c760] border border-[#25c760]'
-                    : 'border border-white/20 text-white/50 hover:border-[#25c760]/50 hover:text-[#25c760]/70'
-                }`}
-              >
-                {mLabels.all}
-              </button>
-              {MONTH_OPTIONS.map((m) => (
-                <button
-                  key={m}
-                  onClick={() => setActiveMonth(m)}
-                  className={`px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-semibold transition-colors ${
-                    activeMonth === m
-                      ? 'bg-[#25c760]/20 text-[#25c760] border border-[#25c760]'
-                      : 'border border-white/20 text-white/50 hover:border-[#25c760]/50 hover:text-[#25c760]/70'
-                  }`}
-                >
-                  {mLabels[m]}
-                </button>
-              ))}
-            </div>
-          )}
 
           {/* Subscription Plan Selector */}
           <div className="max-w-4xl mx-auto mb-8 md:mb-10">
@@ -971,60 +972,62 @@ export default function ProductsSection() {
             <div className="flex justify-center mt-5">
               <button
                 onClick={() => handleSubscribe(selectedPlan)}
-                className="px-8 py-3 md:px-12 md:py-4 bg-[#25c760] text-black font-bold text-sm md:text-lg rounded-full hover:bg-[#1da84e] transition-colors shadow-lg shadow-[#25c760]/20"
+                disabled={subscribing}
+                className="px-8 py-3 md:px-12 md:py-4 bg-[#25c760] text-black font-bold text-sm md:text-lg rounded-full hover:bg-[#1da84e] transition-colors shadow-lg shadow-[#25c760]/20 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isJa ? 'サブスクリプションを開始する' : 'Start Subscription'}
               </button>
             </div>
           </div>
 
-          {/* Monthly Timeline */}
-          <div className="space-y-2 max-w-6xl mx-auto">
+          {/* Monthly Timeline — wide, no scroll arrow, no count; product name click toggles a wide dropdown modal */}
+          <div className="space-y-3 w-full">
             {Object.entries(productsByMonth)
               .sort(([a], [b]) => Number(a) - Number(b))
               .map(([month, products]) => (
                 <div key={month}>
-                  {/* Month row - clickable header */}
+                  {/* Month row — top-aligned on mobile so the month badge and the (vertically-stacked) product icons line up at the top */}
                   <div
-                    className={`flex items-center gap-3 md:gap-4 cursor-pointer p-3 md:p-4 rounded-lg transition-colors ${
+                    className={`flex items-start md:items-center gap-3 md:gap-5 px-3 py-2.5 md:px-4 md:py-3 rounded-lg transition-colors ${
                       expandedMonth === Number(month)
                         ? 'bg-[#25c760]/10 border border-[#25c760]/30'
                         : 'hover:bg-white/5 border border-transparent'
                     }`}
-                    onClick={() => setExpandedMonth(expandedMonth === Number(month) ? null : Number(month))}
                   >
                     {/* Month badge */}
                     <span className={`${getMonthBadgeColor(Number(month))} text-white text-xs md:text-sm font-bold px-3 py-1 md:px-4 md:py-1.5 rounded-full min-w-[48px] md:min-w-[56px] text-center shrink-0`}>
                       {mLabels[Number(month)]}
                     </span>
 
-                    {/* Product thumbnails row */}
-                    <div className="flex items-center gap-2 md:gap-3 flex-1 overflow-x-auto scrollbar-hide">
-                      {products.map((p) => (
-                        <div key={p.id} className="flex items-center gap-1.5 shrink-0">
-                          <div
-                            className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-cover bg-center border-2 border-white/20"
-                            style={{ backgroundImage: `url(${p.imageUrl})` }}
-                          />
-                          <span className="text-[10px] md:text-xs text-gray-300 max-w-[80px] md:max-w-[120px] truncate">
-                            {p.name}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Product count + expand indicator */}
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className="text-[10px] md:text-xs text-white/40">
-                        {products.length} {isJa ? '商品' : products.length === 1 ? 'item' : 'items'}
-                      </span>
-                      <span className={`text-gray-500 text-sm transition-transform duration-200 ${expandedMonth === Number(month) ? 'rotate-180' : ''}`}>
-                        {'\u25BC'}
-                      </span>
+                    {/* Product thumbnails — equal-width columns. Mobile: stack vertically (icon above wrapped name). Desktop: icon next to name. */}
+                    <div className="relative flex-1 min-w-0">
+                      <div className="grid grid-cols-3 gap-2 md:gap-4 justify-items-center">
+                        {products.map((p) => {
+                          const isOpen = expandedMonth === Number(month);
+                          return (
+                            <button
+                              key={p.id}
+                              type="button"
+                              onClick={() =>
+                                setExpandedMonth(isOpen ? null : Number(month))
+                              }
+                              className="w-full flex flex-col md:flex-row items-center md:items-center justify-center md:justify-start gap-1.5 md:gap-2 rounded-lg px-1 py-1 md:px-2 hover:bg-white/5 transition-colors"
+                            >
+                              <div
+                                className="w-10 h-10 md:w-11 md:h-11 shrink-0 rounded-full bg-cover bg-center border-2 border-[#25c760]/60 shadow-[0_0_0_1px_rgba(37,199,96,0.25)]"
+                                style={{ backgroundImage: `url(${p.imageUrl})` }}
+                              />
+                              <span className="text-[11px] leading-tight md:text-sm text-gray-200 hover:text-[#25c760] transition-colors text-center md:text-left break-words md:truncate w-full md:w-auto">
+                                {p.name}
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Expanded product cards */}
+                  {/* Expanded dropdown modal — wider, full-width */}
                   {expandedMonth === Number(month) && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
@@ -1032,7 +1035,7 @@ export default function ProductsSection() {
                       transition={{ duration: 0.3, ease: 'easeOut' }}
                       className="overflow-hidden"
                     >
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 p-3 md:p-4 border border-white/10 rounded-lg mt-2 bg-black/30">
+                      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-7 p-4 md:p-6 border border-[#25c760]/40 rounded-xl mt-3 bg-black/40">
                         {products.map((product) => (
                           <motion.div
                             key={product.id}
@@ -1044,8 +1047,8 @@ export default function ProductsSection() {
                           >
                             {/* Mobile: Horizontal Layout / Desktop: Vertical Layout */}
                             <div className="flex flex-row md:flex-col gap-3 md:gap-0">
-                              {/* Video or Image */}
-                              <div className="flex-shrink-0 self-stretch md:self-auto md:mb-4 md:flex md:justify-center">
+                              {/* Video or Image — 16:9 landscape on desktop, square on mobile */}
+                              <div className="flex-shrink-0 self-stretch md:self-auto md:mb-4 md:w-full">
                                 {product.videoUrl ? (
                                   <video
                                     src={product.videoUrl}
@@ -1053,13 +1056,13 @@ export default function ProductsSection() {
                                     loop
                                     muted
                                     playsInline
-                                    className="w-24 h-full md:w-28 md:h-52 object-cover rounded-lg"
+                                    className="w-24 h-full md:w-full md:h-auto md:aspect-video object-cover rounded-lg"
                                   />
                                 ) : (
                                   <img
                                     src={product.imageUrl!}
                                     alt={product.name}
-                                    className="w-24 h-24 md:w-28 md:h-52 object-cover rounded-lg"
+                                    className="w-24 h-24 md:w-full md:h-auto md:aspect-video object-cover rounded-lg"
                                   />
                                 )}
                               </div>
@@ -1102,6 +1105,9 @@ export default function ProductsSection() {
                                   )}
                                 </div>
 
+                                {/* MVT earn preview */}
+                                {renderMvtBadge(product as unknown as Record<string, unknown>)}
+
                               </div>
                             </div>
 
@@ -1137,13 +1143,6 @@ export default function ProductsSection() {
                                 className="block w-full text-center py-2.5 md:py-3 bg-[#25c760] text-black font-semibold text-sm md:text-base rounded-full hover:bg-[#1da84e] transition-colors"
                               >
                                 {isJa ? 'カートに入れる' : 'Add to Cart'}
-                              </button>
-                              {/* Subscribe button */}
-                              <button
-                                onClick={() => handleSubscribe(selectedPlan)}
-                                className="block w-full text-center py-2.5 md:py-3 border-2 border-[#25c760] text-[#25c760] font-semibold text-sm md:text-base rounded-full hover:bg-[#25c760]/10 transition-colors"
-                              >
-                                {isJa ? 'サブスクで購入' : 'Subscribe'}
                               </button>
                               <Link
                                 href={product.productLink}

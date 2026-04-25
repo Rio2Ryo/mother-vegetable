@@ -500,8 +500,16 @@
     "backToDealer": "返回经销商计划",
     "navLabel": "经销商"
   },
+  "mvt": {
+    "earnPrefix": "获得MVT",
+    "envImpactLabel": "环境贡献",
+    "co2Label": "CO2",
+    "proteinLabel": "蛋白质",
+    "chemicalLabel": "化学减少",
+    "subscribeError": "启动订阅失败"
+  },
   "jackpot": {
-    "title": "MV能量计",
+    "title": "MV Growth Meter",
     "subtitle": "大家一起购买，解锁超级奖励！",
     "progress": "{current} / {target}",
     "remaining": "再购买{count}个即可进入奖励时间！",
@@ -511,13 +519,18 @@
     "recentPurchases": "最近购买",
     "purchasedBy": "{name}购买了{product}",
     "ago": "{time}前",
-    "rewardsTitle": "能量满格，全员获得特别奖励！",
-    "rewardsSubtitle": "能量条达到100%时，所有人都将获得：",
-    "rewardDiscount": "下次购买享9折优惠",
-    "rewardDiscountDesc": "下次订单享受10%折扣",
-    "rewardGoods": "限量MV周边赠送",
-    "rewardGoodsDesc": "赢取非卖品原创周边",
-    "rewardToken": "MVT代币双倍发放",
-    "rewardTokenDesc": "下次购买时获得2倍MVT代币"
+    "rewardsTitle": "100人达成，启动地球规模的特别奖励",
+    "rewardsSubtitle": "能量满格 = 实体 SEF 工厂正式建造，全员同时开启以下4项特权",
+    "rewardFounder": "SEF 创始人认证 & 名牌镌刻",
+    "rewardFounderDesc": "你的姓名将镌刻在实体 SEF 的纪念牌上，永久获得 Founder 创始人称号",
+    "rewardFish": "AquaCulture 鲜鱼直送",
+    "rewardFishDesc": "新建 SEF 配套养殖设施饲养的 48 种营养鱼，最佳新鲜度直送到家",
+    "rewardMvtBoost": "MVT ×5 加成 + 环境回报",
+    "rewardMvtBoostDesc": "下次购买 MVT 5倍 + 根据CO2/蛋白质/化学品减量自动回馈",
+    "rewardSuperwood": "Superwood DIY 木块礼盒",
+    "rewardSuperwoodDesc": "建造完成的 SEF 同款 Superwood 木块 (直/角/板) 配送到家",
+    "jackpotMaxBanner": "🎊 奖励时间达成！🎊",
+    "jackpotMaxBannerSub": "Jackpot Unlocked!",
+    "mvtEarned": "+{amount} MVT 获得！"
   }
 }

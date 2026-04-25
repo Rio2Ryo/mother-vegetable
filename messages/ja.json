@@ -500,8 +500,16 @@
     "backToDealer": "代理店プログラムに戻る",
     "navLabel": "代理店"
   },
+  "mvt": {
+    "earnPrefix": "獲得MVT",
+    "envImpactLabel": "環境貢献量",
+    "co2Label": "CO2",
+    "proteinLabel": "タンパク質",
+    "chemicalLabel": "化学物質削減",
+    "subscribeError": "サブスクリプションの開始に失敗しました"
+  },
   "jackpot": {
-    "title": "MVパワーメーター",
+    "title": "MV Growth Meter",
     "subtitle": "みんなの購入パワーで特典をゲットしよう！",
     "progress": "{current} / {target}",
     "remaining": "あと{count}個でボーナスタイム突入！",
@@ -511,13 +519,18 @@
     "recentPurchases": "みんなの購入履歴",
     "purchasedBy": "{name}さんが {product} を購入",
     "ago": "{time}前",
-    "rewardsTitle": "メーター達成でみんなにスペシャル特典！",
-    "rewardsSubtitle": "メーターが100%になるとみんなにご褒美が！",
-    "rewardDiscount": "次回購入10%OFF",
-    "rewardDiscountDesc": "次回のお買い物が10%割引",
-    "rewardGoods": "限定MVグッズプレゼント",
-    "rewardGoodsDesc": "非売品のオリジナルグッズが当たる",
-    "rewardToken": "MVTトークン2倍付与",
-    "rewardTokenDesc": "次回購入時のMVTが2倍に"
+    "rewardsTitle": "100人達成で、地球規模の特典が動き出す",
+    "rewardsSubtitle": "メーターMAX = 実物のSEFが建ち、参加者全員にこの4特典が同時開放",
+    "rewardFounder": "SEF Founder 認定 & 銘板刻印",
+    "rewardFounderDesc": "建設される実物SEFの銘板にあなたの名前が刻まれ、永続的にFounder称号を獲得",
+    "rewardFish": "AquaCulture朝採れ便",
+    "rewardFishDesc": "新設SEF併設の養殖キットで育った48種栄養のマザベジフィッシュを直送",
+    "rewardMvtBoost": "MVT ×5 ブースト + 環境還元",
+    "rewardMvtBoostDesc": "次回購入のMVTが5倍 + CO2/タンパク質/ケミカル削減量に応じて自動リターン",
+    "rewardSuperwood": "Superwood DIY ブロックBOX",
+    "rewardSuperwoodDesc": "完成SEFのSuperwoodブロック (ストレート/コーナー/パネル) をご自宅へ",
+    "jackpotMaxBanner": "🎊 ボーナスタイム達成！🎊",
+    "jackpotMaxBannerSub": "Jackpot Unlocked!",
+    "mvtEarned": "+{amount} MVT 獲得！"
   }
 }

@@ -180,16 +180,7 @@ export default function Header() {
                       </svg>
                       {t('signUp')}
                     </Link>
-                    <Link
-                      href="/instructor/login"
-                      className="flex items-center w-full py-3 px-4 bg-black border-2 border-[#25C760] rounded-lg text-white text-base font-medium cursor-pointer transition-all duration-300 no-underline hover:bg-[rgba(37,199,96,0.1)] hover:border-[#3C8063]"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <svg className="w-4 h-4 mr-2" width="16" height="16" fill="currentColor" viewBox="0 0 640 512">
-                        <path d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H576V64H224v49.9C205.2 102.2 183.3 96 160 96V64zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM0 482.3C0 383.8 79.8 304 178.3 304h-36.6C240.2 304 320 383.8 320 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
-                      </svg>
-                      {t('instructorPortal')}
-                    </Link>
+                    {/* Instructor-portal mobile login entry hidden per yakon's request */}
                   </>
                 )}
               </div>
@@ -276,42 +267,8 @@ export default function Header() {
                     {t('news')}
                   </Link>
                 </li>
-                {/* Instructor-specific or regular menu items */}
-                {isRegisteredInstructor ? (
-                  <>
-                    <li className="max-lg:w-full">
-                      <Link
-                        href="/instructor/dashboard"
-                        className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
-                        style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {t('dashboard')}
-                      </Link>
-                    </li>
-                    <li className="max-lg:w-full">
-                      <Link
-                        href="/mv/certifiedInstructor"
-                        className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
-                        style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {t('certifiedInstructor')}
-                      </Link>
-                    </li>
-                  </>
-                ) : (
-                  <li className="max-lg:w-full">
-                    <Link
-                      href="/mv/certifiedInstructor"
-                      className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
-                      style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {t('certifiedInstructor')}
-                    </Link>
-                  </li>
-                )}
+                {/* Instructor-portal entry hidden from public nav (per yakon's request).
+                    Instructor accounts can still access /instructor/login directly. */}
               </ul>
             </nav>
 
@@ -441,15 +398,7 @@ export default function Header() {
                         </svg>
                         {t('signUp')}
                       </Link>
-                      <Link
-                        href="/instructor/login"
-                        className="flex items-center px-4 py-3 no-underline text-white font-medium text-sm transition-all duration-200 hover:bg-[#25C760] hover:text-white"
-                      >
-                        <svg className="w-[14px] h-[14px] mr-[10px]" width="14" height="14" fill="currentColor" viewBox="0 0 640 512">
-                          <path d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H576V64H224v49.9C205.2 102.2 183.3 96 160 96V64zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM0 482.3C0 383.8 79.8 304 178.3 304h-36.6C240.2 304 320 383.8 320 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
-                        </svg>
-                        {t('instructorPortal')}
-                      </Link>
+                      {/* Instructor portal link removed from desktop dropdown per yakon's request */}
                     </>
                   )}
                 </div>

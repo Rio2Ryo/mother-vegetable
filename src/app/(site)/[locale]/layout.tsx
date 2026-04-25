@@ -29,11 +29,11 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://mother-vegetable.ver
 
 export const metadata: Metadata = {
   title: {
-    default: 'Mother Vegetable — Premium Health Supplements',
-    template: '%s | Mother Vegetable',
+    default: 'Mother Vegetable｜次世代の健康・サステナブルブランド',
+    template: '%s｜Mother Vegetable',
   },
   description:
-    'Mother Vegetable offers premium health supplements derived from nature. Achieve capsules for daily wellness, Confidence cream for skin vitality. Free worldwide shipping.',
+    '48種類の必須栄養素を1度に摂取できるMother Vegetable。Achieve（フレッシュドライプロテイン）・Confidence（コラーゲンクリーム）・MV養殖魚など、地球と人を同時に育てるサステナブルプロダクトをお届けします。',
   metadataBase: new URL(APP_URL),
   icons: { icon: '/Images/favicon.png' },
   alternates: {
@@ -47,24 +47,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'Mother Vegetable',
-    title: 'Mother Vegetable — Premium Health Supplements',
+    title: 'Mother Vegetable｜地球と人を、同時に育てる',
     description:
-      'Premium health supplements derived from nature. Achieve capsules for daily wellness, Confidence cream for skin vitality.',
+      '48種の必須栄養素をまるごと摂取。Achieve・Confidenceから始まる、新しい健康とサステナブルのスタンダード。みんなの購入が実物のSEFを建てる「MV Growth Meter」も連動中。',
     url: APP_URL,
     images: [
       {
         url: '/cdn/products_achieve_10001.png',
         width: 800,
         height: 800,
-        alt: 'Mother Vegetable Achieve',
+        alt: 'Mother Vegetable',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mother Vegetable — Premium Health Supplements',
+    title: 'Mother Vegetable｜地球と人を、同時に育てる',
     description:
-      'Premium health supplements derived from nature. Free worldwide shipping.',
+      '48種の必須栄養素を1度に摂れる、サステナブルな次世代健康ブランド。',
     images: ['/cdn/products_achieve_10001.png'],
   },
   robots: {

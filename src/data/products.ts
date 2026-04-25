@@ -48,6 +48,11 @@ export interface ProductData {
   foodItems?: MixItem[];
   cosmeticItems?: MixItem[];
   petItems?: MixItem[];
+  // Environmental impact + MVT reward (demo values)
+  co2SavedKg?: number;
+  proteinGrams?: number;
+  chemicalReducedGrams?: number;
+  mvtReward?: number;
 }
 
 // ---------------------------------------------------------------------------
@@ -116,6 +121,10 @@ const achieve: ProductData = {
   howToLink: "/achieve-howto",
   inStock: true,
   priceJpy: '¥5,500',
+  co2SavedKg: 1.2,
+  proteinGrams: 6,
+  chemicalReducedGrams: 40,
+  mvtReward: 80,
   drinkItems: [
     { label: "Beer", image: "/Images/Assets/achieve/mazekomu/beer.png" },
     { label: "Cola", image: "/Images/Assets/achieve/mazekomu/cola.png" },
@@ -193,6 +202,10 @@ const confidence: ProductData = {
   howToLink: "/confidence-howto",
   inStock: true,
   priceJpy: '¥5,500',
+  co2SavedKg: 0.9,
+  proteinGrams: 0,
+  chemicalReducedGrams: 55,
+  mvtReward: 75,
   cosmeticItems: [
     {
       label: "Shampoo",
@@ -283,6 +296,10 @@ const tilapia: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.8,
+  proteinGrams: 22,
+  chemicalReducedGrams: 10,
+  mvtReward: 60,
 };
 
 // ---------------------------------------------------------------------------
@@ -323,6 +340,10 @@ const mvSalt: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.4,
+  proteinGrams: 2,
+  chemicalReducedGrams: 15,
+  mvtReward: 35,
 };
 
 // ---------------------------------------------------------------------------
@@ -363,6 +384,10 @@ const mvSoySauce: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.5,
+  proteinGrams: 3,
+  chemicalReducedGrams: 18,
+  mvtReward: 38,
 };
 
 // ---------------------------------------------------------------------------
@@ -406,6 +431,10 @@ const mvToner: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.3,
+  proteinGrams: 0,
+  chemicalReducedGrams: 30,
+  mvtReward: 40,
 };
 
 // ---------------------------------------------------------------------------
@@ -449,6 +478,10 @@ const mvBalm: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.25,
+  proteinGrams: 0,
+  chemicalReducedGrams: 28,
+  mvtReward: 38,
 };
 
 // ---------------------------------------------------------------------------
@@ -492,6 +525,10 @@ const mvSoap: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.35,
+  proteinGrams: 0,
+  chemicalReducedGrams: 32,
+  mvtReward: 42,
 };
 
 // ---------------------------------------------------------------------------
@@ -526,6 +563,10 @@ const mvMiso: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.45,
+  proteinGrams: 4,
+  chemicalReducedGrams: 16,
+  mvtReward: 40,
 };
 
 // ---------------------------------------------------------------------------
@@ -560,6 +601,10 @@ const mvWasabi: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.3,
+  proteinGrams: 1,
+  chemicalReducedGrams: 12,
+  mvtReward: 30,
 };
 
 // ---------------------------------------------------------------------------
@@ -594,6 +639,10 @@ const mvMatchaLatte: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.4,
+  proteinGrams: 3,
+  chemicalReducedGrams: 14,
+  mvtReward: 36,
 };
 
 // ---------------------------------------------------------------------------
@@ -628,6 +677,10 @@ const mvGreenSmoothie: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.55,
+  proteinGrams: 4,
+  chemicalReducedGrams: 18,
+  mvtReward: 45,
 };
 
 // ---------------------------------------------------------------------------
@@ -662,6 +715,10 @@ const mvMatcha: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.5,
+  proteinGrams: 3,
+  chemicalReducedGrams: 15,
+  mvtReward: 40,
 };
 
 // ---------------------------------------------------------------------------
@@ -696,6 +753,10 @@ const mvOlive: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.45,
+  proteinGrams: 2,
+  chemicalReducedGrams: 18,
+  mvtReward: 38,
 };
 
 // ---------------------------------------------------------------------------
@@ -730,6 +791,10 @@ const mvDressing: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.4,
+  proteinGrams: 2,
+  chemicalReducedGrams: 14,
+  mvtReward: 34,
 };
 
 // ---------------------------------------------------------------------------
@@ -764,6 +829,10 @@ const mvHerbSalt: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.42,
+  proteinGrams: 2,
+  chemicalReducedGrams: 16,
+  mvtReward: 36,
 };
 
 // ---------------------------------------------------------------------------
@@ -798,6 +867,10 @@ const mvHandCream: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.2,
+  proteinGrams: 0,
+  chemicalReducedGrams: 26,
+  mvtReward: 34,
 };
 
 // ---------------------------------------------------------------------------
@@ -832,6 +905,10 @@ const mvSuncare: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.18,
+  proteinGrams: 0,
+  chemicalReducedGrams: 30,
+  mvtReward: 32,
 };
 
 // ---------------------------------------------------------------------------
@@ -866,6 +943,10 @@ const mvBodyMist: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.22,
+  proteinGrams: 0,
+  chemicalReducedGrams: 24,
+  mvtReward: 32,
 };
 
 // ---------------------------------------------------------------------------
@@ -900,6 +981,10 @@ const mvPonzu: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.38,
+  proteinGrams: 2,
+  chemicalReducedGrams: 16,
+  mvtReward: 36,
 };
 
 // ---------------------------------------------------------------------------
@@ -934,6 +1019,10 @@ const mvTsuyu: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.32,
+  proteinGrams: 3,
+  chemicalReducedGrams: 14,
+  mvtReward: 34,
 };
 
 // ---------------------------------------------------------------------------
@@ -968,6 +1057,10 @@ const mvFurikake: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.28,
+  proteinGrams: 2,
+  chemicalReducedGrams: 12,
+  mvtReward: 30,
 };
 
 // ---------------------------------------------------------------------------
@@ -1002,6 +1095,10 @@ const mvLipBalm: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.15,
+  proteinGrams: 0,
+  chemicalReducedGrams: 18,
+  mvtReward: 28,
 };
 
 // ---------------------------------------------------------------------------
@@ -1036,6 +1133,10 @@ const mvFaceMist: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.2,
+  proteinGrams: 0,
+  chemicalReducedGrams: 22,
+  mvtReward: 32,
 };
 
 // ---------------------------------------------------------------------------
@@ -1070,6 +1171,10 @@ const mvHairOil: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.22,
+  proteinGrams: 0,
+  chemicalReducedGrams: 24,
+  mvtReward: 32,
 };
 
 // ---------------------------------------------------------------------------
@@ -1104,6 +1209,10 @@ const mvVinegar: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.36,
+  proteinGrams: 1,
+  chemicalReducedGrams: 15,
+  mvtReward: 34,
 };
 
 // ---------------------------------------------------------------------------
@@ -1138,6 +1247,10 @@ const mvPonzuYuzu: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.34,
+  proteinGrams: 1,
+  chemicalReducedGrams: 14,
+  mvtReward: 33,
 };
 
 // ---------------------------------------------------------------------------
@@ -1172,6 +1285,10 @@ const mvCookingSake: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.3,
+  proteinGrams: 1,
+  chemicalReducedGrams: 14,
+  mvtReward: 32,
 };
 
 // ---------------------------------------------------------------------------
@@ -1206,6 +1323,10 @@ const mvBathSalt: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.25,
+  proteinGrams: 0,
+  chemicalReducedGrams: 28,
+  mvtReward: 34,
 };
 
 // ---------------------------------------------------------------------------
@@ -1240,6 +1361,10 @@ const mvBathBomb: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.2,
+  proteinGrams: 0,
+  chemicalReducedGrams: 32,
+  mvtReward: 32,
 };
 
 // ---------------------------------------------------------------------------
@@ -1274,6 +1399,10 @@ const mvBodyCream: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.22,
+  proteinGrams: 0,
+  chemicalReducedGrams: 30,
+  mvtReward: 32,
 };
 
 // ---------------------------------------------------------------------------
@@ -1308,6 +1437,10 @@ const mvHoney: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.38,
+  proteinGrams: 1,
+  chemicalReducedGrams: 10,
+  mvtReward: 34,
 };
 
 // ---------------------------------------------------------------------------
@@ -1342,6 +1475,10 @@ const mvGingerTea: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.32,
+  proteinGrams: 2,
+  chemicalReducedGrams: 12,
+  mvtReward: 32,
 };
 
 // ---------------------------------------------------------------------------
@@ -1376,6 +1513,10 @@ const mvManuka: ProductData = {
   howToLink: '#',
   inStock: true,
   priceJpy: '¥2,000',
+  co2SavedKg: 0.45,
+  proteinGrams: 2,
+  chemicalReducedGrams: 16,
+  mvtReward: 40,
 };
 
 // ---------------------------------------------------------------------------

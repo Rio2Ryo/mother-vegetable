@@ -31,5 +31,37 @@ export const PRODUCT_PRICES: Record<string, number> = {
   'mv-soap': 1350,      // $13.50
 };
 
+// JPY prices — Stripe treats JPY as zero-decimal so unit amount is in YEN directly.
+// Mirrors priceJpy in src/data/products.ts and the home-page plan selector.
+export const PRODUCT_PRICES_JPY: Record<string, number> = {
+  achieve: 5500,
+  confidence: 5500,
+  'tilapia': 2000,
+  'mv-salt': 2000,
+  'mv-soy-sauce': 2000,
+  'mv-toner': 2000,
+  'mv-balm': 2000,
+  'mv-soap': 2000,
+};
+
+// Monthly subscription amounts in JPY — keyed by API plan id.
+export const SUBSCRIPTION_PRICES_JPY: Record<string, number> = {
+  basic: 2000,
+  standard: 3500,
+  premium: 5000,
+};
+
 // Referral discount rate (10% off)
 export const REFERRAL_DISCOUNT_RATE = 0.10;
+
+// Map our app locale to Stripe locale + currency.
+export function resolveLocaleAndCurrency(locale: string | undefined): {
+  stripeLocale: "ja" | "en" | "zh" | "auto";
+  currency: "jpy" | "usd";
+  zeroDecimal: boolean;
+} {
+  if (locale === "ja") return { stripeLocale: "ja", currency: "jpy", zeroDecimal: true };
+  if (locale === "zh") return { stripeLocale: "zh", currency: "usd", zeroDecimal: false };
+  if (locale === "en") return { stripeLocale: "en", currency: "usd", zeroDecimal: false };
+  return { stripeLocale: "auto", currency: "usd", zeroDecimal: false };
+}
