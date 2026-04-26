@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジビネガー — Mother Vegetable',
     description: 'Premium nutrient-rich rice vinegar. 150ml.',
-    images: [{ url: 'https://images.unsplash.com/photo-1595706334573-09ea13ed4d04?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジビネガー' }],
+    images: [{ url: '/cdn/mv_vinegar_detail.png', width: 800, height: 800, alt: 'マザベジビネガー' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvVinegarProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-vinegar')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1595706334573-09ea13ed4d04?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_vinegar_detail.png',
     galleryImages: getProductBySlug('mv-vinegar')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvVinegarPage({ params }: { params: Promise<{ loca
       <ProductJsonLd
         name="マザベジビネガー"
         description="Premium rice vinegar with 48 nutrients. 150ml."
-        image="https://images.unsplash.com/photo-1595706334573-09ea13ed4d04?w=400&h=400&fit=crop"
+        image="/cdn/mv_vinegar_detail.png"
         price={13.50}
         slug="mv-vinegar"
       />

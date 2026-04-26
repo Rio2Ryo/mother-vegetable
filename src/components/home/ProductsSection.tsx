@@ -465,7 +465,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアム酢' : 'Nutrient-rich rice vinegar',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1620574387735-3624d75b2dbc?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_vinegar_top.png',
       features: isJa
         ? ['48種類の栄養素入りプレミアム酢', '料理・ドレッシング・健康ドリンクに']
         : ['Nutrient-rich premium vinegar', 'Versatile for cooking and health drinks'],
