@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジヘアオイル — Mother Vegetable',
     description: 'Natural nourishing hair oil. 30ml.',
-    images: [{ url: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジヘアオイル' }],
+    images: [{ url: '/cdn/mv_hair_oil_detail.png', width: 800, height: 800, alt: 'マザベジヘアオイル' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvHairOilProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-hair-oil')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_hair_oil_detail.png',
     galleryImages: getProductBySlug('mv-hair-oil')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvHairOilPage({ params }: { params: Promise<{ loca
       <ProductJsonLd
         name="マザベジヘアオイル"
         description="Natural hair oil with plant-based nutrients. 30ml."
-        image="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=400&fit=crop"
+        image="/cdn/mv_hair_oil_detail.png"
         price={13.50}
         slug="mv-hair-oil"
       />

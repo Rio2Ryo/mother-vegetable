@@ -425,7 +425,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然植物由来成分のヘアオイル' : 'Nutrient-rich hair oil',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_hair_oil_top.png',
       features: isJa
         ? ['天然植物由来成分配合ヘアオイル', '髪をなめらかに栄養補給']
         : ['Natural hair oil with plant-based nutrients', 'Keeps hair smooth and nourished'],
