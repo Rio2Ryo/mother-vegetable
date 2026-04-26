@@ -66,7 +66,7 @@ function getProducts(isJa: boolean) {
       subName: isJa ? 'フレッシュドライプロテイン' : 'Flesh Dry Protein',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
       videoUrl: '/new_achieve_video.mp4',
-      imageUrl: null,
+      imageUrl: '/cdn/products_achieve_10001.png',
       features: isJa
         ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と']
         : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones'],
@@ -85,7 +85,7 @@ function getProducts(isJa: boolean) {
       subName: isJa ? 'フレッシュブリッジコラーゲン' : 'Flesh Bridge Collagen',
       tagline: isJa ? '肌の気になるところに直接塗布' : 'For All Skin Types',
       videoUrl: '/new_confidence_video.mp4',
-      imageUrl: null,
+      imageUrl: '/cdn/products_confidence_10001.png',
       features: isJa
         ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用']
         : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics'],

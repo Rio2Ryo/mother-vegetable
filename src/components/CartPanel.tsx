@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
@@ -67,14 +66,25 @@ export default function CartPanel() {
                     transition={{ delay: index * 0.05, duration: 0.3 }}
                     className="flex gap-3 sm:gap-4 p-3 mb-3 border border-[rgba(37,199,96,0.15)] rounded-lg shadow-[0_2px_7px_rgba(0,0,0,0.2)] hover:border-[#25C760] transition-all duration-200"
                   >
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 flex items-center justify-center relative">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        width={70}
-                        height={70}
-                        className="object-contain"
-                      />
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 flex items-center justify-center relative bg-[#0d1f12] border border-[#25C760]/20 rounded-md overflow-hidden">
+                      {item.image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          width={70}
+                          height={70}
+                          className="object-contain w-full h-full"
+                          onError={(e) => {
+                            // Fallback to MVT coin if remote URL fails to load
+                            (e.currentTarget as HTMLImageElement).src = '/cdn/mvt_coin.png';
+                          }}
+                        />
+                      ) : (
+                        <span className="text-[#25C760] font-bold text-xs text-center px-1 leading-tight">
+                          {item.name.slice(0, 2)}
+                        </span>
+                      )}
                     </div>
                     <div className="flex flex-col justify-center flex-1 min-w-0">
                       <span className="font-bold text-[#25C760] text-sm mb-2 truncate">{item.name}</span>
