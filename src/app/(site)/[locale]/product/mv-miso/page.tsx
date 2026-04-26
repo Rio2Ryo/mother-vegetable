@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ味噌 — Mother Vegetable',
     description: 'Nutrient-rich premium miso with 48 natural nutrients.',
-    images: [{ url: '/cdn/mv_miso.jpg', width: 800, height: 800, alt: 'マザベジ味噌' }],
+    images: [{ url: '/cdn/mv_miso_detail.png', width: 800, height: 800, alt: 'マザベジ味噌' }],
   },
 };
 
@@ -30,7 +30,7 @@ function getMvMisoProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-miso')?.inStock ?? true,
-    productImage: '/cdn/mv_miso.jpg',
+    productImage: '/cdn/mv_miso_detail.png',
     galleryImages: (getProductBySlug('mv-miso')?.galleryImages?.length ?? 0) > 0
       ? getProductBySlug('mv-miso')!.galleryImages
       : undefined,
@@ -207,7 +207,7 @@ export default async function MvMisoPage({ params }: { params: Promise<{ locale:
       <ProductJsonLd
         name="マザベジ味噌"
         description="Premium miso paste with 48 nutrients. 200g."
-        image="/cdn/mv_miso.jpg"
+        image="/cdn/mv_miso_detail.png"
         price={13.50}
         slug="mv-miso"
       />

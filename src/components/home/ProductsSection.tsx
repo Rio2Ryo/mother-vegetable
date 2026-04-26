@@ -165,7 +165,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'Confidenceコラーゲン配合の化粧水' : 'Confidence-powered skin toner',
       videoUrl: null,
-      imageUrl: '/cdn/mv_toner.jpg',
+      imageUrl: '/cdn/mv_toner_top.png',
       features: isJa
         ? ['天然コラーゲン配合・毎日のスキンケアに', '天然栄養素でうるおいケア']
         : ['Natural collagen for daily skincare', 'Moisture care with natural nutrients'],
@@ -225,7 +225,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアム味噌' : 'Nutrient-rich premium miso',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_miso_top.jpg',
       features: isJa
         ? ['48種類の栄養素入りプレミアム味噌', '伝統の味わいに植物由来の栄養をプラス']
         : ['Premium miso with 48 nutrients', 'Traditional flavor with plant-based nutrition'],
@@ -245,7 +245,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合プレミアムわさび' : 'Nutrient-rich premium wasabi',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_wasabi_top.png',
       features: isJa
         ? ['48種類の栄養素入りプレミアムわさび', '新鮮なわさびの風味に栄養素をプラス']
         : ['Premium wasabi with 48 nutrients', 'Fresh wasabi flavor with added health benefits'],
@@ -385,7 +385,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合ポン酢' : 'Nutrient-rich ponzu sauce',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_ponzu_top.png',
       features: isJa
         ? ['48種類の栄養素入りポン酢', '鍋・サラダ・焼き物に最適']
         : ['Nutrient-rich citrus ponzu', 'Perfect for nabe, salad, and grilled dishes'],

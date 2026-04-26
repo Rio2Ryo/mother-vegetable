@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジわさび — Mother Vegetable',
     description: 'Nutrient-rich premium wasabi with 48 natural nutrients.',
-    images: [{ url: '/cdn/mv_wasabi.jpg', width: 800, height: 800, alt: 'マザベジわさび' }],
+    images: [{ url: '/cdn/mv_wasabi_detail.png', width: 800, height: 800, alt: 'マザベジわさび' }],
   },
 };
 
@@ -30,7 +30,7 @@ function getMvWasabiProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-wasabi')?.inStock ?? true,
-    productImage: '/cdn/mv_wasabi.jpg',
+    productImage: '/cdn/mv_wasabi_detail.png',
     galleryImages: (getProductBySlug('mv-wasabi')?.galleryImages?.length ?? 0) > 0
       ? getProductBySlug('mv-wasabi')!.galleryImages
       : undefined,
@@ -207,7 +207,7 @@ export default async function MvWasabiPage({ params }: { params: Promise<{ local
       <ProductJsonLd
         name="マザベジわさび"
         description="Premium wasabi paste with 48 nutrients. 50g."
-        image="/cdn/mv_wasabi.jpg"
+        image="/cdn/mv_wasabi_detail.png"
         price={13.50}
         slug="mv-wasabi"
       />

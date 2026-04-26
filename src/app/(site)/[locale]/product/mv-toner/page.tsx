@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ化粧水 — Mother Vegetable',
     description: 'Natural collagen facial toner. 150ml.',
-    images: [{ url: '/cdn/mv_toner.jpg', width: 800, height: 800, alt: 'マザベジ化粧水' }],
+    images: [{ url: '/cdn/mv_toner_detail.png', width: 800, height: 800, alt: 'マザベジ化粧水' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvTonerProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-toner')?.inStock ?? true,
-    productImage: '/cdn/mv_toner.jpg',
+    productImage: '/cdn/mv_toner_detail.png',
     galleryImages: getProductBySlug('mv-toner')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvTonerPage({ params }: { params: Promise<{ locale
       <ProductJsonLd
         name="マザベジ化粧水"
         description="Nutrient-infused facial toner with natural collagen. 150ml."
-        image="/cdn/mv_toner.jpg"
+        image="/cdn/mv_toner_detail.png"
         price={13.50}
         slug="mv-toner"
       />

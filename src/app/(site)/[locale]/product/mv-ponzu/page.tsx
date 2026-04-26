@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジポン酢 — Mother Vegetable',
     description: 'Premium nutrient-rich citrus ponzu sauce. 150ml.',
-    images: [{ url: 'https://images.unsplash.com/photo-1619221882220-947b3d3c8861?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジポン酢' }],
+    images: [{ url: '/cdn/mv_ponzu_detail.png', width: 800, height: 800, alt: 'マザベジポン酢' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvPonzuProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-ponzu')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1619221882220-947b3d3c8861?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_ponzu_detail.png',
     galleryImages: getProductBySlug('mv-ponzu')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvPonzuPage({ params }: { params: Promise<{ locale
       <ProductJsonLd
         name="マザベジポン酢"
         description="Citrus ponzu sauce with 48 nutrients. 150ml."
-        image="https://images.unsplash.com/photo-1619221882220-947b3d3c8861?w=400&h=400&fit=crop"
+        image="/cdn/mv_ponzu_detail.png"
         price={13.50}
         slug="mv-ponzu"
       />
