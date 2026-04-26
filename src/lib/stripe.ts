@@ -32,7 +32,7 @@ export const PRODUCT_PRICES: Record<string, number> = {
 };
 
 // JPY prices — Stripe treats JPY as zero-decimal so unit amount is in YEN directly.
-// Mirrors priceJpy in src/data/products.ts and the home-page plan selector.
+// Mirrors priceJpy in src/components/home/ProductsSection.tsx (24 catalog items).
 export const PRODUCT_PRICES_JPY: Record<string, number> = {
   achieve: 5500,
   confidence: 5500,
@@ -42,6 +42,22 @@ export const PRODUCT_PRICES_JPY: Record<string, number> = {
   'mv-toner': 2000,
   'mv-balm': 2000,
   'mv-soap': 2000,
+  'mv-miso': 2000,
+  'mv-wasabi': 2000,
+  'mv-matcha': 2000,
+  'mv-dressing': 2000,
+  'mv-olive': 2000,
+  'mv-suncare': 2000,
+  'mv-body-mist': 2000,
+  'mv-handcream': 2000,
+  'mv-ponzu': 2000,
+  'mv-face-mist': 2000,
+  'mv-hair-oil': 2000,
+  'mv-lipbalm': 2000,
+  'mv-vinegar': 2000,
+  'mv-bathsalt': 2000,
+  'mv-ginger-tea': 2000,
+  'mv-honey': 2000,
 };
 
 // Monthly subscription amounts in JPY — keyed by API plan id.

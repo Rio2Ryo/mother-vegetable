@@ -2,14 +2,41 @@
 
 import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
+import { PRODUCT_PRICES_JPY, REFERRAL_DISCOUNT_RATE } from '@/lib/stripe';
 
 export default function CartPanel() {
-  const { items, isOpen, closeCart, updateQuantity, removeItem, totalPrice } =
+  const { items, isOpen, closeCart, updateQuantity, removeItem } =
     useCartStore();
   const router = useRouter();
   const t = useTranslations('cart');
+  const locale = useLocale();
+  const isJa = locale === 'ja';
+
+  // Resolve price for each item in the user's locale currency.
+  // For JA, look up the canonical JPY price by productId (priceJpy in catalog);
+  // fall back to the stored USD price if the product is not in the JPY map.
+  const resolvedItems = items.map((item) => {
+    const jpyBase = PRODUCT_PRICES_JPY[item.productId];
+    if (isJa && jpyBase != null) {
+      const hadDiscount = item.discountedPrice != null && item.discountedPrice < item.price;
+      const jpyEffective = hadDiscount
+        ? Math.round(jpyBase * (1 - REFERRAL_DISCOUNT_RATE))
+        : jpyBase;
+      return { item, currency: 'JPY' as const, unit: jpyEffective };
+    }
+    return {
+      item,
+      currency: 'USD' as const,
+      unit: item.discountedPrice ?? item.price,
+    };
+  });
+
+  const subtotal = resolvedItems.reduce((sum, { unit, item }) => sum + unit * item.quantity, 0);
+  const subtotalCurrency = isJa && resolvedItems.every(r => r.currency === 'JPY') ? 'JPY' : 'USD';
+  const fmt = (currency: 'JPY' | 'USD', amount: number) =>
+    currency === 'JPY' ? `¥${Math.round(amount).toLocaleString()}` : `USD ${amount.toFixed(2)}`;
 
   return (
     <AnimatePresence>
@@ -58,7 +85,7 @@ export default function CartPanel() {
                   </button>
                 </div>
               ) : (
-                items.map((item, index) => (
+                resolvedItems.map(({ item, currency, unit }, index) => (
                   <motion.div
                     key={item.id}
                     initial={{ opacity: 0, x: 20 }}
@@ -89,7 +116,7 @@ export default function CartPanel() {
                     <div className="flex flex-col justify-center flex-1 min-w-0">
                       <span className="font-bold text-[#25C760] text-sm mb-2 truncate">{item.name}</span>
                       <span className="text-[#25C760] text-sm font-bold">
-                        {item.currency} {(item.price * item.quantity).toFixed(2)}
+                        {fmt(currency, unit * item.quantity)}
                       </span>
                       <div className="flex items-center gap-2 mt-2">
                         <span className="text-white text-sm mr-1">{t('qty')}</span>
@@ -132,7 +159,7 @@ export default function CartPanel() {
                 <div className="flex justify-end items-end mb-3">
                   <span className="text-sm font-bold text-white mr-3">{t('subtotal')}</span>
                   <span className="text-xl font-bold text-[#25C760]">
-                    USD {totalPrice().toFixed(2)}
+                    {fmt(subtotalCurrency, subtotal)}
                   </span>
                 </div>
                 <button
