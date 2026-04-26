@@ -59,9 +59,11 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
   const [addedFeedback, setAddedFeedback] = useState(false);
   const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0);
 
-  const galleryImages = product.galleryImages ?? [
-    { url: product.productImage, alt: product.name },
-  ];
+  // Fall back to the single productImage when galleryImages is missing OR empty
+  // (catalog entries for newer products use galleryImages: [] rather than null).
+  const galleryImages = product.galleryImages && product.galleryImages.length > 0
+    ? product.galleryImages
+    : [{ url: product.productImage, alt: product.name }];
   const activeImage = galleryImages[selectedGalleryIndex] ?? galleryImages[0];
   const addItem = useCartStore((s) => s.addItem);
   const router = useRouter();
