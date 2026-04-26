@@ -812,7 +812,7 @@ export default function ProductsSection() {
                     {/* Features */}
                     <div className="space-y-1 mb-2 mt-5">
                       {product.features.map((feature, idx) => (
-                        <p key={idx} className="text-white text-[10px] md:text-lg flex items-start md:justify-center">
+                        <p key={idx} className="text-white text-[10px] md:text-lg flex items-start text-left">
                           <span className="text-green-400 mr-1 md:mr-2">{'\u2713'}</span>
                           {feature}
                         </p>
@@ -820,7 +820,7 @@ export default function ProductsSection() {
                     </div>
 
                     {/* Price */}
-                    <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center">
+                    <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center justify-center">
                       {hasReferral ? (
                         <>
                           <span className="text-white/50 line-through text-base md:text-lg">{product.priceJpy}</span>
@@ -1081,7 +1081,7 @@ export default function ProductsSection() {
                                 {/* Features */}
                                 <div className="space-y-1 mb-2 mt-5">
                                   {product.features.map((feature, idx) => (
-                                    <p key={idx} className="text-white text-[10px] md:text-lg flex items-start md:justify-center">
+                                    <p key={idx} className="text-white text-[10px] md:text-lg flex items-start text-left">
                                       <span className="text-green-400 mr-1 md:mr-2">{'\u2713'}</span>
                                       {feature}
                                     </p>
@@ -1089,7 +1089,7 @@ export default function ProductsSection() {
                                 </div>
 
                                 {/* Price */}
-                                <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center">
+                                <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center justify-center">
                                   {hasReferral ? (
                                     <>
                                       <span className="text-white/50 line-through text-base md:text-lg">{product.priceJpy}</span>
