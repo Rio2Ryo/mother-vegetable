@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジサンケアジェル — Mother Vegetable',
     description: 'Natural suncare gel with plant-based nutrients. 30g.',
-    images: [{ url: 'https://images.unsplash.com/photo-1662729182165-3612bfed89f4?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジサンケアジェル' }],
+    images: [{ url: '/cdn/mv_suncare_detail.png', width: 800, height: 800, alt: 'マザベジサンケアジェル' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvSuncareProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-suncare')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1662729182165-3612bfed89f4?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_suncare_detail.png',
     galleryImages: getProductBySlug('mv-suncare')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvSuncarePage({ params }: { params: Promise<{ loca
       <ProductJsonLd
         name="マザベジサンケアジェル"
         description="Natural suncare gel with plant-based nutrients. 30g."
-        image="https://images.unsplash.com/photo-1662729182165-3612bfed89f4?w=400&h=400&fit=crop"
+        image="/cdn/mv_suncare_detail.png"
         price={13.50}
         slug="mv-suncare"
       />

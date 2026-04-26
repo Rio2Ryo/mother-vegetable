@@ -325,7 +325,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然植物由来成分のサンケアジェル' : 'Nutrient-rich suncare gel',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1556227834-09f1de7a7d14?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_suncare_top.png',
       features: isJa
         ? ['天然植物由来成分配合サンケアジェル', 'やさしい日焼け対策に']
         : ['Natural suncare with plant-based nutrients', 'Gentle protection for daily use'],
