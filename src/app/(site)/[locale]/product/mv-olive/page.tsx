@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジオリーブオイル — Mother Vegetable',
     description: 'Premium extra virgin olive oil with 48 nutrients. 100ml.',
-    images: [{ url: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジオリーブオイル' }],
+    images: [{ url: '/cdn/mv_olive_detail.png', width: 800, height: 800, alt: 'マザベジオリーブオイル' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvOliveProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-olive')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_olive_detail.png',
     galleryImages: getProductBySlug('mv-olive')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvOlivePage({ params }: { params: Promise<{ locale
       <ProductJsonLd
         name="マザベジオリーブオイル"
         description="Extra virgin olive oil infused with Mother Vegetable nutrients. 100ml."
-        image="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop"
+        image="/cdn/mv_olive_detail.png"
         price={13.50}
         slug="mv-olive"
       />
