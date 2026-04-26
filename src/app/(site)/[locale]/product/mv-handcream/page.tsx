@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジハンドクリーム — Mother Vegetable',
     description: 'Moisturizing hand cream with natural collagen. 30g.',
-    images: [{ url: 'https://images.unsplash.com/photo-1741896136021-ae070f0b6f24?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジハンドクリーム' }],
+    images: [{ url: '/cdn/mv_handcream_detail.png', width: 800, height: 800, alt: 'マザベジハンドクリーム' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvHandcreamProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-handcream')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1741896136021-ae070f0b6f24?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_handcream_detail.png',
     galleryImages: getProductBySlug('mv-handcream')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvHandcreamPage({ params }: { params: Promise<{ lo
       <ProductJsonLd
         name="マザベジハンドクリーム"
         description="Moisturizing hand cream with natural collagen. 30g."
-        image="https://images.unsplash.com/photo-1741896136021-ae070f0b6f24?w=400&h=400&fit=crop"
+        image="/cdn/mv_handcream_detail.png"
         price={13.50}
         slug="mv-handcream"
       />

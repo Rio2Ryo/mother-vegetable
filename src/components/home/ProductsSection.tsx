@@ -365,7 +365,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然コラーゲン配合のハンドクリーム' : 'Natural collagen hand cream',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1611080541599-8c6dbde6ed28?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_handcream_top.png',
       features: isJa
         ? ['天然コラーゲン配合ハンドクリーム', '手をやわらかくしっとり保湿']
         : ['Natural collagen hand cream', 'Keeps hands soft and moisturized'],
