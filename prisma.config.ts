@@ -3,12 +3,22 @@
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
+// Resolve the datasource URL with a build-safe fallback. If DATABASE_URL is
+// missing or has an unrecognized scheme (e.g. empty string, plain filename),
+// Prisma 7 fails `prisma generate` with P1013 even though `generate` itself
+// doesn't connect. We default to "file:./dev.db" so the build can complete;
+// the actual runtime connection is handled by @prisma/adapter-libsql which
+// reads its own env vars at request time.
+const PRISMA_VALID_SCHEMES = /^(file|libsql|postgresql|postgres|mysql|sqlserver|sqlite|prisma|mongodb):/i;
+const rawUrl = process.env["DATABASE_URL"] ?? "";
+const datasourceUrl = PRISMA_VALID_SCHEMES.test(rawUrl) ? rawUrl : "file:./dev.db";
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    url: datasourceUrl,
   },
 });
