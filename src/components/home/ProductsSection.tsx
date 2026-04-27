@@ -305,7 +305,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'マザベジ栄養素配合オリーブオイル' : 'Nutrient-rich olive oil',
       videoUrl: null,
-      imageUrl: '/cdn/mv_olive_top.png',
+      imageUrl: '/cdn/mv_olive.png',
       features: isJa
         ? ['48種類の栄養素入りオリーブオイル', 'サラダ・料理・ディップに最適']
         : ['Premium olive oil with 48 nutrients', 'Perfect for salads, cooking, and dipping'],
