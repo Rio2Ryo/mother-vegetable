@@ -285,7 +285,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合ドレッシング' : 'Nutrient-rich dressing',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1609501676725-7186f017a4b7?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_dressing.png',
       features: isJa
         ? ['48種類の栄養素入りプレミアムドレッシング', 'サラダ・温野菜に最適']
         : ['Premium dressing with 48 nutrients', 'Perfect for salads and vegetables'],
