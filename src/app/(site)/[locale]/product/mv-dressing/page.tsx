@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジドレッシング — Mother Vegetable',
     description: 'Premium nutrient-rich salad dressing. 150ml.',
-    images: [{ url: 'https://images.unsplash.com/photo-1638324396082-69209f24abdc?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジドレッシング' }],
+    images: [{ url: '/cdn/mv_dressing.png', width: 800, height: 800, alt: 'マザベジドレッシング' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvDressingProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-dressing')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1638324396082-69209f24abdc?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_dressing.png',
     galleryImages: getProductBySlug('mv-dressing')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvDressingPage({ params }: { params: Promise<{ loc
       <ProductJsonLd
         name="マザベジドレッシング"
         description="Premium salad dressing with 48 nutrients. 150ml."
-        image="https://images.unsplash.com/photo-1638324396082-69209f24abdc?w=400&h=400&fit=crop"
+        image="/cdn/mv_dressing.png"
         price={13.50}
         slug="mv-dressing"
       />
