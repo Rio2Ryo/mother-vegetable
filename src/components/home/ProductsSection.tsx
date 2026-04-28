@@ -445,7 +445,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然コラーゲン配合のリップバーム' : 'Natural collagen lip care',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1599305090598-fe179d501227?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_lipbalm_top.png',
       features: isJa
         ? ['天然コラーゲン配合リップバーム', '唇をやわらかくしっとり保湿']
         : ['Natural collagen lip balm', 'Keeps lips soft and moisturized'],

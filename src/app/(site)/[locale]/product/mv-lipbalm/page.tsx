@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジリップバーム — Mother Vegetable',
     description: 'Natural collagen lip balm. 5g.',
-    images: [{ url: 'https://images.unsplash.com/photo-1599305090598-fe179d501227?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジリップバーム' }],
+    images: [{ url: '/cdn/mv_lipbalm_detail.png', width: 800, height: 800, alt: 'マザベジリップバーム' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvLipbalmProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-lipbalm')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1599305090598-fe179d501227?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_lipbalm_detail.png',
     galleryImages: getProductBySlug('mv-lipbalm')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvLipbalmPage({ params }: { params: Promise<{ loca
       <ProductJsonLd
         name="マザベジリップバーム"
         description="Natural collagen lip balm. 5g."
-        image="https://images.unsplash.com/photo-1599305090598-fe179d501227?w=400&h=400&fit=crop"
+        image="/cdn/mv_lipbalm_detail.png"
         price={13.50}
         slug="mv-lipbalm"
       />
