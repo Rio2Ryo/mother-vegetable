@@ -405,7 +405,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然コラーゲン配合のフェイスミスト' : 'Nutrient-rich face mist',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_face_mist_top.png',
       features: isJa
         ? ['天然コラーゲン配合フェイスミスト', 'いつでもどこでもうるおい補給']
         : ['Natural collagen face mist', 'Refreshing hydration throughout the day'],

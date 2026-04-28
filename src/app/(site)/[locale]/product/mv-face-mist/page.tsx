@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジフェイスミスト — Mother Vegetable',
     description: 'Refreshing face mist with natural collagen. 50ml.',
-    images: [{ url: 'https://images.unsplash.com/photo-1601066551508-6d9cb1b9de65?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジフェイスミスト' }],
+    images: [{ url: '/cdn/mv_face_mist_detail.png', width: 800, height: 800, alt: 'マザベジフェイスミスト' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvFaceMistProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-face-mist')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1601066551508-6d9cb1b9de65?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_face_mist_detail.png',
     galleryImages: getProductBySlug('mv-face-mist')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvFaceMistPage({ params }: { params: Promise<{ loc
       <ProductJsonLd
         name="マザベジフェイスミスト"
         description="Refreshing face mist with natural collagen. 50ml."
-        image="https://images.unsplash.com/photo-1601066551508-6d9cb1b9de65?w=400&h=400&fit=crop"
+        image="/cdn/mv_face_mist_detail.png"
         price={13.50}
         slug="mv-face-mist"
       />
