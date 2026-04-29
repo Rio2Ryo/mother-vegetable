@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ抹茶 — Mother Vegetable',
     description: 'Nutrient-rich premium matcha blend. 30g.',
-    images: [{ url: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジ抹茶' }],
+    images: [{ url: '/cdn/mv_matcha_detail.png', width: 800, height: 800, alt: 'マザベジ抹茶' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvMatchaProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-matcha')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_matcha_detail.png',
     galleryImages: getProductBySlug('mv-matcha')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvMatchaPage({ params }: { params: Promise<{ local
       <ProductJsonLd
         name="マザベジ抹茶"
         description="Premium matcha green tea powder blended with Mother Vegetable. 30g."
-        image="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=400&h=400&fit=crop"
+        image="/cdn/mv_matcha_detail.png"
         price={13.50}
         slug="mv-matcha"
       />
