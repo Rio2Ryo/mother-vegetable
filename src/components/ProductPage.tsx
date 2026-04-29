@@ -89,7 +89,7 @@ export interface ProductPageData {
 /* ------------------------------------------------------------------ */
 
 export default function ProductPage({ product }: { product: ProductPageData }) {
-  const [selectedVideo, setSelectedVideo] = useState(0);
+  const mainVideoUrl = product.videoUrls[0] ?? product.mainVideoUrl;
   const [quantity, setQuantity] = useState(1);
   const [hasReferral, setHasReferral] = useState(false);
   const [addedFeedback, setAddedFeedback] = useState(false);
@@ -147,17 +147,8 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
 
         /* Gallery Row */
         .gallery-row { display: flex; align-items: stretch; height: 750px; }
-        .gallery-col-thumb { width: 8.333%; flex: 0 0 8.333%; max-width: 8.333%; }
-        .gallery-col-main { width: 33.333%; flex: 0 0 33.333%; max-width: 33.333%; }
+        .gallery-col-main { width: 41.667%; flex: 0 0 41.667%; max-width: 41.667%; }
         .gallery-col-info { width: 58.333%; flex: 0 0 58.333%; max-width: 58.333%; }
-
-        /* Thumbnail Gallery */
-        .thumbnail-gallery { display: flex; flex-direction: column; gap: 15px; padding: 20px 0; max-height: 600px; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
-        .thumbnail-gallery::-webkit-scrollbar { display: none; }
-        .thumbnail-item { width: 100%; aspect-ratio: 1; border-radius: 10px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; position: relative; flex-shrink: 0; }
-        .thumbnail-item:hover { border-color: #25C760; transform: scale(1.05); }
-        .thumbnail-item.active { border-color: #25C760; box-shadow: 0 0 15px rgba(37, 199, 96, 0.5); }
-        .thumbnail-video { width: 100%; height: 100%; object-fit: cover; }
 
         /* Main Product Display */
         .main-product-display { display: flex; justify-content: center; align-items: center; padding: 20px; height: 700px; }
@@ -331,14 +322,10 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         @media (max-width: 820px) {
           .gallery-row { display: flex; flex-direction: column; height: unset; }
           .gallery-col-main { order: 1; width: 100%; max-width: 100%; flex: 0 0 100%; }
-          .gallery-col-thumb { order: 2; width: 100%; max-width: 100%; flex: 0 0 100%; }
-          .gallery-col-info { order: 3; width: 100%; max-width: 100%; flex: 0 0 100%; }
+          .gallery-col-info { order: 2; width: 100%; max-width: 100%; flex: 0 0 100%; }
           .main-product-display { height: auto; min-height: 400px; padding: 20px 0; }
           .product-media-container { max-width: 100%; min-height: 350px; height: auto; }
           .main-product-video { max-height: none; width: 50%; height: auto; }
-          .thumbnail-gallery { flex-direction: row; overflow-x: auto; padding: 10px 0; gap: 10px; height: auto; max-height: none; }
-          .thumbnail-item { min-width: 60px; max-width: 80px; height: auto; aspect-ratio: unset; }
-          .thumbnail-video { width: 100%; height: auto; object-fit: contain; }
           .product-name { font-size: 1.2rem; line-height: 1.3; margin-bottom: 8px; }
           .product-info-cart { padding: 30px 20px; margin-top: 30px; }
           .trust-title { font-size: 1rem; margin-bottom: 5px; }
@@ -416,36 +403,18 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       <section className="product-gallery-section">
         <div className="gallery-container">
           <div className="gallery-row">
-            {/* Left Side - Thumbnail Gallery */}
-            <div className="gallery-col-thumb">
-              <div className="thumbnail-gallery">
-                {product.videoUrls.map((url, i) => (
-                  <div
-                    key={i}
-                    className={`thumbnail-item${selectedVideo === i ? ' active' : ''}`}
-                    onClick={() => setSelectedVideo(i)}
-                  >
-                    <video className="thumbnail-video" muted preload="metadata" playsInline>
-                      <source src={url} type="video/mp4" />
-                    </video>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* Center Side - Main Product Display */}
             <div className="gallery-col-main">
               <div className="main-product-display">
                 <div className="product-media-container">
                   <video
-                    key={selectedVideo}
                     className="main-product-video"
                     muted
                     autoPlay
                     loop
                     playsInline
                   >
-                    <source src={product.videoUrls[selectedVideo]} type="video/mp4" />
+                    <source src={mainVideoUrl} type="video/mp4" />
                   </video>
                 </div>
               </div>

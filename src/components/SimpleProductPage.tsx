@@ -57,14 +57,8 @@ export interface SimpleProductPageData {
 export default function SimpleProductPage({ product }: { product: SimpleProductPageData }) {
   const [quantity, setQuantity] = useState(1);
   const [addedFeedback, setAddedFeedback] = useState(false);
-  const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0);
-
-  // Fall back to the single productImage when galleryImages is missing OR empty
-  // (catalog entries for newer products use galleryImages: [] rather than null).
-  const galleryImages = product.galleryImages && product.galleryImages.length > 0
-    ? product.galleryImages
-    : [{ url: product.productImage, alt: product.name }];
-  const activeImage = galleryImages[selectedGalleryIndex] ?? galleryImages[0];
+  // Show one main product image only; thumbnail strip is intentionally removed.
+  const activeImage = product.galleryImages?.[0] ?? { url: product.productImage, alt: product.name };
   const addItem = useCartStore((s) => s.addItem);
   const router = useRouter();
   const locale = useLocale();
@@ -124,36 +118,6 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
                 sizes="(max-width: 768px) 100vw, 400px"
               />
             </div>
-            {/* Thumbnail strip */}
-            {galleryImages.length > 1 && (
-              <div className="flex gap-2 justify-center">
-                {galleryImages.map((img, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSelectedGalleryIndex(i)}
-                    className={`relative w-14 h-14 rounded-lg overflow-hidden border-2 transition ${
-                      i === selectedGalleryIndex
-                        ? 'border-[#25C760]'
-                        : 'border-gray-700 hover:border-gray-500'
-                    } bg-gray-900`}
-                  >
-                    <Image
-                      src={img.url}
-                      alt={img.alt}
-                      fill
-                      className="object-contain p-1"
-                      sizes="56px"
-                    />
-                    {/* Placeholder overlay for future images */}
-                    {i > 0 && (
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                        <span className="text-[8px] text-gray-400 font-medium">{i + 1}</span>
-                      </div>
-                    )}
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
 
           {/* Product Info */}

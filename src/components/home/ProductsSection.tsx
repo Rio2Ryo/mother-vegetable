@@ -773,13 +773,13 @@ export default function ProductsSection() {
               <motion.div
                 key={product.id}
                 variants={cardVariants}
-                className="rounded-lg p-3 md:p-6"
+                className="rounded-lg p-4 md:p-6"
                 style={{ border: '1px solid #25c760' }}
               >
-                {/* Mobile: Horizontal Layout / Desktop: Vertical Layout */}
-                <div className="flex flex-row md:flex-col gap-3 md:gap-0">
-                  {/* Video or Image — Achieve/Confidence keep the original portrait look on desktop */}
-                  <div className="flex-shrink-0 self-stretch md:self-auto md:mb-4 md:flex md:justify-center">
+                {/* Match mobile product cards to the desktop vertical layout */}
+                <div className="flex flex-col gap-0">
+                  {/* Video or Image — centered, with the same visual size as desktop */}
+                  <div className="mb-4 flex justify-center w-full">
                     {product.videoUrl ? (
                       <video
                         src={product.videoUrl}
@@ -787,13 +787,13 @@ export default function ProductsSection() {
                         loop
                         muted
                         playsInline
-                        className="w-24 h-full md:w-28 md:h-52 object-cover rounded-lg"
+                        className="w-28 h-52 object-cover rounded-lg"
                       />
                     ) : (
                       <img
                         src={product.imageUrl!}
                         alt={product.name}
-                        className="w-24 h-24 md:w-28 md:h-52 object-cover rounded-lg"
+                        className="w-28 h-52 object-cover rounded-lg"
                       />
                     )}
                   </div>
@@ -1042,13 +1042,13 @@ export default function ProductsSection() {
                             variants={cardVariants}
                             initial="hidden"
                             animate="visible"
-                            className="rounded-lg p-3 md:p-6"
+                            className="rounded-lg p-4 md:p-6"
                             style={{ border: '1px solid #25c760' }}
                           >
-                            {/* Mobile: Horizontal Layout / Desktop: Vertical Layout */}
-                            <div className="flex flex-row md:flex-col gap-3 md:gap-0">
-                              {/* Video or Image — 16:9 landscape on desktop, square on mobile */}
-                              <div className="flex-shrink-0 self-stretch md:self-auto md:mb-4 md:w-full">
+                            {/* Match mobile product cards to the desktop vertical layout */}
+                            <div className="flex flex-col gap-0">
+                              {/* Video or Image — full-width landscape, centered like desktop */}
+                              <div className="mb-4 w-full flex justify-center">
                                 {product.videoUrl ? (
                                   <video
                                     src={product.videoUrl}
@@ -1056,13 +1056,13 @@ export default function ProductsSection() {
                                     loop
                                     muted
                                     playsInline
-                                    className="w-24 h-full md:w-full md:h-auto md:aspect-video object-cover rounded-lg"
+                                    className="w-full h-auto aspect-video object-cover rounded-lg"
                                   />
                                 ) : (
                                   <img
                                     src={product.imageUrl!}
                                     alt={product.name}
-                                    className="w-24 h-24 md:w-full md:h-auto md:aspect-video object-cover rounded-lg"
+                                    className="w-full h-auto aspect-video object-cover rounded-lg"
                                   />
                                 )}
                               </div>
