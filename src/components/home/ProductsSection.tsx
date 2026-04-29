@@ -525,7 +525,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'マザベジ栄養素ブレンドの蜂蜜' : 'Nutrient-rich honey',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_honey_top.png',
       features: isJa
         ? ['48種類の栄養素入りプレミアム蜂蜜', 'ドリンク・トースト・料理に最適']
         : ['Premium honey with 48 nutrients', 'Perfect for drinks, toast, and cooking'],

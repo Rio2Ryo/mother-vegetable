@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジハニー — Mother Vegetable',
     description: 'Nutrient-rich premium honey. 100g.',
-    images: [{ url: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジハニー' }],
+    images: [{ url: '/cdn/mv_honey_detail.png', width: 800, height: 800, alt: 'マザベジハニー' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvHoneyProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-honey')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_honey_detail.png',
     galleryImages: getProductBySlug('mv-honey')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvHoneyPage({ params }: { params: Promise<{ locale
       <ProductJsonLd
         name="マザベジハニー"
         description="Pure honey blended with Mother Vegetable nutrients. 100g."
-        image="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop"
+        image="/cdn/mv_honey_detail.png"
         price={13.50}
         slug="mv-honey"
       />
