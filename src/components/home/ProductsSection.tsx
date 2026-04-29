@@ -345,7 +345,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '天然栄養素配合のボディミスト' : 'Nutrient-rich body mist',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_body_mist_top.png',
       features: isJa
         ? ['天然栄養素配合ボディミスト', '毎日のリフレッシュに']
         : ['Refreshing body mist with natural nutrients', 'Light fragrance for everyday freshness'],

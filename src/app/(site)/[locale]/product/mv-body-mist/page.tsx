@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジボディミスト — Mother Vegetable',
     description: 'Refreshing body mist with natural nutrients. 50ml.',
-    images: [{ url: 'https://images.unsplash.com/photo-1604903614277-fb7e5f6dfce4?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジボディミスト' }],
+    images: [{ url: '/cdn/mv_body_mist_detail.png', width: 800, height: 800, alt: 'マザベジボディミスト' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvBodyMistProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-body-mist')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1604903614277-fb7e5f6dfce4?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_body_mist_detail.png',
     galleryImages: getProductBySlug('mv-body-mist')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvBodyMistPage({ params }: { params: Promise<{ loc
       <ProductJsonLd
         name="マザベジボディミスト"
         description="Refreshing body mist with natural nutrients. 50ml."
-        image="https://images.unsplash.com/photo-1604903614277-fb7e5f6dfce4?w=400&h=400&fit=crop"
+        image="/cdn/mv_body_mist_detail.png"
         price={13.50}
         slug="mv-body-mist"
       />
