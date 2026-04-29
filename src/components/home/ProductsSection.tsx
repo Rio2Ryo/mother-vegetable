@@ -505,7 +505,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? 'マザベジ栄養素ブレンドの生姜茶' : 'Nutrient-rich ginger tea',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_ginger_tea_top.png',
       features: isJa
         ? ['48種類の栄養素入り生姜茶', '冬のあたたかい健康ドリンク']
         : ['Warming ginger tea with 48 nutrients', 'Perfect winter wellness drink'],

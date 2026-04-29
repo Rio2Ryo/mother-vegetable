@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ生姜茶 — Mother Vegetable',
     description: 'Nutrient-rich warming ginger tea. 30g.',
-    images: [{ url: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジ生姜茶' }],
+    images: [{ url: '/cdn/mv_ginger_tea_detail.png', width: 800, height: 800, alt: 'マザベジ生姜茶' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvGingerTeaProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-ginger-tea')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_ginger_tea_detail.png',
     galleryImages: getProductBySlug('mv-ginger-tea')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvGingerTeaPage({ params }: { params: Promise<{ lo
       <ProductJsonLd
         name="マザベジ生姜茶"
         description="Warming ginger tea blended with Mother Vegetable nutrients. 30g."
-        image="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=400&fit=crop"
+        image="/cdn/mv_ginger_tea_detail.png"
         price={13.50}
         slug="mv-ginger-tea"
       />
