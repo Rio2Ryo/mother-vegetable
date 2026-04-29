@@ -485,7 +485,7 @@ function getProducts(isJa: boolean) {
       subName: '',
       tagline: isJa ? '48種の栄養素配合バスソルト' : 'Nutrient-rich bath salt',
       videoUrl: null,
-      imageUrl: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=400&h=400&fit=crop',
+      imageUrl: '/cdn/mv_bathsalt_top.png',
       features: isJa
         ? ['48種類の栄養素入りバスソルト', 'リラックスバスタイムに栄養素をプラス']
         : ['Nutrient-rich mineral bath salt', 'Relaxing bath experience with 48 nutrients'],

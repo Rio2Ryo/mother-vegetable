@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジバスソルト — Mother Vegetable',
     description: 'Mineral-rich relaxing bath salt. 200g.',
-    images: [{ url: 'https://images.unsplash.com/photo-1663181596766-2176f8403211?w=400&h=400&fit=crop', width: 800, height: 800, alt: 'マザベジバスソルト' }],
+    images: [{ url: '/cdn/mv_bathsalt_detail.png', width: 800, height: 800, alt: 'マザベジバスソルト' }],
   },
 };
 
@@ -28,7 +28,7 @@ function getMvBathSaltProduct(locale: string): SimpleProductPageData {
     priceJpy: '¥2,000',
 
     inStock: getProductBySlug('mv-bathsalt')?.inStock ?? true,
-    productImage: 'https://images.unsplash.com/photo-1663181596766-2176f8403211?w=400&h=400&fit=crop',
+    productImage: '/cdn/mv_bathsalt_detail.png',
     galleryImages: getProductBySlug('mv-bathsalt')?.galleryImages,
     benefits: isJa
       ? [
@@ -118,7 +118,7 @@ export default async function MvBathSaltPage({ params }: { params: Promise<{ loc
       <ProductJsonLd
         name="マザベジバスソルト"
         description="Mineral-rich bath salt with 48 nutrients. 200g."
-        image="https://images.unsplash.com/photo-1663181596766-2176f8403211?w=400&h=400&fit=crop"
+        image="/cdn/mv_bathsalt_detail.png"
         price={13.50}
         slug="mv-bathsalt"
       />
