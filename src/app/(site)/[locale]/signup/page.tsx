@@ -119,7 +119,7 @@ export default function SignupPage() {
             <div className="w-full md:w-1/2 p-4">
               <div className="px-2.5 py-2.5 md:px-6 md:py-2.5">
                 <div className="pb-0">
-                  <h1 className="font-['Ubuntu'] font-bold text-[#25C760] text-2xl md:text-3xl">{t('signupTitle').toUpperCase()}</h1>
+                  <h1 className="font-sans font-bold text-[#25C760] text-2xl md:text-3xl tracking-normal">{t('signupTitle')}</h1>
                 </div>
 
                 {/* Referral Banner */}
