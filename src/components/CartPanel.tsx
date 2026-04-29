@@ -54,7 +54,7 @@ export default function CartPanel() {
 
           {/* Panel */}
           <motion.div
-            className="fixed top-0 right-0 w-full sm:w-[85%] md:w-[40%] h-screen bg-black border-l border-[#25C760] shadow-[-5px_0_30px_rgba(0,0,0,0.5)] z-[11]"
+            className="fixed inset-y-0 right-0 w-full sm:w-[85%] md:w-[40%] h-[100dvh] bg-black border-l border-[#25C760] shadow-[-5px_0_30px_rgba(0,0,0,0.5)] z-[11] overflow-hidden"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -73,7 +73,7 @@ export default function CartPanel() {
             </div>
 
             {/* Cart items */}
-            <div className="p-4 sm:p-6 overflow-y-auto h-[calc(100vh-200px)] mt-2">
+            <div className="p-4 sm:p-6 overflow-y-auto h-[calc(100dvh-210px-env(safe-area-inset-bottom))] mt-2 pb-6">
               {items.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-center">
                   <span className="text-xl mb-3 text-[#25C760]">{t('empty')}</span>
@@ -155,7 +155,7 @@ export default function CartPanel() {
 
             {/* Checkout */}
             {items.length > 0 && (
-              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 bg-black border-t border-[rgba(37,199,96,0.2)]">
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 pb-[calc(1rem+env(safe-area-inset-bottom))] bg-black border-t border-[rgba(37,199,96,0.2)]">
                 <div className="flex justify-end items-end mb-3">
                   <span className="text-sm font-bold text-white mr-3">{t('subtotal')}</span>
                   <span className="text-xl font-bold text-[#25C760]">
