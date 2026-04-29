@@ -196,7 +196,7 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
       <section className="border-t border-gray-800">
         <div className="max-w-3xl mx-auto px-4 py-10 md:py-14">
           <h2 className="text-lg font-bold text-[#25C760] mb-4 text-center uppercase tracking-wider">{isJa ? '使い方' : 'How to Use'}</h2>
-          <p className="text-gray-300 text-center leading-relaxed text-sm">{product.howToUse}</p>
+          <p className="text-gray-300 text-left md:text-center leading-relaxed text-sm">{product.howToUse}</p>
         </div>
       </section>
 
