@@ -153,13 +153,7 @@ export default function AccountPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
               <p className="text-gray-500 mb-2">{t('noOrders')}</p>
-              <p className="text-gray-600 text-sm mb-6">{t('startShopping')}</p>
-              <Link
-                href="/product/achieve"
-                className="inline-block px-6 py-3 bg-[#25C760] text-black font-semibold rounded-lg hover:bg-[#1ea84e] transition-colors"
-              >
-                {t('browseProducts')}
-              </Link>
+              <p className="text-gray-600 text-sm">{t('startShopping')}</p>
             </div>
           )}
 
