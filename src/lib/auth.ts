@@ -19,7 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           }),
         ]
       : []),
-    Credentials(
+    Credentials({
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
