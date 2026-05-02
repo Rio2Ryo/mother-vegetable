@@ -1,15 +1,12 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import Google from "next-auth/providers/google";
-import Facebook from "next-auth/providers/facebook";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import prisma from "@/lib/prisma";
 
 const googleClientId = process.env.GOOGLE_CLIENT_ID?.trim();
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim();
-const facebookClientId = process.env.FACEBOOK_CLIENT_ID?.trim();
-const facebookClientSecret = process.env.FACEBOOK_CLIENT_SECRET?.trim();
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -22,15 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           }),
         ]
       : []),
-    ...(facebookClientId && facebookClientSecret
-      ? [
-          Facebook({
-            clientId: facebookClientId,
-            clientSecret: facebookClientSecret,
-          }),
-        ]
-      : []),
-    Credentials({
+    Credentials(
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
