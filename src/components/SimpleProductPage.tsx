@@ -109,13 +109,13 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
           {/* Product Image Gallery */}
           <div className="flex flex-col items-center gap-3">
             {/* Main image */}
-            <div className="relative w-full max-w-sm aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-gray-800">
+            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
                 src={activeImage.url}
                 alt={activeImage.alt}
                 fill
-                className="object-contain p-6"
-                sizes="(max-width: 768px) 100vw, 400px"
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 500px"
               />
             </div>
           </div>
