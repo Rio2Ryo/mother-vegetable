@@ -19,6 +19,22 @@ function getProductKey(value: string | null): ProductKey {
   return 'sef';
 }
 
+function getProductTitleLines(productKey: ProductKey, productName: string, isJa: boolean): string[] {
+  if (!isJa) return [productName];
+
+  switch (productKey) {
+    case 'aquaculture-small':
+      return ['Mother Vegetable', 'アクアカルチャーキット', '（小）'];
+    case 'aquaculture-large':
+      return ['Mother Vegetable', 'アクアカルチャーキット', '（大）'];
+    case 'agriculture':
+      return ['Mother Vegetable', 'アグリカルチャーキット'];
+    case 'sef':
+    default:
+      return ['1/100スケール', 'SEF'];
+  }
+}
+
 function ApplicationContent() {
   const locale = useLocale();
   const searchParams = useSearchParams();
@@ -28,6 +44,7 @@ function ApplicationContent() {
   const productKey = getProductKey(searchParams.get('product'));
   const product = PRODUCT_LABELS[productKey];
   const productName = isJa ? product.ja : isZh ? product.zh : product.en;
+  const productTitleLines = getProductTitleLines(productKey, productName, isJa);
 
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
@@ -75,7 +92,13 @@ function ApplicationContent() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#25c760]/10 to-transparent pointer-events-none" />
         <div className="relative max-w-3xl mx-auto">
           <p className="text-[#25c760] text-sm font-semibold tracking-[0.2em] uppercase mb-4">APPLICATION CONSULTATION</p>
-          <h1 className="text-3xl md:text-5xl font-extrabold mb-5">{productName}</h1>
+          <h1 className="text-[clamp(2rem,7vw,3.5rem)] font-extrabold leading-tight mb-5">
+            {productTitleLines.map((line) => (
+              <span key={line} className="block whitespace-nowrap">
+                {line}
+              </span>
+            ))}
+          </h1>
           <p className="text-gray-300 leading-relaxed">
             {t('This is a high-value, custom item. It is not purchased through the normal cart. Please submit an inquiry first so we can confirm conditions and guide the dedicated process.', '高額・個別対応商品です。通常カート購入ではなく、まず設置条件・購入意向を確認してから専用手続きへ進みます。', '这是高价定制商品，不通过普通购物车购买。请先提交咨询，我们会确认条件后引导专用流程。')}
           </p>
