@@ -55,6 +55,11 @@ type Subcategory = 'seasoning' | 'supplement' | 'cosmetic' | 'fish';
 
 const REGULAR_IDS = new Set(['achieve', 'confidence']);
 
+function getMobileProductNameLines(name: string): string[] {
+  if (!name.startsWith('マザベジ') || name.length <= 6) return [name];
+  return ['マザベジ', name.slice(4)];
+}
+
 function getProducts(isJa: boolean) {
   return [
     {
@@ -1017,8 +1022,15 @@ export default function ProductsSection() {
                                 className="w-10 h-10 md:w-11 md:h-11 shrink-0 rounded-full bg-cover bg-center border-2 border-[#25c760]/60 shadow-[0_0_0_1px_rgba(37,199,96,0.25)]"
                                 style={{ backgroundImage: `url(${p.imageUrl})` }}
                               />
-                              <span className="text-[9px] leading-[1.15] md:text-sm text-gray-200 hover:text-[#25c760] transition-colors text-center md:text-left break-words md:truncate w-full md:w-auto overflow-hidden [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
-                                {p.name}
+                              <span className="text-[8px] leading-[1.15] tracking-[-0.08em] md:text-sm md:tracking-normal text-gray-200 hover:text-[#25c760] transition-colors text-center md:text-left w-full md:w-auto">
+                                <span className="md:hidden">
+                                  {getMobileProductNameLines(p.name).map((line) => (
+                                    <span key={line} className="block whitespace-nowrap">
+                                      {line}
+                                    </span>
+                                  ))}
+                                </span>
+                                <span className="hidden md:inline md:truncate">{p.name}</span>
                               </span>
                             </button>
                           );
