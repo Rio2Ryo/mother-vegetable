@@ -143,7 +143,7 @@ export default function SuperWoodPage() {
             <p className="text-white/70 text-sm mb-8">100人で¥1.5億 ＝ 実物SEF1棟が完成します</p>
 
             <Link
-              href="/superwood/sef-application"
+              href="/superwood/application?product=sef"
               className="inline-block px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors no-underline"
             >
               申し込み相談へ進む
@@ -226,7 +226,7 @@ export default function SuperWoodPage() {
 
               <div className="text-center">
                 <Link
-                  href="/about"
+                  href="/superwood/application?product=aquaculture-small"
                   className="inline-block px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors no-underline"
                 >
                   <span className="block whitespace-nowrap">お問い合わせ・</span>
@@ -293,7 +293,7 @@ export default function SuperWoodPage() {
 
               <div className="text-center">
                 <Link
-                  href="/about"
+                  href="/superwood/application?product=aquaculture-large"
                   className="inline-block px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors no-underline"
                 >
                   <span className="block whitespace-nowrap">お問い合わせ・</span>
@@ -357,7 +357,7 @@ export default function SuperWoodPage() {
 
             <div className="text-center">
               <Link
-                href="/about"
+                href="/superwood/application?product=agriculture"
                 className="inline-block px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors no-underline"
               >
                 <span className="block whitespace-nowrap">お問い合わせ・</span>
