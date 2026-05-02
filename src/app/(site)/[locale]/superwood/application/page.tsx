@@ -92,7 +92,7 @@ function ApplicationContent() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#25c760]/10 to-transparent pointer-events-none" />
         <div className="relative max-w-3xl mx-auto">
           <p className="text-[#25c760] text-sm font-semibold tracking-[0.2em] uppercase mb-4">APPLICATION CONSULTATION</p>
-          <h1 className="text-[clamp(2rem,7vw,3.5rem)] font-extrabold leading-tight mb-5">
+          <h1 className="text-[clamp(1.6rem,7vw,3.5rem)] font-extrabold leading-tight tracking-tight mb-5">
             {productTitleLines.map((line) => (
               <span key={line} className="block whitespace-nowrap">
                 {line}
