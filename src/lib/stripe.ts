@@ -29,6 +29,7 @@ export const PRODUCT_PRICES: Record<string, number> = {
   'mv-toner': 1350,     // $13.50
   'mv-balm': 1350,      // $13.50
   'mv-soap': 1350,      // $13.50
+  'sef-1-100': 1000000, // $10,000
 };
 
 // JPY prices — Stripe treats JPY as zero-decimal so unit amount is in YEN directly.
@@ -58,6 +59,7 @@ export const PRODUCT_PRICES_JPY: Record<string, number> = {
   'mv-bathsalt': 2000,
   'mv-ginger-tea': 2000,
   'mv-honey': 2000,
+  'sef-1-100': 1500000,
 };
 
 // Monthly subscription amounts in JPY — keyed by API plan id.

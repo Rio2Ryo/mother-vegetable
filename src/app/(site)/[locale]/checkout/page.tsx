@@ -39,6 +39,7 @@ const PRODUCT_PRICES_JPY: Record<string, number> = {
   'mv-toner': 2000,
   'mv-balm': 2000,
   'mv-soap': 2000,
+  'sef-1-100': 1500000,
 };
 
 function fmtPrice(amount: number, isJpy: boolean): string {

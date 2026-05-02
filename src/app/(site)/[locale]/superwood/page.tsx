@@ -1,7 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
+import { useCartStore } from '@/store/cart';
 
 /* Lumber line-up — keyed by cross-section, with available lengths in mm. */
 const lumberSizes: { section: string; lengths: number[] }[] = [
@@ -26,6 +27,21 @@ function renderLines(text: string) {
 
 export default function SuperWoodPage() {
   const t = useTranslations('superwood');
+  const router = useRouter();
+  const addItem = useCartStore((state) => state.addItem);
+
+  const handleScaleSefPurchase = () => {
+    addItem({
+      id: 'sef-1-100',
+      productId: 'sef-1-100',
+      name: '1/100スケールSEF',
+      price: 10000,
+      currency: 'USD',
+      quantity: 1,
+      image: '/cdn/sef_building_v2.png',
+    });
+    router.push('/checkout');
+  };
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -142,7 +158,11 @@ export default function SuperWoodPage() {
             <p className="text-gray-400 text-sm mb-1">($10,000) / 1口</p>
             <p className="text-white/70 text-sm mb-8">100人で¥1.5億 ＝ 実物SEF1棟が完成します</p>
 
-            <button className="px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors cursor-pointer">
+            <button
+              type="button"
+              onClick={handleScaleSefPurchase}
+              className="px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors cursor-pointer"
+            >
               {t('scaleSef.buy')}
             </button>
             </div>
