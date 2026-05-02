@@ -1001,7 +1001,7 @@ export default function ProductsSection() {
 
                     {/* Product thumbnails — equal-width columns. Mobile: stack vertically (icon above wrapped name). Desktop: icon next to name. */}
                     <div className="relative flex-1 min-w-0">
-                      <div className="grid grid-cols-3 gap-2 md:gap-4 justify-items-center items-start">
+                      <div className="grid grid-cols-3 gap-2 md:gap-4 justify-items-center items-start content-start">
                         {products.map((p) => {
                           const isOpen = expandedMonth === Number(month);
                           return (
@@ -1011,13 +1011,13 @@ export default function ProductsSection() {
                               onClick={() =>
                                 setExpandedMonth(isOpen ? null : Number(month))
                               }
-                              className="w-full self-start flex flex-col md:flex-row items-center md:items-center justify-start gap-1.5 md:gap-2 rounded-lg px-1 py-1 md:px-2 hover:bg-white/5 transition-colors"
+                              className="w-full self-start flex flex-col md:flex-row items-center md:items-center justify-start gap-1 md:gap-2 rounded-lg px-1 py-0 md:px-2 md:py-1 hover:bg-white/5 transition-colors"
                             >
                               <div
                                 className="w-10 h-10 md:w-11 md:h-11 shrink-0 rounded-full bg-cover bg-center border-2 border-[#25c760]/60 shadow-[0_0_0_1px_rgba(37,199,96,0.25)]"
                                 style={{ backgroundImage: `url(${p.imageUrl})` }}
                               />
-                              <span className="text-[11px] leading-tight md:text-sm text-gray-200 hover:text-[#25c760] transition-colors text-center md:text-left break-words md:truncate w-full md:w-auto">
+                              <span className="text-[9px] leading-[1.15] md:text-sm text-gray-200 hover:text-[#25c760] transition-colors text-center md:text-left break-words md:truncate w-full md:w-auto overflow-hidden [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
                                 {p.name}
                               </span>
                             </button>
