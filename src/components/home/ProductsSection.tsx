@@ -783,8 +783,8 @@ export default function ProductsSection() {
               >
                 {/* Match mobile product cards to the desktop vertical layout */}
                 <div className="flex flex-col gap-0">
-                  {/* Video or Image — centered, with the same visual size as desktop */}
-                  <div className="mb-4 flex justify-center w-full">
+                  {/* Video or Image — fill the card width on mobile to avoid side gaps */}
+                  <div className="mb-4 w-full flex justify-center">
                     {product.videoUrl ? (
                       <video
                         src={product.videoUrl}
@@ -792,13 +792,13 @@ export default function ProductsSection() {
                         loop
                         muted
                         playsInline
-                        className="w-28 h-52 object-cover rounded-lg"
+                        className="w-full h-auto aspect-video object-cover rounded-lg"
                       />
                     ) : (
                       <img
                         src={product.imageUrl!}
                         alt={product.name}
-                        className="w-28 h-52 object-cover rounded-lg"
+                        className="w-full h-auto aspect-video object-cover rounded-lg"
                       />
                     )}
                   </div>
