@@ -18,7 +18,7 @@ const lumberSizes: { section: string; lengths: number[] }[] = [
 
 function renderLines(text: string) {
   return text.split('\n').map((line, index) => (
-    <span key={`${line}-${index}`} className="block">
+    <span key={`${line}-${index}`} className="block whitespace-nowrap">
       {line}
     </span>
   ));
@@ -44,10 +44,10 @@ export default function SuperWoodPage() {
         {/* Soft vignette so title stays readable — no green tint */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60" />
         <div className="relative max-w-3xl mx-auto">
-          <h1 className="text-[clamp(2.5rem,11vw,4rem)] font-extrabold tracking-tight leading-[1.08] mb-4 text-balance">
+          <h1 className="text-[clamp(2rem,9.5vw,4rem)] font-extrabold tracking-tight leading-[1.08] mb-4 text-balance">
             {renderLines(t('hero.title'))}
           </h1>
-          <p className="text-[clamp(1rem,4.8vw,1.5rem)] leading-relaxed text-gray-300 mb-2 text-balance">
+          <p className="text-[clamp(0.9rem,4.2vw,1.5rem)] leading-relaxed text-gray-300 mb-2 text-balance">
             {renderLines(t('hero.subtitle'))}
           </p>
           <div className="mt-6 h-1 w-24 mx-auto rounded-full bg-[#25c760]" />
