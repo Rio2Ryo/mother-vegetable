@@ -226,7 +226,8 @@ export default function SuperWoodPage() {
                   href="/about"
                   className="inline-block px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors no-underline"
                 >
-                  お問い合わせ・導入相談
+                  <span className="block whitespace-nowrap">お問い合わせ・</span>
+                  <span className="block whitespace-nowrap">導入相談</span>
                 </Link>
               </div>
             </div>
@@ -292,7 +293,8 @@ export default function SuperWoodPage() {
                   href="/about"
                   className="inline-block px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors no-underline"
                 >
-                  お問い合わせ・導入相談
+                  <span className="block whitespace-nowrap">お問い合わせ・</span>
+                  <span className="block whitespace-nowrap">導入相談</span>
                 </Link>
               </div>
             </div>
@@ -355,7 +357,8 @@ export default function SuperWoodPage() {
                 href="/about"
                 className="inline-block px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors no-underline"
               >
-                お問い合わせ・導入相談
+                <span className="block whitespace-nowrap">お問い合わせ・</span>
+                <span className="block whitespace-nowrap">導入相談</span>
               </Link>
             </div>
           </div>
