@@ -1001,7 +1001,7 @@ export default function ProductsSection() {
 
                     {/* Product thumbnails — equal-width columns. Mobile: stack vertically (icon above wrapped name). Desktop: icon next to name. */}
                     <div className="relative flex-1 min-w-0">
-                      <div className="grid grid-cols-3 gap-2 md:gap-4 justify-items-center">
+                      <div className="grid grid-cols-3 gap-2 md:gap-4 justify-items-center items-start">
                         {products.map((p) => {
                           const isOpen = expandedMonth === Number(month);
                           return (
@@ -1011,7 +1011,7 @@ export default function ProductsSection() {
                               onClick={() =>
                                 setExpandedMonth(isOpen ? null : Number(month))
                               }
-                              className="w-full flex flex-col md:flex-row items-center md:items-center justify-center md:justify-start gap-1.5 md:gap-2 rounded-lg px-1 py-1 md:px-2 hover:bg-white/5 transition-colors"
+                              className="w-full self-start flex flex-col md:flex-row items-center md:items-center justify-start gap-1.5 md:gap-2 rounded-lg px-1 py-1 md:px-2 hover:bg-white/5 transition-colors"
                             >
                               <div
                                 className="w-10 h-10 md:w-11 md:h-11 shrink-0 rounded-full bg-cover bg-center border-2 border-[#25c760]/60 shadow-[0_0_0_1px_rgba(37,199,96,0.25)]"
