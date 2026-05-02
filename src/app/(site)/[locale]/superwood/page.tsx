@@ -142,7 +142,7 @@ export default function SuperWoodPage() {
             <p className="text-gray-400 text-sm mb-1">($10,000) / 1口</p>
             <p className="text-white/70 text-sm mb-8">100人で¥1.5億 ＝ 実物SEF1棟が完成します</p>
 
-            <button className="px-10 py-4 rounded-xl bg-[#25c760] text-black font-bold text-lg hover:bg-[#1fb350] transition-colors duration-200 cursor-pointer">
+            <button className="px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors cursor-pointer">
               {t('scaleSef.buy')}
             </button>
             </div>
@@ -224,7 +224,7 @@ export default function SuperWoodPage() {
               <div className="text-center">
                 <Link
                   href="/about"
-                  className="inline-block px-10 py-4 rounded-xl bg-[#25c760] text-black font-bold text-lg hover:bg-[#1fb350] transition-colors duration-200 no-underline"
+                  className="inline-block px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors no-underline"
                 >
                   お問い合わせ・導入相談
                 </Link>
@@ -290,7 +290,7 @@ export default function SuperWoodPage() {
               <div className="text-center">
                 <Link
                   href="/about"
-                  className="inline-block px-10 py-4 rounded-xl bg-[#25c760] text-black font-bold text-lg hover:bg-[#1fb350] transition-colors duration-200 no-underline"
+                  className="inline-block px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors no-underline"
                 >
                   お問い合わせ・導入相談
                 </Link>
@@ -353,7 +353,7 @@ export default function SuperWoodPage() {
             <div className="text-center">
               <Link
                 href="/about"
-                className="inline-block px-10 py-4 rounded-xl bg-[#25c760] text-black font-bold text-lg hover:bg-[#1fb350] transition-colors duration-200 no-underline"
+                className="inline-block px-8 py-2.5 md:py-3 rounded-full bg-[#25c760] text-black font-semibold text-sm md:text-base hover:bg-[#1da84e] transition-colors no-underline"
               >
                 お問い合わせ・導入相談
               </Link>
