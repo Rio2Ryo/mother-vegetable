@@ -17,8 +17,21 @@ export async function GET(
 
     const { id } = await params;
 
+    const userEmail = session.user.email?.trim().toLowerCase();
+
     const order = await prisma.order.findFirst({
-      where: { id, userId: session.user.id },
+      where: {
+        id,
+        OR: [
+          { userId: session.user.id },
+          ...(userEmail
+            ? [
+                { user: { email: userEmail } },
+                { shippingAddress: { contains: userEmail } },
+              ]
+            : []),
+        ],
+      },
     });
 
     if (!order) {

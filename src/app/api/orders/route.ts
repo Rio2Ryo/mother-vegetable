@@ -96,8 +96,20 @@ export async function GET() {
       );
     }
 
+    const userEmail = session.user.email?.trim().toLowerCase();
+
     const orders = await prisma.order.findMany({
-      where: { userId: session.user.id },
+      where: {
+        OR: [
+          { userId: session.user.id },
+          ...(userEmail
+            ? [
+                { user: { email: userEmail } },
+                { shippingAddress: { contains: userEmail } },
+              ]
+            : []),
+        ],
+      },
       orderBy: { createdAt: "desc" },
     });
 
