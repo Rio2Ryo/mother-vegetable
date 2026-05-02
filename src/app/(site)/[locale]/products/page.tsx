@@ -9,6 +9,33 @@ import { getStoredReferralCode } from '@/lib/affiliate';
 
 const REFERRAL_DISCOUNT_RATE = 0.10;
 
+const TOP_PAGE_PRODUCT_IMAGES: Record<string, string> = {
+  achieve: '/cdn/products_achieve_10001.png',
+  confidence: '/cdn/products_confidence_10001.png',
+  tilapia: '/cdn/mv_tilapia.jpg',
+  'mv-salt': '/cdn/mv_salt.jpg',
+  'mv-soy-sauce': '/cdn/mv_soy_sauce_top.png',
+  'mv-toner': '/cdn/mv_toner_top.png',
+  'mv-balm': '/cdn/mv_balm.jpg',
+  'mv-soap': '/cdn/mv_soap.jpg',
+  'mv-miso': '/cdn/mv_miso_top.jpg',
+  'mv-wasabi': '/cdn/mv_wasabi_top.png',
+  'mv-matcha': '/cdn/mv_matcha_top.png',
+  'mv-dressing': '/cdn/mv_dressing.png',
+  'mv-olive': '/cdn/mv_olive.png',
+  'mv-suncare': '/cdn/mv_suncare_top.png',
+  'mv-body-mist': '/cdn/mv_body_mist_top.png',
+  'mv-handcream': '/cdn/mv_handcream_top.png',
+  'mv-ponzu': '/cdn/mv_ponzu_top.png',
+  'mv-face-mist': '/cdn/mv_face_mist_top.png',
+  'mv-hair-oil': '/cdn/mv_hair_oil_top.png',
+  'mv-lipbalm': '/cdn/mv_lipbalm_top.png',
+  'mv-vinegar': '/cdn/mv_vinegar_top.png',
+  'mv-bathsalt': '/cdn/mv_bathsalt_top.png',
+  'mv-ginger-tea': '/cdn/mv_ginger_tea_top.png',
+  'mv-honey': '/cdn/mv_honey_top.png',
+};
+
 function parseJpyPrice(priceStr: string): number {
   return parseInt(priceStr.replace(/[¥,]/g, ''), 10);
 }
@@ -56,8 +83,9 @@ export default function ProductsListingPage() {
   const [hasReferral, setHasReferral] = useState(false);
 
   useEffect(() => {
-    const code = getStoredReferralCode();
-    if (code) setHasReferral(true);
+    queueMicrotask(() => {
+      setHasReferral(Boolean(getStoredReferralCode()));
+    });
   }, []);
 
   const t = (en: string, ja: string, zh: string) => (isJa ? ja : isZh ? zh : en);
@@ -188,6 +216,7 @@ function ProductCard({
 
   const displayName = isJa && product.nameJa ? product.nameJa : product.name;
   const displayDescription = isJa && product.descriptionJa ? product.descriptionJa : product.description;
+  const productImage = TOP_PAGE_PRODUCT_IMAGES[product.slug] || product.images[0] || '/Images/Assets/General/logo.png';
 
   return (
     <Link
@@ -216,7 +245,7 @@ function ProductCard({
           />
         ) : (
           <Image
-            src={product.images[0] || '/Images/Assets/General/logo.png'}
+            src={productImage}
             alt={product.fullName}
             width={300}
             height={300}
