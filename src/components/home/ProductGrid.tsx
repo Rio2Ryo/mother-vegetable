@@ -27,6 +27,46 @@ interface Props {
   onTagClick?: (kind: 'region' | 'story', tag: string) => void;
 }
 
+function ProductThumbnail({ product }: { product: HomeProductCard }) {
+  const [failed, setFailed] = useState(false);
+  const useImg = Boolean(product.imageUrl) && !failed;
+  return (
+    <>
+      {useImg ? (
+        // External CDN thumbnails — using <img> intentionally to avoid the
+        // next/image remote-loader config requirement for these grid tiles.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={product.imageUrl}
+          alt={product.name}
+          loading="lazy"
+          onError={() => setFailed(true)}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
+          <div className="text-center px-3">
+            <div
+              className="mx-auto mb-2 inline-flex h-12 w-12 items-center justify-center rounded-full"
+              style={{ backgroundColor: 'rgba(37, 199, 96, 0.10)' }}
+            >
+              <span
+                className="text-base font-extrabold tracking-tight"
+                style={{ color: '#25c760' }}
+              >
+                MV
+              </span>
+            </div>
+            <p className="text-[10px] text-gray-400 line-clamp-2 leading-tight">
+              {product.name}
+            </p>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 export default function ProductGrid({ products, onTagClick }: Props) {
   const locale = useLocale();
   const isJa = locale === 'ja';
@@ -89,43 +129,24 @@ export default function ProductGrid({ products, onTagClick }: Props) {
         return (
           <div
             key={product.id}
-            className="group bg-zinc-900/60 border border-zinc-800 rounded-lg overflow-hidden hover:border-[#25c760]/60 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#25c760]/10 transition-all duration-200 flex flex-col"
+            className="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-[#25c760] hover:-translate-y-0.5 hover:shadow-md hover:shadow-[#25c760]/15 transition-all duration-200 flex flex-col"
           >
             {/* Thumbnail */}
             <Link
               href={product.productLink}
-              className="block relative aspect-square overflow-hidden bg-zinc-800/40 no-underline"
+              className="block relative aspect-square overflow-hidden bg-gray-50 no-underline"
               aria-label={product.name}
             >
-              {product.videoUrl ? (
-                <video
-                  src={product.videoUrl}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              ) : (
-                // External CDN thumbnails — using <img> intentionally to avoid the
-                // next/image remote-loader config requirement for these grid tiles.
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={product.imageUrl}
-                  alt={product.name}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              )}
+              <ProductThumbnail product={product} />
             </Link>
 
             {/* Content */}
             <div className="p-3 space-y-2 flex-1 flex flex-col">
               {/* Name */}
-              <h3 className="text-sm font-bold text-white leading-snug line-clamp-2 min-h-[2.5rem]">
+              <h3 className="text-sm font-bold leading-snug line-clamp-2 min-h-[2.5rem]">
                 <Link
                   href={product.productLink}
-                  className="text-white hover:text-[#25c760] transition-colors no-underline"
+                  className="text-gray-900 hover:text-[#25c760] transition-colors no-underline"
                 >
                   {product.name}
                 </Link>
@@ -133,7 +154,7 @@ export default function ProductGrid({ products, onTagClick }: Props) {
 
               {/* Subtitle */}
               {product.subtitle && (
-                <p className="text-xs text-white/50 truncate">{product.subtitle}</p>
+                <p className="text-xs text-gray-500 truncate">{product.subtitle}</p>
               )}
 
               {/* Tag chips: 1 region + up to 2 story */}
@@ -143,7 +164,7 @@ export default function ProductGrid({ products, onTagClick }: Props) {
                     <button
                       type="button"
                       onClick={() => onTagClick?.('region', regionChip)}
-                      className="inline-flex items-center gap-1 rounded-full border border-[#25c760]/30 bg-[#25c760]/10 px-1.5 py-0.5 text-[10px] text-[#25c760] hover:bg-[#25c760]/20 transition-colors max-w-full"
+                      className="inline-flex items-center gap-1 rounded-full border border-[#25c760]/40 bg-[#25c760]/10 px-1.5 py-0.5 text-[10px] text-[#25c760] hover:bg-[#25c760]/20 transition-colors max-w-full"
                       title={regionChip}
                     >
                       <MapPin className="h-3 w-3 shrink-0" />
@@ -159,7 +180,7 @@ export default function ProductGrid({ products, onTagClick }: Props) {
                         key={tagKey}
                         type="button"
                         onClick={() => onTagClick?.('story', tagKey)}
-                        className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-1.5 py-0.5 text-[10px] text-white/70 hover:border-[#25c760]/40 hover:text-[#25c760] transition-colors max-w-full"
+                        className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-50 px-1.5 py-0.5 text-[10px] text-gray-700 hover:border-[#25c760]/50 hover:text-[#25c760] hover:bg-[#25c760]/5 transition-colors max-w-full"
                         title={label}
                       >
                         {icon && <span aria-hidden="true">{icon}</span>}
@@ -180,15 +201,15 @@ export default function ProductGrid({ products, onTagClick }: Props) {
                     >
                       {formatJpyPrice(jpyDiscounted)}
                     </span>
-                    <span className="text-[10px] text-white/40 line-through">
+                    <span className="text-[10px] text-gray-400 line-through">
                       {product.priceJpy}
                     </span>
-                    <span className="text-[9px] font-semibold text-[#25C760] bg-[#25C760]/15 border border-[#25C760] rounded px-1 py-px">
+                    <span className="text-[9px] font-semibold text-[#25C760] bg-[#25C760]/10 border border-[#25C760] rounded px-1 py-px">
                       10% OFF
                     </span>
                   </>
                 ) : (
-                  <span className="text-base font-bold text-white">
+                  <span className="text-base font-bold text-gray-900">
                     {product.priceJpy}
                   </span>
                 )}
@@ -215,7 +236,7 @@ export default function ProductGrid({ products, onTagClick }: Props) {
 
               {/* Quantity + Add to cart */}
               <div className="flex items-center gap-1.5 pt-1">
-                <div className="flex items-center rounded-full border border-zinc-700">
+                <div className="flex items-center rounded-full border border-gray-300 bg-white">
                   <button
                     type="button"
                     onClick={() => setQty(product.id, qty - 1)}
@@ -224,7 +245,7 @@ export default function ProductGrid({ products, onTagClick }: Props) {
                   >
                     {'−'}
                   </button>
-                  <span className="text-white text-xs font-bold w-5 text-center select-none">
+                  <span className="text-gray-900 text-xs font-bold w-5 text-center select-none">
                     {qty}
                   </span>
                   <button
@@ -240,7 +261,7 @@ export default function ProductGrid({ products, onTagClick }: Props) {
                   type="button"
                   onClick={() => handleAddToCart(product)}
                   aria-label={isJa ? 'カートに入れる' : 'Add to cart'}
-                  className="flex-1 inline-flex items-center justify-center gap-1 rounded-full bg-[#25c760] text-black text-xs font-semibold py-1.5 hover:bg-[#1da84e] transition-colors"
+                  className="flex-1 inline-flex items-center justify-center gap-1 rounded-full bg-[#25c760] text-white text-xs font-semibold py-1.5 hover:bg-[#1da84e] transition-colors"
                 >
                   <ShoppingCart className="h-3.5 w-3.5" />
                   <span className="hidden sm:inline">
@@ -252,7 +273,7 @@ export default function ProductGrid({ products, onTagClick }: Props) {
               {/* Detail link */}
               <Link
                 href={product.productLink}
-                className="block text-center text-[10px] text-white/40 hover:text-[#25c760] transition-colors no-underline pt-0.5"
+                className="block text-center text-[10px] text-gray-400 hover:text-[#25c760] transition-colors no-underline pt-0.5"
               >
                 {isJa ? '詳細' : 'Details'}
               </Link>

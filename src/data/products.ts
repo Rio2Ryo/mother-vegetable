@@ -1707,6 +1707,14 @@ export interface HomeProductCard {
   chemicalReducedGrams?: number;
 }
 
+// Some products' images[0] points to a wordmark/logo asset (legacy data,
+// e.g. products_achieve_10001.png is 304×46) rather than a proper product
+// photo. Override here so the home grid uses a clean still.
+const HOME_THUMBNAIL_OVERRIDES: Record<string, string> = {
+  achieve: '/cdn/products_achieve_10005.jpg',
+  confidence: '/cdn/products_confidence_10005.jpg',
+};
+
 export function getHomeProductCards(locale: string): HomeProductCard[] {
   const isJa = locale === 'ja';
   return products.map((p) => ({
@@ -1715,7 +1723,7 @@ export function getHomeProductCards(locale: string): HomeProductCard[] {
     name: isJa ? (p.nameJa ?? p.name) : p.name,
     subtitle: p.subtitle,
     tagline: isJa ? (p.taglineJp || p.tagline) : p.tagline,
-    imageUrl: p.images?.[0] ?? '',
+    imageUrl: HOME_THUMBNAIL_OVERRIDES[p.slug] ?? p.images?.[0] ?? '',
     videoUrl: p.mainVideoUrl || undefined,
     features: p.benefits ?? [],
     priceUsd: `$${p.price.toFixed(2)}`,
