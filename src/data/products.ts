@@ -53,6 +53,12 @@ export interface ProductData {
   proteinGrams?: number;
   chemicalReducedGrams?: number;
   mvtReward?: number;
+  // Producer/region storytelling
+  producer?: string;            // e.g. "河津町漁協"、"伊豆〇〇農園"
+  region?: string;              // e.g. "静岡県 河津町"  (display string)
+  regionTags?: string[];        // e.g. ["河津町", "静岡県", "伊豆"]
+  storyTags?: string[];         // e.g. ["漁協連携", "地域連携"]
+  storyDescription?: string;    // 1-2 sentence story shown in tooltip/modal
 }
 
 // ---------------------------------------------------------------------------
@@ -125,6 +131,11 @@ const achieve: ProductData = {
   proteinGrams: 6,
   chemicalReducedGrams: 40,
   mvtReward: 80,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['オーガニック', '無添加'],
+  storyDescription: '静岡県のマザベジラボで開発した、48栄養素入り無添加サプリメント。',
   drinkItems: [
     { label: "Beer", image: "/Images/Assets/achieve/mazekomu/beer.png" },
     { label: "Cola", image: "/Images/Assets/achieve/mazekomu/cola.png" },
@@ -206,6 +217,11 @@ const confidence: ProductData = {
   proteinGrams: 0,
   chemicalReducedGrams: 55,
   mvtReward: 75,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['オーガニック', '無添加'],
+  storyDescription: 'すべての肌タイプに寄り添う、無添加・天然由来のスキンケアジェル。',
   cosmeticItems: [
     {
       label: "Shampoo",
@@ -300,6 +316,11 @@ const tilapia: ProductData = {
   proteinGrams: 22,
   chemicalReducedGrams: 10,
   mvtReward: 60,
+  producer: '河津町漁協',
+  region: '静岡県 河津町',
+  regionTags: ['河津町', '静岡県', '伊豆'],
+  storyTags: ['漁協連携', '地域連携'],
+  storyDescription: '河津町漁協と連携し、地域の海で育てた48栄養素入りのマザベジフィッシュ。',
 };
 
 // ---------------------------------------------------------------------------
@@ -344,6 +365,11 @@ const mvSalt: ProductData = {
   proteinGrams: 2,
   chemicalReducedGrams: 15,
   mvtReward: 35,
+  producer: '伊豆海塩工房',
+  region: '静岡県 伊豆',
+  regionTags: ['伊豆', '静岡県'],
+  storyTags: ['伝統製法', '地域連携'],
+  storyDescription: '伊豆の海水を伝統の平釜製法で炊き上げた、48栄養素入りのミネラル塩。',
 };
 
 // ---------------------------------------------------------------------------
@@ -388,6 +414,11 @@ const mvSoySauce: ProductData = {
   proteinGrams: 3,
   chemicalReducedGrams: 18,
   mvtReward: 38,
+  producer: '河津醸造',
+  region: '静岡県 河津町',
+  regionTags: ['河津町', '静岡県', '伊豆'],
+  storyTags: ['伝統製法', '地域連携'],
+  storyDescription: '河津町の老舗醸造蔵による、伝統の杉樽製法で仕上げた48栄養素入り醤油。',
 };
 
 // ---------------------------------------------------------------------------
@@ -431,6 +462,11 @@ const mvToner: ProductData = {
   proteinGrams: 0,
   chemicalReducedGrams: 30,
   mvtReward: 40,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['無添加', 'オーガニック'],
+  storyDescription: '静岡県のラボで開発した、天然コラーゲン配合の無添加化粧水。',
 };
 
 // ---------------------------------------------------------------------------
@@ -478,6 +514,11 @@ const mvBalm: ProductData = {
   proteinGrams: 0,
   chemicalReducedGrams: 28,
   mvtReward: 38,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['無添加', 'オーガニック'],
+  storyDescription: '静岡県のラボで丁寧に練り上げた、天然コラーゲン配合のラグジュアリーバウム。',
 };
 
 // ---------------------------------------------------------------------------
@@ -525,6 +566,11 @@ const mvSoap: ProductData = {
   proteinGrams: 0,
   chemicalReducedGrams: 32,
   mvtReward: 42,
+  producer: '伊豆コスメ工房',
+  region: '静岡県 伊豆',
+  regionTags: ['伊豆', '静岡県'],
+  storyTags: ['伝統製法', 'オーガニック'],
+  storyDescription: '伊豆のコスメ工房が伝統的なコールドプロセス製法で手作りする、栄養素配合の石鹸。',
 };
 
 // ---------------------------------------------------------------------------
@@ -563,6 +609,11 @@ const mvMiso: ProductData = {
   proteinGrams: 4,
   chemicalReducedGrams: 16,
   mvtReward: 40,
+  producer: '河津味噌蔵',
+  region: '静岡県 河津町',
+  regionTags: ['河津町', '静岡県', '伊豆'],
+  storyTags: ['伝統製法', '地域連携'],
+  storyDescription: '河津町の味噌蔵が天然麹で長期熟成させた、48栄養素入りプレミアム味噌。',
 };
 
 // ---------------------------------------------------------------------------
@@ -601,6 +652,11 @@ const mvWasabi: ProductData = {
   proteinGrams: 1,
   chemicalReducedGrams: 12,
   mvtReward: 30,
+  producer: '伊豆わさび農園',
+  region: '静岡県 伊豆',
+  regionTags: ['伊豆', '静岡県'],
+  storyTags: ['地域連携', '限定生産'],
+  storyDescription: '伊豆の清流で育つ天然わさびを、限定数量で出荷する地域連携プロダクト。',
 };
 
 // ---------------------------------------------------------------------------
@@ -639,6 +695,11 @@ const mvMatchaLatte: ProductData = {
   proteinGrams: 3,
   chemicalReducedGrams: 14,
   mvtReward: 36,
+  producer: '静岡茶園',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['伝統製法', '地域連携'],
+  storyDescription: '静岡の老舗茶園による伝統石臼挽き抹茶を、48栄養素とブレンドしたラテミックス。',
 };
 
 // ---------------------------------------------------------------------------
@@ -677,6 +738,11 @@ const mvGreenSmoothie: ProductData = {
   proteinGrams: 4,
   chemicalReducedGrams: 18,
   mvtReward: 45,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['オーガニック'],
+  storyDescription: '静岡県のラボがオーガニック青菜と48栄養素をブレンドした、毎日のグリーンスムージー。',
 };
 
 // ---------------------------------------------------------------------------
@@ -715,6 +781,11 @@ const mvMatcha: ProductData = {
   proteinGrams: 3,
   chemicalReducedGrams: 15,
   mvtReward: 40,
+  producer: '静岡茶園',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['伝統製法', '地域連携'],
+  storyDescription: '静岡の老舗茶園が石臼挽きで仕上げた、48栄養素ブレンドの抹茶パウダー。',
 };
 
 // ---------------------------------------------------------------------------
@@ -753,6 +824,11 @@ const mvOlive: ProductData = {
   proteinGrams: 2,
   chemicalReducedGrams: 18,
   mvtReward: 38,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['オーガニック'],
+  storyDescription: '静岡で厳選したオーガニックオリーブを、48栄養素とブレンドしたエクストラバージンオイル。',
 };
 
 // ---------------------------------------------------------------------------
@@ -791,6 +867,11 @@ const mvDressing: ProductData = {
   proteinGrams: 2,
   chemicalReducedGrams: 14,
   mvtReward: 34,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['無添加'],
+  storyDescription: '静岡県のラボが厳選したオイルとビネガーをベースに作る、48栄養素入り無添加ドレッシング。',
 };
 
 // ---------------------------------------------------------------------------
@@ -867,6 +948,11 @@ const mvHandCream: ProductData = {
   proteinGrams: 0,
   chemicalReducedGrams: 26,
   mvtReward: 34,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['オーガニック', '無添加'],
+  storyDescription: '静岡県のラボが手肌を守るために開発した、オーガニック天然コラーゲン配合のハンドクリーム。',
 };
 
 // ---------------------------------------------------------------------------
@@ -905,6 +991,11 @@ const mvSuncare: ProductData = {
   proteinGrams: 0,
   chemicalReducedGrams: 30,
   mvtReward: 32,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['オーガニック', '無添加'],
+  storyDescription: '静岡県のラボが開発した、オーガニック植物由来成分100%の無添加サンケアジェル。',
 };
 
 // ---------------------------------------------------------------------------
@@ -943,6 +1034,11 @@ const mvBodyMist: ProductData = {
   proteinGrams: 0,
   chemicalReducedGrams: 24,
   mvtReward: 32,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['無添加'],
+  storyDescription: '静岡県のラボが開発した、天然栄養素配合の無添加ボディミスト。',
 };
 
 // ---------------------------------------------------------------------------
@@ -981,6 +1077,11 @@ const mvPonzu: ProductData = {
   proteinGrams: 2,
   chemicalReducedGrams: 16,
   mvtReward: 36,
+  producer: '河津醸造',
+  region: '静岡県 河津町',
+  regionTags: ['河津町', '静岡県', '伊豆'],
+  storyTags: ['地域連携', '伝統製法'],
+  storyDescription: '河津町の老舗醸造蔵が伝統製法で仕込んだ、48栄養素入り柑橘ポン酢。',
 };
 
 // ---------------------------------------------------------------------------
@@ -1095,6 +1196,11 @@ const mvLipBalm: ProductData = {
   proteinGrams: 0,
   chemicalReducedGrams: 18,
   mvtReward: 28,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['無添加'],
+  storyDescription: '静岡県のラボがふっくらした唇のために手作りする、天然コラーゲン配合の無添加リップバーム。',
 };
 
 // ---------------------------------------------------------------------------
@@ -1133,6 +1239,11 @@ const mvFaceMist: ProductData = {
   proteinGrams: 0,
   chemicalReducedGrams: 22,
   mvtReward: 32,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['無添加'],
+  storyDescription: '静岡県のラボが日中の保湿のために開発した、天然コラーゲン配合の無添加フェイスミスト。',
 };
 
 // ---------------------------------------------------------------------------
@@ -1171,6 +1282,11 @@ const mvHairOil: ProductData = {
   proteinGrams: 0,
   chemicalReducedGrams: 24,
   mvtReward: 32,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['オーガニック'],
+  storyDescription: '静岡県のラボが厳選したオーガニック植物オイルをブレンドした、髪のためのヘアオイル。',
 };
 
 // ---------------------------------------------------------------------------
@@ -1209,6 +1325,11 @@ const mvVinegar: ProductData = {
   proteinGrams: 1,
   chemicalReducedGrams: 15,
   mvtReward: 34,
+  producer: '河津醸造',
+  region: '静岡県 河津町',
+  regionTags: ['河津町', '静岡県', '伊豆'],
+  storyTags: ['伝統製法', '地域連携'],
+  storyDescription: '河津町の老舗醸造蔵が静置発酵で仕上げた、48栄養素入りのプレミアム米酢。',
 };
 
 // ---------------------------------------------------------------------------
@@ -1323,6 +1444,11 @@ const mvBathSalt: ProductData = {
   proteinGrams: 0,
   chemicalReducedGrams: 28,
   mvtReward: 34,
+  producer: '伊豆海塩工房',
+  region: '静岡県 伊豆',
+  regionTags: ['伊豆', '静岡県'],
+  storyTags: ['伝統製法', '地域連携'],
+  storyDescription: '伊豆の海塩工房がミネラル豊富な海塩に48栄養素を加えた、伝統製法のバスソルト。',
 };
 
 // ---------------------------------------------------------------------------
@@ -1437,6 +1563,11 @@ const mvHoney: ProductData = {
   proteinGrams: 1,
   chemicalReducedGrams: 10,
   mvtReward: 34,
+  producer: '伊豆養蜂園',
+  region: '静岡県 伊豆',
+  regionTags: ['伊豆', '静岡県'],
+  storyTags: ['地域連携', '限定生産'],
+  storyDescription: '伊豆の養蜂園が地域の花から集める、限定数量の48栄養素ブレンド蜂蜜。',
 };
 
 // ---------------------------------------------------------------------------
@@ -1475,6 +1606,11 @@ const mvGingerTea: ProductData = {
   proteinGrams: 2,
   chemicalReducedGrams: 12,
   mvtReward: 32,
+  producer: '静岡茶園',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['地域連携'],
+  storyDescription: '静岡の老舗茶園が国産生姜とブレンドした、48栄養素入りの体を温めるジンジャーティー。',
 };
 
 // ---------------------------------------------------------------------------
@@ -1513,6 +1649,11 @@ const mvManuka: ProductData = {
   proteinGrams: 2,
   chemicalReducedGrams: 16,
   mvtReward: 40,
+  producer: 'Mother Vegetable Lab',
+  region: '静岡県',
+  regionTags: ['静岡県'],
+  storyTags: ['限定生産'],
+  storyDescription: '静岡県のラボがニュージーランド産マヌカハニーに48栄養素を加えた、限定生産のプレミアムブレンド。',
 };
 
 // ---------------------------------------------------------------------------
@@ -1527,4 +1668,71 @@ export const allProducts: ProductData[] = [achieve, confidence, tilapia, mvSalt,
 
 export function getProductBySlug(slug: string): ProductData | undefined {
   return allProducts.find((p) => p.slug === slug);
+}
+
+// ----------------------------------------------------------------------
+// Home page adapter
+// ----------------------------------------------------------------------
+//
+// The home page <ProductsSection> historically inlined its own product
+// list. This adapter exposes the canonical `products` array in a shape
+// the home grid can render, so we no longer maintain two copies.
+
+export interface HomeProductCard {
+  id: string;
+  slug: string;
+  name: string;                  // localized (uses nameJa for ja, name for en/zh)
+  subtitle?: string;
+  tagline: string;               // localized
+  imageUrl: string;
+  videoUrl?: string;
+  features: string[];            // benefits, localized for now (en for non-ja)
+  priceUsd: string;              // formatted "$36.70"
+  priceJpy: string;              // already formatted
+  productLink: string;           // "/product/<slug>"
+  tier: 'regular' | 'product100';
+  category: 'food' | 'cosmetic' | 'pet';
+  subcategory?: 'seasoning' | 'supplement' | 'cosmetic' | 'fish';
+  subscriptionMonth?: number;
+  // Tag/story
+  producer?: string;
+  region?: string;
+  regionTags: string[];
+  storyTags: string[];
+  storyDescription?: string;
+  // Impact
+  mvtReward?: number;
+  co2SavedKg?: number;
+  proteinGrams?: number;
+  chemicalReducedGrams?: number;
+}
+
+export function getHomeProductCards(locale: string): HomeProductCard[] {
+  const isJa = locale === 'ja';
+  return products.map((p) => ({
+    id: p.slug, // historical home-page id used the slug-style key (e.g. "mv-salt")
+    slug: p.slug,
+    name: isJa ? (p.nameJa ?? p.name) : p.name,
+    subtitle: p.subtitle,
+    tagline: isJa ? (p.taglineJp || p.tagline) : p.tagline,
+    imageUrl: p.images?.[0] ?? '',
+    videoUrl: p.mainVideoUrl || undefined,
+    features: p.benefits ?? [],
+    priceUsd: `$${p.price.toFixed(2)}`,
+    priceJpy: p.priceJpy,
+    productLink: `/product/${p.slug}`,
+    tier: p.tier,
+    category: p.category,
+    subcategory: p.subcategory,
+    subscriptionMonth: p.subscriptionMonth,
+    producer: p.producer,
+    region: p.region,
+    regionTags: p.regionTags ?? [],
+    storyTags: p.storyTags ?? [],
+    storyDescription: p.storyDescription,
+    mvtReward: p.mvtReward,
+    co2SavedKg: p.co2SavedKg,
+    proteinGrams: p.proteinGrams,
+    chemicalReducedGrams: p.chemicalReducedGrams,
+  }));
 }
