@@ -68,8 +68,8 @@ export const metadata: Metadata = {
     images: ['/cdn/products_achieve_10001.png'],
   },
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
 };
 

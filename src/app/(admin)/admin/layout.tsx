@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 export const metadata: Metadata = {
   title: "Admin | Mother Vegetable",
   description: "Mother Vegetable administration dashboard",
+  robots: { index: false, follow: false },
 };
 
 export default function AdminRootLayout({
