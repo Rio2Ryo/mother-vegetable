@@ -91,7 +91,7 @@ export default function ProductsSection() {
           className="text-lg md:text-2xl font-bold text-center mb-4 md:mb-6"
           style={{ color: '#25c760' }}
         >
-          {isJa ? 'MV プロダクト100' : 'MV Product 100'}
+          MV Product 100
         </h3>
 
         {/* Subscription Plan Selector — preserved verbatim from previous implementation */}
