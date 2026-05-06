@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { useLocale } from 'next-intl';
+import { Search, X } from 'lucide-react';
 import { products, type ProductData } from '@/data/products';
 import { getStoredReferralCode } from '@/lib/affiliate';
 
@@ -80,6 +81,7 @@ export default function ProductsListingPage() {
   const isJa = locale === 'ja';
   const isZh = locale === 'zh';
   const [filter, setFilter] = useState<CategoryFilter>('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [hasReferral, setHasReferral] = useState(false);
 
   useEffect(() => {
@@ -90,9 +92,38 @@ export default function ProductsListingPage() {
 
   const t = (en: string, ja: string, zh: string) => (isJa ? ja : isZh ? zh : en);
 
-  const filteredProducts = filter === 'all'
-    ? products
-    : products.filter((p) => p.category === filter);
+  const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+
+  const filteredProducts = products.filter((product) => {
+    const matchesCategory = filter === 'all' || product.category === filter;
+    if (!matchesCategory) return false;
+
+    if (!normalizedSearchQuery) return true;
+
+    const searchableText = [
+      product.name,
+      product.nameJa,
+      product.fullName,
+      product.slug,
+      product.description,
+      product.descriptionJa,
+      product.tagline,
+      product.taglineJp,
+      product.subtitle,
+      product.sku,
+      product.category,
+      product.tier,
+      product.producer,
+      product.region,
+      ...(product.regionTags ?? []),
+      ...(product.storyTags ?? []),
+    ]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
+
+    return searchableText.includes(normalizedSearchQuery);
+  });
 
   const regularProducts = filteredProducts.filter((p) => p.tier === 'regular');
   const product100Products = filteredProducts.filter((p) => p.tier === 'product100');
@@ -111,19 +142,66 @@ export default function ProductsListingPage() {
   return (
     <main className="bg-black text-white min-h-screen">
       {/* Hero */}
-      <section className="relative py-20 px-6 text-center overflow-hidden">
+      <section className="relative py-16 md:py-20 px-6 text-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(37,199,96,0.08)] to-transparent pointer-events-none" />
-        <div className="relative max-w-3xl mx-auto">
+        <div className="relative max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
             {t('Products', '製品一覧', '产品列表')}
           </h1>
-          <p className="text-lg text-gray-300">
+          <p className="text-base md:text-lg text-gray-300 mb-8">
             {t(
-              'Discover our complete range of health and beauty products.',
-              '健康と美容の製品ラインナップをご覧ください。',
-              '探索我们完整的健康与美容产品系列。',
+              'Search our growing lineup of health and beauty products.',
+              '健康と美容の製品ラインナップを検索できます。',
+              '搜索我们不断扩展的健康与美容产品系列。',
             )}
           </p>
+
+          <form
+            className="mx-auto max-w-3xl"
+            role="search"
+            onSubmit={(event) => event.preventDefault()}
+          >
+            <div className="flex items-center gap-2 rounded-full border-2 border-[#25C760]/70 bg-white p-2 shadow-[0_18px_60px_rgba(37,199,96,0.25)] transition focus-within:border-[#25C760] focus-within:shadow-[0_22px_70px_rgba(37,199,96,0.35)]">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25C760] text-black md:h-14 md:w-14">
+                <Search className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
+              </div>
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder={t(
+                  'Search products, categories, ingredients...',
+                  '商品名・カテゴリ・素材で検索',
+                  '搜索商品、分类、原料...',
+                )}
+                aria-label={t('Search products', '商品を検索', '搜索商品')}
+                className="h-12 min-w-0 flex-1 bg-transparent px-1 text-base font-medium text-black outline-none placeholder:text-gray-500 md:h-14 md:text-lg"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-black"
+                  aria-label={t('Clear search', '検索をクリア', '清除搜索')}
+                >
+                  <X className="h-5 w-5" aria-hidden="true" />
+                </button>
+              )}
+              <button
+                type="submit"
+                className="hidden rounded-full bg-[#25C760] px-6 py-3 text-sm font-bold text-black transition hover:bg-[#2ee873] md:block"
+              >
+                {t('Search', '検索', '搜索')}
+              </button>
+            </div>
+            <p className="mt-3 text-sm text-gray-400">
+              {t(
+                `${filteredProducts.length} products found`,
+                `${filteredProducts.length}件の商品が見つかりました`,
+                `找到${filteredProducts.length}件商品`,
+              )}
+            </p>
+          </form>
         </div>
       </section>
 
