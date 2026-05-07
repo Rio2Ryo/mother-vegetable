@@ -59,6 +59,7 @@ export interface ProductData {
   regionTags?: string[];        // e.g. ["河津町", "静岡県", "伊豆"]
   storyTags?: string[];         // e.g. ["漁協連携", "地域連携"]
   storyDescription?: string;    // 1-2 sentence story shown in tooltip/modal
+  proposerTags?: string[];      // e.g. ["マザーベジタブル社"] — who proposed/developed this product
 }
 
 // ---------------------------------------------------------------------------
@@ -136,6 +137,7 @@ const achieve: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['オーガニック', '無添加'],
   storyDescription: '静岡県のマザベジラボで開発した、48栄養素入り無添加サプリメント。',
+  proposerTags: ['マザーベジタブル社'],
   drinkItems: [
     { label: "Beer", image: "/Images/Assets/achieve/mazekomu/beer.png" },
     { label: "Cola", image: "/Images/Assets/achieve/mazekomu/cola.png" },
@@ -222,6 +224,7 @@ const confidence: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['オーガニック', '無添加'],
   storyDescription: 'すべての肌タイプに寄り添う、無添加・天然由来のスキンケアジェル。',
+  proposerTags: ['マザーベジタブル社'],
   cosmeticItems: [
     {
       label: "Shampoo",
@@ -321,6 +324,7 @@ const tilapia: ProductData = {
   regionTags: ['河津町', '静岡県', '伊豆'],
   storyTags: ['漁協連携', '地域連携'],
   storyDescription: '河津町漁協と連携し、地域の海で育てた48栄養素入りのマザベジフィッシュ。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -370,6 +374,7 @@ const mvSalt: ProductData = {
   regionTags: ['伊豆', '静岡県'],
   storyTags: ['伝統製法', '地域連携'],
   storyDescription: '伊豆の海水を伝統の平釜製法で炊き上げた、48栄養素入りのミネラル塩。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -419,6 +424,7 @@ const mvSoySauce: ProductData = {
   regionTags: ['河津町', '静岡県', '伊豆'],
   storyTags: ['伝統製法', '地域連携'],
   storyDescription: '河津町の老舗醸造蔵による、伝統の杉樽製法で仕上げた48栄養素入り醤油。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -467,6 +473,7 @@ const mvToner: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['無添加', 'オーガニック'],
   storyDescription: '静岡県のラボで開発した、天然コラーゲン配合の無添加化粧水。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -519,6 +526,7 @@ const mvBalm: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['無添加', 'オーガニック'],
   storyDescription: '静岡県のラボで丁寧に練り上げた、天然コラーゲン配合のラグジュアリーバウム。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -571,6 +579,7 @@ const mvSoap: ProductData = {
   regionTags: ['伊豆', '静岡県'],
   storyTags: ['伝統製法', 'オーガニック'],
   storyDescription: '伊豆のコスメ工房が伝統的なコールドプロセス製法で手作りする、栄養素配合の石鹸。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -614,6 +623,7 @@ const mvMiso: ProductData = {
   regionTags: ['河津町', '静岡県', '伊豆'],
   storyTags: ['伝統製法', '地域連携'],
   storyDescription: '河津町の味噌蔵が天然麹で長期熟成させた、48栄養素入りプレミアム味噌。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -657,6 +667,7 @@ const mvWasabi: ProductData = {
   regionTags: ['伊豆', '静岡県'],
   storyTags: ['地域連携', '限定生産'],
   storyDescription: '伊豆の清流で育つ天然わさびを、限定数量で出荷する地域連携プロダクト。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -700,6 +711,7 @@ const mvMatchaLatte: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['伝統製法', '地域連携'],
   storyDescription: '静岡の老舗茶園による伝統石臼挽き抹茶を、48栄養素とブレンドしたラテミックス。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -786,6 +798,7 @@ const mvMatcha: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['伝統製法', '地域連携'],
   storyDescription: '静岡の老舗茶園が石臼挽きで仕上げた、48栄養素ブレンドの抹茶パウダー。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -829,6 +842,7 @@ const mvOlive: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['オーガニック'],
   storyDescription: '静岡で厳選したオーガニックオリーブを、48栄養素とブレンドしたエクストラバージンオイル。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -872,6 +886,7 @@ const mvDressing: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['無添加'],
   storyDescription: '静岡県のラボが厳選したオイルとビネガーをベースに作る、48栄養素入り無添加ドレッシング。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -953,6 +968,7 @@ const mvHandCream: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['オーガニック', '無添加'],
   storyDescription: '静岡県のラボが手肌を守るために開発した、オーガニック天然コラーゲン配合のハンドクリーム。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -996,6 +1012,7 @@ const mvSuncare: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['オーガニック', '無添加'],
   storyDescription: '静岡県のラボが開発した、オーガニック植物由来成分100%の無添加サンケアジェル。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1039,6 +1056,7 @@ const mvBodyMist: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['無添加'],
   storyDescription: '静岡県のラボが開発した、天然栄養素配合の無添加ボディミスト。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1082,6 +1100,7 @@ const mvPonzu: ProductData = {
   regionTags: ['河津町', '静岡県', '伊豆'],
   storyTags: ['地域連携', '伝統製法'],
   storyDescription: '河津町の老舗醸造蔵が伝統製法で仕込んだ、48栄養素入り柑橘ポン酢。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1201,6 +1220,7 @@ const mvLipBalm: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['無添加'],
   storyDescription: '静岡県のラボがふっくらした唇のために手作りする、天然コラーゲン配合の無添加リップバーム。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1244,6 +1264,7 @@ const mvFaceMist: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['無添加'],
   storyDescription: '静岡県のラボが日中の保湿のために開発した、天然コラーゲン配合の無添加フェイスミスト。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1287,6 +1308,7 @@ const mvHairOil: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['オーガニック'],
   storyDescription: '静岡県のラボが厳選したオーガニック植物オイルをブレンドした、髪のためのヘアオイル。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1330,6 +1352,7 @@ const mvVinegar: ProductData = {
   regionTags: ['河津町', '静岡県', '伊豆'],
   storyTags: ['伝統製法', '地域連携'],
   storyDescription: '河津町の老舗醸造蔵が静置発酵で仕上げた、48栄養素入りのプレミアム米酢。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1449,6 +1472,7 @@ const mvBathSalt: ProductData = {
   regionTags: ['伊豆', '静岡県'],
   storyTags: ['伝統製法', '地域連携'],
   storyDescription: '伊豆の海塩工房がミネラル豊富な海塩に48栄養素を加えた、伝統製法のバスソルト。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1568,6 +1592,7 @@ const mvHoney: ProductData = {
   regionTags: ['伊豆', '静岡県'],
   storyTags: ['地域連携', '限定生産'],
   storyDescription: '伊豆の養蜂園が地域の花から集める、限定数量の48栄養素ブレンド蜂蜜。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1611,6 +1636,7 @@ const mvGingerTea: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['地域連携'],
   storyDescription: '静岡の老舗茶園が国産生姜とブレンドした、48栄養素入りの体を温めるジンジャーティー。',
+  proposerTags: ['マザーベジタブル社'],
 };
 
 // ---------------------------------------------------------------------------

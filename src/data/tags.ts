@@ -33,3 +33,22 @@ export type StoryTagKey = StoryTagDef['key'];
 export function getStoryTagDef(key: string): StoryTagDef | undefined {
   return STORY_TAGS.find((t) => t.key === key);
 }
+
+export interface ProposerTagDef {
+  key: string;
+  labelJa: string;
+  labelEn: string;
+  icon: string;
+  faceImage?: string; // path to face/avatar image under /public
+}
+
+export const PROPOSER_TAGS: ProposerTagDef[] = [
+  { key: 'マザーベジタブル社', labelJa: 'マザーベジタブル社', labelEn: 'Mother Vegetable Co.', icon: '🌱', faceImage: '/cdn/mv-search-character.png' },
+  { key: 'アスリート',         labelJa: 'アスリート',           labelEn: 'Athlete',                icon: '🏃' },
+  { key: '小学生',             labelJa: '小学生',               labelEn: 'Elementary Student',     icon: '📚' },
+  { key: '河津住民',           labelJa: '河津住民',             labelEn: 'Kawazu Resident',        icon: '🏘️' },
+];
+
+export function getProposerTagDef(key: string): ProposerTagDef | undefined {
+  return PROPOSER_TAGS.find((t) => t.key === key);
+}

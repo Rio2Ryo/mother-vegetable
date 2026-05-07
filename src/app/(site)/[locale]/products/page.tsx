@@ -4,9 +4,9 @@ import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { useLocale } from 'next-intl';
-import { Search, X, MapPin, Tag, SlidersHorizontal, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, X, MapPin, Tag, SlidersHorizontal, ChevronDown, ChevronUp, Users } from 'lucide-react';
 import { products, type ProductData } from '@/data/products';
-import { STORY_TAGS } from '@/data/tags';
+import { STORY_TAGS, PROPOSER_TAGS, getProposerTagDef } from '@/data/tags';
 import { getStoredReferralCode } from '@/lib/affiliate';
 
 const REFERRAL_DISCOUNT_RATE = 0.10;
@@ -61,6 +61,7 @@ interface FilterState {
   category: CategoryFilter;
   regionTags: Set<string>;
   storyTags: Set<string>;
+  proposerTags: Set<string>;
   searchQuery: string;
 }
 
@@ -84,12 +85,14 @@ export default function ProductsListingPage() {
     category: 'all',
     regionTags: new Set(),
     storyTags: new Set(),
+    proposerTags: new Set(),
     searchQuery: '',
   });
   const [hasReferral, setHasReferral] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [regionExpanded, setRegionExpanded] = useState(true);
   const [storyExpanded, setStoryExpanded] = useState(true);
+  const [proposerExpanded, setProposerExpanded] = useState(true);
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -112,6 +115,11 @@ export default function ProductsListingPage() {
         const hit = (p.storyTags ?? []).some((s) => filter.storyTags.has(s));
         if (!hit) return false;
       }
+      // Proposer tag filter (OR within selected)
+      if (filter.proposerTags.size > 0) {
+        const hit = (p.proposerTags ?? []).some((pt) => filter.proposerTags.has(pt));
+        if (!hit) return false;
+      }
       // Full-text search
       if (q) {
         const text = [
@@ -123,6 +131,7 @@ export default function ProductsListingPage() {
           p.storyDescription,
           ...(p.regionTags ?? []),
           ...(p.storyTags ?? []),
+          ...(p.proposerTags ?? []),
         ].filter(Boolean).join(' ').toLowerCase();
         if (!text.includes(q)) return false;
       }
@@ -136,10 +145,11 @@ export default function ProductsListingPage() {
   const activeFilterCount =
     (filter.category !== 'all' ? 1 : 0) +
     filter.regionTags.size +
-    filter.storyTags.size;
+    filter.storyTags.size +
+    filter.proposerTags.size;
 
   const clearAllFilters = () =>
-    setFilter((f) => ({ ...f, category: 'all', regionTags: new Set(), storyTags: new Set() }));
+    setFilter((f) => ({ ...f, category: 'all', regionTags: new Set(), storyTags: new Set(), proposerTags: new Set() }));
 
   const categoryButtons: { key: CategoryFilter; ja: string; en: string; zh: string }[] = [
     { key: 'all', ja: 'すべて', en: 'All', zh: '全部' },
@@ -149,72 +159,56 @@ export default function ProductsListingPage() {
 
   return (
     <div className="bg-black text-white min-h-screen">
-      {/* ── Hero / Search bar ─────────────────────────────────────────── */}
-      <section className="relative py-12 md:py-16 px-6 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(37,199,96,0.08)] to-transparent pointer-events-none" />
-        <div className="relative max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight">
+      {/* ── Compact sticky header ─────────────────────────────────────── */}
+      <header className="sticky top-0 z-30 bg-black/90 backdrop-blur-md border-b border-white/5 px-4">
+        <div className="max-w-7xl mx-auto h-16 flex items-center gap-4">
+          {/* Left: title */}
+          <span className="shrink-0 text-xs font-semibold text-gray-400 hidden sm:block">
             {t('Products', '製品一覧', '产品列表')}
-          </h1>
-          <p className="text-sm md:text-base text-gray-400 mb-6">
-            {t(
-              'Find products by story, region, and maker.',
-              '作り手の物語・地域・思いから、あなたの商品に出会う。',
-              '通过故事、地区和制造商找到您的产品。',
-            )}
-          </p>
+          </span>
 
+          {/* Center: search input */}
           <form
-            className="mx-auto max-w-3xl"
+            className="flex-1 flex items-center"
             role="search"
             onSubmit={(e) => e.preventDefault()}
           >
-            <div className="flex items-center gap-2 rounded-full border-2 border-[#25C760]/70 bg-white p-2 shadow-[0_18px_60px_rgba(37,199,96,0.25)] transition focus-within:border-[#25C760] focus-within:shadow-[0_22px_70px_rgba(37,199,96,0.35)]">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25C760] text-black md:h-14 md:w-14">
-                <Search className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
-              </div>
+            <div className="relative w-full max-w-md mx-auto flex items-center">
+              <Search className="absolute left-3 h-4 w-4 text-[#25C760]/70 pointer-events-none" aria-hidden="true" />
               <input
                 type="search"
                 value={filter.searchQuery}
                 onChange={(e) => setFilter((f) => ({ ...f, searchQuery: e.target.value }))}
                 placeholder={t(
-                  'Search by product, maker, region, story…',
-                  '商品名・作り手・地域・ストーリーで検索',
-                  '搜索商品、制造商、地区、故事…',
+                  'Search products…',
+                  '商品名・地域・ストーリーで検索',
+                  '搜索商品…',
                 )}
                 aria-label={t('Search products', '商品を検索', '搜索商品')}
-                className="h-12 min-w-0 flex-1 bg-transparent px-1 text-base font-medium text-black outline-none placeholder:text-gray-500 md:h-14 md:text-lg"
+                className="w-full h-9 pl-9 pr-8 bg-white/5 border border-[#25C760]/40 rounded-full text-sm text-white placeholder:text-gray-500 outline-none focus:border-[#25C760] focus:bg-white/8 transition"
               />
               {filter.searchQuery && (
                 <button
                   type="button"
                   onClick={() => setFilter((f) => ({ ...f, searchQuery: '' }))}
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-black"
+                  className="absolute right-2 flex items-center justify-center rounded-full text-gray-500 hover:text-white transition"
                   aria-label={t('Clear search', '検索をクリア', '清除搜索')}
                 >
-                  <X className="h-5 w-5" aria-hidden="true" />
+                  <X className="h-4 w-4" aria-hidden="true" />
                 </button>
               )}
-              <button
-                type="submit"
-                className="hidden rounded-full bg-[#25C760] px-6 py-3 text-sm font-bold text-black transition hover:bg-[#2ee873] md:block"
-              >
-                {t('Search', '検索', '搜索')}
-              </button>
             </div>
-            <p className="mt-2 text-sm text-gray-500">
-              {t(
-                `${filteredProducts.length} products found`,
-                `${filteredProducts.length}件の商品が見つかりました`,
-                `找到${filteredProducts.length}件商品`,
-              )}
-            </p>
           </form>
+
+          {/* Right: count badge */}
+          <span className="shrink-0 text-xs font-semibold text-[#25C760] bg-[#25C760]/15 border border-[#25C760]/40 rounded-full px-3 py-1 whitespace-nowrap">
+            {filteredProducts.length}{t(' items', '件', '件')}
+          </span>
         </div>
-      </section>
+      </header>
 
       {/* ── Body: Sidebar + Grid ───────────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-4 pb-20 lg:flex lg:gap-8">
+      <div className="max-w-7xl mx-auto px-4 pt-4 pb-20 lg:flex lg:gap-8">
 
         {/* Mobile: filter toggle button */}
         <div className="lg:hidden flex items-center justify-between mb-4">
@@ -246,7 +240,7 @@ export default function ProductsListingPage() {
             sidebarOpen ? 'block' : 'hidden'
           } lg:block lg:w-56 xl:w-64 shrink-0 mb-6 lg:mb-0`}
         >
-          <div className="sticky top-4 space-y-6">
+          <div className="sticky top-20 space-y-6">
             {/* Clear filters (desktop) */}
             {activeFilterCount > 0 && (
               <div className="hidden lg:flex items-center justify-between">
@@ -282,6 +276,54 @@ export default function ProductsListingPage() {
                   </button>
                 ))}
               </div>
+            </div>
+
+            {/* Proposer tags */}
+            <div>
+              <button
+                className="w-full flex items-center justify-between text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2"
+                onClick={() => setProposerExpanded((v) => !v)}
+              >
+                <span className="flex items-center gap-1">
+                  <Users className="h-3 w-3" />
+                  {t('Proposer', '発案者', '提案者')}
+                </span>
+                {proposerExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+              </button>
+              {proposerExpanded && (
+                <div className="space-y-1">
+                  {PROPOSER_TAGS.map((def) => (
+                    <label key={def.key} className="flex items-center gap-2 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={filter.proposerTags.has(def.key)}
+                        onChange={() =>
+                          setFilter((f) => ({ ...f, proposerTags: toggleSet(f.proposerTags, def.key) }))
+                        }
+                        className="accent-[#25C760] h-3.5 w-3.5 rounded"
+                      />
+                      <span
+                        className={`text-sm transition flex items-center gap-1.5 ${
+                          filter.proposerTags.has(def.key) ? 'text-[#25C760] font-medium' : 'text-gray-300 group-hover:text-white'
+                        }`}
+                      >
+                        {def.faceImage ? (
+                          <Image
+                            src={def.faceImage}
+                            alt={def.labelJa}
+                            width={18}
+                            height={18}
+                            className="rounded-full object-cover"
+                          />
+                        ) : (
+                          <span className="text-xs">{def.icon}</span>
+                        )}
+                        {isJa ? def.labelJa : def.labelEn}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Region tags */}
@@ -381,6 +423,16 @@ export default function ProductsListingPage() {
                   onRemove={() => setFilter((f) => ({ ...f, category: 'all' }))}
                 />
               )}
+              {[...filter.proposerTags].map((key) => {
+                const def = getProposerTagDef(key);
+                return (
+                  <FilterChip
+                    key={key}
+                    label={def ? `${def.icon} ${isJa ? def.labelJa : def.labelEn}` : key}
+                    onRemove={() => setFilter((f) => ({ ...f, proposerTags: toggleSet(f.proposerTags, key) }))}
+                  />
+                );
+              })}
               {[...filter.regionTags].map((tag) => (
                 <FilterChip
                   key={tag}
@@ -510,42 +562,76 @@ function ProductCard({
   onRegionClick: (tag: string) => void;
 }) {
   const displayName = isJa && product.nameJa ? product.nameJa : product.name;
-  const priceJpy = product.priceJpy;
   const productImage = TOP_PAGE_PRODUCT_IMAGES[product.slug] || product.images[0] || '/Images/Assets/General/logo.png';
+
+  // Resolve proposer info for the face strip
+  const firstProposerKey = product.proposerTags?.[0];
+  const proposerDef = firstProposerKey ? getProposerTagDef(firstProposerKey) : undefined;
 
   return (
     <div className="flex flex-col border border-[rgba(37,199,96,0.25)] rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.02)] hover:border-[#25C760]/60 hover:bg-[rgba(37,199,96,0.04)] transition-all duration-300 group">
-      {/* Image */}
-      <Link href={`/product/${product.slug}`} className="relative block w-full aspect-[4/3] bg-black/50 overflow-hidden">
-        {product.slug === 'achieve' ? (
-          <video
-            src="/new_achieve_video.mp4"
-            autoPlay loop muted playsInline
-            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-          />
-        ) : product.slug === 'confidence' ? (
-          <video
-            src="/new_confidence_video.mp4"
-            autoPlay loop muted playsInline
-            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
-          />
-        ) : (
-          <Image
-            src={productImage}
-            alt={product.fullName}
-            fill
-            className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
-          />
-        )}
-        {/* Category badge */}
-        <span className={`absolute top-3 left-3 px-2.5 py-1 text-xs font-bold rounded-full border ${getCategoryBadgeColor(product.category)}`}>
-          {getCategoryLabel(product.category, locale)}
-        </span>
-        {/* Story tag badge (first tag) */}
-        {product.storyTags?.[0] && (
-          <span className="absolute top-3 right-3 px-2 py-1 text-xs rounded-full bg-black/70 text-gray-300 border border-white/10 backdrop-blur-sm">
-            {getStoryTagIcon(product.storyTags[0])}
+      {/* Image block (2-tier) */}
+      <Link href={`/product/${product.slug}`} className="block w-full bg-black/50 overflow-hidden">
+        {/* Upper tier: product image / video — aspect-[4/3] */}
+        <div className="relative w-full aspect-[4/3] overflow-hidden">
+          {product.slug === 'achieve' ? (
+            <video
+              src="/new_achieve_video.mp4"
+              autoPlay loop muted playsInline
+              className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+            />
+          ) : product.slug === 'confidence' ? (
+            <video
+              src="/new_confidence_video.mp4"
+              autoPlay loop muted playsInline
+              className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+            />
+          ) : (
+            <Image
+              src={productImage}
+              alt={product.fullName}
+              fill
+              className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+            />
+          )}
+          {/* Category badge */}
+          <span className={`absolute top-3 left-3 px-2.5 py-1 text-xs font-bold rounded-full border ${getCategoryBadgeColor(product.category)}`}>
+            {getCategoryLabel(product.category, locale)}
           </span>
+          {/* Story tag badge (first tag) */}
+          {product.storyTags?.[0] && (
+            <span className="absolute top-3 right-3 px-2 py-1 text-xs rounded-full bg-black/70 text-gray-300 border border-white/10 backdrop-blur-sm">
+              {getStoryTagIcon(product.storyTags[0])}
+            </span>
+          )}
+        </div>
+
+        {/* Lower tier: proposer face strip — ~64px */}
+        {proposerDef && (
+          <div className="flex items-center gap-2.5 px-3 bg-black/70 h-16">
+            {proposerDef.faceImage ? (
+              <div className="relative h-8 w-8 shrink-0 rounded-full overflow-hidden border border-[#25C760]/40">
+                <Image
+                  src={proposerDef.faceImage}
+                  alt={proposerDef.labelJa}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-base border border-white/15">
+                {proposerDef.icon}
+              </span>
+            )}
+            <div className="min-w-0">
+              <p className="text-[10px] text-gray-500 leading-none mb-0.5">
+                {t('Proposer', '発案者', '提案者')}
+              </p>
+              <p className="text-xs font-semibold text-[#25C760] truncate">
+                {isJa ? proposerDef.labelJa : proposerDef.labelEn}
+              </p>
+            </div>
+          </div>
         )}
       </Link>
 

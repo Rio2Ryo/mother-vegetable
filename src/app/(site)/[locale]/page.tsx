@@ -1,46 +1,30 @@
-import { Suspense } from 'react';
 import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
-import HeroSection from '@/components/home/HeroSection';
-import ProductsSection from '@/components/home/ProductsSection';
-import ProductsSkeleton from '@/components/home/ProductsSkeleton';
-import NewsSection from '@/components/home/NewsSection';
-import JackpotMeter from '@/components/home/JackpotMeter';
+import LpHeroSection from '@/components/home/lp/LpHeroSection';
+import LpAboutSection from '@/components/home/lp/LpAboutSection';
+import LpProductsSection from '@/components/home/lp/LpProductsSection';
+import LpStorySection from '@/components/home/lp/LpStorySection';
+import LpCommerceSection from '@/components/home/lp/LpCommerceSection';
+import LpOwnerFlowSection from '@/components/home/lp/LpOwnerFlowSection';
+import LpVisionSection from '@/components/home/lp/LpVisionSection';
 
 export const metadata: Metadata = {
-  title: 'Mother Vegetable - Natural Health Products',
-  description:
-    'Discover Mother Vegetable — a complete product line delivering 48 essential nutrients from nature. Food supplements, cosmetics, and pet health products for your whole family.',
-  openGraph: {
-    title: 'Mother Vegetable - Natural Health Products',
-    description:
-      'Discover Mother Vegetable — a complete product line delivering 48 essential nutrients from nature. Food supplements, cosmetics, and pet health products for your whole family.',
-  },
+  title: 'Mother Vegetable Project | 生産者の想い×日本の魅力×地球最古の生命の力',
+  description: '地球最古の生命力と人の想いから生まれるMother Vegetableプロジェクト。',
 };
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   return (
-    <>
-      <HeroSection />
-      <section className="bg-black py-12 md:py-24">
-        <div className="max-w-[1500px] mx-auto px-5">
-          <Suspense fallback={<ProductsSkeleton />}>
-            <ProductsSection />
-          </Suspense>
-        </div>
-      </section>
-      <section className="bg-black py-12 md:py-24">
-        <div className="max-w-3xl mx-auto px-5">
-          <JackpotMeter />
-        </div>
-      </section>
-      <section className="bg-black py-12 md:py-24">
-        <div className="max-w-[1500px] mx-auto px-5">
-          <NewsSection />
-        </div>
-      </section>
-    </>
+    <main>
+      <LpHeroSection />
+      <LpAboutSection />
+      <LpProductsSection />
+      <LpStorySection />
+      <LpCommerceSection />
+      <LpOwnerFlowSection />
+      <LpVisionSection />
+    </main>
   );
 }
