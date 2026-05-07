@@ -605,9 +605,9 @@ function ProductCard({
   const proposerFaceImage = proposerDef?.faceImage ?? defaultProposerDef?.faceImage;
 
   return (
-    <div className="flex flex-row sm:flex-col border border-[rgba(37,199,96,0.25)] rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.02)] hover:border-[#25C760]/60 hover:bg-[rgba(37,199,96,0.04)] transition-all duration-300 group">
+    <div className="flex flex-row sm:flex-col border-x-0 border-t-0 border-b border-white/10 sm:border sm:border-[rgba(37,199,96,0.25)] rounded-none sm:rounded-2xl overflow-hidden bg-transparent sm:bg-[rgba(255,255,255,0.02)] hover:border-[#25C760]/60 hover:bg-[rgba(37,199,96,0.04)] transition-all duration-300 group">
       {/* Image block (Amazon-like mobile: image left, details right) */}
-      <div className="w-[44%] sm:w-full shrink-0 bg-black/50 overflow-hidden">
+      <div className="w-[43%] sm:w-full shrink-0 bg-black/40 sm:bg-black/50 overflow-hidden">
       <Link href={`/product/${product.slug}`} className="block w-full overflow-hidden">
         {/* Upper tier: product image / video — taller on mobile, 4:3 on desktop */}
         <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] overflow-hidden">
@@ -651,7 +651,7 @@ function ProductCard({
           <button
             type="button"
             onClick={() => onProposerClick(proposerKey)}
-            className="flex w-full flex-col items-center justify-center gap-1 px-2 py-2 bg-black/70 min-h-20 hover:bg-[#25C760]/10 transition text-center"
+            className="flex w-full flex-col items-center justify-center gap-1 px-1.5 sm:px-2 py-2 bg-black/70 min-h-16 sm:min-h-20 hover:bg-[#25C760]/10 transition text-center"
             aria-label={`${isJa ? proposerDef.labelJa : proposerDef.labelEn} ${t('products', 'の商品で絞り込む', 'products')}`}
           >
             {proposerFaceImage ? (
@@ -681,23 +681,14 @@ function ProductCard({
       </div>
 
       {/* Info */}
-      <div className="flex flex-col flex-1 min-w-0 p-2.5 sm:p-4 gap-2 sm:gap-3">
-        {/* Name + main tag */}
-        <div className="flex items-start justify-between gap-2">
+      <div className="flex flex-col flex-1 min-w-0 px-3 py-2.5 sm:p-4 gap-1.5 sm:gap-3">
+        {/* Name */}
+        <div className="flex items-start gap-2">
           <Link href={`/product/${product.slug}`} className="min-w-0 no-underline">
-            <h2 className="text-white font-bold text-sm sm:text-base leading-snug group-hover:text-[#25C760] transition-colors duration-300 line-clamp-2 sm:line-clamp-1">
+            <h2 className="text-white font-medium sm:font-bold text-[13px] sm:text-base leading-snug group-hover:text-[#25C760] transition-colors duration-300 line-clamp-3 sm:line-clamp-1">
               {displayName}
             </h2>
           </Link>
-          {mainStoryTag && (
-            <button
-              type="button"
-              onClick={() => onTagClick(mainStoryTag)}
-              className="shrink-0 max-w-[45%] truncate rounded-full bg-[#25C760]/10 px-2 py-0.5 text-[10px] sm:text-[11px] font-medium text-[#25C760] border border-[#25C760]/25 hover:bg-[#25C760]/20 transition"
-            >
-              {getStoryTagLabel(mainStoryTag, isJa)}
-            </button>
-          )}
         </div>
 
         {/* Producer + Region */}
@@ -714,14 +705,23 @@ function ProductCard({
 
         {/* Story description */}
         {product.storyDescription && (
-          <p className="text-[11px] sm:text-xs text-gray-400 leading-relaxed line-clamp-2">
+          <p className="text-[10px] sm:text-xs text-gray-400 leading-relaxed line-clamp-2">
             {product.storyDescription}
           </p>
         )}
 
         {/* Story + region tags */}
-        {(secondaryStoryTags.length > 0 || (product.regionTags?.length ?? 0) > 0) && (
+        {(mainStoryTag || secondaryStoryTags.length > 0 || (product.regionTags?.length ?? 0) > 0) && (
           <div className="flex flex-wrap gap-1.5">
+            {mainStoryTag && (
+              <button
+                type="button"
+                onClick={(e) => { e.preventDefault(); onTagClick(mainStoryTag); }}
+                className="px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-medium bg-[#25C760]/15 text-[#25C760] border border-[#25C760]/35 hover:bg-[#25C760]/25 transition cursor-pointer"
+              >
+                {getStoryTagLabel(mainStoryTag, isJa)}
+              </button>
+            )}
             {secondaryStoryTags.map((tag) => (
               <button
                 key={tag}
@@ -746,11 +746,11 @@ function ProductCard({
         )}
 
         {/* Price + CTA */}
-        <div className="mt-1 sm:mt-auto flex flex-col items-start gap-2 pt-2 border-t border-white/5">
+        <div className="mt-1 flex flex-col items-start gap-1.5 sm:gap-2 pt-1 sm:pt-2 sm:border-t sm:border-white/5">
           <PriceDisplay product={product} isJa={isJa} hasReferral={hasReferral} />
           <Link
             href={`/product/${product.slug}`}
-            className="inline-flex w-full sm:w-auto justify-center rounded-full bg-[#25C760] text-black text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-2 hover:bg-[#2ee873] transition no-underline"
+            className="inline-flex w-full sm:w-auto justify-center rounded-full bg-[#25C760] text-black text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 hover:bg-[#2ee873] transition no-underline"
           >
             {t('Details', '詳細', '详情')}
           </Link>
@@ -778,12 +778,12 @@ function PriceDisplay({
       return (
         <div className="flex items-baseline gap-1.5 flex-wrap">
           <span className="line-through text-gray-600 text-xs">{priceJpy}</span>
-          <span className="text-[#25C760] font-bold text-sm">{discounted}</span>
+          <span className="text-[#25C760] font-bold text-lg sm:text-sm leading-none">{discounted}</span>
           <span className="text-[10px] font-semibold text-[#25C760] bg-[#25C760]/15 border border-[#25C760] rounded px-1.5 py-0.5">10%OFF</span>
         </div>
       );
     }
-    return <span className="text-[#25C760] font-bold text-sm">{priceJpy}</span>;
+    return <span className="text-[#25C760] font-bold text-lg sm:text-sm leading-none">{priceJpy}</span>;
   }
   // non-JA
   if (hasReferral) {
@@ -791,14 +791,14 @@ function PriceDisplay({
     return (
       <div className="flex items-baseline gap-1.5 flex-wrap">
         <span className="line-through text-gray-600 text-xs">USD {product.price.toFixed(2)}</span>
-        <span className="text-[#25C760] font-bold text-sm">USD {discounted}</span>
+        <span className="text-[#25C760] font-bold text-lg sm:text-sm leading-none">USD {discounted}</span>
         <span className="text-[10px] font-semibold text-[#25C760] bg-[#25C760]/15 border border-[#25C760] rounded px-1.5 py-0.5">10%OFF</span>
       </div>
     );
   }
   return (
     <div className="flex items-baseline gap-1">
-      <span className="text-[#25C760] font-bold text-sm">USD {product.price.toFixed(2)}</span>
+      <span className="text-[#25C760] font-bold text-lg sm:text-sm leading-none">USD {product.price.toFixed(2)}</span>
       {priceJpy && <span className="text-gray-600 text-xs">({priceJpy})</span>}
     </div>
   );
