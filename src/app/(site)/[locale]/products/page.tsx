@@ -38,6 +38,31 @@ const TOP_PAGE_PRODUCT_IMAGES: Record<string, string> = {
   'mv-honey': '/cdn/mv_honey_top.png',
 };
 
+const MOBILE_PRODUCT_IMAGES: Record<string, string> = {
+  tilapia: '/cdn/mobile-cards/tilapia.webp',
+  'mv-salt': '/cdn/mobile-cards/mv-salt.webp',
+  'mv-soy-sauce': '/cdn/mobile-cards/mv-soy-sauce.webp',
+  'mv-toner': '/cdn/mobile-cards/mv-toner.webp',
+  'mv-balm': '/cdn/mobile-cards/mv-balm.webp',
+  'mv-soap': '/cdn/mobile-cards/mv-soap.webp',
+  'mv-miso': '/cdn/mobile-cards/mv-miso.webp',
+  'mv-wasabi': '/cdn/mobile-cards/mv-wasabi.webp',
+  'mv-matcha': '/cdn/mobile-cards/mv-matcha.webp',
+  'mv-dressing': '/cdn/mobile-cards/mv-dressing.webp',
+  'mv-olive': '/cdn/mobile-cards/mv-olive.webp',
+  'mv-suncare': '/cdn/mobile-cards/mv-suncare.webp',
+  'mv-body-mist': '/cdn/mobile-cards/mv-body-mist.webp',
+  'mv-handcream': '/cdn/mobile-cards/mv-handcream.webp',
+  'mv-ponzu': '/cdn/mobile-cards/mv-ponzu.webp',
+  'mv-face-mist': '/cdn/mobile-cards/mv-face-mist.webp',
+  'mv-hair-oil': '/cdn/mobile-cards/mv-hair-oil.webp',
+  'mv-lipbalm': '/cdn/mobile-cards/mv-lipbalm.webp',
+  'mv-vinegar': '/cdn/mobile-cards/mv-vinegar.webp',
+  'mv-bathsalt': '/cdn/mobile-cards/mv-bathsalt.webp',
+  'mv-ginger-tea': '/cdn/mobile-cards/mv-ginger-tea.webp',
+  'mv-honey': '/cdn/mobile-cards/mv-honey.webp',
+};
+
 function parseJpyPrice(priceStr: string): number {
   return parseInt(priceStr.replace(/[¥,]/g, ''), 10);
 }
@@ -567,6 +592,7 @@ function ProductCard({
 }) {
   const displayName = isJa && product.nameJa ? product.nameJa : product.name;
   const productImage = TOP_PAGE_PRODUCT_IMAGES[product.slug] || product.images[0] || '/Images/Assets/General/logo.png';
+  const mobileProductImage = MOBILE_PRODUCT_IMAGES[product.slug];
   const mainStoryTag = product.storyTags?.[0];
   const secondaryStoryTags = product.storyTags?.slice(1) ?? [];
 
@@ -598,12 +624,24 @@ function ProductCard({
               className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
-            <Image
-              src={productImage}
-              alt={product.fullName}
-              fill
-              className="object-contain p-2 sm:p-4 group-hover:scale-105 transition-transform duration-500"
-            />
+            <>
+              {mobileProductImage && (
+                <Image
+                  src={mobileProductImage}
+                  alt={product.fullName}
+                  fill
+                  className="object-cover sm:hidden group-hover:scale-105 transition-transform duration-500"
+                  sizes="44vw"
+                />
+              )}
+              <Image
+                src={productImage}
+                alt={product.fullName}
+                fill
+                className={`${mobileProductImage ? 'hidden sm:block' : 'block'} object-contain p-2 sm:p-4 group-hover:scale-105 transition-transform duration-500`}
+                sizes="(max-width: 640px) 44vw, (max-width: 1280px) 50vw, 33vw"
+              />
+            </>
           )}
         </div>
       </Link>
