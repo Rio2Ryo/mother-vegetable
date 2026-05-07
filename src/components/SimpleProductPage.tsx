@@ -6,6 +6,7 @@ import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
 import { getStoredReferralCode } from '@/lib/affiliate';
 import { useLocale } from 'next-intl';
+import ProductMetaBadges from '@/components/ProductMetaBadges';
 
 const REFERRAL_DISCOUNT_RATE = 0.10;
 
@@ -66,8 +67,10 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
   const [hasReferral, setHasReferral] = useState(false);
 
   useEffect(() => {
-    const code = getStoredReferralCode();
-    if (code) setHasReferral(true);
+    queueMicrotask(() => {
+      const code = getStoredReferralCode();
+      if (code) setHasReferral(true);
+    });
   }, []);
 
   const discountedPrice = parseFloat((product.price * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2));
@@ -110,6 +113,7 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
           <div className="flex flex-col items-center gap-3">
             {/* Main image */}
             <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
+              <ProductMetaBadges slug={product.id} isJa={isJa} />
               <Image
                 src={activeImage.url}
                 alt={activeImage.alt}

@@ -4,9 +4,9 @@ import Image from 'next/image';
 import { useState, useEffect, useCallback } from 'react';
 import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
-import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
+import { useLocale, useTranslations } from 'next-intl';
 import { getStoredReferralCode } from '@/lib/affiliate';
+import ProductMetaBadges from '@/components/ProductMetaBadges';
 
 const REFERRAL_DISCOUNT_RATE = 0.10; // 10% off
 
@@ -95,11 +95,15 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
   const [addedFeedback, setAddedFeedback] = useState(false);
   const { addItem } = useCartStore();
   const router = useRouter();
+  const locale = useLocale();
+  const isJa = locale === 'ja';
   const t = useTranslations('cart');
 
   useEffect(() => {
-    const code = getStoredReferralCode();
-    if (code) setHasReferral(true);
+    queueMicrotask(() => {
+      const code = getStoredReferralCode();
+      if (code) setHasReferral(true);
+    });
   }, []);
 
   const discountedPrice = parseFloat((product.price * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2));
@@ -119,7 +123,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
     });
     setAddedFeedback(true);
     setTimeout(() => setAddedFeedback(false), 2000);
-  }, [addItem, product, hasReferral, quantity]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity]);
 
   const handleBuyNow = useCallback(() => {
     if (!product.inStock) return;
@@ -134,7 +138,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       quantity,
     });
     router.push('/checkout');
-  }, [addItem, product, hasReferral, quantity, router]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity, router]);
 
   return (
     <div className="bg-black min-h-screen">
@@ -407,6 +411,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
             <div className="gallery-col-main">
               <div className="main-product-display">
                 <div className="product-media-container">
+                  <ProductMetaBadges slug={product.id} isJa={isJa} />
                   <video
                     className="main-product-video"
                     muted
