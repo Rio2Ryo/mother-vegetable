@@ -8,6 +8,7 @@ import { Search, X, MapPin, Tag, SlidersHorizontal, ChevronDown, ChevronUp, User
 import { products, type ProductData } from '@/data/products';
 import { STORY_TAGS, PROPOSER_TAGS, getProposerTagDef } from '@/data/tags';
 import { getStoredReferralCode } from '@/lib/affiliate';
+import { useCartStore } from '@/store/cart';
 
 const REFERRAL_DISCOUNT_RATE = 0.10;
 
@@ -603,6 +604,25 @@ function ProductCard({
   const proposerDef = (firstProposerKey ? getProposerTagDef(firstProposerKey) : undefined)
     ?? (product.tier === 'product100' ? defaultProposerDef : undefined);
   const proposerFaceImage = proposerDef?.faceImage ?? defaultProposerDef?.faceImage;
+  const addItem = useCartStore((s) => s.addItem);
+  const [addedFeedback, setAddedFeedback] = useState(false);
+
+  const handleAddToCart = () => {
+    addItem({
+      id: product.id,
+      productId: product.id,
+      name: displayName,
+      price: product.price,
+      discountedPrice: hasReferral
+        ? parseFloat((product.price * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2))
+        : undefined,
+      currency: product.currency,
+      quantity: 1,
+      image: mobileProductImage ?? productImage,
+    });
+    setAddedFeedback(true);
+    setTimeout(() => setAddedFeedback(false), 1800);
+  };
 
   return (
     <div className="flex flex-row sm:flex-col border-x-0 border-t-0 border-b border-white/10 sm:border sm:border-[rgba(37,199,96,0.25)] rounded-none sm:rounded-2xl overflow-hidden bg-transparent sm:bg-[rgba(255,255,255,0.02)] hover:border-[#25C760]/60 hover:bg-[rgba(37,199,96,0.04)] transition-all duration-300 group">
@@ -682,33 +702,36 @@ function ProductCard({
 
       {/* Info */}
       <div className="flex flex-col flex-1 min-w-0 px-3 py-2.5 sm:p-4 gap-1.5 sm:gap-3">
-        {/* Name */}
-        <div className="flex items-start gap-2">
-          <Link href={`/product/${product.slug}`} className="min-w-0 no-underline">
+        {/* Detail link area */}
+        <Link href={`/product/${product.slug}`} className="min-w-0 no-underline">
+          <div className="flex flex-col gap-1.5 sm:gap-3">
+            {/* Name */}
+            <div className="flex items-start gap-2">
             <h2 className="text-white font-medium sm:font-bold text-[13px] sm:text-base leading-snug group-hover:text-[#25C760] transition-colors duration-300 line-clamp-3 sm:line-clamp-1">
               {displayName}
             </h2>
-          </Link>
-        </div>
+            </div>
 
-        {/* Producer + Region */}
-        {(product.producer || product.region) && (
-          <div className="flex items-start gap-1.5 text-xs text-gray-400">
-            <MapPin className="h-3.5 w-3.5 mt-0.5 text-[#25C760]/70 shrink-0" />
-            <span className="line-clamp-2">
-              {product.producer && <span className="text-gray-300">{product.producer}</span>}
-              {product.producer && product.region && <span className="mx-1 text-gray-600">·</span>}
-              {product.region && <span>{product.region}</span>}
-            </span>
+            {/* Producer + Region */}
+            {(product.producer || product.region) && (
+              <div className="flex items-start gap-1.5 text-xs text-gray-400">
+                <MapPin className="h-3.5 w-3.5 mt-0.5 text-[#25C760]/70 shrink-0" />
+                <span className="line-clamp-2">
+                  {product.producer && <span className="text-gray-300">{product.producer}</span>}
+                  {product.producer && product.region && <span className="mx-1 text-gray-600">·</span>}
+                  {product.region && <span>{product.region}</span>}
+                </span>
+              </div>
+            )}
+
+            {/* Story description */}
+            {product.storyDescription && (
+              <p className="text-[10px] sm:text-xs text-gray-400 leading-relaxed line-clamp-2">
+                {product.storyDescription}
+              </p>
+            )}
           </div>
-        )}
-
-        {/* Story description */}
-        {product.storyDescription && (
-          <p className="text-[10px] sm:text-xs text-gray-400 leading-relaxed line-clamp-2">
-            {product.storyDescription}
-          </p>
-        )}
+        </Link>
 
         {/* Story + region tags */}
         {(mainStoryTag || secondaryStoryTags.length > 0 || (product.regionTags?.length ?? 0) > 0) && (
@@ -748,12 +771,13 @@ function ProductCard({
         {/* Price + CTA */}
         <div className="mt-1 flex flex-col items-start gap-1.5 sm:gap-2 pt-1 sm:pt-2 sm:border-t sm:border-white/5">
           <PriceDisplay product={product} isJa={isJa} hasReferral={hasReferral} />
-          <Link
-            href={`/product/${product.slug}`}
-            className="inline-flex w-full sm:w-auto justify-center rounded-full bg-[#25C760] text-black text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 hover:bg-[#2ee873] transition no-underline"
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            className="inline-flex w-full sm:w-auto justify-center rounded-full bg-[#25C760] text-black text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 hover:bg-[#2ee873] transition"
           >
-            {t('Details', '詳細', '详情')}
-          </Link>
+            {addedFeedback ? t('✓ Added', '✓ 追加済み', '✓ 已添加') : t('Add to Cart', 'カートに入れる', '加入购物车')}
+          </button>
         </div>
       </div>
     </div>
