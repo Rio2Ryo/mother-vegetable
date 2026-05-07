@@ -398,7 +398,7 @@ export default function ProductsListingPage() {
                               filter.storyTags.has(key) ? 'text-[#25C760] font-medium' : 'text-gray-300 group-hover:text-white'
                             }`}
                           >
-                            {def.icon} {isJa ? def.labelJa : def.labelEn}
+                            {isJa ? def.labelJa : def.labelEn}
                           </span>
                         </label>
                       );
@@ -445,7 +445,7 @@ export default function ProductsListingPage() {
                 return (
                   <FilterChip
                     key={key}
-                    label={def ? `${def.icon} ${isJa ? def.labelJa : def.labelEn}` : key}
+                    label={def ? (isJa ? def.labelJa : def.labelEn) : key}
                     onRemove={() => setFilter((f) => ({ ...f, storyTags: toggleSet(f.storyTags, key) }))}
                   />
                 );
@@ -563,17 +563,22 @@ function ProductCard({
 }) {
   const displayName = isJa && product.nameJa ? product.nameJa : product.name;
   const productImage = TOP_PAGE_PRODUCT_IMAGES[product.slug] || product.images[0] || '/Images/Assets/General/logo.png';
+  const mainStoryTag = product.storyTags?.[0];
+  const secondaryStoryTags = product.storyTags?.slice(1) ?? [];
 
-  // Resolve proposer info for the face strip
+  // Resolve proposer info for the face strip. Product100 must always show a face below the image.
   const firstProposerKey = product.proposerTags?.[0];
-  const proposerDef = firstProposerKey ? getProposerTagDef(firstProposerKey) : undefined;
+  const defaultProposerDef = getProposerTagDef('マザーベジタブル社');
+  const proposerDef = (firstProposerKey ? getProposerTagDef(firstProposerKey) : undefined)
+    ?? (product.tier === 'product100' ? defaultProposerDef : undefined);
+  const proposerFaceImage = proposerDef?.faceImage ?? defaultProposerDef?.faceImage;
 
   return (
     <div className="flex flex-row sm:flex-col border border-[rgba(37,199,96,0.25)] rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.02)] hover:border-[#25C760]/60 hover:bg-[rgba(37,199,96,0.04)] transition-all duration-300 group">
       {/* Image block (Amazon-like mobile: image left, details right) */}
       <Link href={`/product/${product.slug}`} className="block w-[38%] sm:w-full shrink-0 bg-black/50 overflow-hidden">
         {/* Upper tier: product image / video — square-ish on mobile, 4:3 on desktop */}
-        <div className="relative w-full h-full min-h-[158px] sm:h-auto sm:aspect-[4/3] overflow-hidden">
+        <div className="relative w-full aspect-square sm:aspect-[4/3] overflow-hidden">
           {product.slug === 'achieve' ? (
             <video
               src="/new_achieve_video.mp4"
@@ -598,21 +603,21 @@ function ProductCard({
           <span className={`absolute top-3 left-3 px-2.5 py-1 text-xs font-bold rounded-full border ${getCategoryBadgeColor(product.category)}`}>
             {getCategoryLabel(product.category, locale)}
           </span>
-          {/* Story tag badge (first tag) */}
-          {product.storyTags?.[0] && (
-            <span className="absolute top-3 right-3 px-2 py-1 text-xs rounded-full bg-black/70 text-gray-300 border border-white/10 backdrop-blur-sm">
-              {getStoryTagIcon(product.storyTags[0])}
+          {/* Main tag badge */}
+          {mainStoryTag && (
+            <span className="absolute top-3 right-3 max-w-[56%] truncate px-2 py-1 text-[10px] sm:text-xs rounded-full bg-black/75 text-[#25C760] border border-[#25C760]/35 backdrop-blur-sm">
+              {getStoryTagLabel(mainStoryTag, isJa)}
             </span>
           )}
         </div>
 
-        {/* Lower tier: proposer face strip — ~64px (desktop/tablet only; mobile keeps the left image clean) */}
+        {/* Lower tier: proposer face strip — Product100 always shows a face below the image */}
         {proposerDef && (
-          <div className="hidden sm:flex items-center gap-2.5 px-3 bg-black/70 h-16">
-            {proposerDef.faceImage ? (
+          <div className="flex items-center gap-2 px-2 sm:px-3 bg-black/70 h-14 sm:h-16">
+            {proposerFaceImage ? (
               <div className="relative h-8 w-8 shrink-0 rounded-full overflow-hidden border border-[#25C760]/40">
                 <Image
-                  src={proposerDef.faceImage}
+                  src={proposerFaceImage}
                   alt={proposerDef.labelJa}
                   fill
                   className="object-cover"
@@ -627,7 +632,7 @@ function ProductCard({
               <p className="text-[10px] text-gray-500 leading-none mb-0.5">
                 {t('Proposer', '発案者', '提案者')}
               </p>
-              <p className="text-xs font-semibold text-[#25C760] truncate">
+              <p className="text-[11px] sm:text-xs font-semibold text-[#25C760] truncate">
                 {isJa ? proposerDef.labelJa : proposerDef.labelEn}
               </p>
             </div>
@@ -664,16 +669,16 @@ function ProductCard({
         )}
 
         {/* Story + region tags */}
-        {((product.storyTags?.length ?? 0) > 0 || (product.regionTags?.length ?? 0) > 0) && (
-          <div className="hidden sm:flex flex-wrap gap-1.5">
-            {product.storyTags?.map((tag) => (
+        {(secondaryStoryTags.length > 0 || (product.regionTags?.length ?? 0) > 0) && (
+          <div className="flex flex-wrap gap-1.5">
+            {secondaryStoryTags.map((tag) => (
               <button
                 key={tag}
                 type="button"
                 onClick={(e) => { e.preventDefault(); onTagClick(tag); }}
-                className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-[#25C760]/10 text-[#25C760] border border-[#25C760]/25 hover:bg-[#25C760]/20 transition cursor-pointer"
+                className="px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-medium bg-[#25C760]/10 text-[#25C760] border border-[#25C760]/25 hover:bg-[#25C760]/20 transition cursor-pointer"
               >
-                {getStoryTagDisplay(tag, isJa)}
+                {getStoryTagLabel(tag, isJa)}
               </button>
             ))}
             {product.regionTags?.slice(0, 2).map((tag) => (
@@ -753,15 +758,10 @@ function PriceDisplay({
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-function getStoryTagDisplay(key: string, isJa: boolean): string {
+function getStoryTagLabel(key: string, isJa: boolean): string {
   const def = STORY_TAGS.find((s) => s.key === key);
   if (!def) return key;
-  return `${def.icon} ${isJa ? def.labelJa : def.labelEn}`;
-}
-
-function getStoryTagIcon(key: string): string {
-  const def = STORY_TAGS.find((s) => s.key === key);
-  return def ? def.icon : '🏷';
+  return isJa ? def.labelJa : def.labelEn;
 }
 
 function getCategoryLabel(category: string, locale: string): string {
