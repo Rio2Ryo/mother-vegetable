@@ -745,15 +745,12 @@ function ProductCard({
           </div>
         )}
 
-        {/* Spacer */}
-        <div className="flex-1" />
-
         {/* Price + CTA */}
-        <div className="flex items-end justify-between gap-2 pt-2 border-t border-white/5">
+        <div className="mt-1 sm:mt-auto flex flex-col items-start gap-2 pt-2 border-t border-white/5">
           <PriceDisplay product={product} isJa={isJa} hasReferral={hasReferral} />
           <Link
             href={`/product/${product.slug}`}
-            className="shrink-0 rounded-full bg-[#25C760] text-black text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-2 hover:bg-[#2ee873] transition no-underline"
+            className="inline-flex w-full sm:w-auto justify-center rounded-full bg-[#25C760] text-black text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-2 hover:bg-[#2ee873] transition no-underline"
           >
             {t('Details', '詳細', '详情')}
           </Link>
