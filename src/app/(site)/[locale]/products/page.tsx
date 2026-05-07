@@ -477,7 +477,6 @@ export default function ProductsListingPage() {
                       <ProductCard
                         key={p.id}
                         product={p}
-                        locale={locale}
                         isJa={isJa}
                         t={t}
                         hasReferral={hasReferral}
@@ -486,6 +485,9 @@ export default function ProductsListingPage() {
                         }
                         onRegionClick={(tag) =>
                           setFilter((f) => ({ ...f, regionTags: toggleSet(f.regionTags, tag) }))
+                        }
+                        onProposerClick={(tag) =>
+                          setFilter((f) => ({ ...f, proposerTags: new Set([tag]) }))
                         }
                       />
                     ))}
@@ -503,7 +505,6 @@ export default function ProductsListingPage() {
                       <ProductCard
                         key={p.id}
                         product={p}
-                        locale={locale}
                         isJa={isJa}
                         t={t}
                         hasReferral={hasReferral}
@@ -512,6 +513,9 @@ export default function ProductsListingPage() {
                         }
                         onRegionClick={(tag) =>
                           setFilter((f) => ({ ...f, regionTags: toggleSet(f.regionTags, tag) }))
+                        }
+                        onProposerClick={(tag) =>
+                          setFilter((f) => ({ ...f, proposerTags: new Set([tag]) }))
                         }
                       />
                     ))}
@@ -546,20 +550,20 @@ function FilterChip({ label, onRemove }: { label: string; onRemove: () => void }
 
 function ProductCard({
   product,
-  locale,
   isJa,
   t,
   hasReferral,
   onTagClick,
   onRegionClick,
+  onProposerClick,
 }: {
   product: ProductData;
-  locale: string;
   isJa: boolean;
   t: (en: string, ja: string, zh: string) => string;
   hasReferral: boolean;
   onTagClick: (tag: string) => void;
   onRegionClick: (tag: string) => void;
+  onProposerClick: (tag: string) => void;
 }) {
   const displayName = isJa && product.nameJa ? product.nameJa : product.name;
   const productImage = TOP_PAGE_PRODUCT_IMAGES[product.slug] || product.images[0] || '/Images/Assets/General/logo.png';
@@ -568,6 +572,7 @@ function ProductCard({
 
   // Resolve proposer info for the face strip. Product100 must always show a face below the image.
   const firstProposerKey = product.proposerTags?.[0];
+  const proposerKey = firstProposerKey ?? (product.tier === 'product100' ? 'マザーベジタブル社' : undefined);
   const defaultProposerDef = getProposerTagDef('マザーベジタブル社');
   const proposerDef = (firstProposerKey ? getProposerTagDef(firstProposerKey) : undefined)
     ?? (product.tier === 'product100' ? defaultProposerDef : undefined);
@@ -576,7 +581,8 @@ function ProductCard({
   return (
     <div className="flex flex-row sm:flex-col border border-[rgba(37,199,96,0.25)] rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.02)] hover:border-[#25C760]/60 hover:bg-[rgba(37,199,96,0.04)] transition-all duration-300 group">
       {/* Image block (Amazon-like mobile: image left, details right) */}
-      <Link href={`/product/${product.slug}`} className="block w-[38%] sm:w-full shrink-0 bg-black/50 overflow-hidden">
+      <div className="w-[38%] sm:w-full shrink-0 bg-black/50 overflow-hidden">
+      <Link href={`/product/${product.slug}`} className="block w-full overflow-hidden">
         {/* Upper tier: product image / video — square-ish on mobile, 4:3 on desktop */}
         <div className="relative w-full aspect-square sm:aspect-[4/3] overflow-hidden">
           {product.slug === 'achieve' ? (
@@ -599,21 +605,17 @@ function ProductCard({
               className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
             />
           )}
-          {/* Category badge */}
-          <span className={`absolute top-3 left-3 px-2.5 py-1 text-xs font-bold rounded-full border ${getCategoryBadgeColor(product.category)}`}>
-            {getCategoryLabel(product.category, locale)}
-          </span>
-          {/* Main tag badge */}
-          {mainStoryTag && (
-            <span className="absolute top-3 right-3 max-w-[56%] truncate px-2 py-1 text-[10px] sm:text-xs rounded-full bg-black/75 text-[#25C760] border border-[#25C760]/35 backdrop-blur-sm">
-              {getStoryTagLabel(mainStoryTag, isJa)}
-            </span>
-          )}
         </div>
+      </Link>
 
         {/* Lower tier: proposer face strip — Product100 always shows a face below the image */}
-        {proposerDef && (
-          <div className="flex items-center gap-2 px-2 sm:px-3 bg-black/70 h-14 sm:h-16">
+        {proposerDef && proposerKey && (
+          <button
+            type="button"
+            onClick={() => onProposerClick(proposerKey)}
+            className="flex w-full flex-col items-center justify-center gap-1 px-2 py-2 bg-black/70 min-h-20 hover:bg-[#25C760]/10 transition text-center"
+            aria-label={`${isJa ? proposerDef.labelJa : proposerDef.labelEn} ${t('products', 'の商品で絞り込む', 'products')}`}
+          >
             {proposerFaceImage ? (
               <div className="relative h-8 w-8 shrink-0 rounded-full overflow-hidden border border-[#25C760]/40">
                 <Image
@@ -628,26 +630,37 @@ function ProductCard({
                 {proposerDef.icon}
               </span>
             )}
-            <div className="min-w-0">
-              <p className="text-[10px] text-gray-500 leading-none mb-0.5">
+            <div className="w-full min-w-0">
+              <p className="text-[10px] text-gray-500 leading-none mb-1">
                 {t('Proposer', '発案者', '提案者')}
               </p>
-              <p className="text-[11px] sm:text-xs font-semibold text-[#25C760] truncate">
+              <p className="text-[10px] sm:text-xs font-semibold text-[#25C760] truncate">
                 {isJa ? proposerDef.labelJa : proposerDef.labelEn}
               </p>
             </div>
-          </div>
+          </button>
         )}
-      </Link>
+      </div>
 
       {/* Info */}
       <div className="flex flex-col flex-1 min-w-0 p-3 sm:p-4 gap-2 sm:gap-3">
-        {/* Name */}
-        <Link href={`/product/${product.slug}`} className="no-underline">
-          <h2 className="text-white font-bold text-sm sm:text-base leading-snug group-hover:text-[#25C760] transition-colors duration-300 line-clamp-2 sm:line-clamp-1">
-            {displayName}
-          </h2>
-        </Link>
+        {/* Name + main tag */}
+        <div className="flex items-start justify-between gap-2">
+          <Link href={`/product/${product.slug}`} className="min-w-0 no-underline">
+            <h2 className="text-white font-bold text-sm sm:text-base leading-snug group-hover:text-[#25C760] transition-colors duration-300 line-clamp-2 sm:line-clamp-1">
+              {displayName}
+            </h2>
+          </Link>
+          {mainStoryTag && (
+            <button
+              type="button"
+              onClick={() => onTagClick(mainStoryTag)}
+              className="shrink-0 max-w-[45%] truncate rounded-full bg-[#25C760]/10 px-2 py-0.5 text-[10px] sm:text-[11px] font-medium text-[#25C760] border border-[#25C760]/25 hover:bg-[#25C760]/20 transition"
+            >
+              {getStoryTagLabel(mainStoryTag, isJa)}
+            </button>
+          )}
+        </div>
 
         {/* Producer + Region */}
         {(product.producer || product.region) && (
@@ -762,22 +775,4 @@ function getStoryTagLabel(key: string, isJa: boolean): string {
   const def = STORY_TAGS.find((s) => s.key === key);
   if (!def) return key;
   return isJa ? def.labelJa : def.labelEn;
-}
-
-function getCategoryLabel(category: string, locale: string): string {
-  const isJa = locale === 'ja';
-  const isZh = locale === 'zh';
-  if (category === 'food') return isJa ? 'フード' : isZh ? '食品' : 'Food';
-  if (category === 'cosmetic') return isJa ? 'コスメ' : isZh ? '化妆品' : 'Cosmetic';
-  if (category === 'pet') return isJa ? 'ペット' : isZh ? '宠物' : 'Pet';
-  return category;
-}
-
-function getCategoryBadgeColor(category: string): string {
-  switch (category) {
-    case 'food':     return 'bg-[#25C760]/20 text-[#25C760] border-[#25C760]/40';
-    case 'cosmetic': return 'bg-pink-500/20 text-pink-400 border-pink-500/40';
-    case 'pet':      return 'bg-blue-500/20 text-blue-400 border-blue-500/40';
-    default:         return 'bg-gray-500/20 text-gray-400 border-gray-500/40';
-  }
 }
