@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
-import { Link } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { useLocale } from 'next-intl';
 import { Search, X, MapPin, Tag, SlidersHorizontal, ChevronDown, ChevronUp, Users } from 'lucide-react';
 import { products, type ProductData } from '@/data/products';
@@ -605,7 +605,9 @@ function ProductCard({
     ?? (product.tier === 'product100' ? defaultProposerDef : undefined);
   const proposerFaceImage = proposerDef?.faceImage ?? defaultProposerDef?.faceImage;
   const addItem = useCartStore((s) => s.addItem);
+  const router = useRouter();
   const [addedFeedback, setAddedFeedback] = useState(false);
+  const detailHref = `/product/${product.slug}`;
 
   const handleAddToCart = () => {
     addItem({
@@ -628,7 +630,7 @@ function ProductCard({
     <div className="flex flex-row sm:flex-col border-x-0 border-t-0 border-b border-white/10 sm:border sm:border-[rgba(37,199,96,0.25)] rounded-none sm:rounded-2xl overflow-hidden bg-transparent sm:bg-[rgba(255,255,255,0.02)] hover:border-[#25C760]/60 hover:bg-[rgba(37,199,96,0.04)] transition-all duration-300 group">
       {/* Image block (Amazon-like mobile: image left, details right) */}
       <div className="w-[43%] sm:w-full shrink-0 bg-black/40 sm:bg-black/50 overflow-hidden">
-      <Link href={`/product/${product.slug}`} className="block w-full overflow-hidden">
+      <Link href={detailHref} className="block w-full overflow-hidden">
         {/* Upper tier: product image / video — taller on mobile, 4:3 on desktop */}
         <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] overflow-hidden">
           {product.slug === 'achieve' ? (
@@ -670,7 +672,7 @@ function ProductCard({
         {proposerDef && proposerKey && (
           <button
             type="button"
-            onClick={() => onProposerClick(proposerKey)}
+            onClick={(e) => { e.stopPropagation(); onProposerClick(proposerKey); }}
             className="flex w-full flex-col items-center justify-center gap-1 px-1.5 sm:px-2 py-2 bg-black/70 min-h-16 sm:min-h-20 hover:bg-[#25C760]/10 transition text-center"
             aria-label={`${isJa ? proposerDef.labelJa : proposerDef.labelEn} ${t('products', 'の商品で絞り込む', 'products')}`}
           >
@@ -701,9 +703,19 @@ function ProductCard({
       </div>
 
       {/* Info */}
-      <div className="flex flex-col flex-1 min-w-0 px-3 py-2.5 sm:p-4 gap-1.5 sm:gap-3">
-        {/* Detail link area */}
-        <Link href={`/product/${product.slug}`} className="min-w-0 no-underline">
+      <div
+        className="flex flex-col flex-1 min-w-0 px-3 py-2.5 sm:p-4 gap-1.5 sm:gap-3 cursor-pointer"
+        role="link"
+        tabIndex={0}
+        onClick={() => router.push(detailHref)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            router.push(detailHref);
+          }
+        }}
+      >
+        {/* Detail tap area */}
           <div className="flex flex-col gap-1.5 sm:gap-3">
             {/* Name */}
             <div className="flex items-start gap-2">
@@ -731,7 +743,6 @@ function ProductCard({
               </p>
             )}
           </div>
-        </Link>
 
         {/* Story + region tags */}
         {(mainStoryTag || secondaryStoryTags.length > 0 || (product.regionTags?.length ?? 0) > 0) && (
@@ -739,7 +750,7 @@ function ProductCard({
             {mainStoryTag && (
               <button
                 type="button"
-                onClick={(e) => { e.preventDefault(); onTagClick(mainStoryTag); }}
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); onTagClick(mainStoryTag); }}
                 className="px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-medium bg-[#25C760]/15 text-[#25C760] border border-[#25C760]/35 hover:bg-[#25C760]/25 transition cursor-pointer"
               >
                 {getStoryTagLabel(mainStoryTag, isJa)}
@@ -749,7 +760,7 @@ function ProductCard({
               <button
                 key={tag}
                 type="button"
-                onClick={(e) => { e.preventDefault(); onTagClick(tag); }}
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); onTagClick(tag); }}
                 className="px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-medium bg-[#25C760]/10 text-[#25C760] border border-[#25C760]/25 hover:bg-[#25C760]/20 transition cursor-pointer"
               >
                 {getStoryTagLabel(tag, isJa)}
@@ -759,7 +770,7 @@ function ProductCard({
               <button
                 key={tag}
                 type="button"
-                onClick={(e) => { e.preventDefault(); onRegionClick(tag); }}
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); onRegionClick(tag); }}
                 className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10 hover:text-gray-300 transition cursor-pointer"
               >
                 📍 {tag}
@@ -773,7 +784,7 @@ function ProductCard({
           <PriceDisplay product={product} isJa={isJa} hasReferral={hasReferral} />
           <button
             type="button"
-            onClick={handleAddToCart}
+            onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
             className="inline-flex w-full sm:w-auto justify-center rounded-full bg-[#25C760] text-black text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 hover:bg-[#2ee873] transition"
           >
             {addedFeedback ? t('✓ Added', '✓ 追加済み', '✓ 已添加') : t('Add to Cart', 'カートに入れる', '加入购物车')}
