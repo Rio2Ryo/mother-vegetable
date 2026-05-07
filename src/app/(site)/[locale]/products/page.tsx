@@ -569,11 +569,11 @@ function ProductCard({
   const proposerDef = firstProposerKey ? getProposerTagDef(firstProposerKey) : undefined;
 
   return (
-    <div className="flex flex-col border border-[rgba(37,199,96,0.25)] rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.02)] hover:border-[#25C760]/60 hover:bg-[rgba(37,199,96,0.04)] transition-all duration-300 group">
-      {/* Image block (2-tier) */}
-      <Link href={`/product/${product.slug}`} className="block w-full bg-black/50 overflow-hidden">
-        {/* Upper tier: product image / video — aspect-[4/3] */}
-        <div className="relative w-full aspect-[4/3] overflow-hidden">
+    <div className="flex flex-row sm:flex-col border border-[rgba(37,199,96,0.25)] rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.02)] hover:border-[#25C760]/60 hover:bg-[rgba(37,199,96,0.04)] transition-all duration-300 group">
+      {/* Image block (Amazon-like mobile: image left, details right) */}
+      <Link href={`/product/${product.slug}`} className="block w-[38%] sm:w-full shrink-0 bg-black/50 overflow-hidden">
+        {/* Upper tier: product image / video — square-ish on mobile, 4:3 on desktop */}
+        <div className="relative w-full h-full min-h-[158px] sm:h-auto sm:aspect-[4/3] overflow-hidden">
           {product.slug === 'achieve' ? (
             <video
               src="/new_achieve_video.mp4"
@@ -606,9 +606,9 @@ function ProductCard({
           )}
         </div>
 
-        {/* Lower tier: proposer face strip — ~64px */}
+        {/* Lower tier: proposer face strip — ~64px (desktop/tablet only; mobile keeps the left image clean) */}
         {proposerDef && (
-          <div className="flex items-center gap-2.5 px-3 bg-black/70 h-16">
+          <div className="hidden sm:flex items-center gap-2.5 px-3 bg-black/70 h-16">
             {proposerDef.faceImage ? (
               <div className="relative h-8 w-8 shrink-0 rounded-full overflow-hidden border border-[#25C760]/40">
                 <Image
@@ -636,10 +636,10 @@ function ProductCard({
       </Link>
 
       {/* Info */}
-      <div className="flex flex-col flex-1 p-4 gap-3">
+      <div className="flex flex-col flex-1 min-w-0 p-3 sm:p-4 gap-2 sm:gap-3">
         {/* Name */}
         <Link href={`/product/${product.slug}`} className="no-underline">
-          <h2 className="text-white font-bold text-base leading-snug group-hover:text-[#25C760] transition-colors duration-300 line-clamp-1">
+          <h2 className="text-white font-bold text-sm sm:text-base leading-snug group-hover:text-[#25C760] transition-colors duration-300 line-clamp-2 sm:line-clamp-1">
             {displayName}
           </h2>
         </Link>
@@ -648,7 +648,7 @@ function ProductCard({
         {(product.producer || product.region) && (
           <div className="flex items-start gap-1.5 text-xs text-gray-400">
             <MapPin className="h-3.5 w-3.5 mt-0.5 text-[#25C760]/70 shrink-0" />
-            <span>
+            <span className="line-clamp-2">
               {product.producer && <span className="text-gray-300">{product.producer}</span>}
               {product.producer && product.region && <span className="mx-1 text-gray-600">·</span>}
               {product.region && <span>{product.region}</span>}
@@ -658,14 +658,14 @@ function ProductCard({
 
         {/* Story description */}
         {product.storyDescription && (
-          <p className="text-xs text-gray-400 leading-relaxed line-clamp-2">
+          <p className="text-[11px] sm:text-xs text-gray-400 leading-relaxed line-clamp-2">
             {product.storyDescription}
           </p>
         )}
 
         {/* Story + region tags */}
         {((product.storyTags?.length ?? 0) > 0 || (product.regionTags?.length ?? 0) > 0) && (
-          <div className="flex flex-wrap gap-1.5">
+          <div className="hidden sm:flex flex-wrap gap-1.5">
             {product.storyTags?.map((tag) => (
               <button
                 key={tag}
@@ -693,11 +693,11 @@ function ProductCard({
         <div className="flex-1" />
 
         {/* Price + CTA */}
-        <div className="flex items-center justify-between pt-2 border-t border-white/5">
-          <PriceDisplay product={product} locale={locale} isJa={isJa} hasReferral={hasReferral} />
+        <div className="flex items-end justify-between gap-2 pt-2 border-t border-white/5">
+          <PriceDisplay product={product} isJa={isJa} hasReferral={hasReferral} />
           <Link
             href={`/product/${product.slug}`}
-            className="shrink-0 ml-3 rounded-full bg-[#25C760] text-black text-xs font-bold px-4 py-2 hover:bg-[#2ee873] transition no-underline"
+            className="shrink-0 rounded-full bg-[#25C760] text-black text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-2 hover:bg-[#2ee873] transition no-underline"
           >
             {t('Details', '詳細', '详情')}
           </Link>
@@ -709,12 +709,10 @@ function ProductCard({
 
 function PriceDisplay({
   product,
-  locale,
   isJa,
   hasReferral,
 }: {
   product: ProductData;
-  locale: string;
   isJa: boolean;
   hasReferral: boolean;
 }) {

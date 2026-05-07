@@ -119,39 +119,39 @@ export default function ProductsSection() {
             className="rounded-lg p-4 md:p-6"
             style={{ border: '1px solid #25c760' }}
           >
-            <div className="flex flex-col gap-0">
-              {/* Video */}
-              <div className="mb-4 w-full flex justify-center">
+            <div className="flex flex-row md:flex-col gap-3 md:gap-0 items-start">
+              {/* Video (Amazon-like mobile: media left, info right) */}
+              <div className="mb-0 md:mb-4 w-[38%] md:w-full shrink-0 flex justify-center bg-black/40 rounded-lg overflow-hidden">
                 <video
                   src={product.videoUrl}
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-full max-w-[220px] md:max-w-[260px] aspect-[7/13] object-cover rounded-lg"
+                  className="w-full max-w-[130px] md:max-w-[260px] aspect-[7/13] object-cover rounded-lg"
                 />
               </div>
 
               {/* Text */}
-              <div className="flex-1 flex flex-col">
+              <div className="flex-1 min-w-0 flex flex-col">
                 <div className="mb-1 md:text-center">
-                  <h3 className="text-lg md:text-3xl font-bold" style={{ color: '#25c760' }}>
+                  <h3 className="text-base md:text-3xl font-bold" style={{ color: '#25c760' }}>
                     {product.name}
                   </h3>
                   <p className="text-green-400 text-xs md:text-sm">{product.subtitle}</p>
                   <p className="text-green-400 text-xs md:text-sm">{product.subName}</p>
                 </div>
 
-                <div className="space-y-1 mb-2 mt-5">
+                <div className="space-y-1 mb-2 mt-2 md:mt-5">
                   {product.features.map((feature, idx) => (
-                    <p key={idx} className="text-white text-[10px] md:text-lg flex items-start text-left">
+                    <p key={idx} className="text-white text-[10px] md:text-lg flex items-start text-left leading-relaxed">
                       <span className="text-green-400 mr-1 md:mr-2">✓</span>
                       {feature}
                     </p>
                   ))}
                 </div>
 
-                <div className="flex flex-wrap gap-2 mt-3 mb-2 items-center justify-center">
+                <div className="flex flex-wrap gap-2 mt-2 md:mt-3 mb-2 items-center justify-start md:justify-center">
                   {hasReferral ? (
                     <>
                       <span className="text-white/50 line-through text-base md:text-lg">{product.priceJpy}</span>
