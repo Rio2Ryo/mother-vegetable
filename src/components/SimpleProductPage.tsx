@@ -111,9 +111,9 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
           {/* Product Image Gallery */}
           <div className="flex flex-col items-center gap-3">
+            <ProductMetaBadges slug={product.id} isJa={isJa} />
             {/* Main image */}
             <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
-              <ProductMetaBadges slug={product.id} isJa={isJa} />
               <Image
                 src={activeImage.url}
                 alt={activeImage.alt}

@@ -27,7 +27,7 @@ export default function ProductMetaBadges({ slug, isJa }: { slug: string; isJa: 
   const regionTags = product.regionTags ?? [];
 
   return (
-    <div className="absolute left-3 right-3 top-3 z-10 rounded-2xl border border-black/10 bg-black/65 p-3 text-white shadow-lg backdrop-blur-md">
+    <div className="w-full rounded-2xl border border-[#25C760]/25 bg-[#07120b] p-3 text-white shadow-lg">
       <div className="mb-2 flex flex-wrap items-center gap-1.5">
         <span className="rounded-full bg-[#25C760] px-2 py-0.5 text-[10px] font-bold text-black">
           {getCategoryLabel(product.category, isJa)}

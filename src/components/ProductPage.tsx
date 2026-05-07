@@ -155,7 +155,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         .gallery-col-info { width: 58.333%; flex: 0 0 58.333%; max-width: 58.333%; }
 
         /* Main Product Display */
-        .main-product-display { display: flex; justify-content: center; align-items: center; padding: 20px; height: 700px; }
+        .main-product-display { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px; padding: 20px; height: 700px; }
         .product-media-container { position: relative; width: 100%; max-width: 500px; height: 100%; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); background-color: black; display: flex; align-items: center; justify-content: center; }
         .main-product-video { width: 100%; max-height: 100%; height: auto; display: block; object-fit: contain; }
 
@@ -410,8 +410,8 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
             {/* Center Side - Main Product Display */}
             <div className="gallery-col-main">
               <div className="main-product-display">
+                <ProductMetaBadges slug={product.id} isJa={isJa} />
                 <div className="product-media-container">
-                  <ProductMetaBadges slug={product.id} isJa={isJa} />
                   <video
                     className="main-product-video"
                     muted
