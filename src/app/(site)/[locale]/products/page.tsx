@@ -581,10 +581,10 @@ function ProductCard({
   return (
     <div className="flex flex-row sm:flex-col border border-[rgba(37,199,96,0.25)] rounded-2xl overflow-hidden bg-[rgba(255,255,255,0.02)] hover:border-[#25C760]/60 hover:bg-[rgba(37,199,96,0.04)] transition-all duration-300 group">
       {/* Image block (Amazon-like mobile: image left, details right) */}
-      <div className="w-[38%] sm:w-full shrink-0 bg-black/50 overflow-hidden">
+      <div className="w-[44%] sm:w-full shrink-0 bg-black/50 overflow-hidden">
       <Link href={`/product/${product.slug}`} className="block w-full overflow-hidden">
-        {/* Upper tier: product image / video — square-ish on mobile, 4:3 on desktop */}
-        <div className="relative w-full aspect-square sm:aspect-[4/3] overflow-hidden">
+        {/* Upper tier: product image / video — taller on mobile, 4:3 on desktop */}
+        <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] overflow-hidden">
           {product.slug === 'achieve' ? (
             <video
               src="/new_achieve_video.mp4"
@@ -602,7 +602,7 @@ function ProductCard({
               src={productImage}
               alt={product.fullName}
               fill
-              className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+              className="object-contain p-2 sm:p-4 group-hover:scale-105 transition-transform duration-500"
             />
           )}
         </div>
@@ -643,7 +643,7 @@ function ProductCard({
       </div>
 
       {/* Info */}
-      <div className="flex flex-col flex-1 min-w-0 p-3 sm:p-4 gap-2 sm:gap-3">
+      <div className="flex flex-col flex-1 min-w-0 p-2.5 sm:p-4 gap-2 sm:gap-3">
         {/* Name + main tag */}
         <div className="flex items-start justify-between gap-2">
           <Link href={`/product/${product.slug}`} className="min-w-0 no-underline">
