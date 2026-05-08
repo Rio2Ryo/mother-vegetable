@@ -5,27 +5,30 @@ import LpAboutSection from '@/components/home/lp/LpAboutSection';
 import LpProductsSection from '@/components/home/lp/LpProductsSection';
 import LpStorySection from '@/components/home/lp/LpStorySection';
 import LpCommerceSection from '@/components/home/lp/LpCommerceSection';
-import LpOwnerFlowSection from '@/components/home/lp/LpOwnerFlowSection';
-import LpVisionSection from '@/components/home/lp/LpVisionSection';
 import ProductsListing from '@/components/products/ProductsListing';
+import { getLpLocale, lpCopy } from '@/components/home/lp/lpCopy';
 
-export const metadata: Metadata = {
-  title: 'Mother Vegetable Project | 生産者の想い×日本の魅力×地球最古の生命の力',
-  description: '地球最古の生命力と人の想いから生まれるMother Vegetableプロジェクト。',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const copy = lpCopy[getLpLocale(locale)];
+
+  return {
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+  };
+}
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const lpLocale = getLpLocale(locale);
   return (
     <main>
-      <LpHeroSection />
-      <LpAboutSection />
-      <LpProductsSection />
-      <LpStorySection />
-      <LpCommerceSection />
-      <LpOwnerFlowSection />
-      <LpVisionSection />
+      <LpHeroSection locale={lpLocale} />
+      <LpAboutSection locale={lpLocale} />
+      <LpProductsSection locale={lpLocale} />
+      <LpStorySection locale={lpLocale} />
+      <LpCommerceSection locale={lpLocale} />
       <ProductsListing embedded />
     </main>
   );

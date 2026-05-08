@@ -3,21 +3,22 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Link } from '@/i18n/navigation';
+import { getLpLocale, lpCopy, type LpLocale } from './lpCopy';
 
-export default function LpHeroSection() {
+export default function LpHeroSection({ locale = 'ja' }: { locale?: LpLocale }) {
+  const copy = lpCopy[getLpLocale(locale)];
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image */}
       <div className="absolute inset-0">
         <Image
           src="/Images/Assets/homepage/bannerImg.png"
-          alt="Mother Vegetable Project"
+          alt={copy.heroTitle}
           fill
           className="object-cover"
           priority
         />
         <div className="absolute inset-0 bg-black/60" />
-        {/* Radial glow overlay */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -27,9 +28,7 @@ export default function LpHeroSection() {
         />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 text-center max-w-4xl mx-auto px-5 pt-24 pb-20">
-        {/* Floating logo */}
         <motion.div
           className="mb-6"
           animate={{ y: [0, -6, 0] }}
@@ -45,12 +44,11 @@ export default function LpHeroSection() {
           />
         </motion.div>
 
-        {/* H1 */}
         <motion.h1
           className="font-extrabold leading-tight tracking-wide"
           style={{
             fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
-            fontSize: 'clamp(38px, 5.4vw, 66px)',
+            fontSize: 'clamp(21px, 5.7vw, 66px)',
             color: '#25C760',
             textShadow: '0 0 20px rgba(37,199,96,0.42), 0 2px 8px rgba(0,0,0,0.55)',
             whiteSpace: 'nowrap',
@@ -59,23 +57,37 @@ export default function LpHeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: 'easeOut', delay: 0.2 }}
         >
-          Mother Vegetable Project
+          {copy.heroTitle}
         </motion.h1>
 
-        {/* Green underline */}
         <div
           className="mx-auto mt-5 rounded-full"
           style={{
             width: 'min(280px, 62%)',
             height: 3,
-            background: 'linear-gradient(90deg, #25C760, #3C8063, transparent)',
+            background: 'linear-gradient(90deg, transparent, #25C760, #3C8063, transparent)',
             boxShadow: '0 0 20px rgba(37,199,96,0.42)',
           }}
         />
 
-        {/* Eyebrow */}
         <motion.span
-          className="block mt-6 font-semibold"
+          className="block mt-6 font-bold uppercase"
+          style={{
+            fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
+            fontSize: 'clamp(12px, 1.1vw, 16px)',
+            color: 'rgba(255,255,255,0.76)',
+            letterSpacing: '0.18em',
+            textShadow: '0 2px 4px rgba(0,0,0,0.55)',
+          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: 'easeOut', delay: 0.5 }}
+        >
+          {copy.heroSubbrand}
+        </motion.span>
+
+        <motion.span
+          className="block mt-5 font-semibold"
           style={{
             fontFamily: "'Noto Sans JP', sans-serif",
             fontSize: 'clamp(13px, 1.35vw, 18px)',
@@ -85,34 +97,16 @@ export default function LpHeroSection() {
           }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: 'easeOut', delay: 0.5 }}
+          transition={{ duration: 0.9, ease: 'easeOut', delay: 0.65 }}
         >
-          生産者の想い×日本の魅力×地球最古の生命の力
+          {copy.heroTagline}
         </motion.span>
 
-        {/* Lead text */}
-        <motion.p
-          className="mt-6 mx-auto"
-          style={{
-            maxWidth: 600,
-            color: 'rgba(255,255,255,0.88)',
-            fontSize: 'clamp(14px, 1.15vw, 17px)',
-            lineHeight: 1.9,
-            textShadow: '0 2px 4px rgba(0,0,0,0.55)',
-          }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: 'easeOut', delay: 0.7 }}
-        >
-          人の思いと地域の素材を、Mother Vegetableの生命力で未来の商品へ。
-        </motion.p>
-
-        {/* CTA */}
         <motion.div
           className="mt-9 flex flex-wrap justify-center gap-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: 'easeOut', delay: 0.9 }}
+          transition={{ duration: 0.9, ease: 'easeOut', delay: 0.8 }}
         >
           <Link
             href="/products"
@@ -125,7 +119,7 @@ export default function LpHeroSection() {
               fontFamily: "'Noto Sans JP', sans-serif",
             }}
           >
-            MV Productをチェックする
+            {copy.heroCta}
           </Link>
         </motion.div>
       </div>

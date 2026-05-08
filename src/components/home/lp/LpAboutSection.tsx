@@ -1,11 +1,13 @@
 import Image from 'next/image';
+import { getLpLocale, lpCopy, type LpLocale } from './lpCopy';
 
-export default function LpAboutSection() {
+export default function LpAboutSection({ locale = 'ja' }: { locale?: LpLocale }) {
+  const copy = lpCopy[getLpLocale(locale)];
+
   return (
     <section className="bg-black py-32">
       <div className="w-full max-w-[1180px] mx-auto px-5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left: Text */}
           <div>
             <h2
               className="font-extrabold leading-tight"
@@ -17,11 +19,11 @@ export default function LpAboutSection() {
                 lineHeight: 1.05,
               }}
             >
-              <span className="block">What is</span>
-              <span className="block">Mother Vegetable</span>
+              {copy.aboutTitle.map((line) => (
+                <span key={line} className="block">{line}</span>
+              ))}
             </h2>
 
-            {/* Underline */}
             <div
               className="mt-5 rounded-full"
               style={{
@@ -32,45 +34,25 @@ export default function LpAboutSection() {
               }}
             />
 
-            <p
-              className="mt-7 font-bold"
-              style={{
-                fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
-                fontSize: 'clamp(20px, 2.4vw, 32px)',
-                color: '#fff',
-                lineHeight: 1.35,
-              }}
-            >
-              栄養・浄化・再生の力を持つ
-              <br />
-              35億年前の地球最初の生命
+            <p className="mt-7" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2.05 }}>
+              {copy.aboutLead.map((line, index) => (
+                <span key={line}>
+                  {line}
+                  {index < copy.aboutLead.length - 1 && <br />}
+                </span>
+              ))}
             </p>
-
-            <p
-              className="mt-5"
-              style={{
-                color: 'rgba(255,255,255,0.78)',
-                fontSize: 16,
-                lineHeight: 2.05,
-              }}
-            >
-              Mother Vegetableは、35億年前の地球に誕生した最初の生命の力を受け継ぐ存在です。
-            </p>
-            <p
-              className="mt-3"
-              style={{
-                color: 'rgba(255,255,255,0.78)',
-                fontSize: 16,
-                lineHeight: 2.05,
-              }}
-            >
-              育つ過程で二酸化炭素を吸収し、人々に必要な高純度のたんぱく質や医薬品原料をも生み出します。
+            <p className="mt-5" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2.05 }}>
+              {copy.aboutBody.map((line, index) => (
+                <span key={line}>
+                  {line}
+                  {index < copy.aboutBody.length - 1 && <br />}
+                </span>
+              ))}
             </p>
           </div>
 
-          {/* Right: Character image */}
           <div className="relative flex justify-center items-end min-h-[300px]">
-            {/* Glow circle behind character */}
             <div
               className="absolute left-1/2 bottom-[8%] -translate-x-1/2 rounded-full pointer-events-none"
               style={{
@@ -84,7 +66,7 @@ export default function LpAboutSection() {
             />
             <Image
               src="/cdn/mv-search-character.png"
-              alt="Mother Vegetableのキャラクター"
+              alt="Mother Vegetable character"
               width={300}
               height={366}
               className="relative z-10 w-full max-w-[300px] h-auto object-contain"

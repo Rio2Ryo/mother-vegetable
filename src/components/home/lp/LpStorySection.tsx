@@ -1,15 +1,13 @@
-export default function LpStorySection() {
+import { getLpLocale, lpCopy, type LpLocale } from './lpCopy';
+
+export default function LpStorySection({ locale = 'ja' }: { locale?: LpLocale }) {
+  const copy = lpCopy[getLpLocale(locale)];
+
   return (
     <section
       className="relative py-28 w-full overflow-hidden"
-      style={{
-        background: '#000',
-        borderTop: '1px solid #25C760',
-        borderBottom: '1px solid #25C760',
-        margin: '30px 0',
-      }}
+      style={{ background: '#000', borderTop: '1px solid #25C760', borderBottom: '1px solid #25C760', margin: '30px 0' }}
     >
-      {/* Background radial glows */}
       <div
         className="absolute pointer-events-none"
         style={{
@@ -20,7 +18,6 @@ export default function LpStorySection() {
       />
 
       <div className="relative z-10 w-full max-w-[1180px] mx-auto px-5">
-        {/* MV Product head */}
         <div className="max-w-[900px] mx-auto mb-14 text-center">
           <h2
             className="font-black"
@@ -35,7 +32,6 @@ export default function LpStorySection() {
           >
             MV Product
           </h2>
-          {/* Underline */}
           <div
             className="mx-auto mt-6 rounded-full"
             style={{
@@ -55,64 +51,43 @@ export default function LpStorySection() {
               lineHeight: 1.42,
             }}
           >
-            人の想い。日本の魅力。地球の力。
-            <br />
-            そのすべてを取り込んだプロダクト。
+            {copy.storySubtitle.map((line, index) => (
+              <span key={line}>
+                {line}
+                {index < copy.storySubtitle.length - 1 && <br />}
+              </span>
+            ))}
           </p>
         </div>
 
-        {/* Diagram */}
         <div
           className="mx-auto max-w-[1080px] p-8"
-          style={{
-            border: '1px solid #25C760',
-            borderRadius: 14,
-            background: 'linear-gradient(135deg, rgba(37,199,96,0.09), rgba(0,0,0,0.94))',
-          }}
-          aria-label="MV Productをつくる3つの力の図解"
+          style={{ border: '1px solid #25C760', borderRadius: 14, background: 'linear-gradient(135deg, rgba(37,199,96,0.09), rgba(0,0,0,0.94))' }}
+          aria-label={copy.storyDiagramTitle}
         >
           <h3
             className="text-center mb-7 font-extrabold"
-            style={{
-              fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
-              color: '#fff',
-              fontSize: 'clamp(24px, 3vw, 38px)',
-              lineHeight: 1.35,
-            }}
+            style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", color: '#fff', fontSize: 'clamp(24px, 3vw, 38px)', lineHeight: 1.35 }}
           >
-            MV Productをつくる3つの力
+            {copy.storyDiagramTitle}
           </h3>
 
-          {/* Force grid */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 items-center">
-            {/* 力01 */}
-            <ForceCard number="01" title="生産者の想い" description="誰のために、どんな未来を想い作られたのか。" />
-
-            {/* Plus */}
+            <ForceCard number="01" title={copy.force1Title} description={copy.force1Description} />
             <PlusSign />
-
-            {/* 力02 */}
             <ForceCard
               number="02"
               title={
                 <>
-                  日本の素材
+                  {copy.force2Title[0]}
                   <br />
-                  地域の魅力
+                  {copy.force2Title[1]}
                 </>
               }
-              description="土地に根づいた素材、文化、技術、物語。"
+              description={copy.force2Description}
             />
-
-            {/* Plus */}
             <PlusSign />
-
-            {/* 力03 */}
-            <ForceCard
-              number="03"
-              title="Mother Vegetableの力"
-              description="地球最古の生命が持つ、栄養・浄化・再生の力。"
-            />
+            <ForceCard number="03" title={copy.force3Title} description={copy.force3Description} />
           </div>
         </div>
       </div>
@@ -120,69 +95,29 @@ export default function LpStorySection() {
   );
 }
 
-function ForceCard({
-  number,
-  title,
-  description,
-}: {
-  number: string;
-  title: React.ReactNode;
-  description: string;
-}) {
+function ForceCard({ number, title, description }: { number: string; title: React.ReactNode; description: string }) {
   return (
     <article
       className="relative p-7 overflow-hidden"
-      style={{
-        border: '1px solid rgba(37,199,96,0.42)',
-        borderRadius: 14,
-        background: '#000',
-        minHeight: 250,
-      }}
+      style={{ border: '1px solid rgba(37,199,96,0.42)', borderRadius: 14, background: '#000', minHeight: 250 }}
     >
-      {/* Glow accent */}
       <div
         className="absolute pointer-events-none"
-        style={{
-          right: -72,
-          top: -80,
-          width: 190,
-          height: 190,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(37,199,96,0.22), transparent 70%)',
-        }}
+        style={{ right: -72, top: -80, width: 190, height: 190, borderRadius: '50%', background: 'radial-gradient(circle, rgba(37,199,96,0.22), transparent 70%)' }}
       />
       <span
         className="block mb-4 font-black tracking-widest"
-        style={{
-          color: '#25C760',
-          fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
-          fontSize: 13,
-          letterSpacing: '0.12em',
-        }}
+        style={{ color: '#25C760', fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 13, letterSpacing: '0.12em' }}
       >
         {number}
       </span>
       <h3
         className="relative font-extrabold"
-        style={{
-          color: '#fff',
-          fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
-          fontSize: 'clamp(21px, 2.2vw, 28px)',
-          lineHeight: 1.32,
-          margin: 0,
-        }}
+        style={{ color: '#fff', fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 'clamp(21px, 2.2vw, 28px)', lineHeight: 1.32, margin: 0 }}
       >
         {title}
       </h3>
-      <p
-        className="relative mt-4"
-        style={{
-          color: 'rgba(255,255,255,0.78)',
-          fontSize: 15,
-          lineHeight: 1.9,
-          margin: 0,
-        }}
-      >
+      <p className="relative mt-4" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 15, lineHeight: 1.9, margin: 0 }}>
         {description}
       </p>
     </article>
