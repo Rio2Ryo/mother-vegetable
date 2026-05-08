@@ -64,6 +64,113 @@ const MOBILE_PRODUCT_IMAGES: Record<string, string> = {
   'mv-honey': '/cdn/mobile-cards/mv-honey.webp',
 };
 
+const PRODUCT_NAME_EN: Record<string, string> = {
+  tilapia: 'MV Fish',
+  'mv-salt': 'MV Salt',
+  'mv-soy-sauce': 'MV Soy Sauce',
+  'mv-toner': 'MV Toner',
+  'mv-balm': 'MV Balm',
+  'mv-soap': 'MV Soap',
+  'mv-miso': 'MV Miso',
+  'mv-wasabi': 'MV Wasabi',
+  'mv-matcha-latte': 'MV Matcha Latte Mix',
+  'mv-green-smoothie': 'MV Green Smoothie',
+  'mv-matcha': 'MV Matcha',
+  'mv-olive': 'MV Olive Oil',
+  'mv-dressing': 'MV Dressing',
+  'mv-herb-salt': 'MV Herb Salt',
+  'mv-handcream': 'MV Hand Cream',
+  'mv-suncare': 'MV Suncare Gel',
+  'mv-body-mist': 'MV Body Mist',
+  'mv-ponzu': 'MV Ponzu',
+  'mv-tsuyu': 'MV Mentsuyu',
+  'mv-furikake': 'MV Furikake',
+  'mv-lipbalm': 'MV Lip Balm',
+  'mv-face-mist': 'MV Face Mist',
+  'mv-hair-oil': 'MV Hair Oil',
+  'mv-vinegar': 'MV Vinegar',
+  'mv-ponzu-yuzu': 'MV Yuzu Ponzu',
+  'mv-cooking-sake': 'MV Cooking Sake',
+  'mv-bathsalt': 'MV Bath Salt',
+  'mv-bath-bomb': 'MV Bath Bomb',
+  'mv-body-cream': 'MV Body Cream',
+  'mv-honey': 'MV Honey',
+  'mv-ginger-tea': 'MV Ginger Tea',
+  'mv-manuka': 'MV Manuka Blend',
+};
+
+const PRODUCER_EN: Record<string, string> = {
+  '河津町漁協': 'Kawazu Fisheries Cooperative',
+  '伊豆海塩工房': 'Izu Sea Salt Studio',
+  '河津醸造': 'Kawazu Brewery',
+  '伊豆コスメ工房': 'Izu Cosmetics Studio',
+  '河津味噌蔵': 'Kawazu Miso Brewery',
+  '伊豆わさび農園': 'Izu Wasabi Farm',
+  '静岡茶園': 'Shizuoka Tea Farm',
+  '伊豆養蜂園': 'Izu Apiary',
+};
+
+const REGION_EN: Record<string, string> = {
+  '静岡県': 'Shizuoka, Japan',
+  '静岡県 河津町': 'Kawazu, Shizuoka, Japan',
+  '静岡県 伊豆': 'Izu, Shizuoka, Japan',
+  '河津町': 'Kawazu',
+  '伊豆': 'Izu',
+  '伊豆諸島': 'Izu Islands',
+  '沖縄': 'Okinawa',
+  '北海道': 'Hokkaido',
+};
+
+const STORY_DESCRIPTION_EN: Record<string, string> = {
+  achieve: 'An additive-free supplement with 48 nutrients, developed by Mother Vegetable Lab in Shizuoka.',
+  confidence: 'An additive-free, naturally derived skincare gel made for every skin type.',
+  tilapia: 'MV Fish with 48 nutrients, raised through a local partnership with the Kawazu Fisheries Cooperative.',
+  'mv-salt': 'Mineral-rich sea salt with 48 nutrients, slowly cooked from Izu seawater using a traditional flat-kettle method.',
+  'mv-soy-sauce': 'Soy sauce with 48 nutrients, crafted by a long-established Kawazu brewery using traditional cedar barrels.',
+  'mv-toner': 'An additive-free toner with natural collagen, developed by a lab in Shizuoka.',
+  'mv-balm': 'A luxury balm with natural collagen, carefully blended by a lab in Shizuoka.',
+  'mv-soap': 'A nutrient-infused soap handmade by an Izu cosmetics studio using a traditional cold-process method.',
+  'mv-miso': 'Premium miso with 48 nutrients, long-aged with natural koji by a Kawazu miso brewery.',
+  'mv-wasabi': 'A limited regional collaboration product made with natural wasabi grown in the clear streams of Izu.',
+  'mv-matcha-latte': 'A latte mix blending stone-milled matcha from a long-established Shizuoka tea farm with 48 nutrients.',
+  'mv-green-smoothie': 'A daily green smoothie blending organic greens with 48 nutrients, developed by a lab in Shizuoka.',
+  'mv-matcha': 'Stone-milled matcha powder from a long-established Shizuoka tea farm, blended with 48 nutrients.',
+  'mv-olive': 'Extra virgin olive oil made from selected organic olives in Shizuoka and blended with 48 nutrients.',
+  'mv-dressing': 'An additive-free dressing with 48 nutrients, made from carefully selected oils and vinegars by a Shizuoka lab.',
+  'mv-handcream': 'A hand cream with organic natural collagen, developed by a Shizuoka lab to protect hands.',
+  'mv-suncare': 'An additive-free suncare gel made with 100% organic plant-derived ingredients, developed by a Shizuoka lab.',
+  'mv-body-mist': 'An additive-free body mist with natural nutrients, developed by a Shizuoka lab.',
+  'mv-ponzu': 'Citrus ponzu with 48 nutrients, brewed using a traditional method by a long-established Kawazu brewery.',
+  'mv-lipbalm': 'An additive-free lip balm with natural collagen, handmade by a Shizuoka lab for soft, plump lips.',
+  'mv-face-mist': 'An additive-free face mist with natural collagen, developed by a Shizuoka lab for daytime hydration.',
+  'mv-hair-oil': 'Hair oil made from a selected blend of organic plant oils by a Shizuoka lab.',
+  'mv-vinegar': 'Premium rice vinegar with 48 nutrients, made by a long-established Kawazu brewery using static fermentation.',
+  'mv-bathsalt': 'Traditional bath salt made with mineral-rich Izu sea salt and 48 nutrients.',
+  'mv-honey': 'Limited honey blended with 48 nutrients, gathered from regional flowers by an Izu apiary.',
+  'mv-ginger-tea': 'A warming ginger tea with 48 nutrients, blended by a long-established Shizuoka tea farm using Japanese ginger.',
+  'mv-manuka': 'A limited premium blend of New Zealand manuka honey and 48 nutrients, developed by a Shizuoka lab.',
+};
+
+function localizeProductName(product: ProductData, isJa: boolean): string {
+  if (isJa) return product.nameJa ?? product.name;
+  return PRODUCT_NAME_EN[product.slug] ?? product.name;
+}
+
+function localizeProducer(value: string | undefined, isJa: boolean): string | undefined {
+  if (!value || isJa) return value;
+  return PRODUCER_EN[value] ?? value;
+}
+
+function localizeRegion(value: string | undefined, isJa: boolean): string | undefined {
+  if (!value || isJa) return value;
+  return REGION_EN[value] ?? value;
+}
+
+function localizeStoryDescription(product: ProductData, isJa: boolean): string | undefined {
+  if (isJa) return product.storyDescription;
+  return STORY_DESCRIPTION_EN[product.slug] ?? product.description;
+}
+
 function parseJpyPrice(priceStr: string): number {
   return parseInt(priceStr.replace(/[¥,]/g, ''), 10);
 }
@@ -382,7 +489,7 @@ export default function ProductsListing({ embedded = false }: { embedded?: boole
                             filter.regionTags.has(tag) ? 'text-[#25C760] font-medium' : 'text-gray-300 group-hover:text-white'
                           }`}
                         >
-                          {tag}
+                          {localizeRegion(tag, isJa)}
                         </span>
                       </label>
                     ))}
@@ -462,7 +569,7 @@ export default function ProductsListing({ embedded = false }: { embedded?: boole
               {[...filter.regionTags].map((tag) => (
                 <FilterChip
                   key={tag}
-                  label={tag}
+                    label={localizeRegion(tag, isJa) ?? tag}
                   onRemove={() => setFilter((f) => ({ ...f, regionTags: toggleSet(f.regionTags, tag) }))}
                 />
               ))}
@@ -591,7 +698,7 @@ function ProductCard({
   onRegionClick: (tag: string) => void;
   onProposerClick: (tag: string) => void;
 }) {
-  const displayName = isJa && product.nameJa ? product.nameJa : product.name;
+  const displayName = localizeProductName(product, isJa);
   const productImage = TOP_PAGE_PRODUCT_IMAGES[product.slug] || product.images[0] || '/Images/Assets/General/logo.png';
   const mobileProductImage = MOBILE_PRODUCT_IMAGES[product.slug];
   const mainStoryTag = product.storyTags?.[0];
@@ -608,6 +715,9 @@ function ProductCard({
   const router = useRouter();
   const [addedFeedback, setAddedFeedback] = useState(false);
   const detailHref = `/product/${product.slug}`;
+  const displayProducer = localizeProducer(product.producer, isJa);
+  const displayRegion = localizeRegion(product.region, isJa);
+  const displayStoryDescription = localizeStoryDescription(product, isJa);
 
   const handleAddToCart = () => {
     addItem({
@@ -725,21 +835,21 @@ function ProductCard({
             </div>
 
             {/* Producer + Region */}
-            {(product.producer || product.region) && (
+            {(displayProducer || displayRegion) && (
               <div className="flex items-start gap-1.5 text-xs text-gray-400">
                 <MapPin className="h-3.5 w-3.5 mt-0.5 text-[#25C760]/70 shrink-0" />
                 <span className="line-clamp-2">
-                  {product.producer && <span className="text-gray-300">{product.producer}</span>}
-                  {product.producer && product.region && <span className="mx-1 text-gray-600">·</span>}
-                  {product.region && <span>{product.region}</span>}
+                  {displayProducer && <span className="text-gray-300">{displayProducer}</span>}
+                  {displayProducer && displayRegion && <span className="mx-1 text-gray-600">·</span>}
+                  {displayRegion && <span>{displayRegion}</span>}
                 </span>
               </div>
             )}
 
             {/* Story description */}
-            {product.storyDescription && (
+            {displayStoryDescription && (
               <p className="text-[10px] sm:text-xs text-gray-400 leading-relaxed line-clamp-2">
-                {product.storyDescription}
+                {displayStoryDescription}
               </p>
             )}
           </div>
@@ -773,7 +883,7 @@ function ProductCard({
                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); onRegionClick(tag); }}
                 className="px-2 py-0.5 rounded-full text-[11px] font-medium bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10 hover:text-gray-300 transition cursor-pointer"
               >
-                📍 {tag}
+                📍 {localizeRegion(tag, isJa)}
               </button>
             ))}
           </div>
