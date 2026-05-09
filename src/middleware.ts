@@ -40,6 +40,14 @@ export default function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Dedicated short path for the ATH LP. Keep the public URL as /ath,
+  // while rendering the Japanese localized page inside the existing site shell.
+  if (pathname === '/ath' || pathname.startsWith('/ath/')) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(/^\/ath/, '/ja/ath');
+    return NextResponse.rewrite(url);
+  }
+
   // When NEXT_PUBLIC_SHOW_PAGES=top, only allow the homepage (top page).
   // All other pages redirect to the root.
   if (process.env.NEXT_PUBLIC_SHOW_PAGES === 'top') {
