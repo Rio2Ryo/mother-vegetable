@@ -320,6 +320,25 @@ export default function ProductsListing({ embedded = false }: { embedded?: boole
     });
   }, []);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get('search') ?? params.get('q') ?? '';
+    const focus = params.get('focus');
+
+    setFilter((f) => ({ ...f, searchQuery: query }));
+
+    if (focus === 'story') {
+      setStoryExpanded(true);
+      setSidebarOpen(true);
+    } else if (focus === 'region') {
+      setRegionExpanded(true);
+      setSidebarOpen(true);
+    } else if (focus === 'proposer') {
+      setProposerExpanded(true);
+      setSidebarOpen(true);
+    }
+  }, []);
+
   const filteredProducts = useMemo(() => {
     const q = filter.searchQuery.trim().toLowerCase();
     return products.filter((p) => {
@@ -340,18 +359,32 @@ export default function ProductsListing({ embedded = false }: { embedded?: boole
         const hit = (p.proposerTags ?? []).some((pt) => filter.proposerTags.has(pt));
         if (!hit) return false;
       }
-      // Full-text search
+      // Full-text search: product name, short mobile copy, producer, region, category, tags, and tag labels.
       if (q) {
+        const storyTagLabels = (p.storyTags ?? []).flatMap((tag) => {
+          const def = STORY_TAGS.find((s) => s.key === tag);
+          return def ? [def.key, def.labelJa, def.labelEn] : [tag];
+        });
+        const proposerTagLabels = (p.proposerTags ?? []).flatMap((tag) => {
+          const def = getProposerTagDef(tag);
+          return def ? [def.key, def.labelJa, def.labelEn] : [tag];
+        });
         const text = [
           p.name, p.nameJa, p.fullName, p.slug,
+          localizeProductName(p, true), localizeProductName(p, false),
+          localizeMobileProductName(p, true), localizeMobileProductName(p, false),
           p.description, p.descriptionJa,
+          localizeStoryDescription(p, true), localizeStoryDescription(p, false),
+          localizeMobileStoryDescription(p, true), localizeMobileStoryDescription(p, false),
           p.tagline, p.taglineJp, p.subtitle, p.sku,
           p.category, p.tier,
-          p.producer, p.region,
+          p.producer, localizeProducer(p.producer, false),
+          p.region, localizeRegion(p.region, false),
           p.storyDescription,
           ...(p.regionTags ?? []),
-          ...(p.storyTags ?? []),
-          ...(p.proposerTags ?? []),
+          ...(p.regionTags ?? []).map((tag) => localizeRegion(tag, false)),
+          ...storyTagLabels,
+          ...proposerTagLabels,
         ].filter(Boolean).join(' ').toLowerCase();
         if (!text.includes(q)) return false;
       }
@@ -366,10 +399,11 @@ export default function ProductsListing({ embedded = false }: { embedded?: boole
     (filter.category !== 'all' ? 1 : 0) +
     filter.regionTags.size +
     filter.storyTags.size +
-    filter.proposerTags.size;
+    filter.proposerTags.size +
+    (filter.searchQuery.trim() ? 1 : 0);
 
   const clearAllFilters = () =>
-    setFilter((f) => ({ ...f, category: 'all', regionTags: new Set(), storyTags: new Set(), proposerTags: new Set() }));
+    setFilter({ category: 'all', regionTags: new Set(), storyTags: new Set(), proposerTags: new Set(), searchQuery: '' });
 
   const categoryButtons: { key: CategoryFilter; ja: string; en: string; zh: string }[] = [
     { key: 'all', ja: 'すべて', en: 'All', zh: '全部' },
@@ -984,14 +1018,15 @@ function ProductCard({
         {/* Price + CTA */}
         <div className="mt-1 flex flex-col items-start gap-1.5 sm:gap-2 pt-1 sm:pt-2 sm:border-t sm:border-white/5">
           <PriceDisplay product={product} isJa={isJa} hasReferral={hasReferral} />
-          <button
-            type="button"
-            onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
-            disabled={!isPurchasable}
-            className={`inline-flex w-full sm:w-auto justify-center rounded-full text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 transition ${isPurchasable ? 'bg-[#25C760] text-black hover:bg-[#2ee873]' : 'bg-white/10 text-white/60 border border-white/15 cursor-not-allowed'}`}
-          >
-            {!isPurchasable ? 'Coming Soon' : (addedFeedback ? t('✓ Added', '✓ 追加済み', '✓ 已添加') : t('Add to Cart', 'カートに入れる', '加入购物车'))}
-          </button>
+          {isPurchasable && (
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
+              className="inline-flex w-full sm:w-auto justify-center rounded-full bg-[#25C760] text-black text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 hover:bg-[#2ee873] transition"
+            >
+              {addedFeedback ? t('✓ Added', '✓ 追加済み', '✓ 已添加') : t('Add to Cart', 'カートに入れる', '加入购物车')}
+            </button>
+          )}
         </div>
       </div>
     </div>

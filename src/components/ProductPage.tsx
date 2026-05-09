@@ -501,27 +501,27 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                       <p style={{ color: '#f87171', fontSize: '0.85rem', margin: '4px 0 0' }}>{t('outOfStockDesc')}</p>
                     </div>
                   )}
-                  <button
-                    className="action-btn"
-                    onClick={handleAddToCart}
-                    disabled={!product.inStock}
-                    style={!product.inStock ? { opacity: 0.4, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
-                  >
-                    {addedFeedback ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <svg className="w-5 h-5 text-[#25C760]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
-                        {t('addedToCart')}
-                      </span>
-                    ) : t('addToCart')}
-                  </button>
-                  <button
-                    className="action-btn"
-                    onClick={handleBuyNow}
-                    disabled={!product.inStock}
-                    style={!product.inStock ? { opacity: 0.4, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
-                  >
-                    {t('buyNow')}
-                  </button>
+                  {product.inStock && (
+                    <>
+                      <button
+                        className="action-btn"
+                        onClick={handleAddToCart}
+                      >
+                        {addedFeedback ? (
+                          <span className="flex items-center justify-center gap-2">
+                            <svg className="w-5 h-5 text-[#25C760]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            {t('addedToCart')}
+                          </span>
+                        ) : t('addToCart')}
+                      </button>
+                      <button
+                        className="action-btn"
+                        onClick={handleBuyNow}
+                      >
+                        {t('buyNow')}
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

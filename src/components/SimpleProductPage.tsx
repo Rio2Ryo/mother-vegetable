@@ -167,37 +167,37 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
             </div>
 
             {/* Quantity + CTA */}
-            <div className="flex flex-col gap-3 pt-2">
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-gray-500 uppercase tracking-wider">{isJa ? '数量' : 'Qty'}</span>
-                <div className="flex items-center border-2 border-[#25C760] rounded-lg">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-9 h-9 flex items-center justify-center text-white hover:bg-gray-800 transition text-lg"
-                  >−</button>
-                  <span className="w-8 h-9 flex items-center justify-center text-white font-bold text-sm">{quantity}</span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="w-9 h-9 flex items-center justify-center text-white hover:bg-gray-800 transition text-lg"
-                  >+</button>
+            {product.inStock && (
+              <div className="flex flex-col gap-3 pt-2">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-gray-500 uppercase tracking-wider">{isJa ? '数量' : 'Qty'}</span>
+                  <div className="flex items-center border-2 border-[#25C760] rounded-lg">
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="w-9 h-9 flex items-center justify-center text-white hover:bg-gray-800 transition text-lg"
+                    >−</button>
+                    <span className="w-8 h-9 flex items-center justify-center text-white font-bold text-sm">{quantity}</span>
+                    <button
+                      onClick={() => setQuantity(quantity + 1)}
+                      className="w-9 h-9 flex items-center justify-center text-white hover:bg-gray-800 transition text-lg"
+                    >+</button>
+                  </div>
                 </div>
-              </div>
 
-              <button
-                onClick={handleAddToCart}
-                disabled={!product.inStock}
-                className="w-full py-3 bg-white text-black font-bold rounded-lg text-sm uppercase tracking-wider border-2 border-[#25C760] hover:bg-[#25C760] hover:text-white transition disabled:opacity-50"
-              >
-                {!product.inStock ? 'Coming Soon' : (addedFeedback ? (isJa ? '✓ カートに追加しました' : '✓ Added to Cart') : (isJa ? 'カートに入れる' : 'Add to Cart'))}
-              </button>
-              <button
-                onClick={handleBuyNow}
-                disabled={!product.inStock}
-                className="w-full py-3 bg-[#25C760] text-white font-bold rounded-lg text-sm uppercase tracking-wider hover:bg-[#1da84e] transition disabled:opacity-50"
-              >
-                {!product.inStock ? 'Coming Soon' : (isJa ? '今すぐ購入' : 'Buy Now')}
-              </button>
-            </div>
+                <button
+                  onClick={handleAddToCart}
+                  className="w-full py-3 bg-white text-black font-bold rounded-lg text-sm uppercase tracking-wider border-2 border-[#25C760] hover:bg-[#25C760] hover:text-white transition"
+                >
+                  {addedFeedback ? (isJa ? '✓ カートに追加しました' : '✓ Added to Cart') : (isJa ? 'カートに入れる' : 'Add to Cart')}
+                </button>
+                <button
+                  onClick={handleBuyNow}
+                  className="w-full py-3 bg-[#25C760] text-white font-bold rounded-lg text-sm uppercase tracking-wider hover:bg-[#1da84e] transition"
+                >
+                  {isJa ? '今すぐ購入' : 'Buy Now'}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>

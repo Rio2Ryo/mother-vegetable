@@ -1,16 +1,50 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Link } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { getLpLocale, lpCopy, type LpLocale } from './lpCopy';
 
 export default function LpCommerceSection({ locale = 'ja' }: { locale?: LpLocale }) {
-  const copy = lpCopy[getLpLocale(locale)];
+  const lpLocale = getLpLocale(locale);
+  const copy = lpCopy[lpLocale];
+  const router = useRouter();
   const [activeOption, setActiveOption] = useState<string>(copy.searchOptions[0]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     setActiveOption(copy.searchOptions[0]);
   }, [copy.searchOptions]);
+
+  const getSearchFocus = () => {
+    const index = (Array.from(copy.searchOptions) as string[]).indexOf(activeOption);
+    if (index === 1) return 'proposer';
+    if (index === 2) return 'region';
+    return 'story';
+  };
+
+  const getSearchPlaceholder = () => {
+    const focus = getSearchFocus();
+    if (lpLocale === 'ja') {
+      if (focus === 'proposer') return '例：発案者名で探す';
+      if (focus === 'region') return '例：静岡県 / 伊豆で探す';
+      return '例：無添加 / 栄養 / 美容で探す';
+    }
+    if (lpLocale === 'zh') {
+      if (focus === 'proposer') return '按提案者搜索';
+      if (focus === 'region') return '按地区搜索';
+      return '按故事或关键词搜索';
+    }
+    if (focus === 'proposer') return 'Search by creator';
+    if (focus === 'region') return 'Search by place';
+    return 'Search by story or keyword';
+  };
+
+  const handleSearch = () => {
+    const params = new URLSearchParams({ focus: getSearchFocus() });
+    const trimmed = searchTerm.trim();
+    if (trimmed) params.set('search', trimmed);
+    router.push(`/products?${params.toString()}`);
+  };
 
   return (
     <section className="bg-black py-32">
@@ -113,25 +147,39 @@ export default function LpCommerceSection({ locale = 'ja' }: { locale?: LpLocale
               })}
             </div>
 
-            <div
-              className="relative flex items-center justify-center sm:justify-start gap-3 min-h-[76px] px-4 sm:px-6 py-2"
+            <form
+              className="relative flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-3 min-h-[76px] px-4 sm:px-6 py-3 sm:py-2"
               style={{
-                borderRadius: 999,
+                borderRadius: 28,
                 border: '1px solid rgba(37,199,96,0.78)',
                 background: 'rgba(0,0,0,0.78)',
                 boxShadow: 'inset 0 0 24px rgba(37,199,96,0.10), 0 0 28px rgba(37,199,96,0.14)',
               }}
               role="search"
-              aria-label="Search form mockup"
+              aria-label="MV Product search"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSearch();
+              }}
             >
               <span className="hidden sm:block flex-shrink-0 relative w-8 h-8 rounded-full" style={{ border: '2px solid #25C760', boxShadow: '0 0 14px rgba(37,199,96,0.32)' }} aria-hidden="true" />
-              <span className="hidden sm:block flex-1 font-extrabold text-left" style={{ color: 'rgba(255,255,255,0.86)', letterSpacing: '0.01em', fontFamily: "'Noto Sans JP', sans-serif" }}>
-                {activeOption}
-              </span>
-              <span className="flex-shrink-0 inline-flex items-center justify-center min-w-[132px] min-h-[54px] px-6 rounded-full font-black" style={{ background: '#25C760', color: '#001d0c', fontFamily: "'Inter', 'Noto Sans JP', sans-serif", boxShadow: '0 0 20px rgba(37,199,96,0.42)' }}>
+              <input
+                type="search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder={getSearchPlaceholder()}
+                className="hidden sm:block flex-1 min-w-0 bg-transparent font-extrabold text-left outline-none placeholder:text-white/45"
+                style={{ color: 'rgba(255,255,255,0.86)', letterSpacing: '0.01em', fontFamily: "'Noto Sans JP', sans-serif" }}
+                aria-label={getSearchPlaceholder()}
+              />
+              <button
+                type="submit"
+                className="flex-shrink-0 inline-flex items-center justify-center min-w-[132px] min-h-[54px] px-6 rounded-full font-black transition-all duration-200 hover:-translate-y-0.5"
+                style={{ background: '#25C760', color: '#001d0c', fontFamily: "'Inter', 'Noto Sans JP', sans-serif", boxShadow: '0 0 20px rgba(37,199,96,0.42)' }}
+              >
                 Search
-              </span>
-            </div>
+              </button>
+            </form>
 
             <p className="relative mt-5 text-center font-extrabold" style={{ color: '#fff', lineHeight: 1.8 }}>
               {copy.searchNote}
