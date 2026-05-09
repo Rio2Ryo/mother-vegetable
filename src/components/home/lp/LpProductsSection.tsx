@@ -76,7 +76,7 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
           </article>
 
           <article
-            className="relative w-full p-12 overflow-hidden text-right ml-auto"
+            className="relative w-full p-12 overflow-hidden text-left"
             style={{
               borderRadius: 14,
               border: '1px solid rgba(255,255,255,0.78)',
@@ -98,10 +98,10 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
             <h3 className="font-extrabold mb-2" style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 'clamp(38px, 4.2vw, 58px)', color: '#fff', textShadow: '0 0 20px rgba(255,255,255,0.34)', lineHeight: 1.18 }}>
               Confidence
             </h3>
-            <strong className="block font-extrabold mb-4 ml-auto" style={{ color: 'rgba(255,255,255,0.90)', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
+            <strong className="block font-extrabold mb-4" style={{ color: 'rgba(255,255,255,0.90)', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
               {copy.confidenceLead}
             </strong>
-            <p className="ml-auto" style={{ color: 'rgba(255,255,255,0.90)', fontSize: 16, lineHeight: 2, maxWidth: 620 }}>
+            <p style={{ color: 'rgba(255,255,255,0.90)', fontSize: 16, lineHeight: 2, maxWidth: 620 }}>
               {copy.confidenceBody.map((line, index) => (
                 <span key={line}>
                   {line}
@@ -109,7 +109,7 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
                 </span>
               ))}
             </p>
-            <div className="mt-7 flex justify-end">
+            <div className="mt-7 flex justify-start">
               <Link
                 href="/product/confidence"
                 className="inline-flex items-center justify-center px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1"
