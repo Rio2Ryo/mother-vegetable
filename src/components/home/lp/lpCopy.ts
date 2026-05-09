@@ -29,7 +29,7 @@ export const lpCopy = {
     force2Title: ['日本の素材', '地域の魅力'],
     force2Description: '土地に根づいた素材、文化、技術、物語。',
     force3Title: 'Mother Vegetableの力',
-    force3Description: '地球最古の生命が持つ、栄養・浄化・再生の力。',
+    force3Description: '地球最古の生命の力が持つ、高栄養・浄化・再生の力。',
     searchTitle: ['物語・人・国から', 'いますぐ検索してみよう'],
     searchSubtitle: '探すこと自体が、楽しくなるECへ',
     searchOptions: ['物語で探す', '発案者で探す', '国で探す'],

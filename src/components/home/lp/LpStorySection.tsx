@@ -94,9 +94,15 @@ export default function LpStorySection({ locale = 'ja' }: { locale?: LpLocale })
                 </>
               }
               description={copy.force2Description}
+              mobileDescriptionLines={lpLocale === 'ja' ? ['土地に根づいた素材、文化、', '技術、物語。'] : undefined}
             />
             <PlusSign />
-            <ForceCard number="03" title={copy.force3Title} description={copy.force3Description} />
+            <ForceCard
+              number="03"
+              title={copy.force3Title}
+              description={copy.force3Description}
+              mobileDescriptionLines={lpLocale === 'ja' ? ['地球最古の生命の力が持つ、', '高栄養・浄化・再生の力。'] : undefined}
+            />
           </div>
         </div>
       </div>
@@ -104,7 +110,17 @@ export default function LpStorySection({ locale = 'ja' }: { locale?: LpLocale })
   );
 }
 
-function ForceCard({ number, title, description }: { number: string; title: React.ReactNode; description: string }) {
+function ForceCard({
+  number,
+  title,
+  description,
+  mobileDescriptionLines,
+}: {
+  number: string;
+  title: React.ReactNode;
+  description: string;
+  mobileDescriptionLines?: string[];
+}) {
   return (
     <article
       className="relative p-7 overflow-hidden"
@@ -127,7 +143,18 @@ function ForceCard({ number, title, description }: { number: string; title: Reac
         {title}
       </h3>
       <p className="relative mt-4" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 15, lineHeight: 1.9, margin: 0 }}>
-        {description}
+        {mobileDescriptionLines ? (
+          <>
+            <span className="md:hidden">
+              {mobileDescriptionLines.map((line) => (
+                <span key={line} className="block">{line}</span>
+              ))}
+            </span>
+            <span className="hidden md:inline">{description}</span>
+          </>
+        ) : (
+          description
+        )}
       </p>
     </article>
   );
