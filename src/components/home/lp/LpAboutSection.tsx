@@ -50,7 +50,7 @@ export default function LpAboutSection({ locale = 'ja' }: { locale?: LpLocale })
               }}
             />
 
-            <div className="space-y-5 md:space-y-6 font-bold" style={{ color: '#fff', fontSize: 'clamp(16px, 1.7vw, 22px)', lineHeight: 1.75 }}>
+            <div className="space-y-5 md:space-y-6 font-bold text-left" style={{ color: '#fff', fontSize: 'clamp(16px, 1.7vw, 22px)', lineHeight: 1.75, textAlign: 'left' }}>
               <p>
                 {copy.aboutLead.map((line, index) => (
                   <span key={line}>
