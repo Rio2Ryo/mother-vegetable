@@ -10,6 +10,9 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
   const mobileAchieveLead = lpLocale === 'ja'
     ? ['高たんぱく質', '＋全48種類の天然栄養']
     : [copy.achieveLead];
+  const mobileConfidenceLead = lpLocale === 'ja'
+    ? ['純度97%の天然シリカで、', 'やさしく整える。']
+    : [copy.confidenceLead];
   const mobileConfidenceBody = lpLocale === 'ja'
     ? [
         'Mother Vegetableから生まれた白いパウダー「Confidence」。育つ過程で、純度97%の非晶質シリカを生み出します。',
@@ -95,7 +98,7 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
             <div className="mt-7 flex">
               <Link
                 href="/product/achieve"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1"
+                className="inline-flex items-center justify-center w-[min(100%,290px)] md:w-auto px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1"
                 style={{ background: '#25C760', color: '#001d0c', border: '1px solid #25C760', boxShadow: '0 0 20px rgba(37,199,96,0.42)', fontFamily: "'Noto Sans JP', sans-serif" }}
               >
                 {copy.achieveCta}
@@ -127,7 +130,12 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
               Confidence
             </h3>
             <strong className="block font-extrabold mb-4" style={{ color: 'rgba(255,255,255,0.90)', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
-              {copy.confidenceLead}
+              <span className="md:hidden">
+                {mobileConfidenceLead.map((line) => (
+                  <span key={line} className="block">{line}</span>
+                ))}
+              </span>
+              <span className="hidden md:inline">{copy.confidenceLead}</span>
             </strong>
             <p style={{ color: 'rgba(255,255,255,0.90)', fontSize: 16, lineHeight: 2, maxWidth: 620 }}>
               <span className="md:hidden">
@@ -150,7 +158,7 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
             <div className="mt-7 flex justify-start">
               <Link
                 href="/product/confidence"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1"
+                className="inline-flex items-center justify-center w-[min(100%,290px)] md:w-auto px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1"
                 style={{ background: '#fff', color: '#001d0c', border: '1px solid #fff', fontFamily: "'Noto Sans JP', sans-serif" }}
               >
                 <span className="md:hidden">
