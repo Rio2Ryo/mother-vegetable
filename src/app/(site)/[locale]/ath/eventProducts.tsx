@@ -92,7 +92,7 @@ export const eventProducts: Record<EventProductKey, EventProduct> = {
       'Mother Vegetable Achieve は、35億年前に誕生した生命の栄養を凝縮したナチュラルパウダーです。たんぱく質、鉄分、ビタミン、フィコシアニンなどを豊富に含み、毎日のコンディションづくりをサポートします。',
     conceptTitle: '子どもたちの未来のために',
     conceptBody:
-      '世界を制したチャンピオンの想い。北海道の大地の恵み。そして、35億年前から続く生命の栄養。子どもたちの未来を応援する、新しいハチミツです。',
+      '世界を制したチャンピオンの想い。\n北海道の大地の恵み。\nそして、35億年前から続く生命の栄養。\n子どもたちの未来を応援する、新しいハチミツです。',
     benefits: ['Tokachi Honey', 'Rich Aroma', 'Kids Future'],
     closingTitle: '子どもたちの未来を応援する、\n新しいハチミツ。',
     closingBody:
@@ -126,7 +126,7 @@ export const eventProducts: Record<EventProductKey, EventProduct> = {
       'Mother Vegetable Achieve は、35億年前に誕生した生命の栄養を現代に届けるナチュラルパウダーです。たんぱく質、鉄分、ビタミン、フィコシアニンなどを豊富に含み、毎日の栄養補給をやさしくサポートします。',
     conceptTitle: '子どもたちの未来のために',
     conceptBody:
-      '世界で戦ったアスリートの経験。故郷の自然の恵み。そして、35億年前から続く生命の栄養。子どもたちの挑戦を支える、新しいハチミツです。',
+      '世界で戦ったアスリートの経験。\n故郷の自然の恵み。\nそして、35億年前から続く生命の栄養。\n子どもたちの挑戦を支える、新しいハチミツです。',
     benefits: ['Daisen Honey', 'Gentle Sweetness', 'Challenge Support'],
     closingTitle: '子どもたちの挑戦を支える、\n新しいハチミツ。',
     closingBody:

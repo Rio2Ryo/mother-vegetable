@@ -151,6 +151,70 @@ const STORY_DESCRIPTION_EN: Record<string, string> = {
   'mv-manuka': 'A limited premium blend of New Zealand manuka honey and 48 nutrients, developed by a Shizuoka lab.',
 };
 
+const MOBILE_PRODUCT_NAME_JA: Record<string, string> = {
+  'mv-salt': '塩',
+  'mv-soy-sauce': '醤油',
+  'mv-toner': '化粧水',
+  'mv-balm': 'バウム',
+  'mv-soap': '石鹸',
+  'mv-miso': '味噌',
+  'mv-wasabi': 'わさび',
+  'mv-matcha-latte': '抹茶ラテミックス',
+  'mv-green-smoothie': 'グリーンスムージー',
+  'mv-matcha': '抹茶',
+  'mv-olive': 'オリーブオイル',
+  'mv-dressing': 'ドレッシング',
+  'mv-herb-salt': 'ハーブソルト',
+  'mv-handcream': 'ハンドクリーム',
+  'mv-suncare': 'サンケアジェル',
+  'mv-body-mist': 'ボディミスト',
+  'mv-ponzu': 'ポン酢',
+  'mv-tsuyu': 'めんつゆ',
+  'mv-furikake': 'ふりかけ',
+  'mv-lipbalm': 'リップバーム',
+  'mv-face-mist': 'フェイスミスト',
+  'mv-hair-oil': 'ヘアオイル',
+  'mv-vinegar': '酢',
+  'mv-ponzu-yuzu': 'ゆずポン酢',
+  'mv-cooking-sake': '料理酒',
+  'mv-bathsalt': 'バスソルト',
+  'mv-bath-bomb': 'バスボム',
+  'mv-body-cream': 'ボディクリーム',
+  'mv-honey': '蜂蜜',
+  'mv-ginger-tea': '生姜茶',
+  'mv-manuka': 'マヌカブレンド',
+};
+
+const MOBILE_STORY_DESCRIPTION_JA: Record<string, string> = {
+  achieve: '48栄養素入りの無添加サプリメント。',
+  confidence: '天然由来の無添加スキンケアジェル。',
+  tilapia: '地域の海で育てた48栄養素入りフィッシュ。',
+  'mv-salt': '伊豆海塩のミネラル塩。',
+  'mv-soy-sauce': '杉樽製法で仕上げた48栄養素入り醤油。',
+  'mv-toner': '天然コラーゲン配合の無添加化粧水。',
+  'mv-balm': '天然コラーゲン配合のバウム。',
+  'mv-soap': 'コールドプロセス製法の栄養素配合石鹸。',
+  'mv-miso': '天然麹で長期熟成したプレミアム味噌。',
+  'mv-wasabi': '伊豆の清流で育つ天然わさび。',
+  'mv-matcha-latte': '石臼挽き抹茶と48栄養素のラテミックス。',
+  'mv-green-smoothie': '青菜と48栄養素のグリーンスムージー。',
+  'mv-matcha': '石臼挽き抹茶と48栄養素のブレンド。',
+  'mv-olive': 'オーガニックオリーブのエクストラバージンオイル。',
+  'mv-dressing': '48栄養素入りの無添加ドレッシング。',
+  'mv-handcream': '天然コラーゲン配合のハンドクリーム。',
+  'mv-suncare': '植物由来成分の無添加サンケアジェル。',
+  'mv-body-mist': '天然栄養素配合の無添加ボディミスト。',
+  'mv-ponzu': '伝統製法で仕込んだ柑橘ポン酢。',
+  'mv-lipbalm': '天然コラーゲン配合のリップバーム。',
+  'mv-face-mist': '日中の保湿に使えるフェイスミスト。',
+  'mv-hair-oil': 'オーガニック植物オイルのヘアオイル。',
+  'mv-vinegar': '静置発酵で仕上げたプレミアム米酢。',
+  'mv-bathsalt': '伊豆海塩と48栄養素のバスソルト。',
+  'mv-honey': '地域の花から集めた48栄養素ブレンド蜂蜜。',
+  'mv-ginger-tea': '国産生姜と48栄養素のジンジャーティー。',
+  'mv-manuka': 'マヌカハニーと48栄養素のプレミアムブレンド。',
+};
+
 function localizeProductName(product: ProductData, isJa: boolean): string {
   if (isJa) return product.nameJa ?? product.name;
   return PRODUCT_NAME_EN[product.slug] ?? product.name;
@@ -169,6 +233,16 @@ function localizeRegion(value: string | undefined, isJa: boolean): string | unde
 function localizeStoryDescription(product: ProductData, isJa: boolean): string | undefined {
   if (isJa) return product.storyDescription;
   return STORY_DESCRIPTION_EN[product.slug] ?? product.description;
+}
+
+function localizeMobileProductName(product: ProductData, isJa: boolean): string {
+  if (!isJa) return localizeProductName(product, false);
+  return MOBILE_PRODUCT_NAME_JA[product.slug] ?? product.nameJa ?? product.name;
+}
+
+function localizeMobileStoryDescription(product: ProductData, isJa: boolean): string | undefined {
+  if (!isJa) return localizeStoryDescription(product, false);
+  return MOBILE_STORY_DESCRIPTION_JA[product.slug] ?? product.storyDescription;
 }
 
 function ProducerRegionLine({ producer, region }: { producer?: string; region?: string }) {
@@ -731,6 +805,8 @@ function ProductCard({
   const displayProducer = localizeProducer(product.producer, isJa);
   const displayRegion = localizeRegion(product.region, isJa);
   const displayStoryDescription = localizeStoryDescription(product, isJa);
+  const displayMobileName = localizeMobileProductName(product, isJa);
+  const displayMobileStoryDescription = localizeMobileStoryDescription(product, isJa);
 
   const handleAddToCart = () => {
     addItem({
@@ -843,7 +919,8 @@ function ProductCard({
             {/* Name */}
             <div className="flex items-start gap-2">
             <h2 className="text-white font-medium sm:font-bold text-[13px] sm:text-base leading-snug group-hover:text-[#25C760] transition-colors duration-300 line-clamp-3 sm:line-clamp-1">
-              {displayName}
+              <span className="sm:hidden">{displayMobileName}</span>
+              <span className="hidden sm:inline">{displayName}</span>
             </h2>
             </div>
 
@@ -858,9 +935,10 @@ function ProductCard({
             )}
 
             {/* Story description */}
-            {displayStoryDescription && (
+            {(displayStoryDescription || displayMobileStoryDescription) && (
               <p className="text-[10px] sm:text-xs text-gray-400 leading-relaxed line-clamp-2">
-                {displayStoryDescription}
+                <span className="sm:hidden">{displayMobileStoryDescription ?? displayStoryDescription}</span>
+                <span className="hidden sm:inline">{displayStoryDescription}</span>
               </p>
             )}
           </div>
