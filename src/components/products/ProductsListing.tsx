@@ -171,6 +171,20 @@ function localizeStoryDescription(product: ProductData, isJa: boolean): string |
   return STORY_DESCRIPTION_EN[product.slug] ?? product.description;
 }
 
+function ProducerRegionLine({ producer, region }: { producer?: string; region?: string }) {
+  if (producer && region) {
+    return (
+      <>
+        <span className="text-gray-300">{producer}</span>
+        <span className="hidden sm:inline mx-1 text-gray-600">·</span>
+        <span className="block sm:inline">{region}</span>
+      </>
+    );
+  }
+
+  return <>{producer ? <span className="text-gray-300">{producer}</span> : region}</>;
+}
+
 function parseJpyPrice(priceStr: string): number {
   return parseInt(priceStr.replace(/[¥,]/g, ''), 10);
 }
@@ -839,9 +853,7 @@ function ProductCard({
               <div className="flex items-start gap-1.5 text-xs text-gray-400">
                 <MapPin className="h-3.5 w-3.5 mt-0.5 text-[#25C760]/70 shrink-0" />
                 <span className="line-clamp-2">
-                  {displayProducer && <span className="text-gray-300">{displayProducer}</span>}
-                  {displayProducer && displayRegion && <span className="mx-1 text-gray-600">·</span>}
-                  {displayRegion && <span>{displayRegion}</span>}
+                  <ProducerRegionLine producer={displayProducer} region={displayRegion} />
                 </span>
               </div>
             )}
