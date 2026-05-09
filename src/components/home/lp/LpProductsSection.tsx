@@ -10,6 +10,15 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
   const mobileAchieveLead = lpLocale === 'ja'
     ? ['高たんぱく質', '＋全48種類の天然栄養']
     : [copy.achieveLead];
+  const mobileConfidenceBody = lpLocale === 'ja'
+    ? [
+        'Mother Vegetableから生まれた白いパウダー「Confidence」。育つ過程で、純度97%の非晶質シリカを生み出します。',
+        '医薬部外品原料規格もクリアしたシリカは肌や髪、愛するペットにも使用可能で、化粧水やシャンプーに混ぜて1ランク上のアイテムに。',
+      ]
+    : copy.confidenceBody;
+  const mobileConfidenceCta = lpLocale === 'ja'
+    ? ['Confidenceとの', 'コラボ商品はこちら']
+    : [copy.confidenceCta];
 
   return (
     <section className="bg-black py-32">
@@ -121,12 +130,22 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
               {copy.confidenceLead}
             </strong>
             <p style={{ color: 'rgba(255,255,255,0.90)', fontSize: 16, lineHeight: 2, maxWidth: 620 }}>
-              {copy.confidenceBody.map((line, index) => (
-                <span key={line}>
-                  {line}
-                  {index < copy.confidenceBody.length - 1 && <br />}
-                </span>
-              ))}
+              <span className="md:hidden">
+                {mobileConfidenceBody.map((line, index) => (
+                  <span key={line}>
+                    {line}
+                    {index < mobileConfidenceBody.length - 1 && <br />}
+                  </span>
+                ))}
+              </span>
+              <span className="hidden md:inline">
+                {copy.confidenceBody.map((line, index) => (
+                  <span key={line}>
+                    {line}
+                    {index < copy.confidenceBody.length - 1 && <br />}
+                  </span>
+                ))}
+              </span>
             </p>
             <div className="mt-7 flex justify-start">
               <Link
@@ -134,7 +153,12 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
                 className="inline-flex items-center justify-center px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1"
                 style={{ background: '#fff', color: '#001d0c', border: '1px solid #fff', fontFamily: "'Noto Sans JP', sans-serif" }}
               >
-                {copy.confidenceCta}
+                <span className="md:hidden">
+                  {mobileConfidenceCta.map((line) => (
+                    <span key={line} className="block">{line}</span>
+                  ))}
+                </span>
+                <span className="hidden md:inline">{copy.confidenceCta}</span>
               </Link>
             </div>
           </article>
