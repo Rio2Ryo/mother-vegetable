@@ -150,7 +150,7 @@ export function EventProductPage({ product }: { product: EventProduct }) {
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               {stripeLink ? (
                 <a href={stripeLink} target="_blank" rel="noreferrer" className={`${ctaClass} bg-emerald-300 text-black hover:bg-white`}>
-                  Stripeで申し込む
+                  購入する
                 </a>
               ) : (
                 <span className={`${ctaClass} cursor-not-allowed bg-white/20 text-white/55`}>
@@ -204,7 +204,7 @@ export function EventProductPage({ product }: { product: EventProduct }) {
             <span className="rounded-full bg-white px-6 py-4 text-lg font-black text-black">{product.price}</span>
             {stripeLink ? (
               <a href={stripeLink} target="_blank" rel="noreferrer" className="rounded-full bg-emerald-300 px-9 py-4 text-sm font-black text-black transition hover:bg-white">
-                Stripeで申し込む
+                購入する
               </a>
             ) : (
               <span className="rounded-full bg-white/20 px-9 py-4 text-sm font-black text-white/55">Stripeリンク準備中</span>
