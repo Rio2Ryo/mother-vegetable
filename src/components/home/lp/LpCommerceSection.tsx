@@ -114,7 +114,7 @@ export default function LpCommerceSection({ locale = 'ja' }: { locale?: LpLocale
             </div>
 
             <div
-              className="relative flex items-center gap-3 min-h-[76px] px-6 py-2"
+              className="relative flex items-center justify-center sm:justify-start gap-3 min-h-[76px] px-4 sm:px-6 py-2"
               style={{
                 borderRadius: 999,
                 border: '1px solid rgba(37,199,96,0.78)',
@@ -124,8 +124,8 @@ export default function LpCommerceSection({ locale = 'ja' }: { locale?: LpLocale
               role="search"
               aria-label="Search form mockup"
             >
-              <span className="flex-shrink-0 relative w-8 h-8 rounded-full" style={{ border: '2px solid #25C760', boxShadow: '0 0 14px rgba(37,199,96,0.32)' }} aria-hidden="true" />
-              <span className="flex-1 font-extrabold text-left" style={{ color: 'rgba(255,255,255,0.86)', letterSpacing: '0.01em', fontFamily: "'Noto Sans JP', sans-serif" }}>
+              <span className="hidden sm:block flex-shrink-0 relative w-8 h-8 rounded-full" style={{ border: '2px solid #25C760', boxShadow: '0 0 14px rgba(37,199,96,0.32)' }} aria-hidden="true" />
+              <span className="hidden sm:block flex-1 font-extrabold text-left" style={{ color: 'rgba(255,255,255,0.86)', letterSpacing: '0.01em', fontFamily: "'Noto Sans JP', sans-serif" }}>
                 {activeOption}
               </span>
               <span className="flex-shrink-0 inline-flex items-center justify-center min-w-[132px] min-h-[54px] px-6 rounded-full font-black" style={{ background: '#25C760', color: '#001d0c', fontFamily: "'Inter', 'Noto Sans JP', sans-serif", boxShadow: '0 0 20px rgba(37,199,96,0.42)' }}>
