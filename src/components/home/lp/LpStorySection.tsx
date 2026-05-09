@@ -1,7 +1,11 @@
 import { getLpLocale, lpCopy, type LpLocale } from './lpCopy';
 
 export default function LpStorySection({ locale = 'ja' }: { locale?: LpLocale }) {
-  const copy = lpCopy[getLpLocale(locale)];
+  const lpLocale = getLpLocale(locale);
+  const copy = lpCopy[lpLocale];
+  const mobileStoryDiagramTitle = lpLocale === 'ja'
+    ? ['MV Productをつくる', '3つの力']
+    : [copy.storyDiagramTitle];
 
   return (
     <section
@@ -47,7 +51,7 @@ export default function LpStorySection({ locale = 'ja' }: { locale?: LpLocale })
               maxWidth: 760,
               color: '#fff',
               fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
-              fontSize: 'clamp(22px, 3vw, 40px)',
+              fontSize: 'clamp(17px, 4.6vw, 40px)',
               lineHeight: 1.42,
             }}
           >
@@ -69,7 +73,12 @@ export default function LpStorySection({ locale = 'ja' }: { locale?: LpLocale })
             className="text-center mb-7 font-extrabold"
             style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", color: '#fff', fontSize: 'clamp(24px, 3vw, 38px)', lineHeight: 1.35 }}
           >
-            {copy.storyDiagramTitle}
+            <span className="md:hidden">
+              {mobileStoryDiagramTitle.map((line) => (
+                <span key={line} className="block">{line}</span>
+              ))}
+            </span>
+            <span className="hidden md:inline">{copy.storyDiagramTitle}</span>
           </h3>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 items-center">
