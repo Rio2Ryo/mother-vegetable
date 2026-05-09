@@ -7,6 +7,9 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
   const mobileProductsTitle = lpLocale === 'ja'
     ? ['Mother Vegetableから', '生まれた2つの', '「地球最古の生命の力」が', '全てのアイテムに']
     : copy.productsTitle;
+  const mobileAchieveLead = lpLocale === 'ja'
+    ? ['高たんぱく質', '＋全48種類の天然栄養']
+    : [copy.achieveLead];
 
   return (
     <section className="bg-black py-32">
@@ -65,7 +68,12 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
               Achieve
             </h3>
             <strong className="block font-extrabold mb-4" style={{ color: '#fff', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
-              {copy.achieveLead}
+              <span className="md:hidden">
+                {mobileAchieveLead.map((line) => (
+                  <span key={line} className="block">{line}</span>
+                ))}
+              </span>
+              <span className="hidden md:inline">{copy.achieveLead}</span>
             </strong>
             <p className="max-w-[620px]" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2 }}>
               {copy.achieveBody.map((line, index) => (
