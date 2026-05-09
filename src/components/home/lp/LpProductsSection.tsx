@@ -10,18 +10,9 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
   const mobileAchieveLead = lpLocale === 'ja'
     ? ['高たんぱく質', '＋全48種類の天然栄養']
     : [copy.achieveLead];
-  const mobileAchieveBody = lpLocale === 'ja'
-    ? [
-        'Mother Vegetableから生まれた高栄養食品「Achieve」。',
-        'たんぱく質、ミネラル、',
-        'ビタミン、フィコシアニン',
-        'などを含み、食事、調味料、',
-        '飲料、ペット、スポーツ栄養まで',
-        '幅広く活用できます。',
-        '現代の食に、地球最古の',
-        '生命力を加える素材です。',
-      ]
-    : copy.achieveBody;
+  const mobileAchieveCta = lpLocale === 'ja'
+    ? ['Achieveとの', 'コラボ商品はこちら']
+    : [copy.achieveCta];
   const mobileConfidenceLead = lpLocale === 'ja'
     ? ['純度97%の天然シリカで、', 'やさしく整える。']
     : [copy.confidenceLead];
@@ -100,30 +91,25 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
               <span className="hidden md:inline">{copy.achieveLead}</span>
             </strong>
             <p className="max-w-[620px]" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2 }}>
-              <span className="md:hidden">
-                {mobileAchieveBody.map((line, index) => (
-                  <span key={line}>
-                    {line}
-                    {index < mobileAchieveBody.length - 1 && <br />}
-                  </span>
-                ))}
-              </span>
-              <span className="hidden md:inline">
-                {copy.achieveBody.map((line, index) => (
-                  <span key={line}>
-                    {line}
-                    {index < copy.achieveBody.length - 1 && <br />}
-                  </span>
-                ))}
-              </span>
+              {copy.achieveBody.map((line, index) => (
+                <span key={line}>
+                  {line}
+                  {index < copy.achieveBody.length - 1 && <br />}
+                </span>
+              ))}
             </p>
             <div className="mt-7 flex">
               <Link
                 href="/product/achieve"
-                className="inline-flex items-center justify-center w-full max-w-[520px] md:w-auto px-4 md:px-6 py-3 rounded-full font-bold text-[13px] sm:text-sm whitespace-nowrap transition-all duration-300 hover:-translate-y-1"
+                className="inline-flex items-center justify-center w-[min(100%,290px)] md:w-auto px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1"
                 style={{ background: '#25C760', color: '#001d0c', border: '1px solid #25C760', boxShadow: '0 0 20px rgba(37,199,96,0.42)', fontFamily: "'Noto Sans JP', sans-serif" }}
               >
-                {copy.achieveCta}
+                <span className="md:hidden">
+                  {mobileAchieveCta.map((line) => (
+                    <span key={line} className="block">{line}</span>
+                  ))}
+                </span>
+                <span className="hidden md:inline">{copy.achieveCta}</span>
               </Link>
             </div>
           </article>
