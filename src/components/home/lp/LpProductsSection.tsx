@@ -2,7 +2,11 @@ import { Link } from '@/i18n/navigation';
 import { getLpLocale, lpCopy, type LpLocale } from './lpCopy';
 
 export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale }) {
-  const copy = lpCopy[getLpLocale(locale)];
+  const lpLocale = getLpLocale(locale);
+  const copy = lpCopy[lpLocale];
+  const mobileProductsTitle = lpLocale === 'ja'
+    ? ['Mother Vegetableから', '生まれた2つの', '「地球最古の生命の力」が', '全てのアイテムに']
+    : copy.productsTitle;
 
   return (
     <section className="bg-black py-32">
@@ -18,9 +22,16 @@ export default function LpProductsSection({ locale = 'ja' }: { locale?: LpLocale
               textShadow: '0 0 18px rgba(37,199,96,0.30)',
             }}
           >
-            <span className="block">{copy.productsTitle[0]}</span>
-            <span className="block">
-              {copy.productsTitle[1]}<span className="block md:inline">{copy.productsTitle[2]}</span>
+            <span className="md:hidden">
+              {mobileProductsTitle.map((line) => (
+                <span key={line} className="block">{line}</span>
+              ))}
+            </span>
+            <span className="hidden md:block">
+              <span className="block">{copy.productsTitle[0]}</span>
+              <span className="block">
+                {copy.productsTitle[1]}<span className="block md:inline">{copy.productsTitle[2]}</span>
+              </span>
             </span>
           </h2>
           <div
