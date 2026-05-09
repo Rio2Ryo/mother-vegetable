@@ -176,8 +176,7 @@ function ProducerRegionLine({ producer, region }: { producer?: string; region?: 
     return (
       <>
         <span className="text-gray-300">{producer}</span>
-        <span className="hidden sm:inline mx-1 text-gray-600">·</span>
-        <span className="block sm:inline">{region}</span>
+        <span className="block sm:inline sm:ml-1">{region}</span>
       </>
     );
   }
