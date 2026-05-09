@@ -22,6 +22,10 @@ export type EventProduct = {
   storyBody: string;
   detailTitle: string;
   detailBody: string;
+  achieveTitle: string;
+  achieveBody: string;
+  conceptTitle: string;
+  conceptBody: string;
   benefits: string[];
   closingTitle: string;
   closingBody: string;
@@ -51,7 +55,13 @@ export const eventProducts: Record<EventProductKey, EventProduct> = {
     detailTitle: 'Confidence の魅力',
     detailBody:
       'Mother Vegetable Confidence は、毎日のセルフケアをやさしく支えるプロダクトです。イベント会場では、日差しを浴びた後の肌をいたわるアフターサンケアとして使いやすく仕立てました。',
-    benefits: ['After Sun Care', 'Portable Spray', 'Plant-Based Wellness'],
+    achieveTitle: 'スプレータイプの使いやすさ',
+    achieveBody:
+      '手を汚さずにさっと使えるスプレータイプ。会場での移動中、屋外で過ごしたあと、ホテルに戻る前のひと吹きなど、マレーシアの強い日差しを浴びた日のケア習慣として取り入れやすいアイテムです。',
+    conceptTitle: '日差しを楽しんだあとに',
+    conceptBody:
+      'イベントを思いきり楽しんだ肌に、うるおいとクールダウンを。現地で試して、そのまま持ち帰れる当日購入用のConfidenceケアスプレーです。',
+    benefits: ['After Sun Care', 'Quick Spray', 'Event Limited'],
     closingTitle: '会場で体験して、\nそのまま持ち帰る。',
     closingBody: '数量限定100個まで。マレーシアイベント当日の購入用リンクからお申し込みください。',
   },
@@ -64,7 +74,7 @@ export const eventProducts: Record<EventProductKey, EventProduct> = {
     eyebrow: 'HONEY ACHIEVE',
     title: '北海道十勝の恵みと、\n世界を制した想いを。',
     lead:
-      '北海道の広大な大地で育まれたハチミツに、Mother Vegetable Achieveの栄養を重ねたイベント限定商品です。子どもたちの未来を応援する想いを込めています。',
+      '世界を制したチャンピオンの想い、北海道十勝の大地の恵み、そして35億年前から続く生命の栄養をひとつに。子どもたちの未来を応援する、新しいハチミツです。',
     productName: '永原和可那 × 十勝 Honey Achieve',
     shortName: '北海道 永原さん はちみつ',
     price: 'US$35',
@@ -78,7 +88,13 @@ export const eventProducts: Record<EventProductKey, EventProduct> = {
     detailTitle: '永原和可那選手について',
     detailBody:
       '永原和可那選手は、女子ダブルスで日本初となる世界選手権2連覇を達成した世界トップクラスのアスリートです。世界の頂点に立った経験を持ち、次世代の子どもたちの成長を応援しています。その想いを込めて、この商品づくりに参加しました。',
-    benefits: ['Tokachi Honey', 'Achieve Nutrition', 'Kids Future Support'],
+    achieveTitle: 'Achieve の魅力',
+    achieveBody:
+      'Mother Vegetable Achieve は、35億年前に誕生した生命の栄養を凝縮したナチュラルパウダーです。たんぱく質、鉄分、ビタミン、フィコシアニンなどを豊富に含み、毎日のコンディションづくりをサポートします。',
+    conceptTitle: '子どもたちの未来のために',
+    conceptBody:
+      '世界を制したチャンピオンの想い。北海道の大地の恵み。そして、35億年前から続く生命の栄養。子どもたちの未来を応援する、新しいハチミツです。',
+    benefits: ['Tokachi Honey', 'Rich Aroma', 'Kids Future'],
     closingTitle: '子どもたちの未来を応援する、\n新しいハチミツ。',
     closingBody:
       '世界を制したチャンピオンの想い、北海道の大地の恵み、35億年前から続く生命の栄養をひとつに。数量限定100個まで。',
@@ -92,7 +108,7 @@ export const eventProducts: Record<EventProductKey, EventProduct> = {
     eyebrow: 'HONEY ACHIEVE',
     title: '秋田県大仙市の恵みと、\n挑戦を支える想いを。',
     lead:
-      '秋田県大仙市の自然が育んだやさしい甘さのハチミツに、Mother Vegetable Achieveの栄養を重ねたイベント限定商品です。子どもたちの挑戦を応援します。',
+      '世界で戦ったアスリートの経験、故郷の自然の恵み、そして35億年前から続く生命の栄養をひとつに。子どもたちの挑戦を支える、新しいハチミツです。',
     productName: '伊藤友広 × 大仙市 Honey Achieve',
     shortName: '秋田 伊藤さん はちみつ',
     price: 'US$35',
@@ -106,7 +122,13 @@ export const eventProducts: Record<EventProductKey, EventProduct> = {
     detailTitle: '伊藤友広選手について',
     detailBody:
       '伊藤友広選手は、アテネオリンピック男子4×100mリレー日本代表として世界の舞台を走ったトップアスリートです。現在は毎年1,000人以上の子どもたちに走る楽しさと挑戦する大切さを伝えています。子どもたちの未来を応援したいという想いから、この商品づくりに参加しました。',
-    benefits: ['Daisen Honey', 'Achieve Nutrition', 'Challenge Support'],
+    achieveTitle: 'Achieve の魅力',
+    achieveBody:
+      'Mother Vegetable Achieve は、35億年前に誕生した生命の栄養を現代に届けるナチュラルパウダーです。たんぱく質、鉄分、ビタミン、フィコシアニンなどを豊富に含み、毎日の栄養補給をやさしくサポートします。',
+    conceptTitle: '子どもたちの未来のために',
+    conceptBody:
+      '世界で戦ったアスリートの経験。故郷の自然の恵み。そして、35億年前から続く生命の栄養。子どもたちの挑戦を支える、新しいハチミツです。',
+    benefits: ['Daisen Honey', 'Gentle Sweetness', 'Challenge Support'],
     closingTitle: '子どもたちの挑戦を支える、\n新しいハチミツ。',
     closingBody:
       '世界で戦ったアスリートの経験、故郷の自然の恵み、35億年前から続く生命の栄養をひとつに。数量限定100個まで。',
@@ -189,6 +211,18 @@ export function EventProductPage({ product }: { product: EventProduct }) {
             <p className="text-sm font-black tracking-[0.3em] text-emerald-300">PRODUCT</p>
             <h2 className="mt-5 text-4xl font-black tracking-[-0.05em] sm:text-6xl">{product.detailTitle}</h2>
             <p className="mt-6 leading-8 text-white/68">{product.detailBody}</p>
+          </article>
+        </div>
+        <div className="mx-auto mt-5 grid max-w-7xl gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+          <article className={`rounded-[2rem] border border-white/10 bg-gradient-to-br ${product.accent} p-7 text-black sm:p-10`}>
+            <p className="text-sm font-black tracking-[0.3em] text-black/60">FEATURE</p>
+            <h2 className="mt-5 text-4xl font-black tracking-[-0.05em] sm:text-6xl">{product.achieveTitle}</h2>
+            <p className="mt-6 leading-8 text-black/72">{product.achieveBody}</p>
+          </article>
+          <article className="rounded-[2rem] border border-emerald-200/15 bg-emerald-300/[0.08] p-7 sm:p-10">
+            <p className="text-sm font-black tracking-[0.3em] text-emerald-300">MESSAGE</p>
+            <h2 className="mt-5 text-4xl font-black tracking-[-0.05em] sm:text-6xl">{product.conceptTitle}</h2>
+            <p className="mt-6 whitespace-pre-line leading-8 text-white/72">{product.conceptBody}</p>
           </article>
         </div>
       </section>
