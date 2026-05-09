@@ -1686,11 +1686,19 @@ const mvManuka: ProductData = {
 // Exports
 // ---------------------------------------------------------------------------
 
+const purchasableProductSlugs = new Set(['achieve', 'confidence']);
+
+const productCatalog: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi, mvMatcha, mvDressing, mvOlive, mvSuncare, mvBodyMist, mvHandCream, mvPonzu, mvFaceMist, mvHairOil, mvLipBalm, mvVinegar, mvBathSalt, mvGingerTea, mvHoney];
+
+function withPurchaseAvailability(product: ProductData): ProductData {
+  return purchasableProductSlugs.has(product.slug) ? product : { ...product, inStock: false };
+}
+
 /** Active products shown on the site. */
-export const products: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi, mvMatcha, mvDressing, mvOlive, mvSuncare, mvBodyMist, mvHandCream, mvPonzu, mvFaceMist, mvHairOil, mvLipBalm, mvVinegar, mvBathSalt, mvGingerTea, mvHoney];
+export const products: ProductData[] = productCatalog.map(withPurchaseAvailability);
 
 /** All products including discontinued, for admin/order lookup. */
-export const allProducts: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi, mvMatcha, mvDressing, mvOlive, mvSuncare, mvBodyMist, mvHandCream, mvPonzu, mvFaceMist, mvHairOil, mvLipBalm, mvVinegar, mvBathSalt, mvGingerTea, mvHoney];
+export const allProducts: ProductData[] = productCatalog.map(withPurchaseAvailability);
 
 export function getProductBySlug(slug: string): ProductData | undefined {
   return allProducts.find((p) => p.slug === slug);

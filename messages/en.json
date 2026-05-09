@@ -146,8 +146,8 @@
     "howToUseTitle": "How to use",
     "addedToCart": "Added to cart!",
     "itemCount": "({count}) items",
-    "outOfStock": "Out of Stock",
-    "outOfStockDesc": "This product is currently unavailable."
+    "outOfStock": "Coming Soon",
+    "outOfStockDesc": "This product is not available for purchase yet."
   },
   "checkout": {
     "title": "Checkout",

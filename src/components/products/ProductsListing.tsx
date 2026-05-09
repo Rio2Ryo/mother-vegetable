@@ -807,8 +807,11 @@ function ProductCard({
   const displayStoryDescription = localizeStoryDescription(product, isJa);
   const displayMobileName = localizeMobileProductName(product, isJa);
   const displayMobileStoryDescription = localizeMobileStoryDescription(product, isJa);
+  const isPurchasable = product.inStock;
 
   const handleAddToCart = () => {
+    if (!isPurchasable) return;
+
     addItem({
       id: product.id,
       productId: product.id,
@@ -984,9 +987,10 @@ function ProductCard({
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
-            className="inline-flex w-full sm:w-auto justify-center rounded-full bg-[#25C760] text-black text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 hover:bg-[#2ee873] transition"
+            disabled={!isPurchasable}
+            className={`inline-flex w-full sm:w-auto justify-center rounded-full text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 transition ${isPurchasable ? 'bg-[#25C760] text-black hover:bg-[#2ee873]' : 'bg-white/10 text-white/60 border border-white/15 cursor-not-allowed'}`}
           >
-            {addedFeedback ? t('✓ Added', '✓ 追加済み', '✓ 已添加') : t('Add to Cart', 'カートに入れる', '加入购物车')}
+            {!isPurchasable ? 'Coming Soon' : (addedFeedback ? t('✓ Added', '✓ 追加済み', '✓ 已添加') : t('Add to Cart', 'カートに入れる', '加入购物车'))}
           </button>
         </div>
       </div>
@@ -1003,6 +1007,10 @@ function PriceDisplay({
   isJa: boolean;
   hasReferral: boolean;
 }) {
+  if (!product.inStock) {
+    return <span className="text-white/60 font-bold text-xs sm:text-sm leading-none rounded-full border border-white/15 bg-white/10 px-2.5 py-1">Coming Soon</span>;
+  }
+
   const priceJpy = product.priceJpy;
   if (isJa) {
     if (hasReferral && priceJpy) {

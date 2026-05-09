@@ -146,8 +146,8 @@
     "howToUseTitle": "使用方法",
     "addedToCart": "已添加到购物车！",
     "itemCount": "({count}) 件",
-    "outOfStock": "缺货",
-    "outOfStockDesc": "此商品暂时无货。"
+    "outOfStock": "Coming Soon",
+    "outOfStockDesc": "此商品即将推出，目前无法购买。"
   },
   "checkout": {
     "title": "结算",

@@ -76,6 +76,8 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
   const discountedPrice = parseFloat((product.price * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2));
 
   const handleAddToCart = useCallback(() => {
+    if (!product.inStock) return;
+
     addItem({
       id: product.id,
       productId: product.id,
@@ -91,6 +93,8 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
   }, [addItem, product, hasReferral, discountedPrice, quantity]);
 
   const handleBuyNow = useCallback(() => {
+    if (!product.inStock) return;
+
     addItem({
       id: product.id,
       productId: product.id,
@@ -134,7 +138,9 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
 
             {/* Price */}
             <div className="flex items-center gap-3 flex-wrap">
-              {hasReferral ? (
+              {!product.inStock ? (
+                <span className="text-sm font-bold text-white/70 rounded-full border border-white/15 bg-white/10 px-3 py-1">Coming Soon</span>
+              ) : hasReferral ? (
                 <>
                   <span className="text-lg text-white/50 line-through">{product.priceJpy}</span>
                   <span className="text-2xl font-bold text-white">
@@ -147,7 +153,7 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
               ) : (
                 <span className="text-2xl font-bold text-white">{product.priceJpy}</span>
               )}
-              <span className="ml-2 text-[#25C760] text-xs border border-[#25C760] rounded px-2 py-0.5">{isJa ? '送料無料' : 'Free Shipping'}</span>
+              {product.inStock && <span className="ml-2 text-[#25C760] text-xs border border-[#25C760] rounded px-2 py-0.5">{isJa ? '送料無料' : 'Free Shipping'}</span>}
             </div>
 
             {/* Benefits */}
@@ -182,14 +188,14 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
                 disabled={!product.inStock}
                 className="w-full py-3 bg-white text-black font-bold rounded-lg text-sm uppercase tracking-wider border-2 border-[#25C760] hover:bg-[#25C760] hover:text-white transition disabled:opacity-50"
               >
-                {addedFeedback ? (isJa ? '✓ カートに追加しました' : '✓ Added to Cart') : (isJa ? 'カートに入れる' : 'Add to Cart')}
+                {!product.inStock ? 'Coming Soon' : (addedFeedback ? (isJa ? '✓ カートに追加しました' : '✓ Added to Cart') : (isJa ? 'カートに入れる' : 'Add to Cart'))}
               </button>
               <button
                 onClick={handleBuyNow}
                 disabled={!product.inStock}
                 className="w-full py-3 bg-[#25C760] text-white font-bold rounded-lg text-sm uppercase tracking-wider hover:bg-[#1da84e] transition disabled:opacity-50"
               >
-                {isJa ? '今すぐ購入' : 'Buy Now'}
+                {!product.inStock ? 'Coming Soon' : (isJa ? '今すぐ購入' : 'Buy Now')}
               </button>
             </div>
           </div>
