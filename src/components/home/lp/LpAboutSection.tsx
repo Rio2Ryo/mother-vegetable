@@ -2,7 +2,11 @@ import Image from 'next/image';
 import { getLpLocale, lpCopy, type LpLocale } from './lpCopy';
 
 export default function LpAboutSection({ locale = 'ja' }: { locale?: LpLocale }) {
-  const copy = lpCopy[getLpLocale(locale)];
+  const lpLocale = getLpLocale(locale);
+  const copy = lpCopy[lpLocale];
+  const mobileAboutTitle = lpLocale === 'ja'
+    ? ['開発者', 'ストーリーと', '地球最初の', '植物との融合']
+    : copy.aboutTitle;
 
   return (
     <section className="relative bg-black py-24 md:py-32 overflow-hidden">
@@ -35,9 +39,16 @@ export default function LpAboutSection({ locale = 'ja' }: { locale?: LpLocale })
                 textShadow: '0 0 20px rgba(37,199,96,0.28)',
               }}
             >
-              {copy.aboutTitle.map((line) => (
-                <span key={line} className="block">{line}</span>
-              ))}
+              <span className="md:hidden">
+                {mobileAboutTitle.map((line) => (
+                  <span key={line} className="block">{line}</span>
+                ))}
+              </span>
+              <span className="hidden md:block">
+                {copy.aboutTitle.map((line) => (
+                  <span key={line} className="block">{line}</span>
+                ))}
+              </span>
             </h2>
 
             <div
