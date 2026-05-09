@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 export type EventProductKey = 'ath' | 'wn' | 'ti';
 
@@ -145,7 +144,6 @@ function getStripeLink(product: EventProduct) {
 
 export function EventProductPage({ product }: { product: EventProduct }) {
   const stripeLink = getStripeLink(product);
-  const ctaClass = 'rounded-full px-8 py-4 text-center text-sm font-black shadow-[0_18px_50px_rgba(52,211,153,0.24)] transition';
 
   return (
     <div className="min-h-screen overflow-hidden bg-black text-white">
@@ -164,24 +162,24 @@ export function EventProductPage({ product }: { product: EventProduct }) {
               <Multiline text={product.title} />
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">{product.lead}</p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <span className="rounded-full bg-white px-5 py-3 text-lg font-black text-black">{product.price}</span>
-              <span className="rounded-full border border-white/15 bg-white/8 px-5 py-3 text-sm font-bold text-white/76">Max 100 pcs</span>
-              <span className="rounded-full border border-emerald-200/20 bg-emerald-300/10 px-5 py-3 text-sm font-bold text-emerald-100">Event Order</span>
-            </div>
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-8 max-w-md rounded-[1.75rem] border border-white/10 bg-black/30 p-5 backdrop-blur">
+              <div className="flex items-end justify-between gap-4 border-b border-white/10 pb-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/48">Price</p>
+                  <p className="mt-1 text-4xl font-black tracking-[-0.04em] text-white">{product.price}</p>
+                </div>
+                <p className="pb-1 text-right text-xs font-bold uppercase tracking-[0.16em] text-emerald-200/80">Max 100 pcs</p>
+              </div>
               {stripeLink ? (
-                <a href={stripeLink} target="_blank" rel="noreferrer" className={`${ctaClass} bg-emerald-300 text-black hover:bg-white`}>
+                <a href={stripeLink} target="_blank" rel="noreferrer" className="mt-5 flex w-full items-center justify-center rounded-2xl bg-emerald-300 px-8 py-5 text-lg font-black text-black shadow-[0_18px_50px_rgba(52,211,153,0.36)] transition hover:-translate-y-0.5 hover:bg-white">
                   購入する
+                  <span className="ml-3 text-2xl leading-none">→</span>
                 </a>
               ) : (
-                <span className={`${ctaClass} cursor-not-allowed bg-white/20 text-white/55`}>
-                  Stripeリンク準備中
+                <span className="mt-5 flex w-full cursor-not-allowed items-center justify-center rounded-2xl bg-white/20 px-8 py-5 text-lg font-black text-white/55">
+                  リンク準備中
                 </span>
               )}
-              <Link href="/" className="rounded-full border border-white/20 bg-white/8 px-8 py-4 text-center text-sm font-bold text-white backdrop-blur transition hover:border-emerald-200/60 hover:bg-white/14">
-                Mother Vegetable
-              </Link>
             </div>
           </div>
 
@@ -234,14 +232,17 @@ export function EventProductPage({ product }: { product: EventProduct }) {
             <Multiline text={product.closingTitle} />
           </h2>
           <p className="mx-auto mt-7 max-w-2xl leading-8 text-white/66">{product.closingBody}</p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <span className="rounded-full bg-white px-6 py-4 text-lg font-black text-black">{product.price}</span>
+          <div className="mx-auto mt-8 max-w-md rounded-[1.75rem] border border-white/10 bg-black/30 p-5">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/48">Price</p>
+            <p className="mt-1 text-4xl font-black tracking-[-0.04em] text-white">{product.price}</p>
+            <p className="mt-2 text-sm font-bold text-white/50">最大100個まで購入できます</p>
             {stripeLink ? (
-              <a href={stripeLink} target="_blank" rel="noreferrer" className="rounded-full bg-emerald-300 px-9 py-4 text-sm font-black text-black transition hover:bg-white">
+              <a href={stripeLink} target="_blank" rel="noreferrer" className="mt-5 flex w-full items-center justify-center rounded-2xl bg-emerald-300 px-9 py-5 text-lg font-black text-black transition hover:-translate-y-0.5 hover:bg-white">
                 購入する
+                <span className="ml-3 text-2xl leading-none">→</span>
               </a>
             ) : (
-              <span className="rounded-full bg-white/20 px-9 py-4 text-sm font-black text-white/55">Stripeリンク準備中</span>
+              <span className="mt-5 flex w-full cursor-not-allowed items-center justify-center rounded-2xl bg-white/20 px-9 py-5 text-lg font-black text-white/55">リンク準備中</span>
             )}
           </div>
         </div>
