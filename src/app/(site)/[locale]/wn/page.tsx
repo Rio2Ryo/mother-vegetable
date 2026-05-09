@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
-import { EventProductPage, eventProducts } from './eventProducts';
+import { EventProductPage, eventProducts } from '../ath/eventProducts';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const product = eventProducts.ath;
+  const product = eventProducts.wn;
 
   return {
     title: product.metaTitle,
     description: product.metaDescription,
-    alternates: { canonical: '/ath' },
+    alternates: { canonical: '/wn' },
     openGraph: {
       title: product.metaTitle,
       description: product.metaDescription,
@@ -17,8 +17,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function AthPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function WnPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <EventProductPage product={eventProducts.ath} />;
+  return <EventProductPage product={eventProducts.wn} />;
 }

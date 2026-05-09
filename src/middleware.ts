@@ -40,11 +40,11 @@ export default function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Dedicated short path for the ATH LP. Keep the public URL as /ath,
-  // while rendering the Japanese localized page inside the existing site shell.
-  if (pathname === '/ath' || pathname.startsWith('/ath/')) {
+  // Dedicated short event LP paths. Keep public URLs short,
+  // while rendering the Japanese localized pages inside the existing site shell.
+  if (/^\/(ath|wn|ti)(\/|$)/.test(pathname)) {
     const url = request.nextUrl.clone();
-    url.pathname = pathname.replace(/^\/ath/, '/ja/ath');
+    url.pathname = pathname.replace(/^\/(ath|wn|ti)/, '/ja/$1');
     return NextResponse.rewrite(url);
   }
 
