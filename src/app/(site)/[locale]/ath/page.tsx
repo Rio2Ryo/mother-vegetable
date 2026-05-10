@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
-import { EventProductPage, eventProducts } from './eventProducts';
+import { EventProductPage, getEventProduct } from './eventProducts';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const product = eventProducts.ath;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const product = getEventProduct('ath', locale);
 
   return {
     title: product.metaTitle,
@@ -20,5 +21,5 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AthPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <EventProductPage product={eventProducts.ath} />;
+  return <EventProductPage product={getEventProduct('ath', locale)} locale={locale} />;
 }

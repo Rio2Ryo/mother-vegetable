@@ -134,6 +134,82 @@ export const eventProducts: Record<EventProductKey, EventProduct> = {
   },
 };
 
+const eventProductsEn: Record<EventProductKey, EventProduct> = {
+  ath: {
+    ...eventProducts.ath,
+    metaTitle: 'After Sun Care Spray | Mother Vegetable',
+    metaDescription: 'Malaysia event limited after-sun care spray powered by Confidence from Mother Vegetable.',
+    badge: 'Mother Vegetable Confidence',
+    eyebrow: 'MALAYSIA EVENT LIMITED',
+    title: 'Gentle cooldown\nfor sun-kissed skin.',
+    lead: 'For guests at the Malaysia event who want to care for their skin right after strong sunlight. We present the plant-based care of Confidence as an easy-to-carry after-sun spray.',
+    productName: 'Confidence After Sun Care Spray',
+    shortName: 'After Sun Care Spray',
+    imageAlt: 'Mother Vegetable Confidence after-sun spray bottle',
+    storyTitle: 'Refresh your skin on event day.',
+    storyBody: 'After outdoor travel and strong sunlight, this care item helps bring moisture and comfort back to your skin. A quick spray gently supports skin that feels dry after sun exposure.',
+    detailTitle: 'The power of Confidence',
+    detailBody: 'Mother Vegetable Confidence is a self-care product designed to support everyday skin care. For the event, it has been presented as an easy after-sun care item for skin exposed to strong sunlight.',
+    achieveTitle: 'Easy spray format',
+    achieveBody: 'Use it quickly without getting your hands messy. During the event, after spending time outdoors, or before returning to your hotel, it fits naturally into a care routine for sunny Malaysia days.',
+    conceptTitle: 'After enjoying the sunshine',
+    conceptBody: 'Moisture and cooldown for skin after a full day at the event. Try it on-site and take it home as a limited event purchase item.',
+    benefits: ['After Sun Care', 'Quick Spray', 'Event Limited'],
+    closingTitle: 'Try it at the venue\nand take it home.',
+    closingBody: 'Limited to up to 100 units. Please purchase through the event-day link.',
+  },
+  wn: {
+    ...eventProducts.wn,
+    metaTitle: 'Wakana Nagahara × Tokachi Honey Achieve | Mother Vegetable',
+    metaDescription: 'Event purchase page for Honey Achieve inspired by Wakana Nagahara and the blessings of Tokachi, Hokkaido.',
+    badge: 'Wakana Nagahara × Tokachi',
+    eyebrow: 'HONEY ACHIEVE',
+    title: 'The blessings of Tokachi\nand a champion’s spirit.',
+    lead: 'The spirit of a world champion, the richness of Tokachi in Hokkaido, and the nutrition of life that began 3.5 billion years ago come together in a new honey that supports children’s futures.',
+    productName: 'Wakana Nagahara × Tokachi Honey Achieve',
+    shortName: 'Tokachi Honey Achieve',
+    imageAlt: 'Tokachi Honey Achieve',
+    storyTitle: 'The blessings of Tokachi, Hokkaido',
+    storyBody: 'Tokachi, located in eastern Hokkaido, is one of Japan’s largest agricultural regions. With vast open land and clean air, it is often called Japan’s food basket. Honey gathered in this rich natural environment has a deep aroma and full-bodied sweetness.',
+    detailTitle: 'About Wakana Nagahara',
+    detailBody: 'Wakana Nagahara is a world-class badminton athlete who became the first Japanese player to win back-to-back World Championship titles in women’s doubles. With experience at the top of the world, she continues to support the growth of the next generation.',
+    achieveTitle: 'The appeal of Achieve',
+    achieveBody: 'Mother Vegetable Achieve is a natural powder that concentrates the nutrition of life that began 3.5 billion years ago. Rich in protein, iron, vitamins, phycocyanin, and more, it supports everyday conditioning.',
+    conceptTitle: 'For children’s futures',
+    conceptBody: 'The spirit of a world champion.\nThe gifts of Hokkaido’s land.\nAnd the nutrition of life that has continued for 3.5 billion years.\nA new honey that supports children’s futures.',
+    benefits: ['Tokachi Honey', 'Rich Aroma', 'Kids Future'],
+    closingTitle: 'A new honey\nfor children’s futures.',
+    closingBody: 'The spirit of a world champion, the blessings of Hokkaido, and the nutrition of life from 3.5 billion years ago come together. Limited to up to 100 units.',
+  },
+  ti: {
+    ...eventProducts.ti,
+    metaTitle: 'Tomohiro Ito × Daisen Honey Achieve | Mother Vegetable',
+    metaDescription: 'Event purchase page for Honey Achieve inspired by Tomohiro Ito and the blessings of Daisen, Akita.',
+    badge: 'Tomohiro Ito × Daisen',
+    eyebrow: 'HONEY ACHIEVE',
+    title: 'The blessings of Daisen\nand a spirit of challenge.',
+    lead: 'The experience of an athlete who competed on the world stage, the natural richness of his hometown, and the nutrition of life that began 3.5 billion years ago come together in a new honey that supports children’s challenges.',
+    productName: 'Tomohiro Ito × Daisen Honey Achieve',
+    shortName: 'Daisen Honey Achieve',
+    imageAlt: 'Daisen Honey Achieve',
+    storyTitle: 'The blessings of Daisen, Akita',
+    storyBody: 'Daisen City in Akita is a nature-rich area known as one of Japan’s leading rice-producing regions. Winter snow nourishes the land, and from spring to summer, bees gather fragrant nectar from blooming flowers. Honey from this landscape has a gentle and refined sweetness.',
+    detailTitle: 'About Tomohiro Ito',
+    detailBody: 'Tomohiro Ito represented Japan in the men’s 4×100m relay at the Athens Olympics. Today, he teaches more than 1,000 children every year the joy of running and the importance of taking on challenges. This product reflects his wish to support children’s futures.',
+    achieveTitle: 'The appeal of Achieve',
+    achieveBody: 'Mother Vegetable Achieve is a natural powder that delivers the nutrition of life that began 3.5 billion years ago. Rich in protein, iron, vitamins, phycocyanin, and more, it gently supports daily nutrition.',
+    conceptTitle: 'For children’s futures',
+    conceptBody: 'Experience from competing on the world stage.\nThe natural gifts of a hometown.\nAnd the nutrition of life that has continued for 3.5 billion years.\nA new honey that supports children’s challenges.',
+    benefits: ['Daisen Honey', 'Gentle Sweetness', 'Challenge Support'],
+    closingTitle: 'A new honey\nfor children’s challenges.',
+    closingBody: 'The experience of a world-stage athlete, the blessings of his hometown, and the nutrition of life from 3.5 billion years ago come together. Limited to up to 100 units.',
+  },
+};
+
+export function getEventProduct(key: EventProductKey, locale?: string): EventProduct {
+  return locale === 'en' ? eventProductsEn[key] : eventProducts[key];
+}
+
 function Multiline({ text }: { text: string }) {
   return <>{text.split('\n').map((line) => <span key={line} className="block">{line}</span>)}</>;
 }
@@ -148,8 +224,13 @@ function getStripeLink(product: EventProduct) {
   return LIVE_STRIPE_LINKS[product.key];
 }
 
-export function EventProductPage({ product }: { product: EventProduct }) {
+export function EventProductPage({ product, locale }: { product: EventProduct; locale?: string }) {
   const stripeLink = getStripeLink(product);
+  const isEnglish = locale === 'en';
+  const purchaseLabel = isEnglish ? 'Purchase' : '購入する';
+  const maxLabel = isEnglish ? 'Max 100 pcs' : 'Max 100 pcs';
+  const maxPurchaseLabel = isEnglish ? 'You can purchase up to 100 units' : '最大100個まで購入できます';
+  const preparingLabel = isEnglish ? 'Link coming soon' : 'リンク準備中';
 
   return (
     <div className="min-h-screen overflow-hidden bg-black text-white">
@@ -174,16 +255,16 @@ export function EventProductPage({ product }: { product: EventProduct }) {
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/48">Price</p>
                   <p className="mt-1 text-4xl font-black tracking-[-0.04em] text-white">{product.price}</p>
                 </div>
-                <p className="pb-1 text-right text-xs font-bold uppercase tracking-[0.16em] text-emerald-200/80">Max 100 pcs</p>
+                <p className="pb-1 text-right text-xs font-bold uppercase tracking-[0.16em] text-emerald-200/80">{maxLabel}</p>
               </div>
               {stripeLink ? (
                 <a href={stripeLink} target="_blank" rel="noreferrer" className="mt-5 flex w-full items-center justify-center rounded-2xl bg-emerald-300 px-8 py-5 text-lg font-black text-black shadow-[0_18px_50px_rgba(52,211,153,0.36)] transition hover:-translate-y-0.5 hover:bg-white">
-                  購入する
+                  {purchaseLabel}
                   <span className="ml-3 text-2xl leading-none">→</span>
                 </a>
               ) : (
                 <span className="mt-5 flex w-full cursor-not-allowed items-center justify-center rounded-2xl bg-white/20 px-8 py-5 text-lg font-black text-white/55">
-                  リンク準備中
+                  {preparingLabel}
                 </span>
               )}
             </div>
@@ -241,14 +322,14 @@ export function EventProductPage({ product }: { product: EventProduct }) {
           <div className="mx-auto mt-8 max-w-md rounded-[1.75rem] border border-white/10 bg-black/30 p-5">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/48">Price</p>
             <p className="mt-1 text-4xl font-black tracking-[-0.04em] text-white">{product.price}</p>
-            <p className="mt-2 text-sm font-bold text-white/50">最大100個まで購入できます</p>
+            <p className="mt-2 text-sm font-bold text-white/50">{maxPurchaseLabel}</p>
             {stripeLink ? (
               <a href={stripeLink} target="_blank" rel="noreferrer" className="mt-5 flex w-full items-center justify-center rounded-2xl bg-emerald-300 px-9 py-5 text-lg font-black text-black transition hover:-translate-y-0.5 hover:bg-white">
-                購入する
+                {purchaseLabel}
                 <span className="ml-3 text-2xl leading-none">→</span>
               </a>
             ) : (
-              <span className="mt-5 flex w-full cursor-not-allowed items-center justify-center rounded-2xl bg-white/20 px-9 py-5 text-lg font-black text-white/55">リンク準備中</span>
+              <span className="mt-5 flex w-full cursor-not-allowed items-center justify-center rounded-2xl bg-white/20 px-9 py-5 text-lg font-black text-white/55">{preparingLabel}</span>
             )}
           </div>
         </div>
