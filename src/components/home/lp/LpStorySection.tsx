@@ -94,14 +94,14 @@ export default function LpStorySection({ locale = 'ja' }: { locale?: LpLocale })
                 </>
               }
               description={copy.force2Description}
-              mobileDescriptionLines={lpLocale === 'ja' ? ['土地に根づいた素材、文化、', '技術、物語。'] : undefined}
+              mobileDescriptionLines={lpLocale === 'ja' ? ['土地に根づいた素材、', '文化、技術、物語。'] : undefined}
             />
             <PlusSign />
             <ForceCard
               number="03"
               title={copy.force3Title}
               description={copy.force3Description}
-              mobileDescriptionLines={lpLocale === 'ja' ? ['地球最古の生命の力が持つ、', '高栄養・浄化・再生の力。'] : undefined}
+              mobileDescriptionLines={lpLocale === 'ja' ? ['地球最古の生命の力が', '持つ、', '高栄養・浄化・再生の力。'] : undefined}
             />
           </div>
         </div>
@@ -123,7 +123,7 @@ function ForceCard({
 }) {
   return (
     <article
-      className="relative p-7 overflow-hidden"
+      className="relative p-5 sm:p-7 overflow-hidden"
       style={{ border: '1px solid rgba(37,199,96,0.42)', borderRadius: 14, background: '#000', minHeight: 250 }}
     >
       <div
@@ -142,12 +142,22 @@ function ForceCard({
       >
         {title}
       </h3>
-      <p className="relative mt-4" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 15, lineHeight: 1.9, margin: 0 }}>
+      <p
+        className="relative mt-4"
+        style={{
+          color: 'rgba(255,255,255,0.78)',
+          fontSize: 'clamp(14px, 3.65vw, 15px)',
+          lineHeight: 1.9,
+          margin: 0,
+          wordBreak: 'keep-all',
+          overflowWrap: 'normal',
+        }}
+      >
         {mobileDescriptionLines ? (
           <>
             <span className="md:hidden">
               {mobileDescriptionLines.map((line) => (
-                <span key={line} className="block">{line}</span>
+                <span key={line} className="block whitespace-nowrap">{line}</span>
               ))}
             </span>
             <span className="hidden md:inline">{description}</span>
