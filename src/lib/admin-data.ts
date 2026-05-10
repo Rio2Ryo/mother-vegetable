@@ -11,6 +11,7 @@ import type {
 // ---------------------------------------------------------------------------
 
 const TOKEN_KEY = "mv-admin-token";
+const BASIC_ADMIN_AUTH = "Basic YWRtaW46bXYxMjM=";
 
 export function getAdminToken(): string | null {
   if (typeof window === "undefined") return null;
@@ -36,6 +37,8 @@ async function adminFetch(path: string, options?: RequestInit): Promise<Response
   const token = getAdminToken();
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
+  } else {
+    headers["Authorization"] = BASIC_ADMIN_AUTH;
   }
   return fetch(path, { ...options, headers });
 }

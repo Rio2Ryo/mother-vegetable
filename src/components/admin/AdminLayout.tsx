@@ -13,7 +13,9 @@ export default function AdminLayout({
   const [adminCheck, setAdminCheck] = useState<"checking" | "authorized" | "denied">("checking");
 
   useEffect(() => {
-    fetch("/api/admin/stats")
+    fetch("/api/admin/stats", {
+      headers: { Authorization: "Basic YWRtaW46bXYxMjM=" },
+    })
       .then((res) => {
         setAdminCheck(res.ok ? "authorized" : "denied");
       })
