@@ -848,8 +848,8 @@ function ProductCard({
     if (!isPurchasable) return;
 
     addItem({
-      id: product.id,
-      productId: product.id,
+      id: product.slug,
+      productId: product.slug,
       name: displayName,
       price: product.price,
       discountedPrice: hasReferral

@@ -1706,6 +1706,10 @@ export function getProductBySlug(slug: string): ProductData | undefined {
   return allProducts.find((p) => p.slug === slug);
 }
 
+export function getProductByCheckoutId(idOrSlug: string): ProductData | undefined {
+  return allProducts.find((p) => p.slug === idOrSlug || p.id === idOrSlug);
+}
+
 // ----------------------------------------------------------------------
 // Home page adapter
 // ----------------------------------------------------------------------

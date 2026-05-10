@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe, PRODUCT_PRICES, PRODUCT_PRICES_JPY, REFERRAL_DISCOUNT_RATE, resolveLocaleAndCurrency } from "@/lib/stripe";
-import { getProductBySlug } from "@/data/products";
+import { getProductByCheckoutId } from "@/data/products";
 import prisma from "@/lib/prisma";
 import { ensureNewTables } from "@/lib/ensure-tables";
 
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
 
     // Check stock availability before creating checkout session
     for (const item of body.items) {
-      const product = getProductBySlug(item.productId);
+      const product = getProductByCheckoutId(item.productId);
       if (product && !product.inStock) {
         return NextResponse.json(
           { error: `${item.name} is currently out of stock` },
@@ -134,7 +134,9 @@ export async function POST(request: NextRequest) {
     // Build line items for Stripe — enforce server-side pricing
     // Apply referral discount first, then coupon discount stacks on top
     const lineItems = body.items.map((item) => {
-      const serverPrice = priceTable[item.productId];
+      const product = getProductByCheckoutId(item.productId);
+      const checkoutProductId = product?.slug ?? item.productId;
+      const serverPrice = priceTable[checkoutProductId] ?? priceTable[item.productId];
       if (!serverPrice) {
         throw new Error(`Unknown product: ${item.productId}`);
       }
@@ -199,7 +201,9 @@ export async function POST(request: NextRequest) {
         locale: locale,
         items: JSON.stringify(
           body.items.map((i) => {
-            const sp = PRODUCT_PRICES[i.productId] || 0;
+            const product = getProductByCheckoutId(i.productId);
+            const checkoutProductId = product?.slug ?? i.productId;
+            const sp = PRODUCT_PRICES[checkoutProductId] || PRODUCT_PRICES[i.productId] || 0;
             const hasDiscount = !!body.referralCode;
             let price = hasDiscount ? Math.round(sp * (1 - REFERRAL_DISCOUNT_RATE)) : sp;
 

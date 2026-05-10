@@ -22,7 +22,9 @@ export const INSTRUCTOR_REFERRAL_REWARD = 5000; // $50 in cents
 // used in ProductPage (product.id) and sent via the checkout API.
 export const PRODUCT_PRICES: Record<string, number> = {
   achieve: 3670, // $36.70
+  'achieve-capsule-30': 3670, // legacy cart id
   confidence: 3670, // $36.70
+  'confidence-tube-30': 3670, // legacy cart id
   'tilapia': 1350,     // $13.50
   'mv-salt': 1350,     // $13.50
   'mv-soy-sauce': 1350, // $13.50
@@ -35,7 +37,9 @@ export const PRODUCT_PRICES: Record<string, number> = {
 // Mirrors priceJpy in src/components/home/ProductsSection.tsx (24 catalog items).
 export const PRODUCT_PRICES_JPY: Record<string, number> = {
   achieve: 5500,
+  'achieve-capsule-30': 5500,
   confidence: 5500,
+  'confidence-tube-30': 5500,
   'tilapia': 2000,
   'mv-salt': 2000,
   'mv-soy-sauce': 2000,
