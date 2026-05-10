@@ -4,7 +4,6 @@ import LpHeroSection from '@/components/home/lp/LpHeroSection';
 import LpAboutSection from '@/components/home/lp/LpAboutSection';
 import LpProductsSection from '@/components/home/lp/LpProductsSection';
 import LpStorySection from '@/components/home/lp/LpStorySection';
-import LpCommerceSection from '@/components/home/lp/LpCommerceSection';
 import ProductsListing from '@/components/products/ProductsListing';
 import { getLpLocale, lpCopy } from '@/components/home/lp/lpCopy';
 
@@ -28,7 +27,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <LpAboutSection locale={lpLocale} />
       <LpProductsSection locale={lpLocale} />
       <LpStorySection locale={lpLocale} />
-      <LpCommerceSection locale={lpLocale} />
       <ProductsListing embedded />
     </main>
   );
