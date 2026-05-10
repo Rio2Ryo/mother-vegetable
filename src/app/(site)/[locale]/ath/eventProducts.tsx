@@ -139,7 +139,9 @@ function Multiline({ text }: { text: string }) {
 }
 
 function getStripeLink(product: EventProduct) {
-  return process.env[product.stripeEnv] || '';
+  const rawValue = process.env[product.stripeEnv] || '';
+  const firstStripeUrl = rawValue.match(/https:\/\/buy\.stripe\.com\/[^\\\s"']+/)?.[0];
+  return firstStripeUrl || rawValue.trim();
 }
 
 export function EventProductPage({ product }: { product: EventProduct }) {
