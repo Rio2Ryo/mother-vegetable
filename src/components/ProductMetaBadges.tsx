@@ -64,8 +64,9 @@ export default function ProductMetaBadges({ slug, isJa }: { slug: string; isJa: 
               </p>
             )}
             {(product.producer || product.region) && (
-              <p className="truncate text-gray-200">
-                {[product.producer, product.region].filter(Boolean).join(' · ')}
+              <p className="text-gray-200">
+                {product.producer && <span className="block truncate">{product.producer}</span>}
+                {product.region && <span className="block truncate">{product.region}</span>}
               </p>
             )}
           </div>
