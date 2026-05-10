@@ -101,7 +101,7 @@ export default function ChatBot() {
       {!isOpen && (
         <motion.button
           onClick={handleOpen}
-          className="fixed bottom-6 right-6 z-[9] w-14 h-14 rounded-full bg-gradient-to-r from-[#25C760] to-[#3C8063] text-white shadow-[0_4px_20px_rgba(37,199,96,0.4)] flex items-center justify-center cursor-pointer border-none hover:shadow-[0_4px_30px_rgba(37,199,96,0.6)] transition-shadow duration-300"
+          className="fixed bottom-6 right-6 z-[1000] w-14 h-14 rounded-full bg-gradient-to-r from-[#25C760] to-[#3C8063] text-white shadow-[0_4px_20px_rgba(37,199,96,0.4)] flex items-center justify-center cursor-pointer border-none hover:shadow-[0_4px_30px_rgba(37,199,96,0.6)] transition-shadow duration-300"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           exit={{ scale: 0 }}
@@ -128,7 +128,7 @@ export default function ChatBot() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed bottom-6 right-6 z-[9] w-[350px] h-[500px] max-h-[80vh] max-w-[calc(100vw-2rem)] bg-black border border-[#25C760] rounded-xl shadow-[0_8px_40px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden"
+            className="fixed bottom-6 right-6 z-[1000] w-[350px] h-[500px] max-h-[80vh] max-w-[calc(100vw-2rem)] bg-black border border-[#25C760] rounded-xl shadow-[0_8px_40px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
