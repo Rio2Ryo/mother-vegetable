@@ -38,6 +38,9 @@ const TOP_PAGE_PRODUCT_IMAGES: Record<string, string> = {
   'mv-bathsalt': '/cdn/mv_bathsalt_top.png',
   'mv-ginger-tea': '/cdn/mv_ginger_tea_top.png',
   'mv-honey': '/cdn/mv_honey_top.png',
+  ath: '/cdn/mv_body_mist_top.png',
+  wn: '/cdn/mv_honey_top.png',
+  ti: '/cdn/mv_honey_top.png',
 };
 
 const MOBILE_PRODUCT_IMAGES: Record<string, string> = {
@@ -98,6 +101,9 @@ const PRODUCT_NAME_EN: Record<string, string> = {
   'mv-honey': 'MV Honey',
   'mv-ginger-tea': 'MV Ginger Tea',
   'mv-manuka': 'MV Manuka Blend',
+  ath: 'Confidence After Sun Care Spray',
+  wn: 'Wakana Nagahara × Tokachi Honey Achieve',
+  ti: 'Tomohiro Ito × Daisen Honey Achieve',
 };
 
 const PRODUCER_EN: Record<string, string> = {
@@ -120,6 +126,13 @@ const REGION_EN: Record<string, string> = {
   '伊豆諸島': 'Izu Islands',
   '沖縄': 'Okinawa',
   '北海道': 'Hokkaido',
+  '北海道 十勝': 'Tokachi, Hokkaido, Japan',
+  '十勝': 'Tokachi',
+  '秋田県': 'Akita, Japan',
+  '秋田県 大仙市': 'Daisen, Akita, Japan',
+  '大仙市': 'Daisen',
+  'マレーシア': 'Malaysia',
+  'Malaysia Event': 'Malaysia Event',
 };
 
 const STORY_DESCRIPTION_EN: Record<string, string> = {
@@ -150,6 +163,9 @@ const STORY_DESCRIPTION_EN: Record<string, string> = {
   'mv-honey': 'Limited honey blended with 48 nutrients, gathered from regional flowers by an Izu apiary.',
   'mv-ginger-tea': 'A warming ginger tea with 48 nutrients, blended by a long-established Shizuoka tea farm using Japanese ginger.',
   'mv-manuka': 'A limited premium blend of New Zealand manuka honey and 48 nutrients, developed by a Shizuoka lab.',
+  ath: 'A Malaysia event limited after-sun care spray powered by Mother Vegetable Confidence.',
+  wn: 'A limited Honey Achieve combining Wakana Nagahara’s champion spirit, Tokachi honey, and Achieve nutrition.',
+  ti: 'A limited Honey Achieve combining Tomohiro Ito’s spirit of challenge, Daisen honey, and Achieve nutrition.',
 };
 
 const MOBILE_PRODUCT_NAME_JA: Record<string, string> = {
@@ -184,6 +200,9 @@ const MOBILE_PRODUCT_NAME_JA: Record<string, string> = {
   'mv-honey': '蜂蜜',
   'mv-ginger-tea': '生姜茶',
   'mv-manuka': 'マヌカブレンド',
+  ath: '日焼け後ケアスプレー',
+  wn: '永原さん はちみつ',
+  ti: '伊藤さん はちみつ',
 };
 
 const MOBILE_STORY_DESCRIPTION_JA: Record<string, string> = {
@@ -214,7 +233,20 @@ const MOBILE_STORY_DESCRIPTION_JA: Record<string, string> = {
   'mv-honey': '地域の花から集めた48栄養素ブレンド蜂蜜。',
   'mv-ginger-tea': '国産生姜と48栄養素のジンジャーティー。',
   'mv-manuka': 'マヌカハニーと48栄養素のプレミアムブレンド。',
+  ath: 'イベント限定の日焼け後ケアスプレー。',
+  wn: '永原和可那選手と十勝の限定Honey Achieve。',
+  ti: '伊藤友広選手と大仙市の限定Honey Achieve。',
 };
+
+const EVENT_PRODUCT_DETAIL_HREFS: Record<string, string> = {
+  ath: '/ath',
+  wn: '/wn',
+  ti: '/ti',
+};
+
+function isEventProduct(product: ProductData): boolean {
+  return product.slug in EVENT_PRODUCT_DETAIL_HREFS;
+}
 
 function localizeProductName(product: ProductData, isJa: boolean): string {
   if (isJa) return product.nameJa ?? product.name;
@@ -836,13 +868,14 @@ function ProductCard({
   const addItem = useCartStore((s) => s.addItem);
   const router = useRouter();
   const [addedFeedback, setAddedFeedback] = useState(false);
-  const detailHref = `/product/${product.slug}`;
+  const eventProduct = isEventProduct(product);
+  const detailHref = EVENT_PRODUCT_DETAIL_HREFS[product.slug] ?? `/product/${product.slug}`;
   const displayProducer = localizeProducer(product.producer, isJa);
   const displayRegion = localizeRegion(product.region, isJa);
   const displayStoryDescription = localizeStoryDescription(product, isJa);
   const displayMobileName = localizeMobileProductName(product, isJa);
   const displayMobileStoryDescription = localizeMobileStoryDescription(product, isJa);
-  const isPurchasable = product.inStock;
+  const isPurchasable = product.inStock && !eventProduct;
 
   const handleAddToCart = () => {
     if (!isPurchasable) return;
@@ -1028,6 +1061,15 @@ function ProductCard({
               {addedFeedback ? t('✓ Added', '✓ 追加済み', '✓ 已添加') : t('Add to Cart', 'カートに入れる', '加入购物车')}
             </button>
           )}
+          {eventProduct && (
+            <Link
+              href={detailHref}
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex w-full sm:w-auto justify-center rounded-full border border-[#25C760] text-[#25C760] text-[11px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 hover:bg-[#25C760]/10 transition no-underline"
+            >
+              {t('View Event Product', 'イベント商品を見る', '查看活动商品')}
+            </Link>
+          )}
         </div>
       </div>
     </div>
@@ -1045,6 +1087,10 @@ function PriceDisplay({
 }) {
   if (!product.inStock) {
     return <span className="text-white/60 font-bold text-xs sm:text-sm leading-none rounded-full border border-white/15 bg-white/10 px-2.5 py-1">Coming Soon</span>;
+  }
+
+  if (isEventProduct(product)) {
+    return <span className="text-[#25C760] font-bold text-lg sm:text-sm leading-none">US${product.price.toFixed(0)}</span>;
   }
 
   const priceJpy = product.priceJpy;

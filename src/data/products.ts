@@ -280,6 +280,133 @@ const confidence: ProductData = {
 };
 
 // ---------------------------------------------------------------------------
+// Event products
+// ---------------------------------------------------------------------------
+
+const confidenceAfterSunSpray: ProductData = {
+  id: 'ath-after-sun-care-spray',
+  name: 'Confidence After Sun Care Spray',
+  nameJa: '日焼け後ケアスプレー',
+  fullName: 'Mother Vegetable Confidence After Sun Care Spray',
+  slug: 'ath',
+  description: 'Malaysia event limited after-sun care spray powered by Mother Vegetable Confidence.',
+  descriptionJa: 'マレーシアイベント限定。Confidenceを日焼け後のケアに使いやすいスプレータイプに。',
+  price: 20,
+  currency: 'USD',
+  sku: 'MV-EVT-ATH-001',
+  category: 'cosmetic',
+  tier: 'product100',
+  subcategory: 'cosmetic',
+  images: ['/cdn/mv_body_mist_top.png'],
+  galleryImages: [
+    { url: '/cdn/mv_body_mist_top.png', alt: 'Confidence after-sun care spray bottle for Malaysia event' },
+  ],
+  thumbnails: ['/cdn/mv_body_mist_top.png'],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['After Sun Care', 'Quick Spray', 'Event Limited'],
+  taglineJp: '日差しを浴びた肌に、やさしいクールダウンを。',
+  tagline: 'Gentle cooldown for sun-kissed skin.',
+  subtitle: 'Event Limited',
+  howToUse: '日差しを浴びたあと、肌に軽くスプレーしてください。',
+  howToLink: '/ath',
+  inStock: true,
+  priceJpy: 'US$20',
+  co2SavedKg: 0.4,
+  proteinGrams: 0,
+  chemicalReducedGrams: 20,
+  mvtReward: 40,
+  producer: 'Mother Vegetable Lab',
+  region: 'Malaysia Event',
+  regionTags: ['マレーシア'],
+  storyTags: ['限定生産', '地域連携'],
+  storyDescription: 'マレーシアイベント会場で、日焼け後の肌をすぐにいたわるための数量限定ケアスプレー。',
+  proposerTags: ['マザーベジタブル社'],
+};
+
+const wakanaTokachiHoneyAchieve: ProductData = {
+  id: 'wn-tokachi-honey-achieve',
+  name: 'Wakana Nagahara × Tokachi Honey Achieve',
+  nameJa: '永原和可那 × 十勝 Honey Achieve',
+  fullName: 'Wakana Nagahara × Tokachi Honey Achieve',
+  slug: 'wn',
+  description: 'A limited Honey Achieve made with the blessings of Tokachi and the spirit of world champion Wakana Nagahara.',
+  descriptionJa: '永原和可那選手の想いと北海道十勝の恵みを込めた、Achieve入りハチミツ。',
+  price: 35,
+  currency: 'USD',
+  sku: 'MV-EVT-WN-001',
+  category: 'food',
+  tier: 'product100',
+  subcategory: 'supplement',
+  images: ['/cdn/mv_honey_top.png'],
+  galleryImages: [
+    { url: '/cdn/mv_honey_top.png', alt: 'Tokachi Honey Achieve collaboration product' },
+  ],
+  thumbnails: ['/cdn/mv_honey_top.png'],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Tokachi Honey', 'Rich Aroma', 'Kids Future'],
+  taglineJp: '北海道十勝の恵みと、世界を制した想いを。',
+  tagline: 'The blessings of Tokachi and a champion’s spirit.',
+  subtitle: 'Honey Achieve',
+  howToUse: 'そのまま、または飲み物・ヨーグルトなどに加えてお召し上がりください。',
+  howToLink: '/wn',
+  inStock: true,
+  priceJpy: 'US$35',
+  co2SavedKg: 0.8,
+  proteinGrams: 2,
+  chemicalReducedGrams: 25,
+  mvtReward: 60,
+  producer: 'Wakana Nagahara × Tokachi',
+  region: '北海道 十勝',
+  regionTags: ['北海道', '十勝'],
+  storyTags: ['地域連携', '限定生産'],
+  storyDescription: '世界を制したチャンピオンの想い、北海道十勝の大地の恵み、Achieveの栄養をひとつにした限定ハチミツ。',
+  proposerTags: ['アスリート'],
+};
+
+const tomohiroDaisenHoneyAchieve: ProductData = {
+  id: 'ti-daisen-honey-achieve',
+  name: 'Tomohiro Ito × Daisen Honey Achieve',
+  nameJa: '伊藤友広 × 大仙市 Honey Achieve',
+  fullName: 'Tomohiro Ito × Daisen Honey Achieve',
+  slug: 'ti',
+  description: 'A limited Honey Achieve made with the blessings of Daisen, Akita and Tomohiro Ito’s spirit of challenge.',
+  descriptionJa: '伊藤友広選手の想いと秋田県大仙市の恵みを込めた、Achieve入りハチミツ。',
+  price: 35,
+  currency: 'USD',
+  sku: 'MV-EVT-TI-001',
+  category: 'food',
+  tier: 'product100',
+  subcategory: 'supplement',
+  images: ['/cdn/mv_honey_top.png'],
+  galleryImages: [
+    { url: '/cdn/mv_honey_top.png', alt: 'Daisen Honey Achieve collaboration product' },
+  ],
+  thumbnails: ['/cdn/mv_honey_top.png'],
+  videoUrls: [],
+  mainVideoUrl: '',
+  benefits: ['Daisen Honey', 'Gentle Sweetness', 'Challenge Support'],
+  taglineJp: '秋田県大仙市の恵みと、挑戦を支える想いを。',
+  tagline: 'The blessings of Daisen and a spirit of challenge.',
+  subtitle: 'Honey Achieve',
+  howToUse: 'そのまま、または飲み物・ヨーグルトなどに加えてお召し上がりください。',
+  howToLink: '/ti',
+  inStock: true,
+  priceJpy: 'US$35',
+  co2SavedKg: 0.8,
+  proteinGrams: 2,
+  chemicalReducedGrams: 25,
+  mvtReward: 60,
+  producer: 'Tomohiro Ito × Daisen',
+  region: '秋田県 大仙市',
+  regionTags: ['秋田県', '大仙市'],
+  storyTags: ['地域連携', '限定生産'],
+  storyDescription: '世界で戦ったアスリートの経験、秋田県大仙市の自然の恵み、Achieveの栄養をひとつにした限定ハチミツ。',
+  proposerTags: ['アスリート'],
+};
+
+// ---------------------------------------------------------------------------
 // Tilapia
 // ---------------------------------------------------------------------------
 
@@ -1688,9 +1815,9 @@ const mvManuka: ProductData = {
 // Exports
 // ---------------------------------------------------------------------------
 
-const purchasableProductSlugs = new Set(['achieve', 'confidence']);
+const purchasableProductSlugs = new Set(['achieve', 'confidence', 'ath', 'wn', 'ti']);
 
-const productCatalog: ProductData[] = [achieve, confidence, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi, mvMatcha, mvDressing, mvOlive, mvSuncare, mvBodyMist, mvHandCream, mvPonzu, mvFaceMist, mvHairOil, mvLipBalm, mvVinegar, mvBathSalt, mvGingerTea, mvHoney];
+const productCatalog: ProductData[] = [achieve, confidence, confidenceAfterSunSpray, wakanaTokachiHoneyAchieve, tomohiroDaisenHoneyAchieve, tilapia, mvSalt, mvSoySauce, mvToner, mvBalm, mvSoap, mvMiso, mvWasabi, mvMatcha, mvDressing, mvOlive, mvSuncare, mvBodyMist, mvHandCream, mvPonzu, mvFaceMist, mvHairOil, mvLipBalm, mvVinegar, mvBathSalt, mvGingerTea, mvHoney];
 
 function withPurchaseAvailability(product: ProductData): ProductData {
   return purchasableProductSlugs.has(product.slug) ? product : { ...product, inStock: false };
