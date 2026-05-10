@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Mother Vegetable Confidence — Skin Care Support',
     description: 'Natural skin care cream for all skin types.',
-    images: [{ url: '/cdn/products_confidence_10001.png', width: 800, height: 800, alt: 'Mother Vegetable Confidence' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -36,7 +36,7 @@ function getConfidenceProduct(locale: string): ProductPageData {
     priceJpy: '¥5,500',
 
     inStock: getProductBySlug('confidence')?.inStock ?? true,
-    productImage: '/cdn/products_confidence_10001.png',
+    productImage: '/cdn/products_confidence_10018.jpg',
     videoUrls: [
       '/new_confidence_video.mp4',
       '/04.mp4',
@@ -126,7 +126,7 @@ export default async function ConfidencePage({ params }: { params: Promise<{ loc
       <ProductJsonLd
         name="Mother Vegetable Confidence"
         description="Natural skin care cream for all skin types."
-        image="/cdn/products_confidence_10001.png"
+        image="/cdn/products_confidence_10018.jpg"
         price={36.70}
         slug="confidence"
       />

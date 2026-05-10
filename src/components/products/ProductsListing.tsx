@@ -8,13 +8,14 @@ import { Search, X, MapPin, Tag, SlidersHorizontal, ChevronDown, ChevronUp, User
 import { products, type ProductData } from '@/data/products';
 import { STORY_TAGS, PROPOSER_TAGS, getProposerTagDef } from '@/data/tags';
 import { getStoredReferralCode } from '@/lib/affiliate';
+import { resolveProductImage } from '@/lib/productImages';
 import { useCartStore } from '@/store/cart';
 
 const REFERRAL_DISCOUNT_RATE = 0.10;
 
 const TOP_PAGE_PRODUCT_IMAGES: Record<string, string> = {
-  achieve: '/cdn/products_achieve_10001.png',
-  confidence: '/cdn/products_confidence_10001.png',
+  achieve: '/cdn/products_achieve_10004.jpg',
+  confidence: '/cdn/products_confidence_10018.jpg',
   tilapia: '/cdn/mv_tilapia.jpg',
   'mv-salt': '/cdn/mv_salt.jpg',
   'mv-soy-sauce': '/cdn/mv_soy_sauce_top.png',
@@ -856,7 +857,7 @@ function ProductCard({
         : undefined,
       currency: product.currency,
       quantity: 1,
-      image: mobileProductImage ?? productImage,
+      image: resolveProductImage({ ...product, imageUrl: mobileProductImage ?? productImage }),
     });
     setAddedFeedback(true);
     setTimeout(() => setAddedFeedback(false), 1800);

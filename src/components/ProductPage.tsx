@@ -6,6 +6,7 @@ import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { getStoredReferralCode } from '@/lib/affiliate';
+import { resolveProductImage } from '@/lib/productImages';
 import ProductMetaBadges from '@/components/ProductMetaBadges';
 
 const REFERRAL_DISCOUNT_RATE = 0.10; // 10% off
@@ -108,6 +109,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
 
   const discountedPrice = parseFloat((product.price * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2));
   const effectivePrice = hasReferral ? discountedPrice : product.price;
+  const cartImage = resolveProductImage(product);
 
   const handleAddToCart = useCallback(() => {
     if (!product.inStock) return;
@@ -117,13 +119,13 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       name: product.fullName,
       price: product.price,
       discountedPrice: hasReferral ? discountedPrice : undefined,
-      image: product.productImage,
+      image: cartImage,
       currency: product.currency,
       quantity,
     });
     setAddedFeedback(true);
     setTimeout(() => setAddedFeedback(false), 2000);
-  }, [addItem, product, hasReferral, discountedPrice, quantity]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity, cartImage]);
 
   const handleBuyNow = useCallback(() => {
     if (!product.inStock) return;
@@ -133,12 +135,12 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       name: product.fullName,
       price: product.price,
       discountedPrice: hasReferral ? discountedPrice : undefined,
-      image: product.productImage,
+      image: cartImage,
       currency: product.currency,
       quantity,
     });
     router.push('/checkout');
-  }, [addItem, product, hasReferral, discountedPrice, quantity, router]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity, router, cartImage]);
 
   return (
     <div className="bg-black min-h-screen">

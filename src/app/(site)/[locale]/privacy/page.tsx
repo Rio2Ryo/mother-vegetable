@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Privacy Policy — Mother Vegetable',
     description: 'Mother Vegetable privacy policy. Learn how we collect, use, and protect your personal data.',
-    images: [{ url: '/cdn/products_achieve_10001.png', width: 800, height: 800, alt: 'Mother Vegetable' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
   twitter: {
     card: 'summary_large_image',

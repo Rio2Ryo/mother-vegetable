@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジオリーブオイル — Mother Vegetable',
     description: 'Premium extra virgin olive oil with 48 nutrients. 100ml.',
-    images: [{ url: '/cdn/mv_olive.png', width: 800, height: 800, alt: 'マザベジオリーブオイル' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

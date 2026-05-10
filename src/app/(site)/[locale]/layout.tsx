@@ -53,9 +53,9 @@ export const metadata: Metadata = {
     url: APP_URL,
     images: [
       {
-        url: '/cdn/products_achieve_10001.png',
-        width: 800,
-        height: 800,
+        url: '/Images/Assets/General/og-logo.png',
+        width: 1200,
+        height: 630,
         alt: 'Mother Vegetable',
       },
     ],
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     title: 'Mother Vegetable｜地球と人を、同時に育てる',
     description:
       '48種の必須栄養素を1度に摂れる、サステナブルな次世代健康ブランド。',
-    images: ['/cdn/products_achieve_10001.png'],
+    images: ['/Images/Assets/General/og-logo.png'],
   },
   robots: {
     index: true,

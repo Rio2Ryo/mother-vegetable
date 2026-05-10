@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジドレッシング — Mother Vegetable',
     description: 'Premium nutrient-rich salad dressing. 150ml.',
-    images: [{ url: '/cdn/mv_dressing.png', width: 800, height: 800, alt: 'マザベジドレッシング' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

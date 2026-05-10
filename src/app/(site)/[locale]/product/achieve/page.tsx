@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Mother Vegetable Achieve — 48 Nutrients in One Stick',
     description: 'Premium health supplement delivering 48 nutrients in one stick.',
-    images: [{ url: '/cdn/products_achieve_10001.png', width: 800, height: 800, alt: 'Mother Vegetable Achieve' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -36,7 +36,7 @@ function getAchieveProduct(locale: string): ProductPageData {
     priceJpy: '¥5,500',
 
     inStock: getProductBySlug('achieve')?.inStock ?? true,
-    productImage: '/cdn/products_achieve_10001.png',
+    productImage: '/cdn/products_achieve_10004.jpg',
     videoUrls: [
       '/new_achieve_video.mp4',
       '/01.mp4',
@@ -178,7 +178,7 @@ export default async function AchievePage({ params }: { params: Promise<{ locale
       <ProductJsonLd
         name="Mother Vegetable Achieve"
         description="48 different nutrients in one stick. Premium health supplement for daily wellness."
-        image="/cdn/products_achieve_10001.png"
+        image="/cdn/products_achieve_10004.jpg"
         price={36.70}
         slug="achieve"
       />

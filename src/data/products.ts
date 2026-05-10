@@ -1,3 +1,5 @@
+import { resolveProductImage } from '@/lib/productImages';
+
 const CDN_BASE =
   "https://mv-prod-1334776400.cos.ap-singapore.myqcloud.com";
 
@@ -105,13 +107,13 @@ const achieve: ProductData = {
   sku: "MV-ACH-030",
   category: "food",
   tier: 'regular',
-  images: ["/cdn/products_achieve_10001.png"],
+  images: ["/cdn/products_achieve_10004.jpg"],
   galleryImages: [
-    { url: "/cdn/products_achieve_10001.png", alt: "Achieve green superfood supplement packaging with 30 individual stick packets" },
-    { url: "/cdn/products_achieve_10001.png", alt: "Achieve supplement stick being mixed into a refreshing glass of water" },
-    { url: "/cdn/products_achieve_10001.png", alt: "Close-up of Achieve powder showing fine green plant-based nutrient texture" },
-    { url: "/cdn/products_achieve_10001.png", alt: "Achieve supplement alongside fresh fruits, salads, and healthy meal ingredients" },
-    { url: "/cdn/products_achieve_10001.png", alt: "Active person enjoying improved energy and gut health from daily Achieve routine" },
+    { url: "/cdn/products_achieve_10004.jpg", alt: "Achieve green superfood supplement packaging with 30 individual stick packets" },
+    { url: "/cdn/products_achieve_10005.jpg", alt: "Achieve supplement mixed into a refreshing green drink" },
+    { url: "/cdn/products_achieve_10006.jpg", alt: "Achieve supplement in a daily wellness scene" },
+    { url: "/cdn/products_achieve_10007.jpg", alt: "Achieve supplement alongside healthy meal ingredients" },
+    { url: "/cdn/products_achieve_10008.jpg", alt: "Active person enjoying daily Achieve routine" },
   ],
   thumbnails: thumbnails("products_achieve", 10002, 10010),
   videoUrls: videoRange("achieve", 4),
@@ -192,13 +194,13 @@ const confidence: ProductData = {
   sku: "MV-CON-030",
   category: "cosmetic",
   tier: 'regular',
-  images: ["/cdn/products_confidence_10001.png"],
+  images: ["/cdn/products_confidence_10018.jpg"],
   galleryImages: [
-    { url: "/cdn/products_confidence_10001.png", alt: "Confidence skincare tube packaging with sleek green and white design" },
-    { url: "/cdn/products_confidence_10001.png", alt: "Confidence cream being gently applied to facial skin for daily care" },
-    { url: "/cdn/products_confidence_10001.png", alt: "Close-up of Confidence gel texture showing smooth collagen-rich formula" },
-    { url: "/cdn/products_confidence_10001.png", alt: "Confidence tube displayed with natural botanical ingredients and cosmetic tools" },
-    { url: "/cdn/products_confidence_10001.png", alt: "Radiant glowing skin after consistent use of Confidence skincare treatment" },
+    { url: "/cdn/products_confidence_10018.jpg", alt: "Confidence skincare product shown clearly for product identification" },
+    { url: "/cdn/products_confidence_10002.jpg", alt: "Confidence cream being gently applied to skin for daily care" },
+    { url: "/cdn/products_confidence_10003.jpg", alt: "Close-up of Confidence gel texture showing smooth formula" },
+    { url: "/cdn/products_confidence_10004.jpg", alt: "Confidence displayed in a natural skincare scene" },
+    { url: "/cdn/products_confidence_10008.jpg", alt: "Radiant skin care routine supported by Confidence" },
   ],
   thumbnails: thumbnails("products_confidence", 10002, 10010),
   videoUrls: videoRange("confidence", 4),
@@ -1741,13 +1743,6 @@ export interface HomeProductCard {
   chemicalReducedGrams?: number;
 }
 
-// Some products' images[0] points to a wordmark/logo asset (legacy data,
-// e.g. products_achieve_10001.png is 304×46) rather than a proper product
-// photo. Override here so the home grid uses a clean still.
-const HOME_THUMBNAIL_OVERRIDES: Record<string, string> = {
-  achieve: '/cdn/products_achieve_10005.jpg',
-  confidence: '/cdn/products_confidence_10005.jpg',
-};
 
 export function getHomeProductCards(locale: string): HomeProductCard[] {
   const isJa = locale === 'ja';
@@ -1757,7 +1752,7 @@ export function getHomeProductCards(locale: string): HomeProductCard[] {
     name: isJa ? (p.nameJa ?? p.name) : p.name,
     subtitle: p.subtitle,
     tagline: isJa ? (p.taglineJp || p.tagline) : p.tagline,
-    imageUrl: HOME_THUMBNAIL_OVERRIDES[p.slug] ?? p.images?.[0] ?? '',
+    imageUrl: resolveProductImage(p),
     videoUrl: p.mainVideoUrl || undefined,
     features: p.benefits ?? [],
     priceUsd: `$${p.price.toFixed(2)}`,

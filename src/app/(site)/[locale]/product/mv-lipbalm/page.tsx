@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジリップバーム — Mother Vegetable',
     description: 'Natural collagen lip balm. 5g.',
-    images: [{ url: '/cdn/mv_lipbalm_detail.png', width: 800, height: 800, alt: 'マザベジリップバーム' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

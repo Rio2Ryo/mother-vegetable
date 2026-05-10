@@ -5,6 +5,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
 import { getStoredReferralCode } from '@/lib/affiliate';
+import { resolveProductImage } from '@/lib/productImages';
 import { useLocale } from 'next-intl';
 import ProductMetaBadges from '@/components/ProductMetaBadges';
 
@@ -74,6 +75,7 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
   }, []);
 
   const discountedPrice = parseFloat((product.price * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2));
+  const cartImage = resolveProductImage(product);
 
   const handleAddToCart = useCallback(() => {
     if (!product.inStock) return;
@@ -84,13 +86,13 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
       name: product.name,
       price: product.price,
       discountedPrice: hasReferral ? discountedPrice : undefined,
-      image: product.productImage,
+      image: cartImage,
       currency: product.currency,
       quantity,
     });
     setAddedFeedback(true);
     setTimeout(() => setAddedFeedback(false), 2000);
-  }, [addItem, product, hasReferral, discountedPrice, quantity]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity, cartImage]);
 
   const handleBuyNow = useCallback(() => {
     if (!product.inStock) return;
@@ -101,12 +103,12 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
       name: product.name,
       price: product.price,
       discountedPrice: hasReferral ? discountedPrice : undefined,
-      image: product.productImage,
+      image: cartImage,
       currency: product.currency,
       quantity,
     });
     router.push('/checkout');
-  }, [addItem, product, hasReferral, discountedPrice, quantity, router]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity, router, cartImage]);
 
   return (
     <div className="bg-black min-h-screen text-white">

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ石鹸 — Mother Vegetable',
     description: 'Natural collagen handcrafted soap. 100g.',
-    images: [{ url: '/cdn/mv_soap.jpg', width: 800, height: 800, alt: 'マザベジ石鹸' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

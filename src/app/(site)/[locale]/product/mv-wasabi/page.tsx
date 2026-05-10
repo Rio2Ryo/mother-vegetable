@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジわさび — Mother Vegetable',
     description: 'Nutrient-rich premium wasabi with 48 natural nutrients.',
-    images: [{ url: '/cdn/mv_wasabi_detail.png', width: 800, height: 800, alt: 'マザベジわさび' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

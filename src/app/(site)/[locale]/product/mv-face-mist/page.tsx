@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジフェイスミスト — Mother Vegetable',
     description: 'Refreshing face mist with natural collagen. 50ml.',
-    images: [{ url: '/cdn/mv_face_mist_detail.png', width: 800, height: 800, alt: 'マザベジフェイスミスト' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

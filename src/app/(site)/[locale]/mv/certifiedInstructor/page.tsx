@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Become a Certified Instructor — Mother Vegetable',
     description: 'Join the Mother Vegetable instructor affiliate program. Earn 25% commission on direct sales and 10% on referral sales.',
-    images: [{ url: '/cdn/products_achieve_10001.png', width: 800, height: 800, alt: 'Mother Vegetable' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
   twitter: {
     card: 'summary_large_image',

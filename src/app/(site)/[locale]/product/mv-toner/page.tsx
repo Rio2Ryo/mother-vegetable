@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ化粧水 — Mother Vegetable',
     description: 'Natural collagen facial toner. 150ml.',
-    images: [{ url: '/cdn/mv_toner_detail.png', width: 800, height: 800, alt: 'マザベジ化粧水' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

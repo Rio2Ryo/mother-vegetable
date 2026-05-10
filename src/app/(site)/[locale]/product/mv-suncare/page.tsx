@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジサンケアジェル — Mother Vegetable',
     description: 'Natural suncare gel with plant-based nutrients. 30g.',
-    images: [{ url: '/cdn/mv_suncare_detail.png', width: 800, height: 800, alt: 'マザベジサンケアジェル' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

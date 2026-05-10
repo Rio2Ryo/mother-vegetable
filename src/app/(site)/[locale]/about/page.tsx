@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'About — Mother Vegetable Project',
     description:
       'Learn about the Mother Vegetable Project — our mission to harness the life force of 45 vegetables for human health and wellness.',
-    images: [{ url: '/cdn/products_achieve_10001.png', width: 800, height: 800, alt: 'Mother Vegetable' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
   twitter: {
     card: 'summary_large_image',

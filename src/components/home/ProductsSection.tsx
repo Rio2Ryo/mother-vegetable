@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { useLocale } from 'next-intl';
 import { useCartStore } from '@/store/cart';
 import { getStoredReferralCode } from '@/lib/affiliate';
+import { resolveProductImage } from '@/lib/productImages';
 import { ArrowRight } from 'lucide-react';
 
 const REFERRAL_DISCOUNT_RATE = 0.10;
@@ -44,7 +45,7 @@ function getFlagshipProducts(isJa: boolean) {
       subName: isJa ? 'フレッシュドライプロテイン' : 'Fresh Dry Protein',
       tagline: isJa ? '48種類の栄養を一度に摂取' : '48 different nutrients at once.',
       videoUrl: '/new_achieve_video.mp4',
-      imageUrl: '/cdn/products_achieve_10001.png',
+      imageUrl: '/cdn/products_achieve_10004.jpg',
       features: isJa
         ? ['48種類の栄養を一度に摂取', '毎日の健康を大切な人と']
         : ['48 different nutrients in one serving', 'Share daily wellness with your loved ones'],
@@ -59,7 +60,7 @@ function getFlagshipProducts(isJa: boolean) {
       subName: isJa ? 'フレッシュブリッジコラーゲン' : 'Fresh Bridge Collagen',
       tagline: isJa ? '肌の気になるところに直接塗布' : 'For All Skin Types',
       videoUrl: '/new_confidence_video.mp4',
-      imageUrl: '/cdn/products_confidence_10001.png',
+      imageUrl: '/cdn/products_confidence_10018.jpg',
       features: isJa
         ? ['肌の気になるところに直接塗布', 'お気に入りコスメに混ぜて使用']
         : ['Apply directly to areas of skin concern', 'Mix into your favorite cosmetics'],
@@ -202,7 +203,7 @@ export default function ProductsSection() {
                       : undefined,
                     currency: 'USD',
                     quantity: quantities[product.id] ?? 1,
-                    image: product.imageUrl ?? '',
+                    image: resolveProductImage(product),
                   });
                 }}
                 className="block w-full text-center py-2.5 md:py-3 bg-[#25c760] text-black font-semibold text-sm md:text-base rounded-full hover:bg-[#1da84e] transition-colors"

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジハニー — Mother Vegetable',
     description: 'Nutrient-rich premium honey. 100g.',
-    images: [{ url: '/cdn/mv_honey_detail.png', width: 800, height: 800, alt: 'マザベジハニー' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

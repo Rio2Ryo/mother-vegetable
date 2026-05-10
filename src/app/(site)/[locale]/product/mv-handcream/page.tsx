@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジハンドクリーム — Mother Vegetable',
     description: 'Moisturizing hand cream with natural collagen. 30g.',
-    images: [{ url: '/cdn/mv_handcream_detail.png', width: 800, height: 800, alt: 'マザベジハンドクリーム' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 
