@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ味噌 — Mother Vegetable',
     description: 'Nutrient-rich premium miso with 48 natural nutrients.',
-    images: [{ url: '/cdn/mv_miso_detail.png', width: 800, height: 800, alt: 'マザベジ味噌' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

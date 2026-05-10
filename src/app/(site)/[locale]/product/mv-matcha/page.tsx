@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ抹茶 — Mother Vegetable',
     description: 'Nutrient-rich premium matcha blend. 30g.',
-    images: [{ url: '/cdn/mv_matcha_detail.png', width: 800, height: 800, alt: 'マザベジ抹茶' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジポン酢 — Mother Vegetable',
     description: 'Premium nutrient-rich citrus ponzu sauce. 150ml.',
-    images: [{ url: '/cdn/mv_ponzu_detail.png', width: 800, height: 800, alt: 'マザベジポン酢' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

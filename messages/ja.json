@@ -146,8 +146,8 @@
     "howToUseTitle": "使い方",
     "addedToCart": "カートに追加しました！",
     "itemCount": "({count}) 点",
-    "outOfStock": "在庫切れ",
-    "outOfStockDesc": "この商品は現在お取り扱いできません。"
+    "outOfStock": "Coming Soon",
+    "outOfStockDesc": "この商品は近日公開予定です。現在は購入できません。"
   },
   "checkout": {
     "title": "お会計",

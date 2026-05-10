@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Healthcare — Clinical Research & Certifications',
     description: 'Explore the science behind Mother Vegetable. GMP, HACCP, and JFRL certified. Clinical research on 45+ vegetable extract benefits.',
-    images: [{ url: '/cdn/products_achieve_10001.png', width: 800, height: 800, alt: 'Mother Vegetable' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
   twitter: {
     card: 'summary_large_image',

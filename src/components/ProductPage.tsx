@@ -4,9 +4,10 @@ import Image from 'next/image';
 import { useState, useEffect, useCallback } from 'react';
 import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
-import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
+import { useLocale, useTranslations } from 'next-intl';
 import { getStoredReferralCode } from '@/lib/affiliate';
+import { resolveProductImage } from '@/lib/productImages';
+import ProductMetaBadges from '@/components/ProductMetaBadges';
 
 const REFERRAL_DISCOUNT_RATE = 0.10; // 10% off
 
@@ -95,15 +96,20 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
   const [addedFeedback, setAddedFeedback] = useState(false);
   const { addItem } = useCartStore();
   const router = useRouter();
+  const locale = useLocale();
+  const isJa = locale === 'ja';
   const t = useTranslations('cart');
 
   useEffect(() => {
-    const code = getStoredReferralCode();
-    if (code) setHasReferral(true);
+    queueMicrotask(() => {
+      const code = getStoredReferralCode();
+      if (code) setHasReferral(true);
+    });
   }, []);
 
   const discountedPrice = parseFloat((product.price * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2));
   const effectivePrice = hasReferral ? discountedPrice : product.price;
+  const cartImage = resolveProductImage(product);
 
   const handleAddToCart = useCallback(() => {
     if (!product.inStock) return;
@@ -113,13 +119,13 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       name: product.fullName,
       price: product.price,
       discountedPrice: hasReferral ? discountedPrice : undefined,
-      image: product.productImage,
+      image: cartImage,
       currency: product.currency,
       quantity,
     });
     setAddedFeedback(true);
     setTimeout(() => setAddedFeedback(false), 2000);
-  }, [addItem, product, hasReferral, quantity]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity, cartImage]);
 
   const handleBuyNow = useCallback(() => {
     if (!product.inStock) return;
@@ -129,12 +135,12 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
       name: product.fullName,
       price: product.price,
       discountedPrice: hasReferral ? discountedPrice : undefined,
-      image: product.productImage,
+      image: cartImage,
       currency: product.currency,
       quantity,
     });
     router.push('/checkout');
-  }, [addItem, product, hasReferral, quantity, router]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity, router, cartImage]);
 
   return (
     <div className="bg-black min-h-screen">
@@ -151,7 +157,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
         .gallery-col-info { width: 58.333%; flex: 0 0 58.333%; max-width: 58.333%; }
 
         /* Main Product Display */
-        .main-product-display { display: flex; justify-content: center; align-items: center; padding: 20px; height: 700px; }
+        .main-product-display { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px; padding: 20px; height: 700px; }
         .product-media-container { position: relative; width: 100%; max-width: 500px; height: 100%; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); background-color: black; display: flex; align-items: center; justify-content: center; }
         .main-product-video { width: 100%; max-height: 100%; height: auto; display: block; object-fit: contain; }
 
@@ -406,6 +412,7 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
             {/* Center Side - Main Product Display */}
             <div className="gallery-col-main">
               <div className="main-product-display">
+                <ProductMetaBadges slug={product.id} isJa={isJa} />
                 <div className="product-media-container">
                   <video
                     className="main-product-video"
@@ -496,27 +503,27 @@ export default function ProductPage({ product }: { product: ProductPageData }) {
                       <p style={{ color: '#f87171', fontSize: '0.85rem', margin: '4px 0 0' }}>{t('outOfStockDesc')}</p>
                     </div>
                   )}
-                  <button
-                    className="action-btn"
-                    onClick={handleAddToCart}
-                    disabled={!product.inStock}
-                    style={!product.inStock ? { opacity: 0.4, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
-                  >
-                    {addedFeedback ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <svg className="w-5 h-5 text-[#25C760]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
-                        {t('addedToCart')}
-                      </span>
-                    ) : t('addToCart')}
-                  </button>
-                  <button
-                    className="action-btn"
-                    onClick={handleBuyNow}
-                    disabled={!product.inStock}
-                    style={!product.inStock ? { opacity: 0.4, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
-                  >
-                    {t('buyNow')}
-                  </button>
+                  {product.inStock && (
+                    <>
+                      <button
+                        className="action-btn"
+                        onClick={handleAddToCart}
+                      >
+                        {addedFeedback ? (
+                          <span className="flex items-center justify-center gap-2">
+                            <svg className="w-5 h-5 text-[#25C760]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            {t('addedToCart')}
+                          </span>
+                        ) : t('addToCart')}
+                      </button>
+                      <button
+                        className="action-btn"
+                        onClick={handleBuyNow}
+                      >
+                        {t('buyNow')}
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,46 +1,35 @@
-import { Suspense } from 'react';
 import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
-import HeroSection from '@/components/home/HeroSection';
-import ProductsSection from '@/components/home/ProductsSection';
-import ProductsSkeleton from '@/components/home/ProductsSkeleton';
-import NewsSection from '@/components/home/NewsSection';
-import JackpotMeter from '@/components/home/JackpotMeter';
+import LpHeroSection from '@/components/home/lp/LpHeroSection';
+import LpAboutSection from '@/components/home/lp/LpAboutSection';
+import LpProductsSection from '@/components/home/lp/LpProductsSection';
+import LpStorySection from '@/components/home/lp/LpStorySection';
+import LpCommerceSection from '@/components/home/lp/LpCommerceSection';
+import ProductsListing from '@/components/products/ProductsListing';
+import { getLpLocale, lpCopy } from '@/components/home/lp/lpCopy';
 
-export const metadata: Metadata = {
-  title: 'Mother Vegetable - Natural Health Products',
-  description:
-    'Discover Mother Vegetable — a complete product line delivering 48 essential nutrients from nature. Food supplements, cosmetics, and pet health products for your whole family.',
-  openGraph: {
-    title: 'Mother Vegetable - Natural Health Products',
-    description:
-      'Discover Mother Vegetable — a complete product line delivering 48 essential nutrients from nature. Food supplements, cosmetics, and pet health products for your whole family.',
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const copy = lpCopy[getLpLocale(locale)];
+
+  return {
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+  };
+}
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const lpLocale = getLpLocale(locale);
   return (
-    <>
-      <HeroSection />
-      <section className="bg-black py-12 md:py-24">
-        <div className="max-w-[1500px] mx-auto px-5">
-          <Suspense fallback={<ProductsSkeleton />}>
-            <ProductsSection />
-          </Suspense>
-        </div>
-      </section>
-      <section className="bg-black py-12 md:py-24">
-        <div className="max-w-3xl mx-auto px-5">
-          <JackpotMeter />
-        </div>
-      </section>
-      <section className="bg-black py-12 md:py-24">
-        <div className="max-w-[1500px] mx-auto px-5">
-          <NewsSection />
-        </div>
-      </section>
-    </>
+    <main>
+      <LpHeroSection locale={lpLocale} />
+      <LpAboutSection locale={lpLocale} />
+      <LpProductsSection locale={lpLocale} />
+      <LpStorySection locale={lpLocale} />
+      <LpCommerceSection locale={lpLocale} />
+      <ProductsListing embedded />
+    </main>
   );
 }

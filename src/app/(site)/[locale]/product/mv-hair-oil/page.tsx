@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジヘアオイル — Mother Vegetable',
     description: 'Natural nourishing hair oil. 30ml.',
-    images: [{ url: '/cdn/mv_hair_oil_detail.png', width: 800, height: 800, alt: 'マザベジヘアオイル' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

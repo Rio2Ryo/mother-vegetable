@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ醤油 — Mother Vegetable',
     description: 'Nutrient-infused premium dark soy sauce with 48 natural nutrients.',
-    images: [{ url: '/cdn/mv_soy_sauce_detail.png', width: 800, height: 800, alt: 'マザベジ醤油' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

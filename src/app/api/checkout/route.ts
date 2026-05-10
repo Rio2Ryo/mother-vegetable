@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe, PRODUCT_PRICES, PRODUCT_PRICES_JPY, REFERRAL_DISCOUNT_RATE, resolveLocaleAndCurrency } from "@/lib/stripe";
-import { getProductBySlug } from "@/data/products";
+import { getProductByCheckoutId } from "@/data/products";
 import prisma from "@/lib/prisma";
 import { ensureNewTables } from "@/lib/ensure-tables";
 
@@ -50,11 +50,16 @@ export async function POST(request: NextRequest) {
     }
 
     const locale = body.locale || "en";
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const appUrl =
+      process.env.VERCEL_ENV === "production" && process.env.NEXT_PUBLIC_APP_URL
+        ? process.env.NEXT_PUBLIC_APP_URL
+        : process.env.VERCEL_URL
+          ? `https://${process.env.VERCEL_URL}`
+          : process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
     // Check stock availability before creating checkout session
     for (const item of body.items) {
-      const product = getProductBySlug(item.productId);
+      const product = getProductByCheckoutId(item.productId);
       if (product && !product.inStock) {
         return NextResponse.json(
           { error: `${item.name} is currently out of stock` },
@@ -134,7 +139,9 @@ export async function POST(request: NextRequest) {
     // Build line items for Stripe — enforce server-side pricing
     // Apply referral discount first, then coupon discount stacks on top
     const lineItems = body.items.map((item) => {
-      const serverPrice = priceTable[item.productId];
+      const product = getProductByCheckoutId(item.productId);
+      const checkoutProductId = product?.slug ?? item.productId;
+      const serverPrice = priceTable[checkoutProductId] ?? priceTable[item.productId];
       if (!serverPrice) {
         throw new Error(`Unknown product: ${item.productId}`);
       }
@@ -199,7 +206,9 @@ export async function POST(request: NextRequest) {
         locale: locale,
         items: JSON.stringify(
           body.items.map((i) => {
-            const sp = PRODUCT_PRICES[i.productId] || 0;
+            const product = getProductByCheckoutId(i.productId);
+            const checkoutProductId = product?.slug ?? i.productId;
+            const sp = PRODUCT_PRICES[checkoutProductId] || PRODUCT_PRICES[i.productId] || 0;
             const hasDiscount = !!body.referralCode;
             let price = hasDiscount ? Math.round(sp * (1 - REFERRAL_DISCOUNT_RATE)) : sp;
 
@@ -230,6 +239,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ url: session.url });
   } catch (error) {
     console.error("Checkout session creation failed:", error);
+    if (error instanceof Error && error.message.includes("STRIPE_SECRET_KEY")) {
+      return NextResponse.json(
+        { error: "Stripe is not configured on this deployment. Please set STRIPE_SECRET_KEY to enable checkout." },
+        { status: 503 }
+      );
+    }
     return NextResponse.json(
       { error: "Failed to create checkout session" },
       { status: 500 }

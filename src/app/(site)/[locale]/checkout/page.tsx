@@ -32,7 +32,9 @@ const SUBSCRIPTION_PLANS: Record<SubPlanId, {
 // Inlined so we don't pull the server-side stripe SDK into the client bundle.
 const PRODUCT_PRICES_JPY: Record<string, number> = {
   achieve: 5500,
+  'achieve-capsule-30': 5500,
   confidence: 5500,
+  'confidence-tube-30': 5500,
   'tilapia': 2000,
   'mv-salt': 2000,
   'mv-soy-sauce': 2000,

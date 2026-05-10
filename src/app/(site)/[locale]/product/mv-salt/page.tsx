@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ塩 — Mother Vegetable',
     description: 'Green mineral-rich salt with 48 natural nutrients.',
-    images: [{ url: '/cdn/mv_salt.jpg', width: 800, height: 800, alt: 'マザベジ塩' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジビネガー — Mother Vegetable',
     description: 'Premium nutrient-rich rice vinegar. 150ml.',
-    images: [{ url: '/cdn/mv_vinegar_detail.png', width: 800, height: 800, alt: 'マザベジビネガー' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

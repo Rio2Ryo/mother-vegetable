@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジバスソルト — Mother Vegetable',
     description: 'Mineral-rich relaxing bath salt. 200g.',
-    images: [{ url: '/cdn/mv_bathsalt_detail.png', width: 800, height: 800, alt: 'マザベジバスソルト' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

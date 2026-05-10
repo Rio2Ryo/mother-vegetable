@@ -5,7 +5,9 @@ import { useState, useCallback, useEffect } from 'react';
 import { useCartStore } from '@/store/cart';
 import { useRouter } from '@/i18n/navigation';
 import { getStoredReferralCode } from '@/lib/affiliate';
+import { resolveProductImage } from '@/lib/productImages';
 import { useLocale } from 'next-intl';
+import ProductMetaBadges from '@/components/ProductMetaBadges';
 
 const REFERRAL_DISCOUNT_RATE = 0.10;
 
@@ -66,40 +68,47 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
   const [hasReferral, setHasReferral] = useState(false);
 
   useEffect(() => {
-    const code = getStoredReferralCode();
-    if (code) setHasReferral(true);
+    queueMicrotask(() => {
+      const code = getStoredReferralCode();
+      if (code) setHasReferral(true);
+    });
   }, []);
 
   const discountedPrice = parseFloat((product.price * (1 - REFERRAL_DISCOUNT_RATE)).toFixed(2));
+  const cartImage = resolveProductImage(product);
 
   const handleAddToCart = useCallback(() => {
+    if (!product.inStock) return;
+
     addItem({
       id: product.id,
       productId: product.id,
       name: product.name,
       price: product.price,
       discountedPrice: hasReferral ? discountedPrice : undefined,
-      image: product.productImage,
+      image: cartImage,
       currency: product.currency,
       quantity,
     });
     setAddedFeedback(true);
     setTimeout(() => setAddedFeedback(false), 2000);
-  }, [addItem, product, hasReferral, discountedPrice, quantity]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity, cartImage]);
 
   const handleBuyNow = useCallback(() => {
+    if (!product.inStock) return;
+
     addItem({
       id: product.id,
       productId: product.id,
       name: product.name,
       price: product.price,
       discountedPrice: hasReferral ? discountedPrice : undefined,
-      image: product.productImage,
+      image: cartImage,
       currency: product.currency,
       quantity,
     });
     router.push('/checkout');
-  }, [addItem, product, hasReferral, discountedPrice, quantity, router]);
+  }, [addItem, product, hasReferral, discountedPrice, quantity, router, cartImage]);
 
   return (
     <div className="bg-black min-h-screen text-white">
@@ -108,6 +117,7 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
           {/* Product Image Gallery */}
           <div className="flex flex-col items-center gap-3">
+            <ProductMetaBadges slug={product.id} isJa={isJa} />
             {/* Main image */}
             <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
@@ -130,7 +140,9 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
 
             {/* Price */}
             <div className="flex items-center gap-3 flex-wrap">
-              {hasReferral ? (
+              {!product.inStock ? (
+                <span className="text-sm font-bold text-white/70 rounded-full border border-white/15 bg-white/10 px-3 py-1">Coming Soon</span>
+              ) : hasReferral ? (
                 <>
                   <span className="text-lg text-white/50 line-through">{product.priceJpy}</span>
                   <span className="text-2xl font-bold text-white">
@@ -143,7 +155,7 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
               ) : (
                 <span className="text-2xl font-bold text-white">{product.priceJpy}</span>
               )}
-              <span className="ml-2 text-[#25C760] text-xs border border-[#25C760] rounded px-2 py-0.5">{isJa ? '送料無料' : 'Free Shipping'}</span>
+              {product.inStock && <span className="ml-2 text-[#25C760] text-xs border border-[#25C760] rounded px-2 py-0.5">{isJa ? '送料無料' : 'Free Shipping'}</span>}
             </div>
 
             {/* Benefits */}
@@ -157,37 +169,37 @@ export default function SimpleProductPage({ product }: { product: SimpleProductP
             </div>
 
             {/* Quantity + CTA */}
-            <div className="flex flex-col gap-3 pt-2">
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-gray-500 uppercase tracking-wider">{isJa ? '数量' : 'Qty'}</span>
-                <div className="flex items-center border-2 border-[#25C760] rounded-lg">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-9 h-9 flex items-center justify-center text-white hover:bg-gray-800 transition text-lg"
-                  >−</button>
-                  <span className="w-8 h-9 flex items-center justify-center text-white font-bold text-sm">{quantity}</span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="w-9 h-9 flex items-center justify-center text-white hover:bg-gray-800 transition text-lg"
-                  >+</button>
+            {product.inStock && (
+              <div className="flex flex-col gap-3 pt-2">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-gray-500 uppercase tracking-wider">{isJa ? '数量' : 'Qty'}</span>
+                  <div className="flex items-center border-2 border-[#25C760] rounded-lg">
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="w-9 h-9 flex items-center justify-center text-white hover:bg-gray-800 transition text-lg"
+                    >−</button>
+                    <span className="w-8 h-9 flex items-center justify-center text-white font-bold text-sm">{quantity}</span>
+                    <button
+                      onClick={() => setQuantity(quantity + 1)}
+                      className="w-9 h-9 flex items-center justify-center text-white hover:bg-gray-800 transition text-lg"
+                    >+</button>
+                  </div>
                 </div>
-              </div>
 
-              <button
-                onClick={handleAddToCart}
-                disabled={!product.inStock}
-                className="w-full py-3 bg-white text-black font-bold rounded-lg text-sm uppercase tracking-wider border-2 border-[#25C760] hover:bg-[#25C760] hover:text-white transition disabled:opacity-50"
-              >
-                {addedFeedback ? (isJa ? '✓ カートに追加しました' : '✓ Added to Cart') : (isJa ? 'カートに入れる' : 'Add to Cart')}
-              </button>
-              <button
-                onClick={handleBuyNow}
-                disabled={!product.inStock}
-                className="w-full py-3 bg-[#25C760] text-white font-bold rounded-lg text-sm uppercase tracking-wider hover:bg-[#1da84e] transition disabled:opacity-50"
-              >
-                {isJa ? '今すぐ購入' : 'Buy Now'}
-              </button>
-            </div>
+                <button
+                  onClick={handleAddToCart}
+                  className="w-full py-3 bg-white text-black font-bold rounded-lg text-sm uppercase tracking-wider border-2 border-[#25C760] hover:bg-[#25C760] hover:text-white transition"
+                >
+                  {addedFeedback ? (isJa ? '✓ カートに追加しました' : '✓ Added to Cart') : (isJa ? 'カートに入れる' : 'Add to Cart')}
+                </button>
+                <button
+                  onClick={handleBuyNow}
+                  className="w-full py-3 bg-[#25C760] text-white font-bold rounded-lg text-sm uppercase tracking-wider hover:bg-[#1da84e] transition"
+                >
+                  {isJa ? '今すぐ購入' : 'Buy Now'}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジ生姜茶 — Mother Vegetable',
     description: 'Nutrient-rich warming ginger tea. 30g.',
-    images: [{ url: '/cdn/mv_ginger_tea_detail.png', width: 800, height: 800, alt: 'マザベジ生姜茶' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 

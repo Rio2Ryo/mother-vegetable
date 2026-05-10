@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'マザベジボディミスト — Mother Vegetable',
     description: 'Refreshing body mist with natural nutrients. 50ml.',
-    images: [{ url: '/cdn/mv_body_mist_detail.png', width: 800, height: 800, alt: 'マザベジボディミスト' }],
+    images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
 };
 
