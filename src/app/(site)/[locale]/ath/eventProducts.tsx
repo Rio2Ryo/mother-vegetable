@@ -138,10 +138,14 @@ function Multiline({ text }: { text: string }) {
   return <>{text.split('\n').map((line) => <span key={line} className="block">{line}</span>)}</>;
 }
 
+const LIVE_STRIPE_LINKS: Record<EventProductKey, string> = {
+  ath: 'https://buy.stripe.com/5kQbJ28ZX0nL7mR7dT5J600',
+  wn: 'https://buy.stripe.com/aFa7sM7VTdaxcHb0Pv5J601',
+  ti: 'https://buy.stripe.com/eVqdRa5NLeeB5eJfKp5J602',
+};
+
 function getStripeLink(product: EventProduct) {
-  const rawValue = process.env[product.stripeEnv] || '';
-  const firstStripeUrl = rawValue.match(/https:\/\/buy\.stripe\.com\/[^\\\s"']+/)?.[0];
-  return firstStripeUrl || rawValue.trim();
+  return LIVE_STRIPE_LINKS[product.key];
 }
 
 export function EventProductPage({ product }: { product: EventProduct }) {
