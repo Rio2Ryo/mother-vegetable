@@ -50,7 +50,12 @@ export async function POST(request: NextRequest) {
     }
 
     const locale = body.locale || "en";
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const appUrl =
+      process.env.VERCEL_ENV === "production" && process.env.NEXT_PUBLIC_APP_URL
+        ? process.env.NEXT_PUBLIC_APP_URL
+        : process.env.VERCEL_URL
+          ? `https://${process.env.VERCEL_URL}`
+          : process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
     // Check stock availability before creating checkout session
     for (const item of body.items) {
@@ -234,6 +239,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ url: session.url });
   } catch (error) {
     console.error("Checkout session creation failed:", error);
+    if (error instanceof Error && error.message.includes("STRIPE_SECRET_KEY")) {
+      return NextResponse.json(
+        { error: "Stripe is not configured on this deployment. Please set STRIPE_SECRET_KEY to enable checkout." },
+        { status: 503 }
+      );
+    }
     return NextResponse.json(
       { error: "Failed to create checkout session" },
       { status: 500 }
