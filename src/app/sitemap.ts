@@ -21,7 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/achieve-howto",
     "/confidence-howto",
     "/mv/certifiedInstructor",
-    "/news",
     "/about",
     "/privacy",
     "/terms",

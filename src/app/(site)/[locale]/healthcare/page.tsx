@@ -857,9 +857,9 @@ export default async function HealthcarePage({
       </section>
 
       {/* ============================================================ */}
-      {/*  SECTION 13 — Blog / News                                    */}
+      {/*  SECTION 13 — Blog / News hidden for now                     */}
       {/* ============================================================ */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="hidden py-16 md:py-24 bg-white">
         <div className="max-w-[1400px] mx-auto px-5">
           <div className="flex items-end justify-between mb-10">
             <div>
