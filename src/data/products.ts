@@ -362,7 +362,7 @@ const wakanaTokachiHoneyAchieve: ProductData = {
   regionTags: ['北海道', '十勝'],
   storyTags: ['地域連携', '限定生産'],
   storyDescription: '世界を制したチャンピオンの想い、北海道十勝の大地の恵み、Achieveの栄養をひとつにした限定ハチミツ。',
-  proposerTags: ['アスリート'],
+  proposerTags: ['永原和可那'],
 };
 
 const tomohiroDaisenHoneyAchieve: ProductData = {
@@ -403,7 +403,7 @@ const tomohiroDaisenHoneyAchieve: ProductData = {
   regionTags: ['秋田県', '大仙市'],
   storyTags: ['地域連携', '限定生産'],
   storyDescription: '世界で戦ったアスリートの経験、秋田県大仙市の自然の恵み、Achieveの栄養をひとつにした限定ハチミツ。',
-  proposerTags: ['アスリート'],
+  proposerTags: ['伊藤友広'],
 };
 
 // ---------------------------------------------------------------------------
