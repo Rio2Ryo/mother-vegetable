@@ -186,15 +186,6 @@ export default function LpCommerceSection({ locale = 'ja' }: { locale?: LpLocale
             </p>
           </div>
 
-          <div className="mt-8 flex justify-center">
-            <Link
-              href="/products"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1"
-              style={{ border: '1px solid #25C760', background: 'transparent', color: '#25C760', fontFamily: "'Noto Sans JP', sans-serif" }}
-            >
-              {copy.searchCta}
-            </Link>
-          </div>
         </div>
       </div>
     </section>
