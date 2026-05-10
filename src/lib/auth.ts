@@ -5,8 +5,12 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import prisma from "@/lib/prisma";
 
-const googleClientId = process.env.GOOGLE_CLIENT_ID?.trim();
-const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim();
+function cleanEnv(value: string | undefined): string | undefined {
+  return value?.replace(/\\n/g, '').trim();
+}
+
+const googleClientId = cleanEnv(process.env.GOOGLE_CLIENT_ID);
+const googleClientSecret = cleanEnv(process.env.GOOGLE_CLIENT_SECRET);
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
