@@ -46,7 +46,7 @@ export const PROPOSER_TAGS: ProposerTagDef[] = [
   { key: 'マザーベジタブル社', labelJa: 'マザーベジタブル社', labelEn: 'Mother Vegetable Co.', icon: '🌱', faceImage: '/cdn/mv-search-character.png' },
   { key: 'アスリート',         labelJa: 'アスリート',           labelEn: 'Athlete',                icon: '🏃' },
   { key: '永原和可那',         labelJa: '永原和可那',           labelEn: 'Wakana Nagahara',        icon: '🏸' },
-  { key: '伊藤友広',           labelJa: '伊藤友広',             labelEn: 'Tomohiro Ito',           icon: '🏃' },
+  { key: '伊藤友広',           labelJa: '伊藤友広',             labelEn: 'Tomohiro Ito',           icon: '🏅' },
   { key: '小学生',             labelJa: '小学生',               labelEn: 'Elementary Student',     icon: '📚' },
   { key: '河津住民',           labelJa: '河津住民',             labelEn: 'Kawazu Resident',        icon: '🏘️' },
 ];

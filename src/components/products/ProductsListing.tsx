@@ -864,7 +864,7 @@ function ProductCard({
   const defaultProposerDef = getProposerTagDef('マザーベジタブル社');
   const proposerDef = (firstProposerKey ? getProposerTagDef(firstProposerKey) : undefined)
     ?? (product.tier === 'product100' ? defaultProposerDef : undefined);
-  const proposerFaceImage = proposerDef?.faceImage ?? defaultProposerDef?.faceImage;
+  const proposerFaceImage = proposerDef?.faceImage;
   const addItem = useCartStore((s) => s.addItem);
   const router = useRouter();
   const [addedFeedback, setAddedFeedback] = useState(false);
