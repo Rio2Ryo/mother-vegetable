@@ -12,6 +12,19 @@ function getAdminEmails(): string[] {
     .filter(Boolean);
 }
 
+function isBasicAdmin(request: NextRequest): boolean {
+  const authHeader = request.headers.get("authorization");
+  if (!authHeader?.startsWith("Basic ")) return false;
+
+  try {
+    const decoded = atob(authHeader.slice(6));
+    const [user, pass] = decoded.split(":");
+    return user === "admin" && pass === "mv123";
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Check whether the given email is an admin.
  */
@@ -31,6 +44,11 @@ export function isAdminEmail(email: string): boolean {
 export async function verifyAdmin(
   request: NextRequest
 ): Promise<NextResponse | null> {
+  // Temporary admin access: allow the same Basic auth used for the protected site.
+  if (isBasicAdmin(request)) {
+    return null;
+  }
+
   // Method 1: Bearer token (ADMIN_SECRET)
   const secret = process.env.ADMIN_SECRET;
   const authHeader = request.headers.get("authorization");
