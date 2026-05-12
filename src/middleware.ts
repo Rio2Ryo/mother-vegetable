@@ -5,22 +5,6 @@ import { routing } from './i18n/routing';
 const intlMiddleware = createMiddleware(routing);
 const SEFS_HOST_REGEX = /^sefs\./i;
 
-function isAuthorized(request: NextRequest) {
-  const auth = request.headers.get('authorization');
-  if (!auth) return false;
-
-  const [scheme, encoded] = auth.split(' ');
-  if (scheme !== 'Basic' || !encoded) return false;
-
-  try {
-    const decoded = atob(encoded);
-    const [user, pass] = decoded.split(':');
-    return user === 'admin' && pass === 'mv123';
-  } catch {
-    return false;
-  }
-}
-
 function isSefsHost(host: string): boolean {
   if (!host) return false;
   if (host === 'sefs.mothervegetable.co.jp') return true;
@@ -29,15 +13,6 @@ function isSefsHost(host: string): boolean {
 }
 
 export default function middleware(request: NextRequest) {
-  if (!isAuthorized(request)) {
-    return new NextResponse('認証が必要です', {
-      status: 401,
-      headers: {
-        'WWW-Authenticate': 'Basic realm="Secure Area"',
-      },
-    });
-  }
-
   const host = request.headers.get('host')?.toLowerCase() ?? '';
   const { pathname } = request.nextUrl;
 
