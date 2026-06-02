@@ -50,16 +50,11 @@ export default function MakerPage() {
 
       <section className="px-6 py-16">
         <div className="mx-auto max-w-4xl">
-          <div className="relative overflow-hidden rounded-3xl border border-[#ffb7c5]/70 bg-[#ffb7c5]/10 p-8 md:p-9 shadow-[0_0_28px_rgba(255,183,197,0.12)]">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_86%_12%,rgba(255,183,197,0.18),transparent_30%)]" />
-            <div className="relative z-10">
-              <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#ffb7c5]">About Maker</p>
-              <h2 className="mt-3 text-3xl font-black">Mazavege Makerとは</h2>
-              <div className="mt-6 text-lg leading-9 text-gray-300">
-                <p>Mazavege Makerとは、Mother Vegetableと日本の食品や化粧品などと組み合わせて、自分のオリジナル商品を作りたい方に向けたパートナー制度です。</p>
-                <p className="mt-5">自分の商品アイデアを提案し、審査で承認された場合、Mazavege Shopで販売されます。</p>
-              </div>
-            </div>
+          <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#ffb7c5]">About Maker</p>
+          <h2 className="mt-3 text-3xl font-black">Mazavege Makerとは</h2>
+          <div className="mt-6 text-lg leading-9 text-gray-300">
+            <p>Mazavege Makerとは、Mother Vegetableと日本の食品や化粧品などと組み合わせて、自分のオリジナル商品を作りたい方に向けたパートナー制度です。</p>
+            <p className="mt-5">自分の商品アイデアを提案し、審査で承認された場合、Mazavege Shopで販売されます。</p>
           </div>
         </div>
       </section>
