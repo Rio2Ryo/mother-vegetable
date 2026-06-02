@@ -204,6 +204,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [madeMarkX, setMadeMarkX] = useState(50);
   const [madeMarkY, setMadeMarkY] = useState(86);
   const [madeMarkScale, setMadeMarkScale] = useState(100);
+  const [selectedPreviewItem, setSelectedPreviewItem] = useState<'logo' | 'made' | null>('logo');
   const [labelBg, setLabelBg] = useState('#101010');
   const [designImagePreview, setDesignImagePreview] = useState('');
   const [designImageName, setDesignImageName] = useState('');
@@ -264,14 +265,20 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
     };
   }
 
+  function clamp(value: number, min: number, max: number) {
+    return Math.min(max, Math.max(min, value));
+  }
+
   function onPreviewPointer(event: React.PointerEvent<HTMLDivElement>) {
+    setSelectedPreviewItem('logo');
     const point = getPointerPercent(event);
     setLogoX(point.x);
     setLogoY(point.y);
   }
 
-  function onLogoPointer(event: React.PointerEvent<HTMLImageElement>) {
+  function onLogoPointer(event: React.PointerEvent<HTMLElement>) {
     event.stopPropagation();
+    setSelectedPreviewItem('logo');
     event.currentTarget.setPointerCapture?.(event.pointerId);
     const labelArea = event.currentTarget.parentElement;
     if (!labelArea) return;
@@ -280,14 +287,41 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
     setLogoY(point.y);
   }
 
+  function onLogoResizePointer(event: React.PointerEvent<HTMLElement>) {
+    event.stopPropagation();
+    setSelectedPreviewItem('logo');
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    const labelArea = event.currentTarget.closest('[data-label-area="true"]') as HTMLElement | null;
+    if (!labelArea) return;
+    const rect = labelArea.getBoundingClientRect();
+    const centerX = rect.left + (logoX / 100) * rect.width;
+    const centerY = rect.top + (logoY / 100) * rect.height;
+    const distance = Math.max(Math.abs(event.clientX - centerX), Math.abs(event.clientY - centerY));
+    setLogoScale(clamp(Math.round(distance), 45, 150));
+  }
+
   function onMadeMarkPointer(event: React.PointerEvent<HTMLDivElement>) {
     event.stopPropagation();
+    setSelectedPreviewItem('made');
     event.currentTarget.setPointerCapture?.(event.pointerId);
     const labelArea = event.currentTarget.parentElement;
     if (!labelArea) return;
     const point = getPointerPercent(event, labelArea);
     setMadeMarkX(point.x);
     setMadeMarkY(point.y);
+  }
+
+  function onMadeMarkResizePointer(event: React.PointerEvent<HTMLElement>) {
+    event.stopPropagation();
+    setSelectedPreviewItem('made');
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    const labelArea = event.currentTarget.closest('[data-label-area="true"]') as HTMLElement | null;
+    if (!labelArea) return;
+    const rect = labelArea.getBoundingClientRect();
+    const centerX = rect.left + (madeMarkX / 100) * rect.width;
+    const centerY = rect.top + (madeMarkY / 100) * rect.height;
+    const distance = Math.max(Math.abs(event.clientX - centerX), Math.abs(event.clientY - centerY));
+    setMadeMarkScale(clamp(Math.round((distance / 64) * 100), 45, 160));
   }
 
   function handleDesignImageUpload(event: React.ChangeEvent<HTMLInputElement>) {
@@ -535,6 +569,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               <div
                 onPointerDown={onPreviewPointer}
                 onPointerMove={(e) => e.buttons === 1 && onPreviewPointer(e)}
+                data-label-area="true"
                 className="relative w-full max-w-[360px] cursor-crosshair overflow-hidden rounded-[1.35rem] border-2 border-dashed border-[#25C760]/70 shadow-[0_0_28px_rgba(37,199,96,0.18)]"
                 style={{
                   aspectRatio: `${selectedLabelSize.widthMm} / ${selectedLabelSize.heightMm}`,
@@ -549,21 +584,37 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                     className="pointer-events-none absolute inset-0 h-full w-full object-cover"
                   />
                 )}
-                <img
-                  src={selectedLogo.src}
-                  alt="selected logo"
-                  draggable={false}
+                <div
                   onPointerDown={onLogoPointer}
                   onPointerMove={(e) => e.buttons === 1 && onLogoPointer(e)}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 cursor-grab touch-none select-none object-contain active:cursor-grabbing"
-                  style={{ left: `${logoX}%`, top: `${logoY}%`, width: `${logoScale * 2}px`, maxWidth: '82%', maxHeight: '180px' }}
-                />
+                  className={`absolute z-10 -translate-x-1/2 -translate-y-1/2 cursor-grab touch-none select-none p-1 active:cursor-grabbing ${selectedPreviewItem === 'logo' ? 'outline outline-2 outline-[#25C760]' : ''}`}
+                  style={{ left: `${logoX}%`, top: `${logoY}%` }}
+                  aria-label="マザベジロゴ"
+                >
+                  <img
+                    src={selectedLogo.src}
+                    alt="selected logo"
+                    draggable={false}
+                    className="block object-contain"
+                    style={{ width: `${logoScale * 2}px`, maxWidth: '260px', maxHeight: '180px' }}
+                  />
+                  {selectedPreviewItem === 'logo' && (
+                    <div
+                      onPointerDown={onLogoResizePointer}
+                      onPointerMove={(e) => e.buttons === 1 && onLogoResizePointer(e)}
+                      className="absolute -bottom-3 -right-3 h-6 w-6 cursor-nwse-resize rounded-full border-2 border-black bg-[#25C760] shadow-[0_0_0_2px_rgba(255,255,255,0.85)]"
+                      aria-label="ロゴサイズ調整"
+                    />
+                  )}
+                </div>
                 <MadeInJapanMark
                   x={madeMarkX}
                   y={madeMarkY}
                   scale={madeMarkScale}
+                  selected={selectedPreviewItem === 'made'}
                   onPointerDown={onMadeMarkPointer}
                   onPointerMove={(e) => e.buttons === 1 && onMadeMarkPointer(e)}
+                  onResizePointer={onMadeMarkResizePointer}
                 />
               </div>
             </div>
@@ -673,20 +724,24 @@ function MadeInJapanMark({
   x,
   y,
   scale,
+  selected,
   onPointerDown,
   onPointerMove,
+  onResizePointer,
 }: {
   x: number;
   y: number;
   scale: number;
+  selected: boolean;
   onPointerDown: (event: React.PointerEvent<HTMLDivElement>) => void;
   onPointerMove: (event: React.PointerEvent<HTMLDivElement>) => void;
+  onResizePointer: (event: React.PointerEvent<HTMLDivElement>) => void;
 }) {
   return (
     <div
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
-      className="absolute z-10 w-[128px] cursor-grab select-none text-center text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] active:cursor-grabbing"
+      className={`absolute z-10 w-[128px] cursor-grab select-none p-1 text-center text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] active:cursor-grabbing ${selected ? 'outline outline-2 outline-[#25C760]' : ''}`}
       style={{
         left: `${x}%`,
         top: `${y}%`,
@@ -700,6 +755,14 @@ function MadeInJapanMark({
         <span className="block h-4 w-4 rounded-full bg-[#ed1b2f]" />
       </div>
       <div className="mt-2 whitespace-nowrap font-serif text-[15px] font-black leading-none tracking-[0.04em]">MADE IN JAPAN</div>
+      {selected && (
+        <div
+          onPointerDown={onResizePointer}
+          onPointerMove={(e) => e.buttons === 1 && onResizePointer(e)}
+          className="absolute -bottom-3 -right-3 h-6 w-6 cursor-nwse-resize rounded-full border-2 border-black bg-[#25C760] shadow-[0_0_0_2px_rgba(255,255,255,0.85)]"
+          aria-label="Made in Japanサイズ調整"
+        />
+      )}
     </div>
   );
 }
