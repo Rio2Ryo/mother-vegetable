@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
 
 export const metadata: Metadata = {
   title: 'How to Use Achieve Capsules',
@@ -505,7 +506,225 @@ const indianCurryDessertRecipes: Recipe[] = [
   },
 ];
 
+
+const recipeTitleJa: Record<string, string> = {
+  'Mazavege Pure Water': 'Mazavege ピュアウォーター',
+  'Mazavege Beer': 'Mazavege ビール',
+  'Mazavege Sour': 'Mazavege サワー',
+  'Mazavege Plum Wine on the Rocks': 'Mazavege 梅酒ロック',
+  'Mazavege Highball': 'Mazavege ハイボール',
+  'Mazavege Sake': 'Mazavege 日本酒',
+  'Mazavege Wine': 'Mazavege ワイン',
+  'Mazavege Juice Blend': 'Mazavege ジュースブレンド',
+  Hiyayakko: '冷奴',
+  Natto: '納豆',
+  Mekabu: 'めかぶ',
+  'Vegetable Dip': '野菜ディップ',
+  'Potato Salad': 'ポテトサラダ',
+  'Fried Chicken': '唐揚げ',
+  'Shrimp with Mayo': 'エビマヨ',
+  Ochazuke: 'お茶漬け',
+  'Miso Soup': '味噌汁',
+  'Grilled Pacific Saury': 'さんまの塩焼き',
+  'Tororo Rice': 'とろろご飯',
+  'Zaru Soba': 'ざるそば',
+  Tempura: '天ぷら',
+  Sushi: '寿司',
+  'Shabu-shabu': 'しゃぶしゃぶ',
+  Teppanyaki: '鉄板焼き',
+  Caprese: 'カプレーゼ',
+  Salad: 'サラダ',
+  Bruschetta: 'ブルスケッタ',
+  Lasagna: 'ラザニア',
+  Genovese: 'ジェノベーゼ',
+  Peperoncino: 'ペペロンチーノ',
+  Margherita: 'マルゲリータ',
+  Risotto: 'リゾット',
+  Baguette: 'バゲット',
+  Tabbouleh: 'タブレ',
+  Potage: 'ポタージュ',
+  'Avocado and Scallop Appetizer': 'アボカドとホタテの前菜',
+  Ratatouille: 'ラタトゥイユ',
+  Quiche: 'キッシュ',
+  'Salmon Tartare': 'サーモンタルタル',
+  'White Fish Meuniere': '白身魚のムニエル',
+  'Egg Drop Soup': '卵スープ',
+  'Glass Noodle Salad': '春雨サラダ',
+  'Mapo Tofu': '麻婆豆腐',
+  Xiaolongbao: '小籠包',
+  'Bang Bang Chicken': '棒棒鶏',
+  'Shrimp in Chili Sauce': 'エビチリ',
+  'Stir-Fried Green Pepper and Beef': '青椒肉絲',
+  Kimchi: 'キムチ',
+  Tteokbokki: 'トッポギ',
+  Kimbap: 'キンパ',
+  Samgyetang: '参鶏湯',
+  Samgyeopsal: 'サムギョプサル',
+  Bibimbap: 'ビビンバ',
+  'Cheese Dak-galbi': 'チーズタッカルビ',
+  Naengmyeon: '冷麺',
+  'Dry Curry': 'ドライカレー',
+  'Keema Curry': 'キーマカレー',
+  Biryani: 'ビリヤニ',
+  Naan: 'ナン',
+  Lassi: 'ラッシー',
+  Yogurt: 'ヨーグルト',
+  'Curry Doria': 'カレードリア',
+  'Soup Curry': 'スープカレー',
+};
+
+const recipeTextJa: Record<string, string> = {
+  'Mix Achieve into mineral water': 'ミネラルウォーターにAchieveを混ぜる',
+  'Mix Achieve into beer': 'ビールにAchieveを混ぜる',
+  'Mix Achieve into sour': 'サワーにAchieveを混ぜる',
+  'Mix Achieve into plum wine': '梅酒にAchieveを混ぜる',
+  'Mix Achieve into highball': 'ハイボールにAchieveを混ぜる',
+  'Mix Achieve into sake': '日本酒にAchieveを混ぜる',
+  'Mix Achieve into wine': 'ワインにAchieveを混ぜる',
+  'Mix Achieve into juice': 'ジュースにAchieveを混ぜる',
+  'Sprinkle Achieve on tofu': '豆腐にAchieveをふりかける',
+  'Mix Achieve into natto': '納豆にAchieveを混ぜる',
+  'Mix Achieve into mekabu': 'めかぶにAchieveを混ぜる',
+  'Mix Achieve into miso dip': '味噌ディップにAchieveを混ぜる',
+  'Mix Achieve into potato salad': 'ポテトサラダにAchieveを混ぜる',
+  'Sprinkle Achieve on fried chicken': '唐揚げにAchieveをふりかける',
+  'Mix Achieve into mayo sauce': 'マヨソースにAchieveを混ぜる',
+  'Mix Achieve into ochazuke broth': 'お茶漬けのだしにAchieveを混ぜる',
+  'Sprinkle Achieve on miso soup': '味噌汁にAchieveをふりかける',
+  'Mix Achieve into grated daikon': '大根おろしにAchieveを混ぜる',
+  'Mix Achieve into grated yam': 'とろろにAchieveを混ぜる',
+  'Knead Achieve into soba dough': 'そば生地にAchieveを練り込む',
+  'Mix Achieve into tempura salt': '天ぷら塩にAchieveを混ぜる',
+  'Mix Achieve into soy sauce': '醤油にAchieveを混ぜる',
+  'Mix Achieve into ponzu': 'ポン酢にAchieveを混ぜる',
+  'Mix Achieve into teppanyaki sauce': '鉄板焼きソースにAchieveを混ぜる',
+  'Use Achieve as topping on caprese': 'カプレーゼのトッピングとしてAchieveを使う',
+  'Mix Achieve into salad dressing': 'サラダドレッシングにAchieveを混ぜる',
+  'Spread Achieve mixed paste on bruschetta': 'Achieveを混ぜたペーストをブルスケッタに塗る',
+  'Knead Achieve into lasagna dough': 'ラザニア生地にAchieveを練り込む',
+  'Mix Achieve into basil sauce': 'バジルソースにAchieveを混ぜる',
+  'Mix Achieve into oil-based sauce': 'オイル系ソースにAchieveを混ぜる',
+  'Use Achieve as topping on margherita': 'マルゲリータのトッピングとしてAchieveを使う',
+  'Mix Achieve as finishing touch on risotto': '仕上げにAchieveをリゾットへ混ぜる',
+  'Mix Achieve into butter and spread on baguette': 'バターにAchieveを混ぜてバゲットに塗る',
+  'Mix Achieve into couscous salad': 'クスクスサラダにAchieveを混ぜる',
+  'Mix and sprinkle Achieve on potage': 'ポタージュにAchieveを混ぜる、またはふりかける',
+  'Mix Achieve into appetizer sauce': '前菜ソースにAchieveを混ぜる',
+  'Mix Achieve as finishing touch on ratatouille': '仕上げにAchieveをラタトゥイユへ混ぜる',
+  'Mix Achieve into quiche filling': 'キッシュの具材にAchieveを混ぜる',
+  'Mix Achieve into salmon and avocado tartare': 'サーモンとアボカドのタルタルにAchieveを混ぜる',
+  'Mix Achieve into meuniere sauce': 'ムニエルソースにAchieveを混ぜる',
+  'Mix Achieve as finishing touch in egg drop soup': '仕上げにAchieveを卵スープへ混ぜる',
+  'Mix and sprinkle Achieve on glass noodle salad': '春雨サラダにAchieveを混ぜる、またはふりかける',
+  'Sprinkle Achieve as finishing touch on mapo tofu': '仕上げに麻婆豆腐へAchieveをふりかける',
+  'Mix Achieve into dipping sauce': 'つけだれにAchieveを混ぜる',
+  'Mix Achieve into bang bang chicken sauce': '棒棒鶏ソースにAchieveを混ぜる',
+  'Stir-fry Achieve with fried rice': 'チャーハンにAchieveを加えて炒める',
+  'Sprinkle Achieve as finishing touch on shrimp in chili sauce': '仕上げにエビチリへAchieveをふりかける',
+  'Toss Achieve as finishing touch': '仕上げにAchieveを和える',
+  'Sprinkle Achieve on kimchi': 'キムチにAchieveをふりかける',
+  'Mix Achieve into tteokbokki sauce': 'トッポギソースにAchieveを混ぜる',
+  'Mix Achieve into kimbap rice': 'キンパのご飯にAchieveを混ぜる',
+  'Mix Achieve into samgyetang soup': '参鶏湯のスープにAchieveを混ぜる',
+  'Mix Achieve into seasoned miso for samgyeopsal': 'サムギョプサル用の味噌にAchieveを混ぜる',
+  'Sprinkle Achieve on bibimbap': 'ビビンバにAchieveをふりかける',
+  'Mix Achieve into cheese for dak-galbi': 'タッカルビ用のチーズにAchieveを混ぜる',
+  'Mix Achieve into naengmyeon soup': '冷麺スープにAchieveを混ぜる',
+  'Mix Achieve while frying dry curry': 'ドライカレーを炒めながらAchieveを混ぜる',
+  'Mix Achieve into keema curry': 'キーマカレーにAchieveを混ぜる',
+  'Mix Achieve as finishing touch on biryani': '仕上げにAchieveをビリヤニへ混ぜる',
+  'Knead Achieve into naan dough': 'ナン生地にAchieveを練り込む',
+  'Mix Achieve into lassi': 'ラッシーにAchieveを混ぜる',
+  'Mix Achieve into yogurt': 'ヨーグルトにAchieveを混ぜる',
+  'Make a doria with curry mixed with Achieve': 'Achieveを混ぜたカレーでドリアを作る',
+  'Mix Achieve into soup curry': 'スープカレーにAchieveを混ぜる',
+  '1 glass of water': '水 1杯',
+  '1 glass of beer': 'ビール 1杯',
+  '1 glass of sour': 'サワー 1杯',
+  '1 glass of plum wine': '梅酒 1杯',
+  '1 glass of highball': 'ハイボール 1杯',
+  'Tokkuri 180ml of sake': '日本酒 徳利180ml',
+  '1 glass of wine': 'ワイン 1杯',
+  '1 glass of juice': 'ジュース 1杯',
+  'Mix into seasonings': '調味料に混ぜる',
+  'Direct sprinkling on tofu': '豆腐に直接ふりかける',
+  '1 serving of natto': '納豆 1食分',
+  '1 serving of mekabu': 'めかぶ 1食分',
+  'Approx. 100g of miso dip': '味噌ディップ 約100g',
+  '1 serving of potato salad': 'ポテトサラダ 1食分',
+  'Mix into seasonings (salt 5:Achieve 1)': '調味料に混ぜる（塩5：Achieve1）',
+  'Direct sprinkling': '直接ふりかける',
+  '1 serving of shrimp with mayo': 'エビマヨ 1食分',
+  '1 serving of ochazuke': 'お茶漬け 1食分',
+  '1 serving of miso soup': '味噌汁 1杯',
+  '1 serving of grated daikon': '大根おろし 1食分',
+  '1 serving of grated yam': 'とろろ 1食分',
+  'Approx. 300g of soba dough': 'そば生地 約300g',
+  '1 serving of tempura salt (salt 10:Achieve 1)': '天ぷら塩 1食分（塩10：Achieve1）',
+  'Direct sprinkling on tempura': '天ぷらに直接ふりかける',
+  '1 serving of soy sauce': '醤油 1食分',
+  '1 serving of ponzu': 'ポン酢 1食分',
+  '1 serving of sauce': 'ソース 1食分',
+  'Mix into olive oil': 'オリーブオイルに混ぜる',
+  '1 serving of dressing': 'ドレッシング 1食分',
+  'Mix into paste': 'ペーストに混ぜる',
+  'Approx. 600g of dough': '生地 約600g',
+  '1 serving of genovese': 'ジェノベーゼ 1食分',
+  '1 serving of peperoncino': 'ペペロンチーノ 1食分',
+  'Mix into Tabasco': 'タバスコに混ぜる',
+  '1 serving of risotto': 'リゾット 1食分',
+  '200g of butter': 'バター 200g',
+  'Mix into dressing': 'ドレッシングに混ぜる',
+  'Direct mixing': '直接混ぜる',
+  '1 serving of potage': 'ポタージュ 1杯',
+  '1 serving of appetizer': '前菜 1食分',
+  '1 serving of ratatouille': 'ラタトゥイユ 1食分',
+  'Quiche filling': 'キッシュの具材',
+  'Salmon tartare mixture': 'サーモンタルタルの具材',
+  '1 serving of meuniere sauce': 'ムニエルソース 1食分',
+  '1 serving of egg drop soup': '卵スープ 1杯',
+  '1 serving of glass noodle salad': '春雨サラダ 1食分',
+  '1 serving of mapo tofu': '麻婆豆腐 1食分',
+  '1 serving of dipping sauce': 'つけだれ 1食分',
+  '1 serving of fried rice': 'チャーハン 1食分',
+  '1 serving of shrimp in chili sauce': 'エビチリ 1食分',
+  '1 serving of stir-fry': '炒め物 1食分',
+  '1 serving of kimchi': 'キムチ 1食分',
+  '1 serving of tteokbokki': 'トッポギ 1食分',
+  'Rice for kimbap': 'キンパ用のご飯',
+  '1 serving of samgyetang': '参鶏湯 1食分',
+  'Approx. 300g / 10 servings of seasoned miso': '味噌だれ 約300g / 10食分',
+  '1 serving of bibimbap': 'ビビンバ 1食分',
+  'Cheese for dak-galbi': 'タッカルビ用チーズ',
+  'Approx. 1000ml / 3 servings of soup': 'スープ 約1000ml / 3食分',
+  'Dry curry ingredients': 'ドライカレーの具材',
+  '1 serving of keema curry': 'キーマカレー 1食分',
+  '1 serving of biryani': 'ビリヤニ 1食分',
+  'Naan dough': 'ナン生地',
+  '1 serving of lassi': 'ラッシー 1杯',
+  '1 serving of yogurt': 'ヨーグルト 1食分',
+  'Ingredients for 1 serving': '1食分の材料',
+  'Ingredients for soup curry': 'スープカレーの材料',
+  'Achieve 1 stick': 'Achieve 1本',
+  'Achieve 2 sticks': 'Achieve 2本',
+  'Achieve 1/2 stick': 'Achieve 1/2本',
+  'Achieve 1/3 stick': 'Achieve 1/3本',
+  'Achieve 1/5 stick': 'Achieve 1/5本',
+  'Achieve 1/6 stick': 'Achieve 1/6本',
+  'Achieve 1/10 stick': 'Achieve 1/10本',
+  '*For plum wine soda, use Achieve 1/2 stick.': '※梅酒ソーダの場合はAchieve 1/2本が目安です。',
+  '*For sparkling juice, use Achieve 1/5 stick.': '※炭酸ジュースの場合はAchieve 1/5本が目安です。',
+  '*It is recommended to mix Achieve in as a finishing touch after cooking.': '※調理後、仕上げにAchieveを混ぜるのがおすすめです。',
+};
+
+function localizeRecipeText(value: string, isJa: boolean): string {
+  if (!isJa) return value;
+  return recipeTextJa[value] ?? recipeTitleJa[value] ?? value;
+}
+
 function RecipeCard({ recipe, isJa }: { recipe: Recipe; isJa: boolean }) {
+  const title = isJa ? recipeTitleJa[recipe.title] ?? recipe.title : recipe.title;
+  const description = localizeRecipeText(recipe.description, isJa);
   const lightLabel = isJa ? '薄めの色味の推奨量' : recipe.light.label;
   const strongLabel = isJa ? '濃いめの色味の推奨量' : recipe.strong.label;
 
@@ -516,7 +735,7 @@ function RecipeCard({ recipe, isJa }: { recipe: Recipe; isJa: boolean }) {
         <div className="md:w-[280px] lg:w-[320px] flex-shrink-0">
           <Image
             src={recipe.image}
-            alt={recipe.title}
+            alt={title}
             width={320}
             height={240}
             className="w-full h-full object-cover"
@@ -524,24 +743,24 @@ function RecipeCard({ recipe, isJa }: { recipe: Recipe; isJa: boolean }) {
         </div>
         {/* Right: Content */}
         <div className="flex-1 p-5 md:p-6">
-          <h4 className="text-white text-lg md:text-xl font-bold mb-2">{recipe.title}</h4>
-          <p className="text-[#25C760] font-semibold text-sm md:text-base mb-4">{recipe.description}</p>
+          <h4 className="text-white text-lg md:text-xl font-bold mb-2">{title}</h4>
+          <p className="text-[#25C760] font-semibold text-sm md:text-base mb-4">{description}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-black/50 border border-[#25C760]/30 rounded-lg p-3">
               <p className="text-[#25C760]/80 font-semibold text-xs mb-2">{lightLabel}</p>
               {recipe.light.items.map((item, i) => (
-                <p key={i} className="text-white text-sm leading-relaxed">{item}</p>
+                <p key={i} className="text-white text-sm leading-relaxed">{localizeRecipeText(item, isJa)}</p>
               ))}
             </div>
             <div className="bg-black/50 border border-[#25C760]/30 rounded-lg p-3">
               <p className="text-[#25C760]/80 font-semibold text-xs mb-2">{strongLabel}</p>
               {recipe.strong.items.map((item, i) => (
-                <p key={i} className="text-white text-sm leading-relaxed">{item}</p>
+                <p key={i} className="text-white text-sm leading-relaxed">{localizeRecipeText(item, isJa)}</p>
               ))}
             </div>
           </div>
           {recipe.note && (
-            <p className="text-white/60 text-xs mt-3">{recipe.note}</p>
+            <p className="text-white/60 text-xs mt-3">{localizeRecipeText(recipe.note, isJa)}</p>
           )}
         </div>
       </div>
@@ -646,12 +865,12 @@ export default async function AchieveHowToPage({ params }: { params: Promise<{ l
 
         {/* Buy link */}
         <div className="text-center py-8">
-          <a
+          <Link
             href="/product/achieve"
             className="inline-block bg-white text-black font-semibold py-3 px-8 rounded-lg no-underline hover:bg-[#25C760] hover:text-white transition-all duration-300"
           >
             {isJa ? 'Achieveを購入する' : 'To Buy Achieve'}
-          </a>
+          </Link>
         </div>
 
         <div className="text-center py-8">
