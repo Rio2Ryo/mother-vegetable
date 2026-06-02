@@ -151,6 +151,8 @@ const logos = [
 const regions = ['河津町', '串本町', '伊豆市', '南伊豆町', '和歌山県', '北海道', '新潟県', '静岡県', '小豆島'];
 const categories = ['食品向け', '化粧品向け', '食品・化粧品向け'];
 const tagOptions = ['発酵食品', '調味料', 'スキンケア', 'ヘアケア', '粉末', '液体'];
+const containerColorOptions = ['透明', '黒遮光', '白マット'];
+const lidColorOptions = ['白', '黒', '木目'];
 
 function toggle(list: string[], value: string) {
   return list.includes(value) ? list.filter((item) => item !== value) : [...list, value];
@@ -164,6 +166,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [rawMaterialId, setRawMaterialId] = useState('');
   const [containerId, setContainerId] = useState('');
   const [containerVariantId, setContainerVariantId] = useState('');
+  const [containerColor, setContainerColor] = useState('');
+  const [lidColor, setLidColor] = useState('');
   const [capacity, setCapacity] = useState('');
   const [detailOpen, setDetailOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -198,6 +202,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const selectedLogo = logos.find((item) => item.id === logoId) ?? logos[0];
   const selectedContainerVariant = selectedContainer.variants.find((item) => item.id === containerVariantId) ?? selectedContainer.variants[0];
   const selectedLabelSize = selectedContainerVariant.labelSize;
+  const capacityOptions = selectedContainer.variants.slice(0, 3);
+  const isContainerDetailComplete = Boolean(containerVariantId && containerColor && lidColor);
 
   const filteredMaterials = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -307,7 +313,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {filteredMaterials.map((item) => (
                 <label key={item.id} className={`group cursor-pointer overflow-hidden rounded-[1.75rem] border bg-white/[0.035] transition ${rawMaterialId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.25)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                  <input type="radio" name="rawMaterial" value={item.id} checked={rawMaterialId === item.id} onChange={() => { setRawMaterialId(item.id); setContainerId(''); setContainerVariantId(''); setCapacity(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerSection); }} className="sr-only" />
+                  <input type="radio" name="rawMaterial" value={item.id} checked={rawMaterialId === item.id} onChange={() => { setRawMaterialId(item.id); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerSection); }} className="sr-only" />
                   <div className="relative h-44 overflow-hidden bg-white/5"><img src={item.image} alt={`${item.name}の素材写真`} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /></div>
                   <div className="p-5">
                     <div className="flex items-start justify-between gap-3">
@@ -337,7 +343,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {containers.map((item) => (
               <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${containerId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(''); setCapacity(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }} className="sr-only" />
+                <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }} className="sr-only" />
                 <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5"><img src={item.image} alt={`${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" /></div>
                 <h3 className="mt-5 text-2xl font-black">{item.name}</h3>
                 <p className="mt-1 text-sm font-bold text-[#25C760]">目安容量: {item.capacity}</p>
@@ -352,46 +358,60 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="text-sm font-bold text-[#25C760]">容器の詳細仕様</p>
-                <h3 className="mt-2 text-2xl font-black">{selectedContainer.name}の候補を選ぶ</h3>
+                <h3 className="mt-2 text-2xl font-black">{selectedContainer.name}の仕様を選ぶ</h3>
                 <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-300">
-                  容量、色、形状、スプレー方式、遮光素材などを写真と数字で確認して選べます。写真は仮登録画像なので、正式な容器写真に差し替え可能です。
+                  写真ではなく文字で、容量・容器色・蓋色を順番に選びます。容量にはラベルサイズも一緒に表示します。
                 </p>
               </div>
-              <span className="rounded-full border border-[#25C760]/35 px-4 py-2 text-sm font-bold text-[#25C760]">{selectedContainer.variants.length}候補</span>
+              <span className="rounded-full border border-[#25C760]/35 px-4 py-2 text-sm font-bold text-[#25C760]">3ステップ</span>
             </div>
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {selectedContainer.variants.map((variant) => (
-                <label key={variant.id} className={`cursor-pointer overflow-hidden rounded-[1.5rem] border bg-black/35 transition ${containerVariantId === variant.id ? 'border-[#25C760] shadow-[0_0_22px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                  <input
-                    type="radio"
-                    name="containerVariant"
-                    value={variant.id}
+
+            <div className="mt-8 space-y-8">
+              <ChoiceGroup title="1. 容量を選ぶ（ラベルサイズ）" note="容量を選ぶと、ラベル配置プレビューの範囲もこのサイズに連動します。">
+                {capacityOptions.map((variant) => (
+                  <TextChoice
+                    key={variant.id}
+                    name="containerCapacity"
                     checked={containerVariantId === variant.id}
-                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setDetailOpen(false); setConfirmOpen(false); jumpTo(designSection); }}
-                    className="sr-only"
+                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setDetailOpen(false); setConfirmOpen(false); }}
+                    title={variant.capacity}
+                    detail={`ラベル範囲: 横${variant.labelSize.widthMm}mm × 縦${variant.labelSize.heightMm}mm`}
                   />
-                  <div className="relative h-36 overflow-hidden bg-white/5">
-                    <img src={variant.image} alt={`${variant.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  </div>
-                  <div className="p-5">
-                    <h4 className="text-lg font-black">{variant.name}</h4>
-                    <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-300">
-                      <Spec label="容量" value={variant.capacity} />
-                      <Spec label="色" value={variant.color} />
-                      <Spec label="形状" value={variant.shape} />
-                      <Spec label="仕様" value={variant.spec} />
-                      <Spec label="素材" value={variant.material} />
-                      <Spec label="ラベル" value={`${variant.labelSize.widthMm}×${variant.labelSize.heightMm}mm`} />
-                    </div>
-                  </div>
-                </label>
-              ))}
+                ))}
+              </ChoiceGroup>
+
+              {containerVariantId && (
+                <ChoiceGroup title="2. 容器の色を選ぶ">
+                  {containerColorOptions.map((color) => (
+                    <TextChoice
+                      key={color}
+                      name="containerColor"
+                      checked={containerColor === color}
+                      onChange={() => { setContainerColor(color); setDetailOpen(false); setConfirmOpen(false); }}
+                      title={color}
+                    />
+                  ))}
+                </ChoiceGroup>
+              )}
+
+              {containerVariantId && containerColor && (
+                <ChoiceGroup title="3. 蓋の色を選ぶ">
+                  {lidColorOptions.map((color) => (
+                    <TextChoice
+                      key={color}
+                      name="lidColor"
+                      checked={lidColor === color}
+                      onChange={() => { setLidColor(color); setDetailOpen(false); setConfirmOpen(false); jumpTo(designSection, 120); }}
+                      title={color}
+                    />
+                  ))}
+                </ChoiceGroup>
+              )}
             </div>
           </div>
           )}
 
-          {containerVariantId && (
+          {isContainerDetailComplete && (
           <div className="mt-8 max-w-md rounded-3xl border border-white/10 bg-white/[0.04] p-6">
             <label className="text-sm font-bold text-gray-300">希望内容量・容量</label>
             <input value={capacity} onChange={(e) => setCapacity(e.target.value)} placeholder="例：100ml / 80g / 30包" className="mt-2 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
@@ -401,7 +421,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       </section>
       )}
 
-      {containerVariantId && (
+      {isContainerDetailComplete && (
       <section ref={designSection} className="px-6 py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_420px]">
           <div>
@@ -466,7 +486,9 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <h3 className="text-xl font-black">ラベル配置プレビュー</h3>
             <div className="mt-3 flex flex-wrap gap-2 text-xs font-bold text-[#25C760]">
               <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{selectedContainer.name}</span>
-              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{selectedContainerVariant.name}</span>
+              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{selectedContainerVariant.capacity}</span>
+              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">容器色: {containerColor}</span>
+              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">蓋色: {lidColor}</span>
               <span className="rounded-full border border-[#25C760]/35 px-3 py-1">ラベル範囲: 横{selectedLabelSize.widthMm}mm × 縦{selectedLabelSize.heightMm}mm</span>
             </div>
             <p className="mt-3 text-xs leading-5 text-gray-400">
@@ -561,7 +583,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <Summary label="素材" value={`${selectedRaw.name}（${selectedRaw.region}）`} />
             <Summary label="容器・内容量" value={`${selectedContainer.name} / ${selectedContainerVariant.name} / ${capacity}`} />
-            <Summary label="容器仕様" value={`${selectedContainerVariant.color} / ${selectedContainerVariant.shape} / ${selectedContainerVariant.spec} / ${selectedContainerVariant.material}`} />
+            <Summary label="容器仕様" value={`容器色: ${containerColor} / 蓋色: ${lidColor}`} />
             <Summary label="ラベル範囲" value={`横${selectedLabelSize.widthMm}mm × 縦${selectedLabelSize.heightMm}mm`} />
             <Summary label="ロゴ" value={`${selectedLogo.name} / 位置 ${logoX}%・${logoY}% / サイズ ${logoScale}%`} />
             <Summary label="Made in Japan" value={`位置 ${madeMarkX}%・${madeMarkY}% / サイズ ${madeMarkScale}%`} />
@@ -666,6 +688,39 @@ function Input({ label, value, onChange, placeholder, note, type = 'text' }: { l
   );
 }
 
+
+
+function ChoiceGroup({ title, note, children }: { title: string; note?: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h4 className="text-lg font-black text-white">{title}</h4>
+      {note && <p className="mt-2 text-xs leading-5 text-gray-400">{note}</p>}
+      <div className="mt-4 grid gap-3 md:grid-cols-3">{children}</div>
+    </div>
+  );
+}
+
+function TextChoice({
+  name,
+  checked,
+  onChange,
+  title,
+  detail,
+}: {
+  name: string;
+  checked: boolean;
+  onChange: () => void;
+  title: string;
+  detail?: string;
+}) {
+  return (
+    <label className={`cursor-pointer rounded-2xl border p-4 transition ${checked ? 'border-[#25C760] bg-[#25C760]/15 shadow-[0_0_18px_rgba(37,199,96,0.18)]' : 'border-white/10 bg-black/35 hover:border-[#25C760]/50'}`}>
+      <input type="radio" name={name} checked={checked} onChange={onChange} className="sr-only" />
+      <span className="block text-base font-black text-white">{title}</span>
+      {detail && <span className="mt-2 block text-xs font-bold leading-5 text-[#25C760]">{detail}</span>}
+    </label>
+  );
+}
 
 function Spec({ label, value }: { label: string; value: string }) {
   return (
