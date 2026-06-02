@@ -178,19 +178,19 @@ const motherVegetableOptions = [
     id: 'achieve',
     name: 'Mother Vegetable Achieve',
     category: '食品用',
-    description: '食生活に取り入れやすいMother Vegetableの食品ライン。\n地域素材と組み合わせて、毎日の習慣になる商品を目指します。',
+    description: '重金属などの不純物リスクを最大限に排除した、48種類の栄養素。美しい緑色が特徴',
   },
   {
     id: 'confidence',
     name: 'Mother Vegetable Confidence',
     category: '化粧品用/食品用',
-    description: '美容・食品の両方に展開しやすいMother Vegetableライン。\n地域素材の個性を活かし、日々のコンディションづくりに寄り添います。',
+    description: '日本の厚生労働省が定める医薬部外品原料規格をクリアした、純度約97%の天然非晶質シリカパウダー。アメリカのFDA基準の検査ではPremium Food Powder Grade と評価され、化粧品にも食品にも使用が可能。',
   },
   {
     id: 'both',
     name: '両方とも使用する',
     category: 'Achieve + Confidence',
-    description: '食品用と化粧品用の両面から商品展開を考えたい方向け。\n素材の特徴に合わせて、複数商品のアイデアにも広げやすくなります。',
+    description: 'achieveとconfidenceをどちらも使用して展開したい方向け。'
   },
 ];
 
@@ -237,7 +237,7 @@ const enUi = {
   heroLead: 'Choose one Japanese Raw Material, select the container, logo, and product name, then submit your Mazavege Maker idea. No monthly fee is charged until your idea passes review and you approve it.',
   rawTitle: 'Choose a Japanese Raw Material',
   filters: 'Search & Filter', searchLabel: 'Search by region or material', searchPlaceholder: 'e.g. Kawazu, miso, toner', region: 'Region', usage: 'Use', featureTags: 'Feature tags', count: 'items', select: 'Select',
-  mvTitle: 'Choose the Mother Vegetable to combine', mvLead: 'Select which Mother Vegetable line you want to combine with your chosen Japanese Raw Material.',
+  mvTitle: 'Choose the Mother Vegetable to combine', mvLead: 'Select which Mother Vegetable you want to combine with your chosen Japanese Raw Material.',
   containerTitle: 'What kind of container would you like to use?', containerLead: 'First choose the container shape that fits your material. After choosing a shape, you can select size, color, and specifications.', estimatedCapacity: 'Approx. capacity', chooseFrom: 'options', chooseFromSuffix: 'to choose from',
   specLabel: 'Container details', specTitleSuffix: ' specifications', specLead: 'Choose capacity, container color, and cap color in order.', threeSteps: '3 steps', capacityTitle: '1. Choose capacity', capacityNote: 'Choosing capacity also determines the label size.', labelArea: 'Label area', width: 'W', height: 'H', colorTitle: '2. Choose container color', lidTitle: '3. Choose cap color', desiredCapacity: 'Desired capacity', desiredCapacityPlaceholder: 'e.g. 100ml / 80g / 30 packs', capacityConfirm: 'Check here if this capacity is OK',
   labelTitle: 'Label design', labelLead: 'Choose the Mother Vegetable logo and adjust the size of the logo and Made in Japan mark. You can drag them directly on the preview.', chooseLogo: 'Choose Mother Vegetable logo', bgColor: 'Background color', upload: 'Upload label design image', selectedFile: 'Selected', designMemo: 'Design request memo', designMemoPlaceholder: 'e.g. Black background with white text, large material name, elegant mood that communicates the local story', goProductInfo: 'Go to product information', previewTitle: 'Label placement preview', previewLead: 'When you change the container, this work area changes its aspect ratio to match the label area.', containerColor: 'Container color', lidColor: 'Cap color', logoSize: 'Logo size', madeSize: 'MADE IN JAPAN size',
@@ -517,7 +517,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-bold text-[#25C760]">STEP 02</p>
           <h2 className="mt-2 text-3xl font-black">{ui?.mvTitle ?? '組み合わせるMother Vegetableを選択する'}</h2>
-          <p className="mt-4 max-w-3xl text-gray-300">{ui?.mvLead ?? '選んだJapanese Raw Materialと、どのMother Vegetableラインを組み合わせるか選んでください。'}</p>
+          <p className="mt-4 max-w-3xl text-gray-300">{ui?.mvLead ?? '選んだJapanese Raw Materialと、どのMother Vegetableを組み合わせるか選んでください。'}</p>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {motherVegetableOptions.map((item) => (
               <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${motherVegetableId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
@@ -531,7 +531,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                 />
                 <p className="text-xs font-black uppercase tracking-[0.22em] text-[#25C760]">{term(item.category)}</p>
                 <h3 className="mt-3 text-2xl font-black">{isEnglish ? term(item.name) : item.name}</h3>
-                <p className="mt-4 whitespace-pre-line text-sm leading-7 text-gray-300">{isEnglish ? (item.id === 'achieve' ? 'A Mother Vegetable food line designed to fit naturally into daily eating habits.\nCombine it with regional ingredients to create products people can use every day.' : item.id === 'confidence' ? 'A Mother Vegetable line that can be developed for both beauty and food concepts.\nIt helps express each regional ingredient while supporting daily wellness.' : 'For ideas that use both food and cosmetic approaches.\nThis option makes it easier to expand one material into multiple product ideas.') : item.description}</p>
+                <p className="mt-4 whitespace-pre-line text-sm leading-7 text-gray-300">{isEnglish ? (item.id === 'achieve' ? '48 types of nutrients with impurity risks such as heavy metals reduced as much as possible. Known for its beautiful green color.' : item.id === 'confidence' ? 'A natural amorphous silica powder with about 97% purity that meets Japan’s MHLW quasi-drug ingredient standards. It has been evaluated as Premium Food Powder Grade under FDA-standard testing in the United States and can be used for both cosmetics and food.' : 'For those who want to develop products using both Achieve and Confidence.') : item.description}</p>
               </label>
             ))}
           </div>
