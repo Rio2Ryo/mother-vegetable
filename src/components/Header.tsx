@@ -38,15 +38,11 @@ export default function Header() {
 
   // Zustand store for instructor auth (separate system)
   const currentInstructor = useAffiliateStore((s) => s.currentInstructor);
-  const instructorToken = useAffiliateStore((s) => s.instructorToken);
   const instructorLogout = useAffiliateStore((s) => s.logout);
 
   const isUserLoggedIn = mounted && status === 'authenticated' && !!session?.user;
   const isInstructorLoggedIn = mounted && !!currentInstructor;
   const isLoggedIn = isUserLoggedIn || isInstructorLoggedIn;
-
-  // Instructor-registered check: show instructor menu if token or currentInstructor exists (no active login required)
-  const isRegisteredInstructor = mounted && (!!instructorToken || !!currentInstructor);
 
   const displayName = isUserLoggedIn
     ? (session?.user?.name || session?.user?.email || '')
@@ -55,7 +51,9 @@ export default function Header() {
     ? (session?.user?.email || '')
     : (currentInstructor?.email || '');
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    queueMicrotask(() => setMounted(true));
+  }, []);
 
   function handleLogout() {
     if (isUserLoggedIn) {
@@ -107,7 +105,7 @@ export default function Header() {
         <div className="max-w-[1400px] mx-auto px-5 flex items-center justify-between h-20 max-lg:px-[15px] max-lg:h-[70px]">
           {/* Logo */}
           <Link href="/" className="group flex flex-col justify-center leading-none no-underline transition-all duration-300 hover:scale-[1.03]">
-            <span className="text-[22px] font-black tracking-tight text-white max-lg:text-[18px]">Mazavege</span>
+            <span className="text-[22px] font-black tracking-tight text-[#25C760] max-lg:text-[18px]">Mazavege</span>
             <span className="mt-0.5 text-[22px] font-black tracking-tight text-[#25C760] max-lg:text-[18px]">Shop</span>
             <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-gray-400 max-lg:text-[7px]">
               powered by Mother Vegetable
