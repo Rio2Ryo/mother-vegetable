@@ -211,12 +211,12 @@ export default function MakerPage() {
 
       <section className="px-6 py-16">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-3xl font-black text-[#25C760]">Makerになるメリット</h2>
+          <h2 className="text-3xl font-black text-[#ffb7c5]">Makerになるメリット</h2>
           <div className="mt-8 space-y-5">
             {benefits.map((benefit, index) => (
               <article key={benefit.title} className="rounded-3xl border border-white/10 bg-white/[0.04] p-7">
-                <span className="text-sm font-bold text-[#25C760]">{String(index + 1).padStart(2, '0')}</span>
-                <h3 className="mt-3 text-2xl font-bold">{benefit.title}</h3>
+                <span className="text-sm font-bold text-[#ffb7c5]">{String(index + 1).padStart(2, '0')}</span>
+                <h3 className="mt-3 text-2xl font-bold text-[#ffb7c5]">{benefit.title}</h3>
                 <p className="mt-4 leading-8 text-gray-300">{benefit.body}</p>
               </article>
             ))}
@@ -224,19 +224,19 @@ export default function MakerPage() {
         </div>
       </section>
 
-      <section className="bg-[#25C760]/[0.04] px-6 py-16">
+      <section className="bg-[#ffb7c5]/[0.04] px-6 py-16">
         <div className="mx-auto max-w-4xl space-y-8">
-          <div className="rounded-3xl border border-[#25C760]/30 bg-black/60 p-8">
-            <h2 className="text-2xl font-black text-[#25C760]">Maker登録費用（提案料無料）</h2>
+          <div className="rounded-3xl border border-[#ffb7c5]/30 bg-[#ffb7c5]/[0.04] p-8">
+            <h2 className="text-2xl font-black text-[#ffb7c5]">Maker登録費用（提案料無料）</h2>
             <p className="mt-5 text-3xl font-black">月額 200ドル</p>
             <p className="mt-2 text-gray-300">または 月額30,000円＋税</p>
             <p className="mt-6 leading-8 text-gray-300">商品提案をMother Vegetable社が審査し、承認された場合に限り、初月の支払いが発生します。提案は無料なので、たくさんのアイデアをお待ちしています。</p>
           </div>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-            <h2 className="text-2xl font-black text-[#25C760]">特典と条件</h2>
+          <div className="rounded-3xl border border-[#ffb7c5]/20 bg-white/[0.04] p-8">
+            <h2 className="text-2xl font-black text-[#ffb7c5]">特典と条件</h2>
             <ul className="mt-5 space-y-3 text-gray-300">
               {conditions.map((item) => (
-                <li key={item} className="flex gap-3"><span className="text-[#25C760]">●</span><span>{item}</span></li>
+                <li key={item} className="flex gap-3"><span className="text-[#ffb7c5]">●</span><span>{item}</span></li>
               ))}
             </ul>
           </div>
@@ -244,7 +244,7 @@ export default function MakerPage() {
       </section>
 
       <section className="px-6 py-20 text-center">
-        <div className="mx-auto max-w-3xl rounded-[2rem] border border-[#25C760]/40 bg-[#25C760]/10 p-10">
+        <div className="mx-auto max-w-3xl rounded-[2rem] border border-[#ffb7c5]/40 bg-[#ffb7c5]/10 p-10">
           <h2 className="text-3xl font-black">Mazavege Makerに登録する</h2>
           <p className="mt-4 text-lg text-gray-300">Mother Vegetableと日本の素材を組み合わせ、あなたのアイデアを世界へ届けましょう。</p>
           <Link
