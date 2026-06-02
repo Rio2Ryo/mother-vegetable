@@ -35,15 +35,15 @@ type ContainerItem = {
 };
 
 const rawMaterials: RawMaterial[] = [
-  { id: 'kawazu-salt', name: '河津の平釜塩', region: '河津町', category: '食品向け', tags: ['調味料', '海の素材'], story: '海水を平釜で炊き上げた、土地の味が伝わるミネラル塩。', image: '/images/maker-apply/photos/salt.jpg' },
-  { id: 'kushimoto-miso', name: '串本の米味噌', region: '串本町', category: '食品向け', tags: ['発酵食品', 'ごはんのお供', '常温'], story: '地域の米と麹で丁寧に仕込む、昔ながらの味噌。', image: '/images/maker-apply/photos/miso.jpg' },
-  { id: 'izu-onsen', name: '伊豆の温泉水', region: '伊豆市', category: '化粧品向け', tags: ['スキンケア', '水素材', '保湿感', '観光地'], story: 'やわらかな質感の温泉水。化粧水やミストのベースに。', image: '/images/maker-apply/photos/material-water.svg' },
-  { id: 'minami-toner', name: '南伊豆ハーブ化粧水', region: '南伊豆町', category: '化粧品向け', tags: ['化粧水', 'ハーブ', 'スキンケア', '香り'], story: '小さな農園で育つハーブを活かした、やさしい化粧水素材。', image: '/images/maker-apply/photos/material-herb.svg' },
-  { id: 'wakayama-shampoo', name: '紀州ゆずシャンプー', region: '和歌山県', category: '化粧品向け', tags: ['ヘアケア', '柑橘', '香り', 'バス用品'], story: 'ゆずの香りを活かした、地域色のあるヘアケア素材。', image: '/images/maker-apply/photos/material-yuzu.svg' },
-  { id: 'hokkaido-lip', name: '北海道ミルクリップ', region: '北海道', category: '化粧品向け', tags: ['リップ', '乾燥ケア', '乳素材'], story: '北海道らしいミルク感をテーマにしたリップ素材。', image: '/images/maker-apply/photos/material-lip.svg' },
-  { id: 'komeko-pack', name: '米麹フェイスパック', region: '新潟県', category: '化粧品向け', tags: ['米麹', 'フェイスパック', '発酵', '美容'], story: '米どころの麹文化を美容アイテムに展開できる素材。', image: '/images/maker-apply/photos/koji.jpg' },
-  { id: 'shizuoka-wasabi', name: '静岡わさび塩', region: '静岡県', category: '食品向け', tags: ['調味料', 'わさび', '土産', '粉末'], story: '静岡のわさびを活かした、ふりかけ系コラボに向く素材。', image: '/images/maker-apply/photos/material-wasabi.svg' },
-  { id: 'olive-oil', name: '小豆島オリーブオイル', region: '小豆島', category: '食品・化粧品向け', tags: ['オイル', '食品', '美容'], story: '食品にも美容にも展開しやすい、地域性の強いオイル素材。', image: '/images/maker-apply/photos/material-olive.svg' },
+  { id: 'kawazu-salt', name: '河津の平釜塩', region: '河津町', category: '食品向け', tags: ['調味料', '海の素材'], story: '海水を平釜で炊き上げた、土地の味が伝わるミネラル塩。', image: '/images/maker-apply/raw-materials/kawazu-salt.webp' },
+  { id: 'kushimoto-miso', name: '串本の金山寺味噌', region: '串本町', category: '食品向け', tags: ['発酵食品', 'ごはんのお供', '常温'], story: '地域の米と麹で丁寧に仕込む、昔ながらの金山寺味噌。', image: '/images/maker-apply/raw-materials/kushimoto-kinzanji-miso.webp' },
+  { id: 'izu-onsen', name: '伊豆の温泉化粧水', region: '伊豆市', category: '化粧品向け', tags: ['スキンケア', '水素材', '保湿感', '観光地'], story: 'やわらかな質感の温泉水を活かした、化粧水やミストのベースに。', image: '/images/maker-apply/raw-materials/izu-onsen-toner.webp' },
+  { id: 'minami-toner', name: '南伊豆ハーブ化粧水', region: '南伊豆町', category: '化粧品向け', tags: ['化粧水', 'ハーブ', 'スキンケア', '香り'], story: '小さな農園で育つハーブを活かした、やさしい化粧水素材。', image: '/images/maker-apply/raw-materials/minami-izu-herb-toner.webp' },
+  { id: 'wakayama-shampoo', name: '紀州ゆずシャンプー', region: '和歌山県', category: '化粧品向け', tags: ['ヘアケア', '柑橘', '香り', 'バス用品'], story: 'ゆずの香りを活かした、地域色のあるヘアケア素材。', image: '/images/maker-apply/raw-materials/kishu-yuzu-shampoo.webp' },
+  { id: 'hokkaido-lip', name: '北海道ミルクリップ', region: '北海道', category: '化粧品向け', tags: ['リップ', '乾燥ケア', '乳素材'], story: '北海道らしいミルク感をテーマにしたリップ素材。', image: '/images/maker-apply/raw-materials/hokkaido-milk-lip.webp' },
+  { id: 'komeko-pack', name: '米麹フェイスパック', region: '新潟県', category: '化粧品向け', tags: ['米麹', 'フェイスパック', '発酵', '美容'], story: '米どころの麹文化を美容アイテムに展開できる素材。', image: '/images/maker-apply/raw-materials/komeko-face-pack.webp' },
+  { id: 'shizuoka-wasabi', name: '静岡わさび塩', region: '静岡県', category: '食品向け', tags: ['調味料', 'わさび', '土産', '粉末'], story: '静岡のわさびを活かした、ふりかけ系コラボに向く素材。', image: '/images/maker-apply/raw-materials/shizuoka-wasabi-salt.webp' },
+  { id: 'olive-oil', name: '小豆島オリーブオイル', region: '小豆島', category: '食品・化粧品向け', tags: ['オイル', '食品', '美容'], story: '食品にも美容にも展開しやすい、地域性の強いオイル素材。', image: '/images/maker-apply/raw-materials/shodoshima-olive-oil.webp' },
 ];
 
 const containers: ContainerItem[] = [
