@@ -31,9 +31,9 @@ export default function MakerPage() {
   return (
     <main className="min-h-screen bg-black text-white">
       <section className="relative overflow-hidden px-6 py-24 md:py-28">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,183,197,0.24),transparent_42%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.16),transparent_42%)]" />
         <div className="relative mx-auto max-w-5xl">
-          <p className="mb-4 text-sm font-bold uppercase tracking-[0.35em] text-[#ffb7c5]">Mazavege Partner Program</p>
+          <p className="mb-4 text-sm font-bold uppercase tracking-[0.35em] text-white/85">Mazavege Partner Program</p>
           <h1 className="max-w-3xl text-4xl font-black tracking-tight md:text-6xl">Mazavege Maker</h1>
           <p className="mt-6 text-2xl font-semibold text-white/90 md:text-3xl">あなたのオリジナル商品をリスクなく世界へ</p>
           <p className="mt-6 max-w-4xl text-lg leading-9 text-gray-300 md:text-xl md:leading-10">

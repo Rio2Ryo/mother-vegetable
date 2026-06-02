@@ -20,11 +20,11 @@ export default function PartnerSwitch({ active }: { active: PartnerKind }) {
       href: '/maker',
       title: 'Mazavege Maker',
       subtitle: '商品を作る人',
-      activeClass: 'border-[#ffb7c5] bg-[#ffb7c5]/15 shadow-[0_0_35px_rgba(255,183,197,0.26)]',
-      hoverClass: 'hover:border-[#ffb7c5]/70 hover:bg-[#ffb7c5]/8',
-      textClass: 'text-[#ffb7c5]',
-      hoverTextClass: 'group-hover:text-[#ffb7c5]',
-      badgeClass: 'bg-[#ffb7c5]',
+      activeClass: 'border-white/75 bg-white/[0.12] shadow-[0_0_35px_rgba(255,255,255,0.18)]',
+      hoverClass: 'hover:border-white/55 hover:bg-white/[0.07]',
+      textClass: 'text-white',
+      hoverTextClass: 'group-hover:text-white',
+      badgeClass: 'bg-white',
     },
   ];
 
@@ -45,9 +45,9 @@ export default function PartnerSwitch({ active }: { active: PartnerKind }) {
           >
             {isActiveMaker && (
               <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                <span className="absolute right-[14%] top-[14%] h-8 w-5 rotate-45 rounded-[70%_30%_70%_30%] bg-[#ffb7c5]/22 blur-[0.5px]" />
+                <span className="absolute right-[14%] top-[14%] h-8 w-5 rotate-45 rounded-[70%_30%_70%_30%] bg-white/18 blur-[0.5px]" />
                 <span className="absolute right-[30%] bottom-[18%] h-6 w-4 -rotate-12 rounded-[70%_30%_70%_30%] bg-white/12 blur-[0.5px]" />
-                <span className="absolute left-[58%] top-[36%] h-5 w-3 rotate-[25deg] rounded-[70%_30%_70%_30%] bg-[#ffb7c5]/16 blur-[0.5px]" />
+                <span className="absolute left-[58%] top-[36%] h-5 w-3 rotate-[25deg] rounded-[70%_30%_70%_30%] bg-white/14 blur-[0.5px]" />
               </div>
             )}
             <div className="relative z-10">
