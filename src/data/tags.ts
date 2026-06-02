@@ -43,7 +43,7 @@ export interface ProposerTagDef {
 }
 
 export const PROPOSER_TAGS: ProposerTagDef[] = [
-  { key: 'マザーベジタブル社', labelJa: 'マザーベジタブル社', labelEn: 'Mother Vegetable Co.', icon: '🌱', faceImage: '/cdn/mv-search-character.png' },
+  { key: 'マザーベジタブル社', labelJa: 'Mother Vegetable社', labelEn: 'Mother Vegetable Co.', icon: '🌱', faceImage: '/cdn/mv-search-character.png' },
   { key: '佐藤はるか', labelJa: '佐藤はるか', labelEn: 'Haruka Sato', icon: '👩', faceImage: '/images/proposers/person-haruka.svg' },
   { key: '鈴木大地', labelJa: '鈴木大地', labelEn: 'Daichi Suzuki', icon: '👨', faceImage: '/images/proposers/person-daichi.svg' },
   { key: '森みお', labelJa: '森みお', labelEn: 'Mio Mori', icon: '👩', faceImage: '/images/proposers/person-mio.svg' },
