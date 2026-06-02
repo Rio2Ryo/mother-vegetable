@@ -17,6 +17,7 @@ const langOptions = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [howToOpen, setHowToOpen] = useState(false);
+  const [interviewOpen, setInterviewOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -71,6 +72,7 @@ export default function Header() {
 
   // Timeout refs for delayed dropdown close
   const howToTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const interviewTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const profileTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const openHowTo = useCallback(() => {
@@ -79,6 +81,14 @@ export default function Header() {
   }, []);
   const closeHowTo = useCallback(() => {
     howToTimeout.current = setTimeout(() => setHowToOpen(false), 150);
+  }, []);
+
+  const openInterview = useCallback(() => {
+    if (interviewTimeout.current) { clearTimeout(interviewTimeout.current); interviewTimeout.current = null; }
+    setInterviewOpen(true);
+  }, []);
+  const closeInterview = useCallback(() => {
+    interviewTimeout.current = setTimeout(() => setInterviewOpen(false), 150);
   }, []);
 
   const openProfile = useCallback(() => {
@@ -273,6 +283,52 @@ export default function Header() {
                   >
                     {t('news')}
                   </Link>
+                </li>
+                {/* Interviews */}
+                <li
+                  className="relative group max-lg:w-full"
+                  onMouseEnter={openInterview}
+                  onMouseLeave={closeInterview}
+                >
+                  <button
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-1 bg-transparent border-none cursor-pointer py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:w-full max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                    onClick={() => setInterviewOpen(!interviewOpen)}
+                  >
+                    {t('interviews')}
+                    <svg
+                      className={`w-3 h-3 transition-transform duration-300 ${interviewOpen ? 'rotate-180' : ''}`}
+                      width="12"
+                      height="12"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  <div
+                    className={`lg:absolute lg:top-full lg:left-0 lg:z-[1000] lg:pt-2 transition-all duration-300 ${
+                      interviewOpen
+                        ? 'opacity-100 visible translate-y-0 pointer-events-auto'
+                        : 'lg:opacity-0 lg:invisible lg:-translate-y-[10px] lg:pointer-events-none max-lg:hidden'
+                    } static mt-0 ml-4 lg:mt-0 lg:ml-0`}
+                  >
+                    <ul className="lg:bg-black lg:shadow-[0_8px_20px_rgba(0,0,0,0.3)] lg:rounded-lg lg:border lg:border-[#25C760] lg:min-w-[180px] list-none p-0 m-0">
+                      <li>
+                        <Link
+                          href="/interviews/athletes"
+                          className="block px-4 py-2.5 text-white font-medium text-sm hover:bg-[#25C760] hover:text-white transition-all duration-200 no-underline border-b border-[rgba(37,199,96,0.1)] last:border-b-0"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {t('athletes')}
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 {/* Instructor-portal entry hidden from public nav (per yakon's request).
                     Instructor accounts can still access /instructor/login directly. */}
