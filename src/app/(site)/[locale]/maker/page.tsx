@@ -104,7 +104,7 @@ export default async function MakerPage({ params }: { params: Promise<{ locale: 
 
       <section className="px-6 pb-10">
         <div className="mx-auto max-w-4xl">
-          <PartnerSwitch active="maker" />
+          <PartnerSwitch active="maker" locale={locale} />
         </div>
       </section>
 
