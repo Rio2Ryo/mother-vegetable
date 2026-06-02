@@ -239,7 +239,7 @@ const enUi = {
   rawTitle: 'Choose a Japanese Raw Material',
   filters: 'Search & Filter', searchLabel: 'Search by region or material', searchPlaceholder: 'e.g. Kawazu, miso, toner', region: 'Region', usage: 'Use', featureTags: 'Feature tags', count: 'items', select: 'Select',
   mvTitle: 'Choose the Mother Vegetable to combine', mvLead: 'Select which Mother Vegetable you want to combine with your chosen Japanese Raw Material.', mvNewTitle: 'Choose the Mother Vegetable to use', mvNewLead: 'Select which Mother Vegetable you want to use.',
-  ideaTitle: 'Tell us your idea', ideaLead: 'Please tell us what you would like to create.', productCategory: 'Product category', productCategoryPlaceholder: 'e.g. Toner, shampoo, ramen, bagel', ideaTarget: 'Target audience', ideaTargetPlaceholder: 'e.g. Age, gender, region, lifestyle', ideaIngredients: 'Ingredients you want to use', ideaIngredientsPlaceholder: 'Free entry', requiredIdea: 'STEP 2 is required. After filling in all fields, you can choose a container.',
+  ideaTitle: 'Tell us your idea', ideaLead: 'Please tell us what you would like to create.', productCategory: 'Product category', productCategoryPlaceholder: 'e.g. Toner, shampoo, ramen, bagel', ideaTarget: 'Target audience', ideaTargetPlaceholder: 'e.g. Age, gender, region, lifestyle', ideaIngredients: 'Ingredients you want to use', ideaIngredientsPlaceholder: 'Free entry', requiredIdea: 'STEP 2 is required. After filling in all fields, you can proceed to STEP 3.', goStep3: 'Proceed to STEP 3',
   containerTitle: 'What kind of container would you like to use?', containerLead: 'First choose the container shape that fits your material. After choosing a shape, you can select size, color, and specifications.', estimatedCapacity: 'Approx. capacity', chooseFrom: 'options', chooseFromSuffix: 'to choose from',
   specLabel: 'Container details', specTitleSuffix: ' specifications', specLead: 'Choose capacity, container color, and cap color in order.', threeSteps: '3 steps', capacityTitle: '1. Choose capacity', capacityNote: 'Choosing capacity also determines the label size.', labelArea: 'Label area', width: 'W', height: 'H', colorTitle: '2. Choose container color', lidTitle: '3. Choose cap color', desiredCapacity: 'Desired capacity', desiredCapacityPlaceholder: 'e.g. 100ml / 80g / 30 packs', capacityConfirm: 'Check here if this capacity is OK',
   labelTitle: 'Label design', labelLead: 'Choose the Mother Vegetable logo and adjust the size of the logo and Made in Japan mark. You can drag them directly on the preview.', chooseLogo: 'Choose Mother Vegetable logo', bgColor: 'Background color', upload: 'Upload label design image', selectedFile: 'Selected', designMemo: 'Design request memo', designMemoPlaceholder: 'e.g. Black background with white text, large material name, elegant mood that communicates the local story', goProductInfo: 'Go to product information', previewTitle: 'Label placement preview', previewLead: 'When you change the container, this work area changes its aspect ratio to match the label area.', containerColor: 'Container color', lidColor: 'Cap color', logoSize: 'Logo size', madeSize: 'MADE IN JAPAN size',
@@ -295,6 +295,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [newIdeaCategory, setNewIdeaCategory] = useState('');
   const [newIdeaTarget, setNewIdeaTarget] = useState('');
   const [newIdeaIngredients, setNewIdeaIngredients] = useState('');
+  const [newIdeaStep3Open, setNewIdeaStep3Open] = useState(false);
   const [productName, setProductName] = useState('');
   const [desiredPrice, setDesiredPrice] = useState('');
   const [applicantName, setApplicantName] = useState('');
@@ -329,7 +330,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const isMixMatch = ideaCourse === 'mix-match';
   const newIdeaComplete = Boolean(newIdeaCategory.trim() && newIdeaTarget.trim() && newIdeaIngredients.trim());
   const canShowMotherVegetable = isNewIdea || (isMixMatch && rawMaterialId);
-  const canShowContainer = Boolean(motherVegetableId && (isMixMatch || (isNewIdea && newIdeaComplete)));
+  const canShowContainer = Boolean(motherVegetableId && (isMixMatch || (isNewIdea && newIdeaComplete && newIdeaStep3Open)));
   const term = (value: string) => isEnglish ? (enTerm[value] ?? value) : value;
   const rawName = (item: RawMaterial) => isEnglish ? (enRawMaterials[item.id]?.name ?? item.name) : item.name;
   const rawRegion = (item: RawMaterial) => isEnglish ? (enRawMaterials[item.id]?.region ?? item.region) : item.region;
@@ -382,6 +383,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
     setNewIdeaCategory('');
     setNewIdeaTarget('');
     setNewIdeaIngredients('');
+    setNewIdeaStep3Open(false);
     setAgreements([]);
   }
 
@@ -585,7 +587,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                   name="motherVegetable"
                   value={item.id}
                   checked={motherVegetableId === item.id}
-                  onChange={() => { setMotherVegetableId(item.id); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(isNewIdea ? ideaSection : containerSection, 120); }}
+                  onChange={() => { setMotherVegetableId(item.id); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); setNewIdeaStep3Open(false); jumpTo(isNewIdea ? ideaSection : containerSection, 120); }}
                   className="sr-only"
                 />
                 <p className="text-xs font-black uppercase tracking-[0.22em] text-[#25C760]">{term(item.category)}</p>
@@ -600,19 +602,19 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
 
       {isNewIdea && motherVegetableId && (
       <section ref={ideaSection} className="px-6 py-16">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-7xl">
           <p className="text-sm font-bold text-[#25C760]">STEP 02</p>
           <h2 className="mt-2 text-3xl font-black">{ui?.ideaTitle ?? 'あなたのアイデアを教えてください'}</h2>
           <p className="mt-4 max-w-3xl text-gray-300">{ui?.ideaLead ?? '何を作りたいのか、自由に記入してください。'}</p>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            <Input label={ui?.productCategory ?? '商品分類'} value={newIdeaCategory} onChange={(value) => { setNewIdeaCategory(value); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setDetailOpen(false); setConfirmOpen(false); }} placeholder={ui?.productCategoryPlaceholder ?? '例）化粧水、シャンプー、ラーメン、ベーグル など'} />
-            <Input label={ui?.ideaTarget ?? 'ターゲット層'} value={newIdeaTarget} onChange={(value) => { setNewIdeaTarget(value); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setDetailOpen(false); setConfirmOpen(false); }} placeholder={ui?.ideaTargetPlaceholder ?? '年齢や性別、居住地域など'} />
-            <Input label={ui?.ideaIngredients ?? '使用原料'} value={newIdeaIngredients} onChange={(value) => { setNewIdeaIngredients(value); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setDetailOpen(false); setConfirmOpen(false); }} placeholder={ui?.ideaIngredientsPlaceholder ?? '自由記入'} />
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            <Input label={ui?.productCategory ?? '商品分類'} value={newIdeaCategory} onChange={(value) => { setNewIdeaCategory(value); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setNewIdeaStep3Open(false); setDetailOpen(false); setConfirmOpen(false); }} placeholder={ui?.productCategoryPlaceholder ?? '例）化粧水、シャンプー、ラーメン、ベーグル など'} />
+            <TextareaInput label={ui?.ideaTarget ?? 'ターゲット層'} value={newIdeaTarget} onChange={(value) => { setNewIdeaTarget(value); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setNewIdeaStep3Open(false); setDetailOpen(false); setConfirmOpen(false); }} placeholder={ui?.ideaTargetPlaceholder ?? '年齢や性別、居住地域など'} />
+            <TextareaInput label={ui?.ideaIngredients ?? '使用原料'} value={newIdeaIngredients} onChange={(value) => { setNewIdeaIngredients(value); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setNewIdeaStep3Open(false); setDetailOpen(false); setConfirmOpen(false); }} placeholder={ui?.ideaIngredientsPlaceholder ?? '自由記入'} />
           </div>
-          {!newIdeaComplete && <p className="mt-4 text-sm font-bold text-[#25C760]">{ui?.requiredIdea ?? 'STEP 2はすべて必須入力です。全項目を入力すると容器選択へ進めます。'}</p>}
+          {!newIdeaComplete && <p className="mt-4 text-sm font-bold text-[#25C760]">{ui?.requiredIdea ?? 'STEP 2はすべて必須入力です。全項目を入力するとSTEP03へ進めます。'}</p>}
           {newIdeaComplete && (
-            <button type="button" onClick={() => jumpTo(containerSection, 120)} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">
-              {ui?.containerTitle ?? 'どんな容器を使いたいですか？'}
+            <button type="button" onClick={() => { setNewIdeaStep3Open(true); jumpTo(containerSection, 120); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">
+              {ui?.goStep3 ?? 'Step03へ進む'}
             </button>
           )}
         </div>
@@ -623,7 +625,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       <section ref={containerSection} className="px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-bold text-[#25C760]">STEP 03</p>
-          <h2 className="mt-2 text-3xl font-black">{ui?.containerTitle ?? 'どんな容器を使いたいですか？'}</h2>
+          <h2 className="mt-2 text-3xl font-black">{ui?.containerTitle ?? 'どのような容器を使いたいですか？'}</h2>
           <p className="mt-4 max-w-3xl text-gray-300">{ui?.containerLead ?? '選んだ素材に合わせて、まず容器の形状を1つ選んでください。形状を選ぶと、次にサイズ・色・仕様の候補が表示されます。'}</p>
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {containers.map((item) => (
@@ -961,6 +963,21 @@ function Input({ label, value, onChange, placeholder, note, type = 'text' }: { l
       {label}
       <input type={type} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="mt-3 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
       {note && <span className="mt-2 block text-xs leading-5 text-gray-500">{note}</span>}
+    </label>
+  );
+}
+
+function TextareaInput({ label, value, onChange, placeholder, rows = 6 }: { label: string; value: string; onChange: (value: string) => void; placeholder: string; rows?: number }) {
+  return (
+    <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">
+      {label}
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        rows={rows}
+        placeholder={placeholder}
+        className="mt-3 w-full resize-y rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]"
+      />
     </label>
   );
 }
