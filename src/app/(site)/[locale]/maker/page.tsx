@@ -61,26 +61,182 @@ export default function MakerPage() {
         </div>
       </section>
 
-      <section className="bg-[#25C760]/[0.04] px-6 py-16">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-3xl font-black text-[#25C760]">コラボできる素材</h2>
-          <div className="mt-8 grid gap-6 lg:grid-cols-3">
-            <article className="rounded-3xl border border-[#25C760]/30 bg-black/60 p-7">
-              <h3 className="text-2xl font-black">Mother Vegetable Achieve</h3>
-              <p className="mt-3 font-bold text-[#25C760]">高たんぱく質＋全48種類の天然栄養</p>
-              <p className="mt-4 leading-8 text-gray-300">Mother Vegetableから生まれた高栄養食品「Achieve」。たんぱく質、ミネラル、ビタミン、フィコシアニンなどを含み、食事、調味料、飲料、ペット、スポーツ栄養まで幅広く活用できます。</p>
-              <Link href="/products?search=Achieve" className="mt-6 inline-flex rounded-full border border-[#25C760] px-5 py-3 text-sm font-bold text-[#25C760] no-underline hover:bg-[#25C760] hover:text-black">Achieveとのコラボ商品はこちら</Link>
+      <section className="bg-black px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-[1180px]">
+          <div className="mx-auto mb-14 max-w-[980px] text-center">
+            <h2
+              className="font-bold"
+              style={{
+                fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
+                fontSize: 'clamp(24px, 2.8vw, 38px)',
+                color: '#25C760',
+                lineHeight: 1.28,
+                textShadow: '0 0 18px rgba(37,199,96,0.30)',
+              }}
+            >
+              コラボできる素材
+            </h2>
+            <div
+              className="mx-auto mt-5 rounded-full"
+              style={{
+                width: 'min(280px, 62%)',
+                height: 3,
+                background: 'linear-gradient(90deg, transparent, #25C760, #3C8063, transparent)',
+                boxShadow: '0 0 20px rgba(37,199,96,0.42)',
+              }}
+            />
+          </div>
+
+          <div className="flex flex-col gap-10">
+            <article
+              className="relative w-full overflow-hidden p-8 md:p-12"
+              style={{ borderRadius: 14, border: '1px solid #25C760', background: '#000' }}
+            >
+              <div
+                className="pointer-events-none absolute select-none font-black leading-none"
+                style={{
+                  right: 'clamp(10px, 6vw, 70px)',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
+                  fontSize: 'clamp(150px, 24vw, 310px)',
+                  color: 'rgba(37,199,96,0.10)',
+                  textShadow: '0 0 42px rgba(37,199,96,0.18)',
+                }}
+              >
+                1
+              </div>
+              <div
+                className="absolute pointer-events-none"
+                style={{
+                  width: 300,
+                  height: 300,
+                  right: -80,
+                  top: -70,
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(37,199,96,0.20), transparent 70%)',
+                }}
+              />
+              <div className="relative z-10">
+                <h3 className="mb-2 font-extrabold" style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 'clamp(38px, 4.2vw, 58px)', color: '#25C760', lineHeight: 1.18 }}>
+                  Achieve
+                </h3>
+                <strong className="mb-4 block font-extrabold" style={{ color: '#fff', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
+                  高たんぱく質＋全48種類の天然栄養
+                </strong>
+                <p className="max-w-[680px]" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2 }}>
+                  Mother Vegetableから生まれた高栄養食品「Achieve」。<br />
+                  たんぱく質、ミネラル、ビタミン、フィコシアニンなどを含み、<br className="hidden md:block" />
+                  食事、調味料、飲料、ペット、スポーツ栄養まで幅広く活用できます。<br />
+                  現代の食に、地球最古の生命力を加える素材です。
+                </p>
+                <div className="mt-7 flex">
+                  <Link
+                    href="/products?search=Achieve"
+                    className="inline-flex w-[min(100%,290px)] items-center justify-center rounded-full px-6 py-3 text-sm font-bold no-underline transition-all duration-300 hover:-translate-y-1 md:w-auto"
+                    style={{ background: '#25C760', color: '#001d0c', border: '1px solid #25C760', boxShadow: '0 0 20px rgba(37,199,96,0.42)', fontFamily: "'Noto Sans JP', sans-serif" }}
+                  >
+                    Achieveとのコラボ商品はこちら
+                  </Link>
+                </div>
+              </div>
             </article>
-            <article className="rounded-3xl border border-[#25C760]/30 bg-black/60 p-7">
-              <h3 className="text-2xl font-black">Mother Vegetable Confidence</h3>
-              <p className="mt-3 font-bold text-[#25C760]">純度97%の天然シリカで、やさしく整える。</p>
-              <p className="mt-4 leading-8 text-gray-300">Mother Vegetableから生まれた白いパウダー「Confidence」。医薬部外品原料規格もクリアしたシリカは、肌や髪、愛するペットにも使用可能で、化粧水やシャンプーに混ぜて1ランク上のアイテムに。</p>
-              <Link href="/products?search=Confidence" className="mt-6 inline-flex rounded-full border border-[#25C760] px-5 py-3 text-sm font-bold text-[#25C760] no-underline hover:bg-[#25C760] hover:text-black">Confidenceとのコラボ商品はこちら</Link>
+
+            <article
+              className="relative w-full overflow-hidden p-8 text-left md:p-12"
+              style={{
+                borderRadius: 14,
+                border: '1px solid rgba(255,255,255,0.78)',
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(37,199,96,0.06) 42%, #000 100%)',
+                maxWidth: '100%',
+              }}
+            >
+              <div
+                className="pointer-events-none absolute select-none font-black leading-none"
+                style={{
+                  left: 'clamp(8px, 5vw, 62px)',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
+                  fontSize: 'clamp(150px, 24vw, 310px)',
+                  color: 'rgba(255,255,255,0.10)',
+                  textShadow: '0 0 42px rgba(255,255,255,0.16)',
+                }}
+              >
+                2
+              </div>
+              <div
+                className="absolute pointer-events-none"
+                style={{
+                  width: 300,
+                  height: 300,
+                  left: -90,
+                  top: -70,
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(255,255,255,0.24), rgba(37,199,96,0.10) 44%, transparent 72%)',
+                }}
+              />
+              <div className="relative z-10 md:ml-auto md:max-w-[760px]">
+                <h3 className="mb-2 font-extrabold" style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 'clamp(38px, 4.2vw, 58px)', color: '#fff', textShadow: '0 0 20px rgba(255,255,255,0.34)', lineHeight: 1.18 }}>
+                  Confidence
+                </h3>
+                <strong className="mb-4 block font-extrabold" style={{ color: 'rgba(255,255,255,0.90)', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
+                  純度97%の天然シリカで、やさしく整える。
+                </strong>
+                <p style={{ color: 'rgba(255,255,255,0.90)', fontSize: 16, lineHeight: 2, maxWidth: 680 }}>
+                  Mother Vegetableから生まれた白いパウダー「Confidence」。<br />
+                  育つ過程で、純度97%の非晶質シリカを生み出します。<br />
+                  医薬部外品原料規格もクリアしたシリカは肌や髪、愛するペットにも使用可能で、<br className="hidden md:block" />
+                  化粧水やシャンプーに混ぜて1ランク上のアイテムに。
+                </p>
+                <div className="mt-7 flex justify-start">
+                  <Link
+                    href="/products?search=Confidence"
+                    className="inline-flex w-[min(100%,290px)] items-center justify-center rounded-full px-6 py-3 text-sm font-bold no-underline transition-all duration-300 hover:-translate-y-1 md:w-auto"
+                    style={{ background: '#fff', color: '#001d0c', border: '1px solid #fff', fontFamily: "'Noto Sans JP', sans-serif" }}
+                  >
+                    Confidenceとのコラボ商品はこちら
+                  </Link>
+                </div>
+              </div>
             </article>
-            <article className="rounded-3xl border border-[#25C760]/30 bg-black/60 p-7">
-              <h3 className="text-2xl font-black">Japanese Raw Material</h3>
-              <p className="mt-3 font-bold text-[#25C760]">日本の地方を支える天然食 / 化粧品</p>
-              <p className="mt-4 leading-8 text-gray-300">日本各地の道の駅や小さな町に眠る、地元ならではの食品・素材・産品の総称です。地球にやさしいMother Vegetableと組み合わせ、世界へ日本の魅力を発信していきます。</p>
+
+            <article
+              className="relative w-full overflow-hidden p-8 md:p-12"
+              style={{
+                borderRadius: 14,
+                border: '1px solid rgba(37,199,96,0.55)',
+                background: 'radial-gradient(circle at 82% 8%, rgba(37,199,96,0.16), transparent 30%), linear-gradient(180deg, rgba(37,199,96,0.07), #000 72%)',
+              }}
+            >
+              <div
+                className="pointer-events-none absolute select-none font-black leading-none"
+                style={{
+                  right: 'clamp(10px, 6vw, 70px)',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
+                  fontSize: 'clamp(150px, 24vw, 310px)',
+                  color: 'rgba(37,199,96,0.09)',
+                  textShadow: '0 0 42px rgba(37,199,96,0.14)',
+                }}
+              >
+                3
+              </div>
+              <div className="relative z-10">
+                <h3 className="mb-2 font-extrabold" style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 'clamp(34px, 4vw, 54px)', color: '#25C760', lineHeight: 1.18 }}>
+                  Japanese Raw Material
+                </h3>
+                <strong className="mb-4 block font-extrabold" style={{ color: '#fff', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
+                  日本の地方を支える天然食 / 化粧品
+                </strong>
+                <p className="max-w-[760px]" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2 }}>
+                  日本各地の道の駅や小さな町に眠る、地元ならではの食品・素材・産品の総称です。<br />
+                  味噌や塩、果汁ジュース、発酵食品、温泉水や米ぬかコスメなど、地域の自然と暮らしから生まれたものを指します。<br />
+                  大量生産品にはない、土地の個性と作り手の物語が価値になります。<br />
+                  地球にやさしいMother Vegetableと組み合わせ、世界へ日本の魅力を発信していきます。
+                </p>
+              </div>
             </article>
           </div>
         </div>
