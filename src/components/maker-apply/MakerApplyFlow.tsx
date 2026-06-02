@@ -464,22 +464,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div>
             <p className="text-sm font-bold text-[#25C760]">STEP 03</p>
             <h2 className="mt-2 text-3xl font-black">ラベルデザイン</h2>
-            <p className="mt-4 max-w-3xl text-gray-300">まず、ラベルの作り方を選んでください。自分で細かく調整することも、理念や思いを入力してAIにラベル案を作らせることもできます。Made in Japanマークは必ず入ります。</p>
+            <p className="mt-4 max-w-3xl text-gray-300">Mother Vegetableロゴを選び、ロゴとMade in Japanマークのサイズを調整します。位置はプレビュー上で直接ドラッグできます。</p>
 
-            <div className="mt-8 grid gap-4 md:grid-cols-2">
-              <button type="button" onClick={() => { setLabelDesignChoice('manual'); setDesignMode('manual'); }} className={`rounded-[2rem] border p-6 text-left transition ${labelDesignChoice === 'manual' ? 'border-[#25C760] bg-[#25C760]/15 shadow-[0_0_24px_rgba(37,199,96,0.2)]' : 'border-white/10 bg-white/[0.04] hover:border-[#25C760]/50'}`}>
-                <span className="text-sm font-black text-[#25C760]">1</span>
-                <span className="mt-2 block text-xl font-black text-white">自分でラベルをデザインする</span>
-                <span className="mt-3 block text-sm leading-6 text-gray-300">ロゴとMade in Japanマークの位置はプレビュー上でドラッグし、サイズはバーで調整します。</span>
-              </button>
-              <button type="button" onClick={() => { setLabelDesignChoice('ai'); setDesignMode('ai'); }} className={`rounded-[2rem] border p-6 text-left transition ${labelDesignChoice === 'ai' ? 'border-[#25C760] bg-[#25C760]/15 shadow-[0_0_24px_rgba(37,199,96,0.2)]' : 'border-white/10 bg-white/[0.04] hover:border-[#25C760]/50'}`}>
-                <span className="text-sm font-black text-[#25C760]">2</span>
-                <span className="mt-2 block text-xl font-black text-white">理念や思いを入力してAIによるラベルの自動生成をする</span>
-                <span className="mt-3 block text-sm leading-6 text-gray-300">届けたい人や商品のストーリーを入力し、AIにラベル案を作らせます。</span>
-              </button>
-            </div>
-
-            {labelDesignChoice && (
             <div className="mt-8">
               <p className="text-sm font-bold text-gray-300">Mother Vegetableロゴを選ぶ</p>
               <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -492,42 +478,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                 ))}
               </div>
             </div>
-            )}
 
-            {labelDesignChoice === 'ai' && (
-            <div className="mt-8 rounded-[2rem] border border-[#25C760]/25 bg-[#25C760]/[0.05] p-6">
-              <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-                <div>
-                  <p className="text-sm font-bold text-[#25C760]">AIラベル提案</p>
-                  <h3 className="mt-2 text-2xl font-black">デザインをAIに作成させる</h3>
-                  <p className="mt-3 text-sm leading-6 text-gray-300">
-                    先に選んだMother Vegetableロゴと、必須のMade in Japanマークを使って、商品名・使ってほしい人・ストーリーからラベル案を作ります。
-                  </p>
-                </div>
-                <div className="rounded-full border border-[#25C760]/35 px-4 py-2 text-xs font-bold text-[#25C760]">ロゴ選択後に作成</div>
-              </div>
-              <div className="mt-5 grid gap-4 md:grid-cols-2">
-                <label className="text-sm font-bold text-gray-300">この商品をどんな人に使ってもらいたいですか？
-                  <textarea value={targetAudience} onChange={(e) => setTargetAudience(e.target.value)} rows={4} placeholder="例：自然素材が好きな人、地域の物語を大切にする人、毎日の食卓を少し特別にしたい人" className="mt-3 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
-                </label>
-                <label className="text-sm font-bold text-gray-300">作り手・商品のストーリー
-                  <textarea value={makerStory} onChange={(e) => setMakerStory(e.target.value)} rows={4} placeholder="例：河津の海水を丁寧に炊き上げ、土地の記憶が伝わる塩にしたい" className="mt-3 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
-                </label>
-              </div>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <button type="button" onClick={generateAiLabelDesign} className="rounded-full bg-[#25C760] px-6 py-3 font-black text-black">AIにラベル案を作ってもらう</button>
-                <button type="button" onClick={() => { setLabelDesignChoice('manual'); setDesignMode('manual'); }} className="rounded-full border border-white/20 px-6 py-3 font-bold text-white hover:border-[#25C760]">自分で調整する</button>
-              </div>
-              {aiConcept && (
-                <div className="mt-5 rounded-3xl border border-white/10 bg-black/35 p-5 text-sm leading-7 text-gray-200">
-                  <p className="font-black text-[#25C760]">AI提案コンセプト</p>
-                  <p className="mt-2">{aiConcept}</p>
-                </div>
-              )}
-            </div>
-            )}
-
-            {labelDesignChoice === 'manual' && (
             <>
               <div className="mt-8 grid gap-5 md:grid-cols-2">
                 <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">背景色
@@ -541,14 +492,10 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                 <textarea value={designMemo} onChange={(e) => setDesignMemo(e.target.value)} rows={5} placeholder="例：黒背景に白文字、素材名を大きく、地域の物語が伝わる上品な雰囲気にしたい" className="mt-3 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
               </label>
             </>
-            )}
 
-            {labelDesignChoice && (
-              <button type="button" onClick={() => { setDetailOpen(true); setConfirmOpen(false); jumpTo(detailSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">商品情報へ進む</button>
-            )}
+            <button type="button" onClick={() => { setDetailOpen(true); setConfirmOpen(false); jumpTo(detailSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">商品情報へ進む</button>
           </div>
 
-          {labelDesignChoice === 'manual' && (
           <div className="rounded-[2rem] border border-[#25C760]/30 bg-white/[0.04] p-6">
             <h3 className="text-xl font-black">ラベル配置プレビュー</h3>
             <div className="mt-3 flex flex-wrap gap-2 text-xs font-bold text-[#25C760]">
@@ -572,13 +519,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                   background: labelBg,
                 }}
               >
-                <div className="absolute left-1/2 top-4 -translate-x-1/2 rounded-full border border-white/20 px-3 py-1 text-[10px] text-white/70">LABEL AREA</div>
                 <img src={selectedLogo.src} alt="selected logo" className="absolute -translate-x-1/2 -translate-y-1/2 object-contain" style={{ left: `${logoX}%`, top: `${logoY}%`, width: `${logoScale * 2}px`, maxWidth: '82%', maxHeight: '180px' }} />
-                <div className="absolute left-1/2 top-[58%] w-[78%] -translate-x-1/2 text-center">
-                  <p className="text-xl font-black md:text-2xl">{productName || 'PRODUCT NAME'}</p>
-                  <p className="mt-2 text-xs text-white/70 md:text-sm">{selectedRaw.name} × Mother Vegetable</p>
-                  {aiConcept && <p className="mx-auto mt-3 max-w-[82%] text-[10px] leading-4 text-white/65">{aiConcept}</p>}
-                </div>
                 <MadeInJapanMark
                   x={madeMarkX}
                   y={madeMarkY}
@@ -590,32 +531,23 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             </div>
             <div className="mt-5 grid gap-4 text-sm text-gray-300">
               <label>ロゴサイズ: {logoScale}%<input type="range" min="45" max="150" value={logoScale} onChange={(e) => setLogoScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
-              <div className="rounded-3xl border border-white/10 bg-black/30 p-4">
-                <p className="font-bold text-white">Made in Japanマーク</p>
-                <p className="mt-1 text-xs leading-5 text-gray-400">位置はマークを直接ドラッグして調整できます。背景は透過です。</p>
-                <div className="mt-4 grid gap-3">
-                  <label>サイズ: {madeMarkScale}%<input type="range" min="45" max="160" value={madeMarkScale} onChange={(e) => setMadeMarkScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
-                </div>
-              </div>
+              <label>MADE IN JAPAN サイズ: {madeMarkScale}%<input type="range" min="45" max="160" value={madeMarkScale} onChange={(e) => setMadeMarkScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
             </div>
             <div className="mt-8 rounded-[2rem] border border-white/10 bg-black/35 p-5">
               <div className="flex items-center justify-between gap-3">
                 <h4 className="font-black">完成イメージプレビュー</h4>
-                <span className="rounded-full border border-white/15 px-3 py-1 text-[10px] text-gray-300">{designMode === 'ai' ? 'AI提案' : '手動デザイン'}</span>
+                <span className="rounded-full border border-white/15 px-3 py-1 text-[10px] text-gray-300">ラベル確認</span>
               </div>
               <p className="mt-2 text-xs leading-5 text-gray-400">実写容器写真が登録されたら、この容器画像を差し替えて完成イメージを確認できます。</p>
               <div className="relative mt-4 flex min-h-72 items-center justify-center overflow-hidden rounded-[1.5rem] bg-white/[0.04] p-6">
                 <img src={selectedContainerVariant.image} alt={`${selectedContainerVariant.name}の完成イメージ`} className="max-h-64 max-w-[78%] object-contain opacity-70" />
                 <div className="absolute left-1/2 top-1/2 w-[42%] max-w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-white/30 p-3 text-center shadow-[0_0_20px_rgba(0,0,0,0.55)]" style={{ background: labelBg }}>
                   <img src={selectedLogo.src} alt="selected logo" className="mx-auto h-8 object-contain" />
-                  <p className="mt-4 text-lg font-black leading-tight">{productName || selectedRaw.name}</p>
-                  <p className="mt-2 text-[10px] leading-4 text-white/70">{aiConcept ? 'AI STORY LABEL' : selectedRaw.name}</p>
                   <div className="mt-6 flex justify-center"><StaticMadeInJapanMark /></div>
                 </div>
               </div>
             </div>
           </div>
-          )}
         </div>
       </section>
       )}
@@ -650,7 +582,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <Summary label="ラベル範囲" value={`横${selectedLabelSize.widthMm}mm × 縦${selectedLabelSize.heightMm}mm`} />
             <Summary label="ロゴ" value={`${selectedLogo.name} / 位置 ${logoX}%・${logoY}% / サイズ ${logoScale}%`} />
             <Summary label="Made in Japan" value={`位置 ${madeMarkX}%・${madeMarkY}% / サイズ ${madeMarkScale}%`} />
-            <Summary label="デザイン方法" value={designMode === 'ai' ? `AI提案 / ${aiConcept || '未生成'}` : `手動調整 / ${designMemo || 'メモ未入力'}`} />
+            <Summary label="デザイン方法" value={`手動調整 / ${designMemo || 'メモ未入力'}`} />
             <Summary label="商品名・希望価格" value={`${productName || '未入力'} / ${desiredPrice || '未入力'}`} />
             <Summary label="お名前" value={applicantName || '未入力'} />
             <Summary label="連絡先" value={`${email || '未入力'} / ${phone || '未入力'}`} />
