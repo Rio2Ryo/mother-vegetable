@@ -252,7 +252,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
     window.setTimeout(() => ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), delay);
   }
 
-  function getPointerPercent(event: React.PointerEvent<HTMLDivElement>, relativeTo: HTMLElement = event.currentTarget) {
+  function getPointerPercent(event: React.PointerEvent<HTMLElement>, relativeTo: HTMLElement = event.currentTarget) {
     const rect = relativeTo.getBoundingClientRect();
     const x = Math.round(((event.clientX - rect.left) / rect.width) * 100);
     const y = Math.round(((event.clientY - rect.top) / rect.height) * 100);
@@ -268,8 +268,19 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
     setLogoY(point.y);
   }
 
+  function onLogoPointer(event: React.PointerEvent<HTMLImageElement>) {
+    event.stopPropagation();
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    const labelArea = event.currentTarget.parentElement;
+    if (!labelArea) return;
+    const point = getPointerPercent(event, labelArea);
+    setLogoX(point.x);
+    setLogoY(point.y);
+  }
+
   function onMadeMarkPointer(event: React.PointerEvent<HTMLDivElement>) {
     event.stopPropagation();
+    event.currentTarget.setPointerCapture?.(event.pointerId);
     const labelArea = event.currentTarget.parentElement;
     if (!labelArea) return;
     const point = getPointerPercent(event, labelArea);
@@ -519,7 +530,15 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                   background: labelBg,
                 }}
               >
-                <img src={selectedLogo.src} alt="selected logo" className="absolute -translate-x-1/2 -translate-y-1/2 object-contain" style={{ left: `${logoX}%`, top: `${logoY}%`, width: `${logoScale * 2}px`, maxWidth: '82%', maxHeight: '180px' }} />
+                <img
+                  src={selectedLogo.src}
+                  alt="selected logo"
+                  draggable={false}
+                  onPointerDown={onLogoPointer}
+                  onPointerMove={(e) => e.buttons === 1 && onLogoPointer(e)}
+                  className="absolute -translate-x-1/2 -translate-y-1/2 cursor-grab touch-none select-none object-contain active:cursor-grabbing"
+                  style={{ left: `${logoX}%`, top: `${logoY}%`, width: `${logoScale * 2}px`, maxWidth: '82%', maxHeight: '180px' }}
+                />
                 <MadeInJapanMark
                   x={madeMarkX}
                   y={madeMarkY}
