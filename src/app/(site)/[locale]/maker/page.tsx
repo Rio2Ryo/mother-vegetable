@@ -113,7 +113,7 @@ export default async function MakerPage({ params }: { params: Promise<{ locale: 
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#25C760]">About Maker</p>
           <h2 className="mt-3 text-3xl font-black">{isEn ? enText.aboutTitle : 'Mazavege Makerとは'}</h2>
           <div className="mt-6 text-lg leading-9 text-gray-300">
-            <p>{isEn ? enText.aboutTitle : 'Mazavege Makerとは'}、Mother Vegetableと日本の食品や化粧品などと組み合わせて、自分のオリジナル商品を作りたい方に向けたパートナー制度です。</p>
+            <p>{isEn ? enText.about1 : 'Mazavege Makerとは、Mother Vegetableと日本の食品や化粧品などと組み合わせて、自分のオリジナル商品を作りたい方に向けたパートナー制度です。'}</p>
             <p className="mt-5">{isEn ? enText.about2 : '自分の商品アイデアを提案し、審査で承認された場合、Mazavege Shopで販売されます。'}</p>
           </div>
         </div>
@@ -170,10 +170,7 @@ export default async function MakerPage({ params }: { params: Promise<{ locale: 
                   {isEn ? enText.achieveSub : '高たんぱく質＋全48種類の天然栄養'}
                 </strong>
                 <p className="max-w-[680px]" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2 }}>
-                  Mother Vegetableから生まれた高栄養食品「Achieve」。<br />
-                  たんぱく質、ミネラル、ビタミン、フィコシアニンなどを含み、<br className="hidden md:block" />
-                  食事、調味料、飲料、ペット、スポーツ栄養まで幅広く活用できます。<br />
-                  現代の食に、地球最古の生命力を加える素材です。
+                  {isEn ? enText.achieveBody : <>Mother Vegetableから生まれた高栄養食品「Achieve」。<br />たんぱく質、ミネラル、ビタミン、フィコシアニンなどを含み、<br className="hidden md:block" />食事、調味料、飲料、ペット、スポーツ栄養まで幅広く活用できます。<br />現代の食に、地球最古の生命力を加える素材です。</>}
                 </p>
                 <div className="mt-7 flex">
                   <Link
@@ -216,10 +213,7 @@ export default async function MakerPage({ params }: { params: Promise<{ locale: 
                   {isEn ? enText.confidenceSub : '純度97%の天然シリカで、やさしく整える。'}
                 </strong>
                 <p style={{ color: 'rgba(255,255,255,0.90)', fontSize: 16, lineHeight: 2, maxWidth: 680 }}>
-                  Mother Vegetableから生まれた白いパウダー「Confidence」。<br />
-                  育つ過程で、純度97%の非晶質シリカを生み出します。<br />
-                  医薬部外品原料規格もクリアしたシリカは肌や髪、愛するペットにも使用可能で、<br className="hidden md:block" />
-                  化粧水やシャンプーに混ぜて1ランク上のアイテムに。
+                  {isEn ? enText.confidenceBody : <>Mother Vegetableから生まれた白いパウダー「Confidence」。<br />育つ過程で、純度97%の非晶質シリカを生み出します。<br />医薬部外品原料規格もクリアしたシリカは肌や髪、愛するペットにも使用可能で、<br className="hidden md:block" />化粧水やシャンプーに混ぜて1ランク上のアイテムに。</>}
                 </p>
                 <div className="mt-7 flex justify-start">
                   <Link
@@ -258,10 +252,7 @@ export default async function MakerPage({ params }: { params: Promise<{ locale: 
                   {isEn ? enText.rawSub : '日本各地で作られる高品質の食品/化粧品'}
                 </strong>
                 <p className="max-w-[760px]" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2 }}>
-                  日本各地の道の駅や小さな町に眠る、地元ならではの食品・素材・産品の総称です。<br />
-                  味噌や塩、果汁ジュース、発酵食品、温泉水や米ぬかコスメなど、地域の自然と暮らしから生まれたものを指します。<br />
-                  大量生産品にはない、土地の個性と作り手の物語が価値になります。<br />
-                  地球にやさしいMother Vegetableと組み合わせ、世界へ日本の魅力を発信していきます。
+                  {isEn ? enText.rawBody : <>日本各地の道の駅や小さな町に眠る、地元ならではの食品・素材・産品の総称です。<br />味噌や塩、果汁ジュース、発酵食品、温泉水や米ぬかコスメなど、地域の自然と暮らしから生まれたものを指します。<br />大量生産品にはない、土地の個性と作り手の物語が価値になります。<br />地球にやさしいMother Vegetableと組み合わせ、世界へ日本の魅力を発信していきます。</>}
                 </p>
               </div>
             </article>
