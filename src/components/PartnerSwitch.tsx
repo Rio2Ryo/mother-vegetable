@@ -32,7 +32,6 @@ export default function PartnerSwitch({ active }: { active: PartnerKind }) {
     <div className="grid gap-4 md:grid-cols-2">
       {items.map((item) => {
         const isActive = item.key === active;
-        const isActiveMaker = isActive && item.key === 'maker';
         return (
           <Link
             key={item.key}
@@ -43,13 +42,6 @@ export default function PartnerSwitch({ active }: { active: PartnerKind }) {
                 : `border-white/10 bg-white/[0.03] ${item.hoverClass}`
             }`}
           >
-            {isActiveMaker && (
-              <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                <span className="absolute right-[14%] top-[14%] h-8 w-5 rotate-45 rounded-[70%_30%_70%_30%] bg-white/18 blur-[0.5px]" />
-                <span className="absolute right-[30%] bottom-[18%] h-6 w-4 -rotate-12 rounded-[70%_30%_70%_30%] bg-white/12 blur-[0.5px]" />
-                <span className="absolute left-[58%] top-[36%] h-5 w-3 rotate-[25deg] rounded-[70%_30%_70%_30%] bg-white/14 blur-[0.5px]" />
-              </div>
-            )}
             <div className="relative z-10">
               <p className={`text-xl font-bold ${isActive ? item.textClass : `text-white ${item.hoverTextClass}`}`}>
                 {item.title}
