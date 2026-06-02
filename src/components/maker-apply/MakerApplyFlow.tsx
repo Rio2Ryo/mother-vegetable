@@ -161,10 +161,12 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [rawMaterialId, setRawMaterialId] = useState(rawMaterials[0].id);
-  const [containerId, setContainerId] = useState(containers[0].id);
-  const [containerVariantId, setContainerVariantId] = useState(containers[0].variants[0].id);
-  const [capacity, setCapacity] = useState(containers[0].variants[0].capacity);
+  const [rawMaterialId, setRawMaterialId] = useState('');
+  const [containerId, setContainerId] = useState('');
+  const [containerVariantId, setContainerVariantId] = useState('');
+  const [capacity, setCapacity] = useState('');
+  const [detailOpen, setDetailOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const [logoId, setLogoId] = useState(logos[0].id);
   const [logoX, setLogoX] = useState(50);
   const [logoY, setLogoY] = useState(36);
@@ -304,7 +306,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {filteredMaterials.map((item) => (
                 <label key={item.id} className={`group cursor-pointer overflow-hidden rounded-[1.75rem] border bg-white/[0.035] transition ${rawMaterialId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.25)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                  <input type="radio" name="rawMaterial" value={item.id} checked={rawMaterialId === item.id} onChange={() => { setRawMaterialId(item.id); jumpTo(containerSection); }} className="sr-only" />
+                  <input type="radio" name="rawMaterial" value={item.id} checked={rawMaterialId === item.id} onChange={() => { setRawMaterialId(item.id); setContainerId(''); setContainerVariantId(''); setCapacity(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerSection); }} className="sr-only" />
                   <div className="relative h-44 overflow-hidden bg-white/5"><img src={item.image} alt={`${item.name}の素材写真`} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /></div>
                   <div className="p-5">
                     <div className="flex items-start justify-between gap-3">
@@ -325,15 +327,16 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
         </div>
       </section>
 
+      {rawMaterialId && (
       <section ref={containerSection} className="px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-bold text-[#25C760]">STEP 02</p>
           <h2 className="mt-2 text-3xl font-black">どんな容器を使いたいですか？</h2>
-          <p className="mt-4 max-w-3xl text-gray-300">選んだ素材に合わせて、容器を1つ選んでください。内容量もここで入力します。</p>
+          <p className="mt-4 max-w-3xl text-gray-300">選んだ素材に合わせて、まず容器の形状を1つ選んでください。形状を選ぶと、次にサイズ・色・仕様の候補が表示されます。</p>
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {containers.map((item) => (
               <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${containerId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(item.variants[0].id); setCapacity(item.variants[0].capacity); }} className="sr-only" />
+                <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(''); setCapacity(''); setDetailOpen(false); setConfirmOpen(false); }} className="sr-only" />
                 <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5"><img src={item.image} alt={`${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" /></div>
                 <h3 className="mt-5 text-2xl font-black">{item.name}</h3>
                 <p className="mt-1 text-sm font-bold text-[#25C760]">目安容量: {item.capacity}</p>
@@ -343,6 +346,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               </label>
             ))}
           </div>
+          {containerId && (
           <div className="mt-12 rounded-[2rem] border border-[#25C760]/25 bg-[#25C760]/[0.04] p-6 md:p-8">
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
@@ -362,7 +366,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                     name="containerVariant"
                     value={variant.id}
                     checked={containerVariantId === variant.id}
-                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); jumpTo(designSection); }}
+                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setDetailOpen(false); setConfirmOpen(false); jumpTo(designSection); }}
                     className="sr-only"
                   />
                   <div className="relative h-36 overflow-hidden bg-white/5">
@@ -384,14 +388,19 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               ))}
             </div>
           </div>
+          )}
 
+          {containerVariantId && (
           <div className="mt-8 max-w-md rounded-3xl border border-white/10 bg-white/[0.04] p-6">
             <label className="text-sm font-bold text-gray-300">希望内容量・容量</label>
             <input value={capacity} onChange={(e) => setCapacity(e.target.value)} placeholder="例：100ml / 80g / 30包" className="mt-2 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
           </div>
+          )}
         </div>
       </section>
+      )}
 
+      {containerVariantId && (
       <section ref={designSection} className="px-6 py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_420px]">
           <div>
@@ -449,7 +458,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <label className="mt-5 block rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">デザイン希望メモ
               <textarea value={designMemo} onChange={(e) => setDesignMemo(e.target.value)} rows={5} placeholder="例：黒背景に白文字、素材名を大きく、地域の物語が伝わる上品な雰囲気にしたい" className="mt-3 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
             </label>
-            <button type="button" onClick={() => jumpTo(detailSection)} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">商品情報へ進む</button>
+            <button type="button" onClick={() => { setDetailOpen(true); setConfirmOpen(false); jumpTo(detailSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">商品情報へ進む</button>
           </div>
 
           <div className="rounded-[2rem] border border-[#25C760]/30 bg-white/[0.04] p-6">
@@ -523,7 +532,9 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           </div>
         </div>
       </section>
+      )}
 
+      {detailOpen && (
       <section ref={detailSection} className="px-6 py-16">
         <div className="mx-auto max-w-5xl">
           <p className="text-sm font-bold text-[#25C760]">STEP 04</p>
@@ -536,10 +547,12 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <Input label="電話番号" value={phone} onChange={setPhone} placeholder="090-0000-0000" />
             <Input label="住所" value={address} onChange={setAddress} placeholder="東京都..." />
           </div>
-          <button type="button" onClick={() => jumpTo(confirmSection)} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">確認画面へ進む</button>
+          <button type="button" onClick={() => { setConfirmOpen(true); jumpTo(confirmSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">確認画面へ進む</button>
         </div>
       </section>
+      )}
 
+      {confirmOpen && (
       <section ref={confirmSection} className="px-6 py-16 pb-24">
         <div className="mx-auto max-w-5xl rounded-[2rem] border border-[#25C760]/30 bg-[#25C760]/[0.06] p-6 md:p-10">
           <p className="text-sm font-bold text-[#25C760]">STEP 05</p>
@@ -573,6 +586,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <p className="mt-4 text-sm text-gray-400">送信後、控えメールが届きます。審査結果は原則2週間以内にメールでご連絡します。</p>
         </div>
       </section>
+      )}
     </form>
   );
 }
