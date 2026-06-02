@@ -21,7 +21,9 @@
     "myAccount": "我的账户",
     "news": "新闻",
     "allProducts": "产品列表",
-    "superWood": "Super Wood"
+    "superWood": "Super Wood",
+    "dealer": "Dealer",
+    "maker": "Maker"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",

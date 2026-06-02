@@ -21,7 +21,9 @@
     "myAccount": "My Account",
     "news": "News",
     "allProducts": "Product List",
-    "superWood": "Super Wood"
+    "superWood": "Super Wood",
+    "dealer": "Dealer",
+    "maker": "Maker"
   },
   "hero": {
     "title": "MOTHER VEGETABLE PRODUCTS",

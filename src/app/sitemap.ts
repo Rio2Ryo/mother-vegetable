@@ -8,6 +8,8 @@ const locales = ["en", "ja", "zh"];
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     "",
+    "/dealer",
+    "/maker",
     "/products",
     "/product/achieve",
     "/product/confidence",

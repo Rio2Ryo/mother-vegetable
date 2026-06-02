@@ -186,6 +186,28 @@ export default function Header() {
               </div>
 
               <ul className="flex flex-col lg:flex-row gap-0 lg:gap-8 list-none m-0 p-0 max-lg:pt-2">
+                {/* Dealer */}
+                <li className="max-lg:w-full">
+                  <Link
+                    href="/dealer"
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t('dealer')}
+                  </Link>
+                </li>
+                {/* Maker */}
+                <li className="max-lg:w-full">
+                  <Link
+                    href="/maker"
+                    className="text-[#25C760] text-[15px] whitespace-nowrap hover:text-white hover:-translate-y-0.5 transition-all duration-300 no-underline block py-3 lg:py-0 max-lg:text-base max-lg:text-white max-lg:py-4 max-lg:px-2 max-lg:border-b max-lg:border-[rgba(37,199,96,0.2)] max-lg:hover:text-[#25C760] max-lg:hover:translate-x-2 max-lg:hover:translate-y-0"
+                    style={{ fontWeight: 500, fontFamily: 'Arial, sans-serif' }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t('maker')}
+                  </Link>
+                </li>
                 {/* Products */}
                 <li className="max-lg:w-full">
                   <Link
