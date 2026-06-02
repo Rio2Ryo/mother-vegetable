@@ -19,7 +19,7 @@ export default async function MakerApplyThanksPage({ params }: { params: Promise
       <section className="mx-auto max-w-3xl rounded-[2rem] border border-[#25C760]/40 bg-[#25C760]/10 p-8 text-center md:p-12">
         <p className="text-sm font-bold uppercase tracking-[0.35em] text-[#25C760]">Thank you</p>
         <h1 className="mt-4 text-4xl font-black md:text-5xl">
-          {t('送信ありがとうございました', 'Thank you for your submission', '感谢您的提交')}
+          {t('ご提案ありがとうございます', 'Thank you for your proposal', '感谢您的提案')}
         </h1>
         <p className="mt-6 text-lg leading-9 text-gray-300">
           {t(
