@@ -525,23 +525,6 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <p className="mt-3 text-xs leading-5 text-gray-400">
               容器を変えると、この作業エリアの縦横比もラベル範囲に合わせて変わります。
             </p>
-            <div className="mt-5 rounded-[2rem] border border-white/10 bg-black/35 p-5">
-              <div className="flex items-center justify-between gap-3">
-                <h4 className="font-black">完成イメージプレビュー</h4>
-                <span className="rounded-full border border-white/15 px-3 py-1 text-[10px] text-gray-300">{designMode === 'ai' ? 'AI提案' : '手動デザイン'}</span>
-              </div>
-              <p className="mt-2 text-xs leading-5 text-gray-400">実写容器写真が登録されたら、この容器画像を差し替えて完成イメージを確認できます。</p>
-              <div className="relative mt-4 flex min-h-72 items-center justify-center overflow-hidden rounded-[1.5rem] bg-white/[0.04] p-6">
-                <img src={selectedContainerVariant.image} alt={`${selectedContainerVariant.name}の完成イメージ`} className="max-h-64 max-w-[78%] object-contain opacity-70" />
-                <div className="absolute left-1/2 top-1/2 w-[42%] max-w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-white/30 p-3 text-center shadow-[0_0_20px_rgba(0,0,0,0.55)]" style={{ background: labelBg }}>
-                  <img src={selectedLogo.src} alt="selected logo" className="mx-auto h-8 object-contain" />
-                  <p className="mt-4 text-lg font-black leading-tight">{productName || selectedRaw.name}</p>
-                  <p className="mt-2 text-[10px] leading-4 text-white/70">{aiConcept ? 'AI STORY LABEL' : selectedRaw.name}</p>
-                  <div className="mt-6 flex justify-center"><StaticMadeInJapanMark /></div>
-                </div>
-              </div>
-            </div>
-
             <div className="mt-5 flex min-h-[540px] items-center justify-center rounded-[2rem] border border-white/10 bg-black/35 p-5">
               <div
                 onPointerDown={onPreviewPointer}
@@ -580,6 +563,22 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                   <label>横位置: {madeMarkX}%<input type="range" min="8" max="92" value={madeMarkX} onChange={(e) => setMadeMarkX(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
                   <label>縦位置: {madeMarkY}%<input type="range" min="12" max="94" value={madeMarkY} onChange={(e) => setMadeMarkY(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
                   <label>サイズ: {madeMarkScale}%<input type="range" min="45" max="160" value={madeMarkScale} onChange={(e) => setMadeMarkScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
+                </div>
+              </div>
+            </div>
+            <div className="mt-8 rounded-[2rem] border border-white/10 bg-black/35 p-5">
+              <div className="flex items-center justify-between gap-3">
+                <h4 className="font-black">完成イメージプレビュー</h4>
+                <span className="rounded-full border border-white/15 px-3 py-1 text-[10px] text-gray-300">{designMode === 'ai' ? 'AI提案' : '手動デザイン'}</span>
+              </div>
+              <p className="mt-2 text-xs leading-5 text-gray-400">実写容器写真が登録されたら、この容器画像を差し替えて完成イメージを確認できます。</p>
+              <div className="relative mt-4 flex min-h-72 items-center justify-center overflow-hidden rounded-[1.5rem] bg-white/[0.04] p-6">
+                <img src={selectedContainerVariant.image} alt={`${selectedContainerVariant.name}の完成イメージ`} className="max-h-64 max-w-[78%] object-contain opacity-70" />
+                <div className="absolute left-1/2 top-1/2 w-[42%] max-w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-white/30 p-3 text-center shadow-[0_0_20px_rgba(0,0,0,0.55)]" style={{ background: labelBg }}>
+                  <img src={selectedLogo.src} alt="selected logo" className="mx-auto h-8 object-contain" />
+                  <p className="mt-4 text-lg font-black leading-tight">{productName || selectedRaw.name}</p>
+                  <p className="mt-2 text-[10px] leading-4 text-white/70">{aiConcept ? 'AI STORY LABEL' : selectedRaw.name}</p>
+                  <div className="mt-6 flex justify-center"><StaticMadeInJapanMark /></div>
                 </div>
               </div>
             </div>
