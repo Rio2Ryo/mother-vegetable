@@ -475,7 +475,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               <button type="button" onClick={() => { setLabelDesignChoice('manual'); setDesignMode('manual'); }} className={`rounded-[2rem] border p-6 text-left transition ${labelDesignChoice === 'manual' ? 'border-[#25C760] bg-[#25C760]/15 shadow-[0_0_24px_rgba(37,199,96,0.2)]' : 'border-white/10 bg-white/[0.04] hover:border-[#25C760]/50'}`}>
                 <span className="text-sm font-black text-[#25C760]">1</span>
                 <span className="mt-2 block text-xl font-black text-white">自分でラベルをデザインする</span>
-                <span className="mt-3 block text-sm leading-6 text-gray-300">ロゴ、背景色、Made in Japanマークの位置やサイズを自分で調整します。</span>
+                <span className="mt-3 block text-sm leading-6 text-gray-300">ロゴとMade in Japanマークの位置はプレビュー上でドラッグし、サイズはバーで調整します。</span>
               </button>
               <button type="button" onClick={() => { setLabelDesignChoice('ai'); setDesignMode('ai'); }} className={`rounded-[2rem] border p-6 text-left transition ${labelDesignChoice === 'ai' ? 'border-[#25C760] bg-[#25C760]/15 shadow-[0_0_24px_rgba(37,199,96,0.2)]' : 'border-white/10 bg-white/[0.04] hover:border-[#25C760]/50'}`}>
                 <span className="text-sm font-black text-[#25C760]">2</span>
@@ -594,15 +594,11 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               </div>
             </div>
             <div className="mt-5 grid gap-4 text-sm text-gray-300">
-              <label>ロゴ横位置: {logoX}%<input type="range" min="10" max="90" value={logoX} onChange={(e) => setLogoX(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
-              <label>ロゴ縦位置: {logoY}%<input type="range" min="12" max="72" value={logoY} onChange={(e) => setLogoY(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
               <label>ロゴサイズ: {logoScale}%<input type="range" min="45" max="150" value={logoScale} onChange={(e) => setLogoScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
               <div className="rounded-3xl border border-white/10 bg-black/30 p-4">
                 <p className="font-bold text-white">Made in Japanマーク</p>
-                <p className="mt-1 text-xs leading-5 text-gray-400">マークをドラッグ、または下のスライダーで位置とサイズを調整できます。背景は透過です。</p>
+                <p className="mt-1 text-xs leading-5 text-gray-400">位置はマークを直接ドラッグして調整できます。背景は透過です。</p>
                 <div className="mt-4 grid gap-3">
-                  <label>横位置: {madeMarkX}%<input type="range" min="8" max="92" value={madeMarkX} onChange={(e) => setMadeMarkX(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
-                  <label>縦位置: {madeMarkY}%<input type="range" min="12" max="94" value={madeMarkY} onChange={(e) => setMadeMarkY(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
                   <label>サイズ: {madeMarkScale}%<input type="range" min="45" max="160" value={madeMarkScale} onChange={(e) => setMadeMarkScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
                 </div>
               </div>
