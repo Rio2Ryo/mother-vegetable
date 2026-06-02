@@ -12,6 +12,18 @@ type RawMaterial = {
   image: string;
 };
 
+type ContainerVariant = {
+  id: string;
+  name: string;
+  capacity: string;
+  color: string;
+  shape: string;
+  spec: string;
+  material: string;
+  image: string;
+  labelSize: { widthMm: number; heightMm: number };
+};
+
 type ContainerItem = {
   id: string;
   name: string;
@@ -19,7 +31,7 @@ type ContainerItem = {
   tags: string[];
   note: string;
   image: string;
-  labelSize: { widthMm: number; heightMm: number };
+  variants: ContainerVariant[];
 };
 
 const rawMaterials: RawMaterial[] = [
@@ -35,12 +47,98 @@ const rawMaterials: RawMaterial[] = [
 ];
 
 const containers: ContainerItem[] = [
-  { id: 'pouch', name: 'もみもみパウチ', capacity: '30g〜120g', tags: ['食品向け', '化粧品向け', '軽量', '詰替'], note: '味噌・パック・ジェル系に向く柔らかい容器。', image: '/images/maker-apply/photos/container-pouch.svg', labelSize: { widthMm: 100, heightMm: 100 } },
-  { id: 'spray', name: 'スプレーボトル', capacity: '50ml〜150ml', tags: ['化粧品向け', 'ミスト', '液体'], note: '化粧水・温泉水・ヘアミストにおすすめ。', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 45, heightMm: 90 } },
-  { id: 'soy', name: '醤油差しボトル', capacity: '80ml〜200ml', tags: ['食品向け', '液体', '卓上'], note: '醤油・ポン酢・ドレッシング系に向く容器。', image: '/images/maker-apply/photos/container-soy.svg', labelSize: { widthMm: 55, heightMm: 85 } },
-  { id: 'shaker', name: 'ふりかけシェイカー', capacity: '20g〜80g', tags: ['食品向け', '粉末', '卓上'], note: '塩・スパイス・粉末Achieveコラボに。', image: '/images/maker-apply/photos/container-shaker.svg', labelSize: { widthMm: 50, heightMm: 70 } },
-  { id: 'jar', name: 'ガラスジャー', capacity: '80g〜250g', tags: ['食品向け', '化粧品向け', '高級感'], note: '味噌・バーム・クリーム系に使いやすい容器。', image: '/images/maker-apply/photos/container-jar.svg', labelSize: { widthMm: 60, heightMm: 80 } },
-  { id: 'lip', name: 'リップスティック', capacity: '3g〜8g', tags: ['化粧品向け', 'リップ', '携帯'], note: 'リップ・スティックバーム専用。食品不可。', image: '/images/maker-apply/photos/container-lipstick.svg', labelSize: { widthMm: 28, heightMm: 55 } },
+  {
+    id: 'pouch',
+    name: 'もみもみパウチ',
+    capacity: '30g〜120g',
+    tags: ['食品向け', '化粧品向け', '軽量', '詰替'],
+    note: '味噌・パック・ジェル系に向く柔らかい容器。',
+    image: '/images/maker-apply/photos/container-pouch.svg',
+    variants: [
+      { id: 'pouch-30-clear', name: '小型クリアパウチ', capacity: '30g', color: '透明', shape: 'スタンド小型', spec: 'スクリューキャップ', material: '食品・化粧品対応フィルム', image: '/images/maker-apply/photos/container-pouch.svg', labelSize: { widthMm: 70, heightMm: 80 } },
+      { id: 'pouch-50-white', name: '白マットパウチ', capacity: '50g', color: '白マット', shape: 'スタンド標準', spec: 'スパウト付き', material: '遮光フィルム', image: '/images/maker-apply/photos/container-pouch.svg', labelSize: { widthMm: 80, heightMm: 90 } },
+      { id: 'pouch-80-kraft', name: 'クラフト調パウチ', capacity: '80g', color: 'クラフト', shape: '横広スタンド', spec: 'チャック付き', material: '食品対応フィルム', image: '/images/maker-apply/photos/container-pouch.svg', labelSize: { widthMm: 95, heightMm: 85 } },
+      { id: 'pouch-100-black', name: '黒マットパウチ', capacity: '100g', color: '黒マット', shape: 'スクエア', spec: 'スパウト付き', material: '遮光フィルム', image: '/images/maker-apply/photos/container-pouch.svg', labelSize: { widthMm: 100, heightMm: 100 } },
+      { id: 'pouch-120-clear', name: '大容量クリアパウチ', capacity: '120g', color: '透明', shape: '縦長スタンド', spec: 'スパウト付き', material: '食品・化粧品対応フィルム', image: '/images/maker-apply/photos/container-pouch.svg', labelSize: { widthMm: 100, heightMm: 120 } },
+    ],
+  },
+  {
+    id: 'spray',
+    name: 'スプレーボトル',
+    capacity: '30ml〜200ml',
+    tags: ['化粧品向け', 'ミスト', '液体'],
+    note: '化粧水・温泉水・ヘアミストにおすすめ。',
+    image: '/images/maker-apply/photos/container-spray.svg',
+    variants: [
+      { id: 'spray-30-clear-push', name: '30ml クリアミスト', capacity: '30ml', color: '透明', shape: 'スリム円柱', spec: 'プッシュミスト', material: 'PET', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 32, heightMm: 58 } },
+      { id: 'spray-50-clear-push', name: '50ml クリアミスト', capacity: '50ml', color: '透明', shape: '丸型', spec: 'プッシュミスト', material: 'PET', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 40, heightMm: 72 } },
+      { id: 'spray-50-amber-push', name: '50ml 遮光ブラウン', capacity: '50ml', color: '遮光ブラウン', shape: '丸型', spec: 'プッシュミスト', material: '遮光PET', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 40, heightMm: 72 } },
+      { id: 'spray-80-frost-push', name: '80ml フロストボトル', capacity: '80ml', color: '半透明フロスト', shape: '肩丸型', spec: 'プッシュミスト', material: 'PET', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 45, heightMm: 82 } },
+      { id: 'spray-100-white-push', name: '100ml 白ボトル', capacity: '100ml', color: '白', shape: '丸型', spec: 'プッシュミスト', material: 'HDPE', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 48, heightMm: 90 } },
+      { id: 'spray-100-black-push', name: '100ml 黒マット', capacity: '100ml', color: '黒マット', shape: '丸型', spec: 'プッシュミスト', material: 'HDPE', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 48, heightMm: 90 } },
+      { id: 'spray-120-amber-trigger', name: '120ml 遮光トリガー', capacity: '120ml', color: '遮光ブラウン', shape: '肩丸型', spec: 'トリガースプレー', material: '遮光PET', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 52, heightMm: 95 } },
+      { id: 'spray-150-clear-trigger', name: '150ml クリアトリガー', capacity: '150ml', color: '透明', shape: 'ワイド円柱', spec: 'トリガースプレー', material: 'PET', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 58, heightMm: 105 } },
+      { id: 'spray-150-white-trigger', name: '150ml 白トリガー', capacity: '150ml', color: '白', shape: 'ワイド円柱', spec: 'トリガースプレー', material: 'HDPE', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 58, heightMm: 105 } },
+      { id: 'spray-200-amber-trigger', name: '200ml 遮光大容量', capacity: '200ml', color: '遮光ブラウン', shape: 'ワイド円柱', spec: 'トリガースプレー', material: '遮光PET', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 65, heightMm: 115 } },
+    ],
+  },
+  {
+    id: 'soy',
+    name: '醤油差しボトル',
+    capacity: '80ml〜300ml',
+    tags: ['食品向け', '液体', '卓上'],
+    note: '醤油・ポン酢・ドレッシング系に向く容器。',
+    image: '/images/maker-apply/photos/container-soy.svg',
+    variants: [
+      { id: 'soy-80-clear', name: '80ml 卓上クリア', capacity: '80ml', color: '透明', shape: '丸型卓上', spec: '細口キャップ', material: 'ガラス', image: '/images/maker-apply/photos/container-soy.svg', labelSize: { widthMm: 45, heightMm: 65 } },
+      { id: 'soy-120-amber', name: '120ml 遮光ガラス', capacity: '120ml', color: '遮光ブラウン', shape: '丸型', spec: '細口キャップ', material: '遮光ガラス', image: '/images/maker-apply/photos/container-soy.svg', labelSize: { widthMm: 50, heightMm: 78 } },
+      { id: 'soy-180-clear', name: '180ml スリムボトル', capacity: '180ml', color: '透明', shape: 'スリム円柱', spec: '液だれ防止口', material: 'ガラス', image: '/images/maker-apply/photos/container-soy.svg', labelSize: { widthMm: 55, heightMm: 92 } },
+      { id: 'soy-300-amber', name: '300ml 遮光ボトル', capacity: '300ml', color: '遮光ブラウン', shape: 'ワイド円柱', spec: 'スクリューキャップ', material: '遮光ガラス', image: '/images/maker-apply/photos/container-soy.svg', labelSize: { widthMm: 70, heightMm: 110 } },
+    ],
+  },
+  {
+    id: 'shaker',
+    name: 'ふりかけシェイカー',
+    capacity: '20g〜120g',
+    tags: ['食品向け', '粉末', '卓上'],
+    note: '塩・スパイス・粉末Achieveコラボに。',
+    image: '/images/maker-apply/photos/container-shaker.svg',
+    variants: [
+      { id: 'shaker-20-clear', name: '20g ミニシェイカー', capacity: '20g', color: '透明', shape: '小型円柱', spec: '3穴キャップ', material: 'PET', image: '/images/maker-apply/photos/container-shaker.svg', labelSize: { widthMm: 36, heightMm: 48 } },
+      { id: 'shaker-50-clear', name: '50g 標準シェイカー', capacity: '50g', color: '透明', shape: '円柱', spec: '7穴キャップ', material: 'PET', image: '/images/maker-apply/photos/container-shaker.svg', labelSize: { widthMm: 50, heightMm: 70 } },
+      { id: 'shaker-80-white', name: '80g 白キャップ', capacity: '80g', color: '透明＋白', shape: 'ワイド円柱', spec: '広口キャップ', material: 'PET', image: '/images/maker-apply/photos/container-shaker.svg', labelSize: { widthMm: 58, heightMm: 78 } },
+      { id: 'shaker-120-black', name: '120g 黒キャップ', capacity: '120g', color: '透明＋黒', shape: 'ワイド円柱', spec: '広口キャップ', material: 'PET', image: '/images/maker-apply/photos/container-shaker.svg', labelSize: { widthMm: 66, heightMm: 90 } },
+    ],
+  },
+  {
+    id: 'jar',
+    name: 'ガラスジャー',
+    capacity: '50g〜300g',
+    tags: ['食品向け', '化粧品向け', '高級感'],
+    note: '味噌・バーム・クリーム系に使いやすい容器。',
+    image: '/images/maker-apply/photos/container-jar.svg',
+    variants: [
+      { id: 'jar-50-clear', name: '50g クリアジャー', capacity: '50g', color: '透明', shape: '低型丸', spec: 'スクリュー蓋', material: 'ガラス', image: '/images/maker-apply/photos/container-jar.svg', labelSize: { widthMm: 48, heightMm: 50 } },
+      { id: 'jar-80-amber', name: '80g 遮光ジャー', capacity: '80g', color: '遮光ブラウン', shape: '丸型', spec: 'スクリュー蓋', material: '遮光ガラス', image: '/images/maker-apply/photos/container-jar.svg', labelSize: { widthMm: 60, heightMm: 80 } },
+      { id: 'jar-120-frost', name: '120g フロストジャー', capacity: '120g', color: '半透明フロスト', shape: '丸型', spec: 'アルミ蓋', material: 'ガラス', image: '/images/maker-apply/photos/container-jar.svg', labelSize: { widthMm: 68, heightMm: 82 } },
+      { id: 'jar-200-clear', name: '200g ワイドジャー', capacity: '200g', color: '透明', shape: '広口ワイド', spec: 'スクリュー蓋', material: 'ガラス', image: '/images/maker-apply/photos/container-jar.svg', labelSize: { widthMm: 78, heightMm: 92 } },
+      { id: 'jar-300-amber', name: '300g 遮光ワイド', capacity: '300g', color: '遮光ブラウン', shape: '広口ワイド', spec: 'スクリュー蓋', material: '遮光ガラス', image: '/images/maker-apply/photos/container-jar.svg', labelSize: { widthMm: 90, heightMm: 105 } },
+    ],
+  },
+  {
+    id: 'lip',
+    name: 'リップスティック',
+    capacity: '3g〜15g',
+    tags: ['化粧品向け', 'リップ', '携帯'],
+    note: 'リップ・スティックバーム専用。食品不可。',
+    image: '/images/maker-apply/photos/container-lipstick.svg',
+    variants: [
+      { id: 'lip-3-white', name: '3g 白スティック', capacity: '3g', color: '白', shape: '細身スティック', spec: '繰り出し式', material: 'PP', image: '/images/maker-apply/photos/container-lipstick.svg', labelSize: { widthMm: 24, heightMm: 42 } },
+      { id: 'lip-5-clear', name: '5g クリアキャップ', capacity: '5g', color: '白＋透明', shape: '標準スティック', spec: '繰り出し式', material: 'PP', image: '/images/maker-apply/photos/container-lipstick.svg', labelSize: { widthMm: 28, heightMm: 55 } },
+      { id: 'lip-8-black', name: '8g 黒マット', capacity: '8g', color: '黒マット', shape: '太型スティック', spec: '繰り出し式', material: 'PP', image: '/images/maker-apply/photos/container-lipstick.svg', labelSize: { widthMm: 34, heightMm: 58 } },
+      { id: 'lip-15-jar', name: '15g ミニバーム容器', capacity: '15g', color: '透明', shape: 'ミニジャー', spec: '指塗りタイプ', material: 'PET', image: '/images/maker-apply/photos/container-jar.svg', labelSize: { widthMm: 40, heightMm: 36 } },
+    ],
+  },
 ];
 
 const logos = [
@@ -65,7 +163,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [rawMaterialId, setRawMaterialId] = useState(rawMaterials[0].id);
   const [containerId, setContainerId] = useState(containers[0].id);
-  const [capacity, setCapacity] = useState('100ml / 100g');
+  const [containerVariantId, setContainerVariantId] = useState(containers[0].variants[0].id);
+  const [capacity, setCapacity] = useState(containers[0].variants[0].capacity);
   const [logoId, setLogoId] = useState(logos[0].id);
   const [logoX, setLogoX] = useState(50);
   const [logoY, setLogoY] = useState(36);
@@ -87,7 +186,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const selectedRaw = rawMaterials.find((item) => item.id === rawMaterialId) ?? rawMaterials[0];
   const selectedContainer = containers.find((item) => item.id === containerId) ?? containers[0];
   const selectedLogo = logos.find((item) => item.id === logoId) ?? logos[0];
-  const selectedLabelSize = selectedContainer.labelSize;
+  const selectedContainerVariant = selectedContainer.variants.find((item) => item.id === containerVariantId) ?? selectedContainer.variants[0];
+  const selectedLabelSize = selectedContainerVariant.labelSize;
 
   const filteredMaterials = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -186,16 +286,58 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {containers.map((item) => (
               <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${containerId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); jumpTo(designSection); }} className="sr-only" />
+                <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(item.variants[0].id); setCapacity(item.variants[0].capacity); }} className="sr-only" />
                 <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5"><img src={item.image} alt={`${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" /></div>
                 <h3 className="mt-5 text-2xl font-black">{item.name}</h3>
                 <p className="mt-1 text-sm font-bold text-[#25C760]">目安容量: {item.capacity}</p>
-                <p className="mt-2 inline-flex rounded-full border border-[#25C760]/35 px-3 py-1 text-xs font-bold text-[#25C760]">ラベル範囲: {item.labelSize.widthMm}mm × {item.labelSize.heightMm}mm</p>
+                <p className="mt-2 inline-flex rounded-full border border-[#25C760]/35 px-3 py-1 text-xs font-bold text-[#25C760]">{item.variants.length}候補から選択</p>
                 <p className="mt-4 text-sm leading-6 text-gray-300">{item.note}</p>
                 <div className="mt-4 flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300">{tag}</span>)}</div>
               </label>
             ))}
           </div>
+          <div className="mt-12 rounded-[2rem] border border-[#25C760]/25 bg-[#25C760]/[0.04] p-6 md:p-8">
+            <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-sm font-bold text-[#25C760]">容器の詳細仕様</p>
+                <h3 className="mt-2 text-2xl font-black">{selectedContainer.name}の候補を選ぶ</h3>
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-300">
+                  容量、色、形状、スプレー方式、遮光素材などを写真と数字で確認して選べます。写真は仮登録画像なので、正式な容器写真に差し替え可能です。
+                </p>
+              </div>
+              <span className="rounded-full border border-[#25C760]/35 px-4 py-2 text-sm font-bold text-[#25C760]">{selectedContainer.variants.length}候補</span>
+            </div>
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {selectedContainer.variants.map((variant) => (
+                <label key={variant.id} className={`cursor-pointer overflow-hidden rounded-[1.5rem] border bg-black/35 transition ${containerVariantId === variant.id ? 'border-[#25C760] shadow-[0_0_22px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
+                  <input
+                    type="radio"
+                    name="containerVariant"
+                    value={variant.id}
+                    checked={containerVariantId === variant.id}
+                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); jumpTo(designSection); }}
+                    className="sr-only"
+                  />
+                  <div className="relative h-36 overflow-hidden bg-white/5">
+                    <img src={variant.image} alt={`${variant.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  </div>
+                  <div className="p-5">
+                    <h4 className="text-lg font-black">{variant.name}</h4>
+                    <div className="mt-3 grid grid-cols-2 gap-2 text-xs text-gray-300">
+                      <Spec label="容量" value={variant.capacity} />
+                      <Spec label="色" value={variant.color} />
+                      <Spec label="形状" value={variant.shape} />
+                      <Spec label="仕様" value={variant.spec} />
+                      <Spec label="素材" value={variant.material} />
+                      <Spec label="ラベル" value={`${variant.labelSize.widthMm}×${variant.labelSize.heightMm}mm`} />
+                    </div>
+                  </div>
+                </label>
+              ))}
+            </div>
+          </div>
+
           <div className="mt-8 max-w-md rounded-3xl border border-white/10 bg-white/[0.04] p-6">
             <label className="text-sm font-bold text-gray-300">希望内容量・容量</label>
             <input value={capacity} onChange={(e) => setCapacity(e.target.value)} placeholder="例：100ml / 80g / 30包" className="mt-2 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
@@ -236,6 +378,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <h3 className="text-xl font-black">ラベル配置プレビュー</h3>
             <div className="mt-3 flex flex-wrap gap-2 text-xs font-bold text-[#25C760]">
               <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{selectedContainer.name}</span>
+              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{selectedContainerVariant.name}</span>
               <span className="rounded-full border border-[#25C760]/35 px-3 py-1">ラベル範囲: 横{selectedLabelSize.widthMm}mm × 縦{selectedLabelSize.heightMm}mm</span>
             </div>
             <p className="mt-3 text-xs leading-5 text-gray-400">
@@ -292,7 +435,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <h2 className="mt-2 text-3xl font-black">あなたの希望内容はこれでいいですか？</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <Summary label="素材" value={`${selectedRaw.name}（${selectedRaw.region}）`} />
-            <Summary label="容器・内容量" value={`${selectedContainer.name} / ${capacity}`} />
+            <Summary label="容器・内容量" value={`${selectedContainer.name} / ${selectedContainerVariant.name} / ${capacity}`} />
+            <Summary label="容器仕様" value={`${selectedContainerVariant.color} / ${selectedContainerVariant.shape} / ${selectedContainerVariant.spec} / ${selectedContainerVariant.material}`} />
             <Summary label="ラベル範囲" value={`横${selectedLabelSize.widthMm}mm × 縦${selectedLabelSize.heightMm}mm`} />
             <Summary label="ロゴ" value={`${selectedLogo.name} / 位置 ${logoX}%・${logoY}% / サイズ ${logoScale}%`} />
             <Summary label="商品名・希望価格" value={`${productName || '未入力'} / ${desiredPrice || '未入力'}`} />
@@ -355,6 +499,16 @@ function Input({ label, value, onChange, placeholder, note, type = 'text' }: { l
       <input type={type} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="mt-3 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
       {note && <span className="mt-2 block text-xs leading-5 text-gray-500">{note}</span>}
     </label>
+  );
+}
+
+
+function Spec({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl bg-white/[0.06] px-3 py-2">
+      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#25C760]">{label}</p>
+      <p className="mt-1 font-bold text-gray-100">{value}</p>
+    </div>
   );
 }
 
