@@ -3,7 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 
 export const metadata: Metadata = {
-  title: '送信ありがとうございました｜Mazavege Maker',
+  title: 'ご提案ありがとうございます｜Mazavege Maker',
   description: 'Mazavege Makerアイデア提案の送信完了ページです。',
 };
 
