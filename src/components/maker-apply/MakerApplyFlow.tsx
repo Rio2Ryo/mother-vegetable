@@ -281,18 +281,20 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       </section>
 
       <section className="px-6 py-16">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[300px_1fr]">
-          <aside className="h-fit rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 lg:sticky lg:top-24">
-            <div className="mb-6 border-b border-white/10 pb-6">
-              <p className="text-sm font-bold text-[#25C760]">STEP 01</p>
-              <h2 className="mt-2 text-2xl font-black leading-tight">Japanese Raw Materialを選ぶ</h2>
-            </div>
-            <h3 className="text-xl font-black">検索・絞り込み</h3>
-            <label className="mt-5 block text-sm font-bold text-gray-300">地域・素材名で検索</label>
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="例：河津町、味噌、化粧水" className="mt-2 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
-            <FilterGroup title="地域" items={regions} selected={selectedRegions} onChange={(item) => setSelectedRegions(toggle(selectedRegions, item))} />
-            <FilterGroup title="用途" items={categories} selected={selectedCategories} onChange={(item) => setSelectedCategories(toggle(selectedCategories, item))} />
-            <FilterGroup title="特徴タグ" items={tagOptions} selected={selectedTags} onChange={(item) => setSelectedTags(toggle(selectedTags, item))} />
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8 border-b border-white/10 pb-6">
+            <p className="text-sm font-bold text-[#25C760]">STEP 01</p>
+            <h2 className="mt-2 text-3xl font-black md:text-4xl">Japanese Raw Materialを選ぶ</h2>
+          </div>
+
+          <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
+            <aside className="h-fit rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 lg:sticky lg:top-24">
+              <h3 className="text-xl font-black">検索・絞り込み</h3>
+              <label className="mt-5 block text-sm font-bold text-gray-300">地域・素材名で検索</label>
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="例：河津町、味噌、化粧水" className="mt-2 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
+              <FilterGroup title="地域" items={regions} selected={selectedRegions} onChange={(item) => setSelectedRegions(toggle(selectedRegions, item))} />
+              <FilterGroup title="用途" items={categories} selected={selectedCategories} onChange={(item) => setSelectedCategories(toggle(selectedCategories, item))} />
+              <FilterGroup title="特徴タグ" items={tagOptions} selected={selectedTags} onChange={(item) => setSelectedTags(toggle(selectedTags, item))} />
           </aside>
 
           <div>
@@ -319,6 +321,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               ))}
             </div>
           </div>
+        </div>
         </div>
       </section>
 
