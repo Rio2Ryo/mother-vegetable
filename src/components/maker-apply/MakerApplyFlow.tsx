@@ -494,7 +494,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                 {logos.map((logo) => (
                   <label key={logo.id} className={`cursor-pointer rounded-3xl border bg-white/[0.04] p-4 transition ${logoId === logo.id ? 'border-[#25C760]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
                     <input type="radio" name="logo" value={logo.id} checked={logoId === logo.id} onChange={() => setLogoId(logo.id)} className="sr-only" />
-                    <div className="flex h-32 items-center justify-center rounded-2xl bg-black p-4"><img src={logo.src} alt={logo.name} className="max-h-full max-w-full object-contain" /></div>
+                    <div className={`flex h-32 items-center justify-center rounded-2xl p-4 ${logo.id === 'logo-3' ? 'bg-white' : 'bg-black'}`}><img src={logo.src} alt={logo.name} className="max-h-full max-w-full object-contain" /></div>
                     <p className="mt-3 text-sm font-bold">{logo.name}</p>
                   </label>
                 ))}
