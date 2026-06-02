@@ -774,7 +774,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       <section ref={confirmSection} className="px-6 py-16 pb-24">
         <div className="mx-auto max-w-5xl rounded-[2rem] border border-[#25C760]/30 bg-[#25C760]/[0.06] p-6 md:p-10">
           <p className="text-sm font-bold text-[#25C760]">STEP 06</p>
-          <h2 className="mt-2 text-3xl font-black">{ui?.confirmTitle ?? 'あなたの希望内容はこれでいいですか？'}</h2>
+          <h2 className="mt-2 text-3xl font-black">{ui?.confirmTitle ?? 'ご提案内容のご確認'}</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <Summary label={ui?.material ?? '素材'} value={`${rawName(selectedRaw)}（${rawRegion(selectedRaw)}）`} />
             <Summary label="Mother Vegetable" value={selectedMotherVegetable ? `${isEnglish ? term(selectedMotherVegetable.name) : selectedMotherVegetable.name}（${term(selectedMotherVegetable.category)}）` : (ui?.notEntered ?? '未選択')} />
