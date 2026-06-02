@@ -200,6 +200,59 @@ const tagOptions = ['発酵食品', '調味料', 'スキンケア', 'ヘアケ�
 const containerColorOptions = ['透明', '黒遮光', '白マット'];
 const lidColorOptions = ['白', '黒', '木目'];
 
+const enRawMaterials: Record<string, { name: string; region: string; category: string; story: string; tags: Record<string, string> }> = {
+  'kawazu-salt': { name: 'Kawazu Hiragama Salt', region: 'Kawazu Town', category: 'For food', story: 'Mineral-rich sea salt slowly cooked in a flat pan, carrying the character of the local coast.', tags: { '調味料': 'Seasoning', '海の素材': 'Sea ingredient' } },
+  'kushimoto-miso': { name: 'Kushimoto Kinzanji Miso', region: 'Kushimoto Town', category: 'For food', story: 'Traditional Kinzanji miso carefully made with local rice and koji.', tags: { '発酵食品': 'Fermented food', 'ごはんのお供': 'Rice pairing', '常温': 'Shelf-stable' } },
+  'izu-onsen': { name: 'Izu Onsen Toner', region: 'Izu City', category: 'For cosmetics', story: 'Soft-feeling hot spring water suitable as a base for toner and facial mist products.', tags: { 'スキンケア': 'Skin care', '水素材': 'Water-based', '保湿感': 'Moist feel', '観光地': 'Tourism area' } },
+  'minami-toner': { name: 'Minami-Izu Herb Toner', region: 'Minami-Izu Town', category: 'For cosmetics', story: 'Gentle toner material using herbs grown on a small local farm.', tags: { '化粧水': 'Toner', 'ハーブ': 'Herbs', 'スキンケア': 'Skin care', '香り': 'Fragrance' } },
+  'wakayama-shampoo': { name: 'Kishu Yuzu Shampoo', region: 'Wakayama', category: 'For cosmetics', story: 'A regional hair-care material that makes use of the fresh aroma of yuzu.', tags: { 'ヘアケア': 'Hair care', '柑橘': 'Citrus', '香り': 'Fragrance', 'バス用品': 'Bath care' } },
+  'hokkaido-lip': { name: 'Hokkaido Milk Lip', region: 'Hokkaido', category: 'For cosmetics', story: 'A lip-care material inspired by the rich milk image of Hokkaido.', tags: { 'リップ': 'Lip care', '乾燥ケア': 'Dryness care', '乳素材': 'Milk-inspired' } },
+  'komeko-pack': { name: 'Rice Koji Face Pack', region: 'Niigata', category: 'For cosmetics', story: 'A beauty material that brings the koji culture of Japan’s rice regions into skin-care ideas.', tags: { '米麹': 'Rice koji', 'フェイスパック': 'Face pack', '発酵': 'Fermentation', '美容': 'Beauty' } },
+  'shizuoka-wasabi': { name: 'Shizuoka Wasabi Salt', region: 'Shizuoka', category: 'For food', story: 'A powdered seasoning material using Shizuoka wasabi, ideal for souvenir-style products.', tags: { '調味料': 'Seasoning', 'わさび': 'Wasabi', '土産': 'Souvenir', '粉末': 'Powder' } },
+  'olive-oil': { name: 'Shodoshima Olive Oil', region: 'Shodoshima', category: 'For food / cosmetics', story: 'A highly regional oil material that can be developed for both food and beauty products.', tags: { 'オイル': 'Oil', '食品': 'Food', '美容': 'Beauty' } },
+};
+
+const enContainers: Record<string, { name: string; note: string; tags: Record<string, string>; variants: Record<string, string> }> = {
+  'trigger-spray': { name: 'Trigger Spray Bottle', note: 'For liquids that need a strong spray, such as toner, hair mist, or cleaning-type products.', tags: { '化粧品向け': 'For cosmetics', 'ミスト': 'Mist', '液体': 'Liquid' }, variants: { '100ml トリガータイプ': '100ml Trigger Type', '200ml トリガータイプ': '200ml Trigger Type', '300ml トリガータイプ': '300ml Trigger Type' } },
+  'push-spray': { name: 'Push Spray Bottle', note: 'A compact one-hand spray bottle for toner, fragrance products, and portable mist items.', tags: { '化粧品向け': 'For cosmetics', 'ミスト': 'Mist', '携帯': 'Portable' }, variants: { '30ml プッシュタイプ': '30ml Push Type', '50ml プッシュタイプ': '50ml Push Type', '120ml プッシュタイプ': '120ml Push Type' } },
+  'soy-ponzu': { name: 'Soy Sauce / Ponzu Bottle', note: 'For liquid seasonings such as soy sauce, ponzu, and dressings.', tags: { '食品向け': 'For food', '液体': 'Liquid', '卓上': 'Tabletop' }, variants: { '100ml 卓上ボトル': '100ml Table Bottle', '180ml 卓上ボトル': '180ml Table Bottle', '300ml 卓上ボトル': '300ml Table Bottle' } },
+  'powder-shaker': { name: 'Powder Shaker', note: 'For salt, wasabi salt, spices, and other powdered ingredients.', tags: { '食品向け': 'For food', '粉末': 'Powder', '卓上': 'Tabletop' }, variants: { '20g 粉末用シェイカー': '20g Powder Shaker', '50g 粉末用シェイカー': '50g Powder Shaker', '120g 粉末用シェイカー': '120g Powder Shaker' } },
+  'glass-container': { name: 'Glass Container', note: 'A premium-looking container suitable for miso, cream, balm, and oil-based products.', tags: { '食品向け': 'For food', '化粧品向け': 'For cosmetics', '高級感': 'Premium feel' }, variants: { '50g ガラス容器': '50g Glass Container', '120g ガラス容器': '120g Glass Container', '300g ガラス容器': '300g Glass Container' } },
+  'shampoo-bottle': { name: 'Shampoo Bottle', note: 'For hair-care and bath-care items such as shampoo, treatment, and body soap.', tags: { '化粧品向け': 'For cosmetics', 'ヘアケア': 'Hair care', '液体': 'Liquid' }, variants: { '200ml シャンプーボトル': '200ml Shampoo Bottle', '300ml シャンプーボトル': '300ml Shampoo Bottle', '500ml シャンプーボトル': '500ml Shampoo Bottle' } },
+  'dropper-bottle': { name: 'Dropper Bottle', note: 'For liquids used in small amounts, such as beauty oils, essences, and fragrance materials.', tags: { '化粧品向け': 'For cosmetics', 'オイル': 'Oil', '美容': 'Beauty' }, variants: { '15ml ドロッパー': '15ml Dropper', '30ml ドロッパー': '30ml Dropper', '50ml ドロッパー': '50ml Dropper' } },
+  'can-container': { name: 'Can Container', note: 'For powders, tea leaves, balms, and gift products where storage and appearance both matter.', tags: { '食品向け': 'For food', '化粧品向け': 'For cosmetics', '粉末': 'Powder' }, variants: { '20g 缶容器': '20g Can', '60g 缶容器': '60g Can', '120g 缶容器': '120g Can' } },
+  'lipstick': { name: 'Lip Stick', note: 'Dedicated to lip and stick balm products. Not for food products.', tags: { '化粧品向け': 'For cosmetics', 'リップ': 'Lip care', '携帯': 'Portable' }, variants: { '3g リップスティック': '3g Lip Stick', '5g リップスティック': '5g Lip Stick', '8g リップスティック': '8g Lip Stick' } },
+};
+
+const enTerm: Record<string, string> = {
+  '食品向け': 'For food', '化粧品向け': 'For cosmetics', '食品・化粧品向け': 'For food / cosmetics',
+  '発酵食品': 'Fermented food', '調味料': 'Seasoning', 'スキンケア': 'Skin care', 'ヘアケア': 'Hair care', '粉末': 'Powder', '液体': 'Liquid',
+  '透明': 'Clear', '黒遮光': 'Black UV-blocking', '白マット': 'Matte white', '白': 'White', '黒': 'Black', '木目': 'Wood grain', 'シルバー': 'Silver',
+  '食品用': 'For food', '化粧品用/食品用': 'For cosmetics / food', '両方とも使用する': 'Use both',
+  '河津町': 'Kawazu Town', '串本町': 'Kushimoto Town', '伊豆市': 'Izu City', '南伊豆町': 'Minami-Izu Town', '和歌山県': 'Wakayama', '北海道': 'Hokkaido', '新潟県': 'Niigata', '静岡県': 'Shizuoka', '小豆島': 'Shodoshima',
+};
+
+const enUi = {
+  heroTitle: 'Make your dream product now',
+  heroLead: 'Choose one Japanese Raw Material, select the container, logo, and product name, then submit your Mazavege Maker idea. No monthly fee is charged until your idea passes review and you approve it.',
+  rawTitle: 'Choose a Japanese Raw Material',
+  filters: 'Search & Filter', searchLabel: 'Search by region or material', searchPlaceholder: 'e.g. Kawazu, miso, toner', region: 'Region', usage: 'Use', featureTags: 'Feature tags', count: 'items', select: 'Select',
+  mvTitle: 'Choose the Mother Vegetable to combine', mvLead: 'Select which Mother Vegetable line you want to combine with your chosen Japanese Raw Material.',
+  containerTitle: 'What kind of container would you like to use?', containerLead: 'First choose the container shape that fits your material. After choosing a shape, you can select size, color, and specifications.', estimatedCapacity: 'Approx. capacity', chooseFrom: 'options', chooseFromSuffix: 'to choose from',
+  specLabel: 'Container details', specTitleSuffix: ' specifications', specLead: 'Choose capacity, container color, and cap color in order.', threeSteps: '3 steps', capacityTitle: '1. Choose capacity', capacityNote: 'Choosing capacity also determines the label size.', labelArea: 'Label area', width: 'W', height: 'H', colorTitle: '2. Choose container color', lidTitle: '3. Choose cap color', desiredCapacity: 'Desired capacity', desiredCapacityPlaceholder: 'e.g. 100ml / 80g / 30 packs', capacityConfirm: 'Check here if this capacity is OK',
+  labelTitle: 'Label design', labelLead: 'Choose the Mother Vegetable logo and adjust the size of the logo and Made in Japan mark. You can drag them directly on the preview.', chooseLogo: 'Choose Mother Vegetable logo', bgColor: 'Background color', upload: 'Upload label design image', selectedFile: 'Selected', designMemo: 'Design request memo', designMemoPlaceholder: 'e.g. Black background with white text, large material name, elegant mood that communicates the local story', goProductInfo: 'Go to product information', previewTitle: 'Label placement preview', previewLead: 'When you change the container, this work area changes its aspect ratio to match the label area.', containerColor: 'Container color', lidColor: 'Cap color', logoSize: 'Logo size', madeSize: 'MADE IN JAPAN size',
+  infoTitle: 'Product name, desired price, and contact', productName: 'Desired product name', productNamePlaceholder: 'e.g. Kawazu Mineral Salt Achieve', desiredPrice: 'Desired selling price', desiredPricePlaceholder: 'e.g. JPY 2,980 incl. tax', priceNote: 'The final selling price may not match your request. Mother Vegetable will decide the final price.', name: 'Name', namePlaceholder: 'Taro Yamada', email: 'Email address', phone: 'Phone number', address: 'Address', addressPlaceholder: 'Tokyo...', requiredStep5: 'STEP 5 is required. You can proceed to confirmation after filling in all fields.', goConfirm: 'Go to confirmation',
+  confirmTitle: 'Is this proposal correct?', material: 'Material', containerAndCapacity: 'Container / Capacity', containerSpec: 'Container specifications', logo: 'Logo', position: 'Position', size: 'Size', designMethod: 'Design method', manual: 'Manual adjustment', noMemo: 'No memo entered', productAndPrice: 'Product name / Desired price', contact: 'Contact', notEntered: 'Not entered',
+  agreements: [
+    'I understand that the monthly USD 200 fee (or JPY 30,000 + tax) will not be charged until the proposal passes review.',
+    'I understand that after approval, I will proceed to Maker registration and payment.',
+    'I understand that Mazavege will support the production cost for the first 100 units, and 101 or more units can be produced at 30% of the selling price.',
+    'I understand that if the product does not sell out within one month, I will purchase the remaining inventory at the amount after deducting the 10% Maker royalty.',
+  ],
+  submit: 'Submit', submitNote: 'After submission, you will receive a confirmation email. Review results will generally be sent by email within two weeks.',
+  logoResize: 'Logo size handle', logoAria: 'Mazavege logo', madeAria: 'Made in Japan mark', madeResize: 'Made in Japan size handle', uploadedAlt: 'Uploaded label design',
+};
+
 function toggle(list: string[], value: string) {
   return list.includes(value) ? list.filter((item) => item !== value) : [...list, value];
 }
@@ -261,6 +314,27 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const capacityOptions = selectedContainer.variants.filter((variant, index, variants) => variants.findIndex((item) => item.capacity === variant.capacity) === index).slice(0, 3);
   const isContainerDetailComplete = Boolean(containerVariantId && containerColor && lidColor);
   const isDesignStepOpen = isContainerDetailComplete && capacityConfirmed;
+
+  const isEnglish = locale === 'en';
+  const ui = isEnglish ? enUi : null;
+  const term = (value: string) => isEnglish ? (enTerm[value] ?? value) : value;
+  const rawName = (item: RawMaterial) => isEnglish ? (enRawMaterials[item.id]?.name ?? item.name) : item.name;
+  const rawRegion = (item: RawMaterial) => isEnglish ? (enRawMaterials[item.id]?.region ?? item.region) : item.region;
+  const rawCategory = (item: RawMaterial) => isEnglish ? (enRawMaterials[item.id]?.category ?? item.category) : item.category;
+  const rawStory = (item: RawMaterial) => isEnglish ? (enRawMaterials[item.id]?.story ?? item.story) : item.story;
+  const rawTag = (item: RawMaterial, tag: string) => isEnglish ? (enRawMaterials[item.id]?.tags[tag] ?? term(tag)) : tag;
+  const containerName = (item: ContainerItem) => isEnglish ? (enContainers[item.id]?.name ?? item.name) : item.name;
+  const containerNote = (item: ContainerItem) => isEnglish ? (enContainers[item.id]?.note ?? item.note) : item.note;
+  const containerTag = (item: ContainerItem, tag: string) => isEnglish ? (enContainers[item.id]?.tags[tag] ?? term(tag)) : tag;
+  const variantName = (variant: ContainerVariant) => isEnglish ? (enContainers[selectedContainer.id]?.variants[variant.name] ?? variant.name) : variant.name;
+  const logoName = (name: string) => isEnglish ? name.replace(' ロゴ ', ' Logo ') : name;
+  const uiText = (ja: string, en: string) => isEnglish ? en : ja;
+  const agreementsText = isEnglish ? enUi.agreements : [
+    '審査OKになるまで月額200ドル（または月額30,000円＋税）の支払いは発生しないことを確認しました。',
+    '審査OK後、Maker登録と支払い手続きへ進むことを確認しました。',
+    '初回100個分の製造費はMazavege社が支援し、101個以上は販売価格の30%で製造可能であることを確認しました。',
+    '1ヶ月間で完売できなかった場合、売れ残り分をMakerロイヤリティ10%を差し引いた金額で買い取る条件を確認しました。',
+  ];
 
   const filteredMaterials = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -386,9 +460,9 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,199,96,0.18),transparent_46%)]" />
         <div className="relative mx-auto max-w-6xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.35em] text-[#25C760]">Mazavege Maker Application</p>
-          <h1 className="mt-4 text-4xl font-black md:text-6xl">いますぐ、あなたの夢を叶えよう</h1>
+          <h1 className="mt-4 text-4xl font-black md:text-6xl">{ui?.heroTitle ?? 'いますぐ、あなたの夢を叶えよう'}</h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
-            Japanese Raw Materialを1つ選び、容器や商品名を決めてアイデアを送信します。審査が通過してあなたが承認するまで、月額費用は発生いたしません。
+            {ui?.heroLead ?? 'Japanese Raw Materialを1つ選び、容器や商品名を決めてアイデアを送信します。審査が通過してあなたが承認するまで、月額費用は発生いたしません。'}
           </p>
         </div>
       </section>
@@ -397,38 +471,38 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 border-b border-white/10 pb-6">
             <p className="text-sm font-bold text-[#25C760]">STEP 01</p>
-            <h2 className="mt-2 text-3xl font-black md:text-4xl">Japanese Raw Materialを選ぶ</h2>
+            <h2 className="mt-2 text-3xl font-black md:text-4xl">{ui?.rawTitle ?? 'Japanese Raw Materialを選ぶ'}</h2>
           </div>
 
           <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
             <aside className="h-fit rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 lg:sticky lg:top-24">
-              <h3 className="text-xl font-black">検索・絞り込み</h3>
-              <label className="mt-5 block text-sm font-bold text-gray-300">地域・素材名で検索</label>
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="例：河津町、味噌、化粧水" className="mt-2 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
-              <FilterGroup title="地域" items={regions} selected={selectedRegions} onChange={(item) => setSelectedRegions(toggle(selectedRegions, item))} />
-              <FilterGroup title="用途" items={categories} selected={selectedCategories} onChange={(item) => setSelectedCategories(toggle(selectedCategories, item))} />
-              <FilterGroup title="特徴タグ" items={tagOptions} selected={selectedTags} onChange={(item) => setSelectedTags(toggle(selectedTags, item))} />
+              <h3 className="text-xl font-black">{ui?.filters ?? '検索・絞り込み'}</h3>
+              <label className="mt-5 block text-sm font-bold text-gray-300">{ui?.searchLabel ?? '地域・素材名で検索'}</label>
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={ui?.searchPlaceholder ?? '例：河津町、味噌、化粧水'} className="mt-2 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
+              <FilterGroup title={ui?.region ?? '地域'} items={regions} selected={selectedRegions} onChange={(item) => setSelectedRegions(toggle(selectedRegions, item))} displayItem={term} />
+              <FilterGroup title={ui?.usage ?? '用途'} items={categories} selected={selectedCategories} onChange={(item) => setSelectedCategories(toggle(selectedCategories, item))} displayItem={term} />
+              <FilterGroup title={ui?.featureTags ?? '特徴タグ'} items={tagOptions} selected={selectedTags} onChange={(item) => setSelectedTags(toggle(selectedTags, item))} displayItem={term} />
           </aside>
 
           <div>
             <div className="mb-6 flex justify-end">
-              <p className="text-sm text-gray-400">{filteredMaterials.length}件</p>
+              <p className="text-sm text-gray-400">{filteredMaterials.length}{ui?.count ?? '件'}</p>
             </div>
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {filteredMaterials.map((item) => (
                 <label key={item.id} className={`group cursor-pointer overflow-hidden rounded-[1.75rem] border bg-white/[0.035] transition ${rawMaterialId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.25)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
                   <input type="radio" name="rawMaterial" value={item.id} checked={rawMaterialId === item.id} onChange={() => { setRawMaterialId(item.id); setMotherVegetableId(''); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(motherVegetableSection); }} className="sr-only" />
-                  <div className="relative h-44 overflow-hidden bg-white/5"><img src={item.image} alt={`${item.name}の素材写真`} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /></div>
+                  <div className="relative h-44 overflow-hidden bg-white/5"><img src={item.image} alt={isEnglish ? `${rawName(item)} material photo` : `${item.name}の素材写真`} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /></div>
                   <div className="p-5">
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <h3 className="text-xl font-black">{item.name}</h3>
-                        <p className="mt-1 text-sm text-[#25C760]">{item.region} / {item.category}</p>
+                        <h3 className="text-xl font-black">{rawName(item)}</h3>
+                        <p className="mt-1 text-sm text-[#25C760]">{rawRegion(item)} / {rawCategory(item)}</p>
                       </div>
-                      <span className="rounded-full border border-[#25C760]/40 px-3 py-1 text-xs font-bold text-[#25C760]">選択</span>
+                      <span className="rounded-full border border-[#25C760]/40 px-3 py-1 text-xs font-bold text-[#25C760]">{ui?.select ?? '選択'}</span>
                     </div>
-                    <p className="mt-4 min-h-16 text-sm leading-6 text-gray-300">{item.story}</p>
-                    <div className="mt-4 flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300">{tag}</span>)}</div>
+                    <p className="mt-4 min-h-16 text-sm leading-6 text-gray-300">{rawStory(item)}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300">{rawTag(item, tag)}</span>)}</div>
                   </div>
                 </label>
               ))}
@@ -442,8 +516,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       <section ref={motherVegetableSection} className="px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-bold text-[#25C760]">STEP 02</p>
-          <h2 className="mt-2 text-3xl font-black">組み合わせるMother Vegetableを選択する</h2>
-          <p className="mt-4 max-w-3xl text-gray-300">選んだJapanese Raw Materialと、どのMother Vegetableラインを組み合わせるか選んでください。</p>
+          <h2 className="mt-2 text-3xl font-black">{ui?.mvTitle ?? '組み合わせるMother Vegetableを選択する'}</h2>
+          <p className="mt-4 max-w-3xl text-gray-300">{ui?.mvLead ?? '選んだJapanese Raw Materialと、どのMother Vegetableラインを組み合わせるか選んでください。'}</p>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {motherVegetableOptions.map((item) => (
               <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${motherVegetableId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
@@ -455,9 +529,9 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                   onChange={() => { setMotherVegetableId(item.id); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerSection, 120); }}
                   className="sr-only"
                 />
-                <p className="text-xs font-black uppercase tracking-[0.22em] text-[#25C760]">{item.category}</p>
-                <h3 className="mt-3 text-2xl font-black">{item.name}</h3>
-                <p className="mt-4 whitespace-pre-line text-sm leading-7 text-gray-300">{item.description}</p>
+                <p className="text-xs font-black uppercase tracking-[0.22em] text-[#25C760]">{term(item.category)}</p>
+                <h3 className="mt-3 text-2xl font-black">{isEnglish ? term(item.name) : item.name}</h3>
+                <p className="mt-4 whitespace-pre-line text-sm leading-7 text-gray-300">{isEnglish ? (item.id === 'achieve' ? 'A Mother Vegetable food line designed to fit naturally into daily eating habits.\nCombine it with regional ingredients to create products people can use every day.' : item.id === 'confidence' ? 'A Mother Vegetable line that can be developed for both beauty and food concepts.\nIt helps express each regional ingredient while supporting daily wellness.' : 'For ideas that use both food and cosmetic approaches.\nThis option makes it easier to expand one material into multiple product ideas.') : item.description}</p>
               </label>
             ))}
           </div>
@@ -469,18 +543,18 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       <section ref={containerSection} className="px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-bold text-[#25C760]">STEP 03</p>
-          <h2 className="mt-2 text-3xl font-black">どんな容器を使いたいですか？</h2>
-          <p className="mt-4 max-w-3xl text-gray-300">選んだ素材に合わせて、まず容器の形状を1つ選んでください。形状を選ぶと、次にサイズ・色・仕様の候補が表示されます。</p>
+          <h2 className="mt-2 text-3xl font-black">{ui?.containerTitle ?? 'どんな容器を使いたいですか？'}</h2>
+          <p className="mt-4 max-w-3xl text-gray-300">{ui?.containerLead ?? '選んだ素材に合わせて、まず容器の形状を1つ選んでください。形状を選ぶと、次にサイズ・色・仕様の候補が表示されます。'}</p>
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {containers.map((item) => (
               <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${containerId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
                 <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }} className="sr-only" />
-                <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5"><img src={item.image} alt={`${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" /></div>
-                <h3 className="mt-5 text-2xl font-black">{item.name}</h3>
-                <p className="mt-1 text-sm font-bold text-[#25C760]">目安容量: {item.capacity}</p>
-                <p className="mt-2 inline-flex rounded-full border border-[#25C760]/35 px-3 py-1 text-xs font-bold text-[#25C760]">{item.variants.length}候補から選択</p>
-                <p className="mt-4 text-sm leading-6 text-gray-300">{item.note}</p>
-                <div className="mt-4 flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300">{tag}</span>)}</div>
+                <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5"><img src={item.image} alt={isEnglish ? `${containerName(item)} container photo` : `${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" /></div>
+                <h3 className="mt-5 text-2xl font-black">{containerName(item)}</h3>
+                <p className="mt-1 text-sm font-bold text-[#25C760]">{ui?.estimatedCapacity ?? '目安容量'}: {item.capacity}</p>
+                <p className="mt-2 inline-flex rounded-full border border-[#25C760]/35 px-3 py-1 text-xs font-bold text-[#25C760]">{isEnglish ? `${item.variants.length} ${ui?.chooseFrom}` : `${item.variants.length}候補から選択`}</p>
+                <p className="mt-4 text-sm leading-6 text-gray-300">{containerNote(item)}</p>
+                <div className="mt-4 flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300">{containerTag(item, tag)}</span>)}</div>
               </label>
             ))}
           </div>
@@ -488,17 +562,17 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div ref={containerVariantSection} className="mt-12 scroll-mt-24 rounded-[2rem] border border-[#25C760]/25 bg-[#25C760]/[0.04] p-6 md:p-8">
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="text-sm font-bold text-[#25C760]">容器の詳細仕様</p>
-                <h3 className="mt-2 text-2xl font-black">{selectedContainer.name}の仕様を選ぶ</h3>
+                <p className="text-sm font-bold text-[#25C760]">{ui?.specLabel ?? '容器の詳細仕様'}</p>
+                <h3 className="mt-2 text-2xl font-black">{isEnglish ? `${containerName(selectedContainer)}${ui?.specTitleSuffix}` : `${selectedContainer.name}の仕様を選ぶ`}</h3>
                 <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-300">
-                  容量・容器色・蓋色を順番に選びます。
+                  {ui?.specLead ?? '容量・容器色・蓋色を順番に選びます。'}
                 </p>
               </div>
-              <span className="rounded-full border border-[#25C760]/35 px-4 py-2 text-sm font-bold text-[#25C760]">3ステップ</span>
+              <span className="rounded-full border border-[#25C760]/35 px-4 py-2 text-sm font-bold text-[#25C760]">{ui?.threeSteps ?? '3ステップ'}</span>
             </div>
 
             <div className="mt-8 space-y-8">
-              <ChoiceGroup title="1. 容量を選ぶ" note="容量を選ぶと、ラベルのサイズも決定します。">
+              <ChoiceGroup title={ui?.capacityTitle ?? '1. 容量を選ぶ'} note={ui?.capacityNote ?? '容量を選ぶと、ラベルのサイズも決定します。'}>
                 {capacityOptions.map((variant) => (
                   <TextChoice
                     key={variant.id}
@@ -506,21 +580,21 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                     checked={containerVariantId === variant.id}
                     onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setContainerColor(''); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); }}
                     title={variant.capacity}
-                    detail={`ラベル範囲: 横${variant.labelSize.widthMm}mm × 縦${variant.labelSize.heightMm}mm`}
+                    detail={isEnglish ? `${ui?.labelArea}: ${ui?.width}${variant.labelSize.widthMm}mm × ${ui?.height}${variant.labelSize.heightMm}mm` : `ラベル範囲: 横${variant.labelSize.widthMm}mm × 縦${variant.labelSize.heightMm}mm`}
                   />
                 ))}
               </ChoiceGroup>
 
               {containerVariantId && (
                 <div ref={containerColorSection} className="scroll-mt-24">
-                <ChoiceGroup title="2. 容器の色を選ぶ">
+                <ChoiceGroup title={ui?.colorTitle ?? '2. 容器の色を選ぶ'}>
                   {containerColorOptions.map((color) => (
                     <TextChoice
                       key={color}
                       name="containerColor"
                       checked={containerColor === color}
                       onChange={() => { setContainerColor(color); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); }}
-                      title={color}
+                      title={term(color)}
                     />
                   ))}
                 </ChoiceGroup>
@@ -529,14 +603,14 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
 
               {containerVariantId && containerColor && (
                 <div ref={lidColorSection} className="scroll-mt-24">
-                <ChoiceGroup title="3. 蓋の色を選ぶ">
+                <ChoiceGroup title={ui?.lidTitle ?? '3. 蓋の色を選ぶ'}>
                   {lidColorOptions.map((color) => (
                     <TextChoice
                       key={color}
                       name="lidColor"
                       checked={lidColor === color}
                       onChange={() => { setLidColor(color); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); }}
-                      title={color}
+                      title={term(color)}
                     />
                   ))}
                 </ChoiceGroup>
@@ -550,12 +624,12 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div className="mt-8 max-w-2xl rounded-3xl border border-white/10 bg-white/[0.04] p-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <label className="text-sm font-bold text-gray-300">
-                希望内容量
-                <input value={capacity} onChange={(e) => { setCapacity(e.target.value); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); }} placeholder="例：100ml / 80g / 30包" className="mt-2 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760] md:min-w-[260px]" />
+                {ui?.desiredCapacity ?? '希望内容量'}
+                <input value={capacity} onChange={(e) => { setCapacity(e.target.value); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); }} placeholder={ui?.desiredCapacityPlaceholder ?? '例：100ml / 80g / 30包'} className="mt-2 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760] md:min-w-[260px]" />
               </label>
               <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-[#25C760]/30 bg-[#25C760]/10 p-4 text-sm font-bold leading-6 text-gray-100">
                 <input type="checkbox" checked={capacityConfirmed} onChange={(e) => { setCapacityConfirmed(e.target.checked); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); if (e.target.checked) jumpTo(designSection, 120); }} className="mt-1 h-5 w-5 accent-[#25C760]" />
-                <span>この容量でOKであればチェック</span>
+                <span>{ui?.capacityConfirm ?? 'この容量でOKであればチェック'}</span>
               </label>
             </div>
           </div>
@@ -569,17 +643,17 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_420px]">
           <div>
             <p className="text-sm font-bold text-[#25C760]">STEP 04</p>
-            <h2 className="mt-2 text-3xl font-black">ラベルデザイン</h2>
-            <p className="mt-4 max-w-3xl text-gray-300">Mother Vegetableロゴを選び、ロゴとMade in Japanマークのサイズを調整します。位置はプレビュー上で直接ドラッグできます。</p>
+            <h2 className="mt-2 text-3xl font-black">{ui?.labelTitle ?? 'ラベルデザイン'}</h2>
+            <p className="mt-4 max-w-3xl text-gray-300">{ui?.labelLead ?? 'Mother Vegetableロゴを選び、ロゴとMade in Japanマークのサイズを調整します。位置はプレビュー上で直接ドラッグできます。'}</p>
 
             <div className="mt-8">
-              <p className="text-sm font-bold text-gray-300">Mother Vegetableロゴを選ぶ</p>
+              <p className="text-sm font-bold text-gray-300">{ui?.chooseLogo ?? 'Mother Vegetableロゴを選ぶ'}</p>
               <div className="mt-4 grid gap-4 md:grid-cols-2">
                 {logos.map((logo) => (
                   <label key={logo.id} className={`cursor-pointer rounded-3xl border bg-white/[0.04] p-4 transition ${logoId === logo.id ? 'border-[#25C760]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
                     <input type="radio" name="logo" value={logo.id} checked={logoId === logo.id} onChange={() => setLogoId(logo.id)} className="sr-only" />
-                    <div className={`flex h-32 items-center justify-center rounded-2xl p-4 ${logo.id === 'logo-3' ? 'bg-white' : 'bg-black'}`}><img src={logo.src} alt={logo.name} className="max-h-full max-w-full object-contain" /></div>
-                    <p className="mt-3 text-sm font-bold">{logo.name}</p>
+                    <div className={`flex h-32 items-center justify-center rounded-2xl p-4 ${logo.id === 'logo-3' ? 'bg-white' : 'bg-black'}`}><img src={logo.src} alt={logoName(logo.name)} className="max-h-full max-w-full object-contain" /></div>
+                    <p className="mt-3 text-sm font-bold">{logoName(logo.name)}</p>
                   </label>
                 ))}
               </div>
@@ -587,33 +661,33 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
 
             <>
               <div className="mt-8 grid gap-5 md:grid-cols-2">
-                <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">背景色
+                <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">{ui?.bgColor ?? '背景色'}
                   <input type="color" value={labelBg} onChange={(e) => setLabelBg(e.target.value)} className="mt-3 h-12 w-full rounded-xl bg-black" />
                 </label>
-                <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">ラベルデザイン画像をアップロード
+                <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">{ui?.upload ?? 'ラベルデザイン画像をアップロード'}
                   <input type="file" accept="image/*" onChange={handleDesignImageUpload} className="mt-3 block w-full text-sm text-gray-300 file:mr-4 file:rounded-full file:border-0 file:bg-[#25C760] file:px-4 file:py-2 file:font-bold file:text-black" />
-                  {designImageName && <span className="mt-3 block text-xs leading-5 text-[#25C760]">選択中: {designImageName}</span>}
+                  {designImageName && <span className="mt-3 block text-xs leading-5 text-[#25C760]">{ui?.selectedFile ?? '選択中'}: {designImageName}</span>}
                 </label>
               </div>
-              <label className="mt-5 block rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">デザイン希望メモ
-                <textarea value={designMemo} onChange={(e) => setDesignMemo(e.target.value)} rows={5} placeholder="例：黒背景に白文字、素材名を大きく、地域の物語が伝わる上品な雰囲気にしたい" className="mt-3 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
+              <label className="mt-5 block rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">{ui?.designMemo ?? 'デザイン希望メモ'}
+                <textarea value={designMemo} onChange={(e) => setDesignMemo(e.target.value)} rows={5} placeholder={ui?.designMemoPlaceholder ?? '例：黒背景に白文字、素材名を大きく、地域の物語が伝わる上品な雰囲気にしたい'} className="mt-3 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
               </label>
             </>
 
-            <button type="button" onClick={() => { setDetailOpen(true); setConfirmOpen(false); jumpTo(detailSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">商品情報へ進む</button>
+            <button type="button" onClick={() => { setDetailOpen(true); setConfirmOpen(false); jumpTo(detailSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">{ui?.goProductInfo ?? '商品情報へ進む'}</button>
           </div>
 
           <div className="rounded-[2rem] border border-[#25C760]/30 bg-white/[0.04] p-6">
-            <h3 className="text-xl font-black">ラベル配置プレビュー</h3>
+            <h3 className="text-xl font-black">{ui?.previewTitle ?? 'ラベル配置プレビュー'}</h3>
             <div className="mt-3 flex flex-wrap gap-2 text-xs font-bold text-[#25C760]">
-              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{selectedContainer.name}</span>
+              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{containerName(selectedContainer)}</span>
               <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{selectedContainerVariant.capacity}</span>
-              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">容器色: {containerColor}</span>
-              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">蓋色: {lidColor}</span>
-              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">ラベル範囲: 横{selectedLabelSize.widthMm}mm × 縦{selectedLabelSize.heightMm}mm</span>
+              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{ui?.containerColor ?? '容器色'}: {term(containerColor)}</span>
+              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{ui?.lidColor ?? '蓋色'}: {term(lidColor)}</span>
+              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{ui?.labelArea ?? 'ラベル範囲'}: {isEnglish ? `${ui?.width}${selectedLabelSize.widthMm}mm × ${ui?.height}${selectedLabelSize.heightMm}mm` : `横${selectedLabelSize.widthMm}mm × 縦${selectedLabelSize.heightMm}mm`}</span>
             </div>
             <p className="mt-3 text-xs leading-5 text-gray-400">
-              容器を変えると、この作業エリアの縦横比もラベル範囲に合わせて変わります。
+              {ui?.previewLead ?? '容器を変えると、この作業エリアの縦横比もラベル範囲に合わせて変わります。'}
             </p>
             <div className="mt-5 flex min-h-[540px] items-center justify-center rounded-[2rem] border border-white/10 bg-black/35 p-5">
               <div
@@ -629,7 +703,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                 {designImagePreview && (
                   <img
                     src={designImagePreview}
-                    alt="アップロードしたラベルデザイン"
+                    alt={ui?.uploadedAlt ?? 'アップロードしたラベルデザイン'}
                     className="pointer-events-none absolute inset-0 h-full w-full object-cover"
                   />
                 )}
@@ -638,7 +712,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                   onPointerMove={(e) => e.buttons === 1 && onLogoPointer(e)}
                   className={`absolute z-10 -translate-x-1/2 -translate-y-1/2 cursor-grab touch-none select-none p-1 active:cursor-grabbing ${selectedPreviewItem === 'logo' ? 'outline outline-2 outline-[#25C760]' : ''}`}
                   style={{ left: `${logoX}%`, top: `${logoY}%` }}
-                  aria-label="マザベジロゴ"
+                  aria-label={ui?.logoAria ?? 'マザベジロゴ'}
                 >
                   <img
                     src={selectedLogo.src}
@@ -652,7 +726,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                       onPointerDown={onLogoResizePointer}
                       onPointerMove={(e) => e.buttons === 1 && onLogoResizePointer(e)}
                       className="absolute -bottom-3 -right-3 h-6 w-6 cursor-nwse-resize rounded-full border-2 border-black bg-[#25C760] shadow-[0_0_0_2px_rgba(255,255,255,0.85)]"
-                      aria-label="ロゴサイズ調整"
+                      aria-label={ui?.logoResize ?? 'ロゴサイズ調整'}
                     />
                   )}
                 </div>
@@ -668,8 +742,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               </div>
             </div>
             <div className="mt-5 grid gap-4 text-sm text-gray-300">
-              <label>ロゴサイズ: {logoScale}%<input type="range" min="45" max="150" value={logoScale} onChange={(e) => setLogoScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
-              <label>MADE IN JAPAN サイズ: {madeMarkScale}%<input type="range" min="45" max="160" value={madeMarkScale} onChange={(e) => setMadeMarkScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
+              <label>{ui?.logoSize ?? 'ロゴサイズ'}: {logoScale}%<input type="range" min="45" max="150" value={logoScale} onChange={(e) => setLogoScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
+              <label>{ui?.madeSize ?? 'MADE IN JAPAN サイズ'}: {madeMarkScale}%<input type="range" min="45" max="160" value={madeMarkScale} onChange={(e) => setMadeMarkScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
             </div>
 
           </div>
@@ -681,17 +755,17 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       <section ref={detailSection} className="px-6 py-16">
         <div className="mx-auto max-w-5xl">
           <p className="text-sm font-bold text-[#25C760]">STEP 05</p>
-          <h2 className="mt-2 text-3xl font-black">商品名・希望価格・連絡先</h2>
+          <h2 className="mt-2 text-3xl font-black">{ui?.infoTitle ?? '商品名・希望価格・連絡先'}</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-2">
-            <Input label="希望商品名" value={productName} onChange={setProductName} placeholder="例：Kawazu Mineral Salt Achieve" />
-            <Input label="希望販売価格" value={desiredPrice} onChange={setDesiredPrice} placeholder="例：税込 2,980円" note="販売価格は希望通りにならない場合があります。最終価格はMother Vegetable社が決定します。" />
-            <Input label="お名前" value={applicantName} onChange={setApplicantName} placeholder="山田 太郎" />
-            <Input label="メールアドレス" value={email} onChange={setEmail} placeholder="example@example.com" type="email" />
-            <Input label="電話番号" value={phone} onChange={setPhone} placeholder="090-0000-0000" />
-            <Input label="住所" value={address} onChange={setAddress} placeholder="東京都..." />
+            <Input label={ui?.productName ?? '希望商品名'} value={productName} onChange={setProductName} placeholder={ui?.productNamePlaceholder ?? '例：Kawazu Mineral Salt Achieve'} />
+            <Input label={ui?.desiredPrice ?? '希望販売価格'} value={desiredPrice} onChange={setDesiredPrice} placeholder={ui?.desiredPricePlaceholder ?? '例：税込 2,980円'} note={ui?.priceNote ?? '販売価格は希望通りにならない場合があります。最終価格はMother Vegetable社が決定します。'} />
+            <Input label={ui?.name ?? 'お名前'} value={applicantName} onChange={setApplicantName} placeholder={ui?.namePlaceholder ?? '山田 太郎'} />
+            <Input label={ui?.email ?? 'メールアドレス'} value={email} onChange={setEmail} placeholder="example@example.com" type="email" />
+            <Input label={ui?.phone ?? '電話番号'} value={phone} onChange={setPhone} placeholder="090-0000-0000" />
+            <Input label={ui?.address ?? '住所'} value={address} onChange={setAddress} placeholder={ui?.addressPlaceholder ?? '東京都...'} />
           </div>
-          {!isStep4Complete && <p className="mt-4 text-sm font-bold text-[#25C760]">STEP 5はすべて必須入力です。全項目を入力すると確認画面へ進めます。</p>}
-          <button type="button" disabled={!isStep4Complete} onClick={() => { if (!isStep4Complete) return; setConfirmOpen(true); jumpTo(confirmSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black transition disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-300">確認画面へ進む</button>
+          {!isStep4Complete && <p className="mt-4 text-sm font-bold text-[#25C760]">{ui?.requiredStep5 ?? 'STEP 5はすべて必須入力です。全項目を入力すると確認画面へ進めます。'}</p>}
+          <button type="button" disabled={!isStep4Complete} onClick={() => { if (!isStep4Complete) return; setConfirmOpen(true); jumpTo(confirmSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black transition disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-300">{ui?.goConfirm ?? '確認画面へ進む'}</button>
         </div>
       </section>
       )}
@@ -700,35 +774,30 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       <section ref={confirmSection} className="px-6 py-16 pb-24">
         <div className="mx-auto max-w-5xl rounded-[2rem] border border-[#25C760]/30 bg-[#25C760]/[0.06] p-6 md:p-10">
           <p className="text-sm font-bold text-[#25C760]">STEP 06</p>
-          <h2 className="mt-2 text-3xl font-black">あなたの希望内容はこれでいいですか？</h2>
+          <h2 className="mt-2 text-3xl font-black">{ui?.confirmTitle ?? 'あなたの希望内容はこれでいいですか？'}</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <Summary label="素材" value={`${selectedRaw.name}（${selectedRaw.region}）`} />
-            <Summary label="Mother Vegetable" value={selectedMotherVegetable ? `${selectedMotherVegetable.name}（${selectedMotherVegetable.category}）` : '未選択'} />
-            <Summary label="容器・内容量" value={`${selectedContainer.name} / ${selectedContainerVariant.name} / ${capacity}`} />
-            <Summary label="容器仕様" value={`容器色: ${containerColor} / 蓋色: ${lidColor}`} />
-            <Summary label="ラベル範囲" value={`横${selectedLabelSize.widthMm}mm × 縦${selectedLabelSize.heightMm}mm`} />
-            <Summary label="ロゴ" value={`${selectedLogo.name} / 位置 ${logoX}%・${logoY}% / サイズ ${logoScale}%`} />
-            <Summary label="Made in Japan" value={`位置 ${madeMarkX}%・${madeMarkY}% / サイズ ${madeMarkScale}%`} />
-            <Summary label="デザイン方法" value={`手動調整 / ${designMemo || 'メモ未入力'}`} />
-            <Summary label="商品名・希望価格" value={`${productName || '未入力'} / ${desiredPrice || '未入力'}`} />
-            <Summary label="お名前" value={applicantName || '未入力'} />
-            <Summary label="連絡先" value={`${email || '未入力'} / ${phone || '未入力'}`} />
+            <Summary label={ui?.material ?? '素材'} value={`${rawName(selectedRaw)}（${rawRegion(selectedRaw)}）`} />
+            <Summary label="Mother Vegetable" value={selectedMotherVegetable ? `${isEnglish ? term(selectedMotherVegetable.name) : selectedMotherVegetable.name}（${term(selectedMotherVegetable.category)}）` : (ui?.notEntered ?? '未選択')} />
+            <Summary label={ui?.containerAndCapacity ?? '容器・内容量'} value={`${containerName(selectedContainer)} / ${variantName(selectedContainerVariant)} / ${capacity}`} />
+            <Summary label={ui?.containerSpec ?? '容器仕様'} value={`${ui?.containerColor ?? '容器色'}: ${term(containerColor)} / ${ui?.lidColor ?? '蓋色'}: ${term(lidColor)}`} />
+            <Summary label={ui?.labelArea ?? 'ラベル範囲'} value={isEnglish ? `${ui?.width}${selectedLabelSize.widthMm}mm × ${ui?.height}${selectedLabelSize.heightMm}mm` : `横${selectedLabelSize.widthMm}mm × 縦${selectedLabelSize.heightMm}mm`} />
+            <Summary label={ui?.logo ?? 'ロゴ'} value={`${logoName(selectedLogo.name)} / ${ui?.position ?? '位置'} ${logoX}%・${logoY}% / ${ui?.size ?? 'サイズ'} ${logoScale}%`} />
+            <Summary label="Made in Japan" value={`${ui?.position ?? '位置'} ${madeMarkX}%・${madeMarkY}% / ${ui?.size ?? 'サイズ'} ${madeMarkScale}%`} />
+            <Summary label={ui?.designMethod ?? 'デザイン方法'} value={`${ui?.manual ?? '手動調整'} / ${designMemo || (ui?.noMemo ?? 'メモ未入力')}`} />
+            <Summary label={ui?.productAndPrice ?? '商品名・希望価格'} value={`${productName || (ui?.notEntered ?? '未入力')} / ${desiredPrice || (ui?.notEntered ?? '未入力')}`} />
+            <Summary label={ui?.name ?? 'お名前'} value={applicantName || (ui?.notEntered ?? '未入力')} />
+            <Summary label={ui?.contact ?? '連絡先'} value={`${email || (ui?.notEntered ?? '未入力')} / ${phone || (ui?.notEntered ?? '未入力')}`} />
           </div>
           <div className="mt-8 space-y-3 rounded-3xl border border-white/10 bg-black/40 p-6">
-            {[
-              '審査OKになるまで月額200ドル（または月額30,000円＋税）の支払いは発生しないことを確認しました。',
-              '審査OK後、Maker登録と支払い手続きへ進むことを確認しました。',
-              '初回100個分の製造費はMazavege社が支援し、101個以上は販売価格の30%で製造可能であることを確認しました。',
-              '1ヶ月間で完売できなかった場合、売れ残り分をMakerロイヤリティ10%を差し引いた金額で買い取る条件を確認しました。',
-            ].map((item) => (
+            {agreementsText.map((item) => (
               <label key={item} className="flex gap-3 text-sm leading-6 text-gray-300">
                 <input type="checkbox" checked={agreements.includes(item)} onChange={() => setAgreements(toggle(agreements, item))} className="mt-1 h-5 w-5 accent-[#25C760]" />
                 <span>{item}</span>
               </label>
             ))}
           </div>
-          <button type="submit" disabled={!canSubmit} className="mt-8 rounded-full bg-[#25C760] px-10 py-4 font-black text-black transition disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-300">送信する</button>
-          <p className="mt-4 text-sm text-gray-400">送信後、控えメールが届きます。審査結果は原則2週間以内にメールでご連絡します。</p>
+          <button type="submit" disabled={!canSubmit} className="mt-8 rounded-full bg-[#25C760] px-10 py-4 font-black text-black transition disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-300">{ui?.submit ?? '送信する'}</button>
+          <p className="mt-4 text-sm text-gray-400">{ui?.submitNote ?? '送信後、控えメールが届きます。審査結果は原則2週間以内にメールでご連絡します。'}</p>
         </div>
       </section>
       )}
@@ -767,7 +836,7 @@ function MadeInJapanMark({
         transformOrigin: 'center',
         touchAction: 'none',
       }}
-      aria-label="Made in Japanマーク"
+      aria-label={enUi.madeAria}
     >
       <div className="mx-auto flex h-8 w-14 items-center justify-center border-[2px] border-white bg-transparent">
         <span className="block h-4 w-4 rounded-full bg-[#ed1b2f]" />
@@ -778,14 +847,14 @@ function MadeInJapanMark({
           onPointerDown={onResizePointer}
           onPointerMove={(e) => e.buttons === 1 && onResizePointer(e)}
           className="absolute -bottom-3 -right-3 h-6 w-6 cursor-nwse-resize rounded-full border-2 border-black bg-[#25C760] shadow-[0_0_0_2px_rgba(255,255,255,0.85)]"
-          aria-label="Made in Japanサイズ調整"
+          aria-label={enUi.madeResize}
         />
       )}
     </div>
   );
 }
 
-function FilterGroup({ title, items, selected, onChange }: { title: string; items: string[]; selected: string[]; onChange: (item: string) => void }) {
+function FilterGroup({ title, items, selected, onChange, displayItem = (item) => item }: { title: string; items: string[]; selected: string[]; onChange: (item: string) => void; displayItem?: (item: string) => string }) {
   return (
     <div className="mt-6">
       <p className="text-sm font-black text-white">{title}</p>
@@ -793,7 +862,7 @@ function FilterGroup({ title, items, selected, onChange }: { title: string; item
         {items.map((item) => (
           <label key={item} className="flex items-center gap-3 text-sm text-gray-300">
             <input type="checkbox" checked={selected.includes(item)} onChange={() => onChange(item)} className="h-4 w-4 accent-[#25C760]" />
-            <span>{item}</span>
+            <span>{displayItem(item)}</span>
           </label>
         ))}
       </div>
