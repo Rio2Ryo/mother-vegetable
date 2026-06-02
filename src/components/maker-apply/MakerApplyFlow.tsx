@@ -224,7 +224,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,199,96,0.18),transparent_46%)]" />
         <div className="relative mx-auto max-w-6xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.35em] text-[#25C760]">Mazavege Maker Application</p>
-          <h1 className="mt-4 text-4xl font-black md:text-6xl">何と何を組み合わせたいですか？</h1>
+          <h1 className="mt-4 text-4xl font-black md:text-6xl">いますぐあなたの夢を叶えよう</h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
             まずはJapanese Raw Materialを1つ選び、容器・ロゴ・商品名を決めてアイデアを送信します。審査OKになるまで費用は発生しません。
           </p>
