@@ -205,6 +205,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [madeMarkY, setMadeMarkY] = useState(86);
   const [madeMarkScale, setMadeMarkScale] = useState(100);
   const [labelBg, setLabelBg] = useState('#101010');
+  const [designImagePreview, setDesignImagePreview] = useState('');
+  const [designImageName, setDesignImageName] = useState('');
   const [designMode, setDesignMode] = useState<'manual' | 'ai'>('manual');
   const [labelDesignChoice, setLabelDesignChoice] = useState<'manual' | 'ai' | ''>('');
   const [makerStory, setMakerStory] = useState('');
@@ -286,6 +288,15 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
     const point = getPointerPercent(event, labelArea);
     setMadeMarkX(point.x);
     setMadeMarkY(point.y);
+  }
+
+  function handleDesignImageUpload(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    setDesignImageName(file.name);
+    const reader = new FileReader();
+    reader.onload = () => setDesignImagePreview(typeof reader.result === 'string' ? reader.result : '');
+    reader.readAsDataURL(file);
   }
 
   function generateAiLabelDesign() {
@@ -495,8 +506,9 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                 <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">背景色
                   <input type="color" value={labelBg} onChange={(e) => setLabelBg(e.target.value)} className="mt-3 h-12 w-full rounded-xl bg-black" />
                 </label>
-                <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">希望デザインがある場合
-                  <input type="file" className="mt-3 block w-full text-sm text-gray-300 file:mr-4 file:rounded-full file:border-0 file:bg-[#25C760] file:px-4 file:py-2 file:font-bold file:text-black" />
+                <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">ラベルデザイン画像をアップロード
+                  <input type="file" accept="image/*" onChange={handleDesignImageUpload} className="mt-3 block w-full text-sm text-gray-300 file:mr-4 file:rounded-full file:border-0 file:bg-[#25C760] file:px-4 file:py-2 file:font-bold file:text-black" />
+                  {designImageName && <span className="mt-3 block text-xs leading-5 text-[#25C760]">選択中: {designImageName}</span>}
                 </label>
               </div>
               <label className="mt-5 block rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">デザイン希望メモ
@@ -530,6 +542,13 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                   background: labelBg,
                 }}
               >
+                {designImagePreview && (
+                  <img
+                    src={designImagePreview}
+                    alt="アップロードしたラベルデザイン"
+                    className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+                  />
+                )}
                 <img
                   src={selectedLogo.src}
                   alt="selected logo"
@@ -560,9 +579,18 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               <p className="mt-2 text-xs leading-5 text-gray-400">実写容器写真が登録されたら、この容器画像を差し替えて完成イメージを確認できます。</p>
               <div className="relative mt-4 flex min-h-72 items-center justify-center overflow-hidden rounded-[1.5rem] bg-white/[0.04] p-6">
                 <img src={selectedContainerVariant.image} alt={`${selectedContainerVariant.name}の完成イメージ`} className="max-h-64 max-w-[78%] object-contain opacity-70" />
-                <div className="absolute left-1/2 top-1/2 w-[42%] max-w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-white/30 p-3 text-center shadow-[0_0_20px_rgba(0,0,0,0.55)]" style={{ background: labelBg }}>
-                  <img src={selectedLogo.src} alt="selected logo" className="mx-auto h-8 object-contain" />
-                  <div className="mt-6 flex justify-center"><StaticMadeInJapanMark /></div>
+                <div className="absolute left-1/2 top-1/2 w-[42%] max-w-[190px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl border border-white/30 p-3 text-center shadow-[0_0_20px_rgba(0,0,0,0.55)]" style={{ background: labelBg }}>
+                  {designImagePreview && (
+                    <img
+                      src={designImagePreview}
+                      alt="アップロードしたラベルデザイン"
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                  )}
+                  <div className="relative z-10">
+                    <img src={selectedLogo.src} alt="selected logo" className="mx-auto h-8 object-contain" />
+                    <div className="mt-6 flex justify-center"><StaticMadeInJapanMark /></div>
+                  </div>
                 </div>
               </div>
             </div>
