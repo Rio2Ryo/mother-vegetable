@@ -330,8 +330,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const logoName = (name: string) => isEnglish ? name.replace(' ロゴ ', ' Logo ') : name;
   const uiText = (ja: string, en: string) => isEnglish ? en : ja;
   const agreementsText = isEnglish ? enUi.agreements : [
-    '審査OKになるまで月額200ドル（または月額30,000円＋税）の支払いは発生しないことを確認しました。',
-    '審査OK後、Maker登録と支払い手続きへ進むことを確認しました。',
+    '審査が通過したら月額200ドル（または月額30,000円＋税）の支払いが発生します',
+    '審査が通過したらMaker登録と支払い手続きへ進むことを確認しました。',
     '初回100個分の製造費はMazavege社が支援し、101個以上は販売価格の30%で製造可能であることを確認しました。',
     '1ヶ月間で完売できなかった場合、売れ残り分をMakerロイヤリティ10%を差し引いた金額で買い取る条件を確認しました。',
   ];
