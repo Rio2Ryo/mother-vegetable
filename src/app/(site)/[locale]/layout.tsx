@@ -94,8 +94,8 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${inter.variable} ${notoSansJp.variable}`}>
-      <body className="bg-black text-white font-sans">
+    <html lang={locale} className={`${inter.variable} ${notoSansJp.variable} overflow-x-hidden`}>
+      <body className="overflow-x-hidden bg-black text-white font-sans">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -123,7 +123,7 @@ export default async function LocaleLayout({
               <ReferralTracker />
             </Suspense>
             <Header />
-            <main id="main-content" role="main">{children}</main>
+            <main id="main-content" role="main" className="w-full overflow-x-hidden">{children}</main>
             <FurusatoNouzeiBanner />
             <Footer />
             <ChatBot />

@@ -119,8 +119,8 @@ export default function Header() {
             <nav
               aria-label="Main navigation"
               className={`${
-                mobileMenuOpen ? 'right-0' : 'right-[-100%]'
-              } fixed top-0 w-4/5 max-w-[300px] h-screen bg-black border-l-2 border-[#25C760] transition-all duration-300 z-[1000] pt-20 px-5 shadow-[-5px_0_15px_rgba(0,0,0,0.3)] lg:shadow-none lg:static lg:w-auto lg:max-w-none lg:h-auto lg:border-0 lg:pt-0 lg:px-0 lg:flex lg:items-center max-[600px]:w-[90%] max-[600px]:max-w-[280px] max-[600px]:pt-[70px] max-[600px]:px-[15px]`}
+                mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+              } fixed right-0 top-0 w-4/5 max-w-[300px] h-screen bg-black border-l-2 border-[#25C760] transition-transform duration-300 z-[1000] pt-20 px-5 shadow-[-5px_0_15px_rgba(0,0,0,0.3)] lg:translate-x-0 lg:transition-none lg:shadow-none lg:static lg:w-auto lg:max-w-none lg:h-auto lg:border-0 lg:pt-0 lg:px-0 lg:flex lg:items-center max-[600px]:w-[90%] max-[600px]:max-w-[280px] max-[600px]:pt-[70px] max-[600px]:px-[15px]`}
             >
               {/* Mobile profile buttons */}
               <div className="hidden max-lg:flex max-lg:flex-col gap-[10px] mb-4">
