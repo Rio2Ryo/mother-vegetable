@@ -10,6 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/dealer",
     "/maker",
+    "/maker/apply",
+    "/maker/apply/thanks",
     "/products",
     "/product/achieve",
     "/product/confidence",
