@@ -622,29 +622,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               <label>ロゴサイズ: {logoScale}%<input type="range" min="45" max="150" value={logoScale} onChange={(e) => setLogoScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
               <label>MADE IN JAPAN サイズ: {madeMarkScale}%<input type="range" min="45" max="160" value={madeMarkScale} onChange={(e) => setMadeMarkScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
             </div>
-            <div className="mt-8 rounded-[2rem] border border-white/10 bg-black/35 p-5">
-              <div className="flex items-center justify-between gap-3">
-                <h4 className="font-black">完成イメージプレビュー</h4>
-                <span className="rounded-full border border-white/15 px-3 py-1 text-[10px] text-gray-300">ラベル確認</span>
-              </div>
-              <p className="mt-2 text-xs leading-5 text-gray-400">実写容器写真が登録されたら、この容器画像を差し替えて完成イメージを確認できます。</p>
-              <div className="relative mt-4 flex min-h-72 items-center justify-center overflow-hidden rounded-[1.5rem] bg-white/[0.04] p-6">
-                <img src={selectedContainerVariant.image} alt={`${selectedContainerVariant.name}の完成イメージ`} className="max-h-64 max-w-[78%] object-contain opacity-70" />
-                <div className="absolute left-1/2 top-1/2 w-[42%] max-w-[190px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl border border-white/30 p-3 text-center shadow-[0_0_20px_rgba(0,0,0,0.55)]" style={{ background: labelBg }}>
-                  {designImagePreview && (
-                    <img
-                      src={designImagePreview}
-                      alt="アップロードしたラベルデザイン"
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                  )}
-                  <div className="relative z-10">
-                    <img src={selectedLogo.src} alt="selected logo" className="mx-auto h-8 object-contain" />
-                    <div className="mt-6 flex justify-center"><StaticMadeInJapanMark /></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
@@ -708,17 +686,6 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
 }
 
 
-
-function StaticMadeInJapanMark() {
-  return (
-    <div className="w-[82px] text-center text-white">
-      <div className="mx-auto flex h-5 w-9 items-center justify-center border border-white bg-transparent">
-        <span className="block h-3 w-3 rounded-full bg-[#ed1b2f]" />
-      </div>
-      <div className="mt-1 whitespace-nowrap font-serif text-[9px] font-black leading-none tracking-[0.02em]">MADE IN JAPAN</div>
-    </div>
-  );
-}
 
 function MadeInJapanMark({
   x,
