@@ -1,4 +1,5 @@
 import { Link } from '@/i18n/navigation';
+import { setRequestLocale } from 'next-intl/server';
 import PartnerSwitch from '@/components/PartnerSwitch';
 
 const benefits = [
@@ -16,6 +17,59 @@ const benefits = [
   },
 ];
 
+
+const enBenefits = [
+  {
+    title: 'Launch your own product with less risk',
+    body: 'Creating an original product usually requires large production lots, contract fees, and significant inventory risk. With Mazavege Maker, you can challenge yourself to create your own original product for USD 200 per month (JPY 30,000 + tax).',
+  },
+  {
+    title: 'Create products with Japanese Raw Materials',
+    body: 'You can combine Mother Vegetable with traditional Japanese foods, cosmetic materials, and regional ingredients. By pairing local value with Mother Vegetable, you can deliver Made in Japan products to the world.',
+  },
+  {
+    title: 'Mother Vegetable supports the first 100 units of production',
+    body: 'For approved products, Mother Vegetable fully supports the first 100-unit production lot. Makers do not need to pay the production cost for the first 100 units.',
+  },
+];
+
+const enConditions = [
+  'Produced items will be listed on Mazavege Shop.',
+  'Mazavege Dealers around the world can sell your product.',
+  'Makers also receive Dealer eligibility, so you can sell your own products as well.',
+  'When purchasing your own product, you receive 15% off through a reward after purchase at the regular price.',
+  'When your product sells, you receive a 10% Maker royalty.',
+  'If you sell it yourself, you can receive both the 15% Dealer royalty and the 10% Maker royalty, for a total of 25%.',
+  'If the product does not sell out within one month, you will purchase the remaining inventory at the amount after deducting the 10% Maker royalty.',
+  'If you want to produce 101 units or more, production is possible by paying 30% of the selling price.',
+];
+
+const enText = {
+  heroSub: 'Bring your original product to the world with less risk',
+  heroLead: 'Create an original product using Mother Vegetable, pursue your dream, and help support Earth regeneration, people’s health, and regional revitalization.',
+  aboutTitle: 'What is Mazavege Maker?',
+  about1: 'Mazavege Maker is a partner program for people who want to create their own original products by combining Mother Vegetable with Japanese food, cosmetics, and regional materials.',
+  about2: 'Submit your product idea, and if it is approved through review, it will be sold on Mazavege Shop.',
+  materialsTitle: 'Materials you can collaborate with',
+  achieveSub: '48 types of natural nutrients',
+  achieveBody: 'Achieve is a nutrient-rich food born from Mother Vegetable. It contains protein, minerals, vitamins, phycocyanin, and more, and can be used widely in meals, seasonings, drinks, pet products, and sports nutrition. It adds the life force of Earth’s earliest life to modern food.',
+  achieveButton: 'Collaboration products with Achieve',
+  confidenceSub: 'Natural silica with about 97% purity',
+  confidenceBody: 'Confidence is a white powder born from Mother Vegetable. During its growth process, it produces amorphous silica with about 97% purity. This silica clears quasi-drug ingredient standards and can be used for skin, hair, and beloved pets, helping upgrade toners, shampoos, and other items.',
+  confidenceButton: 'Collaboration products with Confidence',
+  rawSub: 'High-quality food / cosmetic materials made across Japan',
+  rawBody: 'Japanese Raw Material refers to unique local foods, ingredients, and products found in roadside stations and small towns across Japan. Examples include miso, salt, fruit juice, fermented foods, hot spring water, and rice bran cosmetics. Their value comes from regional character and the stories of their makers. By combining them with Earth-friendly Mother Vegetable, we can share Japan’s appeal with the world.',
+  benefitsTitle: 'Benefits of becoming a Maker',
+  feeTitle: 'Maker registration fee (proposal is free)',
+  feeMain: 'USD 200 / month',
+  feeSub: '(JPY 30,000 + tax)',
+  feeLead: 'The first monthly payment is charged only if Mother Vegetable reviews and approves your product proposal. Submitting proposals is free, so we welcome many ideas.',
+  conditionsTitle: 'Benefits and conditions',
+  ctaTitle: 'Register as a Mazavege Maker',
+  ctaLead: 'Combine Mother Vegetable with Japanese materials and bring your idea to the world.',
+  ctaButton: 'Submit your idea',
+};
+
 const conditions = [
   '製造された商品はMazavege Shopに掲載されます',
   'あなたの商品を世界各地にいるMazavege Dealerが販売してくれます',
@@ -27,7 +81,13 @@ const conditions = [
   '101個以上の製造を希望の場合は販売価格の30%の支払いで製造が可能です',
 ];
 
-export default function MakerPage() {
+export default async function MakerPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const isEn = locale === 'en';
+  const pageBenefits = isEn ? enBenefits : benefits;
+  const pageConditions = isEn ? enConditions : conditions;
+
   return (
     <main className="min-h-screen bg-black text-white">
       <section className="relative overflow-hidden px-6 py-24 md:py-28">
@@ -35,9 +95,9 @@ export default function MakerPage() {
         <div className="relative mx-auto max-w-5xl">
           <p className="mb-4 text-sm font-bold uppercase tracking-[0.35em] text-white/85">Mazavege Partner Program</p>
           <h1 className="max-w-3xl text-4xl font-black tracking-tight md:text-6xl">Mazavege Maker</h1>
-          <p className="mt-6 text-2xl font-semibold text-white/90 md:text-3xl">あなたのオリジナル商品をリスクなく世界へ</p>
+          <p className="mt-6 text-2xl font-semibold text-white/90 md:text-3xl">{isEn ? enText.heroSub : 'あなたのオリジナル商品をリスクなく世界へ'}</p>
           <p className="mt-6 max-w-4xl text-lg leading-9 text-gray-300 md:text-xl md:leading-10">
-            Mother Vegetableを使ったオリジナル商品を作り、あなたの夢を叶えながら、地球再生・人々の健康・地域活性化を実現します。
+            {isEn ? enText.heroLead : 'Mother Vegetableを使ったオリジナル商品を作り、あなたの夢を叶えながら、地球再生・人々の健康・地域活性化を実現します。'}
           </p>
         </div>
       </section>
@@ -51,10 +111,10 @@ export default function MakerPage() {
       <section className="px-6 py-16">
         <div className="mx-auto max-w-4xl">
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#25C760]">About Maker</p>
-          <h2 className="mt-3 text-3xl font-black">Mazavege Makerとは</h2>
+          <h2 className="mt-3 text-3xl font-black">{isEn ? enText.aboutTitle : 'Mazavege Makerとは'}</h2>
           <div className="mt-6 text-lg leading-9 text-gray-300">
-            <p>Mazavege Makerとは、Mother Vegetableと日本の食品や化粧品などと組み合わせて、自分のオリジナル商品を作りたい方に向けたパートナー制度です。</p>
-            <p className="mt-5">自分の商品アイデアを提案し、審査で承認された場合、Mazavege Shopで販売されます。</p>
+            <p>{isEn ? enText.aboutTitle : 'Mazavege Makerとは'}、Mother Vegetableと日本の食品や化粧品などと組み合わせて、自分のオリジナル商品を作りたい方に向けたパートナー制度です。</p>
+            <p className="mt-5">{isEn ? enText.about2 : '自分の商品アイデアを提案し、審査で承認された場合、Mazavege Shopで販売されます。'}</p>
           </div>
         </div>
       </section>
@@ -72,7 +132,7 @@ export default function MakerPage() {
                 textShadow: '0 0 18px rgba(37,199,96,0.30)',
               }}
             >
-              コラボできる素材
+              {isEn ? enText.materialsTitle : 'コラボできる素材'}
             </h2>
             <div
               className="mt-5 rounded-full"
@@ -107,7 +167,7 @@ export default function MakerPage() {
                   Achieve
                 </h3>
                 <strong className="mb-4 block font-extrabold" style={{ color: '#fff', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
-                  高たんぱく質＋全48種類の天然栄養
+                  {isEn ? enText.achieveSub : '高たんぱく質＋全48種類の天然栄養'}
                 </strong>
                 <p className="max-w-[680px]" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2 }}>
                   Mother Vegetableから生まれた高栄養食品「Achieve」。<br />
@@ -121,7 +181,7 @@ export default function MakerPage() {
                     className="inline-flex w-[min(100%,290px)] items-center justify-center rounded-full px-6 py-3 text-sm font-bold no-underline transition-all duration-300 hover:-translate-y-1 md:w-auto"
                     style={{ background: '#25C760', color: '#001d0c', border: '1px solid #25C760', boxShadow: '0 0 20px rgba(37,199,96,0.42)', fontFamily: "'Noto Sans JP', sans-serif" }}
                   >
-                    Achieveとのコラボ商品はこちら
+                    {isEn ? enText.achieveButton : 'Achieveとのコラボ商品はこちら'}
                   </Link>
                 </div>
               </div>
@@ -153,7 +213,7 @@ export default function MakerPage() {
                   Confidence
                 </h3>
                 <strong className="mb-4 block font-extrabold" style={{ color: 'rgba(255,255,255,0.90)', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
-                  純度97%の天然シリカで、やさしく整える。
+                  {isEn ? enText.confidenceSub : '純度97%の天然シリカで、やさしく整える。'}
                 </strong>
                 <p style={{ color: 'rgba(255,255,255,0.90)', fontSize: 16, lineHeight: 2, maxWidth: 680 }}>
                   Mother Vegetableから生まれた白いパウダー「Confidence」。<br />
@@ -167,7 +227,7 @@ export default function MakerPage() {
                     className="inline-flex w-[min(100%,290px)] items-center justify-center rounded-full px-6 py-3 text-sm font-bold no-underline transition-all duration-300 hover:-translate-y-1 md:w-auto"
                     style={{ background: '#fff', color: '#001d0c', border: '1px solid #fff', fontFamily: "'Noto Sans JP', sans-serif" }}
                   >
-                    Confidenceとのコラボ商品はこちら
+                    {isEn ? enText.confidenceButton : 'Confidenceとのコラボ商品はこちら'}
                   </Link>
                 </div>
               </div>
@@ -195,7 +255,7 @@ export default function MakerPage() {
                   Japanese Raw Material
                 </h3>
                 <strong className="mb-4 block font-extrabold" style={{ color: '#fff', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
-                  日本各地で作られる高品質の食品/化粧品
+                  {isEn ? enText.rawSub : '日本各地で作られる高品質の食品/化粧品'}
                 </strong>
                 <p className="max-w-[760px]" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2 }}>
                   日本各地の道の駅や小さな町に眠る、地元ならではの食品・素材・産品の総称です。<br />
@@ -211,9 +271,9 @@ export default function MakerPage() {
 
       <section className="px-6 py-16">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-3xl font-black text-[#25C760]">Makerになるメリット</h2>
+          <h2 className="text-3xl font-black text-[#25C760]">{isEn ? enText.benefitsTitle : 'Makerになるメリット'}</h2>
           <div className="mt-8 space-y-5">
-            {benefits.map((benefit, index) => (
+            {pageBenefits.map((benefit, index) => (
               <article key={benefit.title} className="rounded-3xl border border-white/10 bg-white/[0.04] p-7">
                 <span className="text-sm font-bold text-[#25C760]">{String(index + 1).padStart(2, '0')}</span>
                 <h3 className="mt-3 text-2xl font-bold text-[#25C760]">{benefit.title}</h3>
@@ -227,15 +287,15 @@ export default function MakerPage() {
       <section className="bg-[#25C760]/[0.04] px-6 py-16">
         <div className="mx-auto max-w-4xl space-y-8">
           <div className="rounded-3xl border border-[#25C760]/30 bg-[#25C760]/[0.04] p-8">
-            <h2 className="text-2xl font-black text-[#25C760]">Maker登録費用（提案料無料）</h2>
-            <p className="mt-5 text-3xl font-black">月額 200ドル</p>
-            <p className="mt-2 text-gray-300">(月額30,000円＋税)</p>
-            <p className="mt-6 leading-8 text-gray-300">商品提案をMother Vegetable社が審査し、承認された場合に限り、初月の支払いが発生します。提案は無料なので、たくさんのアイデアをお待ちしています。</p>
+            <h2 className="text-2xl font-black text-[#25C760]">{isEn ? enText.feeTitle : 'Maker登録費用（提案料無料）'}</h2>
+            <p className="mt-5 text-3xl font-black">{isEn ? enText.feeMain : '月額 200ドル'}</p>
+            <p className="mt-2 text-gray-300">{isEn ? enText.feeSub : '(月額30,000円＋税)'}</p>
+            <p className="mt-6 leading-8 text-gray-300">{isEn ? enText.feeLead : '商品提案をMother Vegetable社が審査し、承認された場合に限り、初月の支払いが発生します。提案は無料なので、たくさんのアイデアをお待ちしています。'}</p>
           </div>
           <div className="rounded-3xl border border-[#25C760]/20 bg-white/[0.04] p-8">
-            <h2 className="text-2xl font-black text-[#25C760]">特典と条件</h2>
+            <h2 className="text-2xl font-black text-[#25C760]">{isEn ? enText.conditionsTitle : '特典と条件'}</h2>
             <ul className="mt-5 space-y-3 text-gray-300">
-              {conditions.map((item) => (
+              {pageConditions.map((item) => (
                 <li key={item} className="flex gap-3"><span className="text-[#25C760]">●</span><span>{item}</span></li>
               ))}
             </ul>
@@ -245,14 +305,14 @@ export default function MakerPage() {
 
       <section className="px-6 py-20 text-center">
         <div className="mx-auto max-w-3xl rounded-[2rem] border border-[#25C760]/40 bg-[#25C760]/10 p-10">
-          <h2 className="text-3xl font-black">Mazavege Makerに登録する</h2>
-          <p className="mt-4 text-lg text-gray-300">Mother Vegetableと日本の素材を組み合わせ、あなたのアイデアを世界へ届けましょう。</p>
+          <h2 className="text-3xl font-black">{isEn ? enText.ctaTitle : 'Mazavege Makerに登録する'}</h2>
+          <p className="mt-4 text-lg text-gray-300">{isEn ? enText.ctaLead : 'Mother Vegetableと日本の素材を組み合わせ、あなたのアイデアを世界へ届けましょう。'}</p>
           <Link
             href="/maker/apply"
             className="relative mt-8 inline-flex overflow-hidden rounded-full px-8 py-4 font-black text-black no-underline transition hover:bg-white"
             style={{ background: '#25C760', boxShadow: '0 0 24px rgba(37,199,96,0.34)' }}
           >
-            <span className="relative z-10">アイデアを提案する</span>
+            <span className="relative z-10">{isEn ? enText.ctaButton : 'アイデアを提案する'}</span>
           </Link>
         </div>
       </section>
