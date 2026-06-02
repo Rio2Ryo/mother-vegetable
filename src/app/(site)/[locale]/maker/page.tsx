@@ -63,7 +63,7 @@ export default function MakerPage() {
 
       <section className="bg-black px-6 py-24 md:py-32">
         <div className="mx-auto max-w-[1180px]">
-          <div className="mx-auto mb-14 max-w-[980px] text-center">
+          <div className="mb-14 max-w-[980px] text-left">
             <h2
               className="font-bold"
               style={{
@@ -77,11 +77,11 @@ export default function MakerPage() {
               コラボできる素材
             </h2>
             <div
-              className="mx-auto mt-5 rounded-full"
+              className="mt-5 rounded-full"
               style={{
                 width: 'min(280px, 62%)',
                 height: 3,
-                background: 'linear-gradient(90deg, transparent, #25C760, #3C8063, transparent)',
+                background: 'linear-gradient(90deg, #25C760, #3C8063, transparent)',
                 boxShadow: '0 0 20px rgba(37,199,96,0.42)',
               }}
             />
@@ -93,20 +93,6 @@ export default function MakerPage() {
               style={{ borderRadius: 14, border: '1px solid #25C760', background: '#000' }}
             >
               <div
-                className="pointer-events-none absolute select-none font-black leading-none"
-                style={{
-                  right: 'clamp(10px, 6vw, 70px)',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
-                  fontSize: 'clamp(150px, 24vw, 310px)',
-                  color: 'rgba(37,199,96,0.10)',
-                  textShadow: '0 0 42px rgba(37,199,96,0.18)',
-                }}
-              >
-                1
-              </div>
-              <div
                 className="absolute pointer-events-none"
                 style={{
                   width: 300,
@@ -117,7 +103,8 @@ export default function MakerPage() {
                   background: 'radial-gradient(circle, rgba(37,199,96,0.20), transparent 70%)',
                 }}
               />
-              <div className="relative z-10">
+              <div className="relative z-10 text-left">
+                <span className="mb-3 block text-sm font-bold tracking-[0.25em]" style={{ color: '#25C760' }}>01</span>
                 <h3 className="mb-2 font-extrabold" style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 'clamp(38px, 4.2vw, 58px)', color: '#25C760', lineHeight: 1.18 }}>
                   Achieve
                 </h3>
@@ -152,20 +139,6 @@ export default function MakerPage() {
               }}
             >
               <div
-                className="pointer-events-none absolute select-none font-black leading-none"
-                style={{
-                  left: 'clamp(8px, 5vw, 62px)',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
-                  fontSize: 'clamp(150px, 24vw, 310px)',
-                  color: 'rgba(255,255,255,0.10)',
-                  textShadow: '0 0 42px rgba(255,255,255,0.16)',
-                }}
-              >
-                2
-              </div>
-              <div
                 className="absolute pointer-events-none"
                 style={{
                   width: 300,
@@ -176,7 +149,8 @@ export default function MakerPage() {
                   background: 'radial-gradient(circle, rgba(255,255,255,0.24), rgba(37,199,96,0.10) 44%, transparent 72%)',
                 }}
               />
-              <div className="relative z-10 md:ml-auto md:max-w-[760px]">
+              <div className="relative z-10 text-left md:max-w-[760px]">
+                <span className="mb-3 block text-sm font-bold tracking-[0.25em]" style={{ color: '#fff' }}>02</span>
                 <h3 className="mb-2 font-extrabold" style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 'clamp(38px, 4.2vw, 58px)', color: '#fff', textShadow: '0 0 20px rgba(255,255,255,0.34)', lineHeight: 1.18 }}>
                   Confidence
                 </h3>
@@ -205,27 +179,14 @@ export default function MakerPage() {
               className="relative w-full overflow-hidden p-8 md:p-12"
               style={{
                 borderRadius: 14,
-                border: '1px solid rgba(255,255,255,0.78)',
-                background: 'radial-gradient(circle at 82% 8%, rgba(255,255,255,0.20), transparent 28%), radial-gradient(circle at 12% 16%, rgba(255,112,112,0.14), transparent 30%), linear-gradient(180deg, rgba(255,255,255,0.08), #000 72%)',
-                boxShadow: '0 0 28px rgba(255,255,255,0.12)',
+                border: '1px solid rgba(255,183,197,0.86)',
+                background: 'radial-gradient(circle at 82% 8%, rgba(255,183,197,0.20), transparent 28%), radial-gradient(circle at 12% 16%, rgba(255,183,197,0.12), transparent 30%), linear-gradient(180deg, rgba(255,183,197,0.06), #000 72%)',
+                boxShadow: '0 0 28px rgba(255,183,197,0.13)',
               }}
             >
-              <div
-                className="pointer-events-none absolute select-none font-black leading-none"
-                style={{
-                  right: 'clamp(10px, 6vw, 70px)',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
-                  fontSize: 'clamp(150px, 24vw, 310px)',
-                  color: 'rgba(255,255,255,0.13)',
-                  textShadow: '0 0 42px rgba(255,255,255,0.18)',
-                }}
-              >
-                3
-              </div>
-              <div className="relative z-10">
-                <h3 className="mb-2 font-extrabold" style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 'clamp(34px, 4vw, 54px)', color: '#fff', lineHeight: 1.18, textShadow: '0 0 20px rgba(255,255,255,0.26)' }}>
+              <div className="relative z-10 text-left">
+                <span className="mb-3 block text-sm font-bold tracking-[0.25em]" style={{ color: '#ffb7c5' }}>03</span>
+                <h3 className="mb-2 font-extrabold" style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 'clamp(34px, 4vw, 54px)', color: '#ffb7c5', lineHeight: 1.18, textShadow: '0 0 20px rgba(255,183,197,0.22)' }}>
                   Japanese Raw Material
                 </h3>
                 <strong className="mb-4 block font-extrabold" style={{ color: '#fff', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
