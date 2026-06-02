@@ -35,8 +35,8 @@ export default function MakerPage() {
         <div className="relative mx-auto max-w-5xl">
           <p className="mb-4 text-sm font-bold uppercase tracking-[0.35em] text-[#25C760]">Mazavege Partner Program</p>
           <h1 className="max-w-3xl text-4xl font-black tracking-tight md:text-6xl">Mazavege Maker</h1>
-          <p className="mt-6 text-2xl font-semibold text-white/90">あなたのオリジナル商品をリスクなく世界へ</p>
-          <p className="mt-6 max-w-3xl text-lg leading-9 text-gray-300">
+          <p className="mt-6 text-2xl font-semibold text-white/90 md:text-3xl">あなたのオリジナル商品をリスクなく世界へ</p>
+          <p className="mt-6 max-w-4xl text-lg leading-9 text-gray-300 md:text-xl md:leading-10">
             Mother Vegetableを使ったオリジナル商品を作り、あなたの夢を叶えながら、地球再生・人々の健康・地域活性化を実現します。
           </p>
         </div>
@@ -247,7 +247,11 @@ export default function MakerPage() {
         <div className="mx-auto max-w-3xl rounded-[2rem] border border-[#25C760]/40 bg-[#25C760]/10 p-10">
           <h2 className="text-3xl font-black">Mazavege Makerに登録する</h2>
           <p className="mt-4 text-lg text-gray-300">Mother Vegetableと日本の素材を組み合わせ、あなたのアイデアを世界へ届けましょう。</p>
-          <Link href="/dealer/apply" className="mt-8 inline-flex rounded-full bg-[#25C760] px-8 py-4 font-black text-black no-underline transition hover:bg-white">
+          <Link
+            href="/dealer/apply"
+            className="mt-8 inline-flex rounded-full px-8 py-4 font-black text-black no-underline transition hover:bg-white"
+            style={{ background: '#ffb7c5', boxShadow: '0 0 24px rgba(255,183,197,0.34)' }}
+          >
             アイデアを提案する
           </Link>
         </div>
