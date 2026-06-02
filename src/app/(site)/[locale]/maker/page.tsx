@@ -205,9 +205,9 @@ export default function MakerPage() {
               className="relative w-full overflow-hidden p-8 md:p-12"
               style={{
                 borderRadius: 14,
-                border: '1px solid rgba(220,38,38,0.88)',
-                background: 'radial-gradient(circle at 82% 8%, rgba(220,38,38,0.18), transparent 30%), linear-gradient(180deg, rgba(220,38,38,0.08), #000 72%)',
-                boxShadow: '0 0 26px rgba(220,38,38,0.14)',
+                border: '1px solid rgba(255,255,255,0.78)',
+                background: 'radial-gradient(circle at 82% 8%, rgba(255,255,255,0.20), transparent 28%), radial-gradient(circle at 12% 16%, rgba(255,112,112,0.14), transparent 30%), linear-gradient(180deg, rgba(255,255,255,0.08), #000 72%)',
+                boxShadow: '0 0 28px rgba(255,255,255,0.12)',
               }}
             >
               <div
@@ -218,8 +218,8 @@ export default function MakerPage() {
                   transform: 'translateY(-50%)',
                   fontFamily: "'Inter', 'Noto Sans JP', sans-serif",
                   fontSize: 'clamp(150px, 24vw, 310px)',
-                  color: 'rgba(220,38,38,0.12)',
-                  textShadow: '0 0 42px rgba(220,38,38,0.16)',
+                  color: 'rgba(255,255,255,0.13)',
+                  textShadow: '0 0 42px rgba(255,255,255,0.18)',
                 }}
               >
                 3
@@ -228,7 +228,7 @@ export default function MakerPage() {
                 <h3 className="mb-2 font-extrabold" style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 'clamp(34px, 4vw, 54px)', color: '#fff', lineHeight: 1.18, textShadow: '0 0 20px rgba(255,255,255,0.26)' }}>
                   Japanese Raw Material
                 </h3>
-                <strong className="mb-4 block font-extrabold" style={{ color: '#ef4444', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
+                <strong className="mb-4 block font-extrabold" style={{ color: '#fff', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
                   日本の地方を支える天然食 / 化粧品
                 </strong>
                 <p className="max-w-[760px]" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2 }}>
