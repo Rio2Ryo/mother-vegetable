@@ -1,9 +1,14 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
 
 export default function FurusatoNouzeiBanner() {
   const t = useTranslations('products');
+  const pathname = usePathname();
+  const isTopPage = /^\/(en|ja|zh)\/?$/.test(pathname);
+
+  if (!isTopPage) return null;
 
   return (
     <div className="w-full bg-gradient-to-r from-emerald-900/60 via-green-800/50 to-teal-900/60">

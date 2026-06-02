@@ -282,7 +282,7 @@ export default function MakerPage() {
           <h2 className="text-3xl font-black">Mazavege Makerに登録する</h2>
           <p className="mt-4 text-lg text-gray-300">Mother Vegetableと日本の素材を組み合わせ、あなたのアイデアを世界へ届けましょう。</p>
           <Link href="/dealer/apply" className="mt-8 inline-flex rounded-full bg-[#25C760] px-8 py-4 font-black text-black no-underline transition hover:bg-white">
-            Maker登録について相談する
+            アイデアを提案する
           </Link>
         </div>
       </section>
