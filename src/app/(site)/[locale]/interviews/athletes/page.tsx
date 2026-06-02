@@ -159,7 +159,7 @@ export default async function AthleteInterviewsPage({ params }: { params: Promis
                 <div className="p-7 md:p-10">
                   <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#25C760]">{isEn ? interview.sportEn : interview.sport}</p>
                   <h2 className="mt-3 text-3xl font-black md:text-5xl">{isEn ? interview.nameEn : interview.name}</h2>
-                  <p className="mt-2 text-lg font-semibold text-gray-400">{isEn ? interview.name : interview.nameEn}</p>
+                  {!isEn && <p className="mt-2 text-lg font-semibold text-gray-400">{interview.nameEn}</p>}
 
                   <section className="mt-8">
                     <h3 className="text-xl font-black text-[#25C760]">{isEn ? 'Profile' : 'プロフィール'}</h3>
