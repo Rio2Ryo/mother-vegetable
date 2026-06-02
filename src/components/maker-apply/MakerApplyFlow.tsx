@@ -403,7 +403,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                     key={variant.id}
                     name="containerCapacity"
                     checked={containerVariantId === variant.id}
-                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setContainerColor(''); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }}
+                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setContainerColor(''); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); }}
                     title={variant.capacity}
                     detail={`ラベル範囲: 横${variant.labelSize.widthMm}mm × 縦${variant.labelSize.heightMm}mm`}
                   />
@@ -418,7 +418,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                       key={color}
                       name="containerColor"
                       checked={containerColor === color}
-                      onChange={() => { setContainerColor(color); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }}
+                      onChange={() => { setContainerColor(color); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); }}
                       title={color}
                     />
                   ))}
@@ -434,7 +434,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                       key={color}
                       name="lidColor"
                       checked={lidColor === color}
-                      onChange={() => { setLidColor(color); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }}
+                      onChange={() => { setLidColor(color); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); }}
                       title={color}
                     />
                   ))}
