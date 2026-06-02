@@ -13,11 +13,12 @@ export default function DealerApplyPage() {
 
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
-    companyName: '',
     fullName: '',
     email: '',
     phone: '',
-    area: '',
+    companyName: '',
+    postalCode: '',
+    address: '',
     message: '',
   });
 
@@ -58,7 +59,7 @@ export default function DealerApplyPage() {
             href="/dealer"
             className="inline-block bg-[#25C760] text-black font-bold py-3 px-8 rounded-lg hover:bg-[#1da34d] transition-colors duration-300 no-underline"
           >
-            {t('Back to Dealer Program', '代理店プログラムに戻る', '返回经销商计划')}
+            {t('Back to Mazavege Dealer page', 'Mazavege Dealer 解説ページに戻る', '返回Mazavege Dealer说明页面')}
           </Link>
         </div>
       </main>
@@ -72,13 +73,13 @@ export default function DealerApplyPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(37,199,96,0.08)] to-transparent pointer-events-none" />
         <div className="relative max-w-3xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
-            {t('Dealer Application', '代理店お申し込み', '经销商申请')}
+            {t('Mazavege Dealer Application Page', 'Mazavege Dealer 申し込みページ', 'Mazavege Dealer申请页面')}
           </h1>
           <p className="text-base text-gray-300">
             {t(
-              'Fill out the form below to apply for the Mother Vegetable Dealer Program.',
-              '以下のフォームにご記入のうえ、代理店プログラムにお申し込みください。',
-              '请填写以下表单，申请Mother Vegetable经销商计划。',
+              'Fill out the form below to apply for the Mazavege Dealer Program.',
+              '以下のフォームにご記入のうえ、Mazavege Dealer プログラムにお申し込みください。',
+              '请填写以下表单，申请Mazavege Dealer计划。',
             )}
           </p>
         </div>
@@ -88,23 +89,6 @@ export default function DealerApplyPage() {
       <section className="py-12 px-6">
         <div className="max-w-xl mx-auto">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Company Name */}
-            <div>
-              <label htmlFor="companyName" className="block text-sm font-medium text-gray-300 mb-2">
-                {t('Company Name', '会社名', '公司名称')}
-              </label>
-              <input
-                type="text"
-                id="companyName"
-                name="companyName"
-                value={form.companyName}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-[rgba(255,255,255,0.05)] border border-[rgba(37,199,96,0.3)] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#25C760] transition-colors"
-                placeholder={t('Your company name', '会社名を入力', '请输入公司名称')}
-              />
-            </div>
-
             {/* Full Name */}
             <div>
               <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
@@ -156,19 +140,53 @@ export default function DealerApplyPage() {
               />
             </div>
 
-            {/* Area */}
+            {/* Company Name */}
             <div>
-              <label htmlFor="area" className="block text-sm font-medium text-gray-300 mb-2">
-                {t('Desired Area', '希望エリア', '期望区域')}
+              <label htmlFor="companyName" className="block text-sm font-medium text-gray-300 mb-2">
+                {t('Company Name', '会社名', '公司名称')} <span className="text-xs text-gray-500">{t('(optional)', '（任意）', '（选填）')}</span>
               </label>
               <input
                 type="text"
-                id="area"
-                name="area"
-                value={form.area}
+                id="companyName"
+                name="companyName"
+                value={form.companyName}
                 onChange={handleChange}
                 className="w-full px-4 py-3 bg-[rgba(255,255,255,0.05)] border border-[rgba(37,199,96,0.3)] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#25C760] transition-colors"
-                placeholder={t('e.g. Tokyo, Osaka', '例: 東京、大阪', '例如: 东京、大阪')}
+                placeholder={t('Your company name', '会社名を入力', '请输入公司名称')}
+              />
+            </div>
+
+            {/* Postal Code */}
+            <div>
+              <label htmlFor="postalCode" className="block text-sm font-medium text-gray-300 mb-2">
+                {t('Postal Code', '郵便番号', '邮政编码')} <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="text"
+                id="postalCode"
+                name="postalCode"
+                value={form.postalCode}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 bg-[rgba(255,255,255,0.05)] border border-[rgba(37,199,96,0.3)] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#25C760] transition-colors"
+                placeholder={t('e.g. 100-0001', '例：100-0001', '例如：100-0001')}
+              />
+            </div>
+
+            {/* Address */}
+            <div>
+              <label htmlFor="address" className="block text-sm font-medium text-gray-300 mb-2">
+                {t('Address', '住所', '地址')} <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={form.address}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 bg-[rgba(255,255,255,0.05)] border border-[rgba(37,199,96,0.3)] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#25C760] transition-colors"
+                placeholder={t('Your address', '住所を入力', '请输入地址')}
               />
             </div>
 
@@ -197,7 +215,7 @@ export default function DealerApplyPage() {
               type="submit"
               className="w-full bg-[#25C760] text-black font-bold py-3 px-8 rounded-lg text-lg hover:bg-[#1da34d] transition-colors duration-300 cursor-pointer"
             >
-              {t('Submit Application', '申し込む', '提交申请')}
+              {t('Apply as a Mazavege Dealer', 'Mazavege Dealer に申し込む', '申请成为Mazavege Dealer')}
             </button>
           </form>
 
@@ -207,7 +225,7 @@ export default function DealerApplyPage() {
               href="/dealer"
               className="text-[#25C760] hover:underline text-sm no-underline"
             >
-              {t('Back to Dealer Program', '代理店プログラムに戻る', '返回经销商计划')}
+              {t('Back to Mazavege Dealer page', 'Mazavege Dealer 解説ページに戻る', '返回Mazavege Dealer说明页面')}
             </Link>
           </div>
         </div>
