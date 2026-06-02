@@ -1,7 +1,6 @@
 'use client';
 
 import { Link, useRouter, usePathname } from '@/i18n/navigation';
-import Image from 'next/image';
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCartStore } from '@/store/cart';
@@ -97,15 +96,12 @@ export default function Header() {
       <header role="banner" className="bg-black sticky top-0 z-[1000] shadow-[0_2px_20px_rgba(0,0,0,0.3)]">
         <div className="max-w-[1400px] mx-auto px-5 flex items-center justify-between h-20 max-lg:px-[15px] max-lg:h-[70px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-[15px]">
-            <Image
-              src="/Images/Assets/General/logo.png"
-              alt="Mother Vegetable Logo"
-              width={150}
-              height={75}
-              className="h-[75px] w-auto hover:scale-105 transition-all duration-300 max-lg:h-[50px]"
-              priority
-            />
+          <Link href="/" className="group flex flex-col justify-center leading-none no-underline transition-all duration-300 hover:scale-[1.03]">
+            <span className="text-[22px] font-black tracking-tight text-white max-lg:text-[18px]">Mazavege</span>
+            <span className="mt-0.5 text-[22px] font-black tracking-tight text-[#25C760] max-lg:text-[18px]">Shop</span>
+            <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-gray-400 max-lg:text-[7px]">
+              powered by Mother Vegetable
+            </span>
           </Link>
 
           {/* Nav */}
