@@ -193,6 +193,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [agreements, setAgreements] = useState<string[]>([]);
   const containerSection = useRef<HTMLElement>(null);
   const containerVariantSection = useRef<HTMLDivElement>(null);
+  const containerColorSection = useRef<HTMLDivElement>(null);
+  const lidColorSection = useRef<HTMLDivElement>(null);
   const designSection = useRef<HTMLElement>(null);
   const detailSection = useRef<HTMLElement>(null);
   const confirmSection = useRef<HTMLElement>(null);
@@ -202,7 +204,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const selectedLogo = logos.find((item) => item.id === logoId) ?? logos[0];
   const selectedContainerVariant = selectedContainer.variants.find((item) => item.id === containerVariantId) ?? selectedContainer.variants[0];
   const selectedLabelSize = selectedContainerVariant.labelSize;
-  const capacityOptions = selectedContainer.variants.slice(0, 3);
+  const capacityOptions = selectedContainer.variants.filter((variant, index, variants) => variants.findIndex((item) => item.capacity === variant.capacity) === index).slice(0, 3);
   const isContainerDetailComplete = Boolean(containerVariantId && containerColor && lidColor);
 
   const filteredMaterials = useMemo(() => {
@@ -373,7 +375,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                     key={variant.id}
                     name="containerCapacity"
                     checked={containerVariantId === variant.id}
-                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setDetailOpen(false); setConfirmOpen(false); }}
+                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setContainerColor(''); setLidColor(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerColorSection, 120); }}
                     title={variant.capacity}
                     detail={`ラベル範囲: 横${variant.labelSize.widthMm}mm × 縦${variant.labelSize.heightMm}mm`}
                   />
@@ -381,20 +383,23 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               </ChoiceGroup>
 
               {containerVariantId && (
+                <div ref={containerColorSection} className="scroll-mt-24">
                 <ChoiceGroup title="2. 容器の色を選ぶ">
                   {containerColorOptions.map((color) => (
                     <TextChoice
                       key={color}
                       name="containerColor"
                       checked={containerColor === color}
-                      onChange={() => { setContainerColor(color); setDetailOpen(false); setConfirmOpen(false); }}
+                      onChange={() => { setContainerColor(color); setLidColor(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(lidColorSection, 120); }}
                       title={color}
                     />
                   ))}
                 </ChoiceGroup>
+                </div>
               )}
 
               {containerVariantId && containerColor && (
+                <div ref={lidColorSection} className="scroll-mt-24">
                 <ChoiceGroup title="3. 蓋の色を選ぶ">
                   {lidColorOptions.map((color) => (
                     <TextChoice
@@ -406,6 +411,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                     />
                   ))}
                 </ChoiceGroup>
+                </div>
               )}
             </div>
           </div>
