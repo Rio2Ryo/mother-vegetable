@@ -195,7 +195,7 @@ export default function MakerPage() {
                   Japanese Raw Material
                 </h3>
                 <strong className="mb-4 block font-extrabold" style={{ color: '#fff', fontSize: 'clamp(19px, 2vw, 28px)', lineHeight: 1.45 }}>
-                  日本の地方を支える天然食 / 化粧品
+                  日本各地で作られる高品質の食品/化粧品
                 </strong>
                 <p className="max-w-[760px]" style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 2 }}>
                   日本各地の道の駅や小さな町に眠る、地元ならではの食品・素材・産品の総称です。<br />
