@@ -38,11 +38,15 @@ export default function Header() {
 
   // Zustand store for instructor auth (separate system)
   const currentInstructor = useAffiliateStore((s) => s.currentInstructor);
+  const instructorToken = useAffiliateStore((s) => s.instructorToken);
   const instructorLogout = useAffiliateStore((s) => s.logout);
 
   const isUserLoggedIn = mounted && status === 'authenticated' && !!session?.user;
   const isInstructorLoggedIn = mounted && !!currentInstructor;
   const isLoggedIn = isUserLoggedIn || isInstructorLoggedIn;
+
+  // Instructor-registered check: show instructor menu if token or currentInstructor exists (no active login required)
+  const isRegisteredInstructor = mounted && (!!instructorToken || !!currentInstructor);
 
   const displayName = isUserLoggedIn
     ? (session?.user?.name || session?.user?.email || '')
@@ -51,9 +55,7 @@ export default function Header() {
     ? (session?.user?.email || '')
     : (currentInstructor?.email || '');
 
-  useEffect(() => {
-    queueMicrotask(() => setMounted(true));
-  }, []);
+  useEffect(() => { setMounted(true); }, []);
 
   function handleLogout() {
     if (isUserLoggedIn) {
