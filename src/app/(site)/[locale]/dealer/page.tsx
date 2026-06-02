@@ -70,7 +70,7 @@ export default function DealerPage() {
           <h2 className="text-2xl font-black text-[#25C760]">Dealer登録費用</h2>
           <div className="mt-6 rounded-3xl border border-white/10 bg-white/[0.04] p-8">
             <p className="text-3xl font-black">月額 100ドル＋tax</p>
-            <p className="mt-2 text-gray-300">または 月額15,000円＋税</p>
+            <p className="mt-2 text-gray-300">(月額15,000円＋税)</p>
           </div>
         </div>
       </section>

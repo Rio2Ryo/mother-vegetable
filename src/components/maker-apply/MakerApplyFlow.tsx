@@ -249,7 +249,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
     });
   }, [query, selectedRegions, selectedCategories, selectedTags]);
 
-  const canSubmit = productName && applicantName && email && phone && address && agreements.length === 4;
+  const isStep4Complete = Boolean(productName.trim() && desiredPrice.trim() && applicantName.trim() && email.trim() && phone.trim() && address.trim());
+  const canSubmit = isStep4Complete && agreements.length === 4;
 
   function jumpTo(ref: React.RefObject<HTMLElement | HTMLDivElement | null>, delay = 80) {
     window.setTimeout(() => ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), delay);
@@ -641,7 +642,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <Input label="電話番号" value={phone} onChange={setPhone} placeholder="090-0000-0000" />
             <Input label="住所" value={address} onChange={setAddress} placeholder="東京都..." />
           </div>
-          <button type="button" onClick={() => { setConfirmOpen(true); jumpTo(confirmSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">確認画面へ進む</button>
+          {!isStep4Complete && <p className="mt-4 text-sm font-bold text-[#25C760]">STEP 4はすべて必須入力です。全項目を入力すると確認画面へ進めます。</p>}
+          <button type="button" disabled={!isStep4Complete} onClick={() => { if (!isStep4Complete) return; setConfirmOpen(true); jumpTo(confirmSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black transition disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-300">確認画面へ進む</button>
         </div>
       </section>
       )}
@@ -668,7 +670,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               '審査OKになるまで月額200ドル（または月額30,000円＋税）の支払いは発生しないことを確認しました。',
               '審査OK後、Maker登録と支払い手続きへ進むことを確認しました。',
               '初回100個分の製造費はMazavege社が支援し、101個以上は販売価格の30%で製造可能であることを確認しました。',
-              '8週間で完売できなかった場合、売れ残り分をMakerロイヤリティ10%を差し引いた金額で買い取る条件を確認しました。',
+              '1ヶ月間で完売できなかった場合、売れ残り分をMakerロイヤリティ10%を差し引いた金額で買い取る条件を確認しました。',
             ].map((item) => (
               <label key={item} className="flex gap-3 text-sm leading-6 text-gray-300">
                 <input type="checkbox" checked={agreements.includes(item)} onChange={() => setAgreements(toggle(agreements, item))} className="mt-1 h-5 w-5 accent-[#25C760]" />

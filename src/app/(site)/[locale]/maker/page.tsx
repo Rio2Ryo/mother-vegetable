@@ -23,7 +23,7 @@ const conditions = [
   '商品をセルフ購入する際は15%オフになります（定価購入後、15%が報酬として振込）',
   '商品が売れた場合、Makerロイヤリティとして10%の報酬が入ります',
   '自分で販売した場合、Dealerロイヤリティ15%＋Makerロイヤリティ10%の合計25%が入ります',
-  '8週間で完売できなかった場合、売れ残り分をMakerロイヤリティ10%を差し引いた金額で買い取っていただきます',
+  '1ヶ月間で完売できなかった場合、売れ残り分をMakerロイヤリティ10%を差し引いた金額で買い取っていただきます',
   '101個以上の製造を希望の場合は販売価格の30%の支払いで製造が可能です',
 ];
 
@@ -229,7 +229,7 @@ export default function MakerPage() {
           <div className="rounded-3xl border border-[#25C760]/30 bg-[#25C760]/[0.04] p-8">
             <h2 className="text-2xl font-black text-[#25C760]">Maker登録費用（提案料無料）</h2>
             <p className="mt-5 text-3xl font-black">月額 200ドル</p>
-            <p className="mt-2 text-gray-300">または 月額30,000円＋税</p>
+            <p className="mt-2 text-gray-300">(月額30,000円＋税)</p>
             <p className="mt-6 leading-8 text-gray-300">商品提案をMother Vegetable社が審査し、承認された場合に限り、初月の支払いが発生します。提案は無料なので、たくさんのアイデアをお待ちしています。</p>
           </div>
           <div className="rounded-3xl border border-[#25C760]/20 bg-white/[0.04] p-8">
