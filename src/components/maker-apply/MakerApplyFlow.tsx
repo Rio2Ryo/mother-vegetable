@@ -307,15 +307,10 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,199,96,0.18),transparent_46%)]" />
         <div className="relative mx-auto max-w-6xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.35em] text-[#25C760]">Mazavege Maker Application</p>
-          <h1 className="mt-4 text-4xl font-black md:text-6xl">いますぐあなたの夢を叶えよう</h1>
+          <h1 className="mt-4 text-4xl font-black md:text-6xl">いますぐ、あなたの夢を叶えよう</h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
-            まずはJapanese Raw Materialを1つ選び、容器・ロゴ・商品名を決めてアイデアを送信します。審査OKになるまで費用は発生しません。
+            Japanese Raw Materialを1つ選び、容器や商品名を決めてアイデアを送信します。審査が通過してあなたが承認するまで、月額費用は発生いたしません。
           </p>
-          <div className="mx-auto mt-8 grid max-w-4xl gap-3 text-left md:grid-cols-3">
-            {['審査OKまで支払い不要', '初回100個分の製造費を支援', '2週間以内に審査結果を連絡'].map((item) => (
-              <div key={item} className="rounded-2xl border border-[#25C760]/30 bg-[#25C760]/10 p-4 text-sm font-bold text-[#25C760]">{item}</div>
-            ))}
-          </div>
         </div>
       </section>
 
