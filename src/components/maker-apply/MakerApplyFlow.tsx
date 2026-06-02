@@ -390,20 +390,20 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                 <p className="text-sm font-bold text-[#25C760]">容器の詳細仕様</p>
                 <h3 className="mt-2 text-2xl font-black">{selectedContainer.name}の仕様を選ぶ</h3>
                 <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-300">
-                  写真ではなく文字で、容量・容器色・蓋色を順番に選びます。容量にはラベルサイズも一緒に表示します。
+                  容量・容器色・蓋色を順番に選びます。
                 </p>
               </div>
               <span className="rounded-full border border-[#25C760]/35 px-4 py-2 text-sm font-bold text-[#25C760]">3ステップ</span>
             </div>
 
             <div className="mt-8 space-y-8">
-              <ChoiceGroup title="1. 容量を選ぶ（ラベルサイズ）" note="容量を選ぶと、ラベル配置プレビューの範囲もこのサイズに連動します。">
+              <ChoiceGroup title="1. 容量を選ぶ" note="容量を選ぶと、ラベルのサイズも決定します。">
                 {capacityOptions.map((variant) => (
                   <TextChoice
                     key={variant.id}
                     name="containerCapacity"
                     checked={containerVariantId === variant.id}
-                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setContainerColor(''); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerColorSection, 120); }}
+                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setContainerColor(''); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }}
                     title={variant.capacity}
                     detail={`ラベル範囲: 横${variant.labelSize.widthMm}mm × 縦${variant.labelSize.heightMm}mm`}
                   />
@@ -418,7 +418,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                       key={color}
                       name="containerColor"
                       checked={containerColor === color}
-                      onChange={() => { setContainerColor(color); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(lidColorSection, 120); }}
+                      onChange={() => { setContainerColor(color); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }}
                       title={color}
                     />
                   ))}
@@ -434,7 +434,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                       key={color}
                       name="lidColor"
                       checked={lidColor === color}
-                      onChange={() => { setLidColor(color); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); }}
+                      onChange={() => { setLidColor(color); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }}
                       title={color}
                     />
                   ))}
