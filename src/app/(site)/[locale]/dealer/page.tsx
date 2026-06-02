@@ -26,7 +26,7 @@ export default function DealerPage() {
       </section>
 
       <section className="px-6 pb-10">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-4xl">
           <PartnerSwitch active="dealer" />
         </div>
       </section>
