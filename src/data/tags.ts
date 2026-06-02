@@ -44,9 +44,12 @@ export interface ProposerTagDef {
 
 export const PROPOSER_TAGS: ProposerTagDef[] = [
   { key: 'マザーベジタブル社', labelJa: 'マザーベジタブル社', labelEn: 'Mother Vegetable Co.', icon: '🌱', faceImage: '/cdn/mv-search-character.png' },
-  { key: 'アスリート',         labelJa: 'アスリート',           labelEn: 'Athlete',                icon: '🏃' },
-  { key: '小学生',             labelJa: '小学生',               labelEn: 'Elementary Student',     icon: '📚' },
-  { key: '河津住民',           labelJa: '河津住民',             labelEn: 'Kawazu Resident',        icon: '🏘️' },
+  { key: '佐藤はるか', labelJa: '佐藤はるか', labelEn: 'Haruka Sato', icon: '👩', faceImage: '/images/proposers/person-haruka.svg' },
+  { key: '鈴木大地', labelJa: '鈴木大地', labelEn: 'Daichi Suzuki', icon: '👨', faceImage: '/images/proposers/person-daichi.svg' },
+  { key: '森みお', labelJa: '森みお', labelEn: 'Mio Mori', icon: '👩', faceImage: '/images/proposers/person-mio.svg' },
+  { key: '河津フーズ株式会社', labelJa: '河津フーズ株式会社', labelEn: 'Kawazu Foods Inc.', icon: '🏢', faceImage: '/images/proposers/logo-kawazu-foods.svg' },
+  { key: '伊豆ウェルネスラボ', labelJa: '伊豆ウェルネスラボ', labelEn: 'Izu Wellness Lab', icon: '🏢', faceImage: '/images/proposers/logo-izu-lab.svg' },
+  { key: '静岡クラフトワークス', labelJa: '静岡クラフトワークス', labelEn: 'Shizuoka Craft Works', icon: '🏢', faceImage: '/images/proposers/logo-shizuoka-works.svg' },
 ];
 
 export function getProposerTagDef(key: string): ProposerTagDef | undefined {
