@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#202020"/><stop offset="1" stop-color="#0b0b0b"/></linearGradient>
+    <radialGradient id="glow" cx="50%" cy="35%" r="55%"><stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/><stop offset="1" stop-color="#25C760" stop-opacity="0"/></radialGradient>
+    <linearGradient id="white" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfd8d3"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#effff8" stop-opacity="0.92"/><stop offset="1" stop-color="#8fb7a4" stop-opacity="0.46"/></linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="url(#bg)"/>
+  <rect width="900" height="600" fill="url(#glow)"/>
+  <ellipse cx="450" cy="520" rx="260" ry="40" fill="#000" opacity="0.35"/>
+  
+  <path d="M430 100h40v70h-40z" fill="#dbe8e2"/>
+  <path d="M398 166h104l42 295c5 39-25 73-64 73h-60c-39 0-69-34-64-73l42-295z" fill="url(#glass)"/>
+  <path d="M410 250h80v190h-80z" fill="#fff" opacity="0.28"/>
+  <path d="M416 170h68" stroke="#fff" stroke-width="10" opacity="0.7"/>
+
+</svg>

@@ -9,8 +9,7 @@ type RawMaterial = {
   category: '食品向け' | '化粧品向け' | '食品・化粧品向け';
   tags: string[];
   story: string;
-  imageTone: string;
-  emoji: string;
+  image: string;
 };
 
 type ContainerItem = {
@@ -19,28 +18,28 @@ type ContainerItem = {
   capacity: string;
   tags: string[];
   note: string;
-  emoji: string;
+  image: string;
 };
 
 const rawMaterials: RawMaterial[] = [
-  { id: 'kawazu-salt', name: '河津の平釜塩', region: '河津町', category: '食品向け', tags: ['調味料', '海の素材', '道の駅', '小ロット向け'], story: '海水を平釜で炊き上げた、土地の味が伝わるミネラル塩。', imageTone: 'from-emerald-500/35 via-cyan-200/15 to-black', emoji: '🧂' },
-  { id: 'kushimoto-miso', name: '串本の米味噌', region: '串本町', category: '食品向け', tags: ['発酵食品', 'ごはんのお供', '地域工房', '常温'], story: '地域の米と麹で丁寧に仕込む、昔ながらの味噌。', imageTone: 'from-amber-500/35 via-orange-200/10 to-black', emoji: '🥣' },
-  { id: 'izu-onsen', name: '伊豆の温泉水', region: '伊豆市', category: '化粧品向け', tags: ['スキンケア', '水素材', '保湿感', '観光地'], story: 'やわらかな質感の温泉水。化粧水やミストのベースに。', imageTone: 'from-sky-300/35 via-white/10 to-black', emoji: '💧' },
-  { id: 'minami-toner', name: '南伊豆ハーブ化粧水', region: '南伊豆町', category: '化粧品向け', tags: ['化粧水', 'ハーブ', 'スキンケア', '香り'], story: '小さな農園で育つハーブを活かした、やさしい化粧水素材。', imageTone: 'from-lime-400/30 via-emerald-200/10 to-black', emoji: '🌿' },
-  { id: 'wakayama-shampoo', name: '紀州ゆずシャンプー', region: '和歌山県', category: '化粧品向け', tags: ['ヘアケア', '柑橘', '香り', 'バス用品'], story: 'ゆずの香りを活かした、地域色のあるヘアケア素材。', imageTone: 'from-yellow-300/35 via-orange-100/10 to-black', emoji: '🫧' },
-  { id: 'hokkaido-lip', name: '北海道ミルクリップ', region: '北海道', category: '化粧品向け', tags: ['リップ', '乾燥ケア', '乳素材', 'ギフト'], story: '北海道らしいミルク感をテーマにしたリップ素材。', imageTone: 'from-white/30 via-blue-100/10 to-black', emoji: '💄' },
-  { id: 'komeko-pack', name: '米麹フェイスパック', region: '新潟県', category: '化粧品向け', tags: ['米麹', 'フェイスパック', '発酵', '美容'], story: '米どころの麹文化を美容アイテムに展開できる素材。', imageTone: 'from-stone-100/25 via-amber-100/10 to-black', emoji: '🍚' },
-  { id: 'shizuoka-wasabi', name: '静岡わさび塩', region: '静岡県', category: '食品向け', tags: ['調味料', 'わさび', '土産', '粉末'], story: '静岡のわさびを活かした、ふりかけ系コラボに向く素材。', imageTone: 'from-green-500/35 via-lime-200/10 to-black', emoji: '🌱' },
-  { id: 'olive-oil', name: '小豆島オリーブオイル', region: '小豆島', category: '食品・化粧品向け', tags: ['オイル', '食品', '美容', 'ギフト'], story: '食品にも美容にも展開しやすい、地域性の強いオイル素材。', imageTone: 'from-olive-400/30 via-yellow-100/10 to-black', emoji: '🫒' },
+  { id: 'kawazu-salt', name: '河津の平釜塩', region: '河津町', category: '食品向け', tags: ['調味料', '海の素材', '道の駅', '小ロット向け'], story: '海水を平釜で炊き上げた、土地の味が伝わるミネラル塩。', image: '/images/maker-apply/photos/salt.jpg' },
+  { id: 'kushimoto-miso', name: '串本の米味噌', region: '串本町', category: '食品向け', tags: ['発酵食品', 'ごはんのお供', '地域工房', '常温'], story: '地域の米と麹で丁寧に仕込む、昔ながらの味噌。', image: '/images/maker-apply/photos/miso.jpg' },
+  { id: 'izu-onsen', name: '伊豆の温泉水', region: '伊豆市', category: '化粧品向け', tags: ['スキンケア', '水素材', '保湿感', '観光地'], story: 'やわらかな質感の温泉水。化粧水やミストのベースに。', image: '/images/maker-apply/photos/material-water.svg' },
+  { id: 'minami-toner', name: '南伊豆ハーブ化粧水', region: '南伊豆町', category: '化粧品向け', tags: ['化粧水', 'ハーブ', 'スキンケア', '香り'], story: '小さな農園で育つハーブを活かした、やさしい化粧水素材。', image: '/images/maker-apply/photos/material-herb.svg' },
+  { id: 'wakayama-shampoo', name: '紀州ゆずシャンプー', region: '和歌山県', category: '化粧品向け', tags: ['ヘアケア', '柑橘', '香り', 'バス用品'], story: 'ゆずの香りを活かした、地域色のあるヘアケア素材。', image: '/images/maker-apply/photos/material-yuzu.svg' },
+  { id: 'hokkaido-lip', name: '北海道ミルクリップ', region: '北海道', category: '化粧品向け', tags: ['リップ', '乾燥ケア', '乳素材', 'ギフト'], story: '北海道らしいミルク感をテーマにしたリップ素材。', image: '/images/maker-apply/photos/material-lip.svg' },
+  { id: 'komeko-pack', name: '米麹フェイスパック', region: '新潟県', category: '化粧品向け', tags: ['米麹', 'フェイスパック', '発酵', '美容'], story: '米どころの麹文化を美容アイテムに展開できる素材。', image: '/images/maker-apply/photos/koji.jpg' },
+  { id: 'shizuoka-wasabi', name: '静岡わさび塩', region: '静岡県', category: '食品向け', tags: ['調味料', 'わさび', '土産', '粉末'], story: '静岡のわさびを活かした、ふりかけ系コラボに向く素材。', image: '/images/maker-apply/photos/material-wasabi.svg' },
+  { id: 'olive-oil', name: '小豆島オリーブオイル', region: '小豆島', category: '食品・化粧品向け', tags: ['オイル', '食品', '美容', 'ギフト'], story: '食品にも美容にも展開しやすい、地域性の強いオイル素材。', image: '/images/maker-apply/photos/material-olive.svg' },
 ];
 
 const containers: ContainerItem[] = [
-  { id: 'pouch', name: 'もみもみパウチ', capacity: '30g〜120g', tags: ['食品向け', '化粧品向け', '軽量', '詰替'], note: '味噌・パック・ジェル系に向く柔らかい容器。', emoji: '🧴' },
-  { id: 'spray', name: 'スプレーボトル', capacity: '50ml〜150ml', tags: ['化粧品向け', 'ミスト', '液体'], note: '化粧水・温泉水・ヘアミストにおすすめ。', emoji: '💦' },
-  { id: 'soy', name: '醤油差しボトル', capacity: '80ml〜200ml', tags: ['食品向け', '液体', '卓上'], note: '醤油・ポン酢・ドレッシング系に向く容器。', emoji: '🍶' },
-  { id: 'shaker', name: 'ふりかけシェイカー', capacity: '20g〜80g', tags: ['食品向け', '粉末', '卓上'], note: '塩・スパイス・粉末Achieveコラボに。', emoji: '🧂' },
-  { id: 'jar', name: 'ガラスジャー', capacity: '80g〜250g', tags: ['食品向け', '化粧品向け', '高級感'], note: '味噌・バーム・クリーム系に使いやすい容器。', emoji: '🫙' },
-  { id: 'lip', name: 'リップスティック', capacity: '3g〜8g', tags: ['化粧品向け', 'リップ', '携帯'], note: 'リップ・スティックバーム専用。食品不可。', emoji: '💄' },
+  { id: 'pouch', name: 'もみもみパウチ', capacity: '30g〜120g', tags: ['食品向け', '化粧品向け', '軽量', '詰替'], note: '味噌・パック・ジェル系に向く柔らかい容器。', image: '/images/maker-apply/photos/container-pouch.svg' },
+  { id: 'spray', name: 'スプレーボトル', capacity: '50ml〜150ml', tags: ['化粧品向け', 'ミスト', '液体'], note: '化粧水・温泉水・ヘアミストにおすすめ。', image: '/images/maker-apply/photos/container-spray.svg' },
+  { id: 'soy', name: '醤油差しボトル', capacity: '80ml〜200ml', tags: ['食品向け', '液体', '卓上'], note: '醤油・ポン酢・ドレッシング系に向く容器。', image: '/images/maker-apply/photos/container-soy.svg' },
+  { id: 'shaker', name: 'ふりかけシェイカー', capacity: '20g〜80g', tags: ['食品向け', '粉末', '卓上'], note: '塩・スパイス・粉末Achieveコラボに。', image: '/images/maker-apply/photos/container-shaker.svg' },
+  { id: 'jar', name: 'ガラスジャー', capacity: '80g〜250g', tags: ['食品向け', '化粧品向け', '高級感'], note: '味噌・バーム・クリーム系に使いやすい容器。', image: '/images/maker-apply/photos/container-jar.svg' },
+  { id: 'lip', name: 'リップスティック', capacity: '3g〜8g', tags: ['化粧品向け', 'リップ', '携帯'], note: 'リップ・スティックバーム専用。食品不可。', image: '/images/maker-apply/photos/container-lipstick.svg' },
 ];
 
 const logos = [
@@ -69,6 +68,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [logoId, setLogoId] = useState(logos[0].id);
   const [logoX, setLogoX] = useState(50);
   const [logoY, setLogoY] = useState(36);
+  const [logoScale, setLogoScale] = useState(100);
   const [labelBg, setLabelBg] = useState('#101010');
   const [designMemo, setDesignMemo] = useState('');
   const [productName, setProductName] = useState('');
@@ -157,7 +157,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               {filteredMaterials.map((item) => (
                 <label key={item.id} className={`group cursor-pointer overflow-hidden rounded-[1.75rem] border bg-white/[0.035] transition ${rawMaterialId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.25)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
                   <input type="radio" name="rawMaterial" value={item.id} checked={rawMaterialId === item.id} onChange={() => { setRawMaterialId(item.id); jumpTo(containerSection); }} className="sr-only" />
-                  <div className={`flex h-44 items-center justify-center bg-gradient-to-br ${item.imageTone} text-6xl`}>{item.emoji}</div>
+                  <div className="relative h-44 overflow-hidden bg-white/5"><img src={item.image} alt={`${item.name}の素材写真`} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /></div>
                   <div className="p-5">
                     <div className="flex items-start justify-between gap-3">
                       <div>
@@ -185,7 +185,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             {containers.map((item) => (
               <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${containerId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
                 <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); jumpTo(designSection); }} className="sr-only" />
-                <div className="text-6xl">{item.emoji}</div>
+                <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5"><img src={item.image} alt={`${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" /></div>
                 <h3 className="mt-5 text-2xl font-black">{item.name}</h3>
                 <p className="mt-1 text-sm font-bold text-[#25C760]">目安容量: {item.capacity}</p>
                 <p className="mt-4 text-sm leading-6 text-gray-300">{item.note}</p>
@@ -233,16 +233,17 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <h3 className="text-xl font-black">ラベル配置プレビュー</h3>
             <div onPointerDown={onPreviewPointer} onPointerMove={(e) => e.buttons === 1 && onPreviewPointer(e)} className="relative mt-5 h-[520px] cursor-crosshair overflow-hidden rounded-[2rem] border border-white/10" style={{ background: labelBg }}>
               <div className="absolute left-1/2 top-8 -translate-x-1/2 rounded-full border border-white/20 px-4 py-1 text-xs text-white/70">{selectedContainer.name}</div>
-              <img src={selectedLogo.src} alt="selected logo" className="absolute max-h-24 max-w-52 -translate-x-1/2 -translate-y-1/2 object-contain" style={{ left: `${logoX}%`, top: `${logoY}%` }} />
+              <img src={selectedLogo.src} alt="selected logo" className="absolute -translate-x-1/2 -translate-y-1/2 object-contain" style={{ left: `${logoX}%`, top: `${logoY}%`, width: `${logoScale * 2}px`, maxWidth: '82%', maxHeight: '180px' }} />
               <div className="absolute left-1/2 top-[58%] w-[78%] -translate-x-1/2 text-center">
                 <p className="text-2xl font-black">{productName || 'PRODUCT NAME'}</p>
                 <p className="mt-2 text-sm text-white/70">{selectedRaw.name} × Mother Vegetable</p>
               </div>
-              <div className="absolute bottom-6 left-1/2 w-[72%] -translate-x-1/2 rounded-2xl border border-white/25 bg-white/10 px-4 py-3 text-center text-sm font-black tracking-[0.22em] text-white">MADE IN JAPAN</div>
+              <MadeInJapanMark />
             </div>
             <div className="mt-5 grid gap-4 text-sm text-gray-300">
               <label>ロゴ横位置: {logoX}%<input type="range" min="10" max="90" value={logoX} onChange={(e) => setLogoX(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
               <label>ロゴ縦位置: {logoY}%<input type="range" min="12" max="72" value={logoY} onChange={(e) => setLogoY(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
+              <label>ロゴサイズ: {logoScale}%<input type="range" min="45" max="150" value={logoScale} onChange={(e) => setLogoScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
             </div>
           </div>
         </div>
@@ -271,7 +272,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <Summary label="素材" value={`${selectedRaw.name}（${selectedRaw.region}）`} />
             <Summary label="容器・内容量" value={`${selectedContainer.name} / ${capacity}`} />
-            <Summary label="ロゴ" value={`${selectedLogo.name} / 位置 ${logoX}%・${logoY}%`} />
+            <Summary label="ロゴ" value={`${selectedLogo.name} / 位置 ${logoX}%・${logoY}% / サイズ ${logoScale}%`} />
             <Summary label="商品名・希望価格" value={`${productName || '未入力'} / ${desiredPrice || '未入力'}`} />
             <Summary label="お名前" value={applicantName || '未入力'} />
             <Summary label="連絡先" value={`${email || '未入力'} / ${phone || '未入力'}`} />
@@ -294,6 +295,18 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
         </div>
       </section>
     </form>
+  );
+}
+
+
+function MadeInJapanMark() {
+  return (
+    <div className="absolute bottom-6 left-1/2 w-[74%] -translate-x-1/2 text-center text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]">
+      <div className="mx-auto flex h-14 w-24 items-center justify-center border-[5px] border-white bg-transparent">
+        <span className="block h-7 w-7 rounded-full bg-[#ed1b2f]" />
+      </div>
+      <div className="mt-3 font-serif text-2xl font-black tracking-[0.12em] md:text-3xl">MADE IN JAPAN</div>
+    </div>
   );
 }
 
