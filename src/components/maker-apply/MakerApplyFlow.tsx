@@ -194,6 +194,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [containerColor, setContainerColor] = useState('');
   const [lidColor, setLidColor] = useState('');
   const [capacity, setCapacity] = useState('');
+  const [capacityConfirmed, setCapacityConfirmed] = useState(false);
   const [detailOpen, setDetailOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [logoId, setLogoId] = useState(logos[0].id);
@@ -205,6 +206,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [madeMarkScale, setMadeMarkScale] = useState(100);
   const [labelBg, setLabelBg] = useState('#101010');
   const [designMode, setDesignMode] = useState<'manual' | 'ai'>('manual');
+  const [labelDesignChoice, setLabelDesignChoice] = useState<'manual' | 'ai' | ''>('');
   const [makerStory, setMakerStory] = useState('');
   const [targetAudience, setTargetAudience] = useState('');
   const [aiConcept, setAiConcept] = useState('');
@@ -231,6 +233,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const selectedLabelSize = selectedContainerVariant.labelSize;
   const capacityOptions = selectedContainer.variants.filter((variant, index, variants) => variants.findIndex((item) => item.capacity === variant.capacity) === index).slice(0, 3);
   const isContainerDetailComplete = Boolean(containerVariantId && containerColor && lidColor);
+  const isDesignStepOpen = isContainerDetailComplete && capacityConfirmed;
 
   const filteredMaterials = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -340,7 +343,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {filteredMaterials.map((item) => (
                 <label key={item.id} className={`group cursor-pointer overflow-hidden rounded-[1.75rem] border bg-white/[0.035] transition ${rawMaterialId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.25)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                  <input type="radio" name="rawMaterial" value={item.id} checked={rawMaterialId === item.id} onChange={() => { setRawMaterialId(item.id); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerSection); }} className="sr-only" />
+                  <input type="radio" name="rawMaterial" value={item.id} checked={rawMaterialId === item.id} onChange={() => { setRawMaterialId(item.id); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerSection); }} className="sr-only" />
                   <div className="relative h-44 overflow-hidden bg-white/5"><img src={item.image} alt={`${item.name}の素材写真`} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /></div>
                   <div className="p-5">
                     <div className="flex items-start justify-between gap-3">
@@ -370,7 +373,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {containers.map((item) => (
               <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${containerId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }} className="sr-only" />
+                <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }} className="sr-only" />
                 <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5"><img src={item.image} alt={`${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" /></div>
                 <h3 className="mt-5 text-2xl font-black">{item.name}</h3>
                 <p className="mt-1 text-sm font-bold text-[#25C760]">目安容量: {item.capacity}</p>
@@ -400,7 +403,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                     key={variant.id}
                     name="containerCapacity"
                     checked={containerVariantId === variant.id}
-                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setContainerColor(''); setLidColor(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerColorSection, 120); }}
+                    onChange={() => { setContainerVariantId(variant.id); setCapacity(variant.capacity); setContainerColor(''); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerColorSection, 120); }}
                     title={variant.capacity}
                     detail={`ラベル範囲: 横${variant.labelSize.widthMm}mm × 縦${variant.labelSize.heightMm}mm`}
                   />
@@ -415,7 +418,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                       key={color}
                       name="containerColor"
                       checked={containerColor === color}
-                      onChange={() => { setContainerColor(color); setLidColor(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(lidColorSection, 120); }}
+                      onChange={() => { setContainerColor(color); setLidColor(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(lidColorSection, 120); }}
                       title={color}
                     />
                   ))}
@@ -431,7 +434,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                       key={color}
                       name="lidColor"
                       checked={lidColor === color}
-                      onChange={() => { setLidColor(color); setDetailOpen(false); setConfirmOpen(false); jumpTo(designSection, 120); }}
+                      onChange={() => { setLidColor(color); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); }}
                       title={color}
                     />
                   ))}
@@ -443,36 +446,65 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           )}
 
           {isContainerDetailComplete && (
-          <div className="mt-8 max-w-md rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-            <label className="text-sm font-bold text-gray-300">希望内容量・容量</label>
-            <input value={capacity} onChange={(e) => setCapacity(e.target.value)} placeholder="例：100ml / 80g / 30包" className="mt-2 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
+          <div className="mt-8 max-w-2xl rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <label className="text-sm font-bold text-gray-300">
+                希望内容量
+                <input value={capacity} onChange={(e) => { setCapacity(e.target.value); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); }} placeholder="例：100ml / 80g / 30包" className="mt-2 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760] md:min-w-[260px]" />
+              </label>
+              <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-[#25C760]/30 bg-[#25C760]/10 p-4 text-sm font-bold leading-6 text-gray-100">
+                <input type="checkbox" checked={capacityConfirmed} onChange={(e) => { setCapacityConfirmed(e.target.checked); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); if (e.target.checked) jumpTo(designSection, 120); }} className="mt-1 h-5 w-5 accent-[#25C760]" />
+                <span>この容量でOKであればチェック</span>
+              </label>
+            </div>
           </div>
           )}
         </div>
       </section>
       )}
 
-      {isContainerDetailComplete && (
+      {isDesignStepOpen && (
       <section ref={designSection} className="px-6 py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_420px]">
           <div>
             <p className="text-sm font-bold text-[#25C760]">STEP 03</p>
-            <h2 className="mt-2 text-3xl font-black">ロゴとラベルデザイン</h2>
-            <p className="mt-4 max-w-3xl text-gray-300">最初に使うMother Vegetableロゴを選びます。自分で調整することも、商品名・ストーリーからAIにラベル案を作ってもらうこともできます。Made in Japanマークは必ず入ります。</p>
+            <h2 className="mt-2 text-3xl font-black">ラベルデザイン</h2>
+            <p className="mt-4 max-w-3xl text-gray-300">まず、ラベルの作り方を選んでください。自分で細かく調整することも、理念や思いを入力してAIにラベル案を作らせることもできます。Made in Japanマークは必ず入ります。</p>
+
             <div className="mt-8 grid gap-4 md:grid-cols-2">
-              {logos.map((logo) => (
-                <label key={logo.id} className={`cursor-pointer rounded-3xl border bg-white/[0.04] p-4 transition ${logoId === logo.id ? 'border-[#25C760]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                  <input type="radio" name="logo" value={logo.id} checked={logoId === logo.id} onChange={() => setLogoId(logo.id)} className="sr-only" />
-                  <div className="flex h-32 items-center justify-center rounded-2xl bg-black p-4"><img src={logo.src} alt={logo.name} className="max-h-full max-w-full object-contain" /></div>
-                  <p className="mt-3 text-sm font-bold">{logo.name}</p>
-                </label>
-              ))}
+              <button type="button" onClick={() => { setLabelDesignChoice('manual'); setDesignMode('manual'); }} className={`rounded-[2rem] border p-6 text-left transition ${labelDesignChoice === 'manual' ? 'border-[#25C760] bg-[#25C760]/15 shadow-[0_0_24px_rgba(37,199,96,0.2)]' : 'border-white/10 bg-white/[0.04] hover:border-[#25C760]/50'}`}>
+                <span className="text-sm font-black text-[#25C760]">1</span>
+                <span className="mt-2 block text-xl font-black text-white">自分でラベルをデザインする</span>
+                <span className="mt-3 block text-sm leading-6 text-gray-300">ロゴ、背景色、Made in Japanマークの位置やサイズを自分で調整します。</span>
+              </button>
+              <button type="button" onClick={() => { setLabelDesignChoice('ai'); setDesignMode('ai'); }} className={`rounded-[2rem] border p-6 text-left transition ${labelDesignChoice === 'ai' ? 'border-[#25C760] bg-[#25C760]/15 shadow-[0_0_24px_rgba(37,199,96,0.2)]' : 'border-white/10 bg-white/[0.04] hover:border-[#25C760]/50'}`}>
+                <span className="text-sm font-black text-[#25C760]">2</span>
+                <span className="mt-2 block text-xl font-black text-white">理念や思いを入力してAIによるラベルの自動生成をする</span>
+                <span className="mt-3 block text-sm leading-6 text-gray-300">届けたい人や商品のストーリーを入力し、AIにラベル案を作らせます。</span>
+              </button>
             </div>
+
+            {labelDesignChoice && (
+            <div className="mt-8">
+              <p className="text-sm font-bold text-gray-300">Mother Vegetableロゴを選ぶ</p>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                {logos.map((logo) => (
+                  <label key={logo.id} className={`cursor-pointer rounded-3xl border bg-white/[0.04] p-4 transition ${logoId === logo.id ? 'border-[#25C760]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
+                    <input type="radio" name="logo" value={logo.id} checked={logoId === logo.id} onChange={() => setLogoId(logo.id)} className="sr-only" />
+                    <div className="flex h-32 items-center justify-center rounded-2xl bg-black p-4"><img src={logo.src} alt={logo.name} className="max-h-full max-w-full object-contain" /></div>
+                    <p className="mt-3 text-sm font-bold">{logo.name}</p>
+                  </label>
+                ))}
+              </div>
+            </div>
+            )}
+
+            {labelDesignChoice === 'ai' && (
             <div className="mt-8 rounded-[2rem] border border-[#25C760]/25 bg-[#25C760]/[0.05] p-6">
               <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                 <div>
                   <p className="text-sm font-bold text-[#25C760]">AIラベル提案</p>
-                  <h3 className="mt-2 text-2xl font-black">デザインが苦手な人はAIに任せる</h3>
+                  <h3 className="mt-2 text-2xl font-black">デザインをAIに作成させる</h3>
                   <p className="mt-3 text-sm leading-6 text-gray-300">
                     先に選んだMother Vegetableロゴと、必須のMade in Japanマークを使って、商品名・使ってほしい人・ストーリーからラベル案を作ります。
                   </p>
@@ -489,7 +521,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               </div>
               <div className="mt-5 flex flex-wrap gap-3">
                 <button type="button" onClick={generateAiLabelDesign} className="rounded-full bg-[#25C760] px-6 py-3 font-black text-black">AIにラベル案を作ってもらう</button>
-                <button type="button" onClick={() => setDesignMode('manual')} className="rounded-full border border-white/20 px-6 py-3 font-bold text-white hover:border-[#25C760]">自分で調整する</button>
+                <button type="button" onClick={() => { setLabelDesignChoice('manual'); setDesignMode('manual'); }} className="rounded-full border border-white/20 px-6 py-3 font-bold text-white hover:border-[#25C760]">自分で調整する</button>
               </div>
               {aiConcept && (
                 <div className="mt-5 rounded-3xl border border-white/10 bg-black/35 p-5 text-sm leading-7 text-gray-200">
@@ -498,21 +530,30 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                 </div>
               )}
             </div>
+            )}
 
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
-              <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">背景色
-                <input type="color" value={labelBg} onChange={(e) => setLabelBg(e.target.value)} className="mt-3 h-12 w-full rounded-xl bg-black" />
+            {labelDesignChoice === 'manual' && (
+            <>
+              <div className="mt-8 grid gap-5 md:grid-cols-2">
+                <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">背景色
+                  <input type="color" value={labelBg} onChange={(e) => setLabelBg(e.target.value)} className="mt-3 h-12 w-full rounded-xl bg-black" />
+                </label>
+                <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">希望デザインがある場合
+                  <input type="file" className="mt-3 block w-full text-sm text-gray-300 file:mr-4 file:rounded-full file:border-0 file:bg-[#25C760] file:px-4 file:py-2 file:font-bold file:text-black" />
+                </label>
+              </div>
+              <label className="mt-5 block rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">デザイン希望メモ
+                <textarea value={designMemo} onChange={(e) => setDesignMemo(e.target.value)} rows={5} placeholder="例：黒背景に白文字、素材名を大きく、地域の物語が伝わる上品な雰囲気にしたい" className="mt-3 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
               </label>
-              <label className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">希望デザインがある場合
-                <input type="file" className="mt-3 block w-full text-sm text-gray-300 file:mr-4 file:rounded-full file:border-0 file:bg-[#25C760] file:px-4 file:py-2 file:font-bold file:text-black" />
-              </label>
-            </div>
-            <label className="mt-5 block rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm font-bold text-gray-300">デザイン希望メモ
-              <textarea value={designMemo} onChange={(e) => setDesignMemo(e.target.value)} rows={5} placeholder="例：黒背景に白文字、素材名を大きく、地域の物語が伝わる上品な雰囲気にしたい" className="mt-3 w-full rounded-2xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-[#25C760]" />
-            </label>
-            <button type="button" onClick={() => { setDetailOpen(true); setConfirmOpen(false); jumpTo(detailSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">商品情報へ進む</button>
+            </>
+            )}
+
+            {labelDesignChoice && (
+              <button type="button" onClick={() => { setDetailOpen(true); setConfirmOpen(false); jumpTo(detailSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black">商品情報へ進む</button>
+            )}
           </div>
 
+          {labelDesignChoice === 'manual' && (
           <div className="rounded-[2rem] border border-[#25C760]/30 bg-white/[0.04] p-6">
             <h3 className="text-xl font-black">ラベル配置プレビュー</h3>
             <div className="mt-3 flex flex-wrap gap-2 text-xs font-bold text-[#25C760]">
@@ -583,6 +624,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               </div>
             </div>
           </div>
+          )}
         </div>
       </section>
       )}
