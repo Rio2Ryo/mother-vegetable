@@ -184,6 +184,13 @@ export default function MakerPage() {
                 boxShadow: '0 0 28px rgba(255,183,197,0.13)',
               }}
             >
+              <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <span className="absolute right-[12%] top-[16%] h-12 w-7 rotate-45 rounded-[70%_30%_70%_30%] bg-[#ffb7c5]/20 blur-[1px]" />
+                <span className="absolute right-[24%] top-[36%] h-9 w-5 -rotate-12 rounded-[70%_30%_70%_30%] bg-white/12 blur-[1px]" />
+                <span className="absolute right-[8%] bottom-[18%] h-10 w-6 rotate-[28deg] rounded-[70%_30%_70%_30%] bg-[#ffb7c5]/16 blur-[1px]" />
+                <span className="absolute left-[58%] top-[18%] h-7 w-4 -rotate-[32deg] rounded-[70%_30%_70%_30%] bg-[#ffb7c5]/14 blur-[1px]" />
+                <span className="absolute left-[48%] bottom-[20%] h-8 w-5 rotate-[18deg] rounded-[70%_30%_70%_30%] bg-white/10 blur-[1px]" />
+              </div>
               <div className="relative z-10 text-left">
                 <span className="mb-3 block text-sm font-bold tracking-[0.25em]" style={{ color: '#ffb7c5' }}>03</span>
                 <h3 className="mb-2 font-extrabold" style={{ fontFamily: "'Inter', 'Noto Sans JP', sans-serif", fontSize: 'clamp(34px, 4vw, 54px)', color: '#ffb7c5', lineHeight: 1.18, textShadow: '0 0 20px rgba(255,183,197,0.22)' }}>
@@ -220,7 +227,7 @@ export default function MakerPage() {
       </section>
 
       <section className="bg-[#25C760]/[0.04] px-6 py-16">
-        <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="mx-auto max-w-5xl space-y-8">
           <div className="rounded-3xl border border-[#25C760]/30 bg-black/60 p-8">
             <h2 className="text-2xl font-black text-[#25C760]">Maker登録費用（提案料無料）</h2>
             <p className="mt-5 text-3xl font-black">月額 200ドル</p>
