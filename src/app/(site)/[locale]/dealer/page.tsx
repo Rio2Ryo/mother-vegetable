@@ -15,7 +15,7 @@ export default function DealerPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,199,96,0.22),transparent_42%)]" />
         <div className="relative mx-auto max-w-5xl">
           <p className="mb-4 text-sm font-bold uppercase tracking-[0.35em] text-[#25C760]">Mazavege Partner Program</p>
-          <h1 className="max-w-3xl text-4xl font-black tracking-tight md:text-6xl">Mazavege Dealer 募集</h1>
+          <h1 className="max-w-3xl text-4xl font-black tracking-tight md:text-6xl">Mazavege Dealer</h1>
           <p className="mt-6 text-2xl font-semibold text-white/90 md:text-3xl">Mother Vegetableの商品を販売して地球を癒す</p>
           <p className="mt-6 max-w-4xl text-lg leading-9 text-gray-300 md:text-xl md:leading-10">
             <span className="block md:inline">使うことで地球にも、人々の健康にも、そして地域の経済にも優しいMother Vegetableを、</span>

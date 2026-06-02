@@ -34,7 +34,7 @@ export default function MakerPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,199,96,0.22),transparent_42%)]" />
         <div className="relative mx-auto max-w-5xl">
           <p className="mb-4 text-sm font-bold uppercase tracking-[0.35em] text-[#25C760]">Mazavege Partner Program</p>
-          <h1 className="max-w-3xl text-4xl font-black tracking-tight md:text-6xl">Mazavege Maker 募集</h1>
+          <h1 className="max-w-3xl text-4xl font-black tracking-tight md:text-6xl">Mazavege Maker</h1>
           <p className="mt-6 text-2xl font-semibold text-white/90">あなたのオリジナル商品をリスクなく世界へ</p>
           <p className="mt-6 max-w-3xl text-lg leading-9 text-gray-300">
             Mother Vegetableを使ったオリジナル商品を作り、あなたの夢を叶えながら、地球再生・人々の健康・地域活性化を実現します。
@@ -49,12 +49,10 @@ export default function MakerPage() {
       </section>
 
       <section className="px-6 py-16">
-        <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#25C760]">About Maker</p>
-            <h2 className="mt-3 text-3xl font-black">Mazavege Makerとは</h2>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-lg leading-9 text-gray-300">
+        <div className="mx-auto max-w-4xl">
+          <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#25C760]">About Maker</p>
+          <h2 className="mt-3 text-3xl font-black">Mazavege Makerとは</h2>
+          <div className="mt-6 text-lg leading-9 text-gray-300">
             <p>Mazavege Makerとは、Mother Vegetableと日本の食品や化粧品などと組み合わせて、自分のオリジナル商品を作りたい方に向けたパートナー制度です。</p>
             <p className="mt-5">自分の商品アイデアを提案し、審査で承認された場合、Mazavege Shopで販売されます。</p>
           </div>
@@ -62,8 +60,8 @@ export default function MakerPage() {
       </section>
 
       <section className="bg-black px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-[1180px]">
-          <div className="mb-14 max-w-[980px] text-left">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-14 text-left">
             <h2
               className="font-bold"
               style={{
@@ -212,7 +210,7 @@ export default function MakerPage() {
       </section>
 
       <section className="px-6 py-16">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-4xl">
           <h2 className="text-3xl font-black text-[#25C760]">Makerになるメリット</h2>
           <div className="mt-8 space-y-5">
             {benefits.map((benefit, index) => (
@@ -227,7 +225,7 @@ export default function MakerPage() {
       </section>
 
       <section className="bg-[#25C760]/[0.04] px-6 py-16">
-        <div className="mx-auto max-w-5xl space-y-8">
+        <div className="mx-auto max-w-4xl space-y-8">
           <div className="rounded-3xl border border-[#25C760]/30 bg-black/60 p-8">
             <h2 className="text-2xl font-black text-[#25C760]">Maker登録費用（提案料無料）</h2>
             <p className="mt-5 text-3xl font-black">月額 200ドル</p>
