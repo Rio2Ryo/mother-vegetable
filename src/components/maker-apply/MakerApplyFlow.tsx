@@ -204,7 +204,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [madeMarkX, setMadeMarkX] = useState(50);
   const [madeMarkY, setMadeMarkY] = useState(86);
   const [madeMarkScale, setMadeMarkScale] = useState(100);
-  const [selectedPreviewItem, setSelectedPreviewItem] = useState<'logo' | 'made' | null>('logo');
+  const [selectedPreviewItem, setSelectedPreviewItem] = useState<'logo' | 'made' | null>(null);
   const [labelBg, setLabelBg] = useState('#101010');
   const [designImagePreview, setDesignImagePreview] = useState('');
   const [designImageName, setDesignImageName] = useState('');
@@ -271,10 +271,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   }
 
   function onPreviewPointer(event: React.PointerEvent<HTMLDivElement>) {
-    setSelectedPreviewItem('logo');
-    const point = getPointerPercent(event);
-    setLogoX(point.x);
-    setLogoY(point.y);
+    if (event.target !== event.currentTarget) return;
+    setSelectedPreviewItem(null);
   }
 
   function onLogoPointer(event: React.PointerEvent<HTMLElement>) {
@@ -569,9 +567,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <div className="mt-5 flex min-h-[540px] items-center justify-center rounded-[2rem] border border-white/10 bg-black/35 p-5">
               <div
                 onPointerDown={onPreviewPointer}
-                onPointerMove={(e) => e.buttons === 1 && onPreviewPointer(e)}
                 data-label-area="true"
-                className="relative w-full max-w-[360px] cursor-crosshair overflow-hidden rounded-[1.35rem] border-2 border-dashed border-[#25C760]/70 shadow-[0_0_28px_rgba(37,199,96,0.18)]"
+                className="relative w-full max-w-[360px] overflow-hidden rounded-[1.35rem] border-2 border-dashed border-[#25C760]/70 shadow-[0_0_28px_rgba(37,199,96,0.18)]"
                 style={{
                   aspectRatio: `${selectedLabelSize.widthMm} / ${selectedLabelSize.heightMm}`,
                   maxHeight: 500,
