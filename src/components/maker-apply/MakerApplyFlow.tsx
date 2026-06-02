@@ -173,6 +173,27 @@ const logos = [
   { id: 'logo-4', name: 'Mother Vegetable ロゴ D', src: '/images/maker-apply/logo-4.png' },
 ];
 
+const motherVegetableOptions = [
+  {
+    id: 'achieve',
+    name: 'Mother Vegetable Achieve',
+    category: '食品用',
+    description: '食生活に取り入れやすいMother Vegetableの食品ライン。\n地域素材と組み合わせて、毎日の習慣になる商品を目指します。',
+  },
+  {
+    id: 'confidence',
+    name: 'Mother Vegetable Confidence',
+    category: '化粧品用/食品用',
+    description: '美容・食品の両方に展開しやすいMother Vegetableライン。\n地域素材の個性を活かし、日々のコンディションづくりに寄り添います。',
+  },
+  {
+    id: 'both',
+    name: '両方とも使用する',
+    category: 'Achieve + Confidence',
+    description: '食品用と化粧品用の両面から商品展開を考えたい方向け。\n素材の特徴に合わせて、複数商品のアイデアにも広げやすくなります。',
+  },
+];
+
 const regions = ['河津町', '串本町', '伊豆市', '南伊豆町', '和歌山県', '北海道', '新潟県', '静岡県', '小豆島'];
 const categories = ['食品向け', '化粧品向け', '食品・化粧品向け'];
 const tagOptions = ['発酵食品', '調味料', 'スキンケア', 'ヘアケア', '粉末', '液体'];
@@ -189,6 +210,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [rawMaterialId, setRawMaterialId] = useState('');
+  const [motherVegetableId, setMotherVegetableId] = useState('');
   const [containerId, setContainerId] = useState('');
   const [containerVariantId, setContainerVariantId] = useState('');
   const [containerColor, setContainerColor] = useState('');
@@ -221,6 +243,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [agreements, setAgreements] = useState<string[]>([]);
+  const motherVegetableSection = useRef<HTMLElement>(null);
   const containerSection = useRef<HTMLElement>(null);
   const containerVariantSection = useRef<HTMLDivElement>(null);
   const containerColorSection = useRef<HTMLDivElement>(null);
@@ -230,6 +253,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const confirmSection = useRef<HTMLElement>(null);
 
   const selectedRaw = rawMaterials.find((item) => item.id === rawMaterialId) ?? rawMaterials[0];
+  const selectedMotherVegetable = motherVegetableOptions.find((item) => item.id === motherVegetableId);
   const selectedContainer = containers.find((item) => item.id === containerId) ?? containers[0];
   const selectedLogo = logos.find((item) => item.id === logoId) ?? logos[0];
   const selectedContainerVariant = selectedContainer.variants.find((item) => item.id === containerVariantId) ?? selectedContainer.variants[0];
@@ -393,7 +417,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {filteredMaterials.map((item) => (
                 <label key={item.id} className={`group cursor-pointer overflow-hidden rounded-[1.75rem] border bg-white/[0.035] transition ${rawMaterialId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.25)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                  <input type="radio" name="rawMaterial" value={item.id} checked={rawMaterialId === item.id} onChange={() => { setRawMaterialId(item.id); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerSection); }} className="sr-only" />
+                  <input type="radio" name="rawMaterial" value={item.id} checked={rawMaterialId === item.id} onChange={() => { setRawMaterialId(item.id); setMotherVegetableId(''); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(motherVegetableSection); }} className="sr-only" />
                   <div className="relative h-44 overflow-hidden bg-white/5"><img src={item.image} alt={`${item.name}の素材写真`} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /></div>
                   <div className="p-5">
                     <div className="flex items-start justify-between gap-3">
@@ -415,9 +439,36 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       </section>
 
       {rawMaterialId && (
-      <section ref={containerSection} className="px-6 py-16">
+      <section ref={motherVegetableSection} className="px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-bold text-[#25C760]">STEP 02</p>
+          <h2 className="mt-2 text-3xl font-black">組み合わせるMother Vegetableを選択する</h2>
+          <p className="mt-4 max-w-3xl text-gray-300">選んだJapanese Raw Materialと、どのMother Vegetableラインを組み合わせるか選んでください。</p>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {motherVegetableOptions.map((item) => (
+              <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${motherVegetableId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
+                <input
+                  type="radio"
+                  name="motherVegetable"
+                  value={item.id}
+                  checked={motherVegetableId === item.id}
+                  onChange={() => { setMotherVegetableId(item.id); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerSection, 120); }}
+                  className="sr-only"
+                />
+                <p className="text-xs font-black uppercase tracking-[0.22em] text-[#25C760]">{item.category}</p>
+                <h3 className="mt-3 text-2xl font-black">{item.name}</h3>
+                <p className="mt-4 whitespace-pre-line text-sm leading-7 text-gray-300">{item.description}</p>
+              </label>
+            ))}
+          </div>
+        </div>
+      </section>
+      )}
+
+      {motherVegetableId && (
+      <section ref={containerSection} className="px-6 py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-bold text-[#25C760]">STEP 03</p>
           <h2 className="mt-2 text-3xl font-black">どんな容器を使いたいですか？</h2>
           <p className="mt-4 max-w-3xl text-gray-300">選んだ素材に合わせて、まず容器の形状を1つ選んでください。形状を選ぶと、次にサイズ・色・仕様の候補が表示されます。</p>
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -517,7 +568,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       <section ref={designSection} className="px-6 py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_420px]">
           <div>
-            <p className="text-sm font-bold text-[#25C760]">STEP 03</p>
+            <p className="text-sm font-bold text-[#25C760]">STEP 04</p>
             <h2 className="mt-2 text-3xl font-black">ラベルデザイン</h2>
             <p className="mt-4 max-w-3xl text-gray-300">Mother Vegetableロゴを選び、ロゴとMade in Japanマークのサイズを調整します。位置はプレビュー上で直接ドラッグできます。</p>
 
@@ -629,7 +680,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       {detailOpen && (
       <section ref={detailSection} className="px-6 py-16">
         <div className="mx-auto max-w-5xl">
-          <p className="text-sm font-bold text-[#25C760]">STEP 04</p>
+          <p className="text-sm font-bold text-[#25C760]">STEP 05</p>
           <h2 className="mt-2 text-3xl font-black">商品名・希望価格・連絡先</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             <Input label="希望商品名" value={productName} onChange={setProductName} placeholder="例：Kawazu Mineral Salt Achieve" />
@@ -639,7 +690,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <Input label="電話番号" value={phone} onChange={setPhone} placeholder="090-0000-0000" />
             <Input label="住所" value={address} onChange={setAddress} placeholder="東京都..." />
           </div>
-          {!isStep4Complete && <p className="mt-4 text-sm font-bold text-[#25C760]">STEP 4はすべて必須入力です。全項目を入力すると確認画面へ進めます。</p>}
+          {!isStep4Complete && <p className="mt-4 text-sm font-bold text-[#25C760]">STEP 5はすべて必須入力です。全項目を入力すると確認画面へ進めます。</p>}
           <button type="button" disabled={!isStep4Complete} onClick={() => { if (!isStep4Complete) return; setConfirmOpen(true); jumpTo(confirmSection); }} className="mt-8 rounded-full bg-[#25C760] px-8 py-4 font-black text-black transition disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-300">確認画面へ進む</button>
         </div>
       </section>
@@ -648,10 +699,11 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
       {confirmOpen && (
       <section ref={confirmSection} className="px-6 py-16 pb-24">
         <div className="mx-auto max-w-5xl rounded-[2rem] border border-[#25C760]/30 bg-[#25C760]/[0.06] p-6 md:p-10">
-          <p className="text-sm font-bold text-[#25C760]">STEP 05</p>
+          <p className="text-sm font-bold text-[#25C760]">STEP 06</p>
           <h2 className="mt-2 text-3xl font-black">あなたの希望内容はこれでいいですか？</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <Summary label="素材" value={`${selectedRaw.name}（${selectedRaw.region}）`} />
+            <Summary label="Mother Vegetable" value={selectedMotherVegetable ? `${selectedMotherVegetable.name}（${selectedMotherVegetable.category}）` : '未選択'} />
             <Summary label="容器・内容量" value={`${selectedContainer.name} / ${selectedContainerVariant.name} / ${capacity}`} />
             <Summary label="容器仕様" value={`容器色: ${containerColor} / 蓋色: ${lidColor}`} />
             <Summary label="ラベル範囲" value={`横${selectedLabelSize.widthMm}mm × 縦${selectedLabelSize.heightMm}mm`} />
