@@ -19,6 +19,7 @@ type ContainerItem = {
   tags: string[];
   note: string;
   image: string;
+  labelSize: { widthMm: number; heightMm: number };
 };
 
 const rawMaterials: RawMaterial[] = [
@@ -34,12 +35,12 @@ const rawMaterials: RawMaterial[] = [
 ];
 
 const containers: ContainerItem[] = [
-  { id: 'pouch', name: 'もみもみパウチ', capacity: '30g〜120g', tags: ['食品向け', '化粧品向け', '軽量', '詰替'], note: '味噌・パック・ジェル系に向く柔らかい容器。', image: '/images/maker-apply/photos/container-pouch.svg' },
-  { id: 'spray', name: 'スプレーボトル', capacity: '50ml〜150ml', tags: ['化粧品向け', 'ミスト', '液体'], note: '化粧水・温泉水・ヘアミストにおすすめ。', image: '/images/maker-apply/photos/container-spray.svg' },
-  { id: 'soy', name: '醤油差しボトル', capacity: '80ml〜200ml', tags: ['食品向け', '液体', '卓上'], note: '醤油・ポン酢・ドレッシング系に向く容器。', image: '/images/maker-apply/photos/container-soy.svg' },
-  { id: 'shaker', name: 'ふりかけシェイカー', capacity: '20g〜80g', tags: ['食品向け', '粉末', '卓上'], note: '塩・スパイス・粉末Achieveコラボに。', image: '/images/maker-apply/photos/container-shaker.svg' },
-  { id: 'jar', name: 'ガラスジャー', capacity: '80g〜250g', tags: ['食品向け', '化粧品向け', '高級感'], note: '味噌・バーム・クリーム系に使いやすい容器。', image: '/images/maker-apply/photos/container-jar.svg' },
-  { id: 'lip', name: 'リップスティック', capacity: '3g〜8g', tags: ['化粧品向け', 'リップ', '携帯'], note: 'リップ・スティックバーム専用。食品不可。', image: '/images/maker-apply/photos/container-lipstick.svg' },
+  { id: 'pouch', name: 'もみもみパウチ', capacity: '30g〜120g', tags: ['食品向け', '化粧品向け', '軽量', '詰替'], note: '味噌・パック・ジェル系に向く柔らかい容器。', image: '/images/maker-apply/photos/container-pouch.svg', labelSize: { widthMm: 100, heightMm: 100 } },
+  { id: 'spray', name: 'スプレーボトル', capacity: '50ml〜150ml', tags: ['化粧品向け', 'ミスト', '液体'], note: '化粧水・温泉水・ヘアミストにおすすめ。', image: '/images/maker-apply/photos/container-spray.svg', labelSize: { widthMm: 45, heightMm: 90 } },
+  { id: 'soy', name: '醤油差しボトル', capacity: '80ml〜200ml', tags: ['食品向け', '液体', '卓上'], note: '醤油・ポン酢・ドレッシング系に向く容器。', image: '/images/maker-apply/photos/container-soy.svg', labelSize: { widthMm: 55, heightMm: 85 } },
+  { id: 'shaker', name: 'ふりかけシェイカー', capacity: '20g〜80g', tags: ['食品向け', '粉末', '卓上'], note: '塩・スパイス・粉末Achieveコラボに。', image: '/images/maker-apply/photos/container-shaker.svg', labelSize: { widthMm: 50, heightMm: 70 } },
+  { id: 'jar', name: 'ガラスジャー', capacity: '80g〜250g', tags: ['食品向け', '化粧品向け', '高級感'], note: '味噌・バーム・クリーム系に使いやすい容器。', image: '/images/maker-apply/photos/container-jar.svg', labelSize: { widthMm: 60, heightMm: 80 } },
+  { id: 'lip', name: 'リップスティック', capacity: '3g〜8g', tags: ['化粧品向け', 'リップ', '携帯'], note: 'リップ・スティックバーム専用。食品不可。', image: '/images/maker-apply/photos/container-lipstick.svg', labelSize: { widthMm: 28, heightMm: 55 } },
 ];
 
 const logos = [
@@ -86,6 +87,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const selectedRaw = rawMaterials.find((item) => item.id === rawMaterialId) ?? rawMaterials[0];
   const selectedContainer = containers.find((item) => item.id === containerId) ?? containers[0];
   const selectedLogo = logos.find((item) => item.id === logoId) ?? logos[0];
+  const selectedLabelSize = selectedContainer.labelSize;
 
   const filteredMaterials = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -188,6 +190,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                 <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5"><img src={item.image} alt={`${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" /></div>
                 <h3 className="mt-5 text-2xl font-black">{item.name}</h3>
                 <p className="mt-1 text-sm font-bold text-[#25C760]">目安容量: {item.capacity}</p>
+                <p className="mt-2 inline-flex rounded-full border border-[#25C760]/35 px-3 py-1 text-xs font-bold text-[#25C760]">ラベル範囲: {item.labelSize.widthMm}mm × {item.labelSize.heightMm}mm</p>
                 <p className="mt-4 text-sm leading-6 text-gray-300">{item.note}</p>
                 <div className="mt-4 flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300">{tag}</span>)}</div>
               </label>
@@ -231,14 +234,32 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
 
           <div className="rounded-[2rem] border border-[#25C760]/30 bg-white/[0.04] p-6">
             <h3 className="text-xl font-black">ラベル配置プレビュー</h3>
-            <div onPointerDown={onPreviewPointer} onPointerMove={(e) => e.buttons === 1 && onPreviewPointer(e)} className="relative mt-5 h-[520px] cursor-crosshair overflow-hidden rounded-[2rem] border border-white/10" style={{ background: labelBg }}>
-              <div className="absolute left-1/2 top-8 -translate-x-1/2 rounded-full border border-white/20 px-4 py-1 text-xs text-white/70">{selectedContainer.name}</div>
-              <img src={selectedLogo.src} alt="selected logo" className="absolute -translate-x-1/2 -translate-y-1/2 object-contain" style={{ left: `${logoX}%`, top: `${logoY}%`, width: `${logoScale * 2}px`, maxWidth: '82%', maxHeight: '180px' }} />
-              <div className="absolute left-1/2 top-[58%] w-[78%] -translate-x-1/2 text-center">
-                <p className="text-2xl font-black">{productName || 'PRODUCT NAME'}</p>
-                <p className="mt-2 text-sm text-white/70">{selectedRaw.name} × Mother Vegetable</p>
+            <div className="mt-3 flex flex-wrap gap-2 text-xs font-bold text-[#25C760]">
+              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">{selectedContainer.name}</span>
+              <span className="rounded-full border border-[#25C760]/35 px-3 py-1">ラベル範囲: 横{selectedLabelSize.widthMm}mm × 縦{selectedLabelSize.heightMm}mm</span>
+            </div>
+            <p className="mt-3 text-xs leading-5 text-gray-400">
+              容器を変えると、この作業エリアの縦横比もラベル範囲に合わせて変わります。
+            </p>
+            <div className="mt-5 flex min-h-[540px] items-center justify-center rounded-[2rem] border border-white/10 bg-black/35 p-5">
+              <div
+                onPointerDown={onPreviewPointer}
+                onPointerMove={(e) => e.buttons === 1 && onPreviewPointer(e)}
+                className="relative w-full max-w-[360px] cursor-crosshair overflow-hidden rounded-[1.35rem] border-2 border-dashed border-[#25C760]/70 shadow-[0_0_28px_rgba(37,199,96,0.18)]"
+                style={{
+                  aspectRatio: `${selectedLabelSize.widthMm} / ${selectedLabelSize.heightMm}`,
+                  maxHeight: 500,
+                  background: labelBg,
+                }}
+              >
+                <div className="absolute left-1/2 top-4 -translate-x-1/2 rounded-full border border-white/20 px-3 py-1 text-[10px] text-white/70">LABEL AREA</div>
+                <img src={selectedLogo.src} alt="selected logo" className="absolute -translate-x-1/2 -translate-y-1/2 object-contain" style={{ left: `${logoX}%`, top: `${logoY}%`, width: `${logoScale * 2}px`, maxWidth: '82%', maxHeight: '180px' }} />
+                <div className="absolute left-1/2 top-[58%] w-[78%] -translate-x-1/2 text-center">
+                  <p className="text-xl font-black md:text-2xl">{productName || 'PRODUCT NAME'}</p>
+                  <p className="mt-2 text-xs text-white/70 md:text-sm">{selectedRaw.name} × Mother Vegetable</p>
+                </div>
+                <MadeInJapanMark />
               </div>
-              <MadeInJapanMark />
             </div>
             <div className="mt-5 grid gap-4 text-sm text-gray-300">
               <label>ロゴ横位置: {logoX}%<input type="range" min="10" max="90" value={logoX} onChange={(e) => setLogoX(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
@@ -272,6 +293,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <Summary label="素材" value={`${selectedRaw.name}（${selectedRaw.region}）`} />
             <Summary label="容器・内容量" value={`${selectedContainer.name} / ${capacity}`} />
+            <Summary label="ラベル範囲" value={`横${selectedLabelSize.widthMm}mm × 縦${selectedLabelSize.heightMm}mm`} />
             <Summary label="ロゴ" value={`${selectedLogo.name} / 位置 ${logoX}%・${logoY}% / サイズ ${logoScale}%`} />
             <Summary label="商品名・希望価格" value={`${productName || '未入力'} / ${desiredPrice || '未入力'}`} />
             <Summary label="お名前" value={applicantName || '未入力'} />
