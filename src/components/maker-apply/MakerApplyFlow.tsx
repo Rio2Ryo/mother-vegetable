@@ -169,6 +169,9 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [logoX, setLogoX] = useState(50);
   const [logoY, setLogoY] = useState(36);
   const [logoScale, setLogoScale] = useState(100);
+  const [madeMarkX, setMadeMarkX] = useState(50);
+  const [madeMarkY, setMadeMarkY] = useState(86);
+  const [madeMarkScale, setMadeMarkScale] = useState(100);
   const [labelBg, setLabelBg] = useState('#101010');
   const [designMemo, setDesignMemo] = useState('');
   const [productName, setProductName] = useState('');
@@ -206,10 +209,29 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
     window.setTimeout(() => ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
   }
 
+  function getPointerPercent(event: React.PointerEvent<HTMLDivElement>, relativeTo: HTMLElement = event.currentTarget) {
+    const rect = relativeTo.getBoundingClientRect();
+    const x = Math.round(((event.clientX - rect.left) / rect.width) * 100);
+    const y = Math.round(((event.clientY - rect.top) / rect.height) * 100);
+    return {
+      x: Math.min(95, Math.max(5, x)),
+      y: Math.min(95, Math.max(5, y)),
+    };
+  }
+
   function onPreviewPointer(event: React.PointerEvent<HTMLDivElement>) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    setLogoX(Math.round(((event.clientX - rect.left) / rect.width) * 100));
-    setLogoY(Math.round(((event.clientY - rect.top) / rect.height) * 100));
+    const point = getPointerPercent(event);
+    setLogoX(point.x);
+    setLogoY(point.y);
+  }
+
+  function onMadeMarkPointer(event: React.PointerEvent<HTMLDivElement>) {
+    event.stopPropagation();
+    const labelArea = event.currentTarget.parentElement;
+    if (!labelArea) return;
+    const point = getPointerPercent(event, labelArea);
+    setMadeMarkX(point.x);
+    setMadeMarkY(point.y);
   }
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -350,7 +372,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div>
             <p className="text-sm font-bold text-[#25C760]">STEP 03</p>
             <h2 className="mt-2 text-3xl font-black">ロゴとラベルデザイン</h2>
-            <p className="mt-4 max-w-3xl text-gray-300">Mother Vegetableロゴを選び、配置したい位置をプレビュー上でクリック/ドラッグしてください。Made in Japanマークはラベル下部に必ず入ります。</p>
+            <p className="mt-4 max-w-3xl text-gray-300">Mother Vegetableロゴを選び、配置したい位置をプレビュー上でクリック/ドラッグしてください。Made in Japanマークも位置とサイズを調整できます。</p>
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               {logos.map((logo) => (
                 <label key={logo.id} className={`cursor-pointer rounded-3xl border bg-white/[0.04] p-4 transition ${logoId === logo.id ? 'border-[#25C760]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
@@ -401,13 +423,28 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                   <p className="text-xl font-black md:text-2xl">{productName || 'PRODUCT NAME'}</p>
                   <p className="mt-2 text-xs text-white/70 md:text-sm">{selectedRaw.name} × Mother Vegetable</p>
                 </div>
-                <MadeInJapanMark />
+                <MadeInJapanMark
+                  x={madeMarkX}
+                  y={madeMarkY}
+                  scale={madeMarkScale}
+                  onPointerDown={onMadeMarkPointer}
+                  onPointerMove={(e) => e.buttons === 1 && onMadeMarkPointer(e)}
+                />
               </div>
             </div>
             <div className="mt-5 grid gap-4 text-sm text-gray-300">
               <label>ロゴ横位置: {logoX}%<input type="range" min="10" max="90" value={logoX} onChange={(e) => setLogoX(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
               <label>ロゴ縦位置: {logoY}%<input type="range" min="12" max="72" value={logoY} onChange={(e) => setLogoY(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
               <label>ロゴサイズ: {logoScale}%<input type="range" min="45" max="150" value={logoScale} onChange={(e) => setLogoScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
+              <div className="rounded-3xl border border-white/10 bg-black/30 p-4">
+                <p className="font-bold text-white">Made in Japanマーク</p>
+                <p className="mt-1 text-xs leading-5 text-gray-400">マークをドラッグ、または下のスライダーで位置とサイズを調整できます。背景は透過です。</p>
+                <div className="mt-4 grid gap-3">
+                  <label>横位置: {madeMarkX}%<input type="range" min="8" max="92" value={madeMarkX} onChange={(e) => setMadeMarkX(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
+                  <label>縦位置: {madeMarkY}%<input type="range" min="12" max="94" value={madeMarkY} onChange={(e) => setMadeMarkY(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
+                  <label>サイズ: {madeMarkScale}%<input type="range" min="45" max="160" value={madeMarkScale} onChange={(e) => setMadeMarkScale(Number(e.target.value))} className="w-full accent-[#25C760]" /></label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -439,6 +476,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             <Summary label="容器仕様" value={`${selectedContainerVariant.color} / ${selectedContainerVariant.shape} / ${selectedContainerVariant.spec} / ${selectedContainerVariant.material}`} />
             <Summary label="ラベル範囲" value={`横${selectedLabelSize.widthMm}mm × 縦${selectedLabelSize.heightMm}mm`} />
             <Summary label="ロゴ" value={`${selectedLogo.name} / 位置 ${logoX}%・${logoY}% / サイズ ${logoScale}%`} />
+            <Summary label="Made in Japan" value={`位置 ${madeMarkX}%・${madeMarkY}% / サイズ ${madeMarkScale}%`} />
             <Summary label="商品名・希望価格" value={`${productName || '未入力'} / ${desiredPrice || '未入力'}`} />
             <Summary label="お名前" value={applicantName || '未入力'} />
             <Summary label="連絡先" value={`${email || '未入力'} / ${phone || '未入力'}`} />
@@ -465,13 +503,37 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
 }
 
 
-function MadeInJapanMark() {
+function MadeInJapanMark({
+  x,
+  y,
+  scale,
+  onPointerDown,
+  onPointerMove,
+}: {
+  x: number;
+  y: number;
+  scale: number;
+  onPointerDown: (event: React.PointerEvent<HTMLDivElement>) => void;
+  onPointerMove: (event: React.PointerEvent<HTMLDivElement>) => void;
+}) {
   return (
-    <div className="absolute bottom-6 left-1/2 w-[74%] -translate-x-1/2 text-center text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]">
-      <div className="mx-auto flex h-14 w-24 items-center justify-center border-[5px] border-white bg-transparent">
-        <span className="block h-7 w-7 rounded-full bg-[#ed1b2f]" />
+    <div
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      className="absolute z-10 w-[128px] cursor-grab select-none text-center text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] active:cursor-grabbing"
+      style={{
+        left: `${x}%`,
+        top: `${y}%`,
+        transform: `translate(-50%, -50%) scale(${scale / 100})`,
+        transformOrigin: 'center',
+        touchAction: 'none',
+      }}
+      aria-label="Made in Japanマーク"
+    >
+      <div className="mx-auto flex h-8 w-14 items-center justify-center border-[2px] border-white bg-transparent">
+        <span className="block h-4 w-4 rounded-full bg-[#ed1b2f]" />
       </div>
-      <div className="mt-3 font-serif text-2xl font-black tracking-[0.12em] md:text-3xl">MADE IN JAPAN</div>
+      <div className="mt-2 whitespace-nowrap font-serif text-[15px] font-black leading-none tracking-[0.04em]">MADE IN JAPAN</div>
     </div>
   );
 }
