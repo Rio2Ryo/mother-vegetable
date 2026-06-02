@@ -188,6 +188,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [address, setAddress] = useState('');
   const [agreements, setAgreements] = useState<string[]>([]);
   const containerSection = useRef<HTMLElement>(null);
+  const containerVariantSection = useRef<HTMLDivElement>(null);
   const designSection = useRef<HTMLElement>(null);
   const detailSection = useRef<HTMLElement>(null);
   const confirmSection = useRef<HTMLElement>(null);
@@ -211,8 +212,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
 
   const canSubmit = productName && applicantName && email && phone && address && agreements.length === 4;
 
-  function jumpTo(ref: React.RefObject<HTMLElement | null>) {
-    window.setTimeout(() => ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+  function jumpTo(ref: React.RefObject<HTMLElement | HTMLDivElement | null>, delay = 80) {
+    window.setTimeout(() => ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), delay);
   }
 
   function getPointerPercent(event: React.PointerEvent<HTMLDivElement>, relativeTo: HTMLElement = event.currentTarget) {
@@ -336,7 +337,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {containers.map((item) => (
               <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${containerId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(''); setCapacity(''); setDetailOpen(false); setConfirmOpen(false); }} className="sr-only" />
+                <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(''); setCapacity(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }} className="sr-only" />
                 <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5"><img src={item.image} alt={`${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" /></div>
                 <h3 className="mt-5 text-2xl font-black">{item.name}</h3>
                 <p className="mt-1 text-sm font-bold text-[#25C760]">目安容量: {item.capacity}</p>
@@ -347,7 +348,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             ))}
           </div>
           {containerId && (
-          <div className="mt-12 rounded-[2rem] border border-[#25C760]/25 bg-[#25C760]/[0.04] p-6 md:p-8">
+          <div ref={containerVariantSection} className="mt-12 scroll-mt-24 rounded-[2rem] border border-[#25C760]/25 bg-[#25C760]/[0.04] p-6 md:p-8">
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="text-sm font-bold text-[#25C760]">容器の詳細仕様</p>
