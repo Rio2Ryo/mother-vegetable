@@ -593,10 +593,10 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                   onChange={() => { setMotherVegetableId(item.id); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); setNewIdeaStep3Open(false); jumpTo(isNewIdea ? ideaSection : containerSection, 120); }}
                   className="sr-only"
                 />
-                <p className="text-xs font-black uppercase tracking-[0.22em] text-[#25C760]">
-                  {item.id === 'confidence' && !isEnglish ? <><span className="text-white">化粧品用</span><span>/食品用</span></> : item.id === 'both' && !isEnglish ? <><span>Achieve</span><span className="text-white"> + Confidence</span></> : term(item.category)}
+                <p className={`text-xs font-black uppercase tracking-[0.22em] ${item.id === 'confidence' && !isEnglish ? 'text-white' : 'text-[#25C760]'}`}>
+                  {item.id === 'both' && !isEnglish ? <><span>Achieve</span><span className="text-white"> + Confidence</span></> : term(item.category)}
                 </p>
-                <h3 className={`mt-3 text-2xl font-black ${item.id === 'achieve' ? 'text-[#25C760]' : ''}`}>{isEnglish ? term(item.name) : item.name}</h3>
+                <h3 className={`mt-3 text-2xl font-black ${item.id === 'achieve' ? 'text-[#25C760]' : ''}`}>{item.id === 'achieve' ? 'Achieve' : item.id === 'confidence' ? 'Confidence' : (isEnglish ? term(item.name) : item.name)}</h3>
                 <p className="mt-4 whitespace-pre-line text-sm leading-7 text-gray-300">{isEnglish ? (item.id === 'achieve' ? '48 types of nutrients with impurity risks such as heavy metals reduced as much as possible. Known for its beautiful green color.' : item.id === 'confidence' ? 'A natural amorphous silica powder with about 97% purity that meets Japan’s MHLW quasi-drug ingredient standards. It has been evaluated as Premium Food Powder Grade under FDA-standard testing in the United States and can be used for both cosmetics and food.' : 'For those who want to develop products using both Achieve and Confidence.') : item.description}</p>
                 </span>
               </label>
