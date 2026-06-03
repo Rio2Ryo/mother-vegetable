@@ -376,7 +376,7 @@ const mvSalt: ProductData = {
   regionTags: ['伊豆', '静岡県'],
   storyTags: ['伝統製法', '地域連携'],
   storyDescription: '伊豆の海水を伝統の平釜製法で炊き上げた、48栄養素入りのミネラル塩。',
-  proposerTags: ['佐藤はるか'],
+  proposerTags: ['永原和可那'],
 };
 
 // ---------------------------------------------------------------------------
@@ -528,7 +528,7 @@ const mvBalm: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['無添加', 'オーガニック'],
   storyDescription: '静岡県のラボで丁寧に練り上げた、天然コラーゲン配合のラグジュアリーバウム。',
-  proposerTags: ['森みお'],
+  proposerTags: ['永原和可那'],
 };
 
 // ---------------------------------------------------------------------------
@@ -625,7 +625,7 @@ const mvMiso: ProductData = {
   regionTags: ['河津町', '静岡県', '伊豆'],
   storyTags: ['伝統製法', '地域連携'],
   storyDescription: '河津町の味噌蔵が天然麹で長期熟成させた、48栄養素入りプレミアム味噌。',
-  proposerTags: ['鈴木大地'],
+  proposerTags: ['伊藤 友広'],
 };
 
 // ---------------------------------------------------------------------------
@@ -669,7 +669,7 @@ const mvWasabi: ProductData = {
   regionTags: ['伊豆', '静岡県'],
   storyTags: ['地域連携', '限定生産'],
   storyDescription: '伊豆の清流で育つ天然わさびを、限定数量で出荷する地域連携プロダクト。',
-  proposerTags: ['佐藤はるか'],
+  proposerTags: ['永原和可那'],
 };
 
 // ---------------------------------------------------------------------------
@@ -844,7 +844,7 @@ const mvOlive: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['オーガニック'],
   storyDescription: '静岡で厳選したオーガニックオリーブを、48栄養素とブレンドしたエクストラバージンオイル。',
-  proposerTags: ['森みお'],
+  proposerTags: ['永原和可那'],
 };
 
 // ---------------------------------------------------------------------------
@@ -970,7 +970,7 @@ const mvHandCream: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['オーガニック', '無添加'],
   storyDescription: '静岡県のラボが手肌を守るために開発した、オーガニック天然コラーゲン配合のハンドクリーム。',
-  proposerTags: ['佐藤はるか'],
+  proposerTags: ['永原和可那'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1058,7 +1058,7 @@ const mvBodyMist: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['無添加'],
   storyDescription: '静岡県のラボが開発した、天然栄養素配合の無添加ボディミスト。',
-  proposerTags: ['森みお'],
+  proposerTags: ['永原和可那'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1222,7 +1222,7 @@ const mvLipBalm: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['無添加'],
   storyDescription: '静岡県のラボがふっくらした唇のために手作りする、天然コラーゲン配合の無添加リップバーム。',
-  proposerTags: ['鈴木大地'],
+  proposerTags: ['伊藤 友広'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1310,7 +1310,7 @@ const mvHairOil: ProductData = {
   regionTags: ['静岡県'],
   storyTags: ['オーガニック'],
   storyDescription: '静岡県のラボが厳選したオーガニック植物オイルをブレンドした、髪のためのヘアオイル。',
-  proposerTags: ['森みお'],
+  proposerTags: ['永原和可那'],
 };
 
 // ---------------------------------------------------------------------------
@@ -1474,7 +1474,7 @@ const mvBathSalt: ProductData = {
   regionTags: ['伊豆', '静岡県'],
   storyTags: ['伝統製法', '地域連携'],
   storyDescription: '伊豆の海塩工房がミネラル豊富な海塩に48栄養素を加えた、伝統製法のバスソルト。',
-  proposerTags: ['鈴木大地'],
+  proposerTags: ['伊藤 友広'],
 };
 
 // ---------------------------------------------------------------------------
