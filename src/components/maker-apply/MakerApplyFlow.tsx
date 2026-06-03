@@ -501,7 +501,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <p className="text-sm font-bold uppercase tracking-[0.35em] text-[#25C760]">Mazavege Maker Application</p>
           <h1 className="mt-4 text-4xl font-black md:text-6xl">{ui?.heroTitle ?? 'いますぐ、あなたの夢を叶えよう'}</h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
-            {ui?.heroLead ?? 'Japanese Raw Materialを1つ選び、容器や商品名を決めてアイデアを送信します。審査が通過してあなたが承認するまで、月額費用は発生いたしません。'}
+            {ui?.heroLead ?? 'テーラーメイドであなただけの特別な商品を開発しましょう。審査が通過してあなたが承認するまで、月額費用は発生いたしませんのでご安心ください。'}
           </p>
         </div>
       </section>
@@ -915,7 +915,7 @@ function MadeInJapanMark({
     <div
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
-      className={`absolute z-10 w-[128px] cursor-grab select-none p-1 text-center text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] active:cursor-grabbing ${selected ? 'outline outline-2 outline-[#25C760]' : ''}`}
+      className={`absolute z-10 w-[128px] cursor-grab select-none p-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] active:cursor-grabbing ${selected ? 'outline outline-2 outline-[#25C760]' : ''}`}
       style={{
         left: `${x}%`,
         top: `${y}%`,
@@ -925,10 +925,12 @@ function MadeInJapanMark({
       }}
       aria-label={enUi.madeAria}
     >
-      <div className="mx-auto flex h-8 w-14 items-center justify-center border-[2px] border-white bg-transparent">
-        <span className="block h-4 w-4 rounded-full bg-[#ed1b2f]" />
-      </div>
-      <div className="mt-2 whitespace-nowrap font-serif text-[15px] font-black leading-none tracking-[0.04em]">MADE IN JAPAN</div>
+      <img
+        src="/Images/Assets/made-in-japan-mark.png"
+        alt="Made in Japan"
+        className="block h-auto w-full select-none"
+        draggable={false}
+      />
       {selected && (
         <div
           onPointerDown={onResizePointer}
