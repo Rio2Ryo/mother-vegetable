@@ -581,7 +581,10 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <p className="mt-4 max-w-3xl text-gray-300">{isNewIdea ? (ui?.mvNewLead ?? 'どのMother Vegetableを使用するか選んでください。') : (ui?.mvLead ?? '選んだJapanese Raw Materialと、どのMother Vegetableを組み合わせるか選んでください。')}</p>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {motherVegetableOptions.map((item) => (
-              <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${motherVegetableId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
+              <label key={item.id} className={`relative overflow-hidden cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${motherVegetableId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
+                <span className={`pointer-events-none absolute inset-0 opacity-80 ${item.id === 'achieve' ? 'bg-[radial-gradient(circle_at_50%_8%,rgba(37,199,96,0.34),transparent_32%),radial-gradient(circle_at_18%_78%,rgba(37,199,96,0.14),transparent_34%)]' : item.id === 'confidence' ? 'bg-[radial-gradient(circle_at_50%_10%,rgba(255,255,255,0.26),transparent_34%),radial-gradient(circle_at_80%_78%,rgba(255,255,255,0.10),transparent_38%)]' : 'bg-[radial-gradient(circle_at_24%_16%,rgba(37,199,96,0.28),transparent_34%),radial-gradient(circle_at_76%_18%,rgba(255,255,255,0.22),transparent_34%),radial-gradient(circle_at_50%_82%,rgba(37,199,96,0.12),transparent_36%)]'}`} />
+                <span className="pointer-events-none absolute inset-0 bg-black/35" />
+                <span className="relative z-10 block">
                 <input
                   type="radio"
                   name="motherVegetable"
@@ -590,9 +593,12 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                   onChange={() => { setMotherVegetableId(item.id); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); setNewIdeaStep3Open(false); jumpTo(isNewIdea ? ideaSection : containerSection, 120); }}
                   className="sr-only"
                 />
-                <p className="text-xs font-black uppercase tracking-[0.22em] text-[#25C760]">{term(item.category)}</p>
-                <h3 className="mt-3 text-2xl font-black">{isEnglish ? term(item.name) : item.name}</h3>
+                <p className="text-xs font-black uppercase tracking-[0.22em] text-[#25C760]">
+                  {item.id === 'confidence' && !isEnglish ? <><span className="text-white">化粧品用</span><span>/食品用</span></> : item.id === 'both' && !isEnglish ? <><span>Achieve</span><span className="text-white"> + Confidence</span></> : term(item.category)}
+                </p>
+                <h3 className={`mt-3 text-2xl font-black ${item.id === 'achieve' ? 'text-[#25C760]' : ''}`}>{isEnglish ? term(item.name) : item.name}</h3>
                 <p className="mt-4 whitespace-pre-line text-sm leading-7 text-gray-300">{isEnglish ? (item.id === 'achieve' ? '48 types of nutrients with impurity risks such as heavy metals reduced as much as possible. Known for its beautiful green color.' : item.id === 'confidence' ? 'A natural amorphous silica powder with about 97% purity that meets Japan’s MHLW quasi-drug ingredient standards. It has been evaluated as Premium Food Powder Grade under FDA-standard testing in the United States and can be used for both cosmetics and food.' : 'For those who want to develop products using both Achieve and Confidence.') : item.description}</p>
+                </span>
               </label>
             ))}
           </div>
