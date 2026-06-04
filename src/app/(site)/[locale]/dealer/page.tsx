@@ -29,8 +29,8 @@ const enText = {
   benefit2Title: 'Purchase all products at 15% off',
   benefit2Body: 'You can purchase all products on Mazavege Shop at 15% off the regular price. This is also recommended for those who want to continue using the products personally or with their family. After purchasing through your own sales link, the 15% is paid later as a sales reward.',
   feeTitle: 'Dealer registration fee',
-  feeMain: 'USD 100 / month + tax',
-  feeSub: '(JPY 15,000 + tax)',
+  feeMain: 'USD 100 / year + tax',
+  feeSub: '(JPY 15,000 + tax / year)',
   recommendedTitle: 'Recommended for people like this',
   ctaTitle: 'Register as a Mazavege Dealer',
   ctaLead: 'Bring Mother Vegetable, which is kind to the Earth, health, and regional communities, to the world.',
@@ -99,8 +99,8 @@ export default async function DealerPage({ params }: { params: Promise<{ locale:
         <div className="mx-auto max-w-4xl">
           <h2 className="text-2xl font-black text-[#25C760]">{isEn ? enText.feeTitle : 'Dealer登録費用'}</h2>
           <div className="mt-6 rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-            <p className="text-3xl font-black">{isEn ? enText.feeMain : '月額 100ドル＋tax'}</p>
-            <p className="mt-2 text-gray-300">{isEn ? enText.feeSub : '(月額15,000円＋税)'}</p>
+            <p className="text-3xl font-black">{isEn ? enText.feeMain : '年額 100ドル＋tax'}</p>
+            <p className="mt-2 text-gray-300">{isEn ? enText.feeSub : '(年額15,000円＋税)'}</p>
           </div>
         </div>
       </section>
