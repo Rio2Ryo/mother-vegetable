@@ -1,7 +1,7 @@
 'use client';
 
 import { Link, useRouter, usePathname } from '@/i18n/navigation';
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback, useSyncExternalStore } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCartStore } from '@/store/cart';
 import { useAffiliateStore } from '@/store/affiliateStore';
@@ -20,7 +20,7 @@ export default function Header() {
   const [interviewOpen, setInterviewOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);
   const { toggleCart, totalItems } = useCartStore();
   const locale = useLocale();
   const pathname = usePathname();
@@ -38,15 +38,11 @@ export default function Header() {
 
   // Zustand store for instructor auth (separate system)
   const currentInstructor = useAffiliateStore((s) => s.currentInstructor);
-  const instructorToken = useAffiliateStore((s) => s.instructorToken);
   const instructorLogout = useAffiliateStore((s) => s.logout);
 
   const isUserLoggedIn = mounted && status === 'authenticated' && !!session?.user;
   const isInstructorLoggedIn = mounted && !!currentInstructor;
   const isLoggedIn = isUserLoggedIn || isInstructorLoggedIn;
-
-  // Instructor-registered check: show instructor menu if token or currentInstructor exists (no active login required)
-  const isRegisteredInstructor = mounted && (!!instructorToken || !!currentInstructor);
 
   const displayName = isUserLoggedIn
     ? (session?.user?.name || session?.user?.email || '')
@@ -55,7 +51,6 @@ export default function Header() {
     ? (session?.user?.email || '')
     : (currentInstructor?.email || '');
 
-  useEffect(() => { setMounted(true); }, []);
 
   function handleLogout() {
     if (isUserLoggedIn) {
@@ -103,7 +98,7 @@ export default function Header() {
 
   return (
     <>
-      <header role="banner" className="bg-black sticky top-0 z-[1000] shadow-[0_2px_20px_rgba(0,0,0,0.3)]">
+      <header role="banner" className="bg-[#1C1D1D] sticky top-0 z-[1000] shadow-[0_2px_20px_rgba(0,0,0,0.3)]">
         <div className="max-w-[1400px] mx-auto px-5 flex items-center justify-between h-20 max-lg:px-[15px] max-lg:h-[70px]">
           {/* Logo */}
           <Link href="/" className="group flex flex-col justify-center leading-none no-underline transition-all duration-300 hover:scale-[1.03]">
@@ -120,7 +115,7 @@ export default function Header() {
               aria-label="Main navigation"
               className={`${
                 mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-              } fixed right-0 top-0 w-4/5 max-w-[300px] h-screen bg-black border-l-2 border-[#25C760] transition-transform duration-300 z-[1000] pt-20 px-5 shadow-[-5px_0_15px_rgba(0,0,0,0.3)] lg:translate-x-0 lg:transition-none lg:shadow-none lg:static lg:w-auto lg:max-w-none lg:h-auto lg:border-0 lg:pt-0 lg:px-0 lg:flex lg:items-center max-[600px]:w-[90%] max-[600px]:max-w-[280px] max-[600px]:pt-[70px] max-[600px]:px-[15px]`}
+              } fixed right-0 top-0 w-4/5 max-w-[300px] h-screen bg-[#1C1D1D] border-l-2 border-[#25C760] transition-transform duration-300 z-[1000] pt-20 px-5 shadow-[-5px_0_15px_rgba(0,0,0,0.3)] lg:translate-x-0 lg:transition-none lg:shadow-none lg:static lg:w-auto lg:max-w-none lg:h-auto lg:border-0 lg:pt-0 lg:px-0 lg:flex lg:items-center max-[600px]:w-[90%] max-[600px]:max-w-[280px] max-[600px]:pt-[70px] max-[600px]:px-[15px]`}
             >
               {/* Mobile profile buttons */}
               <div className="hidden max-lg:flex max-lg:flex-col gap-[10px] mb-4">

@@ -10,6 +10,8 @@ type RawMaterial = {
   tags: string[];
   story: string;
   image: string;
+  mixable: boolean;
+  allowedContainerIds: string[];
 };
 
 type ContainerVariant = {
@@ -35,15 +37,15 @@ type ContainerItem = {
 };
 
 const rawMaterials: RawMaterial[] = [
-  { id: 'kawazu-salt', name: '河津の平釜塩', region: '河津町', category: '食品向け', tags: ['調味料', '海の素材'], story: '海水を平釜で炊き上げた、土地の味が伝わるミネラル塩。', image: '/images/maker-apply/raw-materials/kawazu-salt.webp' },
-  { id: 'kushimoto-miso', name: '串本の金山寺味噌', region: '串本町', category: '食品向け', tags: ['発酵食品', 'ごはんのお供', '常温'], story: '地域の米と麹で丁寧に仕込む、昔ながらの金山寺味噌。', image: '/images/maker-apply/raw-materials/kushimoto-kinzanji-miso.webp' },
-  { id: 'izu-onsen', name: '伊豆の温泉化粧水', region: '伊豆市', category: '化粧品向け', tags: ['スキンケア', '水素材', '保湿感', '観光地'], story: 'やわらかな質感の温泉水を活かした、化粧水やミストのベースに。', image: '/images/maker-apply/raw-materials/izu-onsen-toner.webp' },
-  { id: 'minami-toner', name: '南伊豆ハーブ化粧水', region: '南伊豆町', category: '化粧品向け', tags: ['化粧水', 'ハーブ', 'スキンケア', '香り'], story: '小さな農園で育つハーブを活かした、やさしい化粧水素材。', image: '/images/maker-apply/raw-materials/minami-izu-herb-toner.webp' },
-  { id: 'wakayama-shampoo', name: '紀州ゆずシャンプー', region: '和歌山県', category: '化粧品向け', tags: ['ヘアケア', '柑橘', '香り', 'バス用品'], story: 'ゆずの香りを活かした、地域色のあるヘアケア素材。', image: '/images/maker-apply/raw-materials/kishu-yuzu-shampoo.webp' },
-  { id: 'hokkaido-lip', name: '北海道ミルクリップ', region: '北海道', category: '化粧品向け', tags: ['リップ', '乾燥ケア', '乳素材'], story: '北海道らしいミルク感をテーマにしたリップ素材。', image: '/images/maker-apply/raw-materials/hokkaido-milk-lip.webp' },
-  { id: 'komeko-pack', name: '米麹フェイスパック', region: '新潟県', category: '化粧品向け', tags: ['米麹', 'フェイスパック', '発酵', '美容'], story: '米どころの麹文化を美容アイテムに展開できる素材。', image: '/images/maker-apply/raw-materials/komeko-face-pack.webp' },
-  { id: 'shizuoka-wasabi', name: '静岡わさび塩', region: '静岡県', category: '食品向け', tags: ['調味料', 'わさび', '土産', '粉末'], story: '静岡のわさびを活かした、ふりかけ系コラボに向く素材。', image: '/images/maker-apply/raw-materials/shizuoka-wasabi-salt.webp' },
-  { id: 'olive-oil', name: '小豆島オリーブオイル', region: '小豆島', category: '食品・化粧品向け', tags: ['オイル', '食品', '美容'], story: '食品にも美容にも展開しやすい、地域性の強いオイル素材。', image: '/images/maker-apply/raw-materials/shodoshima-olive-oil.webp' },
+  { id: 'kawazu-salt', name: '河津の平釜塩', region: '河津町', category: '食品向け', tags: ['調味料', '海の素材'], story: '海水を平釜で炊き上げた、土地の味が伝わるミネラル塩。', image: '/images/maker-apply/raw-materials/kawazu-salt.webp', mixable: true, allowedContainerIds: ['powder-shaker', 'can-container', 'glass-container'] },
+  { id: 'kushimoto-miso', name: '串本の金山寺味噌', region: '串本町', category: '食品向け', tags: ['発酵食品', 'ごはんのお供', '常温'], story: '地域の米と麹で丁寧に仕込む、昔ながらの金山寺味噌。', image: '/images/maker-apply/raw-materials/kushimoto-kinzanji-miso.webp', mixable: false, allowedContainerIds: ['glass-container', 'can-container'] },
+  { id: 'izu-onsen', name: '伊豆の温泉化粧水', region: '伊豆市', category: '化粧品向け', tags: ['スキンケア', '水素材', '保湿感', '観光地'], story: 'やわらかな質感の温泉水を活かした、化粧水やミストのベースに。', image: '/images/maker-apply/raw-materials/izu-onsen-toner.webp', mixable: true, allowedContainerIds: ['trigger-spray', 'push-spray', 'dropper-bottle'] },
+  { id: 'minami-toner', name: '南伊豆ハーブ化粧水', region: '南伊豆町', category: '化粧品向け', tags: ['化粧水', 'ハーブ', 'スキンケア', '香り'], story: '小さな農園で育つハーブを活かした、やさしい化粧水素材。', image: '/images/maker-apply/raw-materials/minami-izu-herb-toner.webp', mixable: true, allowedContainerIds: ['trigger-spray', 'push-spray', 'dropper-bottle'] },
+  { id: 'wakayama-shampoo', name: '紀州ゆずシャンプー', region: '和歌山県', category: '化粧品向け', tags: ['ヘアケア', '柑橘', '香り', 'バス用品'], story: 'ゆずの香りを活かした、地域色のあるヘアケア素材。', image: '/images/maker-apply/raw-materials/kishu-yuzu-shampoo.webp', mixable: false, allowedContainerIds: ['shampoo-bottle'] },
+  { id: 'hokkaido-lip', name: '北海道ミルクリップ', region: '北海道', category: '化粧品向け', tags: ['リップ', '乾燥ケア', '乳素材'], story: '北海道らしいミルク感をテーマにしたリップ素材。', image: '/images/maker-apply/raw-materials/hokkaido-milk-lip.webp', mixable: false, allowedContainerIds: ['lipstick', 'glass-container'] },
+  { id: 'komeko-pack', name: '米麹フェイスパック', region: '新潟県', category: '化粧品向け', tags: ['米麹', 'フェイスパック', '発酵', '美容'], story: '米どころの麹文化を美容アイテムに展開できる素材。', image: '/images/maker-apply/raw-materials/komeko-face-pack.webp', mixable: true, allowedContainerIds: ['glass-container', 'can-container'] },
+  { id: 'shizuoka-wasabi', name: '静岡わさび塩', region: '静岡県', category: '食品向け', tags: ['調味料', 'わさび', '土産', '粉末'], story: '静岡のわさびを活かした、ふりかけ系コラボに向く素材。', image: '/images/maker-apply/raw-materials/shizuoka-wasabi-salt.webp', mixable: true, allowedContainerIds: ['powder-shaker', 'can-container'] },
+  { id: 'olive-oil', name: '小豆島オリーブオイル', region: '小豆島', category: '食品・化粧品向け', tags: ['オイル', '食品', '美容'], story: '食品にも美容にも展開しやすい、地域性の強いオイル素材。', image: '/images/maker-apply/raw-materials/shodoshima-olive-oil.webp', mixable: true, allowedContainerIds: ['soy-ponzu', 'glass-container', 'dropper-bottle'] },
 ];
 
 const containers: ContainerItem[] = [
@@ -265,7 +267,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [rawMaterialId, setRawMaterialId] = useState('');
+  const [rawMaterialIds, setRawMaterialIds] = useState<string[]>([]);
   const [motherVegetableId, setMotherVegetableId] = useState('');
   const [containerId, setContainerId] = useState('');
   const [containerVariantId, setContainerVariantId] = useState('');
@@ -314,7 +316,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const detailSection = useRef<HTMLElement>(null);
   const confirmSection = useRef<HTMLElement>(null);
 
-  const selectedRaw = rawMaterials.find((item) => item.id === rawMaterialId) ?? rawMaterials[0];
+  const selectedRawMaterials = rawMaterials.filter((item) => rawMaterialIds.includes(item.id));
+  const selectedRaw = selectedRawMaterials[0] ?? rawMaterials[0];
   const selectedMotherVegetable = motherVegetableOptions.find((item) => item.id === motherVegetableId);
   const selectedContainer = containers.find((item) => item.id === containerId) ?? containers[0];
   const selectedLogo = logos.find((item) => item.id === logoId) ?? logos[0];
@@ -329,8 +332,16 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const isNewIdea = ideaCourse === 'new-idea';
   const isMixMatch = ideaCourse === 'mix-match';
   const newIdeaComplete = Boolean(newIdeaCategory.trim() && newIdeaTarget.trim() && newIdeaIngredients.trim());
-  const canShowMotherVegetable = isNewIdea || (isMixMatch && rawMaterialId);
+  const canShowMotherVegetable = isNewIdea || (isMixMatch && rawMaterialIds.length > 0);
   const canShowContainer = Boolean(motherVegetableId && (isMixMatch || (isNewIdea && newIdeaComplete && newIdeaStep3Open)));
+  const availableContainers = useMemo(() => {
+    if (!isMixMatch || selectedRawMaterials.length === 0) return containers;
+    const sharedIds = selectedRawMaterials.reduce<string[] | null>((shared, item) => {
+      if (shared === null) return item.allowedContainerIds;
+      return shared.filter((id) => item.allowedContainerIds.includes(id));
+    }, null);
+    return containers.filter((item) => (sharedIds ?? []).includes(item.id));
+  }, [isMixMatch, selectedRawMaterials]);
   const term = (value: string) => isEnglish ? (enTerm[value] ?? value) : value;
   const rawName = (item: RawMaterial) => isEnglish ? (enRawMaterials[item.id]?.name ?? item.name) : item.name;
   const rawRegion = (item: RawMaterial) => isEnglish ? (enRawMaterials[item.id]?.region ?? item.region) : item.region;
@@ -369,7 +380,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   }
 
   function resetFlowAfterCourse() {
-    setRawMaterialId('');
+    setRawMaterialIds([]);
     setMotherVegetableId('');
     setContainerId('');
     setContainerVariantId('');
@@ -391,6 +402,29 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
     setIdeaCourse(course);
     resetFlowAfterCourse();
     jumpTo(course === 'new-idea' ? motherVegetableSection : rawMaterialSection, 120);
+  }
+
+  function resetAfterRawMaterialChange() {
+    setMotherVegetableId('');
+    setContainerId('');
+    setContainerVariantId('');
+    setContainerColor('');
+    setLidColor('');
+    setCapacity('');
+    setCapacityConfirmed(false);
+    setLabelDesignChoice('');
+    setDetailOpen(false);
+    setConfirmOpen(false);
+  }
+
+  function toggleRawMaterial(item: RawMaterial) {
+    setRawMaterialIds((current) => {
+      if (current.includes(item.id)) return current.filter((id) => id !== item.id);
+      const selectedItems = rawMaterials.filter((raw) => current.includes(raw.id));
+      const canAddToCurrent = item.mixable && selectedItems.every((raw) => raw.mixable);
+      return canAddToCurrent ? [...current, item.id] : [item.id];
+    });
+    resetAfterRawMaterialChange();
   }
 
   function getPointerPercent(event: React.PointerEvent<HTMLElement>, relativeTo: HTMLElement = event.currentTarget) {
@@ -470,10 +504,13 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   }
 
   function generateAiLabelDesign() {
-    const name = productName.trim() || (isNewIdea ? newIdeaCategory.trim() || 'New Mother Vegetable Product' : selectedRaw.name);
+    const selectedRawNames = selectedRawMaterials.map((item) => item.name).join(' + ');
+    const selectedRawStories = selectedRawMaterials.map((item) => item.story).join(' / ');
+    const name = productName.trim() || (isNewIdea ? newIdeaCategory.trim() || 'New Mother Vegetable Product' : selectedRawNames || selectedRaw.name);
     const audience = targetAudience.trim() || '地域の背景や作り手の想いに共感してくれる人';
-    const story = makerStory.trim() || (isNewIdea ? `使用原料: ${newIdeaIngredients || '未入力'} / ターゲット: ${newIdeaTarget || '未入力'}` : selectedRaw.story);
-    const suggestedBg = (isNewIdea ? newIdeaCategory : selectedRaw.category).includes('化粧') ? '#15231d' : '#101010';
+    const story = makerStory.trim() || (isNewIdea ? `使用原料: ${newIdeaIngredients || '未入力'} / ターゲット: ${newIdeaTarget || '未入力'}` : selectedRawStories || selectedRaw.story);
+    const hasCosmeticMaterial = selectedRawMaterials.some((item) => item.category.includes('化粧'));
+    const suggestedBg = (isNewIdea ? newIdeaCategory : hasCosmeticMaterial ? '化粧品向け' : selectedRaw.category).includes('化粧') ? '#15231d' : '#101010';
     setDesignMode('ai');
     if (!productName.trim()) setProductName(name);
     setLabelBg(suggestedBg);
@@ -550,23 +587,42 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             </div>
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {filteredMaterials.map((item) => (
-                <label key={item.id} className={`group cursor-pointer overflow-hidden rounded-[1.75rem] border bg-white/[0.035] transition ${rawMaterialId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.25)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
-                  <input type="radio" name="rawMaterial" value={item.id} checked={rawMaterialId === item.id} onChange={() => { setRawMaterialId(item.id); setMotherVegetableId(''); setContainerId(''); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(motherVegetableSection); }} className="sr-only" />
-                  <div className="relative h-44 overflow-hidden bg-white/5"><img src={item.image} alt={isEnglish ? `${rawName(item)} material photo` : `${item.name}の素材写真`} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /></div>
+                <label key={item.id} className={`group cursor-pointer overflow-hidden rounded-[1.75rem] border bg-white/[0.035] transition ${rawMaterialIds.includes(item.id) ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.25)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
+                  <input type="checkbox" name="rawMaterial" value={item.id} checked={rawMaterialIds.includes(item.id)} onChange={() => toggleRawMaterial(item)} className="sr-only" />
+                  <div className="relative h-44 overflow-hidden bg-white/5">
+                    <img src={item.image} alt={isEnglish ? `${rawName(item)} material photo` : `${item.name}の素材写真`} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+                    <span className={`absolute left-4 top-4 rounded-full border px-3 py-1.5 text-xs font-black shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur ${item.mixable ? 'border-[#25C760]/70 bg-[#25C760]/90 text-black' : 'border-white/45 bg-black/70 text-white'}`}>
+                      {item.mixable ? uiText('複数組み合わせOK', 'Mixable') : uiText('単体での使用のみ', 'Single use only')}
+                    </span>
+                  </div>
                   <div className="p-5">
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <h3 className="text-xl font-black">{rawName(item)}</h3>
                         <p className="mt-1 text-sm text-[#25C760]">{rawRegion(item)} / {rawCategory(item)}</p>
                       </div>
-                      <span className="rounded-full border border-[#25C760]/40 px-3 py-1 text-xs font-bold text-[#25C760]">{ui?.select ?? '選択'}</span>
+                      <span className="rounded-full border border-[#25C760]/40 px-3 py-1 text-xs font-bold text-[#25C760]">{rawMaterialIds.includes(item.id) ? uiText('選択中', 'Selected') : (ui?.select ?? '選択')}</span>
                     </div>
                     <p className="mt-4 min-h-16 text-sm leading-6 text-gray-300">{rawStory(item)}</p>
-                    <div className="mt-4 flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300">{rawTag(item, tag)}</span>)}</div>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {item.tags.map((tag) => <span key={tag} className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-300">{rawTag(item, tag)}</span>)}
+                    </div>
                   </div>
                 </label>
               ))}
             </div>
+            {rawMaterialIds.length > 0 && (
+              <div className="sticky bottom-6 z-20 mt-8 rounded-[1.5rem] border border-[#25C760]/30 bg-[#1C1D1D]/95 p-4 shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur md:flex md:items-center md:justify-between">
+                <div>
+                  <p className="text-sm font-bold text-[#25C760]">{uiText(`${rawMaterialIds.length}件の素材を選択中`, `${rawMaterialIds.length} material(s) selected`)}</p>
+                  <p className="mt-1 text-xs text-gray-300">{selectedRawMaterials.map(rawName).join(' / ')}</p>
+                </div>
+                <button type="button" onClick={() => jumpTo(motherVegetableSection, 120)} className="mt-4 rounded-full bg-[#25C760] px-7 py-3 text-sm font-black text-black md:mt-0">
+                  {uiText('Step2へ進む', 'Proceed to Step 2')}
+                </button>
+              </div>
+            )}
           </div>
         </div>
         </div>
@@ -634,7 +690,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <h2 className="mt-2 text-3xl font-black">{ui?.containerTitle ?? 'どのような容器を使いたいですか？'}</h2>
           <p className="mt-4 max-w-3xl text-gray-300">{ui?.containerLead ?? '選んだ素材に合わせて、まず容器の形状を1つ選んでください。形状を選ぶと、次にサイズ・色・仕様の候補が表示されます。'}</p>
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {containers.map((item) => (
+            {availableContainers.map((item) => (
               <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${containerId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
                 <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }} className="sr-only" />
                 <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5"><img src={item.image} alt={isEnglish ? `${containerName(item)} container photo` : `${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" /></div>
@@ -866,7 +922,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <Summary label={ui?.course ?? 'コース'} value={isNewIdea ? (ui?.newIdea ?? 'New Idea') : (ui?.mixMatch ?? 'Mix & Match')} />
             {isMixMatch ? (
-              <Summary label={ui?.material ?? '素材'} value={`${rawName(selectedRaw)}（${rawRegion(selectedRaw)}）`} />
+              <Summary label={ui?.material ?? '素材'} value={isNewIdea ? (ui?.notEntered ?? '未入力') : selectedRawMaterials.map((item) => `${rawName(item)}（${rawRegion(item)}）`).join(' / ')} />
             ) : (
               <Summary label={ui?.ideaDetails ?? 'アイデア内容'} value={`${ui?.productCategory ?? '商品分類'}: ${newIdeaCategory || (ui?.notEntered ?? '未入力')} / ${ui?.ideaTarget ?? 'ターゲット層'}: ${newIdeaTarget || (ui?.notEntered ?? '未入力')} / ${ui?.ideaIngredients ?? '使用原料'}: ${newIdeaIngredients || (ui?.notEntered ?? '未入力')}`} />
             )}

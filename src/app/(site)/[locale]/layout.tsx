@@ -95,7 +95,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${inter.variable} ${notoSansJp.variable} overflow-x-hidden`}>
-      <body className="overflow-x-hidden bg-black text-white font-sans">
+      <body className="overflow-x-hidden bg-[#010100] text-white font-sans">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
