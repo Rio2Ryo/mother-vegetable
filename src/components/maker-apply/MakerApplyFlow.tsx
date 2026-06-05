@@ -436,7 +436,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   function openDetailPage(path: string, event: React.MouseEvent<HTMLElement>) {
     event.preventDefault();
     event.stopPropagation();
-    window.open(`/${locale}${path}`, '_blank', 'noopener,noreferrer');
+    window.open(`/${locale}${path}`, '_blank');
   }
 
   function getPointerPercent(event: React.PointerEvent<HTMLElement>, relativeTo: HTMLElement = event.currentTarget) {
@@ -708,11 +708,13 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                 <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5">
                   <img src={item.image} alt={isEnglish ? `${containerName(item)} container photo` : `${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                  <button type="button" onClick={(event) => openDetailPage(`/maker/apply/containers/${item.id}`, event)} className="absolute right-4 top-4 rounded-full border border-[#25C760]/60 bg-black/70 px-3 py-1.5 text-xs font-black text-[#25C760] shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur transition hover:bg-[#25C760] hover:text-black">
+                </div>
+                <div className="mt-5 flex items-start justify-between gap-3">
+                  <h3 className="text-2xl font-black">{containerName(item)}</h3>
+                  <button type="button" onClick={(event) => openDetailPage(`/maker/apply/containers/${item.id}`, event)} className="shrink-0 rounded-full border border-[#25C760]/50 px-3 py-1 text-xs font-black text-[#25C760] transition hover:bg-[#25C760] hover:text-black">
                     {uiText('詳細', 'Details')}
                   </button>
                 </div>
-                <h3 className="mt-5 text-2xl font-black">{containerName(item)}</h3>
                 <p className="mt-1 text-sm font-bold text-[#25C760]">{ui?.estimatedCapacity ?? '目安容量'}: {item.capacity}</p>
                 <p className="mt-2 inline-flex rounded-full border border-[#25C760]/35 px-3 py-1 text-xs font-bold text-[#25C760]">{isEnglish ? `${item.variants.length} ${ui?.chooseFrom}` : `${item.variants.length}候補から選択`}</p>
                 <p className="mt-4 text-sm leading-6 text-gray-300">{containerNote(item)}</p>

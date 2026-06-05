@@ -13,7 +13,6 @@ export default async function MakerRawMaterialDetailPage({ params }: { params: P
       <div className="mx-auto max-w-5xl">
         <p className="text-sm font-black uppercase tracking-[0.28em] text-[#25C760]">Japanese Raw Material Detail</p>
         <h1 className="mt-3 text-4xl font-black md:text-6xl">{material.name}</h1>
-        <p className="mt-5 max-w-3xl text-gray-300">このRaw Materialに登録予定の詳細情報です。将来は管理画面のRaw Materialデータベースから編集・追加できる想定です。</p>
 
         <section className="mt-10 grid gap-5 md:grid-cols-2">
           <figure className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04]">
@@ -42,12 +41,14 @@ export default async function MakerRawMaterialDetailPage({ params }: { params: P
 
         <section className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 md:p-8">
           <h2 className="text-2xl font-black text-[#25C760]">使用できる容器</h2>
-          <p className="mt-3 text-sm text-gray-300">容器一覧のデータベースからチェックボックスで選ばれる想定の項目です。</p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {allowedContainers.map((container) => container && (
-              <div key={container.id} className="rounded-2xl border border-white/10 bg-black/30 p-5">
-                <p className="text-lg font-black">{container.name}</p>
-                <p className="mt-2 text-sm text-gray-300">使用OKジャンル: {container.okGenres.join(' / ')}</p>
+              <div key={container.id} className="overflow-hidden rounded-2xl border border-white/10 bg-black/30">
+                <img src={container.photos[0]?.src} alt={`${container.name}の容器写真`} className="h-44 w-full object-cover" />
+                <div className="p-5">
+                  <p className="text-lg font-black">{container.name}</p>
+                  <p className="mt-2 text-sm text-gray-300">使用OKジャンル: {container.okGenres.join(' / ')}</p>
+                </div>
               </div>
             ))}
           </div>

@@ -12,7 +12,6 @@ export default async function MakerContainerDetailPage({ params }: { params: Pro
       <div className="mx-auto max-w-5xl">
         <p className="text-sm font-black uppercase tracking-[0.28em] text-[#25C760]">Container Detail</p>
         <h1 className="mt-3 text-4xl font-black md:text-6xl">{container.name}</h1>
-        <p className="mt-5 max-w-3xl text-gray-300">この容器に登録予定の仕様情報です。将来は管理画面の容器データベースから編集・追加できる想定です。</p>
 
         <section className="mt-10 grid gap-5 md:grid-cols-2">
           {container.photos.map((photo) => (
