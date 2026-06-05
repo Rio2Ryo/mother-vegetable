@@ -306,6 +306,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const [address, setAddress] = useState('');
   const [agreements, setAgreements] = useState<string[]>([]);
   const rawMaterialSection = useRef<HTMLElement>(null);
+  const rawMaterialProceedBar = useRef<HTMLDivElement>(null);
   const motherVegetableSection = useRef<HTMLElement>(null);
   const ideaSection = useRef<HTMLElement>(null);
   const containerSection = useRef<HTMLElement>(null);
@@ -375,8 +376,8 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   const isStep4Complete = Boolean(productName.trim() && desiredPrice.trim() && applicantName.trim() && email.trim() && phone.trim() && address.trim());
   const canSubmit = isStep4Complete && agreements.length === 4;
 
-  function jumpTo(ref: React.RefObject<HTMLElement | HTMLDivElement | null>, delay = 80) {
-    window.setTimeout(() => ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), delay);
+  function jumpTo(ref: React.RefObject<HTMLElement | HTMLDivElement | null>, delay = 80, block: ScrollLogicalPosition = 'start') {
+    window.setTimeout(() => ref.current?.scrollIntoView({ behavior: 'smooth', block }), delay);
   }
 
   function resetFlowAfterCourse() {
@@ -419,10 +420,15 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
 
   function toggleRawMaterial(item: RawMaterial) {
     setRawMaterialIds((current) => {
-      if (current.includes(item.id)) return current.filter((id) => id !== item.id);
-      const selectedItems = rawMaterials.filter((raw) => current.includes(raw.id));
-      const canAddToCurrent = item.mixable && selectedItems.every((raw) => raw.mixable);
-      return canAddToCurrent ? [...current, item.id] : [item.id];
+      const next = current.includes(item.id)
+        ? current.filter((id) => id !== item.id)
+        : (() => {
+            const selectedItems = rawMaterials.filter((raw) => current.includes(raw.id));
+            const canAddToCurrent = item.mixable && selectedItems.every((raw) => raw.mixable);
+            return canAddToCurrent ? [...current, item.id] : [item.id];
+          })();
+      if (next.length > 0) jumpTo(rawMaterialProceedBar, 120, 'center');
+      return next;
     });
     resetAfterRawMaterialChange();
   }
@@ -531,7 +537,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
   }
 
   return (
-    <form onSubmit={submit} className="bg-black text-white">
+    <form onSubmit={submit} className="bg-[#010100] text-white">
       <section className="relative overflow-hidden px-6 py-20 md:py-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,199,96,0.18),transparent_46%)]" />
         <div className="relative mx-auto max-w-6xl text-center">
@@ -613,7 +619,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
               ))}
             </div>
             {rawMaterialIds.length > 0 && (
-              <div className="sticky bottom-6 z-20 mt-8 rounded-[1.5rem] border border-[#25C760]/30 bg-[#1C1D1D]/95 p-4 shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur md:flex md:items-center md:justify-between">
+              <div ref={rawMaterialProceedBar} className="sticky bottom-6 z-20 mt-8 scroll-mt-32 rounded-[1.5rem] border border-[#25C760]/30 bg-[#1C1D1D]/95 p-4 shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur md:flex md:items-center md:justify-between">
                 <div>
                   <p className="text-sm font-bold text-[#25C760]">{uiText(`${rawMaterialIds.length}件の素材を選択中`, `${rawMaterialIds.length} material(s) selected`)}</p>
                   <p className="mt-1 text-xs text-gray-300">{selectedRawMaterials.map(rawName).join(' / ')}</p>
