@@ -433,6 +433,12 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
     resetAfterRawMaterialChange();
   }
 
+  function openDetailPage(path: string, event: React.MouseEvent<HTMLElement>) {
+    event.preventDefault();
+    event.stopPropagation();
+    window.open(`/${locale}${path}`, '_blank', 'noopener,noreferrer');
+  }
+
   function getPointerPercent(event: React.PointerEvent<HTMLElement>, relativeTo: HTMLElement = event.currentTarget) {
     const rect = relativeTo.getBoundingClientRect();
     const x = Math.round(((event.clientX - rect.left) / rect.width) * 100);
@@ -608,7 +614,7 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
                         <h3 className="text-xl font-black">{rawName(item)}</h3>
                         <p className="mt-1 text-sm text-[#25C760]">{rawRegion(item)} / {rawCategory(item)}</p>
                       </div>
-                      <span className="rounded-full border border-[#25C760]/40 px-3 py-1 text-xs font-bold text-[#25C760]">{rawMaterialIds.includes(item.id) ? uiText('選択中', 'Selected') : (ui?.select ?? '選択')}</span>
+                      <button type="button" onClick={(event) => openDetailPage(`/maker/apply/raw-materials/${item.id}`, event)} className="rounded-full border border-[#25C760]/40 px-3 py-1 text-xs font-bold text-[#25C760] transition hover:bg-[#25C760] hover:text-black">{uiText('詳細', 'Details')}</button>
                     </div>
                     <p className="mt-4 min-h-16 text-sm leading-6 text-gray-300">{rawStory(item)}</p>
                     <div className="mt-4 flex flex-wrap gap-2">
@@ -699,7 +705,13 @@ export default function MakerApplyFlow({ locale }: { locale: string }) {
             {availableContainers.map((item) => (
               <label key={item.id} className={`cursor-pointer rounded-[1.75rem] border bg-white/[0.04] p-6 transition ${containerId === item.id ? 'border-[#25C760] shadow-[0_0_24px_rgba(37,199,96,0.22)]' : 'border-white/10 hover:border-[#25C760]/50'}`}>
                 <input type="radio" name="container" value={item.id} checked={containerId === item.id} onChange={() => { setContainerId(item.id); setContainerVariantId(''); setContainerColor(''); setLidColor(''); setCapacity(''); setCapacityConfirmed(false); setLabelDesignChoice(''); setDetailOpen(false); setConfirmOpen(false); jumpTo(containerVariantSection, 120); }} className="sr-only" />
-                <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5"><img src={item.image} alt={isEnglish ? `${containerName(item)} container photo` : `${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" /></div>
+                <div className="relative -mx-6 -mt-6 h-44 overflow-hidden rounded-t-[1.75rem] bg-white/5">
+                  <img src={item.image} alt={isEnglish ? `${containerName(item)} container photo` : `${item.name}の容器写真`} className="h-full w-full object-cover transition duration-500 hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                  <button type="button" onClick={(event) => openDetailPage(`/maker/apply/containers/${item.id}`, event)} className="absolute right-4 top-4 rounded-full border border-[#25C760]/60 bg-black/70 px-3 py-1.5 text-xs font-black text-[#25C760] shadow-[0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur transition hover:bg-[#25C760] hover:text-black">
+                    {uiText('詳細', 'Details')}
+                  </button>
+                </div>
                 <h3 className="mt-5 text-2xl font-black">{containerName(item)}</h3>
                 <p className="mt-1 text-sm font-bold text-[#25C760]">{ui?.estimatedCapacity ?? '目安容量'}: {item.capacity}</p>
                 <p className="mt-2 inline-flex rounded-full border border-[#25C760]/35 px-3 py-1 text-xs font-bold text-[#25C760]">{isEnglish ? `${item.variants.length} ${ui?.chooseFrom}` : `${item.variants.length}候補から選択`}</p>
