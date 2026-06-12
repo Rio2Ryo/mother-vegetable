@@ -15,6 +15,8 @@
       "Bash(vercel login)",
       "Bash(npx playwright --version)",
       "Bash(node take-screenshots.mjs)",
+      "Bash(cp /Users/umi/.claude/channels/discord/inbox/* /Users/umi/.openclaw/workspace/projects/mother-vegetable/public/cdn/*)",
+      "Bash(cp /Users/umi/.claude/channels/discord/inbox/* public/cdn/*)",
       "Bash(cd C:\\\\Users\\\\山﨑宗洋\\\\Desktop\\\\０２２３\\\\mother-vegetable:*)",
       "Bash(cd:*)"
     ]
