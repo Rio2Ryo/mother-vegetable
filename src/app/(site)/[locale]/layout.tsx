@@ -73,8 +73,8 @@ export const metadata: Metadata = {
     images: ['/Images/Assets/General/og-logo.png'],
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
   verification: {
     google: [

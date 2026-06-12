@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description: 'Mother Vegetable terms of service. Read our terms and conditions for using mothervegetable.com.',
-  robots: { index: false, follow: false },
+  robots: { index: true, follow: true },
   openGraph: {
     title: 'Terms of Service — Mother Vegetable',
     description: 'Mother Vegetable terms of service. Read our terms and conditions for using mothervegetable.com.',

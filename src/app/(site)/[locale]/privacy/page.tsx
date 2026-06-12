@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: 'Mother Vegetable privacy policy. Learn how we collect, use, and protect your personal data.',
-  robots: { index: false, follow: false },
+  robots: { index: true, follow: true },
   openGraph: {
     title: 'Privacy Policy — Mother Vegetable',
     description: 'Mother Vegetable privacy policy. Learn how we collect, use, and protect your personal data.',
