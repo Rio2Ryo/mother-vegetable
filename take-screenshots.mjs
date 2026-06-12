@@ -1,6 +1,6 @@
 import { chromium } from 'playwright';
 
-const BASE_URL = 'https://mother-vegetable.vercel.app';
+const BASE_URL = 'https://mothervegetable.co.jp';
 
 const pages = [
   { name: 'homepage', path: '/en' },
