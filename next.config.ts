@@ -19,6 +19,16 @@ const nextConfig: NextConfig = {
       './test-results/**',
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.mothervegetable.co.jp" }],
+        destination: "https://mothervegetable.co.jp/:path*",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
