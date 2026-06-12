@@ -1,5 +1,5 @@
 const APP_URL =
-  process.env.NEXT_PUBLIC_APP_URL || "https://mother-vegetable.vercel.app";
+  process.env.NEXT_PUBLIC_APP_URL || "https://mothervegetable.co.jp";
 
 interface ProductJsonLdProps {
   name: string;
