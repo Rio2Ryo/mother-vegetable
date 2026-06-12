@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_APP_URL || "https://mother-vegetable.vercel.app";
+  process.env.NEXT_PUBLIC_APP_URL || "https://mothervegetable.co.jp";
 
 const locales = ["en", "ja", "zh"];
 
