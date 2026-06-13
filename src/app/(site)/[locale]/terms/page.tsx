@@ -3,17 +3,17 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
-  description: 'Mother Vegetable terms of service. Read our terms and conditions for using mothervegetable.com.',
+  description: 'Mother Vegetable terms of service. Read our terms and conditions for using mothervegetable.co.jp.',
   robots: { index: true, follow: true },
   openGraph: {
     title: 'Terms of Service — Mother Vegetable',
-    description: 'Mother Vegetable terms of service. Read our terms and conditions for using mothervegetable.com.',
+    description: 'Mother Vegetable terms of service. Read our terms and conditions for using mothervegetable.co.jp.',
     images: [{ url: '/Images/Assets/General/og-logo.png', width: 1200, height: 630, alt: 'Mother Vegetable' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Terms of Service — Mother Vegetable',
-    description: 'Mother Vegetable terms of service. Read our terms and conditions for using mothervegetable.com.',
+    description: 'Mother Vegetable terms of service. Read our terms and conditions for using mothervegetable.co.jp.',
   },
 };
 
@@ -35,7 +35,7 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
             {/* 1. はじめに */}
             <div className="py-3">
               <h5 className="font-bold text-lg text-[#25C760] mb-2">1. はじめに</h5>
-              <p className="mb-2"><strong>マザーベジタブル</strong>（「当社」、「私たち」）へようこそ。本利用規約（「規約」、「利用規約」）は、<strong>マザーベジタブル</strong>が運営する<strong>https://www.mothervegetable.com</strong>（以下、総称または個別に「サービス」）のご利用を規定するものです。当社のプライバシーポリシーもサービスのご利用を規定し、当社がどのように情報を収集、保護、開示するかを説明しています。</p>
+              <p className="mb-2"><strong>マザーベジタブル</strong>（「当社」、「私たち」）へようこそ。本利用規約（「規約」、「利用規約」）は、<strong>マザーベジタブル</strong>が運営する<strong>https://mothervegetable.co.jp</strong>（以下、総称または個別に「サービス」）のご利用を規定するものです。当社のプライバシーポリシーもサービスのご利用を規定し、当社がどのように情報を収集、保護、開示するかを説明しています。</p>
               <p className="mb-2">お客様と当社との合意には、本規約および当社のプライバシーポリシー（「合意事項」）が含まれます。お客様は合意事項を読み、理解し、これらに拘束されることに同意するものとします。</p>
               <p className="mb-2">合意事項に同意しない（または遵守できない）場合は、サービスをご利用いただけませんが、解決策を見つけるために<strong>support@mothervegetable.com</strong>までメールでご連絡ください。本規約は、サービスへのアクセスまたは使用を希望するすべての訪問者、ユーザー、およびその他の方に適用されます。</p>
             </div>
@@ -331,7 +331,7 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
             {/* 1. Introduction */}
             <div className="py-3">
               <h5 className="font-bold text-lg text-[#25C760] mb-2">1. Introduction</h5>
-              <p className="mb-2">Welcome to <strong>Mother Vegetable</strong> (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;our&rdquo;, &ldquo;us&rdquo;)! These Terms of Service (&ldquo;Terms&rdquo;, &ldquo;Terms of Service&rdquo;) govern your use of our website located at <strong>https://www.mothervegetable.com</strong> (together or individually &ldquo;Service&rdquo;) operated by <strong>Mother Vegetable</strong>. Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages.</p>
+              <p className="mb-2">Welcome to <strong>Mother Vegetable</strong> (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;our&rdquo;, &ldquo;us&rdquo;)! These Terms of Service (&ldquo;Terms&rdquo;, &ldquo;Terms of Service&rdquo;) govern your use of our website located at <strong>https://mothervegetable.co.jp</strong> (together or individually &ldquo;Service&rdquo;) operated by <strong>Mother Vegetable</strong>. Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages.</p>
               <p className="mb-2">Your agreement with us includes these Terms and our Privacy Policy (&ldquo;Agreements&rdquo;). You acknowledge that you have read and understood Agreements, and agree to be bound of them.</p>
               <p className="mb-2">If you do not agree with (or cannot comply with) Agreements, then you may not use the Service, but please let us know by emailing at <strong>support@mothervegetable.com</strong> so we can try to find a solution. These Terms apply to all visitors, users and others who wish to access or use Service.</p>
             </div>
