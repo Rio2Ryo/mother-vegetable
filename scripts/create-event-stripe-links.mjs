@@ -6,7 +6,7 @@ if (!secretKey) {
   process.exit(1);
 }
 
-const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://mother-vegetable.vercel.app';
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://mothervegetable.co.jp';
 const stripe = new Stripe(secretKey);
 
 const items = [
