@@ -1,5 +1,6 @@
-const APP_URL =
-  process.env.NEXT_PUBLIC_APP_URL || "https://mothervegetable.co.jp";
+const APP_URL = (
+  process.env.NEXT_PUBLIC_APP_URL || "https://mothervegetable.co.jp"
+).trim();
 
 interface ProductJsonLdProps {
   name: string;

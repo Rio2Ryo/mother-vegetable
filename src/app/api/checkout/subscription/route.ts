@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     }
 
     const locale = body.locale || "en";
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").trim();
 
     // Locale → Stripe locale + currency. JPY is zero-decimal: amounts are in YEN.
     const { stripeLocale, currency, zeroDecimal } = resolveLocaleAndCurrency(locale);

@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_APP_URL || "https://mothervegetable.co.jp";
+const BASE_URL = (
+  process.env.NEXT_PUBLIC_APP_URL || "https://mothervegetable.co.jp"
+).trim();
 
 const locales = ["en", "ja", "zh"];
 

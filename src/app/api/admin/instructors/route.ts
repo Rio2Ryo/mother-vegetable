@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
         email: inst.email,
         phone: inst.phone,
         referralCode: inst.referralCode,
-        referralUrl: `${process.env.NEXT_PUBLIC_APP_URL || ""}/?ref=${inst.referralCode}`,
+        referralUrl: `${(process.env.NEXT_PUBLIC_APP_URL || "").trim()}/?ref=${inst.referralCode}`,
         referredBy: inst.parentInstructorId || undefined,
         status,
         directSales: directComm.length,

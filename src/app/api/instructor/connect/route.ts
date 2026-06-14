@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").trim();
     const locale = reqLocale || instructor.locale || "en";
     let connectAccountId = instructor.stripeConnectId;
 

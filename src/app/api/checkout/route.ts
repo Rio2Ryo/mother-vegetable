@@ -50,12 +50,13 @@ export async function POST(request: NextRequest) {
     }
 
     const locale = body.locale || "en";
-    const appUrl =
+    const appUrl = (
       process.env.VERCEL_ENV === "production" && process.env.NEXT_PUBLIC_APP_URL
         ? process.env.NEXT_PUBLIC_APP_URL
         : process.env.VERCEL_URL
           ? `https://${process.env.VERCEL_URL}`
-          : process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+          : process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+    ).trim();
 
     // Check stock availability before creating checkout session
     for (const item of body.items) {
