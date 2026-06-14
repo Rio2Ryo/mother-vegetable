@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
     });
 
     const locale = body.locale || "en";
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").trim();
 
     // Create Stripe Checkout Session for subscription (using inline price_data)
     const session = await getStripe().checkout.sessions.create({

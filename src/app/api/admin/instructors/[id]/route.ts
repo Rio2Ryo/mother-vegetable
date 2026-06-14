@@ -82,7 +82,7 @@ export async function GET(
       email: instructor.email,
       phone: instructor.phone,
       referralCode: instructor.referralCode,
-      referralUrl: `${process.env.NEXT_PUBLIC_APP_URL || ""}/?ref=${instructor.referralCode}`,
+      referralUrl: `${(process.env.NEXT_PUBLIC_APP_URL || "").trim()}/?ref=${instructor.referralCode}`,
       referredBy: instructor.parentInstructor
         ? {
             id: instructor.parentInstructor.id,

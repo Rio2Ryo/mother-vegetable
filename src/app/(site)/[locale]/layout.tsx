@@ -25,12 +25,13 @@ const notoSansJp = Noto_Sans_JP({
   weight: ['400', '500', '700'],
 });
 
-const APP_URL =
+const APP_URL = (
   process.env.VERCEL_ENV === 'production' && process.env.NEXT_PUBLIC_APP_URL
     ? process.env.NEXT_PUBLIC_APP_URL
     : process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
-      : process.env.NEXT_PUBLIC_APP_URL || 'https://mothervegetable.co.jp';
+      : process.env.NEXT_PUBLIC_APP_URL || 'https://mothervegetable.co.jp'
+).trim();
 
 export const metadata: Metadata = {
   title: {
